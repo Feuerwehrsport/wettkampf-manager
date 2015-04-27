@@ -1,0 +1,36 @@
+.row.refreshable#score-list-show
+  .col-md-8
+    = box @score_list.name do |box|
+      %table.table.sorted_table{ data: { track_count: list_track_count } }
+        %thead
+          %tr
+            %th Lauf
+            %th Bahn
+            - if single_discipline?
+              %th Vorname
+              %th Nachname
+            %th Mannschaft
+
+        %tbody
+          - score_list_entries do |entry, run, track|
+            = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
+              %td= entry.try(:entity).try(:first_name)
+              %td= entry.try(:entity).try(:last_name)
+              %td= entry.try(:entity).try(:team).try(:name)
+          %tr.hide.placeholder
+            %td{ colspan: 5 }
+              %span
+      - box.footer do
+        = simple_form_for @score_list, html: { class: "hide score_list_form" } do |f|
+          = f.primary_button :submit, "Liste speichern"
+        
+  .col-md-4
+    = box("Hinweise") do
+      %p Einfach die Zeilen in die neue Position ziehen. Danach unter der Tabelle auf Speichern klicken.
+  .col-md-4
+    = box("Aktionen") do
+      = link_to "Ansehen", score_list_path(@score_list), class: "btn btn-sm btn-default"
+      %br
+      = link_to "Bearbeiten", edit_score_list_path(@score_list), class: "btn btn-sm btn-default"
+      %br
+      = link_to "Excel-Liste", score_list_path(@score_list, format: :xlsx), class: "btn btn-sm btn-default"

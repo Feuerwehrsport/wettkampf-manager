@@ -1,0 +1,19 @@
+.row
+  .col-md-8
+    = box(@discipline.to_label) do |box|
+      %table.table
+        %tr
+          %th= @discipline.class.human_attribute_name :name
+          %td= @discipline.name
+
+  .col-md-4
+    = box("Aktionen") do
+      - if @discipline.destroy_possible?
+        = link_to 'Löschen', discipline_path(@discipline), class: "btn btn-sm btn-default", method: :delete, data: { confirm: 'Disziplin wirklich löschen?' }
+      - else
+        .alert.alert-warning
+          Diese Disziplin kann nicht gelöscht werden. Es sind Wertungsgruppen zugeordnet.
+
+  .col-md-12
+    = box Assessment.model_name.human count: 0 do |box|
+      = render 'assessments/index_table', assessments: @discipline.assessments

@@ -1,0 +1,7 @@
+= boxed_form_for Competition.model_name.human, @competition do |f|
+  = f.error_notification
+  = f.inputs do
+    = f.input :name
+    = f.input :date, as: :string
+  = f.actions do
+    = f.primary_button :submit, t('.submit')

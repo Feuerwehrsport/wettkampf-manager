@@ -1,0 +1,17 @@
+.row
+  .col-md-8
+    = box @assessment.name do |box|
+      %table.table
+        %tr
+          %th= @assessment.class.human_attribute_name :name
+          %td= @assessment.name
+        %tr
+          %th= @assessment.class.human_attribute_name :discipline
+          %td= @assessment.discipline
+        %tr
+          %th= @assessment.class.human_attribute_name :gender
+          %td= t("gender.#{@assessment.gender}")
+  .col-md-4
+    = box("Aktionen") do
+      = link_btn "Bearbeiten", edit_assessment_path(@assessment)
+      = link_btn "Startliste hinzufügen", new_score_list_path(assessment: @assessment)

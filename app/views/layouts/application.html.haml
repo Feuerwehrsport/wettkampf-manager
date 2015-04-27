@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %meta{ charset: "UTF-8" }
+    %title= t('application.name')
+    %meta{ content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", name: "viewport" }
+    = stylesheet_link_tag '/adminlte/css/AdminLTE.css', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all'
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    = javascript_include_tag 'application'
+    = javascript_include_tag "controllers/#{controller_path}" if Rails.application.assets.find_asset("controllers/#{controller_path}.js")
+    = csrf_meta_tag
+  %body.skin-blue
+    %header.header
+      .container
+        = link_to root_path, class: 'logo' do
+          %i.ion.ion-ribbon-a
+          = t('application.name')
+        %nav.navbar.navbar-static-top{ role: "navigation" }
+          %a.navbar-btn.sidebar-toggle{ "data-toggle" => "offcanvas", href: "#", role: "button" }
+            %span.sr-only= t('application.toggle_navigation')
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+    .container
+      .wrapper.row-offcanvas.row-offcanvas-left
+        %aside.left-side.sidebar-offcanvas
+          %section.sidebar
+            .user-panel
+            = render 'sidebar_menu'
+        %aside.right-side
+          %section.content-header
+            / %h1= t("#{controller_path.gsub('/', '.')}.content_header")
+            = render 'breadcrumb_wrapper'
+          %section.content
+            = render 'flash_messages'
+            = yield

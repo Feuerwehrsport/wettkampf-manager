@@ -1,0 +1,6 @@
+.pull-left.image
+  %img.img-circle{:alt => "User Image", :src => "/adminlte/img/avatar_#{current_user.gender}.png"}
+.pull-left.info
+  = link_to edit_user_registration_path do
+    = current_user.first_name
+    = current_user.last_name

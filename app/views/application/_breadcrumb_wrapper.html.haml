@@ -1,0 +1,6 @@
+- breadcrumb_string = capture do
+  = render "breadcrumb"
+
+- unless breadcrumb_string.strip.empty?
+  %ol.breadcrumb
+    = breadcrumb_string

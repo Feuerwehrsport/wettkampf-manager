@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    = box Team.model_name.human do |box|
+      %table.table
+        %tr
+          %th= Team.human_attribute_name(:name)
+          %th= Team.human_attribute_name(:gender)
+          %th
+        - @teams.each do |team|
+          %tr
+            %td= team.numbered_name
+            %td= team.translated_gender
+            %td.text-right
+              = link_to "Ansehen", team_path(team), class: "btn btn-sm btn-default"
+              = link_to "Bearbeiten", edit_team_path(team), class: "btn btn-sm btn-default"
+               
+      = box.footer do
+        .pull-right= link_to "Hinzufügen", new_team_path, class: "btn btn-sm btn-default"
+        .clearfix

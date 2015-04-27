@@ -1,0 +1,30 @@
+.row.refreshable#people-show
+  .col-md-8
+    = box(@person.full_name) do |box|
+      %table.table
+        %tr
+          %th= @person.class.human_attribute_name :first_name
+          %td= @person.first_name
+        %tr
+          %th= @person.class.human_attribute_name :last_name
+          %td= @person.last_name
+        %tr
+          %th= @person.class.human_attribute_name :gender
+          %td= @person.translated_gender
+        %tr
+          %th= @person.class.human_attribute_name :team
+          %td= link_to @person.team.name, team_path(@person.team)
+
+  .col-md-4
+    = box("Aktionen") do
+      = link_to "Bearbeiten", edit_person_path(@person), class: "btn btn-sm btn-default"
+      = link_to "Wertungsgruppen bearbeiten", edit_assessment_requests_person_path(@person), class: "btn btn-sm btn-default", remote: true
+
+  .col-md-8
+    = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
+      %table.table
+        - Assessment.requestable_for(@person).each do |assessment|
+          %tr
+            %th= assessment.name
+            %td= assessment.in?(@person.requested_assessments) ? "X" : ""
+            %td= link_btn "Ansehen", assessment_path(assessment)

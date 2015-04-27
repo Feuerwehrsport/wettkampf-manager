@@ -1,0 +1,31 @@
+class PeopleController < ApplicationController
+  implement_crud_actions
+  before_action :assign_resource_for_edit, only: :edit_assessment_requests
+
+  def edit_assessment_requests
+  end
+
+  protected
+
+  def assign_resource_for_edit_assessment_requests
+    assign_existing_resource
+  end
+
+  def after_create
+    render 'edit_assessment_requests'
+  end
+
+  def build_resource
+    instance = super
+    instance.assign_attributes(team: team_from_param, gender: team_from_param.gender) if team_from_param.present?
+    instance
+  end
+
+  def team_from_param
+    @team_from_param ||= Team.find_by_id(params[:team])
+  end
+
+  def person_params
+    params.require(:person).permit(:first_name, :last_name, :team_id, :gender, { requested_assessment_ids: [] })
+  end
+end

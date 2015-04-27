@@ -1,0 +1,17 @@
+.box{ class: "box-#{options[:type]} #{form_options[:modal] ? 'modal fade' : ''}" }
+  = simple_form_for(record, form_options) do |f|
+    - body = capture(f, &form_block)
+    - if title.present?
+      .box-header
+        - if form_options[:modal]
+          %button.close{ type: :button, data: { dismiss: :modal }, "aria-hidden" => true } ×
+        %h2.box-title= title
+    .box-body
+      = body
+      - if f.inputs.present?
+        .form-inputs
+          = capture(&f.inputs)
+    - if f.actions.present?
+      .box-footer
+        .form-actions
+          = capture(&f.actions)

@@ -1,0 +1,117 @@
+de:
+  activerecord:
+    models:
+      assessment: 
+        one: Wertungsgruppe
+        other: Wertungsgruppen
+      competition: Wettkampf
+      discipline: 
+        one: Disziplin
+        other: Disziplinen
+      disciplines/climbing_hook_ladder: Hakenleitersteigen
+      disciplines/fire_attack: Löschangriff Nass
+      disciplines/fire_relay: 4x100m Feuerwehrstafette
+      disciplines/group_relay: Gruppenstafette
+      disciplines/obstacle_course: 100m Hindernisbahn
+      person: Wettkämpfer
+      score/list: Startliste
+      score/list_generators/simple: Zufällig anordnen
+      score/electronic_time: Elektronisch
+      score/handheld_time: Hand
+      team:
+        one: Mannschaft
+        other: Mannschaften
+    attributes:
+      assessment:
+        discipline: Disziplin
+        gender: Geschlecht
+        name: Name
+      competition:
+        date: Datum
+        name: Name
+      discipline:
+        discipline: Disziplin
+        name: Name
+      person:
+        first_name: Vorname
+        gender: Geschlecht
+        last_name: Nachname
+        team: Mannschaft
+      score/list:
+        assessment: Wertungsgruppe
+        name: Name
+        track_count: Wettkampfbahnen
+        generator: Listenerstellung
+      score/list_entry:
+        track: Bahn
+        run: Lauf
+      score/list_generator:
+        foo: a
+      team:
+        gender: Geschlecht
+        name: Name
+        number: Nummer
+        people: Wettkämpfer
+
+  application:
+    create:
+      success: "%{model_name} erfolgreich erstellt"
+    destroy:
+      success: "%{model_name} erfolgreich entfernt"
+      error: "%{model_name} konnte nicht entfernt werden"
+    update:
+      success: "%{model_name} erfolgreich geändert"
+    name: Wettkampf-Manager
+    toggle_navigation: Menü ein-/ausklappen
+
+  gender:
+    female: weiblich
+    male: männlich
+
+  date:
+    formats:
+      default: ! '%d.%m.%Y'
+      long: ! '%e. %B %Y'
+      short: ! '%d.%m.%y'
+    order:
+      - :day
+      - :month
+      - :year
+
+  errors:
+    messages:
+      accepted: muss akzeptiert werden
+      blank: muss ausgefüllt werden
+      present: darf nicht ausgefüllt werden
+      confirmation: stimmt nicht mit %{attribute} überein
+      empty: muss ausgefüllt werden
+      equal_to: muss genau %{count} sein
+      even: muss gerade sein
+      exclusion: ist nicht verfügbar
+      greater_than: muss größer als %{count} sein
+      greater_than_or_equal_to: muss größer oder gleich %{count} sein
+      inclusion: ist kein gültiger Wert
+      invalid: ist nicht gültig
+      less_than: muss kleiner als %{count} sein
+      less_than_or_equal_to: muss kleiner oder gleich %{count} sein
+      not_a_number: ist keine Zahl
+      not_an_integer: muss ganzzahlig sein
+      odd: muss ungerade sein
+      has_other_gender: hat ein anderes Geschlecht
+      record_invalid: ! 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
+      restrict_dependent_destroy:
+        one: ! 'Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz existiert.'
+        many: ! 'Datensatz kann nicht gelöscht werden, da abhängige %{record} existieren.'
+      taken: ist bereits vergeben
+      too_long: ist zu lang (mehr als %{count} Zeichen)
+      too_short: ist zu kurz (weniger als %{count} Zeichen)
+      wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
+      other_than: darf nicht gleich %{count} sein
+
+  time:
+    am: vormittags
+    pm: nachmittags
+    formats:
+      default: '%d.%m.%Y, %H:%M Uhr'
+      long: '%A, %d.%m.%Y, %H:%M Uhr'
+      short: '%d.%m.%y %H:%M Uhr'

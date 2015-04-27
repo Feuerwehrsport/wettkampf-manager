@@ -1,0 +1,9 @@
+.row
+  .col-md-8
+    = box(@competition_seed.name) do |box|
+      %p= @competition_seed.hint
+
+  .col-md-4
+    = box("Aktionen") do
+      = form_for @competition_seed, url: execute_competition_seed_path(@competition_seed.id) do |f|
+        = f.submit "Ausführen", class: "btn btn-default btn-sm"

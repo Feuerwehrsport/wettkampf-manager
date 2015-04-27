@@ -1,0 +1,49 @@
+de:
+  simple_form:
+    "yes": 'Ja'
+    "no": 'Nein'
+    required:
+      text: 'Pflichtfeld'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Bitte prüfen Sie die folgenden Felder:"
+    options:
+      assessment:
+        gender:
+          male: Männlich
+          female: Weiblich
+      person:
+        gender:
+          male: Männlich
+          female: Weiblich
+      team:
+        gender:
+          male: Männlich
+          female: Weiblich
+    hints:
+      score_list:
+        name: Zum Beispiel <i>Lauf 1</i> oder <i>Finale</i>
+      team:
+        number: Die Nummer wird nur angezeigt, wenn es mehrere Mannschaften gibt.
+      # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

@@ -1,0 +1,8 @@
+.row
+  .col-md-12
+    = box Assessment.model_name.human do |box|
+      = render 'index_table', assessments: @assessments
+               
+      = box.footer do
+        .pull-right= link_to "Hinzufügen", new_assessment_path, class: "btn btn-sm btn-default"
+        .clearfix

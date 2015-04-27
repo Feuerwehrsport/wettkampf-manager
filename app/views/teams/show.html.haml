@@ -1,0 +1,33 @@
+.row.refreshable#teams-index
+  .col-md-8
+    = box(@team.numbered_name) do |box|
+      %table.table
+        %tr
+          %th= @team.class.human_attribute_name :name
+          %td= @team.name
+        %tr
+          %th= @team.class.human_attribute_name :number
+          %td= @team.number
+        %tr
+          %th= @team.class.human_attribute_name :people
+          %td= @team.people.count
+
+  .col-md-4
+    = box("Aktionen") do
+      = link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), class: "btn btn-sm btn-default", remote: true
+      = link_to "Bearbeiten", edit_team_path(@team), class: "btn btn-sm btn-default"
+
+  .col-md-12
+    = box(@team.class.human_attribute_name :people) do |box|
+      %table.table
+        %tr
+          %th= Person.human_attribute_name :last_name
+          %th= Person.human_attribute_name :first_name
+          %th= Person.human_attribute_name :gender
+          %th
+        - @team.people.each do |person|
+          %tr
+            %td= person.last_name
+            %td= person.first_name
+            %td= person.translated_gender
+            %td= link_to "Ansehen", person_path(person), class: "btn btn-sm btn-default"

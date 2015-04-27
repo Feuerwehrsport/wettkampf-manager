@@ -1,0 +1,57 @@
+//= require_self
+
+@import bootstrap-sprockets
+@import bootstrap
+@import font-awesome
+@import ionicons
+@import font-kit-rails/open-sans
+@import modal
+
+.suggestions-entries
+  overflow: auto
+  height: 200px
+  border: 1px solid #ccc
+  margin-bottom: 10px
+  .first_name, .last_name
+    width: 33%
+  .team
+    width: 33%
+    font-size: 10px
+  tr
+    cursor: pointer
+
+.sorted_table tbody tr
+  cursor: move
+
+.sortable-placeholder
+  span
+    border: 1px dotted #ccc
+    margin: 3px
+    display: block
+    height: 12px
+
+.next-run
+  border-bottom: 2px solid black
+
+.table > tbody > tr > td.time-col
+  border-top: 0
+
+.time-types
+  border-bottom: 1px solid #ccc
+  span
+    margin-left: 4px
+    label
+      font-size: 10px
+.time-entries
+  label
+    font-size: 10px
+    font-weight: normal
+  .form-group
+    display: inline-block
+    text-align: center
+    margin-left: 6px
+  input
+    width: 62px
+    padding: 6px 8px
+  &.disabled
+    opacity: 0.3

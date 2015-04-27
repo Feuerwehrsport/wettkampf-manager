@@ -1,0 +1,7 @@
+= boxed_form_for Person.model_name.human, @person, remote: true, modal: true do |f|
+  = f.error_notification
+  = f.inputs do
+    = f.collection_check_boxes(:requested_assessment_ids, Assessment.requestable_for(@person), :id, :name)
+  = f.actions do
+    = f.primary_button :submit, "Speichern"
+

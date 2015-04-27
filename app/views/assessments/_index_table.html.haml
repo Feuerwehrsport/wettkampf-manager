@@ -1,0 +1,15 @@
+- if assessments.count == 0
+  .alert.alert-info Keine Einträge gefunden
+- else
+  %table.table
+    %tr
+      %th= Assessment.human_attribute_name(:name)
+      %th= Assessment.human_attribute_name(:discipline)
+      %th
+    - assessments.each do |assessment|
+      %tr
+        %td= assessment.name
+        %td= assessment.discipline
+        %td.text-right
+          = link_to "Ansehen", assessment_path(assessment), class: "btn btn-sm btn-default"
+          = link_to "Bearbeiten", edit_assessment_path(assessment), class: "btn btn-sm btn-default"

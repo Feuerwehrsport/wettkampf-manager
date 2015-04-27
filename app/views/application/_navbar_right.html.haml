@@ -1,0 +1,28 @@
+.navbar-right
+  %ul.nav.navbar-nav
+    - if open_requests?
+      %li.dropdown.messages-menu
+        %a.dropdown-toggle{ :href => job_requests_path }
+          %i.fa.fa-envelope
+          %span.label.label-danger= open_requests.count
+    %li.dropdown.user.user-menu
+      %a.dropdown-toggle{ href: '#', data: { toggle: 'dropdown' } }
+        %i.glyphicon.glyphicon-user
+        %span
+          = current_user.first_name
+          = current_user.last_name
+          %i.caret
+      %ul.dropdown-menu
+        %li.user-header.bg-light-blue
+          %img.img-circle{ src: "/adminlte/img/avatar_#{current_user.gender}.png" }
+          %p
+            = current_user.first_name
+            = current_user.last_name
+            %small
+              Mitglied seit
+              = l current_user.created_at.to_date
+        %li.user-footer
+          .pull-left
+            %a.btn.btn-default.btn-flat{ href: edit_user_registration_path } Profil
+          .pull-right
+            = link_to "Abmelden", destroy_user_session_path, method: :delete, class: 'btn btn-default btn-flat'

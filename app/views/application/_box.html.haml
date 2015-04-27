@@ -1,0 +1,19 @@
+- builder = UI::BoxBuilder.new
+.box{ class: box_classes(options) }
+  - if title.present?
+    .box-header
+      %h2.box-title
+        - if options[:collapsable]
+          %a{ href: "#box-body-#{index}", data: { toggle: 'collapse', parent: options[:collapsable] } }= title
+        - else
+          = title
+  %div{ id: "box-body-#{index}", class: options[:collapsable] ? 'panel-collapse collapse' : '' }
+    - if options[:body] && !options[:body][:padding]
+      .box-body.no-padding
+        = capture(builder, &block)
+    - else
+      .box-body
+        = capture(builder, &block)
+    - if builder.footer
+      .box-footer
+        = capture(&builder.footer)

@@ -1,0 +1,9 @@
+= boxed_form_for Score::List.model_name.human, @score_list do |f|
+  = f.error_notification
+  = f.inputs do
+    = f.input :name
+    = f.input :track_count
+    = f.association :assessment
+    = f.input :generator, collection: Score::ListGenerator.all
+  = f.actions do
+    = f.primary_button :submit, "Speichern"

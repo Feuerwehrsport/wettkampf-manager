@@ -1,0 +1,15 @@
+.row
+  .col-md-8
+    = box("Wettkampf: #{@competition.name}") do |box|
+      %table.table
+        - if @competition.name.present?
+          %tr
+            %th= @competition.class.human_attribute_name :name
+            %td= @competition.name
+        %tr
+          %th= @competition.class.human_attribute_name :date
+          %td= l(@competition.date)
+
+  .col-md-4
+    = box("Aktionen") do
+      = link_to "Bearbeiten", edit_competition_path(@competition), class: "btn btn-sm btn-default"

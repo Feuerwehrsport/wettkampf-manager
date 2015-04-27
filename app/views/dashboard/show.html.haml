@@ -1,0 +1,10 @@
+.row
+  .col-md-12
+    - unless Competition.first.configured?
+      = box "Wettkampf-Manager konfigurieren" do |box|
+        %p Bitte wählen Sie eine Startkonfiguration für den Wettkampf aus:
+        %table.table
+          - CompetitionSeed.all.each do |seed|
+            %tr
+              %th= seed.name
+              %td= link_btn "Ansehen", competition_seed_path(seed.id)

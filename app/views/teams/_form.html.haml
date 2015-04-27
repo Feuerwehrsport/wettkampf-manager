@@ -1,0 +1,8 @@
+= boxed_form_for Team.model_name.human, @team do |f|
+  = f.error_notification
+  = f.inputs do
+    = f.input :name
+    = f.input :number
+    = f.input :gender, collection: [:male, :female]
+  = f.actions do
+    = f.primary_button :submit, "Speichern"

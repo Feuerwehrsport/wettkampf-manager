@@ -1,0 +1,6 @@
+%tr{ list_entry_options(track, entry) }
+  %td.run
+    - if track == 1
+      = run
+  %th.track= track
+  = yield (track == 1)

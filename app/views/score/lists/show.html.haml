@@ -1,0 +1,31 @@
+.row.refreshable#score-list-show
+  .col-md-8
+    = box @score_list.name do |box|
+      %table.table
+        %thead
+          %tr
+            %th Lauf
+            %th Bahn
+            - if single_discipline?
+              %th Vorname
+              %th Nachname
+            %th Mannschaft
+            %th Zeit
+
+        %tbody
+          - score_list_entries do |entry, run, track|
+            = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do |first|
+              %td= entry.try(:entity).try(:first_name)
+              %td= entry.try(:entity).try(:last_name)
+              %td= entry.try(:entity).try(:team).try(:name)
+              %td.time-col
+                = result_for entry
+                - if first
+                  = short_edit_link edit_score_list_run_path(@score_list, run: run), title: "Zeiten bearbeiten"
+  .col-md-4
+    = box("Aktionen") do
+      = link_to "Reihenfolge bearbeiten", move_score_list_path(@score_list), class: "btn btn-sm btn-default"
+      %br
+      = link_to "Bearbeiten", edit_score_list_path(@score_list), class: "btn btn-sm btn-default"
+      %br
+      = link_to "Excel-Liste", score_list_path(@score_list, format: :xlsx), class: "btn btn-sm btn-default"
