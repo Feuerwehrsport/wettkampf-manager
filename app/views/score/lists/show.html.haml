@@ -29,3 +29,5 @@
       = link_to "Bearbeiten", edit_score_list_path(@score_list), class: "btn btn-sm btn-default"
       %br
       = link_to "Excel-Liste", score_list_path(@score_list, format: :xlsx), class: "btn btn-sm btn-default"
+      %br
+      = link_to "Liste abschließen", finished_score_list_path(@score_list), class: "btn btn-sm btn-default", remote: true

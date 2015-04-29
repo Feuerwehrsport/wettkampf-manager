@@ -42,6 +42,7 @@ de:
         name: Name
         track_count: Wettkampfbahnen
         generator: Listenerstellung
+        result_time_type: Zeitenberechnung
       score/list_entry:
         track: Bahn
         run: Lauf
@@ -67,6 +68,12 @@ de:
   gender:
     female: weiblich
     male: männlich
+
+  result_time_types:
+    electronic: Elektronisch
+    handheld_median: Handstoppung - mittlerer Wert
+    handheld_average: Handstoppung - Durchschnitt
+    calculated: Alle Zeiten auf elektronisch umrechnen
 
   date:
     formats:

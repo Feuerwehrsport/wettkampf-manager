@@ -3,7 +3,7 @@ module Score
     belongs_to :list_entry
 
     validates :list_entry, :time, presence: true
-    validates :time, numericality: { more_than: 0 }
+    validates :time, numericality: { greater_than: 0 }
 
     def second_time
       return "" if time.blank? || time == 0

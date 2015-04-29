@@ -8,4 +8,8 @@ class PersonDecorator < ApplicationDecorator
   def translated_gender
     t("gender.#{gender}")
   end
+
+  def to_s
+    full_name
+  end
 end

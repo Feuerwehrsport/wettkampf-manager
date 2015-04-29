@@ -14,4 +14,15 @@ RSpec.describe Score::ListEntry, type: :model do
       end
     end
   end
+
+  describe "scopes" do
+    describe "electronic_time_available" do
+      let(:electronic_time) { create :score_electronic_time }
+      it "" do
+        expect(described_class.electronic_time_available).to eq []
+        electronic_time
+        expect(described_class.electronic_time_available).to eq [electronic_time.list_entry]
+      end
+    end
+  end
 end

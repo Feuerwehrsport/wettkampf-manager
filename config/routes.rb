@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :lists do
       member do
         get :move
+        get :finished
       end
       resources :runs, only: [:edit, :update], param: :run
     end

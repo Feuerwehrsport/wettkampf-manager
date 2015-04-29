@@ -15,6 +15,9 @@ module Score
       options
     end
 
+    def available_time_types_collection
+      @available_time_types.map { |type| [t("result_time_types.#{type}"), type] }
+    end
 
     def score_list_entries
       entries = @score_list.entries.to_a

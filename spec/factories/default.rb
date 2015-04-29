@@ -31,11 +31,25 @@ FactoryGirl.define do
   factory :score_list, class: "Score::List" do
     assessment { Assessment.first || build(:assessment) }
     name "Lauf 1"
+    generator { "Score::ListGenerators::Simple" }
   end  
 
   factory :score_list_entry, class: "Score::ListEntry" do
+    association :list, factory: :score_list 
     track 1
     run 1
-    entity { Person.first || build(:person) }    
+    entity { Person.first || build(:person, :with_team) }    
+    trait :result_valid do
+      result_type "valid"
+    end
+  end
+
+  factory :score_stopwatch_time, class: "Score::StopwatchTime" do
+    association :list_entry, factory: :score_list_entry
+    time 1799
+    factory :score_electronic_time, class: "Score::ElectronicTime" do
+    end
+    factory :score_handheld_time, class: "Score::HandheldTime" do
+    end
   end
 end

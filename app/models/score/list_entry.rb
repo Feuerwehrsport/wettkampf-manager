@@ -14,6 +14,9 @@ module Score
     before_save :handle_time_entries
     attr_reader :time_entries
 
+    scope :result_valid, -> { where(result_type: "valid") }
+    scope :electronic_time_available, -> { joins(:stopwatch_times).where(score_stopwatch_times: { type: ElectronicTime }) }
+
     def self.result_types
       [
         ["waiting", "-"],
@@ -27,9 +30,33 @@ module Score
       entries_attributes.each do |key, attributes|
         @time_entries[key.to_i].assign_attributes(attributes)
       end
-      @time_entries.select { |entry| entry.time.present? }.each do |entry|
+      @time_entries.select { |entry| entry.valid? }.each do |entry|
         stopwatch_times.push(entry)
       end
+    end
+
+    def stopwatch_time
+      stopwatch_times.first
+    end
+
+    def stopwatch_time_valid?
+      stopwatch_times.count > 0
+    end
+
+    def electronic_time_available
+      stopwatch_times.where(type: ElectronicTime).present?
+    end
+
+    def handheld_time_count
+      stopwatch_times.where(type: HandheldTime).count
+    end
+
+    def result_waiting?
+      result_type == "waiting"
+    end
+
+    def result_valid?
+      result_type == "valid"
     end
 
     protected

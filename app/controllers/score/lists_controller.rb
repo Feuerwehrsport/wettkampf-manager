@@ -1,11 +1,18 @@
 module Score
   class ListsController < ApplicationController
     implement_crud_actions 
-    before_action :assign_resource_for_move, only: :move
+    before_action :assign_resource_for_action, only: [:move, :finished]
+
+    def finished
+      @waiting_entries = @score_list.entries.select(&:result_waiting?)
+      @unvalid_entries = @score_list.entries.select(&:result_valid?).reject(&:stopwatch_time_valid?)
+      @available_time_types = @score_list.available_time_types
+      @score_list.result_time_type ||= @available_time_types.first
+    end
   
     protected
 
-    def assign_resource_for_move
+    def assign_resource_for_action
       assign_existing_resource
     end
     

@@ -72,17 +72,6 @@ ActiveRecord::Schema.define(version: 20150420054155) do
 
   add_index "fire_sport_statistics_person_spellings", ["person_id"], name: "index_fire_sport_statistics_person_spellings_on_person_id"
 
-  create_table "fire_sport_statistics_person_trigrams", force: :cascade do |t|
-    t.string  "trigram",     limit: 3
-    t.integer "score",       limit: 2
-    t.integer "owner_id"
-    t.string  "owner_type"
-    t.string  "fuzzy_field"
-  end
-
-  add_index "fire_sport_statistics_person_trigrams", ["owner_id", "owner_type", "fuzzy_field", "trigram", "score"], name: "index_for_match"
-  add_index "fire_sport_statistics_person_trigrams", ["owner_id", "owner_type"], name: "index_by_owner"
-
   create_table "fire_sport_statistics_team_associations", force: :cascade do |t|
     t.integer  "person_id",  null: false
     t.integer  "team_id",    null: false
@@ -138,11 +127,12 @@ ActiveRecord::Schema.define(version: 20150420054155) do
   add_index "score_list_entries", ["list_id"], name: "index_score_list_entries_on_list_id"
 
   create_table "score_lists", force: :cascade do |t|
-    t.string   "name",          default: "", null: false
-    t.integer  "track_count",   default: 2,  null: false
-    t.integer  "assessment_id",              null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "name",             default: "", null: false
+    t.integer  "track_count",      default: 2,  null: false
+    t.integer  "assessment_id",                 null: false
+    t.integer  "result_time_type"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "score_lists", ["assessment_id"], name: "index_score_lists_on_assessment_id"
