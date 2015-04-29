@@ -7,7 +7,6 @@ module Score
       list.transaction do
         while true
           run += 1
-          p run
           for track in (1..list.track_count)
             entity = entities.pop
             return if entity.nil?

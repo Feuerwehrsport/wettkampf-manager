@@ -6,6 +6,7 @@ RSpec.describe Score::ListGenerators::Simple, type: :model do
 
   before do 
     create_list(:person, 5, :with_team).each { |person| person.requests.create!(assessment: score_list.assessment) }
+    score_list.reload
   end
   
   describe 'perform' do
