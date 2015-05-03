@@ -20,14 +20,17 @@
               %td= entry.try(:entity).try(:team).try(:name)
               %td.time-col
                 = result_for entry
-                - if first
+                - if first && @score_list.open?
                   = short_edit_link edit_score_list_run_path(@score_list, run: run), title: "Zeiten bearbeiten"
   .col-md-4
     = box("Aktionen") do
-      = link_to "Reihenfolge bearbeiten", move_score_list_path(@score_list), class: "btn btn-sm btn-default"
-      %br
-      = link_to "Bearbeiten", edit_score_list_path(@score_list), class: "btn btn-sm btn-default"
+      - if @score_list.open?
+        = link_to "Reihenfolge bearbeiten", move_score_list_path(@score_list), class: "btn btn-sm btn-default"
+        %br
+        = link_to "Bearbeiten", edit_score_list_path(@score_list), class: "btn btn-sm btn-default"
+        %br
+        = link_to "Liste abschließen", finished_score_list_path(@score_list), class: "btn btn-sm btn-default", remote: true
+      - else
+        = link_to "Liste öffnen", finished_score_list_path(@score_list), class: "btn btn-sm btn-default", remote: true
       %br
       = link_to "Excel-Liste", score_list_path(@score_list, format: :xlsx), class: "btn btn-sm btn-default"
-      %br
-      = link_to "Liste abschließen", finished_score_list_path(@score_list), class: "btn btn-sm btn-default", remote: true

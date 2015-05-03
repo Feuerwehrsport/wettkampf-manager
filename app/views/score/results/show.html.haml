@@ -1,0 +1,33 @@
+.row
+  .col-md-8
+    = box @score_result.name do |box|
+      %table.table
+        %tr
+          %th= @score_result.class.human_attribute_name :name
+          %td= @score_result.name
+        %tr
+          %th= @score_result.class.human_attribute_name :assessment
+          %td= @score_result.assessment
+        %tr
+          %th= @score_result.class.human_attribute_name :group_assessment
+          %td= @score_result.group_assessment
+        %tr
+          %th= @score_result.class.human_attribute_name :lists
+          %td
+            - @score_result.lists.each do |list|
+              = list
+  .col-md-4
+    = box("Aktionen") do
+      = link_btn "Bearbeiten", edit_score_result_path(@score_result)
+      = link_btn "Startliste hinzufügen", new_score_list_path(score_result: @score_result)
+
+
+  .col-md-12
+    = box @score_result.name do |box|
+      %table.table
+        - @score_result.rows.each do |row|
+          %tr
+            %td= row.entity
+            %td= row.best_time
+            - @score_result.lists.each do |list|
+              %td= row.time_from(list)

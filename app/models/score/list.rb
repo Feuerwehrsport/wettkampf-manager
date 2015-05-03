@@ -2,6 +2,7 @@ module Score
   class List < ActiveRecord::Base
     enum result_time_type: { electronic: 0, handheld_median: 1, handheld_average: 2, calculated: 3 }
     belongs_to :assessment
+    belongs_to :result
     has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry"
     validates :name, :assessment, :track_count, presence: true
     validates :track_count, numericality: { greater_than: 0 }
@@ -21,6 +22,10 @@ module Score
       end
     end
 
+    def open?
+      result_time_type.nil?
+    end
+
     def perform_generator
       generator.perform
     end
@@ -38,7 +43,7 @@ module Score
     end
 
     def handheld_time_count_for_non_electronic_time
-      entries.where.not(id: entries.result_valid.electronic_time_available).map(&:handheld_time_count).min || 0
+      entries.result_valid.where.not(id: entries.result_valid.electronic_time_available).map(&:handheld_time_count).min || 0
     end
 
     def available_time_types

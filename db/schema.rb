@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420054155) do
+ActiveRecord::Schema.define(version: 20150429201357) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",               null: false
@@ -131,11 +131,23 @@ ActiveRecord::Schema.define(version: 20150420054155) do
     t.integer  "track_count",      default: 2,  null: false
     t.integer  "assessment_id",                 null: false
     t.integer  "result_time_type"
+    t.integer  "result_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
 
   add_index "score_lists", ["assessment_id"], name: "index_score_lists_on_assessment_id"
+  add_index "score_lists", ["result_id"], name: "index_score_lists_on_result_id"
+
+  create_table "score_results", force: :cascade do |t|
+    t.string   "name",             default: "",    null: false
+    t.boolean  "group_assessment", default: false, null: false
+    t.integer  "assessment_id",                    null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "score_results", ["assessment_id"], name: "index_score_results_on_assessment_id"
 
   create_table "score_stopwatch_times", force: :cascade do |t|
     t.integer  "list_entry_id", null: false

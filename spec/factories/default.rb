@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  sequence(:first_name) { |n| "Alfred#{n}" }
+  sequence(:last_name) { |n| "Meier#{n}" }
+
   factory :team do
     name "Mecklenburg-Vorpommern"
     gender :male
@@ -42,6 +45,9 @@ FactoryGirl.define do
     trait :result_valid do
       result_type "valid"
     end
+    trait :generate_person do
+      entity { build :person, :with_team, first_name: generate(:first_name), last_name: generate(:last_name) }    
+    end
   end
 
   factory :score_stopwatch_time, class: "Score::StopwatchTime" do
@@ -52,4 +58,9 @@ FactoryGirl.define do
     factory :score_handheld_time, class: "Score::HandheldTime" do
     end
   end
+
+  factory :score_result, class: "Score::Result" do
+    assessment { Assessment.first || build(:assessment) }
+    name "Hakenleitersteigen"
+  end  
 end

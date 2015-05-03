@@ -1,0 +1,8 @@
+= boxed_form_for Score::Result.model_name.human, @score_result do |f|
+  = f.error_notification
+  = f.inputs do
+    = f.input :name
+    = f.association :assessment
+    = f.input :group_assessment, as: :boolean
+  = f.actions do
+    = f.primary_button :submit, "Speichern"

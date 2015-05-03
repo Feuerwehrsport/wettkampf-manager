@@ -5,6 +5,7 @@ class CreateScoreLists < ActiveRecord::Migration
       t.integer :track_count, null: false, default: 2
       t.references :assessment, index: true, null: false
       t.integer :result_time_type
+      t.references :result, index: true
 
       t.timestamps null: false
     end

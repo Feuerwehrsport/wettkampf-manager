@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       end
       resources :runs, only: [:edit, :update], param: :run
     end
+    resources :results
   end
 
   namespace :fire_sport_statistics do

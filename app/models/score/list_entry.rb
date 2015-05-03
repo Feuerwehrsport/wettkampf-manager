@@ -16,6 +16,7 @@ module Score
 
     scope :result_valid, -> { where(result_type: "valid") }
     scope :electronic_time_available, -> { joins(:stopwatch_times).where(score_stopwatch_times: { type: ElectronicTime }) }
+    scope :not_waiting, -> { where.not(result_type: "waiting") }
 
     def self.result_types
       [

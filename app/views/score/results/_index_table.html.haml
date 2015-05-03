@@ -1,0 +1,15 @@
+- if score_results.count == 0
+  .alert.alert-info Keine Einträge gefunden
+- else
+  %table.table
+    %tr
+      %th= Assessment.human_attribute_name(:name)
+      %th= Assessment.human_attribute_name(:discipline)
+      %th
+    - score_results.each do |score_result|
+      %tr
+        %td= score_result.name
+        %td= score_result.discipline
+        %td.text-right
+          = link_to "Ansehen", score_result_path(score_result), class: "btn btn-sm btn-default"
+          = link_to "Bearbeiten", edit_score_result_path(score_result), class: "btn btn-sm btn-default"

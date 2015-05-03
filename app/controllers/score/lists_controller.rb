@@ -21,7 +21,8 @@ module Score
     end
 
     def score_list_params
-      params.require(:score_list).permit(:name, :assessment_id, :generator, :track_count, entries_attributes: [:id, :run, :track])
+      params.require(:score_list).permit(:name, :assessment_id, :generator, :track_count, 
+        :result_time_type, entries_attributes: [:id, :run, :track])
     end
   end
 end
