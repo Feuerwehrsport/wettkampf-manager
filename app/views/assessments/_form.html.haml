@@ -1,8 +1,8 @@
 = boxed_form_for Assessment.model_name.human, @assessment do |f|
   = f.error_notification
   = f.inputs do
-    = f.input :name
     = f.association :discipline
     = f.input :gender, collection: [:male, :female]
+    = f.input :name
   = f.actions do
     = f.primary_button :submit, "Speichern"

@@ -24,6 +24,11 @@ de:
           male: Männlich
           female: Weiblich
     hints:
+      assessment:
+        name: Wird ein Name angegeben, ersetzt dieser den generierten Namen
+      discipline:
+        name: Wird ein Name angegeben, ersetzt dieser den eigentlichen Disziplinnamen (z. B. Spaßwettkampf)
+        type: Ist es eine andere Disziplin, sollte eine Ähnliche ausgewählt werden.
       score_list:
         name: Zum Beispiel <i>Lauf 1</i> oder <i>Finale</i>
       team:

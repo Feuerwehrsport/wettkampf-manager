@@ -45,48 +45,64 @@ class CompetitionSeed
 
   private
 
-  def climbing_hook_ladder
+  def climbing_hook_ladder group_assessment
     climbing_hook_ladder = Disciplines::ClimbingHookLadder.create!
-    Assessment.create!(discipline: climbing_hook_ladder, gender: :male, name: "Hakenleitersteigen - männlich")
-    Assessment.create!(discipline: climbing_hook_ladder, gender: :female, name: "Hakenleitersteigen - weiblich")
+    a = Assessment.create!(discipline: climbing_hook_ladder, gender: :male)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a = Assessment.create!(discipline: climbing_hook_ladder, gender: :female)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a
   end
 
-  def fire_attack
+  def fire_attack group_assessment
     fire_attack = Disciplines::FireAttack.create!
-    Assessment.create!(discipline: fire_attack, gender: :male, name: "Löschangriff - männlich")
-    Assessment.create!(discipline: fire_attack, gender: :female, name: "Löschangriff - weiblich")
+    a = Assessment.create!(discipline: fire_attack, gender: :male)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a = Assessment.create!(discipline: fire_attack, gender: :female)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a
   end
 
-  def obstacle_course
+  def obstacle_course group_assessment
     obstacle_course = Disciplines::ObstacleCourse.create!
-    Assessment.create!(discipline: obstacle_course, gender: :male, name: "Hindernisbahn - männlich")
-    Assessment.create!(discipline: obstacle_course, gender: :female, name: "Hindernisbahn - weiblich")
+    a = Assessment.create!(discipline: obstacle_course, gender: :male)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a = Assessment.create!(discipline: obstacle_course, gender: :female)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a
   end
 
-  def group_relay
+  def group_relay group_assessment
     group_relay = Disciplines::GroupRelay.create!
-    Assessment.create!(discipline: group_relay, gender: :female, name: "Gruppenstafette")
+    a = Assessment.create!(discipline: group_relay, gender: :female)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a
   end
 
-  def fire_relay
+  def fire_relay group_assessment
     fire_relay = Disciplines::FireRelay.create!
-    Assessment.create!(discipline: fire_relay, gender: :male, name: "Feuerwehrstafette - männlich")
-    Assessment.create!(discipline: fire_relay, gender: :female, name: "Feuerwehrstafette - weiblich")
+    a = Assessment.create!(discipline: fire_relay, gender: :male)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a = Assessment.create!(discipline: fire_relay, gender: :female)
+    Score::Result.create!(assessment: a, group_assessment: group_assessment)
+    a
   end
 
   def seed_method_dcup_simple
-    climbing_hook_ladder
-    fire_attack
-    obstacle_course
-    group_relay
+    Competition.update_all(group_score_count: 4, group_assessment: true)
+    climbing_hook_ladder true
+    fire_attack true
+    obstacle_course true
+    group_relay true
   end
 
   def seed_method_dcup_all
-    hl_female = climbing_hook_ladder
-    fire_attack
-    obstacle_course
-    group_relay
-    fire_relay
+    Competition.update_all(group_score_count: 4, group_assessment: true)
+    hl_female = climbing_hook_ladder true
+    fire_attack true
+    obstacle_course true
+    group_relay true
+    fire_relay true
 
 
 
@@ -171,12 +187,10 @@ Person.create!(last_name: 'Benndorf', first_name: 'Thomas', gender: 'male', team
 Person.create!(last_name: 'Hall', first_name: 'Steffen', gender: 'male', team: male_team_mv)
 Person.create!(last_name: 'Gulitz', first_name: 'Michael', gender: 'male', team: male_team_mv)
 Person.create!(last_name: 'Zwick', first_name: 'Sebastian', gender: 'male', team: male_team_mv)
-
-
     
   end
 
   def seed_method_la
-    fire_attack
+    fire_attack false
   end
 end

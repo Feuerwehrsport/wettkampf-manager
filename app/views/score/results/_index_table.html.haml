@@ -3,13 +3,13 @@
 - else
   %table.table
     %tr
-      %th= Assessment.human_attribute_name(:name)
-      %th= Assessment.human_attribute_name(:discipline)
+      %th= Score::Result.human_attribute_name(:name)
+      %th= Score::Result.human_attribute_name(:assessment)
       %th
     - score_results.each do |score_result|
       %tr
         %td= score_result.name
-        %td= score_result.discipline
+        %td= score_result.assessment
         %td.text-right
           = link_to "Ansehen", score_result_path(score_result), class: "btn btn-sm btn-default"
           = link_to "Bearbeiten", edit_score_result_path(score_result), class: "btn btn-sm btn-default"

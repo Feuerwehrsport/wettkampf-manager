@@ -12,7 +12,7 @@ class Discipline < ActiveRecord::Base
   end
 
   def to_label
-    [model_name.human, name].reject(&:empty?).join(" - ")
+    decorate.to_s
   end
 
   def self.types
@@ -27,5 +27,9 @@ class Discipline < ActiveRecord::Base
 
   def destroy_possible?
     assessments.empty?
+  end
+
+  def image
+    self.class.name.demodulize.underscore
   end
 end

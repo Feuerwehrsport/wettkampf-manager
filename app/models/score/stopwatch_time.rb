@@ -13,5 +13,9 @@ module Score
     def second_time= new_second_time
       self.time = (new_second_time.sub(",", ".").sub(":", ".").to_f * 100).to_i
     end
+
+    def <=> other
+      (time || -1) <=> (other.time || -1)
+    end
   end
 end

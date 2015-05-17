@@ -63,4 +63,17 @@ FactoryGirl.define do
     assessment { Assessment.first || build(:assessment) }
     name "Hakenleitersteigen"
   end  
+
+  factory :score_result_row, class: "Score::ResultRow" do
+    entity { build :person }
+    initialize_with { new(entity) }
+
+    factory :good_score_result_row do
+      after(:build) do |row|
+        list_entry = create(:score_list_entry, :result_valid, entity: row.entity) 
+        create(:score_electronic_time, list_entry: list_entry)
+        row.add_list(list_entry)
+      end
+    end
+  end
 end

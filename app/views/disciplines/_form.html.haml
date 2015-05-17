@@ -1,7 +1,7 @@
 = boxed_form_for Discipline.model_name.human, @discipline do |f|
   = f.error_notification
   = f.inputs do
+    = f.input :type, collection: Discipline.types.map { |k| [k.model_name.human, k.name] }
     = f.input :name
-    = f.select :type, Discipline.types.map { |k| [k.model_name.human, k.name] }
   = f.actions do
     = f.primary_button :submit, "Speichern"

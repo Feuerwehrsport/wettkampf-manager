@@ -6,6 +6,7 @@ class CreateScoreListEntries < ActiveRecord::Migration
       t.integer :track, null: false
       t.integer :run, null: false
       t.string :result_type, null: false, default: "waiting"
+      t.integer :assessment_type, default: 0, null: false
 
       t.timestamps null: false
     end

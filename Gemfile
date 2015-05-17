@@ -40,6 +40,7 @@ gem 'font-kit-rails'
 # exports
 gem 'axlsx_rails'
 gem 'prawn'
+gem 'prawn-table'
 gem 'prawnto'
 
 # for windows time zones

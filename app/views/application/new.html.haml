@@ -1,3 +1,6 @@
 .row
   .col-md-8
     = render 'form'
+  - if partial_exists? 'form_description'
+    .col-md-4
+      = render 'form_description'

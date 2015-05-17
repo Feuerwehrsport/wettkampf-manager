@@ -16,4 +16,8 @@ class TeamDecorator < ApplicationDecorator
   def short_name length = 15
     numbered_name.truncate(length)
   end
+
+  def to_s
+    numbered_name
+  end
 end

@@ -8,6 +8,7 @@ module Score
     validates :track_count, numericality: { greater_than: 0 }
     validates :generator, on: :create, presence: true
     validates :result_time_type, inclusion: { in: proc { |l| l.available_time_types.map(&:to_s) } }, allow_nil: true
+    validate { generator.try(:valid?) }
 
     accepts_nested_attributes_for :entries
 
@@ -19,6 +20,20 @@ module Score
         @generator = generator.constantize.new(list: self) rescue nil
       else
         @generator = generator
+      end
+      if @generator_attributes.present?
+        generator_attributes = @generator_attributes
+      end
+    end
+
+    def generator_attributes= attributes
+      if @generator.present?
+        attributes.each do |key, value|
+          @generator.send("#{key}=".to_sym, value)
+        end
+        @generator_attributes = nil
+      else
+        @generator_attributes = attributes
       end
     end
 

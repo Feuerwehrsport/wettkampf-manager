@@ -14,8 +14,11 @@
         %tr
           %th= @score_result.class.human_attribute_name :lists
           %td
-            - @score_result.lists.each do |list|
-              = list
+            %table.table.table-condensed
+              - @score_result.lists.each do |list|
+                %tr
+                  %td= list.name
+                  %td= short_show_link score_list_path(list)
   .col-md-4
     = box("Aktionen") do
       = link_btn "Bearbeiten", edit_score_result_path(@score_result)
@@ -24,10 +27,19 @@
 
   .col-md-12
     = box @score_result.name do |box|
-      %table.table
-        - @score_result.rows.each do |row|
+      %table.table.table-bordered
+        - @rows.each do |row|
           %tr
-            %td= row.entity
-            %td= row.best_time
+            %td= "#{place_for_row row}."
+            %th= row.entity
+            %th= row.best_stopwatch_time
             - @score_result.lists.each do |list|
               %td= row.time_from(list)
+
+  .col-md-12
+    = box "Mannschaftswertung" do |box|
+      %table.table.table-bordered
+        - @group_result_rows.each do |row|
+          %tr
+            %th= row.team
+            %th= row.time

@@ -3,15 +3,13 @@
     = box Discipline.model_name.human do |box|
       %table.table
         %tr
-          %th= Discipline.human_attribute_name(:name)
-          %th= Discipline.human_attribute_name(:discipline)
-          %th= Assessment.model_name.human
+          %th= Discipline.human_attribute_name(:type)
+          %th= Assessment.model_name.human count: 0
           %th
         - @disciplines.each do |discipline|
           %tr
-            %td= discipline.name
-            %td= discipline.discipline.model_name.human
-            %td= discipline.assessments.count
+            %td= discipline
+            %td= discipline.assessments.join(", ")
             %td.text-right
               = link_to "Ansehen", discipline_path(discipline), class: "btn btn-sm btn-default"
                

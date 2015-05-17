@@ -1,5 +1,11 @@
 class DisciplineDecorator < ApplicationDecorator
+  decorates_association :assessments
+
   def to_s
-    to_label
+    name.present? ? name : object.model_name.human
+  end
+
+  def image
+    "#{object.image}.png"
   end
 end

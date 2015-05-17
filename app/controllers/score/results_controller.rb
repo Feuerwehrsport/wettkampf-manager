@@ -1,6 +1,12 @@
 module Score
   class ResultsController < ApplicationController
-    implement_crud_actions 
+    implement_crud_actions
+
+    def show
+      super
+      @rows = @score_result.rows.map(&:decorate)
+      @group_result_rows = GroupResult.new(@score_result).rows.map(&:decorate)
+    end
 
     protected
 

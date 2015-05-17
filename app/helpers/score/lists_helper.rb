@@ -8,6 +8,14 @@ module Score
       @score_list.track_count
     end
 
+    def pdf_row_colors
+      color = 264
+      (1..list_track_count).map do
+        color -= 9
+        color.to_s(16) * 3
+      end
+    end
+
     def list_entry_options track, entry
       options = {}
       options[:class] = "next-run" if track == list_track_count
@@ -25,7 +33,7 @@ module Score
       run = 1
       entry = entries.shift
       invalid_count = 0
-      while entries.length > 0 || track != 0
+      while entry.present? || track != 0
         track += 1
         if entry && entry.track == track && entry.run == run
           yield entry, run, track
@@ -45,15 +53,19 @@ module Score
     end
 
     def result_for entry
-      if entry.result_type == "valid"
+      if entry && entry.result_type == "valid"
         entry.stopwatch_times.first.try(:second_time)
-      elsif entry.result_type == "invalid"
+      elsif entry && entry.result_type == "invalid"
         "D"
-      elsif entry.result_type == "no-run"
+      elsif entry && entry.result_type == "no-run"
         "N"
       else
         ""
       end
+    end
+
+    def form_generator_config_classes type
+      ListGenerator.configuration.select { |key, types| type.in? types }.keys.join(" ")
     end
   end
 end

@@ -61,3 +61,13 @@ bindSortedTable = () ->
 $ () ->
   bindSortedTable()
   $(document).on('partials-refreshed', bindSortedTable)
+
+  $('#score_list_generator').change(() ->
+    type = $(@).val()
+    $('.generator-config').each (i, elem) ->
+      $elem = $(elem)
+      if $.inArray(type, $elem.data('classes').split(" ")) < 0
+        $elem.hide()
+      else
+        $elem.show()
+  ).change()

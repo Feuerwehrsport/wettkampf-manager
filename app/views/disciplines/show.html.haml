@@ -1,10 +1,16 @@
 .row
   .col-md-8
-    = box(@discipline.to_label) do |box|
-      %table.table
-        %tr
-          %th= @discipline.class.human_attribute_name :name
-          %td= @discipline.name
+    = box "Wertungsgruppen von #{@discipline}" do |box|
+      - if @discipline.assessments.count == 0
+        .alert.alert-info Keine Einträge gefunden
+      - else
+        %table.table
+          - @discipline.assessments.each do |assessment|
+            %tr
+              %td= assessment
+              %td.text-right
+                = link_to "Ansehen", assessment_path(assessment), class: "btn btn-sm btn-default"
+
 
   .col-md-4
     = box("Aktionen") do
@@ -13,7 +19,3 @@
       - else
         .alert.alert-warning
           Diese Disziplin kann nicht gelöscht werden. Es sind Wertungsgruppen zugeordnet.
-
-  .col-md-12
-    = box Assessment.model_name.human count: 0 do |box|
-      = render 'assessments/index_table', assessments: @discipline.assessments
