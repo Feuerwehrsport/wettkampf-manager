@@ -1,0 +1,9 @@
+= boxed_form_for "Passwort für Systemanmeldung", @user do |f|
+  = f.error_notification
+  - unless User.configured?
+    .alert.alert-info Es wurde noch kein Passwort zur Anmeldung im System gesetzt.
+  = f.inputs do
+    = f.input :password
+    = f.input :password_confirmation
+  = f.actions do
+    = f.primary_button :submit, "Passwort ändern"

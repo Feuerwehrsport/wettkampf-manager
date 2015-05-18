@@ -2,16 +2,15 @@
   .col-md-8
     = box 'Startlisten' do |box|
       %table.table
-        %tr
-          %th Name
-          %th
         - @score_lists.each do |list|
           %tr
-            %td= list.name
             %td
-              = short_edit_link edit_score_list_path(list)
-              = short_show_link score_list_path(list)
+              = discipline_image(list.discipline, size: "20x20")
+              = list.name
+            %td
+              = link_btn "Ansehen", score_list_path(list)
                
       = box.footer do
-        .pull-right= link_to "Hinzufügen", new_score_list_path, class: "btn btn-sm btn-default"
+        - if logged_in?
+          .pull-right= link_btn "Hinzufügen", new_score_list_path
         .clearfix

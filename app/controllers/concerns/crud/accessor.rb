@@ -15,6 +15,7 @@ module CRUD::Accessor
       include CRUD::EditAction if only.include?(:edit)
       include CRUD::UpdateAction if only.include?(:update)
       include CRUD::DestroyAction if only.include?(:destroy)
+      include CRUD::AuthorizeAction
     end
   end
 end

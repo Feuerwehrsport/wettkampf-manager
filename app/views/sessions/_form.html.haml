@@ -1,0 +1,6 @@
+= boxed_form_for "Anmeldung im System", User.new, url: sessions_path do |f|
+  = f.error_notification
+  = f.inputs do
+    = f.input :password
+  = f.actions do
+    = f.primary_button :submit, "Anmelden"

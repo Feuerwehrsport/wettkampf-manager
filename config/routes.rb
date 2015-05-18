@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   root 'dashboard#show'
+
+  get :logout, to: "sessions#destroy", as: :logout
+  get :login, to: "sessions#new", as: :login
+  resources :sessions, only: [:create]
+  resources :users, only: [:edit, :update]
+
   resources :competition_seeds, only: [:show] do
     member { post :execute }
   end

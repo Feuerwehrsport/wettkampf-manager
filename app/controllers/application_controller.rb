@@ -3,4 +3,13 @@ class ApplicationController < ActionController::Base
   include ResourceAccess
   include AutoDecorate
   include CRUD::Accessor
+  include Authentication
+  before_action :check_user_configured
+
+  private
+
+  def check_user_configured
+    redirect_to edit_user_path(User.first) if controller_name != "users" && !User.configured?
+  end
+
 end

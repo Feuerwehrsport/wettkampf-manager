@@ -6,6 +6,10 @@ gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
+# authentication
+gem "bcrypt"
+gem "cancancan"
+
 # Use HAML for views
 gem 'haml-rails', '~> 0.8'
 # Use SimpleForm for Forms

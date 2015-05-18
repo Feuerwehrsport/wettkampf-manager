@@ -4,5 +4,6 @@
       = render 'index_table', score_results: @score_results
                
       = box.footer do
-        .pull-right= link_to "Hinzufügen", new_score_result_path, class: "btn btn-sm btn-default"
+        - if logged_in?
+          .pull-right= link_to "Hinzufügen", new_score_result_path, class: "btn btn-sm btn-default"
         .clearfix

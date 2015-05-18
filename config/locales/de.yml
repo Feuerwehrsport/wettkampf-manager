@@ -14,7 +14,9 @@ de:
       disciplines/group_relay: Gruppenstafette
       disciplines/obstacle_course: 100m Hindernisbahn
       person: Wettkämpfer
-      score/list: Startliste
+      score/list: 
+        one: Startliste
+        other: Startlisten
       score/list_generators/simple: Zufällig anordnen
       score/electronic_time: Elektronisch
       score/handheld_time: Hand
@@ -62,6 +64,9 @@ de:
         name: Name
         number: Nummer
         people: Wettkämpfer
+      user:
+        password: Passwort
+        password_confirmation: Passwort wiederholen
 
   activemodel:
     <<: *activerecord
