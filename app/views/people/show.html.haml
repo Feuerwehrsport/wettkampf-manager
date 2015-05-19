@@ -13,18 +13,28 @@
           %td= @person.translated_gender
         %tr
           %th= @person.class.human_attribute_name :team
-          %td= link_to @person.team.name, team_path(@person.team)
+          %td
+          - if @person.team
+            = link_to @person.team.name, team_path(@person.team)
 
-  .col-md-4
-    = box("Aktionen") do
-      = link_to "Bearbeiten", edit_person_path(@person), class: "btn btn-sm btn-default"
-      = link_to "Wertungsgruppen bearbeiten", edit_assessment_requests_person_path(@person), class: "btn btn-sm btn-default", remote: true
+      - if logged_in?
+        - box.footer do
+          .pull-right= link_to "Bearbeiten", edit_person_path(@person), class: "btn btn-sm btn-default"
+          .clearfix
 
   .col-md-8
     = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
       %table.table
         - Assessment.requestable_for(@person).each do |assessment|
+          - decorated_assessment = assessment.decorate
           %tr
-            %th= assessment.name
-            %td= assessment.in?(@person.requested_assessments) ? "X" : ""
-            %td= link_btn "Ansehen", assessment_path(assessment)
+            %th
+              = discipline_image decorated_assessment.discipline
+              = decorated_assessment
+            %td
+              - if @person.request_for(assessment).present?
+                = t("assessment_types.#{@person.request_for(assessment).assessment_type}")
+      - if logged_in?
+        - box.footer do
+          .pull-right= link_to "Wertungsgruppen bearbeiten", edit_assessment_requests_person_path(@person), class: "btn btn-sm btn-default", remote: true
+          .clearfix

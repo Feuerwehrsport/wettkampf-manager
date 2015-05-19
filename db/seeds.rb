@@ -9,3 +9,6 @@
 competition = Competition.new(name: "Wettkampf", date: Date.today)
 competition.create_possible = true
 competition.save!
+
+user = User.new()
+user.save!(validate: false)

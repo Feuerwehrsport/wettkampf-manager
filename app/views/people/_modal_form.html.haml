@@ -1,10 +1,9 @@
 = boxed_form_for Person.model_name.human, @person, remote: true, modal: true do |f|
   = f.error_notification
   = f.inputs do
-    = f.hidden_field :team_id
     .form-group.string
       %label.string.control-label{ for: "person_suggestion" } Schnelleingabe
-      %input.string.form-control{ name: "person_suggestion", id: "person_suggestion", type: "text", data: { team_name: @person.team.name } }
+      %input.string.form-control{ name: "person_suggestion", id: "person_suggestion", type: "text", data: { team_name: @person.try(:team).try(:name) } }
     .suggestions-entries
       %table.table.table-hover.table-condensed
     .row
@@ -14,5 +13,9 @@
         = f.input :last_name
       .col-md-3
         = f.input :gender, collection: [:male, :female]
+    - if @person.team.nil?
+      = f.association :team, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
+    - else
+      = f.hidden_field :team_id
   = f.actions do
     = f.primary_button :submit, "Speichern"

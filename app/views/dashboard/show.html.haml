@@ -1,6 +1,6 @@
 .row
-  .col-md-12
-    - unless Competition.first.configured?
+  - unless Competition.first.configured?
+    .col-md-12
       = box "Wettkampf-Manager konfigurieren" do |box|
         %p Bitte wählen Sie eine Startkonfiguration für den Wettkampf aus:
         %table.table
@@ -8,3 +8,26 @@
             %tr
               %th= seed.name
               %td= link_btn "Ansehen", competition_seed_path(seed.id)
+  - else
+    .col-md-7
+      = box decorated_competition do |box|
+        = l decorated_competition.date
+        %table.table
+          %tr
+            %th
+            %th weiblich
+            %th männlich
+          - if Person.count > 0
+            %tr
+              %th Angemeldete Wettkämpfer
+              %th= Person.female.count
+              %th= Person.male.count
+          - if Team.count > 0
+            %tr
+              %th Angemeldete Mannschaften
+              %th= Team.female.count
+              %th= Team.male.count
+    - if logged_in?
+      .col-md-5
+        = box "Konfigurieren" do |box|
+          = link_btn "Name und Datum", edit_competition_path(decorated_competition.id)

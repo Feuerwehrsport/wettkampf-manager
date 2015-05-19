@@ -27,6 +27,8 @@ module ApplicationHelper
   def boxed_form_for(title, record, form_options = {}, &block)
     box_options = form_options.extract!(:box)[:box] || {}
     form_options[:builder] ||= UI::BoxedSimpleFormBuilder
+    form_options[:html] ||= {}
+    form_options[:html][:autocomplete] ||= 'off'
     box_options[:type] ||= :primary
     keep_context do
       render(
@@ -69,6 +71,11 @@ module ApplicationHelper
   end
 
   def discipline_image discipline, options = {}
+    options[:size] ||= "20x20"
     image_tag "disciplines/#{discipline.image}", options
+  end
+
+  def decorated_competition
+    @decorated_competition = Competition.first.decorate
   end
 end

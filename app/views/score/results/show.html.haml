@@ -19,27 +19,32 @@
                 %tr
                   %td= list.name
                   %td= short_show_link score_list_path(list)
-  .col-md-4
-    = box("Aktionen") do
-      = link_btn "Bearbeiten", edit_score_result_path(@score_result)
-      = link_btn "Startliste hinzufügen", new_score_list_path(score_result: @score_result)
+  - if logged_in?
+    .col-md-4
+      = box("Aktionen") do
+        = link_btn "Bearbeiten", edit_score_result_path(@score_result)
+        = link_btn "Startliste hinzufügen", new_score_list_path(score_result: @score_result)
 
+  - if @rows.count > 0
+    .col-md-12
+      = box @score_result.name do |box|
+        %table.table.table-bordered
+          - @rows.each do |row|
+            %tr
+              %td= "#{place_for_row row}."
+              %th= row.entity
+              %th= row.best_stopwatch_time
+              - @score_result.lists.each do |list|
+                %td= row.time_from(list)
 
-  .col-md-12
-    = box @score_result.name do |box|
-      %table.table.table-bordered
-        - @rows.each do |row|
-          %tr
-            %td= "#{place_for_row row}."
-            %th= row.entity
-            %th= row.best_stopwatch_time
-            - @score_result.lists.each do |list|
-              %td= row.time_from(list)
-
-  .col-md-12
-    = box "Mannschaftswertung" do |box|
-      %table.table.table-bordered
-        - @group_result_rows.each do |row|
-          %tr
-            %th= row.team
-            %th= row.time
+    - if @score_result.group_assessment
+      .col-md-12
+        = box "Mannschaftswertung" do |box|
+          %table.table.table-bordered
+            - @group_result_rows.each do |row|
+              %tr
+                %th= row.team
+                %th= row.time
+  - else
+    .col-md-8
+      .alert.alert-info Keine Einträge gefunden

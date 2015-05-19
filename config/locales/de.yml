@@ -92,6 +92,14 @@ de:
     handheld_average: Handstoppung - Durchschnitt
     calculated: Alle Zeiten auf elektronisch umrechnen
 
+  assessment_types:
+    group_competitor: Mannschaftswertung
+    group_competitor_short: M
+    single_competitor: Einzelstarter
+    single_competitor_short: E
+    out_of_competition: Außer der Wertung
+    out_of_competition_short: A
+
   date:
     formats:
       default: ! '%d.%m.%Y'

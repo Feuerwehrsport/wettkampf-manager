@@ -1,8 +1,14 @@
 class PeopleController < ApplicationController
   implement_crud_actions
-  before_action :assign_resource_for_edit, only: :edit_assessment_requests
+  before_action :assign_resource_for_edit_assessment_requests, only: :edit_assessment_requests
 
   def edit_assessment_requests
+  end
+
+  def index
+    super
+    @female = @people.female.decorate
+    @male = @people.male.decorate
   end
 
   protected
@@ -26,6 +32,6 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:first_name, :last_name, :team_id, :gender, { requested_assessment_ids: [] })
+    params.require(:person).permit(:first_name, :last_name, :team_id, :gender, { requests_attributes: [:assessment_type, :_destroy, :assessment_id] })
   end
 end

@@ -6,11 +6,15 @@ class TeamDecorator < ApplicationDecorator
   end
 
   def numbered_name
-    if Team.where(name: name, gender: gender).where.not(id: id).count > 0
+    if Team.gender(gender).where(name: name).where.not(id: id).count > 0
       "#{name} #{number}"
     else
       name
     end
+  end
+
+  def numbered_name_with_gender
+    "#{numbered_name} #{translated_gender}"
   end
 
   def short_name length = 15

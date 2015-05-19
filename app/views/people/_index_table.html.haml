@@ -1,0 +1,21 @@
+- if collection.count == 0
+  .alert.alert-info Keine Einträge gefunden
+- else
+  %table.table.table-bordered.table-hover.table-condensed
+    %tr
+      %th Name
+      %th= Person.human_attribute_name(:team)
+      - assessments = Assessment.requestable_for(collection.first).map(&:decorate)
+      - assessments.each do |assessment|
+        %th{ title: assessment }= discipline_image assessment.discipline
+    - collection.each do |person|
+      %tr
+        %td= link_to person.full_name, person_path(person)
+        %td= person.team
+        - assessments.each do |assessment|
+          - request = person.request_for(assessment.object)
+          - if request.present?
+            %td{ title: "#{assessment}: #{t("assessment_types.#{request.assessment_type}")}" }= t("assessment_types.#{request.assessment_type}_short")
+          - else
+            %td
+                

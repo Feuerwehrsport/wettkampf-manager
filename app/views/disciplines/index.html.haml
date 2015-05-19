@@ -8,7 +8,9 @@
           %th
         - @disciplines.each do |discipline|
           %tr
-            %td= discipline
+            %td
+              = discipline_image(discipline)
+              = discipline
             %td= discipline.assessments.join(", ")
             %td.text-right
               = link_to "Ansehen", discipline_path(discipline), class: "btn btn-sm btn-default"

@@ -1,0 +1,12 @@
+.row
+  .col-md-12.refreshable#people-index
+    = box Person.model_name.human count: 0 do |box|
+      %h4 Weiblich
+      = render "index_table", collection: @female
+      %h4 Weiblich
+      = render "index_table", collection: @male
+      
+      - if logged_in?
+        = box.footer do
+          .pull-right= link_btn "Hinzufügen", new_person_path, remote: true
+          .clearfix

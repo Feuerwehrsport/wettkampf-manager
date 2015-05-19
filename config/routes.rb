@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :suggestions, only: [] do
       collection do
         get :people
-        post :teams
+        get :teams
       end
     end
   end

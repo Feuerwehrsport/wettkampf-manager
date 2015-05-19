@@ -12,10 +12,11 @@
           %th= @team.class.human_attribute_name :people
           %td= @team.people.count
 
-  .col-md-4
-    = box("Aktionen") do
-      = link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), class: "btn btn-sm btn-default", remote: true
-      = link_to "Bearbeiten", edit_team_path(@team), class: "btn btn-sm btn-default"
+  - if logged_in?
+    .col-md-4
+      = box("Aktionen") do
+        = link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), class: "btn btn-sm btn-default", remote: true
+        = link_to "Bearbeiten", edit_team_path(@team), class: "btn btn-sm btn-default"
 
   .col-md-12
     = box(@team.class.human_attribute_name :people) do |box|

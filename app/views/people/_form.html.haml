@@ -1,7 +1,7 @@
 = boxed_form_for Person.model_name.human, @person do |f|
   = f.error_notification
   = f.inputs do
-    = f.association :team
+    = f.association :team, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
     = f.input :first_name
     = f.input :last_name
     = f.input :gender, collection: [:male, :female]

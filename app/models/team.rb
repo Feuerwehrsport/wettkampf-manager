@@ -6,4 +6,6 @@ class Team < ActiveRecord::Base
   validates :name, :gender, :number, presence: true
   validates :number, numericality: { greater_than: 0 }
   validates :name, uniqueness: { scope: [:number, :gender] }
+
+  scope :gender, -> (gender) { where(gender: Team.genders[gender]) }
 end
