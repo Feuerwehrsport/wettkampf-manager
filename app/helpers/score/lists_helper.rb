@@ -67,5 +67,13 @@ module Score
     def form_generator_config_classes type
       ListGenerator.configuration.select { |key, types| type.in? types }.keys.join(" ")
     end
+
+    def discipline_klass
+      single_discipline? ? Person : Team
+    end
+
+    def not_yet_present_entities
+      discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)) 
+    end
   end
 end

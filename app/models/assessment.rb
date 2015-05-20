@@ -5,9 +5,19 @@ class Assessment < ActiveRecord::Base
 
   validates :discipline, presence: true
 
-  def self.requestable_for person
-    where(arel_table[:gender].eq(nil).or(arel_table[:gender].eq(Person.genders[person.gender]))).select do |assessment|
-      assessment.discipline.single_discipline?
+  def to_label
+    decorate
+  end
+
+  def self.requestable_for entity
+    if entity.is_a? Person
+      where(arel_table[:gender].eq(nil).or(arel_table[:gender].eq(Person.genders[entity.gender]))).select do |assessment|
+        assessment.discipline.single_discipline?
+      end
+    else
+      where(arel_table[:gender].eq(nil).or(arel_table[:gender].eq(Team.genders[entity.gender]))).select do |assessment|
+        assessment.discipline.group_discipline?
+      end
     end
   end
 end

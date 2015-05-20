@@ -9,26 +9,31 @@
           %th= @team.class.human_attribute_name :number
           %td= @team.number
         %tr
+          %th= @team.class.human_attribute_name :gender
+          %td= @team.translated_gender
+        %tr
           %th= @team.class.human_attribute_name :people
           %td= @team.people.count
+
+    = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
+      %table.table
+        - Assessment.requestable_for(@team).each do |assessment|
+          - decorated_assessment = assessment.decorate
+          %tr
+            %th
+              = discipline_image decorated_assessment.discipline
+              = decorated_assessment
+            %td
+              - if @team.request_for(assessment).present?
+                = t("assessment_types.#{@team.request_for(assessment).assessment_type}")
 
   - if logged_in?
     .col-md-4
       = box("Aktionen") do
-        = link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), class: "btn btn-sm btn-default", remote: true
-        = link_to "Bearbeiten", edit_team_path(@team), class: "btn btn-sm btn-default"
+        = link_btn "Wettkämpfer hinzufügen", new_person_path(team: @team), remote: true
+        = link_btn "Bearbeiten", edit_team_path(@team)
+        = link_btn "Wertungsgruppen bearbeiten", edit_assessment_requests_team_path(@team), remote: true
 
   .col-md-12
     = box(@team.class.human_attribute_name :people) do |box|
-      %table.table
-        %tr
-          %th= Person.human_attribute_name :last_name
-          %th= Person.human_attribute_name :first_name
-          %th= Person.human_attribute_name :gender
-          %th
-        - @team.people.each do |person|
-          %tr
-            %td= person.last_name
-            %td= person.first_name
-            %td= person.translated_gender
-            %td= link_to "Ansehen", person_path(person), class: "btn btn-sm btn-default"
+      = render "people/index_table", collection: @team.people

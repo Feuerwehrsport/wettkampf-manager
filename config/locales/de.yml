@@ -48,6 +48,7 @@ de:
         result_time_type: Zeitenberechnung
         result: Ergebnisliste
       score/list_entry:
+        entity: Teilnehmer
         track: Bahn
         run: Lauf
       score/list_generator:

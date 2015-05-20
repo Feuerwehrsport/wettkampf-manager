@@ -7,7 +7,7 @@ class Person < ActiveRecord::Base
   validates :last_name, :first_name, :gender, presence: true
   validate :validate_team_gender
 
-  accepts_nested_attributes_for :requests
+  accepts_nested_attributes_for :requests, allow_destroy: true
 
   def request_for assessment
     requests.where(assessment: assessment).first

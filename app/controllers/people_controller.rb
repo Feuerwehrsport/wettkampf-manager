@@ -32,6 +32,7 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:first_name, :last_name, :team_id, :gender, { requests_attributes: [:assessment_type, :_destroy, :assessment_id] })
+    params.require(:person).permit(:first_name, :last_name, :team_id, :gender, 
+      { requests_attributes: [:assessment_type, :_destroy, :assessment_id, :id] })
   end
 end

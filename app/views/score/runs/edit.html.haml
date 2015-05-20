@@ -5,16 +5,20 @@
         %table.table
           %tr
             %th= "Bahn"
-            %th= "Vorname"
-            %th= "Nachname"
-            %th= "Team"
+            - if single_discipline?
+              %th= "Vorname"
+              %th= "Nachname"
+            %th= "Mannschaft"
             %th= "Zeiten"
           - @score_run.list_entries.each do |entry|
             %tr
               %td= entry.track
-              %td= entry.entity.first_name.truncate(20)
-              %td= entry.entity.last_name.truncate(20)
-              %td= entry.entity.team.short_name
+              - if single_discipline?
+                %td= entry.entity.first_name.truncate(20)
+                %td= entry.entity.last_name.truncate(20)
+                %td= entry.entity.team.short_name
+              - else
+                %td= entry.entity.team.name
               %td.edit-time
                 = f.simple_fields_for :list_entries, entry do |n|
                   = n.input :track, as: :hidden

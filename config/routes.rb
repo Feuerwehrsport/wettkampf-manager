@@ -14,14 +14,17 @@ Rails.application.routes.draw do
   resources :assessments
   resources :people do
     member { get :edit_assessment_requests }
-    collection { post :suggestions }
   end
-  resources :teams
+  resources :teams do
+    member { get :edit_assessment_requests }
+  end
   namespace :score do
     resources :lists do
       member do
         get :move
         get :finished
+        get :select_entity
+        get "destroy_entity/:entry_id", action: :destroy_entity, as: :destroy_entity
       end
       resources :runs, only: [:edit, :update], param: :run
     end

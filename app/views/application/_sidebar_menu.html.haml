@@ -6,11 +6,11 @@
   - if logged_in?
     %li{ class: controller_name == 'disciplines' ? 'active' : '' }
       %a{ href: disciplines_path }
-        %i.fa.fa-info-circle
+        %i.fa.fa-cubes
         %span= Discipline.model_name.human count: 0
     %li{ class: controller_name == 'assessments' ? 'active' : '' }
       %a{ href: assessments_path }
-        %i.fa.fa-info-circle
+        %i.fa.fa-paper-plane
         %span= Assessment.model_name.human count: 0
   %li{ class: controller_name == 'teams' ? 'active' : '' }
     %a{ href: teams_path }

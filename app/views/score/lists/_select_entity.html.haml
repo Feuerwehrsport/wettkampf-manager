@@ -1,0 +1,16 @@
+= boxed_form_for "Teilnehmer hinzufügen", @score_list, remote: true, modal: true do |f|
+  - if not_yet_present_entities.count == 0
+    .alert.alert-danger Es wurde alle möglichen Teilnehmer zugeordnet
+  - else
+    = f.error_notification
+    = f.inputs do
+      - free_run, free_track = @score_list.next_free_track
+      = f.simple_fields_for :entries, @score_list.entries.build(run: free_run, track: free_track, entity_type: discipline_klass.name) do |g|
+        = g.association :entity, collection: not_yet_present_entities, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
+        = g.input :run, as: :hidden
+        = g.input :track, as: :hidden
+        = g.input :entity_type, as: :hidden
+        = "Wird in Lauf #{free_run} auf Bahn #{free_track} eingeordnet."
+    = f.actions do
+      = f.primary_button :submit, "Hinzufügen"
+

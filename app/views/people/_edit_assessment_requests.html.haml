@@ -2,10 +2,11 @@
   = f.error_notification
   = f.inputs do
     - Assessment.requestable_for(@person).each do |assessment|
-      = f.simple_fields_for :requests, @person.requests.find_or_initialize_by(assessment: assessment) do |g|
-        = g.input :assessment_id, as: :hidden
-        = g.input :assessment_type, as: :select, collection: AssessmentRequest.assessment_types.keys, label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }
-        = g.input :_destroy, as: :boolean, label: 'Keine Teilnahme', input_html: { checked: !g.object.persisted? }
+      .assessment-request
+        = f.simple_fields_for :requests, @person.requests.find_or_initialize_by(assessment: assessment) do |g|
+          = g.input :_destroy, as: :boolean, label: 'Keine Teilnahme', input_html: { checked: !g.object.persisted? }
+          = g.input :assessment_id, as: :hidden
+          = g.input :assessment_type, as: :select, collection: AssessmentRequest.assessment_types.keys, label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }
   = f.actions do
     = f.primary_button :submit, "Speichern"
 

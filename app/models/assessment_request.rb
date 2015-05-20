@@ -4,4 +4,8 @@ class AssessmentRequest < ActiveRecord::Base
   enum assessment_type: { group_competitor: 0, single_competitor: 1, out_of_competition: 2 }
 
   validates :assessment, :entity, presence: true
+
+  def self.group_assessment_type_keys
+    [:group_competitor, :out_of_competition]
+  end
 end

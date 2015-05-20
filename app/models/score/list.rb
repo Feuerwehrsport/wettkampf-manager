@@ -10,7 +10,7 @@ module Score
     validates :result_time_type, inclusion: { in: proc { |l| l.available_time_types.map(&:to_s) } }, allow_nil: true
     validate { generator.try(:valid?) }
 
-    accepts_nested_attributes_for :entries
+    accepts_nested_attributes_for :entries, allow_destroy: true
 
     attr_accessor :generator
     after_create :perform_generator
@@ -24,6 +24,18 @@ module Score
       if @generator_attributes.present?
         generator_attributes = @generator_attributes
       end
+    end
+
+    def next_free_track
+      last_entry = entries.last
+      run = last_entry.try(:run) || 1
+      track = last_entry.try(:track) || 1
+      track += 1
+      if track > track_count
+        track = 1
+        run += 1
+      end
+      [run, track]
     end
 
     def generator_attributes= attributes

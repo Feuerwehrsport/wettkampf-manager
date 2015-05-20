@@ -61,6 +61,11 @@ module ApplicationHelper
     icon_link_btn('ion ion-edit', path, options)
   end
 
+  def short_destroy_link path, options = {}
+    options[:title] ||= "Löschen"
+    icon_link_btn('ion ion-trash-a', path, options)
+  end
+
   def short_show_link path, options = {}
     options[:title] ||= "Ansehen"
     icon_link_btn('ion ion-eye', path, options)
