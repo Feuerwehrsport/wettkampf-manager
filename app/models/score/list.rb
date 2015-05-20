@@ -3,7 +3,7 @@ module Score
     enum result_time_type: { electronic: 0, handheld_median: 1, handheld_average: 2, calculated: 3 }
     belongs_to :assessment
     belongs_to :result
-    has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry"
+    has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry", dependent: :destroy
     validates :name, :assessment, :track_count, presence: true
     validates :track_count, numericality: { greater_than: 0 }
     validates :generator, on: :create, presence: true

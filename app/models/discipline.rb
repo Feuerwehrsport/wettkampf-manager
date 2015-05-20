@@ -1,6 +1,6 @@
 class Discipline < ActiveRecord::Base
   validates :type, presence: true
-  has_many :assessments
+  has_many :assessments, dependent: :destroy
   before_destroy :destroy_possible?
 
   def group_discipline?

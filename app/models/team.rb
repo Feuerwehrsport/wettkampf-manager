@@ -1,6 +1,6 @@
 class Team < ActiveRecord::Base
   has_many :people
-  has_many :requests, class_name: "AssessmentRequest", as: :entity
+  has_many :requests, class_name: "AssessmentRequest", as: :entity, dependent: :destroy
   has_many :requested_assessments, through: :requests, source: :assessment
 
   enum gender: { female: 0, male: 1 }
