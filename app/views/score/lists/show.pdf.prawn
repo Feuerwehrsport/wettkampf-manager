@@ -21,9 +21,13 @@ score_list_entries do |entry, run, track|
   end
 
   line.push(track)
-  line.push(entry.try(:entity).try(:first_name))
-  line.push(entry.try(:entity).try(:last_name))
-  line.push(entry.try(:entity).try(:team).try(:name))
+  if single_discipline?
+    line.push(entry.try(:entity).try(:first_name))
+    line.push(entry.try(:entity).try(:last_name))
+    line.push(entry.try(:entity).try(:team).try(:name))
+  else
+    line.push(entry.try(:entity).try(:name))
+  end
   line.push(result_for entry)
   data.push(line)
 end

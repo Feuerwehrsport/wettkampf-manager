@@ -54,7 +54,7 @@ module Score
 
     def result_for entry
       if entry && entry.result_type == "valid"
-        entry.stopwatch_times.first.try(:second_time)
+        entry.calculated_time.try(:second_time)
       elsif entry && entry.result_type == "invalid"
         "D"
       elsif entry && entry.result_type == "no-run"
