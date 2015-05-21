@@ -1,4 +1,4 @@
-= boxed_form_for Person.model_name.human, @person, remote: true, modal: true do |f|
+= boxed_form_for @person, @person, remote: true, modal: true do |f|
   = f.error_notification
   = f.inputs do
     - Assessment.requestable_for(@person).each do |assessment|

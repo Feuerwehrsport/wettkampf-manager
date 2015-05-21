@@ -14,6 +14,11 @@
         %tr
           %th= @team.class.human_attribute_name :people
           %td= @team.people.count
+      - if logged_in?
+        - box.footer do
+          .pull-right= link_btn "Bearbeiten", edit_team_path(@team)
+          .clearfix
+
 
     = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
       %table.table
@@ -25,14 +30,19 @@
               = decorated_assessment
             %td
               - if @team.request_for(assessment).present?
+                %i.ion.ion-checkmark
                 = t("assessment_types.#{@team.request_for(assessment).assessment_type}")
+              - else
+                %i.ion.ion-close
+      - if logged_in?
+        - box.footer do
+          .pull-right= link_btn "Wertungsgruppen bearbeiten", edit_assessment_requests_team_path(@team), remote: true
+          .clearfix
 
   - if logged_in?
     .col-md-4
       = box("Aktionen") do
-        = link_btn "Wettkämpfer hinzufügen", new_person_path(team: @team), remote: true
-        = link_btn "Bearbeiten", edit_team_path(@team)
-        = link_btn "Wertungsgruppen bearbeiten", edit_assessment_requests_team_path(@team), remote: true
+        = link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), remote: true, class: "btn btn-info btn-small"
 
   .col-md-12
     = box(@team.class.human_attribute_name :people) do |box|

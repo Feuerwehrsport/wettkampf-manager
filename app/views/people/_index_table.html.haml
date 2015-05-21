@@ -8,6 +8,8 @@
       - assessments = Assessment.requestable_for(collection.first).map(&:decorate)
       - assessments.each do |assessment|
         %th{ title: assessment }= discipline_image assessment.discipline
+      - if logged_in?
+        %th
     - collection.each do |person|
       %tr
         %td= link_to person.full_name, person_path(person)
@@ -18,4 +20,6 @@
             %td{ title: "#{assessment}: #{t("assessment_types.#{request.assessment_type}")}" }= t("assessment_types.#{request.assessment_type}_short")
           - else
             %td
+        - if logged_in?
+          %td= short_edit_link edit_assessment_requests_person_path(person), remote: true, class: "btn-xs", title: "Wertungsgruppen bearbeiten"
                 

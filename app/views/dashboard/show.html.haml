@@ -11,7 +11,7 @@
   - else
     .col-md-7
       = box decorated_competition do |box|
-        = l decorated_competition.date
+        %h4= l decorated_competition.date
         %table.table
           %tr
             %th
@@ -30,4 +30,5 @@
     - if logged_in?
       .col-md-5
         = box "Konfigurieren" do |box|
-          = link_btn "Name und Datum", edit_competition_path(decorated_competition.id)
+          %p= link_btn "Name und Datum", edit_competition_path(decorated_competition.id)
+          %p= link_btn "Passwort", edit_user_path(User.first)
