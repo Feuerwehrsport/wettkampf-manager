@@ -1,6 +1,9 @@
+require 'score'
+
 module Score
   class Result < ActiveRecord::Base
     belongs_to :assessment
+    belongs_to :double_event_result
     has_many :lists
 
     validates :assessment, presence: true
@@ -18,7 +21,7 @@ module Score
       lists.each do |list|
         list.entries.not_waiting.each do |list_entry|
           if rows[list_entry.entity.id].nil?
-            rows[list_entry.entity.id] = ResultRow.new(list_entry.entity)
+            rows[list_entry.entity.id] = ResultRow.new(list_entry.entity, self)
           end
           rows[list_entry.entity.id].add_list(list_entry)
         end

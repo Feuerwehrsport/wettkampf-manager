@@ -19,7 +19,9 @@
 
       - if logged_in?
         - box.footer do
-          .pull-right= link_to "Bearbeiten", edit_person_path(@person), class: "btn btn-sm btn-default"
+          .pull-right
+            = link_btn "Löschen", person_path(@person), method: :delete, data: { confirm: 'Person wirklich löschen?' }
+            = link_btn "Bearbeiten", edit_person_path(@person)
           .clearfix
 
   .col-md-8
@@ -36,5 +38,5 @@
                 = t("assessment_types.#{@person.request_for(assessment).assessment_type}")
       - if logged_in?
         - box.footer do
-          .pull-right= link_to "Wertungsgruppen bearbeiten", edit_assessment_requests_person_path(@person), class: "btn btn-sm btn-default", remote: true
+          .pull-right= link_btn "Wertungsgruppen bearbeiten", edit_assessment_requests_person_path(@person), remote: true
           .clearfix

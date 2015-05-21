@@ -38,7 +38,7 @@ module Score
       (1..score_count).each do
         current = queue.shift
         if current.nil? || current.best_stopwatch_time.nil?
-          @time = nil
+          # @time = nil
         else
           @time += current.best_stopwatch_time.time
         end

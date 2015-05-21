@@ -3,7 +3,7 @@
     = box Person.model_name.human count: 0 do |box|
       %h4 Weiblich
       = render "index_table", collection: @female
-      %h4 Weiblich
+      %h4 Männlich
       = render "index_table", collection: @male
       
       - if logged_in?

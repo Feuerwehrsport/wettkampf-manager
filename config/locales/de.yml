@@ -9,6 +9,7 @@ de:
         one: Disziplin
         other: Disziplinen
       disciplines/climbing_hook_ladder: Hakenleitersteigen
+      disciplines/double_event: Zweikampf
       disciplines/fire_attack: Löschangriff Nass
       disciplines/fire_relay: 4x100m Feuerwehrstafette
       disciplines/group_relay: Gruppenstafette
@@ -60,6 +61,7 @@ de:
         group_assessment: Mannschaftswertung
         lists: Startlisten
         name: Name
+        results: Ergebnislisten
       team:
         gender: Geschlecht
         name: Name

@@ -1,3 +1,5 @@
+require 'score'
+
 module Score
   class List < ActiveRecord::Base
     enum result_time_type: { electronic: 0, handheld_median: 1, handheld_average: 2, calculated: 3 }

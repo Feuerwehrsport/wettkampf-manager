@@ -38,7 +38,7 @@ module Score
     end
 
     def stopwatch_time
-      stopwatch_times.first
+      calculated_time(list.result_time_type)
     end
 
     def stopwatch_time_valid?

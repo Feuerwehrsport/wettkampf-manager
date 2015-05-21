@@ -22,6 +22,7 @@ class Discipline < ActiveRecord::Base
       Disciplines::FireRelay,
       Disciplines::ObstacleCourse,
       Disciplines::GroupRelay,
+      Disciplines::DoubleEvent,
     ]
   end
 

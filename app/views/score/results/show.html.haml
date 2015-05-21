@@ -2,23 +2,33 @@
   .col-md-8
     = box @score_result.name do |box|
       %table.table
-        %tr
-          %th= @score_result.class.human_attribute_name :name
-          %td= @score_result.name
+        - if @score_result.name.present?
+          %tr
+            %th= @score_result.class.human_attribute_name :name
+            %td= @score_result.name
         %tr
           %th= @score_result.class.human_attribute_name :assessment
           %td= @score_result.assessment
-        %tr
-          %th= @score_result.class.human_attribute_name :group_assessment
-          %td= @score_result.group_assessment
-        %tr
-          %th= @score_result.class.human_attribute_name :lists
-          %td
-            %table.table.table-condensed
-              - @score_result.lists.each do |list|
-                %tr
-                  %td= list.name
-                  %td= short_show_link score_list_path(list)
+
+        - if @score_result.is_a? Score::DoubleEventResult
+          %tr
+            %th= @score_result.class.human_attribute_name :results
+            %td
+              %table.table.table-condensed
+                - @score_result.results.each do |result|
+                  %tr
+                    %td= link_to result, score_result_path(result)
+        - else
+          %tr
+            %th= @score_result.class.human_attribute_name :group_assessment
+            %td= @score_result.translated_group_assessment
+          %tr
+            %th= @score_result.class.human_attribute_name :lists
+            %td
+              %table.table.table-condensed
+                - @score_result.lists.each do |list|
+                  %tr
+                    %td= link_to list.name, score_list_path(list)
   - if logged_in?
     .col-md-4
       = box("Aktionen") do
@@ -29,15 +39,38 @@
     .col-md-12
       = box @score_result.name do |box|
         %table.table.table-bordered
+          %tr
+            %th
+            %th Name
+            - if @score_result.is_a? Score::DoubleEventResult
+              %th Summe
+              - @score_result.results.each do |result|
+                %th= discipline_image result.assessment.discipline.decorate
+            - else
+              %th Bestzeit
+              - @score_result.lists.each do |list|
+                %td= list.object.name
+
+
           - @rows.each do |row|
             %tr
               %td= "#{place_for_row row}."
               %th= row.entity
-              %th= row.best_stopwatch_time
-              - @score_result.lists.each do |list|
-                %td= row.time_from(list)
+              - if row.is_a? Score::DoubleEventResultRow
+                %th= row.sum_stopwatch_time
+                - @score_result.results.each do |result|
+                  %td= row.time_from(result)
+              - else
+                %th= row.best_stopwatch_time
+                - @score_result.lists.each do |list|
+                  %td= row.time_from(list)
+        - box.footer do
+          .pull-right
+            = link_btn "als PDF", url_for(format: :pdf)
+            = link_btn "als XLS", url_for(format: :xlsx)
+          .clearfix
 
-    - if @score_result.group_assessment
+    - if @score_result.group_assessment? && @discipline.single_discipline?
       .col-md-12
         = box "Mannschaftswertung" do |box|
           %table.table.table-bordered

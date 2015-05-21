@@ -1,8 +1,7 @@
 module Score
   class ListDecorator < ApplicationDecorator
-
     def name
-      [assessment.decorate.try(:to_s), object.name].reject(&:blank?).join(" - ")
+      [assessment.try(:decorate).try(:to_s), object.name].reject(&:blank?).join(" - ")
     end
 
     def discipline

@@ -1,11 +1,15 @@
 module Score
-  class ResultRow < Struct.new(:entity)
+  class ResultRow < Struct.new(:entity, :result)
     include Draper::Decoratable
     attr_reader :list_entries
 
     def add_list list_entry
       @list_entries ||= []
       @list_entries.push(list_entry)
+    end
+
+    def entity
+      @entity ||= list_entries.first.try(:entity)
     end
 
     def best_stopwatch_time
@@ -22,12 +26,12 @@ module Score
 
     def <=> other
       both = [valid_times, other.valid_times].map(&:count)
-      (0..both.min).each do |i|
+      (0..(both.min - 1)).each do |i|
         compare = valid_times[i] <=> other.valid_times[i]
         next if compare == 0
         return compare
       end
-      both.first <=> both.last
+      both.last <=> both.first
     end
   end
 end

@@ -11,6 +11,7 @@ resetHandler = () ->
       checkbox.change(() ->
         opacity = if checkbox.is(':checked') then 0.3 else 1
         context.find('.team_requests_assessment_type').css(opacity: opacity)
+        context.find('.person_requests_assessment_type').css(opacity: opacity)
       ).change()
       handlers.push(checkbox[0])
 

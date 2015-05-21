@@ -47,64 +47,79 @@ class CompetitionSeed
 
   def climbing_hook_ladder group_assessment
     climbing_hook_ladder = Disciplines::ClimbingHookLadder.create!
-    a = Assessment.create!(discipline: climbing_hook_ladder, gender: :male)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a = Assessment.create!(discipline: climbing_hook_ladder, gender: :female)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a
+    male_assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :male)
+    male_result = Score::Result.create!(assessment: male_assessment, group_assessment: group_assessment)
+    female_assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :female)
+    female_result = Score::Result.create!(assessment: female_assessment, group_assessment: group_assessment)
+    [male_result, female_result]
   end
 
   def fire_attack group_assessment
     fire_attack = Disciplines::FireAttack.create!
-    a = Assessment.create!(discipline: fire_attack, gender: :male)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a = Assessment.create!(discipline: fire_attack, gender: :female)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a
+    male_assessment = Assessment.create!(discipline: fire_attack, gender: :male)
+    male_result = Score::Result.create!(assessment: male_assessment, group_assessment: group_assessment)
+    female_assessment = Assessment.create!(discipline: fire_attack, gender: :female)
+    female_result = Score::Result.create!(assessment: female_assessment, group_assessment: group_assessment)
+    [male_result, female_result]
   end
 
   def obstacle_course group_assessment
     obstacle_course = Disciplines::ObstacleCourse.create!
-    a = Assessment.create!(discipline: obstacle_course, gender: :male)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a = Assessment.create!(discipline: obstacle_course, gender: :female)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a
+    male_assessment = Assessment.create!(discipline: obstacle_course, gender: :male)
+    male_result = Score::Result.create!(assessment: male_assessment, group_assessment: group_assessment)
+    female_assessment = Assessment.create!(discipline: obstacle_course, gender: :female)
+    female_result = Score::Result.create!(assessment: female_assessment, group_assessment: group_assessment)
+    [male_result, female_result]
   end
 
   def group_relay group_assessment
     group_relay = Disciplines::GroupRelay.create!
-    a = Assessment.create!(discipline: group_relay, gender: :female)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a
+    female_assessment = Assessment.create!(discipline: group_relay, gender: :female)
+    female_result = Score::Result.create!(assessment: female_assessment, group_assessment: group_assessment)
+    [female_result]
   end
 
   def fire_relay group_assessment
     fire_relay = Disciplines::FireRelay.create!
-    a = Assessment.create!(discipline: fire_relay, gender: :male)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a = Assessment.create!(discipline: fire_relay, gender: :female)
-    Score::Result.create!(assessment: a, group_assessment: group_assessment)
-    a
+    male_assessment = Assessment.create!(discipline: fire_relay, gender: :male)
+    male_result = Score::Result.create!(assessment: male_assessment, group_assessment: group_assessment)
+    female_assessment = Assessment.create!(discipline: fire_relay, gender: :female)
+    female_result = Score::Result.create!(assessment: female_assessment, group_assessment: group_assessment)
+    [male_result, female_result]
+  end
+
+  def double_event result_lists
+    double_event = Disciplines::DoubleEvent.create!
+    result_lists.map do |result_list|
+      assessment = Assessment.create!(discipline: double_event, gender: result_list.first.assessment.gender)
+      double_event_result = Score::DoubleEventResult.create!(assessment: assessment)
+      result_list.each do |result|
+        result.double_event_result = double_event_result
+        result.save!
+      end
+      double_event_result
+    end
   end
 
   def seed_method_dcup_simple
     Competition.update_all(group_score_count: 4, group_assessment: true)
-    climbing_hook_ladder true
+    chl_results = climbing_hook_ladder true
+    oc_results = obstacle_course true
+    double_event [[chl_results.first, oc_results.first], [chl_results.last, oc_results.last]]
     fire_attack true
-    obstacle_course true
     group_relay true
   end
 
   def seed_method_dcup_all
     Competition.update_all(group_score_count: 4, group_assessment: true)
-    hl_female = climbing_hook_ladder true
+    chl_results = climbing_hook_ladder true
+    oc_results = obstacle_course true
+    double_event [[chl_results.first, oc_results.first], [chl_results.last, oc_results.last]]
     fire_attack true
-    obstacle_course true
     group_relay true
     fire_relay true
 
-
+hl_female = chl_results.last.assessment
 
 male_team_mv = Team.create!(name: "Mecklenburg-Vorpommern", gender: "male")
 female_team_mv = Team.create!(name: "Mecklenburg-Vorpommern", gender: "female")
