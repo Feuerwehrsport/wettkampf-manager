@@ -1,3 +1,5 @@
+require 'score'
+
 module Score
   class ListEntry < ActiveRecord::Base
     belongs_to :list

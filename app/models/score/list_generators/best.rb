@@ -25,7 +25,6 @@ module Score
             p result_row
             return if result_row.nil?
             any_list = result_row.list_entries.first
-            byebug
             list.entries.create!(entity: result_row.entity, run: run, track: track, assessment_type: any_list.assessment_type)
           end
 
