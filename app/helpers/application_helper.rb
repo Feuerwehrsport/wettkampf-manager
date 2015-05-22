@@ -1,5 +1,6 @@
 module ApplicationHelper
   include TranslationHelper
+  include FlashHelper
 
   def box(title, options = {}, &block)
     @@box_index ||= 0
