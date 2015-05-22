@@ -1,0 +1,10 @@
+.row
+  .col-md-12
+    = box "Gesamtwertung" do |box|
+      = render "new_table", gender: :female, collection: @female
+      = render "new_table", gender: :male, collection: @male
+      - box.footer do
+        .pull-right
+          = link_btn "als PDF", url_for(format: :pdf)
+          = link_btn "als XLS", url_for(format: :xlsx)
+        .clearfix

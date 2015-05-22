@@ -45,6 +45,9 @@ de:
       competition:
         date: Datum
         name: Name
+        group_people_count: Wettkämpfer pro Mannschaft
+        group_run_count: Wettkämpfer pro Disziplin
+        group_score_count: Wettkämpfer in Wertung
       discipline:
         type: Disziplin
         name: Name

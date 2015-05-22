@@ -8,6 +8,9 @@ module Score
 
     validates :assessment, presence: true
 
+    scope :gender, -> (gender) { joins(:assessment).merge(Assessment.gender(gender)) }
+    scope :group_assessment_for, -> (gender) { gender(gender).where(group_assessment: true) }
+
     def to_label
       decorate.to_s
     end

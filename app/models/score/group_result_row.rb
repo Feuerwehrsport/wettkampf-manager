@@ -2,6 +2,10 @@ module Score
   class GroupResultRow < Struct.new(:team, :score_count, :run_count)
     include Draper::Decoratable
 
+    def entity
+      team
+    end
+
     def add_result_row result_row
       @result_rows ||= []
       @result_rows.push(result_row)
@@ -9,7 +13,7 @@ module Score
 
     def time
       calculate
-      StopwatchTime.new(time: @time, list_entry: ListEntry.new(result_type: valid? ? "valid" : "invalid"))
+      StopwatchTime.aggregated_time(@time, valid?)
     end
 
     def rows_in

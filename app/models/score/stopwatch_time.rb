@@ -7,6 +7,15 @@ module Score
     validates :list_entry, :time, presence: true
     validates :time, numericality: { greater_than: 0 }
 
+    def self.aggregated_time(time, valid=nil)
+      if time.is_a?(StopwatchTime)
+        time.list_entry = ListEntry.new(result_type: time.time.present? ? "valid" : "invalid")
+        return time
+      end
+      valid = time.present? if valid.nil?
+      new(time: time, list_entry: ListEntry.new(result_type: valid ? "valid" : "invalid"))
+    end
+
     def second_time
       return "" if time.blank? || time == 0
       sprintf("%.2f", (time.to_f/100)).sub(".", ",")

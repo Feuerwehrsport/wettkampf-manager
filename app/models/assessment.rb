@@ -6,6 +6,8 @@ class Assessment < ActiveRecord::Base
 
   validates :discipline, presence: true
 
+  scope :gender, -> (gender) { where(gender: Assessment.genders[gender]) }
+
   def to_label
     decorate
   end

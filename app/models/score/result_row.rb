@@ -16,6 +16,10 @@ module Score
       @best_time ||= valid_times.first
     end
 
+    def time
+      best_stopwatch_time
+    end
+
     def time_from list
       @list_entries.select { |entry| entry.list == list }.map(&:stopwatch_time).first
     end
