@@ -6,7 +6,7 @@
     = f.inputs do
       - free_run, free_track = @score_list.next_free_track
       = f.simple_fields_for :entries, @score_list.entries.build(run: free_run, track: free_track, entity_type: discipline_klass.name) do |g|
-        = g.association :entity, collection: not_yet_present_entities, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
+        = g.association :entity, collection: not_yet_present_entities, label_method: lambda { |entity| label_method_for_select_entity(entity) }
         = g.input :run, as: :hidden
         = g.input :track, as: :hidden
         = g.input :entity_type, as: :hidden

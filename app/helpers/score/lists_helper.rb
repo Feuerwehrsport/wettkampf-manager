@@ -76,6 +76,15 @@ module Score
       discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)) 
     end
 
+    def label_method_for_select_entity entity
+      decorated = entity.decorate
+      if single_discipline?
+        "#{decorated.full_name} #{decorated.translated_gender}"
+      else
+        decorated.numbered_name_with_gender
+      end
+    end
+
     def show_export_data(options={})
       header = ["Lauf", "Bahn"]
       if single_discipline?
