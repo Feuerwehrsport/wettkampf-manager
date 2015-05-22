@@ -74,10 +74,20 @@
       .col-md-12
         = box "Mannschaftswertung" do |box|
           %table.table.table-bordered
+            %tr
+              %th
+              %th Mannschaft
+              %th Zeit
             - @group_result_rows.each do |row|
-              %tr
+              %tr{class: row_invalid_class(row)}
+                %td= "#{place_for_group_row row}."
                 %th= row.team
                 %th= row.time
+              %tr{class: row_invalid_class(row)}
+                %td
+                %td{colspan: 2}
+                  %em= row.rows_in.join(", ")
+                  %small= row.rows_out.join(", ")
   - else
     .col-md-8
       .alert.alert-info Keine Einträge gefunden

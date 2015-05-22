@@ -1,5 +1,7 @@
 module Score
   class StopwatchTime < ActiveRecord::Base
+    INVALID_TIME = 999999999999
+    
     belongs_to :list_entry
 
     validates :list_entry, :time, presence: true
@@ -15,7 +17,7 @@ module Score
     end
 
     def <=> other
-      (time || -1) <=> (other.time || -1)
+      (time || INVALID_TIME) <=> (other.time || INVALID_TIME)
     end
   end
 end

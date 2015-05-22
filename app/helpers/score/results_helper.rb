@@ -8,12 +8,29 @@ module Score
       end
     end
 
+    def place_for_group_row row
+      @group_result_rows.each_with_index do |place_row, place|
+        if 0 == (row <=> place_row)
+          return (place + 1) 
+        end
+      end
+    end
+
     def build_group_data_rows
-      data = [["Name", "Summe"]]
+      data = [["Platz", "Name", "Summe"]]
       @group_result_rows.each do |row|
-        data.push [row.team.to_s, row.time.to_s]
+        data.push ["#{place_for_group_row row}.", row.team.to_s, row.time.to_s]
       end
       data
+    end
+
+    def build_group_data_details_rows
+      result = Struct.new(:team, :time, :rows_in, :rows_out)
+      @group_result_rows.map do |row|
+        rows_in = row.rows_in.map { |result| [result.entity.to_s, result.best_stopwatch_time.to_s] }
+        rows_out = row.rows_out.map { |result| [result.entity.to_s, result.best_stopwatch_time.to_s] }
+        result.new(row.team, row.time, rows_in, rows_out)
+      end
     end
 
     def build_data_rows     
@@ -46,6 +63,10 @@ module Score
       end
 
       data.map! {|row| row.map!(&:to_s) }
+    end
+
+    def row_invalid_class row
+      row.valid? ? "" : "danger"
     end
   end
 end

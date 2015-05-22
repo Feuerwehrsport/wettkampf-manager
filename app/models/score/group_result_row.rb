@@ -8,37 +8,43 @@ module Score
     end
 
     def time
-      calculate unless @calculated
-      @time
+      calculate
+      StopwatchTime.new(time: @time, list_entry: ListEntry.new(result_type: valid? ? "valid" : "invalid"))
     end
 
     def rows_in
-      calculate unless @calculated
+      calculate
       @rows_in
     end
 
     def rows_out
-      calculate unless @calculated
+      calculate
       @rows_out
     end
 
+    def valid?
+      calculate
+      @valid
+    end
+
     def <=> other
-      (time || -1) <=> (other.time || -1)
+      (time || StopwatchTime::INVALID_TIME) <=> (other.time || StopwatchTime::INVALID_TIME)
     end
 
     protected
 
     def calculate
+      return if @calculated
       @time = 0
       @rows_in = []
       @rows_out = []
-
       @result_rows ||= []
+      @valid = @result_rows.count >= score_count && @result_rows.count <= run_count
       queue = @result_rows.sort
       (1..score_count).each do
         current = queue.shift
-        if current.nil? || current.best_stopwatch_time.nil?
-          # @time = nil
+        if current.nil? || !current.valid?
+          @time = nil
         else
           @time += current.best_stopwatch_time.time
         end

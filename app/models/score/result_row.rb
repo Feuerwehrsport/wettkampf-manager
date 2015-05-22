@@ -24,6 +24,10 @@ module Score
       @valid_times ||= @list_entries.select(&:result_valid?).map(&:stopwatch_time).sort
     end
 
+    def valid?
+      @valid ||= valid_times.present?
+    end
+
     def <=> other
       both = [valid_times, other.valid_times].map(&:count)
       (0..(both.min - 1)).each do |i|

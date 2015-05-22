@@ -10,5 +10,9 @@ module Score
     def <=> other
       object <=> other.object
     end
+
+    def to_s
+      "#{entity} #{best_stopwatch_time}"
+    end
   end
 end
