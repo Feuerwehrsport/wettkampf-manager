@@ -1,0 +1,17 @@
+wb = xlsx_package.workbook
+
+if @female.count > 0
+  wb.add_worksheet(name: "Weiblich".truncate(30)) do |sheet|
+    index_export_data(@female).each do |row|
+      sheet.add_row row
+    end
+  end
+end
+
+if @male.count > 0
+  wb.add_worksheet(name: "Männlich".truncate(30)) do |sheet|
+    index_export_data(@male).each do |row|
+      sheet.add_row row
+    end
+  end
+end

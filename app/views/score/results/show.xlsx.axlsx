@@ -1,12 +1,12 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: @score_result.to_s) do |sheet|
+wb.add_worksheet(name: @score_result.to_s.truncate(30)) do |sheet|
   build_data_rows.each do |row|
     sheet.add_row row
   end
 end
 
 if @score_result.group_assessment? && @discipline.single_discipline?
-  wb.add_worksheet(name: "Mannschaftswertung") do |sheet|
+  wb.add_worksheet(name: "Mannschaftswertung".truncate(30)) do |sheet|
     build_group_data_rows.each do |row|
       sheet.add_row row
     end

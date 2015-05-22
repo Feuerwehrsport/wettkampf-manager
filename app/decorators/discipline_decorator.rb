@@ -5,6 +5,10 @@ class DisciplineDecorator < ApplicationDecorator
     name.present? ? name : object.model_name.human
   end
 
+  def to_short
+    name.present? ? name : object.model_name.human(count: 0)
+  end
+
   def image
     "#{object.image}.png"
   end

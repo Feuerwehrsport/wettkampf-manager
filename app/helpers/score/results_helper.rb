@@ -8,14 +8,6 @@ module Score
       end
     end
 
-    def pdf_row_colors
-      color = 264
-      (1..2).map do
-        color -= 9
-        color.to_s(16) * 3
-      end
-    end
-
     def build_group_data_rows
       data = [["Name", "Summe"]]
       @group_result_rows.each do |row|

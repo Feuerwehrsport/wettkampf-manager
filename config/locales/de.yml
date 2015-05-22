@@ -8,12 +8,24 @@ de:
       discipline: 
         one: Disziplin
         other: Disziplinen
-      disciplines/climbing_hook_ladder: Hakenleitersteigen
-      disciplines/double_event: Zweikampf
-      disciplines/fire_attack: Löschangriff Nass
-      disciplines/fire_relay: 4x100m Feuerwehrstafette
-      disciplines/group_relay: Gruppenstafette
-      disciplines/obstacle_course: 100m Hindernisbahn
+      disciplines/climbing_hook_ladder: 
+        one: Hakenleitersteigen
+        other: HL
+      disciplines/double_event: 
+        one: Zweikampf
+        other: ZK
+      disciplines/fire_attack: 
+        one: Löschangriff Nass
+        other: LA
+      disciplines/fire_relay: 
+        one: 4x100m Feuerwehrstafette
+        other: FS
+      disciplines/group_relay: 
+        one: Gruppenstafette
+        other: GS
+      disciplines/obstacle_course: 
+        one: 100m Hindernisbahn
+        other: HB
       person: Wettkämpfer
       score/list: 
         one: Startliste

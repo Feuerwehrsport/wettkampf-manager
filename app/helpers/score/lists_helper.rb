@@ -75,5 +75,49 @@ module Score
     def not_yet_present_entities
       discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)) 
     end
+
+    def show_export_data(options={})
+      header = ["Lauf", "Bahn"]
+      if single_discipline?
+        header.push("Vorname")
+        header.push("Nachname")
+      end
+      header.push("Mannschaft")
+      header.push("Zeit")
+      if options[:stopwatch_times] == :all
+        header.push("Elektronisch")
+        header.push("Hand")
+        header.push("Hand")
+        header.push("Hand")
+      end
+
+      data = [header]
+      score_list_entries do |entry, run, track|
+        line = []
+        if track == 1
+          line.push(run)
+        else
+          line.push("")
+        end
+
+        line.push(track)
+        if single_discipline?
+          line.push(entry.try(:entity).try(:first_name))
+          line.push(entry.try(:entity).try(:last_name))
+          line.push(entry.try(:entity).try(:team).try(:name))
+        else
+          line.push(entry.try(:entity).try(:name))
+        end
+        line.push(result_for entry)
+        if options[:stopwatch_times] == :all
+          line.push(entry.stopwatch_times.where(type: ElectronicTime).first.try(:decorate).to_s)
+          line.push(entry.stopwatch_times.where(type: HandheldTime).first.try(:decorate).to_s)
+          line.push(entry.stopwatch_times.where(type: HandheldTime).second.try(:decorate).to_s)
+          line.push(entry.stopwatch_times.where(type: HandheldTime).third.try(:decorate).to_s)
+        end
+        data.push(line)
+      end
+      data
+    end
   end
 end

@@ -8,5 +8,12 @@
       
       - if logged_in?
         = box.footer do
-          .pull-right= link_btn "Hinzufügen", new_person_path, remote: true
           .clearfix
+          
+      = box.footer do
+        .pull-right
+          = link_btn "als PDF", url_for(format: :pdf)
+          = link_btn "als XLS", url_for(format: :xlsx)
+          - if logged_in?
+            = link_to "Hinzufügen", new_person_path, class: "btn btn-sm btn-info", remote: true
+        .clearfix
