@@ -1,6 +1,6 @@
 .row
   .col-md-12
-    = boxed_form_for "Lauf", @score_run, url: score_list_run_path  do |f, box|
+    = boxed_form_for @score_run.to_s, @score_run, url: score_list_run_path  do |f, box|
       = f.inputs do
         %table.table
           %tr
