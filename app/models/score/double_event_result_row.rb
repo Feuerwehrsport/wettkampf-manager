@@ -11,7 +11,7 @@ module Score
     def sum_stopwatch_time
       @sum_time ||= begin
         time = @result_rows.map(&:best_stopwatch_time).map(&:time).sum
-        StopwatchTime.new(time: time)        
+        StopwatchTime.aggregated_time(time)        
       end
     end
 
