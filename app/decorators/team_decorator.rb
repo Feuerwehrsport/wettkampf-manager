@@ -24,4 +24,12 @@ class TeamDecorator < ApplicationDecorator
   def to_s
     numbered_name
   end
+
+  def self.human_name_cols
+    ["Mannschaft"]
+  end
+
+  def name_cols
+    [to_s]
+  end
 end

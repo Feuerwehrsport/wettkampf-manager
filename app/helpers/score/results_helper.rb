@@ -34,7 +34,12 @@ module Score
     end
 
     def build_data_rows     
-      header = ["Platz", "Name"]
+      header = ["Platz"]
+      if @discipline.single_discipline?
+        PersonDecorator.human_name_cols.each { |col| header.push col }
+      else
+        TeamDecorator.human_name_cols.each { |col| header.push col }
+      end
       if @score_result.is_a? Score::DoubleEventResult
         header.push("Summe")
         @score_result.results.each do |result|
@@ -51,7 +56,7 @@ module Score
       @rows.each do |row|
         line = []
         line.push "#{place_for_row row}."
-        line.push row.entity
+        row.entity.name_cols.each { |col| line.push col }
         if row.is_a? Score::DoubleEventResultRow
           line.push row.sum_stopwatch_time
           @score_result.results.each { |result| line.push(row.time_from(result)) }
