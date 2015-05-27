@@ -23,26 +23,33 @@
                 %td= entry.try(:entity).try(:name)
               %td.time-col
                 = result_for entry
-                .pull-right
-                  - if first && @score_list.open?
-                    = short_edit_link edit_score_list_run_path(@score_list, run: run), title: "Zeiten bearbeiten", class: "btn-xs"
-                  - if @score_list.open? && entry
-                    = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: "Aus Liste entfernen", class: "btn-xs", remote: true
+                - if logged_in?
+                  .pull-right
+                    - if first && @score_list.open?
+                      = short_edit_link edit_score_list_run_path(@score_list, run: run), title: "Zeiten bearbeiten", class: "btn-xs"
+                    - if @score_list.open? && entry
+                      = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: "Aus Liste entfernen", class: "btn-xs", remote: true
       - box.footer do
         .pull-right
           = link_btn "als PDF", url_for(format: :pdf)
           = link_btn "als XLS", url_for(format: :xlsx)
         .clearfix
-  .col-md-3
-    = box("Aktionen") do
-      - if @score_list.open?
-        = link_btn "Reihenfolge bearbeiten", move_score_list_path(@score_list)
-        %br
-        = link_btn "Bearbeiten", edit_score_list_path(@score_list)
-        %br
-        = link_btn "Liste abschließen", finished_score_list_path(@score_list), remote: true
-        %br
-        = link_btn "Teilnehmer hinzufügen", select_entity_score_list_path(@score_list), remote: true
 
-      - else
-        = link_btn "Liste öffnen", finished_score_list_path(@score_list), remote: true
+  - if logged_in?
+    .col-md-3
+      = box("Aktionen") do
+        - if @score_list.open?
+          = link_btn "Liste abschließen", finished_score_list_path(@score_list), remote: true
+          %br
+          = link_to "Reihenfolge bearbeiten", move_score_list_path(@score_list), class: "btn btn-info btn-sm"
+          %br
+          = link_to "Teilnehmer hinzufügen", select_entity_score_list_path(@score_list), remote: true, class: "btn btn-success btn-sm"
+
+        - else
+          = link_btn "Liste öffnen", finished_score_list_path(@score_list), remote: true
+
+      - if @score_list.open?
+        = box("Allgemein") do
+          = link_btn "Bearbeiten", edit_score_list_path(@score_list)
+          %br
+          = link_btn "Löschen", score_list_path(@score_list), method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }

@@ -15,10 +15,6 @@ module Score
     def assign_resource_for_action
       assign_existing_resource
     end
-    
-    def build_resource
-      resource_class.new(assessment_id: params[:assessment])
-    end
 
     def score_list_params
       params.require(:score_list).permit(:name, :assessment_id, :generator, :track_count, 

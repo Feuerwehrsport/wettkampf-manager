@@ -11,6 +11,8 @@ module Score
     scope :gender, -> (gender) { joins(:assessment).merge(Assessment.gender(gender)) }
     scope :group_assessment_for, -> (gender) { gender(gender).where(group_assessment: true) }
 
+    after_destroy :remove_result_from_list
+
     def to_label
       decorate.to_s
     end
@@ -30,6 +32,12 @@ module Score
         end
       end
       rows.values
+    end
+    
+    private
+
+    def remove_result_from_list
+      lists.update_all(result_id: nil)
     end
   end
 end

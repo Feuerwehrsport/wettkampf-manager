@@ -33,7 +33,8 @@
     .col-md-4
       = box("Aktionen") do
         = link_btn "Bearbeiten", edit_score_result_path(@score_result)
-        = link_btn "Startliste hinzufügen", new_score_list_path(score_result: @score_result)
+        %br
+        = link_btn "Löschen", score_result_path(@score_result), method: :delete, data: { confirm: 'Ergebnisliste wirklich löschen? Die zugehörigen Startlisten werden verändert!' }
 
   - if @rows.count > 0
     .col-md-12
