@@ -14,6 +14,7 @@ module Score
     def self.configuration
       {
         "Score::ListGenerators::Simple" => [],
+        "Score::ListGenerators::GroupOrder" => [],
         "Score::ListGenerators::TrackChange" => [:before_list],
         "Score::ListGenerators::TrackSame" => [:before_list],
         "Score::ListGenerators::Best" => [:result, :best_count],
