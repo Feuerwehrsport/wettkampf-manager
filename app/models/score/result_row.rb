@@ -17,7 +17,7 @@ module Score
     end
 
     def best_stopwatch_time
-      @best_time ||= valid_times.first
+      @best_time ||= StopwatchTime.aggregated_time(valid_times.first)
     end
 
     def time
@@ -34,6 +34,10 @@ module Score
 
     def valid?
       @valid ||= valid_times.present?
+    end
+
+    def competition_result_valid?
+      true
     end
 
     def <=> other

@@ -31,6 +31,10 @@ module Score
       @valid
     end
 
+    def competition_result_valid?
+      valid?
+    end
+
     def <=> other
       (time || StopwatchTime::INVALID_TIME) <=> (other.time || StopwatchTime::INVALID_TIME)
     end
