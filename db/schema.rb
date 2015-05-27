@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520121601) do
+ActiveRecord::Schema.define(version: 20150526153242) do
 
   create_table "assessment_requests", force: :cascade do |t|
-    t.integer  "assessment_id",               null: false
-    t.integer  "entity_id",                   null: false
-    t.string   "entity_type",                 null: false
-    t.integer  "assessment_type", default: 0, null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "assessment_id",                      null: false
+    t.integer  "entity_id",                          null: false
+    t.string   "entity_type",                        null: false
+    t.integer  "assessment_type",        default: 0, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "group_competitor_order", default: 0, null: false
   end
 
   add_index "assessment_requests", ["assessment_id"], name: "index_assessment_requests_on_assessment_id"

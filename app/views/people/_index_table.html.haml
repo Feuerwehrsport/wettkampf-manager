@@ -15,9 +15,9 @@
         %td= link_to person.full_name, person_path(person)
         %td= person.team
         - assessments.each do |assessment|
-          - request = person.request_for(assessment.object)
+          - request = person.request_for(assessment.object).try(:decorate)
           - if request.present?
-            %td{ title: "#{assessment}: #{t("assessment_types.#{request.assessment_type}")}" }= t("assessment_types.#{request.assessment_type}_short")
+            %td{ title: "#{assessment}: #{request.type}" }= request.short_type
           - else
             %td
         - if logged_in?

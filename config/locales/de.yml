@@ -42,6 +42,8 @@ de:
         discipline: Disziplin
         gender: Geschlecht
         name: Name
+      assessment_request:
+        group_competitor_order: Reihenfolge
       competition:
         date: Datum
         name: Name
@@ -112,11 +114,17 @@ de:
 
   assessment_types:
     group_competitor: Mannschaftswertung
+    group_competitor_order: Mannschaftswertung (%{group_competitor_order})
     group_competitor_short: M
+    group_competitor_short_order: M%{group_competitor_order}
     single_competitor: Einzelstarter
+    single_competitor_order: Einzelstarter
     single_competitor_short: E
+    single_competitor_short_order: E
     out_of_competition: Außer der Wertung
+    out_of_competition_order: Außer der Wertung
     out_of_competition_short: A
+    out_of_competition_short_order: A
 
   date:
     formats:

@@ -6,7 +6,12 @@
         = f.simple_fields_for :requests, @person.requests.find_or_initialize_by(assessment: assessment) do |g|
           = g.input :_destroy, as: :boolean, label: 'Teilnahme', input_html: { checked: g.object.persisted? }, checked_value: "0", unchecked_value: "1"
           = g.input :assessment_id, as: :hidden
-          = g.input :assessment_type, as: :select, collection: AssessmentRequest.assessment_types.keys, label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }
+
+          .row.edit-assesment-type
+            .col-md-9
+              = g.input :assessment_type, as: :select, collection: AssessmentRequest.assessment_types.keys, label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }
+            .col-md-3.group-competitor-order
+              = g.input :group_competitor_order
   = f.actions do
     = f.primary_button :submit, "Speichern"
 
