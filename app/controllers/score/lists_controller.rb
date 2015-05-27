@@ -22,7 +22,8 @@ module Score
 
     def score_list_params
       params.require(:score_list).permit(:name, :assessment_id, :generator, :track_count, 
-        :result_time_type, :result_id, entries_attributes: [:id, :run, :track, :entity_id, :entity_type, :_destroy],
+        :result_time_type, :result_id, 
+        entries_attributes: [:id, :run, :track, :entity_id, :entity_type, :_destroy, :assessment_type],
         generator_attributes: [:before_list, :best_count, :result])
     end
   end
