@@ -41,28 +41,28 @@ module Score
         TeamDecorator.human_name_cols.each { |col| header.push col }
       end
       if @score_result.is_a? Score::DoubleEventResult
-        header.push("Summe")
         @score_result.results.each do |result|
           header.push(result.assessment.discipline.decorate)
         end
+        header.push("Summe")
       else
-        header.push("Bestzeit")
         @score_result.lists.each do |list|
           header.push(list.object.name)
         end
+        header.push("Bestzeit")
       end
 
       data = [header]
       @rows.each do |row|
         line = []
         line.push "#{place_for_row row}."
-        row.entity.name_cols.each { |col| line.push col }
+        row.entity.name_cols(row.assessment_type).each { |col| line.push col }
         if row.is_a? Score::DoubleEventResultRow
-          line.push row.sum_stopwatch_time
           @score_result.results.each { |result| line.push(row.time_from(result)) }
+          line.push row.sum_stopwatch_time
         else
-          line.push row.best_stopwatch_time
           @score_result.lists.each { |list| line.push(row.time_from(list)) }
+          line.push row.best_stopwatch_time
         end
         data.push(line)
       end

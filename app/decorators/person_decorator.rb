@@ -24,7 +24,7 @@ class PersonDecorator < ApplicationDecorator
     ["Vorname", "Nachname", "Mannschaft"]
   end
 
-  def name_cols
-    [first_name, last_name, team_name]
+  def name_cols assessment_type
+    [first_name, last_name, team_name(assessment_type)]
   end
 end

@@ -85,7 +85,6 @@ module Score
         end
         time
       end
-      p time
       StopwatchTime.new(list_entry: self, time: time)
     end
 

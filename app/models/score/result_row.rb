@@ -8,6 +8,10 @@ module Score
       @list_entries.push(list_entry)
     end
 
+    def assessment_type
+      @list_entries.first.assessment_type
+    end
+
     def entity
       @entity ||= list_entries.first.try(:entity)
     end

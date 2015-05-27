@@ -3,11 +3,11 @@ pdf_header pdf, @score_result.to_s, @discipline
 pdf.table(build_data_rows, {
   header: true, 
   row_colors: pdf_default_row_colors, 
-  width: pdf.bounds.width
+  width: pdf.bounds.width,
+  cell_style: { align: :center, size: 10 }
 }) do
-  row(0).style(align: :center, font_style: :bold)
-  column(0).style(align: :center)
-  column(1).style(align: :center )
+  row(0).style(font_style: :bold, size: 11)
+  column(-1).style(font_style: :bold)
 end
 
 
@@ -18,11 +18,11 @@ if @score_result.group_assessment? && @discipline.single_discipline?
   pdf.table(build_group_data_rows, {
     header: true, 
     row_colors: pdf_default_row_colors, 
-    width: pdf.bounds.width,
+    column_widths: [60, 200, 80],
+    position: :center,
+    cell_style: { align: :center, size: 10 }
   }) do
-    row(0).style(align: :center, font_style: :bold)
-    column(0).style(align: :center)
-    column(1).style(align: :center )
+    row(0).style(font_style: :bold, size: 11)
   end
 
   pdf.start_new_page
@@ -34,8 +34,8 @@ if @score_result.group_assessment? && @discipline.single_discipline?
 
     pdf.table(data, {
       header: true,
+      column_widths: [200, 80],
       position: :center,
-      column_widths: [200, 80]
     }) do
       team_result.rows_in.each_with_index { |row, i| row(i+1).style(size: 10)}
       team_result.rows_out.each_with_index { |row, i| row(i+1+team_result.count).style(font_style: :italic, size: 8)}
