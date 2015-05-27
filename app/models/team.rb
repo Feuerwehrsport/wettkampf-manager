@@ -12,7 +12,7 @@ class Team < ActiveRecord::Base
 
   accepts_nested_attributes_for :requests, allow_destroy: true
 
-  default_scope { order(:gender, :name, :number) } 
+  default_scope { order(:gender, :name, :number) }
   scope :gender, -> (gender) { where(gender: Team.genders[gender]) }
 
   after_create :create_assessment_requests

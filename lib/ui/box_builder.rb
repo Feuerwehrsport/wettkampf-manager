@@ -3,7 +3,7 @@ module UI
     include StoreOrReturn
 
     def store_or_return_methods
-      [:footer]
+      [:footer, :header]
     end
   end
 end

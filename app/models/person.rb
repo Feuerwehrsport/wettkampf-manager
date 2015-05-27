@@ -10,6 +10,9 @@ class Person < ActiveRecord::Base
 
   accepts_nested_attributes_for :requests, allow_destroy: true
 
+  default_scope { order(:gender, :last_name, :first_name) }
+
+
   def request_for assessment
     requests.where(assessment: assessment).first
   end

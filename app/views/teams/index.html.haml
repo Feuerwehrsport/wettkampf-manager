@@ -1,6 +1,8 @@
 .row
   .col-md-12
     = box Team.model_name.human do |box|
+      - box.header do
+        = link_to "Hinzufügen", new_team_path, class: "btn btn-sm btn-info"
       %table.table
         %tr
           %th= Team.human_attribute_name(:name)
@@ -16,8 +18,7 @@
               = link_to "Ansehen", team_path(team), class: "btn btn-sm btn-default"
               - if logged_in?
                 = link_to "Bearbeiten", edit_team_path(team), class: "btn btn-sm btn-default"
-               
-      = box.footer do
+      - box.footer do
         .pull-right
           = link_btn "als PDF", url_for(format: :pdf)
           = link_btn "als XLS", url_for(format: :xlsx)
