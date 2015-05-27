@@ -1,8 +1,9 @@
 .row
   .col-md-12
     = box Team.model_name.human do |box|
-      - box.header do
-        = link_to "Hinzufügen", new_team_path, class: "btn btn-sm btn-info"
+      - if logged_in?
+        - box.header do
+          = link_to "Hinzufügen", new_team_path, class: "btn btn-sm btn-info"
       %table.table
         %tr
           %th= Team.human_attribute_name(:name)
