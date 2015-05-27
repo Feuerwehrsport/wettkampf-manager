@@ -8,7 +8,8 @@ module FireSportStatistics
 
     scope :where_name_like, -> (name) do
       query = "%#{name.split("").join("%")}%"
-      where("(first_name || ' ' || last_name) LIKE ?", query)
+      spelling_query = PersonSpelling.where("(first_name || ' ' || last_name) LIKE ?", query).select(:person_id)
+      where("(first_name || ' ' || last_name) LIKE ? OR id IN (#{spelling_query.to_sql})", query)
     end
 
     scope :order_by_gender, -> (gender) do
