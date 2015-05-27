@@ -36,7 +36,7 @@ module Score
       while entry.present? || track != 0
         track += 1
         if entry && entry.track == track && entry.run == run
-          yield entry, run, track
+          yield entry.decorate, run, track
           entry = entries.shift
         else
           yield nil, run, track

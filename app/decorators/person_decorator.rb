@@ -5,6 +5,13 @@ class PersonDecorator < ApplicationDecorator
     "#{first_name} #{last_name}"
   end
 
+  def team_name assessment_type=nil
+    name = [team.to_s]
+    name.push("E") if assessment_type == "single_competitor"
+    name.push("A") if assessment_type == "out_of_competition"
+    name.join(" ")
+  end
+
   def translated_gender
     t("gender.#{gender}")
   end
@@ -18,6 +25,6 @@ class PersonDecorator < ApplicationDecorator
   end
 
   def name_cols
-    [first_name, last_name, team.to_s]
+    [first_name, last_name, team_name]
   end
 end
