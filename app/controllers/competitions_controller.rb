@@ -5,6 +5,6 @@ class CompetitionsController < ApplicationController
 
   def competition_params
     params.require(:competition).permit(:name, :date, :group_people_count, :group_run_count, :group_score_count, 
-      :youth_name)
+      :youth_name, :hostname)
   end
 end

@@ -33,5 +33,9 @@
           %p= link_btn "Name und Datum", edit_competition_path(decorated_competition.id)
           %p= link_btn "Passwort", edit_user_path(User.first)
     .col-md-5
-      = box link_to(own_url, own_url) do
-        = image_tag url_as_qrcode
+      - if decorated_competition.hostname.present?
+        = box link_to(hostname_url, hostname_url) do
+          = image_tag qrcode(hostname_url)
+      - else
+        = box link_to(ip_url, ip_url) do
+          = image_tag qrcode(ip_url)
