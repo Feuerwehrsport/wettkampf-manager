@@ -7,14 +7,14 @@
     .suggestions-entries
       %table.table.table-hover.table-condensed
     .row
-      .col-md-4
-        = f.input :first_name
-      .col-md-5
-        = f.input :last_name
       - if decorated_competition.youth_name.present?
         .col-md-1
           = f.input :youth, as: :boolean, label: decorated_competition.youth_name
-      .col-md-2
+      .col-md-4
+        = f.input :first_name
+      .col-md-4
+        = f.input :last_name
+      .col-md-3
         = f.input :gender, collection: [:male, :female]
     - if @person.team.nil?
       = f.association :team, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
