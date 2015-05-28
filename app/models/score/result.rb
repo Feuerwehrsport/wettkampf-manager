@@ -8,6 +8,7 @@ module Score
 
     validates :assessment, presence: true
 
+    default_scope { includes(:assessment).order("assessments.discipline_id", "assessments.gender") }
     scope :gender, -> (gender) { joins(:assessment).merge(Assessment.gender(gender)) }
     scope :group_assessment_for, -> (gender) { gender(gender).where(group_assessment: true) }
 

@@ -17,6 +17,8 @@ module Score
     attr_accessor :generator
     after_create :perform_generator
 
+    default_scope { includes(:assessment).order("assessments.discipline_id", "assessments.gender") }
+
     def generator= generator
       if generator.present?
         @generator = generator.constantize.new(list: self) rescue nil
