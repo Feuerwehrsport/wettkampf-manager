@@ -9,6 +9,10 @@
         %tr
           %th= @score_result.class.human_attribute_name :assessment
           %td= @score_result.assessment
+        - if @score_result.youth?
+          %tr
+            %th= decorated_competition.youth_name
+            %td Ja
 
         - if @score_result.is_a? Score::DoubleEventResult
           %tr

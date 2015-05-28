@@ -5,5 +5,7 @@
     = f.input :first_name
     = f.input :last_name
     = f.input :gender, collection: [:male, :female]
+    - if decorated_competition.youth_name.present?
+      = f.input :youth, as: :boolean, label: decorated_competition.youth_name
   = f.actions do
     = f.primary_button :submit, "Speichern"

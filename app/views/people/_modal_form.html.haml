@@ -11,7 +11,10 @@
         = f.input :first_name
       .col-md-5
         = f.input :last_name
-      .col-md-3
+      - if decorated_competition.youth_name.present?
+        .col-md-1
+          = f.input :youth, as: :boolean, label: decorated_competition.youth_name
+      .col-md-2
         = f.input :gender, collection: [:male, :female]
     - if @person.team.nil?
       = f.association :team, label_method: lambda { |team| team.decorate.numbered_name_with_gender }

@@ -27,4 +27,8 @@ class PersonDecorator < ApplicationDecorator
   def name_cols assessment_type
     [first_name, last_name, team_name(assessment_type)]
   end
+
+  def translated_youth
+    youth? ? "Ja" : "Nein"
+  end
 end

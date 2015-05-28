@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526153242) do
+ActiveRecord::Schema.define(version: 20150528135731) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                      null: false
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150526153242) do
     t.integer  "group_score_count",  default: 6,     null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.string   "youth_name",         default: "",    null: false
   end
 
   create_table "disciplines", force: :cascade do |t|
@@ -108,12 +109,13 @@ ActiveRecord::Schema.define(version: 20150526153242) do
   add_index "fire_sport_statistics_teams", ["external_id"], name: "index_fire_sport_statistics_teams_on_external_id"
 
   create_table "people", force: :cascade do |t|
-    t.string   "last_name",  null: false
-    t.string   "first_name", null: false
-    t.integer  "gender",     null: false
+    t.string   "last_name",                  null: false
+    t.string   "first_name",                 null: false
+    t.integer  "gender",                     null: false
     t.integer  "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "youth",      default: false, null: false
   end
 
   add_index "people", ["team_id"], name: "index_people_on_team_id"
@@ -137,13 +139,21 @@ ActiveRecord::Schema.define(version: 20150526153242) do
     t.integer  "track_count",      default: 2,  null: false
     t.integer  "assessment_id",                 null: false
     t.integer  "result_time_type"
-    t.integer  "result_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
 
   add_index "score_lists", ["assessment_id"], name: "index_score_lists_on_assessment_id"
-  add_index "score_lists", ["result_id"], name: "index_score_lists_on_result_id"
+
+  create_table "score_result_lists", force: :cascade do |t|
+    t.integer  "list_id",    null: false
+    t.integer  "result_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "score_result_lists", ["list_id"], name: "index_score_result_lists_on_list_id"
+  add_index "score_result_lists", ["result_id"], name: "index_score_result_lists_on_result_id"
 
   create_table "score_results", force: :cascade do |t|
     t.string   "name",                   default: "",              null: false
@@ -153,6 +163,7 @@ ActiveRecord::Schema.define(version: 20150526153242) do
     t.datetime "updated_at",                                       null: false
     t.integer  "double_event_result_id"
     t.string   "type",                   default: "Score::Result", null: false
+    t.boolean  "youth",                  default: false,           null: false
   end
 
   add_index "score_results", ["assessment_id"], name: "index_score_results_on_assessment_id"

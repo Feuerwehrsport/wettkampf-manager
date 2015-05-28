@@ -102,12 +102,19 @@ class CompetitionSeed
   end
 
   def seed_method_dcup_simple
-    Competition.update_all(group_score_count: 4, group_assessment: true)
+    Competition.update_all(group_score_count: 4, group_assessment: true, youth_name: "U20")
     chl_results = climbing_hook_ladder true
     oc_results = obstacle_course true
-    double_event [[chl_results.first, oc_results.first], [chl_results.last, oc_results.last]]
+    de_results = double_event [[chl_results.first, oc_results.first], [chl_results.last, oc_results.last]]
     fire_attack true
     group_relay true
+    
+    de_male_youth = Score::DoubleEventResult.create!(assessment: de_results.first.assessment, youth: true)
+    de_female_youth = Score::DoubleEventResult.create!(assessment: de_results.last.assessment, youth: true)
+    Score::Result.create!(assessment: chl_results.first.assessment, youth: true, double_event_result: de_male_youth)
+    Score::Result.create!(assessment: chl_results.last.assessment, youth: true, double_event_result: de_female_youth)
+    Score::Result.create!(assessment: oc_results.first.assessment, youth: true, double_event_result: de_male_youth)
+    Score::Result.create!(assessment: oc_results.last.assessment, youth: true, double_event_result: de_female_youth)
   end
 
   def seed_method_dcup_all

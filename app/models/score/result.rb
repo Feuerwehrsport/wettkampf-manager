@@ -4,7 +4,8 @@ module Score
   class Result < ActiveRecord::Base
     belongs_to :assessment
     belongs_to :double_event_result
-    has_many :lists
+    has_many :result_lists
+    has_many :lists, through: :result_lists
 
     validates :assessment, presence: true
 
@@ -26,6 +27,7 @@ module Score
       rows = {}
       lists.each do |list|
         list.entries.not_waiting.each do |list_entry|
+          next if youth? && !list_entry.entity.youth?
           if rows[list_entry.entity.id].nil?
             rows[list_entry.entity.id] = ResultRow.new(list_entry.entity, self)
           end

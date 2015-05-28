@@ -14,7 +14,7 @@ module Score
     protected
 
     def score_result_params
-      params.require(:score_result).permit(:name, :assessment_id, :group_assessment)
+      params.require(:score_result).permit(:name, :assessment_id, :group_assessment, :youth)
     end
   end
 end

@@ -26,6 +26,8 @@ de:
     hints:
       assessment:
         name: Wird ein Name angegeben, ersetzt dieser den generierten Namen
+      competition:
+        youth_name: "Wird ein Name angegeben, wird die Jugendwertung aktiviert. Beispiel: <i>U20</i>"
       discipline:
         name: Wird ein Name angegeben, ersetzt dieser den eigentlichen Disziplinnamen (z. B. Spaßwettkampf)
         type: Ist es eine andere Disziplin, sollte eine Ähnliche ausgewählt werden.

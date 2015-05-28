@@ -83,7 +83,7 @@ module ApplicationHelper
   end
 
   def decorated_competition
-    @decorated_competition = Competition.first.decorate
+    @decorated_competition ||= Competition.first.decorate
   end
 
   def pdf_default_row_colors

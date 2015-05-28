@@ -11,6 +11,12 @@
         %tr
           %th= @person.class.human_attribute_name :gender
           %td= @person.translated_gender
+
+        - if decorated_competition.youth_name.present?
+          %tr
+            %th= decorated_competition.youth_name
+            %td= @person.translated_youth
+
         %tr
           %th= @person.class.human_attribute_name :team
           %td

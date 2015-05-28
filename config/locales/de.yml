@@ -51,6 +51,7 @@ de:
         group_people_count: Wettkämpfer pro Mannschaft
         group_run_count: Wettkämpfer pro Disziplin
         group_score_count: Wettkämpfer in Wertung
+        youth_name: Name der Jugendwertung
       discipline:
         type: Disziplin
         name: Name
@@ -67,6 +68,7 @@ de:
         result_time_type: Zeitenberechnung
         result: Ergebnisliste
       score/list_entry:
+        assessment_type: Wertung
         entity: Teilnehmer
         track: Bahn
         run: Lauf
