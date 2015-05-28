@@ -15,6 +15,11 @@ FactoryGirl.define do
     last_name "Meier"
     gender :male
 
+    trait(:generated) do
+      first_name { generate(:first_name) }
+      last_name { generate(:last_name) }
+    end
+
     trait(:male) { gender :male }
     trait(:female) { gender :female }
     trait(:with_team) do
@@ -45,6 +50,9 @@ FactoryGirl.define do
     trait :result_valid do
       result_type "valid"
     end
+    trait :result_invalid do
+      result_type "invalid"
+    end
     trait :generate_person do
       entity { build :person, :with_team, first_name: generate(:first_name), last_name: generate(:last_name) }    
     end
@@ -62,18 +70,5 @@ FactoryGirl.define do
   factory :score_result, class: "Score::Result" do
     assessment { Assessment.first || build(:assessment) }
     name "Hakenleitersteigen"
-  end  
-
-  factory :score_result_row, class: "Score::ResultRow" do
-    entity { build :person }
-    initialize_with { new(entity) }
-
-    factory :good_score_result_row do
-      after(:build) do |row|
-        list_entry = create(:score_list_entry, :result_valid, entity: row.entity) 
-        create(:score_electronic_time, list_entry: list_entry)
-        row.add_list(list_entry)
-      end
-    end
   end
 end

@@ -1,32 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe Score::Result, type: :model do
-  let(:score_result) { create :score_result }
+  let(:result) { create :score_result }
   
   describe '.rows' do
     context "entries given" do
-      let!(:list1) { create :score_list, result: score_result }
-      let!(:list_entry11) { create :score_list_entry, :result_valid, :generate_person, list: list1 }
-      let!(:electronic_time11) { create :score_electronic_time, list_entry: list_entry11, time: 2100 }
-      let!(:list_entry12) { create :score_list_entry, :result_valid, :generate_person, list: list1 }
-      let!(:electronic_time12) { create :score_electronic_time, list_entry: list_entry12, time: 2000 }
-      let!(:list2) { create :score_list, result: score_result }
-      let!(:list_entry21) { create :score_list_entry, :result_valid, list: list2, entity: list_entry11.entity }
-      let!(:electronic_time21) { create :score_electronic_time, list_entry: list_entry21, time: 2200 }
-      let!(:list_entry22) { create :score_list_entry, :result_valid, list: list2, entity: list_entry12.entity }
-      let!(:electronic_time22) { create :score_electronic_time, list_entry: list_entry22, time: 2300 }
+      let(:person1) { create :person, :generated }
+      let(:person2) { create :person, :generated }
+      let(:person3) { create :person, :generated }
+      let(:person4) { create :person, :generated }
+      let!(:list1) { create_score_list(result, person1 => 1912, person2 => 2020, person3 => 2040, person4 => nil) }
+      let!(:list2) { create_score_list(result, person1 => nil, person2 => 1911, person3 => 1912, person4 => 2040) }
+
 
       it "return results in correct order" do
-        rows = score_result.rows
-        expect(rows).to have(2).entries
+        rows = result.rows
+        expect(rows).to have(4).entries
 
-        expect(rows.first.time_from list1).to eq electronic_time11
-        expect(rows.first.time_from list2).to eq electronic_time21
-        expect(rows.first.best_stopwatch_time).to eq electronic_time11
+        expect(rows.first.time_from(list1).time).to eq 2020
+        expect(rows.first.time_from(list2).time).to eq 1911
+        expect(rows.first.best_stopwatch_time.time).to eq 1911
 
-        expect(rows.last.time_from list1).to eq electronic_time12
-        expect(rows.last.time_from list2).to eq electronic_time22
-        expect(rows.last.best_stopwatch_time).to eq electronic_time12
+        expect(rows.second.time_from(list1).time).to eq 2040
+        expect(rows.second.time_from(list2).time).to eq 1912
+        expect(rows.second.best_stopwatch_time.time).to eq 1912
+
+        expect(rows.third.time_from(list1).time).to eq 1912
+        expect(rows.third.time_from(list2).time).to be_nil
+        expect(rows.third.best_stopwatch_time.time).to eq 1912
+
+        expect(rows.last.time_from(list1).time).to be_nil
+        expect(rows.last.time_from(list2).time).to eq 2040
+        expect(rows.last.best_stopwatch_time.time).to eq 2040
       end
     end
   end
