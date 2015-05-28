@@ -4,11 +4,10 @@ pdf.table(show_export_data, {
   header: true, 
   row_colors: pdf_row_colors, 
   width: pdf.bounds.width,
-  column_widths: { 0 => 40, 1 => 40, 5 => 40 }
+  cell_style: { align: :center, size: 10 },
+  column_widths: { 0 => 40, 1 => 40, -1 => 50 }
 }) do
-  row(0).style(align: :center, font_style: :bold)
-  column(0).style(align: :center)
-  column(1).style(align: :center )
+  row(0).style(font_style: :bold)
 end
 
 pdf_footer pdf
