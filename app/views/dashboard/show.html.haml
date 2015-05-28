@@ -32,3 +32,6 @@
         = box "Konfigurieren" do |box|
           %p= link_btn "Name und Datum", edit_competition_path(decorated_competition.id)
           %p= link_btn "Passwort", edit_user_path(User.first)
+    .col-md-5
+      = box link_to(own_url, own_url) do
+        = image_tag url_as_qrcode

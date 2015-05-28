@@ -46,6 +46,7 @@ gem 'axlsx_rails'
 gem 'prawn'
 gem 'prawn-table'
 gem 'prawnto'
+gem 'rqrcode_png'
 
 # for windows time zones
 gem 'tzinfo-data'
