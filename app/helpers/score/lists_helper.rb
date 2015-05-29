@@ -115,14 +115,18 @@ module Score
           line.push(entry.try(:entity).try(:last_name))
           line.push(entry.try(:entity).try(:team_name, entry.try(:assessment_type)))
         else
-          line.push(entry.try(:entity).try(:name))
+          line.push(entry.try(:entity).try(:numbered_name))
         end
         line.push(result_for entry)
         if options[:stopwatch_times] == :all
-          line.push(entry.stopwatch_times.where(type: ElectronicTime).first.try(:decorate).to_s)
-          line.push(entry.stopwatch_times.where(type: HandheldTime).first.try(:decorate).to_s)
-          line.push(entry.stopwatch_times.where(type: HandheldTime).second.try(:decorate).to_s)
-          line.push(entry.stopwatch_times.where(type: HandheldTime).third.try(:decorate).to_s)
+          if entry.present?
+            line.push(entry.stopwatch_times.where(type: ElectronicTime).first.try(:decorate).to_s)
+            line.push(entry.stopwatch_times.where(type: HandheldTime).first.try(:decorate).to_s)
+            line.push(entry.stopwatch_times.where(type: HandheldTime).second.try(:decorate).to_s)
+            line.push(entry.stopwatch_times.where(type: HandheldTime).third.try(:decorate).to_s)
+          else
+            line.push("", "", "", "")
+          end
         end
         data.push(line)
       end
