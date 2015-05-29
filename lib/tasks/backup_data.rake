@@ -13,7 +13,7 @@ end
 class LiveBackup
   include Rails.application.routes.url_helpers
   def initialize
-    @backup_path = File.join(Rails.root, "backups", DateTime.now.to_s)
+    @backup_path = File.join(Rails.root, "backups", DateTime.now.strftime("%Y%m%d-%H%M%S"))
     FileUtils.mkdir_p(@backup_path)
   end
 
