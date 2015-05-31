@@ -3,7 +3,7 @@ $ () ->
     context = $(this)
     disableHandler = () ->
       if $(this).val() == "valid"
-        context.find('.time-entries').removeClass('disabled')
+        context.find('.time-entries').removeClass('disabled').find('input:first').focus()
       else
         context.find('.time-entries').addClass('disabled')
     $('input:radio', context).on 'ifChecked', disableHandler
