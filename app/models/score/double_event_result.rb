@@ -5,7 +5,7 @@ module Score
     def generate_rows
       rows = {}
       results.each do |result|
-        result.rows.select { |row| row.best_stopwatch_time.present? }.each do |result_row|
+        result.rows.select { |row| row.best_stopwatch_time.present? && row.best_stopwatch_time.time.present?}.each do |result_row|
           if rows[result_row.entity.id].nil?
             rows[result_row.entity.id] = DoubleEventResultRow.new(result_row.entity)
           end

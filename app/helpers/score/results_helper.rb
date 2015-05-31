@@ -35,14 +35,14 @@ module Score
 
     def build_data_rows     
       header = ["Platz"]
-      if @discipline.single_discipline?
+      if @discipline.single_discipline? || @discipline.is_a?(Disciplines::DoubleEvent)
         PersonDecorator.human_name_cols.each { |col| header.push col }
       else
         TeamDecorator.human_name_cols.each { |col| header.push col }
       end
       if @score_result.is_a? Score::DoubleEventResult
         @score_result.results.each do |result|
-          header.push(result.assessment.discipline.decorate)
+          header.push(result.assessment.discipline.decorate.to_short)
         end
         header.push("Summe")
       else

@@ -24,7 +24,7 @@ module Score
       time = @assessment_results.select do |result|
         result.discipline.is_a? Disciplines::FireAttack
       end.first.try(:time)
-      StopwatchTime.aggregated_time(@time)
+      StopwatchTime.aggregated_time(time)
     end
 
     def <=> other
