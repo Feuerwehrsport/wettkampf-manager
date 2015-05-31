@@ -22,7 +22,7 @@ module Score
     end
 
     def second_time= new_second_time
-      self.time = (new_second_time.sub(",", ".").sub(":", ".").to_f * 100).to_i
+      self.time = (new_second_time.sub(",", ".").sub(":", ".").to_f * 100).round
     end
 
     def <=> other
