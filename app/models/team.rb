@@ -21,6 +21,30 @@ class Team < ActiveRecord::Base
     requests.where(assessment: assessment).first
   end
 
+  def list_entries_group_competitor assessment
+    @list_entries_group_competitor = {} if @list_entries_group_competitor.nil?
+    @list_entries_group_competitor[assessment.id] ||= begin
+      people.includes(:list_entries).select do |person|
+        person.list_entries.select { |l| l.list.assessment_id == assessment.id }.find { |l| l.group_competitor? }.present?
+      end.count
+    end
+  end
+
+  def people_assessments
+    @people_assessments ||= begin
+      list_ids = people.includes(:list_entries).map(&:list_entries).map { |l| l.pluck(:list_id) }.flatten
+      Assessment.where(id: Score::List.where(id: list_ids).pluck(:assessment_id).uniq)
+    end
+  end
+
+  def list_entries_group_competitor_valid?
+    @list_entries_group_competitor_valid ||= begin
+      people_assessments.map do |assessment|
+        list_entries_group_competitor(assessment) <= Competition.one.group_run_count
+      end.all?
+    end
+  end
+
   private
 
   def create_assessment_requests

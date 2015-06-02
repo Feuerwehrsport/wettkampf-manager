@@ -1,5 +1,5 @@
 .row
-  - unless Competition.first.configured?
+  - unless Competition.one.configured?
     .col-md-12
       = box "Wettkampf-Manager konfigurieren" do |box|
         %p Bitte wählen Sie eine Startkonfiguration für den Wettkampf aus:

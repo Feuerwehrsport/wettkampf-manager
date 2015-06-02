@@ -14,6 +14,12 @@
         %tr
           %th= @team.class.human_attribute_name :people
           %td= @team.people.count
+        - if logged_in?
+          - @team.people_assessments.each do |assessment|
+            %tr{ @team.list_entries_group_competitor(assessment) > Competition.one.group_run_count ? { class: "danger"} : {} }
+              %th= assessment.decorate
+              %td= "#{@team.list_entries_group_competitor(assessment)} von #{Competition.one.group_run_count}"
+
       - if logged_in?
         - box.footer do
           .pull-right= link_btn "Bearbeiten", edit_team_path(@team)

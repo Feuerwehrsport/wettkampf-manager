@@ -11,10 +11,14 @@
           %th= Team.human_attribute_name(:people)
           %th
         - @teams.each do |team|
-          %tr
+          %tr{ team.list_entries_group_competitor_valid? ? {} : { class: "danger" } }
             %td= team.numbered_name
             %td= team.translated_gender
-            %td= team.people.count
+            %td
+              = team.people.count
+              - if logged_in?
+                - unless team.list_entries_group_competitor_valid?
+                  %i.ion.ion-close{ title: "Mannschaftswertung nicht korrekt"}
             %td.text-right
               = link_to "Ansehen", team_path(team), class: "btn btn-sm btn-default"
               - if logged_in?
