@@ -9,7 +9,7 @@ module Score
     end
 
     def youth_name
-      youth? ? Competition.first.youth_name : ""
+      youth? ? Competition.one.youth_name : ""
     end
 
     def translated_group_assessment

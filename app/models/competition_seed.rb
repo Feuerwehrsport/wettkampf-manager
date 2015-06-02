@@ -39,7 +39,7 @@ class CompetitionSeed
   def execute
     ActiveRecord::Base.transaction do
       send method
-      Competition.first.update_attributes!(configured: true)
+      Competition.one.update_attributes!(configured: true)
     end
   end
 

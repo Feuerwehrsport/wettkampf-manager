@@ -83,7 +83,7 @@ module ApplicationHelper
   end
 
   def decorated_competition
-    @decorated_competition ||= Competition.first.decorate
+    @decorated_competition ||= Competition.one.decorate
   end
 
   def pdf_default_row_colors
@@ -95,7 +95,7 @@ module ApplicationHelper
   end
 
   def pdf_footer pdf
-    competition = Competition.first
+    competition = Competition.one
     name = [competition.name, l(competition.date)].join(" - ")
     pdf.page_count.times do |i|
       pdf.bounding_box([pdf.bounds.left, pdf.bounds.bottom], width: pdf.bounds.width, height: 30) do

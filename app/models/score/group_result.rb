@@ -7,7 +7,7 @@ module Score
 
     def calculated_rows
       team_scores = {}
-      competition = Competition.first
+      competition = Competition.one
       run_count = competition.group_run_count
       score_count = competition.group_score_count
 
