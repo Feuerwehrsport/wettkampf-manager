@@ -1,5 +1,6 @@
 class Assessment < ActiveRecord::Base
   belongs_to :discipline
+  belongs_to :score_competition_result, class_name: "Score::CompetitionResult"
   has_many :requests, class_name: "AssessmentRequest", dependent: :destroy
   has_many :results, class_name: "Score::Result"
   enum gender: { female: 0, male: 1 }

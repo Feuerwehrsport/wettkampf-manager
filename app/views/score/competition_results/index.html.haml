@@ -1,0 +1,11 @@
+.row
+  .col-md-12
+    = box "Gesamtwertung" do |box|
+      - @score_competition_results.each do |result|
+        = render "index_table", competition_result: result
+        
+      - box.footer do
+        .pull-right
+          = link_btn "als PDF", url_for(format: :pdf)
+          = link_btn "als XLS", url_for(format: :xlsx)
+        .clearfix

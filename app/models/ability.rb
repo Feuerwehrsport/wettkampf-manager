@@ -5,7 +5,6 @@ class Ability
     if user.present? || !User.configured?
       can :manage, :all
     else
-      can :create, Score::CompetitionResult
       can :read, :all
     end
   end

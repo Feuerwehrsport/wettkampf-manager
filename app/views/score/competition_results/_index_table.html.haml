@@ -1,0 +1,17 @@
+%h3= competition_result
+%table.table.table-bordered.competition-results
+  %tr
+    %th.sum-points Punkte
+    %th Mannschaft
+    - competition_result.results.each do |result|
+      %th.assessment{colspan: 2}
+        = discipline_image result.assessment.discipline
+        = result.assessment.discipline.to_short
+  - competition_result.rows.each do |row|
+    %tr
+      %td.sum-points= row.points
+      %td= row.team
+      - competition_result.results.each do |result|
+        - assessment_result = row.assessment_result_from(result.assessment)
+        %td.time= assessment_result.try(:time).try(:decorate)
+        %td.points= assessment_result.try(:points)

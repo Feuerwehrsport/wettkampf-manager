@@ -1,6 +1,6 @@
 module Score
   class CompetitionResultsController < ApplicationController
-    implement_crud_actions only: [:new]
+    implement_crud_actions only: [:index]
 
     def new
       super

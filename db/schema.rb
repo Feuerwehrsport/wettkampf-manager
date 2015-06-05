@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528180740) do
+ActiveRecord::Schema.define(version: 20150604135008) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                      null: false
@@ -27,14 +27,16 @@ ActiveRecord::Schema.define(version: 20150528180740) do
   add_index "assessment_requests", ["entity_type", "entity_id"], name: "index_assessment_requests_on_entity_type_and_entity_id"
 
   create_table "assessments", force: :cascade do |t|
-    t.string   "name",          default: "", null: false
-    t.integer  "discipline_id",              null: false
+    t.string   "name",                        default: "", null: false
+    t.integer  "discipline_id",                            null: false
     t.integer  "gender"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "score_competition_result_id"
   end
 
   add_index "assessments", ["discipline_id"], name: "index_assessments_on_discipline_id"
+  add_index "assessments", ["score_competition_result_id"], name: "index_assessments_on_score_competition_result_id"
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name",               default: "",    null: false
@@ -120,6 +122,13 @@ ActiveRecord::Schema.define(version: 20150528180740) do
   end
 
   add_index "people", ["team_id"], name: "index_people_on_team_id"
+
+  create_table "score_competition_results", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "score_list_entries", force: :cascade do |t|
     t.integer  "list_id",                             null: false
