@@ -35,8 +35,13 @@ module Score
       valid?
     end
 
+    def valid_compare
+      competition_result_valid? ? 0 : 1
+    end
+
     def <=> other
-      (time || StopwatchTime::INVALID_TIME) <=> (other.time || StopwatchTime::INVALID_TIME)
+      compare = valid_compare <=> other.valid_compare
+      compare == 0 ? (time || StopwatchTime::INVALID_TIME) <=> (other.time || StopwatchTime::INVALID_TIME) : compare
     end
 
     protected

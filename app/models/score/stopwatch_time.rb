@@ -12,7 +12,7 @@ module Score
         time.list_entry = ListEntry.new(result_type: time.time.present? ? "valid" : "invalid")
         return time
       end
-      valid = time.present? if valid.nil?
+      valid = time.present? if valid.nil? || time.nil?
       new(time: time, list_entry: ListEntry.new(result_type: valid ? "valid" : "invalid"))
     end
 
@@ -25,8 +25,16 @@ module Score
       self.time = (new_second_time.sub(",", ".").sub(":", ".").to_f * 100).round
     end
 
+    def compare_time
+      if list_entry.present? && !list_entry.result_valid?
+        nil
+      else
+        time
+      end
+    end
+
     def <=> other
-      (time || INVALID_TIME) <=> (other.time || INVALID_TIME)
+      (compare_time || INVALID_TIME) <=> (other.compare_time || INVALID_TIME)
     end
   end
 end

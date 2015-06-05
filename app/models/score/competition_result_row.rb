@@ -28,7 +28,19 @@ module Score
     end
 
     def <=> other
+      Competition.result_type.nil? ? 0 : send(:"#{Competition.result_type}_compare", other)
+    end
+
+    private
+
+    def dcup_compare other
       compare = other.points <=> points
+      return fire_attack_time <=> other.fire_attack_time if compare == 0
+      compare
+    end
+
+    def places_to_points_compare other
+      compare = points <=> other.points
       return fire_attack_time <=> other.fire_attack_time if compare == 0
       compare
     end
