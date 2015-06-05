@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604135008) do
+ActiveRecord::Schema.define(version: 20150605182936) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                      null: false
@@ -39,17 +39,18 @@ ActiveRecord::Schema.define(version: 20150604135008) do
   add_index "assessments", ["score_competition_result_id"], name: "index_assessments_on_score_competition_result_id"
 
   create_table "competitions", force: :cascade do |t|
-    t.string   "name",               default: "",    null: false
-    t.date     "date",                               null: false
-    t.boolean  "configured",         default: false, null: false
-    t.boolean  "group_assessment",   default: false, null: false
-    t.integer  "group_people_count", default: 10,    null: false
-    t.integer  "group_run_count",    default: 8,     null: false
-    t.integer  "group_score_count",  default: 6,     null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.string   "youth_name",         default: "",    null: false
-    t.string   "hostname",           default: "",    null: false
+    t.string   "name",                    default: "",    null: false
+    t.date     "date",                                    null: false
+    t.boolean  "configured",              default: false, null: false
+    t.boolean  "group_assessment",        default: false, null: false
+    t.integer  "group_people_count",      default: 10,    null: false
+    t.integer  "group_run_count",         default: 8,     null: false
+    t.integer  "group_score_count",       default: 6,     null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "youth_name",              default: "",    null: false
+    t.string   "hostname",                default: "",    null: false
+    t.string   "competition_result_type"
   end
 
   create_table "disciplines", force: :cascade do |t|

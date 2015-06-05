@@ -46,6 +46,7 @@ de:
       assessment_request:
         group_competitor_order: Reihenfolge
       competition:
+        competition_result_type: Gesamtwertungsberechnung
         date: Datum
         name: Name
         group_people_count: Wettkämpfer pro Mannschaft

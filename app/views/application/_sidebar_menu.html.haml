@@ -29,10 +29,11 @@
       %i.fa.fa-list-ol
       %span= Score::Result.model_name.human count: 0
 
-  %li{ class: controller_name == 'competition_results' ? 'active' : '' }
-    %a{ href: score_competition_results_path }
-      %i.fa.fa-list-ol
-      %span Gesamtwertung
+  - if Competition.result_type.present?
+    %li{ class: controller_name == 'competition_results' ? 'active' : '' }
+      %a{ href: score_competition_results_path }
+        %i.fa.fa-list-ol
+        %span Gesamtwertung
 
   - if logged_in?
     %li{ class: controller_name == 'session' ? 'active' : '' }

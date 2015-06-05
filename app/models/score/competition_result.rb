@@ -5,8 +5,16 @@ module Score
     enum gender: { female: 0, male: 1 }
 
     def rows
-      @rows ||= dcup
+      @rows ||= Competition.result_type.nil? ? [] : send(Competition.result_type)
     end
+
+    def self.result_types
+      {
+        dcup: "D-Cup",
+      }
+    end
+
+    private
 
     def dcup
       teams = {}
