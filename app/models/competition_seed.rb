@@ -134,6 +134,71 @@ class CompetitionSeed
   end
 
   def seed_method_jugend_elbe_elster
+    Competition.update_all(
+      group_assessment: true, 
+      youth_name: "", 
+      competition_result_type: "places_to_points"
+    )
+
+    ak1_female = Score::CompetitionResult.create!(gender: :female, name: "AK1")
+    ak1_male   = Score::CompetitionResult.create!(gender: :male, name: "AK1")
+    ak2_female = Score::CompetitionResult.create!(gender: :female, name: "AK2")
+    ak2_male   = Score::CompetitionResult.create!(gender: :male, name: "AK2")
+
+    # Gruppenstafette
+    group_relay = Disciplines::GroupRelay.create!
+    assessment = Assessment.create!(discipline: group_relay, gender: :female, name: "AK1 Gruppenstafette Mädchen", score_competition_result: ak1_female)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: group_relay, gender: :male, name: "AK1 Gruppenstafette Jungen", score_competition_result: ak1_male)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: group_relay, gender: :female, name: "AK2 Gruppenstafette Mädchen", score_competition_result: ak2_female)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: group_relay, gender: :male, name: "AK2 Gruppenstafette Jungen", score_competition_result: ak2_male)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+
+    # 5x80 Meter-Staffel
+    fire_relay = Disciplines::FireRelay.create!(name: "5x80-Meter-Staffel", short_name: "5x80")
+    assessment = Assessment.create!(discipline: fire_relay, gender: :female, name: "AK1 Staffel Mädchen", score_competition_result: ak1_female)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: fire_relay, gender: :male, name: "AK1 Staffel Jungen", score_competition_result: ak1_male)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: fire_relay, gender: :female, name: "AK2 Staffel Mädchen", score_competition_result: ak2_female)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: fire_relay, gender: :male, name: "AK2 Staffel Jungen", score_competition_result: ak2_male)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+
+    # Löschangriff
+    fire_attack = Disciplines::FireAttack.create!
+    assessment = Assessment.create!(discipline: fire_attack, gender: :female, name: "AK1 Löschangriff Mädchen", score_competition_result: ak1_female)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: fire_attack, gender: :male, name: "AK1 Löschangriff Jungen", score_competition_result: ak1_male)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: fire_attack, gender: :female, name: "AK2 Löschangriff Mädchen", score_competition_result: ak2_female)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+    assessment = Assessment.create!(discipline: fire_attack, gender: :male, name: "AK2 Löschangriff Jungen", score_competition_result: ak2_male)
+    Score::Result.create!(assessment: assessment, group_assessment: true)
+
+    # Hakenleitersteigen
+    climbing_hook_ladder = Disciplines::ClimbingHookLadder.create!
+    assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :female, name: "AK1 Hakenleitersteigen Mädchen")
+    Score::Result.create!(assessment: assessment)
+    assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :male, name: "AK1 Hakenleitersteigen Jungen")
+    Score::Result.create!(assessment: assessment)
+    assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :female, name: "AK2 Hakenleitersteigen Mädchen")
+    Score::Result.create!(assessment: assessment)
+    assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :male, name: "AK2 Hakenleitersteigen Jungen")
+    Score::Result.create!(assessment: assessment)
+
+    # Hindernisbahn
+    obstacle_course = Disciplines::ObstacleCourse.create!
+    assessment = Assessment.create!(discipline: obstacle_course, gender: :female, name: "AK1 Hindernisbahn Mädchen")
+    Score::Result.create!(assessment: assessment)
+    assessment = Assessment.create!(discipline: obstacle_course, gender: :male, name: "AK1 Hindernisbahn Jungen")
+    Score::Result.create!(assessment: assessment)
+    assessment = Assessment.create!(discipline: obstacle_course, gender: :female, name: "AK2 Hindernisbahn Mädchen")
+    Score::Result.create!(assessment: assessment)
+    assessment = Assessment.create!(discipline: obstacle_course, gender: :male, name: "AK2 Hindernisbahn Jungen")
+    Score::Result.create!(assessment: assessment)
   end
 
   def seed_method_la
