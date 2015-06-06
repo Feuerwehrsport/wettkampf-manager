@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605182936) do
+ActiveRecord::Schema.define(version: 20150606073652) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                      null: false
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150605182936) do
     t.string   "type",                    null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "short_name", default: "", null: false
   end
 
   create_table "fire_sport_statistics_people", force: :cascade do |t|

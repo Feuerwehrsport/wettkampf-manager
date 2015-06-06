@@ -55,8 +55,9 @@ de:
         hostname: Hostname des Systems
         youth_name: Name der Jugendwertung
       discipline:
-        type: Disziplin
         name: Name
+        short_name: Kurzname
+        type: Disziplin
       person:
         first_name: Vorname
         gender: Geschlecht

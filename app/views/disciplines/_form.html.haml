@@ -3,5 +3,6 @@
   = f.inputs do
     = f.input :type, collection: Discipline.types.map { |k| [k.model_name.human, k.name] }
     = f.input :name
+    = f.input :short_name
   = f.actions do
     = f.primary_button :submit, "Speichern"

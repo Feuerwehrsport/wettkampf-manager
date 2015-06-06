@@ -31,6 +31,7 @@ de:
         youth_name: "Wird ein Name angegeben, wird die Jugendwertung aktiviert. Beispiel: <i>U20</i>"
       discipline:
         name: Wird ein Name angegeben, ersetzt dieser den eigentlichen Disziplinnamen (z. B. Spaßwettkampf)
+        short_name: Ersetzt den Namen, wo nicht genügend Platz ist
         type: Ist es eine andere Disziplin, sollte eine Ähnliche ausgewählt werden.
       score_list:
         name: Zum Beispiel <i>Lauf 1</i> oder <i>Finale</i>

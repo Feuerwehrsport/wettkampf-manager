@@ -4,6 +4,6 @@ class DisciplinesController < ApplicationController
   protected
 
   def discipline_params
-    params.require(:discipline).permit(:name, :type)
+    params.require(:discipline).permit(:name, :short_name, :type)
   end
 end
