@@ -26,7 +26,7 @@ cd wettkampf-manager
 rvm current
 gem install bundler
 bundle
-./scripts/install.rb
+./scripts/install.sh
 ./scripts/start_server.sh
 
 read -p "Press any key"
