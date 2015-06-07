@@ -1,9 +1,12 @@
 #!/bin/bash
 
 sudo apt-get update
-sudo apt-get -y install firefox libreoffice openssh-server htop vim nginx git g++ gcc make libc6-dev libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev nodejs
+sudo apt-get -y dist-upgrade
+sudo apt-get -y install nginx
 sudo bash -c "echo 'server { listen 80 default_server; listen [::]:80 default_server ipv6only=on; location / { proxy_pass http://localhost:3000; } }' > /etc/nginx/sites-enabled/default"
 sudo service nginx restart
+sudo apt-get -y install firefox libreoffice 
+sudo apt-get -y install openssh-server htop vim git g++ gcc make libc6-dev libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev nodejs
 
 # rvm
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
