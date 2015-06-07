@@ -3,6 +3,7 @@ class Team < ActiveRecord::Base
   has_many :requests, class_name: "AssessmentRequest", as: :entity, dependent: :destroy
   has_many :list_entries, class_name: "Score::ListEntry", as: :entity, dependent: :destroy
   has_many :requested_assessments, through: :requests, source: :assessment
+  has_many :team_relays, dependent: :destroy
 
   enum gender: { female: 0, male: 1 }
 
@@ -49,7 +50,8 @@ class Team < ActiveRecord::Base
 
   def create_assessment_requests
     Assessment.requestable_for(self).each do |assessment|
-      self.requests.create(assessment: assessment)
+      count = assessment.fire_relay? ? 2 : 1
+      self.requests.create(assessment: assessment, relay_count: count)
     end
   end
 end

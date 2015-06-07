@@ -21,10 +21,10 @@ module Score
       teams = {}
       results.each do |result|
         discipline = result.assessment.discipline
-        if result.group_assessment? && discipline.single_discipline?
+        if discipline.single_discipline?
           result_rows = GroupResult.new(result).rows
-        elsif result.group_assessment?
-          result_rows = result.rows
+        else
+          result_rows = result.group_result_rows
         end
 
         points = 11
@@ -52,10 +52,10 @@ module Score
       teams = {}
       results.each do |result|
         discipline = result.assessment.discipline
-        if result.group_assessment? && discipline.single_discipline?
+        if discipline.single_discipline?
           result_rows = GroupResult.new(result).rows
-        elsif result.group_assessment?
-          result_rows = result.rows
+        else 
+          result_rows = result.group_result_rows
         end
 
         points = 0

@@ -36,6 +36,8 @@
               = decorated_assessment
             %td
               - if @team.request_for(assessment).present?
+                - if assessment.fire_relay?
+                  = "#{@team.request_for(assessment).relay_count} x"
                 %i.ion.ion-checkmark
                 = t("assessment_types.#{@team.request_for(assessment).assessment_type}")
               - else

@@ -179,26 +179,24 @@ class CompetitionSeed
     Score::Result.create!(assessment: assessment, group_assessment: true)
 
     # Hakenleitersteigen
-    climbing_hook_ladder = Disciplines::ClimbingHookLadder.create!
-    assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :female, name: "AK1 Hakenleitersteigen Mädchen")
-    Score::Result.create!(assessment: assessment)
-    assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :male, name: "AK1 Hakenleitersteigen Jungen")
-    Score::Result.create!(assessment: assessment)
-    assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :female, name: "AK2 Hakenleitersteigen Mädchen")
-    Score::Result.create!(assessment: assessment)
-    assessment = Assessment.create!(discipline: climbing_hook_ladder, gender: :male, name: "AK2 Hakenleitersteigen Jungen")
-    Score::Result.create!(assessment: assessment)
-
+    chl = Disciplines::ClimbingHookLadder.create!
     # Hindernisbahn
-    obstacle_course = Disciplines::ObstacleCourse.create!
-    assessment = Assessment.create!(discipline: obstacle_course, gender: :female, name: "AK1 Hindernisbahn Mädchen")
-    Score::Result.create!(assessment: assessment)
-    assessment = Assessment.create!(discipline: obstacle_course, gender: :male, name: "AK1 Hindernisbahn Jungen")
-    Score::Result.create!(assessment: assessment)
-    assessment = Assessment.create!(discipline: obstacle_course, gender: :female, name: "AK2 Hindernisbahn Mädchen")
-    Score::Result.create!(assessment: assessment)
-    assessment = Assessment.create!(discipline: obstacle_course, gender: :male, name: "AK2 Hindernisbahn Jungen")
-    Score::Result.create!(assessment: assessment)
+    oc = Disciplines::ObstacleCourse.create!
+    [
+      [:female, "AK1 10-12 DIS Mädchen"],
+      [:female, "AK1 13-14 DIS Mädchen"],
+      [:male, "AK1 10-12 DIS Jungen"],
+      [:male, "AK1 13-14 DIS Jungen"],
+      [:female, "AK2 15-16 DIS Mädchen"],
+      [:female, "AK2 17-18 DIS Mädchen"],
+      [:male, "AK2 15-16 DIS Jungen"],
+      [:male, "AK2 17-18 DIS Jungen"],
+    ].each do |ak|
+      assessment = Assessment.create!(discipline: chl, gender: ak.first, name: ak.last.gsub("DIS", "Hakenleitersteigen"))
+      Score::Result.create!(assessment: assessment)
+      assessment = Assessment.create!(discipline: oc, gender: ak.first, name: ak.last.gsub("DIS", "Hindernisbahn"))
+      Score::Result.create!(assessment: assessment)
+    end
   end
 
   def seed_method_la

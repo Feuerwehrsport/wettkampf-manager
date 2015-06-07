@@ -1,5 +1,6 @@
 class TeamDecorator < ApplicationDecorator
   decorates_association :people
+  decorates_association :team_relays
 
   def translated_gender
     t("gender.#{gender}")

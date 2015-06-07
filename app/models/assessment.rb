@@ -13,6 +13,10 @@ class Assessment < ActiveRecord::Base
     decorate
   end
 
+  def fire_relay?
+    discipline.is_a?(Disciplines::FireRelay)
+  end
+
   def self.requestable_for entity
     if entity.is_a? Person
       where(arel_table[:gender].eq(nil).or(arel_table[:gender].eq(Person.genders[entity.gender]))).select do |assessment|

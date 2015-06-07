@@ -115,7 +115,7 @@ module Score
           line.push(entry.try(:entity).try(:last_name))
           line.push(entry.try(:entity).try(:team_name, entry.try(:assessment_type)))
         else
-          line.push(entry.try(:entity).try(:numbered_name))
+          line.push(entry.try(:entity).try(:to_s))
         end
         line.push(result_for entry)
         if options[:stopwatch_times] == :all

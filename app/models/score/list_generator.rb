@@ -15,6 +15,7 @@ module Score
       {
         "Score::ListGenerators::Simple" => [],
         "Score::ListGenerators::GroupOrder" => [],
+        "Score::ListGenerators::FireRelay" => [],
         "Score::ListGenerators::TrackChange" => [:before_list],
         "Score::ListGenerators::TrackSame" => [:before_list],
         "Score::ListGenerators::Best" => [:result, :best_count],

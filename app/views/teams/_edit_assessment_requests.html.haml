@@ -8,6 +8,8 @@
           = g.input :assessment_id, as: :hidden
           .edit-assesment-type
             = g.input :assessment_type, as: :select, collection: AssessmentRequest.group_assessment_type_keys, label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }
+            - if assessment.fire_relay?
+              = g.input :relay_count
   = f.actions do
     = f.primary_button :submit, "Speichern"
 

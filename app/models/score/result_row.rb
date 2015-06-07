@@ -12,10 +12,6 @@ module Score
       @list_entries.first.assessment_type
     end
 
-    def entity
-      @entity ||= list_entries.first.try(:entity)
-    end
-
     def best_stopwatch_time
       @best_time ||= StopwatchTime.aggregated_time(valid_times.first)
     end

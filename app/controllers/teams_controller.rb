@@ -13,6 +13,6 @@ class TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:name, :gender, :number, 
-      { requests_attributes: [:assessment_type, :_destroy, :assessment_id, :id] })
+      { requests_attributes: [:assessment_type, :relay_count, :_destroy, :assessment_id, :id] })
   end
 end

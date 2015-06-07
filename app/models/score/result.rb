@@ -23,15 +23,21 @@ module Score
       @rows ||= generate_rows.sort
     end
 
-    def generate_rows
+    def group_result_rows
+      @group_result_rows ||= generate_rows(true).sort
+    end
+
+    def generate_rows(group_result=false)
       rows = {}
       lists.each do |list|
         list.entries.not_waiting.each do |list_entry|
-          next if youth? && !list_entry.entity.youth?
-          if rows[list_entry.entity.id].nil?
-            rows[list_entry.entity.id] = ResultRow.new(list_entry.entity, self)
+          entity = list_entry.entity
+          entity = entity.team if group_result && assessment.fire_relay?
+          next if youth? && !entity.youth?
+          if rows[entity.id].nil?
+            rows[entity.id] = ResultRow.new(entity, self)
           end
-          rows[list_entry.entity.id].add_list(list_entry)
+          rows[entity.id].add_list(list_entry)
         end
       end
       rows.values

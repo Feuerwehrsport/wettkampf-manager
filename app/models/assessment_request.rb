@@ -5,6 +5,7 @@ class AssessmentRequest < ActiveRecord::Base
 
   validates :assessment, :entity, presence: true
   validates :group_competitor_order, numericality: { greater_than_or_equal_to: 0 }
+  validates :relay_count, numericality: { greater_than_or_equal_to: 0 }
 
   after_initialize :assign_next_free_group_competitor_order
   before_save :set_valid_group_competitor_order

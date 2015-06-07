@@ -45,6 +45,7 @@ de:
         name: Name
       assessment_request:
         group_competitor_order: Reihenfolge
+        relay_count: Staffelanzahl
       competition:
         competition_result_type: Gesamtwertungsberechnung
         date: Datum
