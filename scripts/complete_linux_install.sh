@@ -13,7 +13,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 source /home/user/.rvm/scripts/rvm
 
 # source
-git clone https://github.com/Feuerwehrsport/wettkampf-manager
+if [[ ! -d ~/wettkampf-manager ]] ; then
+  git clone https://github.com/Feuerwehrsport/wettkampf-manager
+fi
 cd wettkampf-manager
 
 rvm install ruby-2.1.0
