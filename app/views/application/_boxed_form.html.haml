@@ -1,4 +1,4 @@
-.box{ class: "box-#{options[:type]} #{form_options[:modal] ? 'modal fade' : ''}" }
+.box{ class: "box-#{options[:type]} #{form_options[:modal] ? 'modal modal-open fade' : ''}" }
   = simple_form_for(record, form_options) do |f|
     - body = capture(f, &form_block)
     - if title.present?
