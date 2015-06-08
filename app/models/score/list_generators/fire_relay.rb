@@ -10,7 +10,7 @@ module Score
       assessment.requests.to_a.shuffle.each do |request|
         (1..request.relay_count).each do |number|
           number_requests[number] ||= []
-          relay = TeamRelay.find_or_create_by!(team: request.entity, name: TeamRelay.name_for_number(number))
+          relay = TeamRelay.find_or_create_by!(team: request.entity, number: number)
           number_requests[number].push(OpenStruct.new(entity: relay, assessment_type: request.assessment_type))
         end
       end
