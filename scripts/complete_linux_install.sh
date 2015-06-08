@@ -18,6 +18,7 @@ if [[ ! -d ~/wettkampf-manager ]] ; then
   git clone https://github.com/Feuerwehrsport/wettkampf-manager
 fi
 cd wettkampf-manager
+git pull
 
 rvm install ruby-2.1.0
 rvm current
