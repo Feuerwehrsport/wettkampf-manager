@@ -4,6 +4,10 @@ class TeamRelayDecorator < ApplicationDecorator
   def to_s
     "#{team} #{name}"
   end
+
+  def numbered_name_with_gender
+    "#{team.numbered_name_with_gender} #{name}"    
+  end
   
   def self.human_name_cols
     ["Mannschaft"]

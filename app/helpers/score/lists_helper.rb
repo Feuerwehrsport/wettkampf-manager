@@ -69,11 +69,21 @@ module Score
     end
 
     def discipline_klass
-      single_discipline? ? Person : Team
+      if single_discipline?
+        Person
+      elsif @score_list.assessment.fire_relay?
+        TeamRelay
+      else
+        Team
+      end
     end
 
     def not_yet_present_entities
-      discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)) 
+      if @score_list.assessment.fire_relay?
+        Team.all.map { |team| TeamRelay.create_next_free_for(team, @score_list.entries.pluck(:entity_id)) }
+      else
+        discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)) 
+      end
     end
 
     def label_method_for_select_entity entity

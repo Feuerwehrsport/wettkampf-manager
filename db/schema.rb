@@ -193,10 +193,10 @@ ActiveRecord::Schema.define(version: 20150607200351) do
   add_index "score_stopwatch_times", ["list_entry_id"], name: "index_score_stopwatch_times_on_list_entry_id"
 
   create_table "team_relays", force: :cascade do |t|
-    t.integer  "team_id",    null: false
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "team_id",                null: false
+    t.integer  "number",     default: 1, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "team_relays", ["team_id"], name: "index_team_relays_on_team_id"
