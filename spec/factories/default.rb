@@ -29,10 +29,12 @@ FactoryGirl.define do
 
   factory :climbing_hook_ladder, class: "Disciplines::ClimbingHookLadder" do
   end
+  factory :obstacle_course, class: "Disciplines::ObstacleCourse" do
+  end
 
   factory :assessment do
     discipline { Disciplines::ClimbingHookLadder.first || create(:climbing_hook_ladder) }
-    name "Hakenleitersteigen - männlich"
+    name ""
     gender :male
   end
 
@@ -69,6 +71,6 @@ FactoryGirl.define do
 
   factory :score_result, class: "Score::Result" do
     assessment { Assessment.first || build(:assessment) }
-    name "Hakenleitersteigen"
+    name ""
   end
 end

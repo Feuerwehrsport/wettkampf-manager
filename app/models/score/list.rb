@@ -5,13 +5,14 @@ module Score
     enum result_time_type: { electronic: 0, handheld_median: 1, handheld_average: 2, calculated: 3 }
     belongs_to :assessment
     has_many :result_lists
-    has_many :result, through: :result_lists
+    has_many :results, through: :result_lists
     has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry", dependent: :destroy
     validates :name, :assessment, :track_count, presence: true
     validates :track_count, numericality: { greater_than: 0 }
     validates :generator, on: :create, presence: true
     validates :result_time_type, inclusion: { in: proc { |l| l.available_time_types.map(&:to_s) } }, allow_nil: true
     validate { generator.try(:valid?) }
+    validate :results_match_assessment
 
     accepts_nested_attributes_for :entries, allow_destroy: true
 
@@ -86,6 +87,16 @@ module Score
       types.push(:handheld_average) if handheld_count > 0
       types.push(:calculated) if handheld_time_count_for_non_electronic_time > 0
       types
+    end
+
+    private
+
+    def results_match_assessment
+      results.each do |result|
+        if result.assessment != assessment
+          errors.add(:results, 'Muss gleiche Disziplin haben')
+        end
+      end
     end
   end
 end
