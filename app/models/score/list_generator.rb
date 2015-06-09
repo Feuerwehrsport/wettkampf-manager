@@ -35,7 +35,6 @@ module Score
     end
 
     def to_param
-      p self.class.name 
       self.class.name
     end
   end

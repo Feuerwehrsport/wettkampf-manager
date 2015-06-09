@@ -11,7 +11,7 @@ module Score
     validates :track_count, numericality: { greater_than: 0 }
     validates :generator, on: :create, presence: true
     validates :result_time_type, inclusion: { in: proc { |l| l.available_time_types.map(&:to_s) } }, allow_nil: true
-    validate { generator.try(:valid?) }
+    validate :generator_valid?
     validate :results_match_assessment
 
     accepts_nested_attributes_for :entries, allow_destroy: true
@@ -94,7 +94,15 @@ module Score
     def results_match_assessment
       results.each do |result|
         if result.assessment != assessment
-          errors.add(:results, 'Muss gleiche Disziplin haben')
+          errors.add(:results, 'Muss gleiche Wertungsgruppe haben')
+        end
+      end
+    end
+
+    def generator_valid?
+      if generator.present? && !generator.valid?
+        generator.errors.full_messages.each do |msg|
+          errors.add(:generator, msg)
         end
       end
     end

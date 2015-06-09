@@ -70,7 +70,7 @@ de:
         track_count: Wettkampfbahnen
         generator: Listenerstellung
         result_time_type: Zeitenberechnung
-        result: Ergebnisliste
+        results: Ergebnislisten
       score/list_entry:
         assessment_type: Wertung
         entity: Teilnehmer

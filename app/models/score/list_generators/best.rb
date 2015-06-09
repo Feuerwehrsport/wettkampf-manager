@@ -3,6 +3,7 @@ module Score
 
     validates :best_count, numericality: { greater_than_or_equal_to: 0 }
     validates :result, presence: true
+    validate :result_assessment_match
 
     def self.to_label
       "die x Besten"
@@ -32,6 +33,14 @@ module Score
             asdfsadf
           end
         end
+      end
+    end
+
+    private
+
+    def result_assessment_match
+      if @result_object.present? && @result_object.assessment != list.assessment
+        errors.add(:result, "muss mit jetziger Wertungsgruppe übereinstimmen")
       end
     end
   end

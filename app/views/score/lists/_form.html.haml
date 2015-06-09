@@ -4,7 +4,7 @@
     = f.input :name
     = f.input :track_count
     = f.association :assessment
-    = f.association :result
+    = f.association :results
     - unless @score_list.persisted?
       = f.input :generator, collection: Score::ListGenerator.all, label_method: :to_label, selected: @score_list.generator.try(:to_param)
       = f.simple_fields_for :generator, (@score_list.generator || Score::ListGenerator.new) do |g|

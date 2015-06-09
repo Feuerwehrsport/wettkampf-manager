@@ -1,13 +1,14 @@
 module Score
   class ListGenerators::TrackChange < ListGenerator
     validates :before_list, presence: true
+    validate :before_list_assessment_match
 
     def self.to_label
       "Bahnwechsel"
     end
 
     def before_list= list_id
-      @before_list_object = List.find(list_id)
+      @before_list_object = List.find_by_id(list_id)
       super(list_id)
     end
 
@@ -22,6 +23,14 @@ module Score
             assessment_type: entry.assessment_type
           )
         end
+      end
+    end
+
+    private
+
+    def before_list_assessment_match
+      if @before_list_object.present? && @before_list_object.assessment != list.assessment
+        errors.add(:before_list, "muss mit jetziger Wertungsgruppe übereinstimmen")
       end
     end
   end

@@ -1,6 +1,8 @@
 module Score
   class ListGenerators::FireRelay < ListGenerator
 
+    validate :list_assessment_match_fire_relay
+
     def self.to_label
       "Staffellauf mit A, B"
     end
@@ -31,6 +33,12 @@ module Score
           end
         end
       end
+    end
+
+    private
+
+    def list_assessment_match_fire_relay
+      errors.add(:base, "Als Wertungsgruppe muss eine Staffeldisziplin gewählt werden") unless list.assessment.fire_relay?
     end
   end
 end
