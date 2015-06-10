@@ -74,11 +74,12 @@ $ () ->
 
   $('#score_list_assessment_id').change( () ->
     id = $(@).val()
-    assessmentDependend = $('.assessment-dependend')
+    assessmentDependend = $('.assessment-dependend').css(opacity: 0.5)
     unless id.match(/^\d+$/)
-      assessmentDependend.slideUp()
+      assessmentDependend.hide()
     else
-      assessmentDependend.slideDown()
+      assessmentDependend.show()
+      $('#score_list_result_ids').closest('.form-group').show()
 
       resultOptions = $('#score_list_result_ids option, #score_list_generator_attributes_result option').show()
       listOptions = $('#score_list_generator_attributes_before_list option').show()
@@ -94,4 +95,16 @@ $ () ->
           if $.inArray(parseInt(option.val()), data.lists) == -1
             option.hide()
             option.removeAttr('selected')
+
+        # if only one result visible, we could select it and hide the select field
+        if $('#score_list_result_ids option:not(:hidden)').length == 1
+          $('#score_list_result_ids').closest('.form-group').hide().find('option:not(:hidden)').attr('selected', true)
+
+        if $('#score_list_generator_attributes_before_list option:not(:hidden)').length == 1
+          $('#score_list_generator_attributes_before_list option:not(:hidden)').attr('selected', true)
+          
+        if $('#score_list_generator_attributes_result option:not(:hidden)').length == 1
+          $('#score_list_generator_attributes_result option:not(:hidden)').attr('selected', true)
+
+        assessmentDependend.css(opacity: 1)
   ).change()

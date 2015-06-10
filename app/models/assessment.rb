@@ -9,6 +9,7 @@ class Assessment < ActiveRecord::Base
   validates :discipline, presence: true
 
   scope :gender, -> (gender) { where(gender: Assessment.genders[gender]) }
+  scope :no_double_event, -> { joins(:discipline).where.not(disciplines: { type: "Disciplines::DoubleEvent" }) }
 
   def to_label
     decorate

@@ -3,7 +3,7 @@
   = f.inputs do
     = f.input :name
     = f.input :track_count
-    = f.association :assessment
+    = f.association :assessment, collection: Assessment.no_double_event
     .assessment-dependend
       = f.association :results
       - unless @score_list.persisted?
