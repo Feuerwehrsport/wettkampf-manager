@@ -74,6 +74,10 @@ FactoryGirl.define do
     name ""
   end
 
+  factory :team_relay do
+    team { Team.first || build(:team) }
+  end
+
   factory :user do
     password "a"
     password_confirmation "a"
