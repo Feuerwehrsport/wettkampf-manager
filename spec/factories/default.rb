@@ -31,11 +31,24 @@ FactoryGirl.define do
   end
   factory :obstacle_course, class: "Disciplines::ObstacleCourse" do
   end
+  factory :fire_relay, class: "Disciplines::FireRelay" do
+  end
+  factory :fire_attack, class: "Disciplines::FireAttack" do
+  end
 
   factory :assessment do
     discipline { Disciplines::ClimbingHookLadder.first || create(:climbing_hook_ladder) }
     name ""
     gender :male
+    trait :obstacle_course do
+      discipline { create :obstacle_course }
+    end
+    trait :fire_attack do
+      discipline { create :fire_attack }
+    end
+    trait :fire_relay do
+      discipline { create :fire_relay }
+    end
   end
 
   factory :score_list, class: "Score::List" do
