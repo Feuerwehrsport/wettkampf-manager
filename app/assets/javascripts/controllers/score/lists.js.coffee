@@ -71,3 +71,27 @@ $ () ->
       else
         $elem.show()
   ).change()
+
+  $('#score_list_assessment_id').change( () ->
+    id = $(@).val()
+    assessmentDependend = $('.assessment-dependend')
+    unless id.match(/^\d+$/)
+      assessmentDependend.slideUp()
+    else
+      assessmentDependend.slideDown()
+
+      resultOptions = $('#score_list_result_ids option, #score_list_generator_attributes_result option').show()
+      listOptions = $('#score_list_generator_attributes_before_list option').show()
+
+      $.get "/assessments/#{id}/possible_associations.json", (data) ->
+        resultOptions.each () ->
+          option = $(@)
+          if $.inArray(parseInt(option.val()), data.results) == -1
+            option.hide()
+            option.removeAttr('selected')
+        listOptions.each () ->
+          option = $(@)
+          if $.inArray(parseInt(option.val()), data.lists) == -1
+            option.hide()
+            option.removeAttr('selected')
+  ).change()

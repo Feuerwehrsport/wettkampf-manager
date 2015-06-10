@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   end
   resources :competitions, only: [:show, :edit, :update]
   resources :disciplines, only: [:index, :new, :create, :show, :destroy]
-  resources :assessments
+  resources :assessments do
+    member { get :possible_associations }
+  end
   resources :people do
     member { get :edit_assessment_requests }
   end

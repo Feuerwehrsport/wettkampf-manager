@@ -3,6 +3,7 @@ class Assessment < ActiveRecord::Base
   belongs_to :score_competition_result, class_name: "Score::CompetitionResult"
   has_many :requests, class_name: "AssessmentRequest", dependent: :destroy
   has_many :results, class_name: "Score::Result"
+  has_many :lists, class_name: "Score::List"
   enum gender: { female: 0, male: 1 }
 
   validates :discipline, presence: true
