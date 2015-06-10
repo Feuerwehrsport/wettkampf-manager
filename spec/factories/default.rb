@@ -73,4 +73,9 @@ FactoryGirl.define do
     assessment { Assessment.first || build(:assessment) }
     name ""
   end
+
+  factory :user do
+    password "a"
+    password_confirmation "a"
+  end
 end

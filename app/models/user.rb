@@ -15,8 +15,10 @@ class User < ActiveRecord::Base
   end
 
   def self.configured?
-    first.password_hash.present?
+    first.try(:password_hash).present?
   end
+
+  private
   
   def encrypt_password
     if password.present?
