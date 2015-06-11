@@ -30,7 +30,12 @@ de:
       score/list: 
         one: Startliste
         other: Startlisten
+      score/list_generators/best: die x Besten
+      score/list_generators/fire_relay: Staffellauf mit A, B
+      score/list_generators/group_order: Mannschaftsreihenfolge beachten
       score/list_generators/simple: Zufällig anordnen
+      score/list_generators/track_change: Bahnwechsel
+      score/list_generators/track_same: Bahn behalten
       score/electronic_time: Elektronisch
       score/handheld_time: Hand
       score/result: Ergebnisse

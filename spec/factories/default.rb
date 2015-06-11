@@ -1,6 +1,7 @@
 FactoryGirl.define do
   sequence(:first_name) { |n| "Alfred#{n}" }
   sequence(:last_name) { |n| "Meier#{n}" }
+  sequence(:name) { |n| "Team#{n}" }
 
   factory :team do
     name "Mecklenburg-Vorpommern"
@@ -8,6 +9,9 @@ FactoryGirl.define do
 
     trait(:male) { gender :male }
     trait(:female) { gender :female }
+    trait(:generated) do
+      name { generate(:name) }
+    end
   end
 
   factory :person do
@@ -51,6 +55,11 @@ FactoryGirl.define do
     end
   end
 
+  factory :assessment_request do
+    entity { build(:team, :generated) }
+    assessment_type :group_competitor
+  end
+
   factory :score_list, class: "Score::List" do
     assessment { Assessment.first || build(:assessment) }
     name "Lauf 1"
@@ -79,6 +88,15 @@ FactoryGirl.define do
     factory :score_electronic_time, class: "Score::ElectronicTime" do
     end
     factory :score_handheld_time, class: "Score::HandheldTime" do
+    end
+  end
+
+  factory :score_result_row, class: "Score::ResultRow" do
+    initialize_with do
+      new(build(:person), build(:score_result))
+    end
+    after(:build) do |result_row|
+      result_row.add_list(build(:score_list_entry))
     end
   end
 

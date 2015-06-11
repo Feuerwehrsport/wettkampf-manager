@@ -15,7 +15,7 @@ class AssessmentRequest < ActiveRecord::Base
   end
 
   def next_free_group_competitor_order
-    return 0 if entity.is_a?(Team) || entity.team.nil?
+    return 0 if entity.nil? || entity.is_a?(Team) || entity.team.nil?
     free = 1
     AssessmentRequest.where(
       assessment: assessment, 

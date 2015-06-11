@@ -3,10 +3,6 @@ module Score
     validates :before_list, presence: true
     validate :before_list_assessment_match
 
-    def self.to_label
-      "Bahnwechsel"
-    end
-
     def before_list= list_id
       @before_list_object = List.find_by_id(list_id)
       super(list_id)
@@ -16,12 +12,7 @@ module Score
       list.transaction do
         @before_list_object.entries.each do |entry|
           new_track = (entry.track % list.track_count) + 1
-          list.entries.create!(
-            entity: entry.entity,
-            run: entry.run,
-            track: new_track,
-            assessment_type: entry.assessment_type
-          )
+          create_list_entry(entry, entry.run, new_track)
         end
       end
     end
