@@ -51,6 +51,7 @@ de:
       assessment_request:
         group_competitor_order: Reihenfolge
         relay_count: Staffelanzahl
+        single_competitor_order: Reihenfolge
       competition:
         competition_result_type: Gesamtwertungsberechnung
         date: Datum
@@ -126,13 +127,13 @@ de:
 
   assessment_types:
     group_competitor: Mannschaftswertung
-    group_competitor_order: Mannschaftswertung (%{group_competitor_order})
+    group_competitor_order: Mannschaftswertung (%{competitor_order})
     group_competitor_short: M
-    group_competitor_short_order: M%{group_competitor_order}
+    group_competitor_short_order: M%{competitor_order}
     single_competitor: Einzelstarter
-    single_competitor_order: Einzelstarter
+    single_competitor_order: Einzelstarter (%{competitor_order})
     single_competitor_short: E
-    single_competitor_short_order: E
+    single_competitor_short_order: E%{competitor_order}
     out_of_competition: Außer der Wertung
     out_of_competition_order: Außer der Wertung
     out_of_competition_short: A

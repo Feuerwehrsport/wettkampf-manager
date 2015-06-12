@@ -12,6 +12,8 @@
               = g.input :assessment_type, as: :select, collection: AssessmentRequest.assessment_types.keys, label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }
             .col-md-3.group-competitor-order
               = g.input :group_competitor_order
+            .col-md-3.single-competitor-order
+              = g.input :single_competitor_order
   = f.actions do
     = f.primary_button :submit, "Speichern"
 
