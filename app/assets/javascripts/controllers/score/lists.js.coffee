@@ -98,7 +98,7 @@ $ () ->
 
         # if only one result visible, we could select it and hide the select field
         if $('#score_list_result_ids option:not(:hidden)').length == 1
-          $('#score_list_result_ids').closest('.form-group').hide().find('option:not(:hidden)').attr('selected', true)
+          $('#score_list_result_ids').closest('.form-group').find('option:not(:hidden)').attr('selected', true)
 
         if $('#score_list_generator_attributes_before_list option:not(:hidden)').length == 1
           $('#score_list_generator_attributes_before_list option:not(:hidden)').attr('selected', true)
