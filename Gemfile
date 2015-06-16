@@ -70,7 +70,9 @@ group :test do
   gem 'rspec-rails'
   gem 'rspec-collection_matchers'
   gem 'database_cleaner'
+  gem 'connection_pool'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'factory_girl_rails', '~> 4.0'
 end
 

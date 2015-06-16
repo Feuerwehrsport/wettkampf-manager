@@ -1,6 +1,6 @@
 .row
   .col-md-12
-    = box Team.model_name.human do |box|
+    = box Team.model_name.human(count: 0) do |box|
       - if logged_in?
         - box.header do
           = link_to "Hinzufügen", new_team_path, class: "btn btn-sm btn-info"

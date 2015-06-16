@@ -21,6 +21,9 @@ require 'capybara/rspec'
 require 'factory_girl'
 
 RSpec.configure do |config|
+  Capybara.javascript_driver = :webkit
+
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -94,6 +97,10 @@ RSpec.configure do |config|
       # Normally do transactions-based cleanup
       DatabaseCleaner.strategy = :transaction
     end
+
+    config.before(type: :feature) do
+      load File.join(Rails.root, "db", "seeds.rb")
+    end 
 
     config.around(:each) do |spec|
       if spec.metadata[:js]

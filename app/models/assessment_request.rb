@@ -10,6 +10,8 @@ class AssessmentRequest < ActiveRecord::Base
   after_initialize :assign_next_free_competitor_order
   before_save :set_valid_competitor_order
 
+  scope :assessment_type, -> (type) { where(assessment_type: AssessmentRequest.assessment_types[type]) }
+
   def self.group_assessment_type_keys
     [:group_competitor, :out_of_competition]
   end
