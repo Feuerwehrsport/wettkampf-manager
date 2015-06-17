@@ -3,3 +3,4 @@ rvm:
   - 2.1.0
 bundler_args: --without production
 cache: bundler
+script: xvfb-run rspec
