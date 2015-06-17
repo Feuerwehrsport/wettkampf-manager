@@ -5,6 +5,10 @@ module FireSportStatistics
         fetch("teams")
       end
 
+      def self.competitions
+        fetch("competitions")
+      end
+
       def self.team_spellings
         fetch("team-spellings")
       end
@@ -19,6 +23,10 @@ module FireSportStatistics
 
       def self.team_associations
         fetch("team-associations")
+      end
+
+      def self.dcup_single_results
+        logged_in_instance.post("get-dcup-single-results", year: "2015")
       end
 
       protected
