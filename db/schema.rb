@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612065033) do
+ActiveRecord::Schema.define(version: 20150613115323) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -62,6 +62,36 @@ ActiveRecord::Schema.define(version: 20150612065033) do
     t.datetime "updated_at",              null: false
     t.string   "short_name", default: "", null: false
   end
+
+  create_table "fire_sport_statistics_competitions", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.date     "date",        null: false
+    t.integer  "external_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "fire_sport_statistics_d_cup_results", force: :cascade do |t|
+    t.string   "discipline_key",                 null: false
+    t.integer  "gender",                         null: false
+    t.boolean  "youth",          default: false, null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "fire_sport_statistics_d_cup_single_results", force: :cascade do |t|
+    t.integer  "result_id",                  null: false
+    t.integer  "person_id",                  null: false
+    t.integer  "competition_id",             null: false
+    t.integer  "points",         default: 0, null: false
+    t.integer  "time"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "fire_sport_statistics_d_cup_single_results", ["competition_id"], name: "fire_sport_statistics_d_cup_single_competition_id"
+  add_index "fire_sport_statistics_d_cup_single_results", ["person_id"], name: "index_fire_sport_statistics_d_cup_single_results_on_person_id"
+  add_index "fire_sport_statistics_d_cup_single_results", ["result_id"], name: "index_fire_sport_statistics_d_cup_single_results_on_result_id"
 
   create_table "fire_sport_statistics_people", force: :cascade do |t|
     t.string   "last_name",   null: false
