@@ -16,14 +16,18 @@ class Discipline < ActiveRecord::Base
   end
 
   def self.types
-    [
-      Disciplines::ClimbingHookLadder,
-      Disciplines::FireAttack,
-      Disciplines::FireRelay,
-      Disciplines::ObstacleCourse,
-      Disciplines::GroupRelay,
-      Disciplines::DoubleEvent,
-    ]
+    types_with_key.values
+  end
+
+  def self.types_with_key
+    {
+      hl: Disciplines::ClimbingHookLadder,
+      la: Disciplines::FireAttack,
+      fs: Disciplines::FireRelay,
+      hb: Disciplines::ObstacleCourse,
+      gs: Disciplines::GroupRelay,
+      zk: Disciplines::DoubleEvent,
+    }
   end
 
   def destroy_possible?

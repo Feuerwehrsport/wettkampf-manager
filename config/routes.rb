@@ -34,6 +34,10 @@ Rails.application.routes.draw do
     resources :competition_results, only: [:index]
   end
 
+  namespace :d_cup do
+    resources :single_competitor_results, only: [:index, :show]
+  end
+
   namespace :fire_sport_statistics do
     resources :suggestions, only: [] do
       collection do

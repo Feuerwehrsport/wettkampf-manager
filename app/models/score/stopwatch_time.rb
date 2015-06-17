@@ -1,6 +1,6 @@
 module Score
   class StopwatchTime < ActiveRecord::Base
-    INVALID_TIME = 999999999999
+    INVALID_TIME = 999999999
     
     belongs_to :list_entry
 
@@ -12,7 +12,7 @@ module Score
         time.list_entry = ListEntry.new(result_type: time.time.present? ? "valid" : "invalid")
         return time
       end
-      valid = time.present? if valid.nil? || time.nil?
+      valid = time.present? && time < INVALID_TIME if valid.nil? || time.nil?
       new(time: time, list_entry: ListEntry.new(result_type: valid ? "valid" : "invalid"))
     end
 
