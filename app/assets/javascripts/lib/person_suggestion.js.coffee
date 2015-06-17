@@ -13,6 +13,8 @@ class PersonSuggestion
             $('#person_first_name').val(name)
           else
             $('#person_last_name').val(name)
+    $(document).on "change", '#person_first_name, #person_last_name', () ->
+      $('#person_fire_sport_statistics_person_id').val("")
 
   updateSuggestions: () =>
     table = $('.suggestions-entries table')
@@ -34,6 +36,7 @@ class PersonSuggestion
       $('#person_first_name').val(entry.first_name)
       $('#person_last_name').val(entry.last_name)
       $('#person_gender').val(entry.gender)
+      $('#person_fire_sport_statistics_person_id').val(entry.id)
 
     
 

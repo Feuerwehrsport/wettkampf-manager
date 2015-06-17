@@ -20,5 +20,6 @@
       = f.association :team, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
     - else
       = f.hidden_field :team_id
+    = f.hidden_field :fire_sport_statistics_person_id
   = f.actions do
     = f.primary_button :submit, "Speichern"

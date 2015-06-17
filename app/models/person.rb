@@ -1,5 +1,6 @@
 class Person < ActiveRecord::Base
   belongs_to :team
+  belongs_to :fire_sport_statistics_person, class_name: "FireSportStatistics::Person"
   has_many :requests, class_name: "AssessmentRequest", as: :entity, dependent: :destroy
   has_many :list_entries, class_name: "Score::ListEntry", as: :entity, dependent: :destroy
   has_many :requested_assessments, through: :requests, source: :assessment
