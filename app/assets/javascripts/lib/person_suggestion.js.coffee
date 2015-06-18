@@ -4,7 +4,7 @@ class PersonSuggestion
 
     $(document).on "keyup", '#person_suggestion', () =>
       newValue = $('#person_suggestion').val()
-      if @lastValue isnt newValue
+      if @lastValue isnt newValue && newValue isnt ""
         @lastValue = newValue
         @updateSuggestions()
 
@@ -13,6 +13,9 @@ class PersonSuggestion
             $('#person_first_name').val(name)
           else
             $('#person_last_name').val(name)
+    $(document).on 'modal.ready', () ->
+      $('#person_suggestion').trigger('keyup')
+
     $(document).on "change", '#person_first_name, #person_last_name', () ->
       $('#person_fire_sport_statistics_person_id').val("")
 
@@ -20,8 +23,14 @@ class PersonSuggestion
     table = $('.suggestions-entries table')
     params =
       name: @lastValue
-      gender: $('#person_gender').val()
       team_name: $('#person_suggestion').data('team-name')
+
+    suggestion_gender = $('#person_gender').val()
+    params.gender = suggestion_gender if suggestion_gender
+
+    real_gender = $('#person_suggestion').data('gender')
+    params.real_gender = real_gender if real_gender
+
     $.get "/fire_sport_statistics/suggestions/people", params, (entries) =>
       table.children().remove()
       for entry in entries
@@ -34,7 +43,10 @@ class PersonSuggestion
     .append($('<td/>').text(entry.teams.map( (t) -> t.short).join(", ")).addClass("team"))
     .click () ->
       $('#person_first_name').val(entry.first_name)
+      $('.fire-sport-statistics-person .first-name').text(entry.first_name)
       $('#person_last_name').val(entry.last_name)
+      $('.fire-sport-statistics-person .last-name').text(entry.last_name)
+      $('.fire-sport-statistics-person .teams').text(entry.teams.map( (t) -> t.short).join(", "))
       $('#person_gender').val(entry.gender)
       $('#person_fire_sport_statistics_person_id').val(entry.id)
 

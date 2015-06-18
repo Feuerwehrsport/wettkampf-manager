@@ -4,7 +4,13 @@
       - if logged_in?
         - box.header do
           = link_to "Hinzufügen", new_person_path, class: "btn btn-sm btn-info", remote: true
-       
+        
+        - if @without_statistics_id.present?
+          .alert.alert-danger
+            = "Es konnten zu #{@without_statistics_id.count} Wettkämpfern keine D-Cup-Ergebnisse gefunden wurden."
+            = link_btn "Probleme ansehen", without_statistics_id_people_path
+
+
       %h4 Weiblich
       = render "index_table", collection: @female
       %h4 Männlich

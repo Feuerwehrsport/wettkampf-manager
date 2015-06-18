@@ -15,7 +15,11 @@ Rails.application.routes.draw do
     member { get :possible_associations }
   end
   resources :people do
-    member { get :edit_assessment_requests }
+    member do
+      get :edit_assessment_requests
+      get :statistic_suggestions
+    end
+    collection { get :without_statistics_id }
   end
   resources :teams do
     member { get :edit_assessment_requests }

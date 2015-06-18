@@ -21,6 +21,12 @@ module FireSportStatistics
       order("EXISTS(#{sql}) DESC")
     end
 
+    scope :gender, -> (gender) { where(gender: genders[gender]) }
+
+    scope :for_person, -> (person) do
+      where_name_like("#{person.first_name}#{person.last_name}").gender(person.gender)
+    end
+
     def full_name
       "#{first_name} #{last_name}"
     end

@@ -1,0 +1,40 @@
+- if logged_in?
+  .row
+    .col-md-12.refreshable#without-statistics-id-index
+      = box Person.model_name.human count: 0 do |box|
+        %p Bei folgenden Einträgen konnten keine alten D-Cup-Ergebnisse zugeordnet werden. Dies kann zwei Ursachen haben:
+        %ul
+          %li Name wurde falsch geschrieben
+          %li Erste Teilnahme beim D-Cup
+
+        %table.table.table-bordered
+          %tr
+            %th Wettkampf-Name
+            %th Online-Name
+            %th Aktion
+          - @person_suggestions.each do |suggestion|
+            - if suggestion.match?
+              %tr.success
+                %td
+                  = suggestion.person
+                  %br
+                  .small= suggestion.person.team
+                %td
+                  = suggestion.first
+                  %br
+                  .small= suggestion.first.team_list
+                %td
+                  = simple_form_for suggestion.person, remote: true do |f|
+                    = f.hidden_field :fire_sport_statistics_person_id
+                    = f.primary_button :submit, "Übernehmen", class: "btn-sm"
+
+            - elsif suggestion.present?
+              %tr.info
+                %td= suggestion.person
+                %td= "#{suggestion.suggestions.count} Vorschläge"
+                %td= link_btn "Vorschlag auswählen", statistic_suggestions_person_path(suggestion.person), remote: true
+            - else
+              %tr.danger
+                %td= suggestion.person
+                %td Keine Vorschläge
+                %td= link_btn "Vorschlag suchen", statistic_suggestions_person_path(suggestion.person), remote: true
