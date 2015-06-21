@@ -32,9 +32,7 @@ module DCup
       return compare if compare != 0
       compare = other.count <=> count 
       return compare if compare != 0
-      compare = time <=> other.time
-      puts "compare: #{compare}"
-      compare
+      time <=> other.time
     end
   end
 end
