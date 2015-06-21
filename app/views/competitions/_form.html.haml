@@ -9,5 +9,6 @@
     = f.input :youth_name
     = f.input :hostname
     = f.input :competition_result_type, collection: Score::CompetitionResult.result_types.invert, include_blank: "Keine Gesamtwertung"
+    = f.input :d_cup
   = f.actions do
     = f.primary_button :submit, "Speichern"

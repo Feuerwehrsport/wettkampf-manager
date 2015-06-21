@@ -111,7 +111,8 @@ class CompetitionSeed
       group_score_count: 4, 
       group_assessment: true, 
       youth_name: "U20", 
-      competition_result_type: "dcup"
+      competition_result_type: "dcup",
+      d_cup: true,
     )
     result_female = Score::CompetitionResult.create(gender: :female)
     result_male   = Score::CompetitionResult.create(gender: :male)
