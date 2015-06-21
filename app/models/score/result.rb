@@ -32,7 +32,7 @@ module Score
       lists.each do |list|
         list.entries.not_waiting.each do |list_entry|
           entity = list_entry.entity
-          entity = entity.team if group_result && assessment.fire_relay?
+          entity = entity.team if group_result && entity.is_a?(TeamRelay)
           next if youth? && !entity.youth?
           if rows[entity.id].nil?
             rows[entity.id] = ResultRow.new(entity, self)
