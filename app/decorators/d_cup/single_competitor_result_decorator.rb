@@ -2,6 +2,7 @@ module DCup
   class SingleCompetitorResultDecorator < ApplicationDecorator
     decorates_association :rows
     decorates_association :assessment
+    decorates_association :competitions
 
     def to_s
       [assessment.to_s, youth_name].reject(&:blank?).join(" - ")

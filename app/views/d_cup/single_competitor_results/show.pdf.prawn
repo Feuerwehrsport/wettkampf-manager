@@ -2,7 +2,7 @@ pdf_header pdf, @result.to_s, @result.assessment.discipline
 
 head = ["", "Name", "Punkte", "Teil.", "Summe"]
 @result.competitions.each do |competition|
-  head.push(content: competition.name.truncate(13), colspan: 2, border_widths: [1, 1, 1, 2])
+  head.push(content: competition.place.truncate(13), colspan: 2, border_widths: [1, 1, 1, 2])
 end
 
 data = [head]

@@ -9,7 +9,7 @@
           %th Teil.
           %th Summe
           - @result.competitions.each do |competition|
-            %th.competition{colspan: 2}= competition.name.truncate(13)
+            %th.competition{colspan: 2}= competition.place.truncate(13)
 
         - @result.rows.each do |row|
           %tr
