@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
-  has_many :people
+  has_many :people, dependent: :nullify
   has_many :requests, class_name: "AssessmentRequest", as: :entity, dependent: :destroy
   has_many :list_entries, class_name: "Score::ListEntry", as: :entity, dependent: :destroy
   has_many :requested_assessments, through: :requests, source: :assessment

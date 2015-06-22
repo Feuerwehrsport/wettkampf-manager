@@ -51,6 +51,8 @@
     .col-md-4
       = box("Aktionen") do
         = link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), remote: true, class: "btn btn-info btn-small"
+        %br
+        = link_btn "Löschen", team_path(@team), method: :delete, data: { confirm: 'Mannschaft wirklich löschen? Alle Zeiten usw. werden auch gelöscht!' }
 
   .col-md-12
     = box(@team.class.human_attribute_name :people) do |box|
