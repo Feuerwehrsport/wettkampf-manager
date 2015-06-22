@@ -15,6 +15,10 @@ module Score
       end
     end
 
+    def time
+      sum_stopwatch_time
+    end
+
     def time_from result
       @result_rows.select { |row| row.result == result }.map(&:best_stopwatch_time).first
     end
