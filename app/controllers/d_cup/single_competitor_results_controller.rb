@@ -6,6 +6,7 @@ module DCup
 
     def show
       @result = resource_class.find(params[:id]).decorate
+      page_title "D-Cup #{@result}", { page_layout: :landscape }
     end
   end
 end
