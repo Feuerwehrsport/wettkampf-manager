@@ -28,7 +28,7 @@ module Score
     end
 
     def score_list_entries
-      entries = @score_list.entries.to_a
+      entries = @score_list.entries.includes(:entity).to_a
       track = 0
       run = 1
       entry = entries.shift

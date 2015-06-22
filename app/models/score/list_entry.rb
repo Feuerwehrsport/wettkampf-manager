@@ -13,9 +13,7 @@ module Score
 
     delegate :track_count, to: :list
 
-    after_initialize :assign_time_entries
     before_save :handle_time_entries
-    attr_reader :time_entries
 
     scope :result_valid, -> { where(result_type: "valid") }
     scope :electronic_time_available, -> { joins(:stopwatch_times).where(score_stopwatch_times: { type: ElectronicTime }) }
@@ -31,6 +29,7 @@ module Score
     end
 
     def time_entries_attributes= entries_attributes
+      assign_time_entries!
       entries_attributes.each do |key, attributes|
         @time_entries[key.to_i].assign_attributes(attributes)
       end
@@ -88,9 +87,12 @@ module Score
       StopwatchTime.new(list_entry: self, time: time)
     end
 
-    protected
+    def time_entries
+      assign_time_entries! if @time_entries.nil?
+      @time_entries
+    end
 
-    def assign_time_entries
+    def assign_time_entries!
       @time_entries = stopwatch_times.to_a
       unless @time_entries.any? { |time| time.is_a? ElectronicTime }
         @time_entries.unshift(ElectronicTime.new(list_entry: self))
@@ -100,11 +102,13 @@ module Score
       end
     end
 
+    protected
+
     def handle_time_entries
       if result_type != "valid"
         stopwatch_times.select(&:persisted?).each(&:destroy)
         self.stopwatch_times = []
-        assign_time_entries
+        assign_time_entries!
       end
     end
   end
