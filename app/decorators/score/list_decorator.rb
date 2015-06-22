@@ -7,5 +7,9 @@ module Score
     def discipline
       object.assessment.discipline.decorate
     end
+
+    def to_s
+      name
+    end
   end
 end

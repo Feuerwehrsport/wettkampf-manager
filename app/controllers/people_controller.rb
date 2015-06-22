@@ -13,6 +13,7 @@ class PeopleController < ApplicationController
     if Competition.one.d_cup?
       @without_statistics_id = @people.where(fire_sport_statistics_person_id: nil)
     end
+    page_title "Wettkämpfer"
   end
 
   def without_statistics_id

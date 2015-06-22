@@ -2,6 +2,11 @@ class TeamsController < ApplicationController
   implement_crud_actions
   before_action :assign_resource_for_edit_assessment_requests, only: :edit_assessment_requests
 
+  def index
+    super
+    page_title "Mannschaften"
+  end
+
   def edit_assessment_requests
   end
 
