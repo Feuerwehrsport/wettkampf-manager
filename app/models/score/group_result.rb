@@ -13,6 +13,7 @@ module Score
 
       result.rows.each do |result_row|
         next unless result_row.list_entries.first.group_competitor?
+        next if result_row.entity.team.nil?
 
         if team_scores[result_row.entity.team].nil?
           team_scores[result_row.entity.team] = GroupResultRow.new(result_row.entity.team, score_count, run_count)
