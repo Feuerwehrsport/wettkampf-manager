@@ -4,3 +4,7 @@ rvm:
 bundler_args: --without production
 cache: bundler
 script: xvfb-run bundle exec rspec
+notifications:
+  email:
+    recipients:
+      - georf@georf.de
