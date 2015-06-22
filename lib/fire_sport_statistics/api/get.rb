@@ -26,7 +26,7 @@ module FireSportStatistics
       end
 
       def self.dcup_single_results
-        logged_in_instance.post("get-dcup-single-results", year: "2015")
+        logged_in_instance.post("get-dcup-single-results", year: Date.today.year)
       end
 
       protected

@@ -1,6 +1,6 @@
 .row
   .col-md-12
-    = box "Deutschland-Pokal 2015" do |box|
+    = box "Deutschland-Pokal #{Date.today.year}" do |box|
       %table.table
         - @results.each do |result|
           %tr
