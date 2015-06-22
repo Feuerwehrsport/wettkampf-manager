@@ -2,7 +2,7 @@
 %html
   %head
     %meta{ charset: "UTF-8" }
-    %title= t('application.name')
+    %title= @page_title || t('application.name')
     %meta{ content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", name: "viewport" }
     = stylesheet_link_tag '/adminlte/css/AdminLTE.css', media: 'all'
     = stylesheet_link_tag 'application', media: 'all'
