@@ -11,7 +11,7 @@
   - else
     .col-md-7
       = box decorated_competition do |box|
-        %h4= l decorated_competition.date
+        %h4= "#{l decorated_competition.date} - #{decorated_competition.place}"
         %table.table
           %tr
             %th

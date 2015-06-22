@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150621190838) do
+ActiveRecord::Schema.define(version: 20150622150103) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150621190838) do
     t.string   "hostname",                default: "",    null: false
     t.string   "competition_result_type"
     t.boolean  "d_cup",                   default: false, null: false
+    t.string   "place",                   default: "",    null: false
   end
 
   create_table "disciplines", force: :cascade do |t|

@@ -61,6 +61,7 @@ de:
         group_run_count: Wettkämpfer pro Disziplin
         group_score_count: Wettkämpfer in Wertung
         hostname: Hostname des Systems
+        place: Ort
         youth_name: Name der Jugendwertung
       discipline:
         name: Name
