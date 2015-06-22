@@ -9,9 +9,15 @@ class ApplicationController < ActionController::Base
   protected
 
   def page_title title, prawn_options={}
-    info = { Title: title }
-    prawnto prawn: prawn_options.merge(info: info), filename: "#{title.parameterize}.pdf"
+
     @page_title = title.to_s
+    
+    if request.format.pdf?
+      info = { Title: title }
+      prawnto prawn: prawn_options.merge(info: info), filename: "#{title.parameterize}.pdf"
+    elsif request.format.xlsx?
+      response.headers['Content-Disposition'] = "attachment; filename=\"#{title.parameterize}.xlsx\""
+    end
   end
 
   private
