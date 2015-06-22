@@ -33,6 +33,10 @@ module Score
       end
     end
 
+    def to_i
+      time
+    end
+
     def <=> other
       (compare_time || INVALID_TIME) <=> (other.compare_time || INVALID_TIME)
     end

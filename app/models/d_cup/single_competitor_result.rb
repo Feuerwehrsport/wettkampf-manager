@@ -48,7 +48,27 @@ module DCup
         people[result.person_id] ||= SingleCompetitorResultRow.new(result.person)
         people[result.person_id].add_result(result)
       end
+
+      points = 30
+      row_before = nil
+      points_before = nil
+      today_result.rows.each do |row|
+        person_id = row.entity.fire_sport_statistics_person_id || "_#{row.entity.id}"
+        people[person_id] ||= SingleCompetitorResultRow.new(row.entity)
+
+        points_now = points
+        if row_before && (row_before <=> row) == 0
+          points_now = points_before
+        end
+        points_before = points_now
+        row_before = row
+        result = FireSportStatistics::DCupSingleResult.new(competition: Competition.one, points: points_now, time: row.time.to_i)
+        people[person_id].add_result(result)
+        points -= 1 if points > 0
+      end
+
       @competitions = competitions.values.sort_by(&:date)
+      @competitions.push(Competition.one)
       people.values.sort
     end
 

@@ -1,7 +1,7 @@
 .row
   .col-md-12
     = box @result do |box|
-      %table.table.table-bordered.table-striped.table-condensed
+      %table.table.table-bordered.table-striped.table-condensed.d-cup
         %tr
           %th
           %th Name
@@ -9,19 +9,19 @@
           %th Teil.
           %th Summe
           - @result.competitions.each do |competition|
-            %th.small{colspan: 2}= competition.name
+            %th.competition{colspan: 2}= competition.name.truncate(13)
 
         - @result.rows.each do |row|
           %tr
             %td= "#{place_for_row row}."
-            %td= row.person.full_name
+            %td.name= row.person
             %td= row.points
             %td= row.count
-            %td= row.stopwatch_time
+            %td.time-sum= row.stopwatch_time
             - @result.competitions.each do |competition|
               - result = row.result_for_competition(competition).try :decorate
-              %td.small= result.try :points
-              %td.small= result.try :stopwatch_time
+              %td.points= result.try :points
+              %td.time= result.try :stopwatch_time
       - box.footer do
         .pull-right
           = link_btn "als PDF", url_for(format: :pdf)
