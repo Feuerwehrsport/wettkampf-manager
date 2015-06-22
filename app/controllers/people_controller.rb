@@ -10,7 +10,9 @@ class PeopleController < ApplicationController
     @female = @people.female.decorate
     @male = @people.male.decorate
 
-    @without_statistics_id = @people.where(fire_sport_statistics_person_id: nil)
+    if Competition.one.d_cup?
+      @without_statistics_id = @people.where(fire_sport_statistics_person_id: nil)
+    end
   end
 
   def without_statistics_id

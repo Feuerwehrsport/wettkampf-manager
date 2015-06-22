@@ -35,6 +35,12 @@
         %i.fa.fa-list-ol
         %span Gesamtwertung
 
+    - if Competition.one.d_cup?
+      %li{ class: controller_name == 'single_competitor_results' ? 'active' : '' }
+        %a{ href: d_cup_single_competitor_results_path }
+          %i.fa.fa-list-ol
+          %span D-Cup-Wertung
+
   - if logged_in?
     %li{ class: controller_name == 'session' ? 'active' : '' }
       %a{ href: logout_path }
