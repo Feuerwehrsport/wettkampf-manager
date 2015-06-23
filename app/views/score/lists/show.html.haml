@@ -43,6 +43,8 @@
           %br
           = link_to "Reihenfolge bearbeiten", move_score_list_path(@score_list), class: "btn btn-info btn-sm"
           %br
+          = link_to "Zeiten im Block eintragen", edit_times_score_list_path(@score_list), class: "btn btn-default btn-sm"
+          %br
           = link_to "Teilnehmer hinzufügen", select_entity_score_list_path(@score_list), remote: true, class: "btn btn-success btn-sm"
 
         - else

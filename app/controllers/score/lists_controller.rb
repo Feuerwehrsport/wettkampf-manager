@@ -1,7 +1,7 @@
 module Score
   class ListsController < ApplicationController
     implement_crud_actions 
-    before_action :assign_resource_for_action, only: [:move, :finished, :select_entity, :destroy_entity]
+    before_action :assign_resource_for_action, only: [:move, :finished, :select_entity, :destroy_entity, :edit_times]
 
     def show
       super
@@ -14,6 +14,9 @@ module Score
       @available_time_types = @score_list.available_time_types
       @score_list.result_time_type ||= @available_time_types.first
     end
+
+    def edit_times
+    end
   
     protected
 
@@ -24,7 +27,7 @@ module Score
     def score_list_params
       params.require(:score_list).permit(:name, :assessment_id, :generator, :track_count, 
         :result_time_type, result_ids: [], 
-        entries_attributes: [:id, :run, :track, :entity_id, :entity_type, :_destroy, :assessment_type],
+        entries_attributes: [:id, :run, :track, :entity_id, :entity_type, :_destroy, :assessment_type, :result_type, time_entries_attributes: [ :second_time ]],
         generator_attributes: [:before_list, :best_count, :result])
     end
   end

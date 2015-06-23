@@ -1,0 +1,38 @@
+.row
+  .col-md-12
+    = boxed_form_for @score_list.name, @score_list do |f, box|
+      %table.table
+        %thead
+          %tr
+            %th Lauf
+            %th Bahn
+            - if single_discipline?
+              %th Vorname
+              %th Nachname
+            %th Mannschaft
+            %th Zeiten
+
+        %tbody
+          - score_list_entries do |entry, run, track|
+            = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
+              - if single_discipline?
+                %td= entry.try(:entity).try(:first_name).to_s.truncate(20)
+                %td= entry.try(:entity).try(:last_name).to_s.truncate(20)
+                %td= entry.try(:entity).try(:team).try(:short_name)
+              - else
+                %td= entry.try(:entity).try(:to_s)
+              %td.edit-time
+                - if entry.present?
+                  = f.simple_fields_for :entries, entry do |n|
+                    = n.input :track, as: :hidden
+                    .time-types
+                      = n.collection_radio_buttons :result_type, Score::ListEntry.result_types, :first, :last
+                    .time-entries
+                      = n.simple_fields_for :time_entries, entry.time_entries do |t|
+                        = t.input :second_time, label: t.object.class.model_name.human
+        = f.actions do
+          = f.primary_button :submit, "Speichern"
+.row
+  .col-md-6
+    = box("Hinweise") do
+      %p Haben alle Zeiten in einer Wertungsliste eine elektronische Zeit, wird diese für alle Teilnehmer genommen.

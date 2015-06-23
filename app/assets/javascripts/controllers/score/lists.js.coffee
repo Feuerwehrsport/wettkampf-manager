@@ -1,3 +1,5 @@
+#= require lib/enter_times
+
 listEntries = null
 
 buildForm = () ->

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         get :finished
         get :select_entity
         get "destroy_entity/:entry_id", action: :destroy_entity, as: :destroy_entity
+        get :edit_times
       end
       resources :runs, only: [:edit, :update], param: :run
     end
