@@ -12,7 +12,7 @@
             %th Mannschaft
 
         %tbody
-          - score_list_entries do |entry, run, track|
+          - score_list_entries(true) do |entry, run, track|
             = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
               - if single_discipline?
                 %td= entry.try(:entity).try(:first_name)

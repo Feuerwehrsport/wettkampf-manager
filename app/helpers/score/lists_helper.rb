@@ -27,13 +27,17 @@ module Score
       @available_time_types.map { |type| [t("result_time_types.#{type}"), type] }
     end
 
-    def score_list_entries
+    def score_list_entries(move_modus=false)
       entries = @score_list.entries.includes(:entity).to_a
       track = 0
       run = 1
       entry = entries.shift
       invalid_count = 0
-      while entry.present? || track != 0
+      extra_run = move_modus
+      while entry.present? || track != 0 || extra_run
+        if entry.blank? && track == 0 && extra_run
+          extra_run = false
+        end
         track += 1
         if entry && entry.track == track && entry.run == run
           yield entry.decorate, run, track
