@@ -71,7 +71,9 @@
                   %td= row.time_from(list)
         - box.footer do
           .pull-right
-            = link_btn "als PDF", url_for(format: :pdf)
+            = link_btn "Mannschaftswertung als PDF", url_for(format: :pdf, only: :group_assessment)
+            = link_btn "Einzelwertung als PDF", url_for(format: :pdf, only: :single_competitors)
+            = link_btn "Komplett als PDF", url_for(format: :pdf)
             = link_btn "als XLS", url_for(format: :xlsx)
           .clearfix
 

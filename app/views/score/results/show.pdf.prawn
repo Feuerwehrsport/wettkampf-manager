@@ -1,18 +1,19 @@
-pdf_header pdf, @score_result.to_s, @discipline
-
-pdf.table(build_data_rows, {
-  header: true, 
-  row_colors: pdf_default_row_colors, 
-  width: pdf.bounds.width,
-  cell_style: { align: :center, size: 10 }
-}) do
-  row(0).style(font_style: :bold, size: 11)
-  column(-1).style(font_style: :bold)
+if @only != :group_assessment
+  pdf_header pdf, @score_result.to_s, @discipline
+  
+  pdf.table(build_data_rows, {
+    header: true, 
+    row_colors: pdf_default_row_colors, 
+    width: pdf.bounds.width,
+    cell_style: { align: :center, size: 10 }
+  }) do
+    row(0).style(font_style: :bold, size: 11)
+    column(-1).style(font_style: :bold)
+  end
 end
 
-
-if @score_result.group_assessment? && @discipline.single_discipline?
-  pdf.start_new_page
+if @only != :single_competitors && @score_result.group_assessment? && @discipline.single_discipline?
+  pdf.start_new_page if @only.nil?
   pdf_header pdf, "#{@score_result.to_s} - Mannschaftswertung", @discipline
 
   pdf.table(build_group_data_rows, {

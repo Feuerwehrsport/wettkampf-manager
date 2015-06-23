@@ -10,6 +10,7 @@ module Score
         @group_result_rows = GroupResult.new(@score_result).rows.map(&:decorate)
       end
       page_title @score_result.decorate.to_s
+      @only = params[:only].try(:to_sym)
     end
 
     protected
