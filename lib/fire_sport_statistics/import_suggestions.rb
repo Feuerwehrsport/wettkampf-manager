@@ -18,6 +18,7 @@ module FireSportStatistics
             first_name: person.firstname,
             gender: person.sex,
             external_id: person.id,
+            youth: person.youth,
           )
           verbose_dot "p"
         end

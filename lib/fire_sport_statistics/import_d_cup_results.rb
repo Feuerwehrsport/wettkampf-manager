@@ -1,3 +1,5 @@
+require 'fire_sport_statistics'
+
 module FireSportStatistics
   class ImportDCupResults
     def initialize(verbose = false)

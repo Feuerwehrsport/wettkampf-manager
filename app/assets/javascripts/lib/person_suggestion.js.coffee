@@ -49,7 +49,7 @@ class PersonSuggestion
       $('.fire-sport-statistics-person .teams').text(entry.teams.map( (t) -> t.short).join(", "))
       $('#person_gender').val(entry.gender)
       $('#person_fire_sport_statistics_person_id').val(entry.id)
-
+      $('#person_youth').prop('checked', entry.youth)
     
 
 $ () ->
