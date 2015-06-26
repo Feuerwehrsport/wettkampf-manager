@@ -51,6 +51,10 @@ class CompetitionSeed
   private
 
   def seed_method_dcup_simple
+    dcup_seed(false)
+  end
+
+  def dcup_seed(all_disciplines=true)
     Competition.update_all(
       group_score_count: 4, 
       group_assessment: true, 
@@ -59,11 +63,12 @@ class CompetitionSeed
       d_cup: true,
     )
 
-    zk = Disciplines::DoubleEvent.create!
     hb = Disciplines::ObstacleCourse.create!
     hl = Disciplines::ClimbingHookLadder.create!
-    la = Disciplines::FireAttack.create!
     gs = Disciplines::GroupRelay.create!
+    fs = Disciplines::FireRelay.create! if all_disciplines
+    zk = Disciplines::DoubleEvent.create!
+    la = Disciplines::FireAttack.create!
 
     competition_results = [:female, :male].map do |gender|
       competition_result = Score::CompetitionResult.create(gender: gender)
@@ -82,21 +87,21 @@ class CompetitionSeed
 
       la_assessment = Assessment.create!(discipline: la, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: la_assessment, group_assessment: true)
+
+      if all_disciplines
+        fs_assessment = Assessment.create!(discipline: fs, gender: gender, score_competition_result: competition_result)
+        Score::Result.create!(assessment: fs_assessment, group_assessment: true)
+      end
+
       competition_result
     end
 
     gs_assessment = Assessment.create!(discipline: gs, gender: :female, score_competition_result: competition_results.first)
     Score::Result.create!(assessment: gs_assessment, group_assessment: true)
-
-    competition_results
   end
 
   def seed_method_dcup_all
-    fs = Disciplines::FireRelay.create!
-    seed_method_dcup_simple.each do |competition_result|
-      fs_assessment = Assessment.create!(discipline: fs, gender: competition_result.gender, score_competition_result: competition_result)
-      Score::Result.create!(assessment: fs_assessment, group_assessment: true)
-    end      
+    dcup_seed
   end
 
   def seed_method_jugend_elbe_elster
