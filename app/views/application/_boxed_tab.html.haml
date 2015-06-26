@@ -1,0 +1,10 @@
+.nav-tabs-custom.box.box-primary
+  %ul.nav.nav-tabs
+    - tabs.each do |key, tab|
+      %li{ class: tab.class_name }
+        %a{ href: "#tab-#{key}", data: { toggle: "tab" } }
+          = capture(&tab.name)
+  .tab-content
+    - tabs.each do |key, tab|
+      .tab-pane{ id: "tab-#{key}", class: tab.class_name }
+        = capture(&tab.content)

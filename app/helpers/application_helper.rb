@@ -17,6 +17,17 @@ module ApplicationHelper
     end
   end
 
+  def boxed_tab
+    builder = UI::BoxedTabBuilder.new
+    yield(builder)
+    keep_context do
+      render(
+        'boxed_tab',
+        tabs: builder.tabs
+      )
+    end
+  end
+
   def box_classes(options)
     classes = []
     classes << "box-#{options[:type]}"
