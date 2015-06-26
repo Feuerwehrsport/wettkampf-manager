@@ -8,15 +8,19 @@ module PeopleHelper
   def index_export_data(collection)
     assessments = Assessment.requestable_for(collection.first).map(&:decorate)
     data = [[
-      "Name",
+      "Vorname",
+      "Nachname",
       Person.human_attribute_name(:team),
+      "U20",
     ]]
     assessments.each { |assessment| data.first.push(assessment.discipline.to_short) }
     
     collection.each do |person|
       data.push([
-        person.full_name,
-        person.team.to_s
+        person.first_name,
+        person.last_name,
+        person.team.to_s,
+        person.youth ? 'X' : '',
       ])
       assessments.each do |assessment|
         request = person.request_for(assessment.object)
