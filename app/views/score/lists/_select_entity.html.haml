@@ -10,6 +10,7 @@
         = g.input :run, as: :hidden
         = g.input :track, as: :hidden
         = g.input :entity_type, as: :hidden
+        = g.association :assessment, collection: @score_list.assessments
         = g.input :assessment_type, as: :select, collection: AssessmentRequest.assessment_types.keys, label_method: lambda { |type| t("assessment_types.#{type}") }
 
         = "Wird in Lauf #{free_run} auf Bahn #{free_track} eingeordnet."

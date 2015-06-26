@@ -20,7 +20,7 @@ module Score
     private
 
     def before_list_assessment_match
-      if @before_list_object.present? && @before_list_object.assessment != list.assessment
+      if @before_list_object.blank? || @before_list_object.assessment_ids.sort != list.assessment_ids.sort
         errors.add(:before_list, "muss mit jetziger Wertungsgruppe übereinstimmen")
       end
     end

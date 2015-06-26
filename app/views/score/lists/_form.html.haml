@@ -1,19 +1,7 @@
-= boxed_form_for Score::List.model_name.human, @score_list do |f|
+= boxed_form_for @score_list, @score_list do |f|
   = f.error_notification
   = f.inputs do
     = f.input :name
-    = f.input :track_count
-    = f.association :assessment, collection: Assessment.no_double_event
-    .assessment-dependend
-      = f.association :results
-      - unless @score_list.persisted?
-        = f.input :generator, collection: Score::ListGenerator.all, label_method: :to_label, selected: @score_list.generator.try(:to_param)
-        = f.simple_fields_for :generator, (@score_list.generator || Score::ListGenerator.new) do |g|
-          .generator-config{ data: { classes: form_generator_config_classes(:before_list) } }
-            = g.input :before_list, collection: Score::List.all.map(&:decorate)
-          .generator-config{ data: { classes: form_generator_config_classes(:result) } }
-            = g.input :result, collection: Score::Result.all.map(&:decorate)
-          .generator-config{ data: { classes: form_generator_config_classes(:best_count) } }
-            = g.input :best_count, as: :integer
+    = f.association :results, collection: Score::Result.all
   = f.actions do
     = f.primary_button :submit, "Speichern"

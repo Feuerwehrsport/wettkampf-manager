@@ -51,8 +51,10 @@ RSpec.describe Score::ListGenerators::Best, type: :model do
   end
 
   describe "validation" do
-    let(:list) { build_stubbed :score_list }
-    let(:result) { create :score_result }
+    let(:assessment) { create :assessment }
+    let(:other_assessment) { create :assessment }
+    let(:list) { create :score_list, assessments: [assessment] }
+    let(:result) { create :score_result, assessment: other_assessment }
     let(:generator) { described_class.new(best_count: 2, list: list, result: result.id) }
 
     it "compares assessment from list and result" do
@@ -61,7 +63,7 @@ RSpec.describe Score::ListGenerators::Best, type: :model do
     end
 
     context "with same assessment" do
-      let(:result) { create :score_result, assessment: list.assessment }
+      let(:result) { create :score_result, assessment: assessment }
       it "is valid" do
         expect(generator.valid?).to be_truthy
       end

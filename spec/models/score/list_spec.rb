@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Score::List, type: :model do
-  let(:score_list) { build_stubbed :score_list }
+  let(:score_list) { build :score_list }
   
   describe 'validation' do
     context "result_time_type" do
@@ -22,17 +22,17 @@ RSpec.describe Score::List, type: :model do
       let(:obstacle_course) { create :obstacle_course }
       let(:chl_assessment) { create :assessment, discipline: climbing_hook_ladder }
       let(:oc_assessment) { create :assessment, discipline: obstacle_course }
-      let(:score_list) { build :score_list, assessment: nil }
-      let(:score_result) { build :score_result, assessment: oc_assessment }
+      let(:score_list) { build :score_list, assessments: [] }
+      let(:score_result) { create :score_result, assessment: oc_assessment }
 
       it "" do
         expect(score_list).to_not be_valid
-        score_list.assessment = chl_assessment
-        expect(score_list).to be_valid
+        score_list.assessments = [chl_assessment]
+        expect(score_list).to_not be_valid
         score_list.results.push score_result
         expect(score_list).to_not be_valid
-        expect(score_list).to have(1).errors_on(:results)
-        score_result.assessment = chl_assessment
+        expect(score_list).to have(2).errors_on(:results)
+        score_list.assessments = score_list.results.map(&:assessment)
         expect(score_list).to be_valid
       end
     end

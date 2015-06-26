@@ -6,7 +6,9 @@ module Score
     def perform_rows
       teams = {}
       requests = []
-      assessment.requests.order("single_competitor_order + ((group_competitor_order + 1) * 100)").each do |request|
+      assessment_requests.sort_by do |request|
+        request.single_competitor_order + ((request.group_competitor_order + 1) * 100)
+      end.each do |request|
         teams[request.entity.team_id] ||= []
         teams[request.entity.team_id].push(request)
       end

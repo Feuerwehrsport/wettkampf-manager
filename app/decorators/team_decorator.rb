@@ -22,8 +22,8 @@ class TeamDecorator < ApplicationDecorator
     numbered_name.truncate(length)
   end
 
-  def to_s
-    numbered_name
+  def to_s(full=false)
+    full ? numbered_name_with_gender : numbered_name
   end
 
   def self.human_name_cols

@@ -6,8 +6,8 @@ RSpec.describe Score::ListGenerator, type: :model do
       expect(described_class.configuration).to have(6).items
       described_class.configuration.each do |key, value|
         expect(key).to be_a(String)
-        expect(value).to be_a(Array)
-        value.each do |method|
+        expect(value).to be_a(Score::ListGenerator::Configuration)
+        value.generator_attributes.each do |method|
           expect(described_class.instance_methods).to include(method)
         end
       end

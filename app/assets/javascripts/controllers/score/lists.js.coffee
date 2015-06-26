@@ -64,9 +64,9 @@ $ () ->
   bindSortedTable()
   $(document).on('partials-refreshed', bindSortedTable)
 
-  $('#score_list_generator').change(() ->
+  $('select.select-list-generator').change(() ->
     type = $(@).val()
-    $('.generator-config').each (i, elem) ->
+    $(@).closest('form').find('.generator-config').each (i, elem) ->
       $elem = $(elem)
       if $.inArray(type, $elem.data('classes').split(" ")) < 0
         $elem.hide()
@@ -74,39 +74,46 @@ $ () ->
         $elem.show()
   ).change()
 
-  $('#score_list_assessment_id').change( () ->
-    id = $(@).val()
-    assessmentDependend = $('.assessment-dependend').css(opacity: 0.5)
-    unless id.match(/^\d+$/)
+  $('select.select-assessments').change( () ->
+    ids = $(@).val()
+    context = $(@).closest('form')
+    
+    nameInput = $('.input-name', context)
+    options = $(@).find('option:selected')
+    if options.length is 1
+      nameInput.val(options.text())
+    else if options.length is 0
+      nameInput.val(nameInput.data('name'))
+    else
+      nameInput.val("#{nameInput.data('name')} - gemischt")
+
+
+    assessmentDependend = $('.assessment-dependend', context).css(opacity: 0.5)
+    if !ids || ids.length is 0
       assessmentDependend.hide()
     else
       assessmentDependend.show()
-      $('#score_list_result_ids').closest('.form-group').show()
 
-      resultOptions = $('#score_list_result_ids option, #score_list_generator_attributes_result option').show()
-      listOptions = $('#score_list_generator_attributes_before_list option').show()
+      resultOptions = $('.select-result option, .select-results option', context).hide().removeAttr('selected')
+      listOptions = $('.select-before-list option', context).hide().removeAttr('selected')
 
-      $.get "/assessments/#{id}/possible_associations.json", (data) ->
-        resultOptions.each () ->
-          option = $(@)
-          if $.inArray(parseInt(option.val()), data.results) == -1
-            option.hide()
-            option.removeAttr('selected')
-        listOptions.each () ->
-          option = $(@)
-          if $.inArray(parseInt(option.val()), data.lists) == -1
-            option.hide()
-            option.removeAttr('selected')
-
-        # if only one result visible, we could select it and hide the select field
-        if $('#score_list_result_ids option:not(:hidden)').length == 1
-          $('#score_list_result_ids').closest('.form-group').find('option:not(:hidden)').attr('selected', true)
-
-        if $('#score_list_generator_attributes_before_list option:not(:hidden)').length == 1
-          $('#score_list_generator_attributes_before_list option:not(:hidden)').attr('selected', true)
-          
-        if $('#score_list_generator_attributes_result option:not(:hidden)').length == 1
-          $('#score_list_generator_attributes_result option:not(:hidden)').attr('selected', true)
-
+      handleResult = () ->
+        for selector in ['.select-results option:not(:hidden)', '.select-result option:not(:hidden)', '.select-before-list option:not(:hidden)']
+          $(selector, context).attr('selected', true) if $(selector, context).length == 1
         assessmentDependend.css(opacity: 1)
+
+
+      callbackCount = 0
+      $.each ids, (i, id) ->
+        $.get "/assessments/#{id}/possible_associations.json", (data) ->
+          resultOptions.each () ->
+            option = $(@)
+            if $.inArray(parseInt(option.val()), data.results) isnt -1
+              option.show()
+          listOptions.each () ->
+            option = $(@)
+            if $.inArray(parseInt(option.val()), data.lists) isnt -1
+              option.show()
+          callbackCount++
+          handleResult() if callbackCount == ids.length
   ).change()

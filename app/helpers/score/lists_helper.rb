@@ -1,7 +1,7 @@
 module Score
   module ListsHelper
     def single_discipline?
-      @score_list.assessment.discipline.single_discipline?
+      @score_list.assessments.first.discipline.single_discipline?
     end
 
     def list_track_count
@@ -14,6 +14,10 @@ module Score
         color -= 9
         color.to_s(16) * 3
       end
+    end
+
+    def multiple_assessments?
+      @score_list.assessments.count > 1
     end
 
     def list_entry_options track, entry
@@ -69,13 +73,13 @@ module Score
     end
 
     def form_generator_config_classes type
-      ListGenerator.configuration.select { |key, types| type.in? types }.keys.join(" ")
+      ListGenerator.configuration.select { |key, configuration| type.in? configuration.generator_attributes }.keys.join(" ")
     end
 
     def discipline_klass
       if single_discipline?
         Person
-      elsif @score_list.assessment.fire_relay?
+      elsif @score_list.assessments.first.fire_relay?
         TeamRelay
       else
         Team
@@ -83,7 +87,7 @@ module Score
     end
 
     def not_yet_present_entities
-      if @score_list.assessment.fire_relay?
+      if @score_list.assessments.first.fire_relay?
         Team.all.map { |team| TeamRelay.create_next_free_for(team, @score_list.entries.pluck(:entity_id)) }
       else
         discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)) 
@@ -129,7 +133,7 @@ module Score
           line.push(entry.try(:entity).try(:last_name))
           line.push(entry.try(:entity).try(:team_name, entry.try(:assessment_type)))
         else
-          line.push(entry.try(:entity).try(:to_s))
+          line.push(entry.try(:entity).try(:to_s, multiple_assessments?))
         end
         line.push(result_for entry)
         if options[:stopwatch_times] == :all

@@ -2,7 +2,7 @@ module Score
   class ListGenerators::Best < ListGenerator
     validates :best_count, numericality: { greater_than_or_equal_to: 0 }
     validates :result, presence: true
-    validate :result_assessment_match
+    validate :result_assessments_match
 
     def result= result_id
       @result_object = Result.find(result_id)
@@ -31,8 +31,10 @@ module Score
       result_rows
     end
 
-    def result_assessment_match
-      if @result_object.present? && @result_object.assessment != list.assessment
+    def result_assessments_match
+      if list.assessments.count != 1
+        errors.add(:base, "Es darf nur eine Wertungsgruppe ausgewählt werden")
+      elsif @result_object.present? && @result_object.assessment != list.assessments.first
         errors.add(:result, "muss mit jetziger Wertungsgruppe übereinstimmen")
       end
     end

@@ -5,7 +5,7 @@ RSpec.describe Score::ListGenerators::Simple, type: :model do
   subject { Score::ListGenerators::Simple.new(list: score_list) }
 
   before do 
-    create_list(:person, 5, :with_team).each { |person| person.requests.create!(assessment: score_list.assessment) }
+    create_list(:person, 5, :with_team).each { |person| person.requests.create!(assessment: score_list.assessments.first) }
     score_list.reload
   end
   

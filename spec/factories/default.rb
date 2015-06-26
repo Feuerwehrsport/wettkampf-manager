@@ -61,13 +61,15 @@ FactoryGirl.define do
   end
 
   factory :score_list, class: "Score::List" do
-    assessment { Assessment.first || build(:assessment) }
+    assessments { [Assessment.first || create(:assessment)] }
+    results { [ Score::Result.first || create(:score_result)] }
     name "Lauf 1"
     generator { "Score::ListGenerators::Simple" }
   end  
 
   factory :score_list_entry, class: "Score::ListEntry" do
     association :list, factory: :score_list 
+    assessment { Assessment.first || create(:assessment) }
     track 1
     run 1
     entity { Person.first || build(:person, :with_team) }    

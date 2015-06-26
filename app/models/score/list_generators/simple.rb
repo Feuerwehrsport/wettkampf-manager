@@ -4,7 +4,7 @@ module Score
     protected
 
     def perform_rows
-      assessment.requests.to_a.shuffle
+      assessment_requests.to_a.shuffle
     end
   end
 end

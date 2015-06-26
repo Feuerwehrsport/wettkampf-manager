@@ -2,6 +2,11 @@ module Score
   class ListsController < ApplicationController
     implement_crud_actions 
     before_action :assign_resource_for_action, only: [:move, :finished, :select_entity, :destroy_entity, :edit_times]
+    before_action :assign_disciplines, only: [:new, :create]
+
+    def assign_disciplines
+      @disciplines = Assessment.no_double_event.group(:discipline_id).includes(:discipline).map(&:discipline).map(&:decorate)
+    end
 
     def show
       super
@@ -25,9 +30,11 @@ module Score
     end
 
     def score_list_params
-      params.require(:score_list).permit(:name, :assessment_id, :generator, :track_count, 
-        :result_time_type, result_ids: [], 
-        entries_attributes: [:id, :run, :track, :entity_id, :entity_type, :_destroy, :assessment_type, :result_type, time_entries_attributes: [ :second_time ]],
+      params.require(:score_list).permit(:name, :generator, :track_count, :result_time_type, 
+        result_ids: [], assessment_ids: [],
+        entries_attributes: [
+          :id, :run, :track, :entity_id, :entity_type, :_destroy, :assessment_type, :result_type, :assessment_id,
+          time_entries_attributes: [ :second_time ]],
         generator_attributes: [:before_list, :best_count, :result])
     end
   end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Score::ListGenerators::GroupOrder, type: :model do
   
   describe '#perform_rows' do
-    let(:list) { build_stubbed :score_list, assessment: assessment }
+    let(:list) { build_stubbed :score_list, assessments: [assessment] }
     let(:generator) { described_class.new(list: list) }
     let(:assessment) { create :assessment }
 

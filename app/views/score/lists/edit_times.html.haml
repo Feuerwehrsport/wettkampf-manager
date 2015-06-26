@@ -20,7 +20,7 @@
                 %td= entry.try(:entity).try(:last_name).to_s.truncate(20)
                 %td= entry.try(:entity).try(:team).try(:short_name)
               - else
-                %td= entry.try(:entity).try(:to_s)
+                %td= entry.try(:entity).try(:to_s, multiple_assessments?)
               %td.edit-time
                 - if entry.present?
                   = f.simple_fields_for :entries, entry do |n|

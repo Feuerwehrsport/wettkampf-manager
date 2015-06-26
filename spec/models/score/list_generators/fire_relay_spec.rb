@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Score::ListGenerators::FireRelay, type: :model do
   
   describe '#perform_rows' do
-    let(:list) { build_stubbed :score_list, assessment: assessment }
+    let(:list) { build_stubbed :score_list, assessments: [assessment] }
     let(:generator) { described_class.new(list: list) }
     let(:assessment) { create :assessment }
     let!(:assessment_request1) { create :assessment_request, assessment: assessment, relay_count: 2 }
@@ -29,7 +29,7 @@ RSpec.describe Score::ListGenerators::FireRelay, type: :model do
 
   describe "validation" do
     let(:assessment) { build_stubbed :assessment }
-    let(:list) { build_stubbed :score_list, assessment: assessment }
+    let(:list) { build_stubbed :score_list, assessments: [assessment] }
     let(:generator) { described_class.new(best_count: 2, list: list) }
 
     it "validates assessment for fire relay discipline" do
