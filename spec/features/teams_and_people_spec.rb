@@ -31,11 +31,11 @@ RSpec.feature "Teams and People" do
 
     within(:css, ".modal.box") do
       within(:css, ".assessment-request:nth-of-type(1)") do
-        expect(page).to have_content "Hakenleitersteigen - männlich"
+        expect(page).to have_content "100m Hindernisbahn - männlich"
         check 'Teilnahme'
       end
       within(:css, ".assessment-request:nth-of-type(2)") do
-        expect(page).to have_content "100m Hindernisbahn - männlich"
+        expect(page).to have_content "Hakenleitersteigen - männlich"
         check 'Teilnahme'
       end
       click_on "Speichern"
@@ -62,14 +62,14 @@ RSpec.feature "Teams and People" do
 
     within(:css, ".modal.box") do
       within(:css, ".assessment-request:nth-of-type(1)") do
-        expect(page).to have_content "Hakenleitersteigen - männlich"
-        check 'Teilnahme'
-        select "Einzelstarter", from: "Hakenleitersteigen - männlich"
-      end
-      within(:css, ".assessment-request:nth-of-type(2)") do
         expect(page).to have_content "100m Hindernisbahn - männlich"
         check 'Teilnahme'
         select "Einzelstarter", from: "100m Hindernisbahn - männlich"
+      end
+      within(:css, ".assessment-request:nth-of-type(2)") do
+        expect(page).to have_content "Hakenleitersteigen - männlich"
+        check 'Teilnahme'
+        select "Einzelstarter", from: "Hakenleitersteigen - männlich"
       end
       click_on "Speichern"
     end
@@ -97,11 +97,11 @@ RSpec.feature "Teams and People" do
 
     within(:css, ".modal.box") do
       within(:css, ".assessment-request:nth-of-type(1)") do
-        expect(page).to have_content "Hakenleitersteigen - männlich"
+        expect(page).to have_content "100m Hindernisbahn - männlich"
         check 'Teilnahme'
       end
       within(:css, ".assessment-request:nth-of-type(2)") do
-        expect(page).to have_content "100m Hindernisbahn - männlich"
+        expect(page).to have_content "Hakenleitersteigen - männlich"
         check 'Teilnahme'
       end
       click_on "Speichern"
@@ -120,11 +120,11 @@ RSpec.feature "Teams and People" do
 
     within(:css, ".modal.box") do
       within(:css, ".assessment-request:nth-of-type(1)") do
-        expect(page).to have_content "Hakenleitersteigen - männlich"
+        expect(page).to have_content "100m Hindernisbahn - männlich"
         check 'Teilnahme'
       end
       within(:css, ".assessment-request:nth-of-type(2)") do
-        expect(page).to have_content "100m Hindernisbahn - männlich"
+        expect(page).to have_content "Hakenleitersteigen - männlich"
         check 'Teilnahme'
       end
       click_on "Speichern"
