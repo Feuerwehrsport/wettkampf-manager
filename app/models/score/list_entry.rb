@@ -4,10 +4,11 @@ module Score
   class ListEntry < ActiveRecord::Base
     belongs_to :list
     belongs_to :entity, polymorphic: true
+    belongs_to :assessment
     has_many :stopwatch_times, -> { order(:type) }, dependent: :destroy
     enum assessment_type: { group_competitor: 0, single_competitor: 1, out_of_competition: 2 }
 
-    validates :list, :entity, :track, :run, :assessment_type, presence: true
+    validates :list, :entity, :track, :run, :assessment_type, :assessment, presence: true
     validates :track, :run, numericality: { greater_than: 0 }
     validates :track, numericality: { less_than_or_equal_to: :track_count }
 

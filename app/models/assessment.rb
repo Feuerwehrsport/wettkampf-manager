@@ -3,13 +3,15 @@ class Assessment < ActiveRecord::Base
   belongs_to :score_competition_result, class_name: "Score::CompetitionResult"
   has_many :requests, class_name: "AssessmentRequest", dependent: :destroy
   has_many :results, class_name: "Score::Result"
-  has_many :lists, class_name: "Score::List"
+  has_many :list_assessments, class_name: "Score::ListAssessment"
+  has_many :lists, class_name: "Score::List", through: :list_assessments
   enum gender: { female: 0, male: 1 }
 
   validates :discipline, presence: true
 
   scope :gender, -> (gender) { where(gender: Assessment.genders[gender]) }
   scope :no_double_event, -> { joins(:discipline).where.not(disciplines: { type: "Disciplines::DoubleEvent" }) }
+  scope :discipline, -> (discipline) { joins(:discipline).where(disciplines: { type: discipline.type }) }
 
   def to_label
     decorate

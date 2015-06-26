@@ -73,13 +73,14 @@ de:
         last_name: Nachname
         team: Mannschaft
       score/list:
-        assessment: Wertungsgruppe
+        assessments: Wertungsgruppen
         name: Name
         track_count: Wettkampfbahnen
         generator: Listenerstellung
         result_time_type: Zeitenberechnung
         results: Ergebnislisten
       score/list_entry:
+        assessment: Wertungsgruppe
         assessment_type: Wertung
         entity: Teilnehmer
         track: Bahn

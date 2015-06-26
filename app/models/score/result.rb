@@ -12,6 +12,7 @@ module Score
     default_scope { includes(:assessment).order("assessments.discipline_id", "assessments.gender") }
     scope :gender, -> (gender) { joins(:assessment).merge(Assessment.gender(gender)) }
     scope :group_assessment_for, -> (gender) { gender(gender).where(group_assessment: true) }
+    scope :discipline, -> (discipline) { where(assessment: Assessment.discipline(discipline)) }
 
     after_destroy :remove_result_from_list
 
@@ -31,6 +32,7 @@ module Score
       rows = {}
       lists.each do |list|
         list.entries.not_waiting.each do |list_entry|
+          next if list_entry.assessment != assessment
           entity = list_entry.entity
           entity = entity.team if group_result && entity.is_a?(TeamRelay)
           next if youth? && !entity.youth?

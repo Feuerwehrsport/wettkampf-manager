@@ -3,23 +3,21 @@ require 'score'
 module Score
   class List < ActiveRecord::Base
     enum result_time_type: { electronic: 0, handheld_median: 1, handheld_average: 2, calculated: 3 }
-    belongs_to :assessment
+    has_many :list_assessments
+    has_many :assessments, through: :list_assessments
     has_many :result_lists
     has_many :results, through: :result_lists
     has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry", dependent: :destroy
-    validates :name, :assessment, :track_count, presence: true
+    validates :name, :assessments, :track_count, presence: true
     validates :track_count, numericality: { greater_than: 0 }
     validates :generator, on: :create, presence: true
     validates :result_time_type, inclusion: { in: proc { |l| l.available_time_types.map(&:to_s) } }, allow_nil: true
     validate :generator_valid?
-    validate :results_match_assessment
-
+    validate :results_match_assessments
     accepts_nested_attributes_for :entries, allow_destroy: true
 
     attr_accessor :generator
     after_create :perform_generator
-
-    default_scope { includes(:assessment).order("assessments.discipline_id", "assessments.gender") }
 
     def generator= generator
       if generator.present?
@@ -91,10 +89,15 @@ module Score
 
     private
 
-    def results_match_assessment
+    def results_match_assessments
       results.each do |result|
-        if result.assessment != assessment
-          errors.add(:results, 'Muss gleiche Wertungsgruppe haben')
+        unless result.assessment.in? assessments
+          errors.add(:results, 'müssen gleiche Wertungsgruppe haben')
+        end
+      end
+      assessments.each do |assessment|
+        unless assessment.id.in? results.map(&:assessment_id)
+          errors.add(:assessments, 'müssen passende Ergebnislisten haben')
         end
       end
     end
