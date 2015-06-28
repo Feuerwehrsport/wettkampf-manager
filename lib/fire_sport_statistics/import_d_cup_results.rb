@@ -14,6 +14,8 @@ module FireSportStatistics
 
         API::Get.dcup_single_results["results"].each do |full_key, single_results|
           single_results.each do |single_result|
+            time = single_result["time"]
+            time = nil if time.present? && time.to_i >= 99999999
             DCupSingleResult.create!(
               result: result(full_key),
               person: person(single_result["person_id"]),

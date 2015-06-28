@@ -1,6 +1,6 @@
 module Score
   class StopwatchTime < ActiveRecord::Base
-    INVALID_TIME = 999999999
+    INVALID_TIME = 99999999
     
     belongs_to :list_entry
 
