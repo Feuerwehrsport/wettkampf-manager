@@ -37,10 +37,10 @@ class AssessmentRequest < ActiveRecord::Base
       self.group_competitor_order = 0
       self.single_competitor_order = 0
     elsif group_competitor?
-      self.group_competitor_order = next_free_competitor_order(:group)
+      self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order == 0
       self.single_competitor_order = 0
     elsif single_competitor?
-      self.single_competitor_order = next_free_competitor_order(:single)
+      self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order == 0
       self.group_competitor_order = 0
     end
   end
