@@ -103,6 +103,7 @@ RSpec.feature "Teams and People" do
       within(:css, ".assessment-request:nth-of-type(2)") do
         expect(page).to have_content "Hakenleitersteigen - männlich"
         check 'Teilnahme'
+        fill_in "Reihenfolge", with: "6"
       end
       click_on "Speichern"
     end
@@ -134,6 +135,7 @@ RSpec.feature "Teams and People" do
     expect(page).to have_content "M1"
     expect(page).to have_content "Wilhelm Busch"
     expect(page).to have_content "M2"
+    expect(page).to have_content "M6"
     expect(page).to have_content "Karl Marx"
     expect(page).to have_content "M0"
     expect(page).to have_content "Peter Müller"
