@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626113306) do
+ActiveRecord::Schema.define(version: 20150628205829) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 20150626113306) do
     t.datetime "updated_at",                                      null: false
     t.boolean  "youth",                           default: false, null: false
     t.integer  "fire_sport_statistics_person_id"
+    t.integer  "registration_order",              default: 0,     null: false
   end
 
   add_index "people", ["team_id"], name: "index_people_on_team_id"

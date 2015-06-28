@@ -1,0 +1,37 @@
+- if collection.count == 0
+  .alert.alert-info Keine Einträge gefunden
+- else
+  %table.table.table-bordered.table-hover.table-condensed.people-index-table.sorted_table
+    %thead
+      %tr
+        %th Name
+        - if decorated_competition.youth_name.present?
+          %th= decorated_competition.youth_name
+
+        - assessments = Assessment.requestable_for(collection.first).map(&:decorate)
+        - assessments.each do |assessment|
+          %th{ title: assessment }= discipline_image assessment.discipline
+        - if logged_in?
+          %th
+    %tbody
+      - collection.each do |person|
+        %tr
+          %td= link_to person.full_name, person_path(person)
+          - if decorated_competition.youth_name.present?
+            %td= person.youth? ? 'X' : ''
+          - assessments.each do |assessment|
+            - request = person.request_for(assessment.object).try(:decorate)
+            - if request.present?
+              %td{ title: "#{assessment}: #{request.type}" }= request.short_type
+            - else
+              %td
+          - if logged_in?
+            %td
+              = short_edit_link edit_assessment_requests_person_path(person), remote: true, class: "btn-xs", title: "Wertungsgruppen bearbeiten"
+              = simple_form_for person, html: { class: "hide registration-form" } do |f|
+                = f.input :registration_order, as: :hidden
+
+      %tr.hide.placeholder
+        %td
+          %span
+          

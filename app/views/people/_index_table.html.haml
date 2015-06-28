@@ -1,7 +1,7 @@
 - if collection.count == 0
   .alert.alert-info Keine Einträge gefunden
 - else
-  %table.table.table-bordered.table-hover.table-condensed
+  %table.table.table-bordered.table-hover.table-condensed.people-index-table
     %tr
       %th{ style: "width: 35%" } Name
       %th{ style: "width: 35%" }= Person.human_attribute_name(:team)
@@ -27,4 +27,3 @@
             %td
         - if logged_in?
           %td= short_edit_link edit_assessment_requests_person_path(person), remote: true, class: "btn-xs", title: "Wertungsgruppen bearbeiten"
-                

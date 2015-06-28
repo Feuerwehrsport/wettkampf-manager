@@ -56,4 +56,7 @@
 
   .col-md-12
     = box(@team.class.human_attribute_name :people) do |box|
-      = render "people/index_table", collection: @team.people
+      = render "people_table", collection: @team.object.people.registration_order.map(&:decorate)
+      - if logged_in?
+        - box.footer do
+          = "Die Reihenfolge der Personen kann einfach verschoben werden. Dadurch soll ein besseres Abgleichen mit der Eingabe möglich sein."
