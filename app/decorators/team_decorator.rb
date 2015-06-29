@@ -30,8 +30,8 @@ class TeamDecorator < ApplicationDecorator
     ["Mannschaft"]
   end
 
-  def name_cols assessment_type
-    [to_s]
+  def name_cols assessment_type, shortcut
+    [shortcut ? shortcut_name : to_s]
   end
 
   private
