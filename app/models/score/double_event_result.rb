@@ -12,6 +12,7 @@ module Score
           rows[result_row.entity.id].add_result_row(result_row)
         end
       end
+      @out_of_competition_rows = []
       rows.values.select { |row| row.result_rows.count == results.count }
     end
   end

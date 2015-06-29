@@ -5,6 +5,7 @@ module Score
     def show
       super
       @rows = @score_result.rows.map(&:decorate)
+      @out_of_competition_rows = @score_result.out_of_competition_rows.map(&:decorate)
       @discipline = @score_result.assessment.discipline.decorate
       if @score_result.group_assessment? && @discipline.single_discipline?
         @group_result_rows = GroupResult.new(@score_result).rows.map(&:decorate)

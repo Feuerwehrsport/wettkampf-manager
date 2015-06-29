@@ -42,33 +42,8 @@
 
   - if @rows.count > 0
     .col-md-12
-      = box @score_result.name do |box|
-        %table.table.table-bordered
-          %tr
-            %th
-            %th Name
-            - if @score_result.is_a? Score::DoubleEventResult
-              %th Summe
-              - @score_result.results.each do |result|
-                %th= discipline_image result.assessment.discipline.decorate
-            - else
-              %th Bestzeit
-              - @score_result.lists.each do |list|
-                %td= list.object.name
-
-
-          - @rows.each do |row|
-            %tr
-              %td= "#{place_for_row row}."
-              %th= row.entity
-              - if row.is_a? Score::DoubleEventResultRow
-                %th= row.sum_stopwatch_time
-                - @score_result.results.each do |result|
-                  %td= row.time_from(result)
-              - else
-                %th= row.best_stopwatch_time
-                - @score_result.lists.each do |list|
-                  %td= row.time_from(list)
+      = box @score_result do |box|
+        = render 'result_table', rows: @rows, places: true
         - box.footer do
           .pull-right
             = link_btn "Mannschaftswertung als PDF", url_for(format: :pdf, only: :group_assessment)
@@ -98,3 +73,9 @@
   - else
     .col-md-8
       .alert.alert-info Keine Einträge gefunden
+
+
+  - if @out_of_competition_rows.count > 0
+    .col-md-12
+      = box "Außer der Wertung" do |box|
+        = render 'result_table', rows: @out_of_competition_rows, places: false

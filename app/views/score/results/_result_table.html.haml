@@ -1,0 +1,28 @@
+%table.table.table-bordered
+  %tr
+    - if places
+      %th
+    %th Name
+    - if @score_result.is_a? Score::DoubleEventResult
+      %th Summe
+      - @score_result.results.each do |result|
+        %th= discipline_image result.assessment.discipline.decorate
+    - else
+      %th Bestzeit
+      - @score_result.lists.each do |list|
+        %td= list.object.name
+
+
+  - rows.each do |row|
+    %tr
+      - if places
+        %td= "#{place_for_row row}."
+      %th= row.entity
+      - if row.is_a? Score::DoubleEventResultRow
+        %th= row.sum_stopwatch_time
+        - @score_result.results.each do |result|
+          %td= row.time_from(result)
+      - else
+        %th= row.best_stopwatch_time
+        - @score_result.lists.each do |list|
+          %td= row.time_from(list)

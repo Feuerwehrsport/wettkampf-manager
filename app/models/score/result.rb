@@ -24,11 +24,17 @@ module Score
       @rows ||= generate_rows.sort
     end
 
+    def out_of_competition_rows
+      generate_rows if @out_of_competition_rows.nil?
+      @out_of_competition_rows
+    end
+
     def group_result_rows
       @group_result_rows ||= generate_rows(true).sort
     end
 
     def generate_rows(group_result=false)
+      out_of_competition_rows = {}
       rows = {}
       lists.each do |list|
         list.entries.not_waiting.each do |list_entry|
@@ -36,12 +42,21 @@ module Score
           entity = list_entry.entity
           entity = entity.team if group_result && entity.is_a?(TeamRelay)
           next if youth? && !entity.youth?
-          if rows[entity.id].nil?
-            rows[entity.id] = ResultRow.new(entity, self)
+
+          if list_entry.out_of_competition?
+            if out_of_competition_rows[entity.id].nil?
+              out_of_competition_rows[entity.id] = ResultRow.new(entity, self)
+            end
+            out_of_competition_rows[entity.id].add_list(list_entry)
+          else
+            if rows[entity.id].nil?
+              rows[entity.id] = ResultRow.new(entity, self)
+            end
+            rows[entity.id].add_list(list_entry)
           end
-          rows[entity.id].add_list(list_entry)
         end
       end
+      @out_of_competition_rows = out_of_competition_rows.values
       rows.values
     end
     
