@@ -7,10 +7,17 @@ class PersonDecorator < ApplicationDecorator
   end
 
   def team_name assessment_type=nil
-    name = [team.to_s]
+    team_assessment_type_name [team.to_s], assessment_type
+  end
+
+  def team_assessment_type_name name, assessment_type
     name.push("E") if assessment_type == "single_competitor"
     name.push("A") if assessment_type == "out_of_competition"
     name.join(" ")
+  end
+
+  def team_shortcut_name assessment_type=nil
+    team_assessment_type_name [team.shortcut_name], assessment_type
   end
 
   def translated_gender
@@ -25,8 +32,9 @@ class PersonDecorator < ApplicationDecorator
     ["Vorname", "Nachname", "Mannschaft"]
   end
 
-  def name_cols assessment_type
-    [first_name, last_name, team_name(assessment_type)]
+  def name_cols assessment_type, shortcut
+    team = shortcut ? team_shortcut_name(assessment_type) : team_name(assessment_type)
+    [first_name, last_name, team]
   end
 
   def translated_youth

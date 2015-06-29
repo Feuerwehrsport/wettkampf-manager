@@ -4,7 +4,7 @@ first = true
   first = false
   pdf_header pdf, "Gesamtwertung - #{result}"
 
-  pdf.table(table_data(result), {
+  pdf.table(table_data(result, true), {
     header: true,
     width: pdf.bounds.width,
     cell_style: { align: :center},

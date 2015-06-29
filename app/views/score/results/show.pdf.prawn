@@ -1,13 +1,13 @@
 if @only != :group_assessment
   pdf_header pdf, @score_result.to_s, @discipline
   
-  pdf.table(build_data_rows, {
+  pdf.table(build_data_rows(true), {
     header: true, 
     row_colors: pdf_default_row_colors, 
     width: pdf.bounds.width,
     cell_style: { align: :center, size: 10 }
   }) do
-    row(0).style(font_style: :bold, size: 11)
+    row(0).style(font_style: :bold, size: 10)
     column(-1).style(font_style: :bold)
   end
 end

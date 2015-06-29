@@ -4,7 +4,7 @@ module Score
 
     def index
       super
-      page_title "Gesamtwertung"
+      page_title "Gesamtwertung", { page_layout: :landscape }
     end
 
     def new

@@ -16,7 +16,7 @@
               - if single_discipline?
                 %td= entry.entity.first_name.truncate(20)
                 %td= entry.entity.last_name.truncate(20)
-                %td= entry.entity.team.try :short_name
+                %td= entry.entity.team.try :shortcut_name
               - else
                 %td= entry.entity.decorate.to_s
               %td.edit-time

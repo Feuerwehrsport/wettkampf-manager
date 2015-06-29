@@ -18,7 +18,7 @@
               - if single_discipline?
                 %td= entry.try(:entity).try(:first_name).to_s.truncate(20)
                 %td= entry.try(:entity).try(:last_name).to_s.truncate(20)
-                %td= entry.try(:entity).try(:team).try(:short_name)
+                %td= entry.try(:entity).try(:team).try(:shortcut_name)
               - else
                 %td= entry.try(:entity).try(:to_s, multiple_assessments?)
               %td.edit-time

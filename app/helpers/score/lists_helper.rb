@@ -131,7 +131,7 @@ module Score
         if single_discipline?
           line.push(entry.try(:entity).try(:first_name))
           line.push(entry.try(:entity).try(:last_name))
-          line.push(entry.try(:entity).try(:team_name, entry.try(:assessment_type)))
+          line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))
         else
           line.push(entry.try(:entity).try(:to_s, multiple_assessments?))
         end

@@ -2,7 +2,7 @@ wb = xlsx_package.workbook
 bold = wb.styles.add_style b: true
 italic = wb.styles.add_style i: true
 wb.add_worksheet(name: @score_result.to_s.truncate(30)) do |sheet|
-  build_data_rows.each do |row|
+  build_data_rows(false).each do |row|
     sheet.add_row row
   end
 end

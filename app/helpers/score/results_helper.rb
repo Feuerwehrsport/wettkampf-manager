@@ -33,7 +33,7 @@ module Score
       end
     end
 
-    def build_data_rows     
+    def build_data_rows(shortcut)
       header = ["Platz"]
       if @discipline.single_discipline? || @discipline.is_a?(Disciplines::DoubleEvent)
         PersonDecorator.human_name_cols.each { |col| header.push col }
@@ -56,7 +56,7 @@ module Score
       @rows.each do |row|
         line = []
         line.push "#{place_for_row row}."
-        row.entity.name_cols(row.assessment_type).each { |col| line.push col }
+        row.entity.name_cols(row.assessment_type, shortcut).each { |col| line.push col }
         if row.is_a? Score::DoubleEventResultRow
           @score_result.results.each { |result| line.push(row.time_from(result)) }
           line.push row.sum_stopwatch_time

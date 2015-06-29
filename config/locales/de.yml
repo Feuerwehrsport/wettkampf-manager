@@ -121,7 +121,9 @@ de:
 
   gender:
     female: weiblich
+    female_symbol: ♀
     male: männlich
+    male_symbol: ♂
 
   result_time_types:
     electronic: Elektronisch

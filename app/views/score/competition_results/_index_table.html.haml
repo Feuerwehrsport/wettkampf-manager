@@ -10,7 +10,7 @@
   - competition_result.rows.each do |row|
     %tr
       %td.sum-points= row.points
-      %td= row.team
+      %td= row.team.shortcut_name
       - competition_result.results.each do |result|
         - assessment_result = row.assessment_result_from(result.assessment)
         %td.time= assessment_result.try(:time).try(:decorate)

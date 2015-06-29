@@ -18,7 +18,7 @@
               - if single_discipline?
                 %td= entry.try(:entity).try(:first_name)
                 %td= entry.try(:entity).try(:last_name)
-                %td= entry.try(:entity).try(:team_name, entry.try(:assessment_type))
+                %td= entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type))
               - else
                 %td= entry.try(:entity).try(:to_s, multiple_assessments?)
               %td.time-col
