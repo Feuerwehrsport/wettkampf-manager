@@ -47,7 +47,7 @@ module Score
         header.push("Summe")
       else
         @score_result.lists.each do |list|
-          header.push(list.object.name)
+          header.push(list.object.shortcut)
         end
         header.push("Bestzeit")
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629054441) do
+ActiveRecord::Schema.define(version: 20150629163312) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20150629054441) do
     t.integer  "result_time_type"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "shortcut",         default: "", null: false
   end
 
   create_table "score_result_lists", force: :cascade do |t|

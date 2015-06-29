@@ -2,6 +2,7 @@
   = f.error_notification
   = f.inputs do
     = f.input :name
+    = f.input :shortcut, input_html: { maxlength: 8 }
     = f.association :results, collection: Score::Result.all
   = f.actions do
     = f.primary_button :submit, "Speichern"

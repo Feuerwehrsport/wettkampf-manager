@@ -9,7 +9,8 @@
         = f.error_notification
         = f.association :assessments, collection: Assessment.discipline(discipline), input_html: { class: "select-assessments" }
         = f.input :track_count
-        = f.input :name, input_html: { value: discipline.to_s, data: { name: discipline.to_s }, class: "input-name" }
+        = f.input :name, input_html: preset_value_for(:name, discipline.to_s).merge(data: { name: (@score_list.name || discipline.to_s) }, class: "input-name")
+        = f.input :shortcut, input_html: preset_value_for(:shortcut, "Lauf 1").merge(maxlength: 8)
         .assessment-dependend
           = f.association :results, collection: Score::Result.discipline(discipline), input_html: { class: "select-results" }
           = f.input :generator, collection: Score::ListGenerator.for_discipline?(discipline), label_method: :to_label, selected: @score_list.generator.try(:to_param), input_html: { class: "select-list-generator" }

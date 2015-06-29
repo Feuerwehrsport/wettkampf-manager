@@ -8,10 +8,11 @@ module Score
     has_many :result_lists
     has_many :results, through: :result_lists
     has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry", dependent: :destroy
-    validates :name, :assessments, :track_count, presence: true
+    validates :name, :assessments, :track_count, :shortcut, presence: true
     validates :track_count, numericality: { greater_than: 0 }
     validates :generator, on: :create, presence: true
     validates :result_time_type, inclusion: { in: proc { |l| l.available_time_types.map(&:to_s) } }, allow_nil: true
+    validates :shortcut, length: { maximum: 8 }
     validate :generator_valid?
     validate :results_match_assessments
     accepts_nested_attributes_for :entries, allow_destroy: true

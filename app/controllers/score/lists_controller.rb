@@ -30,7 +30,7 @@ module Score
     end
 
     def score_list_params
-      params.require(:score_list).permit(:name, :generator, :track_count, :result_time_type, 
+      params.require(:score_list).permit(:name, :shortcut, :generator, :track_count, :result_time_type, 
         result_ids: [], assessment_ids: [],
         entries_attributes: [
           :id, :run, :track, :entity_id, :entity_type, :_destroy, :assessment_type, :result_type, :assessment_id,

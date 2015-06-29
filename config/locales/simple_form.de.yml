@@ -34,7 +34,8 @@ de:
         short_name: Ersetzt den Namen, wo nicht genügend Platz ist
         type: Ist es eine andere Disziplin, sollte eine Ähnliche ausgewählt werden.
       score_list:
-        name: Zum Beispiel <i>Lauf 1</i> oder <i>Finale</i>
+        name: Gesamter Name dieser Startliste, sollte eindeutig sein, zum Beispiel <em>100m Hindernisbahn - weiblich - Lauf 1</em>
+        shortcut: Zum Beispiel <em>Lauf 1</em>, <em>Vorlauf</em> oder <em>Finale</em>, (maximal 8 Zeichen)
       team:
         name: Der Name wird ohne Nummer angegeben.
         number: Die Nummer wird nur angezeigt, wenn es mehrere Mannschaften gibt.

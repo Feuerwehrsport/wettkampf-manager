@@ -103,6 +103,10 @@ module Score
       end
     end
 
+    def preset_value_for(field, value)
+      @score_list.send(field).blank? ? { value: value } : {}
+    end
+
     def show_export_data(options={})
       header = ["Lauf", "Bahn"]
       if single_discipline?

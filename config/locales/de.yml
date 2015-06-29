@@ -79,6 +79,7 @@ de:
         generator: Listenerstellung
         result_time_type: Zeitenberechnung
         results: Ergebnislisten
+        shortcut: Abkürzung
       score/list_entry:
         assessment: Wertungsgruppe
         assessment_type: Wertung
