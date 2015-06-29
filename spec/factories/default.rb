@@ -5,6 +5,7 @@ FactoryGirl.define do
 
   factory :team do
     name "Mecklenburg-Vorpommern"
+    shortcut "Team MV"
     gender :male
 
     trait(:male) { gender :male }
