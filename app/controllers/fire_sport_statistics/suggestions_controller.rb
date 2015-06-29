@@ -19,7 +19,7 @@ module FireSportStatistics
       suggestions = suggestions.where_name_like(params[:name]) if params[:name]
 
       render json: suggestions.to_json(
-        only: [:name]
+        only: [:name, :short]
       )
     end
 

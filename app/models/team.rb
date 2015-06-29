@@ -7,9 +7,10 @@ class Team < ActiveRecord::Base
 
   enum gender: { female: 0, male: 1 }
 
-  validates :name, :gender, :number, presence: true
+  validates :name, :gender, :number, :shortcut, presence: true
   validates :number, numericality: { greater_than: 0 }
   validates :name, uniqueness: { scope: [:number, :gender] }
+  validates :shortcut, length: { maximum: 12 }
 
   accepts_nested_attributes_for :requests, allow_destroy: true
 

@@ -100,6 +100,7 @@ de:
         name: Name
         number: Nummer
         people: Wettkämpfer
+        shortcut: Abkürzung
       user:
         password: Passwort
         password_confirmation: Passwort wiederholen

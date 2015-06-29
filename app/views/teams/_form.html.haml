@@ -4,6 +4,7 @@
     = f.input :name
     .suggestions-entries
       %table.table.table-hover.table-condensed
+    = f.input :shortcut, input_html: { maxlength: 12 }
     = f.input :number
     = f.input :gender, collection: [:male, :female]
   = f.actions do

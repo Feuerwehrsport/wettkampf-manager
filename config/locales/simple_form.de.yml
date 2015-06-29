@@ -36,7 +36,9 @@ de:
       score_list:
         name: Zum Beispiel <i>Lauf 1</i> oder <i>Finale</i>
       team:
+        name: Der Name wird ohne Nummer angegeben.
         number: Die Nummer wird nur angezeigt, wenn es mehrere Mannschaften gibt.
+        shortcut: Die Abkürzung wird auf Listen benutzt, wo wenig Platz ist.
       # Examples
     # labels:
     #   defaults:
