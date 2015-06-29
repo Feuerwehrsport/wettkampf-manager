@@ -64,7 +64,8 @@ FactoryGirl.define do
   factory :score_list, class: "Score::List" do
     assessments { [Assessment.first || create(:assessment)] }
     results { [ Score::Result.first || create(:score_result)] }
-    name "Lauf 1"
+    name "Hakenleitersteigen - männlich - Lauf 1"
+    shortcut "Lauf 1"
     generator { "Score::ListGenerators::Simple" }
   end  
 
