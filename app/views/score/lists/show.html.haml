@@ -20,7 +20,11 @@
                 %td= entry.try(:entity).try(:last_name)
                 %td= entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type))
               - else
-                %td= entry.try(:entity).try(:to_s, multiple_assessments?)
+                %td
+                  = entry.try(:entity).try(:to_s, multiple_assessments?)
+                  - if multiple_assessments?
+                    %br
+                    .tiny= entry.assessment.try(:decorate)
               %td.time-col
                 = result_for entry
                 - if logged_in?

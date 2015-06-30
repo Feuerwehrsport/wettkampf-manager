@@ -18,7 +18,11 @@
                 %td= entry.entity.last_name.truncate(20)
                 %td= entry.entity.team.try :shortcut_name
               - else
-                %td= entry.entity.decorate.to_s
+                %td
+                  = entry.try(:entity).try(:decorate)
+                  - if multiple_assessments?
+                    %br
+                    .tiny= entry.try(:assessment).try(:decorate)
               %td.edit-time
                 = f.simple_fields_for :list_entries, entry do |n|
                   = n.input :track, as: :hidden

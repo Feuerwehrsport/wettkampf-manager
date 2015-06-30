@@ -7,7 +7,7 @@
     - b.content discipline.id do
       = simple_form_for @score_list do |f|
         = f.error_notification
-        = f.association :assessments, collection: Assessment.discipline(discipline), input_html: { class: "select-assessments" }
+        = f.association :assessments, collection: Assessment.where(discipline: discipline), input_html: { class: "select-assessments" }
         = f.input :track_count
         = f.input :name, input_html: preset_value_for(:name, discipline.to_s).merge(data: { name: (@score_list.name || discipline.to_s) }, class: "input-name")
         = f.input :shortcut, input_html: preset_value_for(:shortcut, "Lauf 1").merge(maxlength: 8)

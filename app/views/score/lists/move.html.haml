@@ -19,7 +19,11 @@
                 %td= entry.try(:entity).try(:last_name)
                 %td= entry.try(:entity).try(:team).try(:name)
               - else
-                %td= entry.try(:entity).try(:to_s, multiple_assessments?)
+                %td
+                  = entry.try(:entity).try(:decorate)
+                  - if multiple_assessments?
+                    %br
+                    .tiny= entry.try(:assessment).try(:decorate)
           %tr.hide.placeholder
             %td{ colspan: 5 }
               %span
