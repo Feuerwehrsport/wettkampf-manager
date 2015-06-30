@@ -1,7 +1,9 @@
 .row
   .col-md-8
     = box(@competition_seed.name) do |box|
-      %p= @competition_seed.hint
+      %ul
+        - @competition_seed.hints.each do |hint|
+          %li= hint
 
   .col-md-4
     = box("Aktionen") do
