@@ -10,17 +10,35 @@ class CompetitionSeed
     [
       [
         "Deutschland-Cup (HL, HB, GS, LA)", 
-        [], 
+        [
+          "Hakenleitersteigen, 100m Hindernisbahn, Zweikampf für Frauen und Männer",
+          "4 Personen von 8 gehen in die Mannschaftswertung ein",
+          "Hakenleitersteigen, 100m Hindernisbahn, Zweikampf - U20 Wertung",
+          "Löschangriff für Frauen und Männer",
+          "Gruppenstaffete für Frauen",
+          "Gesamtwertung mit 1. Platz => 10 Punkte",
+          "D-Cup Gesamtwertung",
+        ], 
         :seed_method_dcup_simple
       ],
       [
         "Deutschland-Cup (HL, HB, GS, LA, FS)", 
-        [], 
+        [
+          "Hakenleitersteigen, 100m Hindernisbahn, Zweikampf für Frauen und Männer",
+          "4 Personen von 8 gehen in die Mannschaftswertung ein",
+          "Hakenleitersteigen, 100m Hindernisbahn, Zweikampf - U20 Wertung",
+          "Löschangriff und 4x100m Staffel für Frauen und Männer",
+          "Gruppenstaffete für Frauen",
+          "Gesamtwertung mit 1. Platz => 10 Punkte",
+          "D-Cup Gesamtwertung",
+        ], 
         :seed_method_dcup_all
       ],
       [
         "Löschangriff-Pokallauf (LA)", 
-        [], 
+        [
+          "Löschangriff für Frauen und Männer",
+        ], 
         :seed_method_la
       ],
       [
@@ -198,7 +216,7 @@ class CompetitionSeed
     la = Disciplines::FireAttack.create!
 
 
-    competition_results = [:female, :male].map do |gender|
+    [:female, :male].map do |gender|
       zk_assessment = Assessment.create!(discipline: zk, gender: gender)
       zk_result = Score::DoubleEventResult.create!(assessment: zk_assessment)
 
@@ -276,6 +294,10 @@ class CompetitionSeed
   end
 
   def seed_method_la
-    fire_attack false
+    la = Disciplines::FireAttack.create!
+    [:female, :male].map do |gender|
+      la_assessment = Assessment.create!(discipline: la, gender: gender)
+      Score::Result.create!(assessment: la_assessment, group_assessment: true)
+    end
   end
 end
