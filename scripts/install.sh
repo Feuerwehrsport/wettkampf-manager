@@ -11,7 +11,6 @@ if [[ -f "$RAILS_DIR/db/production.sqlite3" ]] ; then
   fi
 fi
 
-bundle --without development test staging
 rm -rf "$RAILS_DIR/db/production.sqlite3"
 
 "$RAILS_DIR/scripts/deploy.sh"

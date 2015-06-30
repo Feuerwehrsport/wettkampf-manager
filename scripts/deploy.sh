@@ -3,6 +3,8 @@
 RAILS_DIR=$(dirname $(cd $(dirname $0); pwd -P))
 pushd "$RAILS_DIR"
 
+
+bundle --without development test staging
 rm -rf "$RAILS_DIR/public/assets"
 RAILS_ENV=production bundle exec rake assets:precompile
 RAILS_ENV=production bundle exec rake db:migrate
