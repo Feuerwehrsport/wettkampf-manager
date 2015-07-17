@@ -13,7 +13,11 @@ class TeamRelayDecorator < ApplicationDecorator
     ["Mannschaft"]
   end
 
-  def name_cols assessment_type
-    [to_s]
+  def shortcut_name
+    "#{team.shortcut_name} #{name}"
+  end
+
+  def name_cols assessment_type, shortcut
+    [shortcut ? shortcut_name : to_s]
   end
 end
