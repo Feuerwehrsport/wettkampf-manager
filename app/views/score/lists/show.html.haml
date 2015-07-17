@@ -24,7 +24,7 @@
                   = entry.try(:entity).try(:to_s, multiple_assessments?)
                   - if multiple_assessments?
                     %br
-                    .tiny= entry.assessment.try(:decorate)
+                    .tiny= entry.try(:assessment).try(:decorate)
               %td.time-col
                 = result_for entry
                 - if logged_in?

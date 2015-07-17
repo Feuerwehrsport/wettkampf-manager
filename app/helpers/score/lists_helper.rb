@@ -138,7 +138,7 @@ module Score
           line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))
         else
           team_name = entry.try(:entity).to_s
-          team_name += " <font size='6'>(#{entry.try(:assessment).try(:decorate)})</font>" if multiple_assessments?
+          team_name += " <font size='6'>(#{entry.try(:assessment).try(:decorate)})</font>" if multiple_assessments? && entry.present?
           line.push(content: team_name, inline_format: true)
         end
         line.push(result_for entry)
