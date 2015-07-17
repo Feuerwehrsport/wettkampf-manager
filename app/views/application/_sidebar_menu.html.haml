@@ -15,11 +15,12 @@
   %li{ class: controller_name == 'teams' ? 'active' : '' }
     %a{ href: teams_path }
       %i.ion.ion-person-stalker
-      %span= Team.model_name.human count: 0  
-  %li{ class: controller_name == 'people' ? 'active' : '' }
-    %a{ href: people_path }
-      %i.ion.ion-person
-      %span= Person.model_name.human count: 0  
+      %span= Team.model_name.human count: 0
+  - if logged_in? || Person.count > 0
+    %li{ class: controller_name == 'people' ? 'active' : '' }
+      %a{ href: people_path }
+        %i.ion.ion-person
+        %span= Person.model_name.human count: 0  
   %li{ class: controller_name == 'lists' ? 'active' : '' }
     %a{ href: score_lists_path }
       %i.fa.fa-list-ul

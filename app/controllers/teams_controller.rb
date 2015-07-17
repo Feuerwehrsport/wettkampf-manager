@@ -20,4 +20,16 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name, :gender, :number, :shortcut,
       { requests_attributes: [:assessment_type, :relay_count, :_destroy, :assessment_id, :id] })
   end
+
+  def after_create
+    if single_discipline_exists?
+      super
+    else
+      redirect_to action: :index
+    end
+  end
+
+  def single_discipline_exists?
+    Discipline.all.any?(&:single_discipline?)
+  end
 end
