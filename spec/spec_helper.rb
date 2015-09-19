@@ -92,6 +92,7 @@ RSpec.configure do |config|
     config.include FactoryGirl::Syntax::Methods
 
     config.before(:suite) do
+      FileUtils.mkdir_p(File.join(Rails.root, "tmp", "cache"))
       # Do truncation once per suite to vacuum for Postgres
       DatabaseCleaner.clean_with :truncation
       # Normally do transactions-based cleanup
@@ -99,7 +100,6 @@ RSpec.configure do |config|
     end
 
     config.before(type: :feature) do
-      FileUtils.mkdir_p(File.join(Rails.root, "tmp", "cache"))
       load File.join(Rails.root, "db", "seeds.rb")
     end 
 
