@@ -99,6 +99,7 @@ RSpec.configure do |config|
     end
 
     config.before(type: :feature) do
+      FileUtils.mkdir_p(File.join(Rails.root, "tmp", "cache"))
       load File.join(Rails.root, "db", "seeds.rb")
     end 
 
