@@ -42,7 +42,7 @@ RSpec.describe Score::ListGenerators::Best, type: :model do
     let(:generator) { described_class.new(best_count: 2, list: list) }
     let(:result_row) { build :score_result_row }
     let(:assessment_type) { result_row.list_entries.first.assessment_type }
-    let(:expected_arguments) { { entity: result_row.entity, run: 1, track: 2, assessment_type: assessment_type } }
+    let(:expected_arguments) { { entity: result_row.entity, run: 1, track: 2, assessment_type: assessment_type, assessment: result_row.result.assessment } }
 
     it "creates list entry with given result row" do
       expect(list.entries).to receive(:create!).with(expected_arguments)

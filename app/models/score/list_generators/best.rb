@@ -13,7 +13,13 @@ module Score
 
     def create_list_entry result_row, run, track
       any_list = result_row.list_entries.first
-      list.entries.create!(entity: result_row.entity, run: run, track: track, assessment_type: any_list.assessment_type)
+      list.entries.create!(
+        entity: result_row.entity, 
+        run: run, 
+        track: track, 
+        assessment_type: any_list.assessment_type,
+        assessment: result_row.result.assessment
+      )
     end
 
     private
@@ -32,7 +38,7 @@ module Score
     end
 
     def result_assessments_match
-      if list.assessments.count != 1
+      if list.assessments.length != 1
         errors.add(:base, "Es darf nur eine Wertungsgruppe ausgewählt werden")
       elsif @result_object.present? && @result_object.assessment != list.assessments.first
         errors.add(:result, "muss mit jetziger Wertungsgruppe übereinstimmen")
