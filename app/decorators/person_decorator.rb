@@ -17,7 +17,7 @@ class PersonDecorator < ApplicationDecorator
   end
 
   def team_shortcut_name assessment_type=nil
-    team_assessment_type_name [team.shortcut_name], assessment_type
+    team_assessment_type_name [team.try(:shortcut_name)], assessment_type
   end
 
   def translated_gender
