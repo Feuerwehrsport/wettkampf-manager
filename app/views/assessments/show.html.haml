@@ -11,7 +11,10 @@
         %tr
           %th= @assessment.class.human_attribute_name :gender
           %td= t("gender.#{@assessment.gender}")
-  .col-md-4
-    = box("Aktionen") do
-      = link_btn "Bearbeiten", edit_assessment_path(@assessment)
-      = link_btn "Startliste hinzufügen", new_score_list_path(assessment: @assessment)
+
+  - if logged_in?
+    .col-md-4
+      = box("Aktionen") do
+        = link_btn "Bearbeiten", edit_assessment_path(@assessment)
+        %br
+        = link_btn "Löschen", assessment_path(@assessment), method: :delete, data: { confirm: 'Wertungsgruppe wirklich löschen? Dies ist nur möglich, wenn keine Ergebnisse verknüpft sind.' }

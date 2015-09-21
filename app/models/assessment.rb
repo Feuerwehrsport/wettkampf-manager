@@ -2,9 +2,9 @@ class Assessment < ActiveRecord::Base
   belongs_to :discipline
   belongs_to :score_competition_result, class_name: "Score::CompetitionResult"
   has_many :requests, class_name: "AssessmentRequest", dependent: :destroy
-  has_many :results, class_name: "Score::Result"
-  has_many :list_assessments, class_name: "Score::ListAssessment"
-  has_many :lists, class_name: "Score::List", through: :list_assessments
+  has_many :results, class_name: "Score::Result", dependent: :restrict_with_error
+  has_many :list_assessments, class_name: "Score::ListAssessment", dependent: :restrict_with_error
+  has_many :lists, class_name: "Score::List", through: :list_assessments, dependent: :restrict_with_error
   enum gender: { female: 0, male: 1 }
 
   validates :discipline, presence: true
