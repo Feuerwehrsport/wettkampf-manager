@@ -100,8 +100,12 @@ RSpec.configure do |config|
     end
 
     config.before(type: :feature) do
+      Capybara.reset_sessions!
+      browser = Capybara.current_session.driver.browser
+      browser.try(:clear_cookies)
+      browser.try(:manage).try(:delete_all_cookies)
       load File.join(Rails.root, "db", "seeds.rb")
-    end 
+    end
 
     config.around(:each) do |spec|
       if spec.metadata[:js]
