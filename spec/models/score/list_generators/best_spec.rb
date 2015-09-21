@@ -25,7 +25,7 @@ RSpec.describe Score::ListGenerators::Best, type: :model do
         expect(generator.send :perform_rows).to have(2).items
       end
       it "returns in correct order" do
-        expect(generator.send :perform_rows).to eq [1, 2]
+        expect(generator.send :perform_rows).to eq [2, 1]
       end
     end
 

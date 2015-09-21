@@ -34,7 +34,7 @@ module Score
       while all_rows.count > 0 && (result_rows.last <=> all_rows.first) == 0
         result_rows.push(all_rows.shift)
       end
-      result_rows
+      result_rows.reverse
     end
 
     def result_assessments_match
