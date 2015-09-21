@@ -27,7 +27,12 @@ de:
       assessment:
         name: Wird ein Name angegeben, ersetzt dieser den generierten Namen
       competition:
-        hostname: Wird ein Hostname angegeben, wird daraus auf der Startseite ein QR-Code angezeigt.
+        competition_result_type: 'D-Cup: 1. Platz ⇒ 10 Punkte. 10. Platz ⇒ 1 Punkt.<br/>Plätze zu Punkte: 1. Platz ⇒ 1 Negativpunkt, 2. Platz ⇒ 2 Negativpunkte.'
+        d_cup: Bei einem Deutschland-Cup wird die Jahresgesamtwertung angezeigt.
+        date: Format YYYY-MM-DD
+        hostname: Wird ein Hostname angegeben, wird daraus auf der Startseite ein QR-Code angezeigt. Die Auflösung von Namen in IP-Adresse kann zum Beispiel vom Router übernommen werden. Der Wettkampf-Manger kann das nicht.
+        name: 'Zum Beispiel: Deutschland-Cup in Rostock'
+        place: Wettkampfort wird für die Ergebnislisten separat gebraucht.
         youth_name: "Wird ein Name angegeben, wird die Jugendwertung aktiviert. Beispiel: <i>U20</i>"
       discipline:
         name: Wird ein Name angegeben, ersetzt dieser den eigentlichen Disziplinnamen (z. B. Spaßwettkampf)
