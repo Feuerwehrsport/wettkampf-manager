@@ -3,9 +3,9 @@ require 'score'
 module Score
   class List < ActiveRecord::Base
     enum result_time_type: { electronic: 0, handheld_median: 1, handheld_average: 2, calculated: 3 }
-    has_many :list_assessments
+    has_many :list_assessments, dependent: :destroy
     has_many :assessments, through: :list_assessments
-    has_many :result_lists
+    has_many :result_lists, dependent: :destroy
     has_many :results, through: :result_lists
     has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry", dependent: :destroy
     validates :name, :assessments, :track_count, :shortcut, presence: true

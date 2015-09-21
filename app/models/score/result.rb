@@ -3,8 +3,8 @@ require 'score'
 module Score
   class Result < ActiveRecord::Base
     belongs_to :assessment
-    belongs_to :double_event_result
-    has_many :result_lists
+    belongs_to :double_event_result, dependent: :destroy
+    has_many :result_lists, dependent: :destroy
     has_many :lists, through: :result_lists
 
     validates :assessment, presence: true
@@ -13,8 +13,6 @@ module Score
     scope :gender, -> (gender) { joins(:assessment).merge(Assessment.gender(gender)) }
     scope :group_assessment_for, -> (gender) { gender(gender).where(group_assessment: true) }
     scope :discipline, -> (discipline) { where(assessment: Assessment.discipline(discipline)) }
-
-    after_destroy :remove_result_from_list
 
     def to_label
       decorate.to_s
@@ -58,12 +56,6 @@ module Score
       end
       @out_of_competition_rows = out_of_competition_rows.values
       rows.values
-    end
-    
-    private
-
-    def remove_result_from_list
-      lists.update_all(result_id: nil)
     end
   end
 end
