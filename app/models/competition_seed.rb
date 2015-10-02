@@ -55,6 +55,14 @@ class CompetitionSeed
           "Kinder AKI 10-12; AKI 13-14; AKII 15-16; AKII 17-18 jeweils m/w: 100m Hindernisbahn, Hakenleitersteigen",
         ],
         :seed_method_stadtmeisterschaft_sonnewalde
+      ],
+      [
+        "MV-Cup (HL, HB)",
+        [
+          "Frauen: 100m Hindernisbahn, Hakenleitersteigen, Zweikampf",
+          "Männer: 100m Hindernisbahn, Hakenleitersteigen, Zweikampf",
+        ],
+        :seed_method_mv_cup
       ]
     ]
   end
@@ -80,6 +88,27 @@ class CompetitionSeed
 
   def seed_method_dcup_simple
     dcup_seed(false)
+  end
+
+  def seed_method_mv_cup
+    Competition.update_all(
+      name: "MV-Cup",
+    )
+
+    hb = Disciplines::ObstacleCourse.create!
+    hl = Disciplines::ClimbingHookLadder.create!
+    zk = Disciplines::DoubleEvent.create!
+    
+    [:female, :male].each do |gender|
+      zk_assessment = Assessment.create!(discipline: zk, gender: gender)
+      zk_result = Score::DoubleEventResult.create!(assessment: zk_assessment)
+
+      hb_assessment = Assessment.create!(discipline: hb, gender: gender)
+      Score::Result.create!(assessment: hb_assessment, double_event_result: zk_result)
+
+      hl_assessment = Assessment.create!(discipline: hl, gender: gender)
+      Score::Result.create!(assessment: hl_assessment, double_event_result: zk_result)
+    end
   end
 
   def dcup_seed(all_disciplines=true)
