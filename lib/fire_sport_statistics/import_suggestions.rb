@@ -12,27 +12,26 @@ module FireSportStatistics
 
         people = []
         teams = []
-        API::Get.people.each do |person|
+        API::Get.fetch(:people).each do |person|
           people[person.id.to_i] = Person.create!(
-            last_name: person.name,
-            first_name: person.firstname,
-            gender: person.sex,
+            last_name: person.last_name,
+            first_name: person.first_name,
+            gender: person.gender,
             external_id: person.id,
-            youth: person.youth,
           )
           verbose_dot "p"
         end
 
-        API::Get.teams.each do |team|
+        API::Get.fetch(:teams).each do |team|
           teams[team.id.to_i] = Team.create!(
             name: team.name,
-            short: team.short,
+            short: team.shortcut,
             external_id: team.id,
           )
           verbose_dot "t"
         end
         
-        API::Get.team_associations.each do |association|
+        API::Get.fetch(:team_members).each do |association|
           TeamAssociation.create!(
             person: people[association.person_id.to_i],
             team: teams[association.team_id.to_i],
@@ -40,21 +39,21 @@ module FireSportStatistics
           verbose_dot "a"
         end
         
-        API::Get.team_spellings.each do |spelling|
+        API::Get.fetch(:team_spellings).each do |spelling|
           TeamSpelling.create!(
             team: teams[spelling.team_id.to_i],
             name: spelling.name,
-            short: spelling.short,
+            short: spelling.shortcut,
           )
           verbose_dot "s"
         end
         
-        API::Get.person_spellings.each do |spelling|
+        API::Get.fetch(:person_spellings).each do |spelling|
           PersonSpelling.create!(
             person: people[spelling.person_id.to_i],
-            last_name: spelling.name,
-            first_name: spelling.firstname,
-            gender: spelling.sex,
+            last_name: spelling.last_name,
+            first_name: spelling.first_name,
+            gender: spelling.gender,
           )
           verbose_dot "v"
         end
