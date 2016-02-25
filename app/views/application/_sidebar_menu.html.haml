@@ -41,6 +41,11 @@
         %a{ href: d_cup_single_competitor_results_path }
           %i.fa.fa-list-ol
           %span D-Cup-Wertung
+  - if logged_in?
+    %li{ class: controller_name == 'certificates/templates' ? 'active' : '' }
+      %a{ href: certificates_templates_path }
+        %i.ion.ion-document
+        %span= Certificates::Template.model_name.human count: 0  
 
   - if logged_in?
     %li{ class: controller_name == 'session' ? 'active' : '' }

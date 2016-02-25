@@ -1,0 +1,7 @@
+= boxed_form_for Certificates::Template.model_name.human, @certificates_template do |f|
+  = f.error_notification
+  = f.inputs do
+    = f.input :name
+    = f.input :image, as: :file
+  = f.actions do
+    = f.primary_button :submit, "Speichern"

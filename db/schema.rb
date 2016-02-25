@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629163312) do
+ActiveRecord::Schema.define(version: 20160224145037) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -39,6 +39,24 @@ ActiveRecord::Schema.define(version: 20150629163312) do
 
   add_index "assessments", ["discipline_id"], name: "index_assessments_on_discipline_id"
   add_index "assessments", ["score_competition_result_id"], name: "index_assessments_on_score_competition_result_id"
+
+  create_table "certificates_templates", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "image",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "certificates_text_positions", force: :cascade do |t|
+    t.integer  "template_id", null: false
+    t.string   "key",         null: false
+    t.integer  "top",         null: false
+    t.integer  "left",        null: false
+    t.string   "align",       null: false
+    t.integer  "size",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name",                    default: "",    null: false

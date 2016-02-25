@@ -16,10 +16,9 @@ gem 'haml-rails', '~> 0.8'
 gem 'simple_form'
 # Draper as model decorator
 gem 'draper'
+
 # Carrierwave for file uploads
-# We need current master for multiple file support
-# gem 'carrierwave', git: 'https://github.com/carrierwaveuploader/carrierwave.git', branch: 'master'
-# gem 'mini_magick'
+gem 'carrierwave'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -35,6 +34,7 @@ gem 'coffee-script-source', '1.8.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 
 # Icons and icon fonts
 gem 'font-awesome-rails'

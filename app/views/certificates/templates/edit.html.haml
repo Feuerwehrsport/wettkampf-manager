@@ -1,0 +1,25 @@
+= boxed_form_for Certificates::Template.model_name.human, @certificates_template do |f|
+  = f.error_notification
+  = f.inputs do
+    .row
+      .col-md-10
+        #certificates-template-position
+          = image_tag(asset_path('certificate_template_arrow.png'), id: "template-arrow")
+          = image_tag(@certificates_template.image, id: "template-background")
+      
+      .col-md-2#position-buttons
+
+    = f.input :name
+
+    - @certificates_template.text_positions.each do |text_position|
+      = f.simple_fields_for :text_positions, text_position do |tpf|
+        .text-position-form{ data: { description: text_position.description, example: text_position.example } }
+          = tpf.input :key, as: :hidden
+          = tpf.input :top, as: :hidden
+          = tpf.input :left, as: :hidden
+          = tpf.input :align, as: :hidden
+          = tpf.input :size, as: :hidden
+          = tpf.input :id, as: :hidden
+          = tpf.input :_destroy, as: :hidden, input_html: { value: tpf.object.persisted? ? 'false' : 'true' }
+  = f.actions do
+    = f.primary_button :submit, "Speichern"

@@ -1,0 +1,10 @@
+de:
+  activerecord:
+    models:
+      certificates/template:
+        one: Urkundenvorlage
+        other: Urkundenvorlagen
+    attributes:
+      certificates/template:
+        name: Name
+        image: Hintergrundbild

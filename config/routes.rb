@@ -51,5 +51,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :certificates do
+    resources :templates
+  end
 end
 

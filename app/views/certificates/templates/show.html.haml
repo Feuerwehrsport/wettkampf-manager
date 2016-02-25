@@ -1,0 +1,15 @@
+.row
+  .col-md-8
+    = box("Wettkampf: #{@certificates_template.name}") do |box|
+      %table.table
+        - if @certificates_template.name.present?
+          %tr
+            %th= @certificates_template.class.human_attribute_name :name
+            %td= @certificates_template.name
+        %tr
+          %th= @certificates_template.class.human_attribute_name :image
+          %td= image_tag(@certificates_template.image)
+
+  .col-md-4
+    = box("Aktionen") do
+      = link_to "Bearbeiten", edit_certificates_template_path(@certificates_template), class: "btn btn-sm btn-default"
