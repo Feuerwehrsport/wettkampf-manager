@@ -13,3 +13,6 @@
   .col-md-4
     = box("Aktionen") do
       = link_to "Bearbeiten", edit_certificates_template_path(@certificates_template), class: "btn btn-sm btn-default"
+  .col-md-6
+    = box("Vorschau") do
+      %iframe#certificates-template-preview{ src: "/pdfjs/web/viewer.html?file=#{url_for(format: :pdf)}" }
