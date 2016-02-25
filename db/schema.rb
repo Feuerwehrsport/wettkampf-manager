@@ -42,7 +42,8 @@ ActiveRecord::Schema.define(version: 20160224145037) do
 
   create_table "certificates_templates", force: :cascade do |t|
     t.string   "name",       null: false
-    t.string   "image",      null: false
+    t.string   "image"
+    t.string   "font"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

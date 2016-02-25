@@ -7,6 +7,11 @@ module Certificates
       page_title("Urkundenvorlage", margin: [0,0,0,0])
     end
 
+    def edit
+      super
+      @text_position_form = params[:form_type] == "text_positions"
+    end
+
     protected
 
     def assign_resource_for_edit
@@ -17,7 +22,10 @@ module Certificates
     end
 
     def certificates_template_params
-      params.require(:certificates_template).permit(:name, :image, text_positions_attributes: [:key, :top, :left, :align, :size, :id, :_destroy])
+      params.require(:certificates_template).permit(
+        :name, :image, :font, :remove_image, :remove_font,
+        text_positions_attributes: [:key, :top, :left, :align, :size, :id, :_destroy]
+      )
     end
   end
 end

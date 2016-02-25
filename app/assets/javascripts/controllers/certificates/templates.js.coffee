@@ -51,6 +51,7 @@ class TextElement
     @arrow = new Arrow()
     @parentOffset = @parent.offset()
 
+
     buttonLine = $('<div/>')
     @setAlign(buttonLine)
     @textLine = $('<div/>').addClass("text-line text-#{@currentAlign()}").append(@formElement.example())
@@ -59,6 +60,11 @@ class TextElement
     @removeButton = $('<div/>').addClass("btn btn-default btn-xs glyphicon glyphicon-remove").appendTo(buttonLine)
     @addButton = $('<div/>').addClass('btn btn-default btn-xs btn-block').appendTo($('#position-buttons')).text(@formElement.description()).click(@show)
     @show() if @formElement.get('destroy') is 'false'
+    @setFont() 
+
+  setFont: () =>
+    font = @parent.data('font-family')
+    @textLine.css(fontFamily: font) if font?
 
   setAlign: (buttonLine) =>
     @textAlign = 1

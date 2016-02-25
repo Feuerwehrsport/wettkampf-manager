@@ -8,3 +8,6 @@ de:
       certificates/template:
         name: Name
         image: Hintergrundbild
+        remove_image: Hintergrundbild entfernen
+        font: Schriftart
+        remove_font: Schriftart entfernen

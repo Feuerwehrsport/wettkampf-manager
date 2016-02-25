@@ -1,6 +1,9 @@
+- if @certificates_template.font.present?
+  = render 'font_style'
+
 .row
   .col-md-8
-    = box("Wettkampf: #{@certificates_template.name}") do |box|
+    = box("Urkundenvorlage: #{@certificates_template.name}") do
       %table.table
         - if @certificates_template.name.present?
           %tr
@@ -8,11 +11,23 @@
             %td= @certificates_template.name
         %tr
           %th= @certificates_template.class.human_attribute_name :image
-          %td= image_tag(@certificates_template.image)
+          - if @certificates_template.image.present?
+            %td= image_tag(@certificates_template.image)
+          - else
+            %td Nicht angegeben
+        %tr
+          %th= @certificates_template.class.human_attribute_name :font
+          - if @certificates_template.font.present?
+            %td{ style: "font-family: certificates_template_#{@certificates_template.id}" } Beispieltext 
+          - else
+            %td Nicht angegeben
 
   .col-md-4
     = box("Aktionen") do
-      = link_to "Bearbeiten", edit_certificates_template_path(@certificates_template), class: "btn btn-sm btn-default"
+      = link_to "Textpositionen", { action: :edit, form_type: :text_positions}, class: "btn btn-sm btn-default btn-block"
+      = link_to "Bearbeiten", { action: :edit}, class: "btn btn-sm btn-default btn-block"
+      = link_to "Vorschau als PDF", { format: :pdf }, class: "btn btn-sm btn-default btn-block"
+
   .col-md-6
     = box("Vorschau") do
       %iframe#certificates-template-preview{ src: "/pdfjs/web/viewer.html?file=#{url_for(format: :pdf)}" }
