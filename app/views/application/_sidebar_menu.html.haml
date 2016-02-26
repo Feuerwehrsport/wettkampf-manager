@@ -42,7 +42,7 @@
           %i.fa.fa-list-ol
           %span D-Cup-Wertung
   - if logged_in?
-    %li{ class: controller_name == 'certificates/templates' ? 'active' : '' }
+    %li{ class: controller_name == 'templates' ? 'active' : '' }
       %a{ href: certificates_templates_path }
         %i.ion.ion-document
         %span= Certificates::Template.model_name.human count: 0  

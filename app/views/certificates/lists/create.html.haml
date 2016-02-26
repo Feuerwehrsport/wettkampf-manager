@@ -1,0 +1,8 @@
+.row
+  .col-md-8
+    = boxed_form_for "Urkunden", @certificates_list, url: url_for(action: :export, format: :pdf) do |f|
+      = f.input :template_id, as: :hidden
+      = f.input :image, as: :hidden
+      = f.input :score_result_id, as: :hidden
+      = f.actions do
+        = f.primary_button :submit, "PDF anzeigen"

@@ -1,13 +1,20 @@
 de:
-  activerecord:
+  activerecord: &activerecord
     models:
+      certificates/list: Urkunden
       certificates/template:
         one: Urkundenvorlage
         other: Urkundenvorlagen
     attributes:
+      certificates/list:
+        image: Hintergrundbild einbetten
+        template_id: Urkundenvorlage
+        score_result_id: Ergebnisliste
       certificates/template:
         name: Name
         image: Hintergrundbild
         remove_image: Hintergrundbild entfernen
         font: Schriftart
         remove_font: Schriftart entfernen
+  activemodel:
+    <<: *activerecord

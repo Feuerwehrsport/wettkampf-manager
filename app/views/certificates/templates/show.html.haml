@@ -27,6 +27,7 @@
       = link_to "Textpositionen", { action: :edit, form_type: :text_positions}, class: "btn btn-sm btn-default btn-block"
       = link_to "Bearbeiten", { action: :edit}, class: "btn btn-sm btn-default btn-block"
       = link_to "Vorschau als PDF", { format: :pdf }, class: "btn btn-sm btn-default btn-block"
+      = link_to "Löschen", { action: :destroy }, method: :delete, class: "btn btn-sm btn-default btn-block", data: { confirm: 'Vorlage wirklich löschen?' }
 
   .col-md-6
     = box("Vorschau") do

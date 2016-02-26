@@ -46,6 +46,7 @@
         = render 'result_table', rows: @rows, places: true
         - box.footer do
           .pull-right
+            = link_btn "Urkunden", new_certificates_list_path(score_result_id: @score_result.id)
             = link_btn "Mannschaftswertung als PDF", url_for(format: :pdf, only: :group_assessment)
             = link_btn "Einzelwertung als PDF", url_for(format: :pdf, only: :single_competitors)
             = link_btn "Komplett als PDF", url_for(format: :pdf)

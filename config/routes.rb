@@ -54,6 +54,11 @@ Rails.application.routes.draw do
 
   namespace :certificates do
     resources :templates
+    resources :lists, only: [:new, :create] do
+      collection do
+        post :export
+      end
+    end
   end
 end
 

@@ -1,0 +1,8 @@
+= boxed_form_for "Urkunden", @certificates_list do |f|
+  = f.error_notification
+  = f.inputs do
+    = f.input :template_id, collection: Certificates::Template.all
+    = f.input :image, as: :boolean
+    = f.input :score_result_id, collection: Score::Result.all
+  = f.actions do
+    = f.primary_button :submit, "Speichern"

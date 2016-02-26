@@ -23,6 +23,7 @@
             = tpf.input :id, as: :hidden
             = tpf.input :_destroy, as: :hidden, input_html: { value: tpf.object.persisted? ? 'false' : 'true' }
     = f.actions do
+      = link_to("Abbrechen", { action: :show }, class: "btn btn-link")
       = f.primary_button :submit, "Speichern"
 - else
   = boxed_form_for Certificates::Template.model_name.human, @certificates_template do |f|
@@ -37,4 +38,5 @@
         = f.input :remove_font, as: :boolean, hint: "Zur Zeit: #{f.object.font.file.filename}"
 
     = f.actions do
+      = link_to("Abbrechen", { action: :show }, class: "btn btn-link")
       = f.primary_button :submit, "Speichern"
