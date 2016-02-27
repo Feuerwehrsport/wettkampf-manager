@@ -1,6 +1,6 @@
 module DashboardHelper
   def qrcode url
-    RQRCode::QRCode.new(url, size: 4, level: :h ).to_img.resize(200, 200).to_data_url
+    RQRCode::QRCode.new(url, level: :h ).to_img.resize(200, 200).to_data_url
   end
 
   def hostname_url

@@ -12,7 +12,7 @@
         %tr
           %th= @certificates_template.class.human_attribute_name :image
           - if @certificates_template.image.present?
-            %td= image_tag(@certificates_template.image)
+            %td= image_tag(@certificates_template.image, width: "100px")
           - else
             %td Nicht angegeben
         %tr
@@ -24,10 +24,10 @@
 
   .col-md-4
     = box("Aktionen") do
-      = link_to "Textpositionen", { action: :edit, form_type: :text_positions}, class: "btn btn-sm btn-default btn-block"
-      = link_to "Bearbeiten", { action: :edit}, class: "btn btn-sm btn-default btn-block"
-      = link_to "Vorschau als PDF", { format: :pdf }, class: "btn btn-sm btn-default btn-block"
-      = link_to "Löschen", { action: :destroy }, method: :delete, class: "btn btn-sm btn-default btn-block", data: { confirm: 'Vorlage wirklich löschen?' }
+      = block_link_to "Textpositionen", { action: :edit, form_type: :text_positions}
+      = block_link_to "Bearbeiten", { action: :edit}
+      = block_link_to "Vorschau als PDF", { format: :pdf }
+      = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Vorlage wirklich löschen?' }
 
   .col-md-6
     = box("Vorschau") do

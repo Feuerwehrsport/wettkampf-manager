@@ -4,5 +4,4 @@
       = render 'index_table', assessments: @assessments
                
       = box.footer do
-        .pull-right= link_to "Hinzufügen", new_assessment_path, class: "btn btn-sm btn-default"
-        .clearfix
+        = btn_link_to "Hinzufügen", { action: :new }

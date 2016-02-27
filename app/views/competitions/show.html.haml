@@ -12,4 +12,4 @@
 
   .col-md-4
     = box("Aktionen") do
-      = link_to "Bearbeiten", edit_competition_path(@competition), class: "btn btn-sm btn-default"
+      = block_link_to "Bearbeiten", { action: :edit }

@@ -9,13 +9,13 @@
             %tr
               %td= assessment
               %td.text-right
-                = link_to "Ansehen", assessment_path(assessment), class: "btn btn-sm btn-default"
+                = btn_link_to "Ansehen", assessment
 
 
   .col-md-4
     = box("Aktionen") do
       - if @discipline.destroy_possible?
-        = link_to 'Löschen', discipline_path(@discipline), class: "btn btn-sm btn-default", method: :delete, data: { confirm: 'Disziplin wirklich löschen?' }
+        = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Disziplin wirklich löschen?' }
       - else
         .alert.alert-warning
           Diese Disziplin kann nicht gelöscht werden. Es sind Wertungsgruppen zugeordnet.

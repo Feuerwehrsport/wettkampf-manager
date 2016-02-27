@@ -5,4 +5,5 @@
     = f.input :image, as: :file, hint: "Hintergrundbild zur Orientierung"
     = f.input :font, as: :file, hint: "Schriftart für variable Texte"
   = f.actions do
+    = cancel_link
     = f.primary_button :submit, "Speichern"

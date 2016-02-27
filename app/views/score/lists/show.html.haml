@@ -34,28 +34,22 @@
                     - if @score_list.open? && entry
                       = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: "Aus Liste entfernen", class: "btn-xs", remote: true
       - box.footer do
-        .pull-right
-          = link_btn "als PDF", url_for(format: :pdf)
-          = link_btn "als XLS", url_for(format: :xlsx)
-        .clearfix
+        = link_btn "als PDF", format: :pdf
+        = link_btn "als XLS", format: :xlsx
 
   - if logged_in?
     .col-md-3
       = box("Aktionen") do
         - if @score_list.open?
-          = link_btn "Liste abschließen", finished_score_list_path(@score_list), remote: true
-          %br
-          = link_to "Reihenfolge bearbeiten", move_score_list_path(@score_list), class: "btn btn-info btn-sm"
-          %br
-          = link_to "Zeiten im Block eintragen", edit_times_score_list_path(@score_list), class: "btn btn-default btn-sm"
-          %br
-          = link_to "Teilnehmer hinzufügen", select_entity_score_list_path(@score_list), remote: true, class: "btn btn-success btn-sm"
+          = link_to "Liste abschließen", { action: :finished }, remote: true, class: "btn btn-default btn-sm btn-block"
+          = link_to "Reihenfolge bearbeiten", { action: :move }, class: "btn btn-default btn-sm btn-block"
+          = link_to "Zeiten im Block eintragen", { action: :edit_times }, class: "btn btn-default btn-sm btn-block"
+          = link_to "Teilnehmer hinzufügen", { action: :select_entity }, remote: true, class: "btn btn-default btn-sm btn-block"
 
         - else
-          = link_btn "Liste öffnen", finished_score_list_path(@score_list), remote: true
+          = link_to "Liste öffnen", { action: :finished }, remote: true, class: "btn btn-default btn-sm btn-block"
 
       - if @score_list.open?
         = box("Allgemein") do
-          = link_btn "Bearbeiten", edit_score_list_path(@score_list)
-          %br
-          = link_btn "Löschen", score_list_path(@score_list), method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }
+          = link_to "Bearbeiten", { action: :edit }, class: "btn btn-default btn-sm btn-block"
+          = link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }, class: "btn btn-default btn-sm btn-block"

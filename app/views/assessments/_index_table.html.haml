@@ -15,5 +15,5 @@
           = assessment.discipline
         %td= assessment.translated_gender
         %td.text-right
-          = link_to "Ansehen", assessment_path(assessment), class: "btn btn-sm btn-default"
-          = link_to "Bearbeiten", edit_assessment_path(assessment), class: "btn btn-sm btn-default"
+          = btn_link_to "Ansehen", assessment
+          = btn_link_to "Bearbeiten", { action: :edit, id: assessment }

@@ -9,11 +9,11 @@
           %tr
             %td= template.name
             %td.text-right
-              = link_to "Ansehen", {action: :show, id: template}, class: "btn btn-sm btn-default"
-              = link_to "Bearbeiten", {action: :edit, id: template}, class: "btn btn-sm btn-default"
-  .col-md-4
-    = box '' do |box|
-      %p Hier können Sie Vorlagen für Urkunden anlegen, die später mit den Ergebnislisten automatisch ausgefüllt werden.
-      %p.bg-danger Bitte beachten Sie, dass diese Funktionen nur mit Firefox und Chrome ausführlich getestet wurden.
+              = btn_link_to "Ansehen", template
+              = btn_link_to "Bearbeiten", { action: :edit, id: template }
       - box.footer do
-        = link_to("Hinzufügen", { action: :new }, class: "btn btn-info")
+        = btn_link_to "Hinzufügen", { action: :new }
+  .col-md-4
+    = box 'Erläuterung' do |box|
+      %p Hier können Sie Vorlagen für Urkunden anlegen, die später mit den Ergebnislisten automatisch ausgefüllt werden.
+      .alert.alert-danger Bitte beachten Sie, dass diese Funktionen nur mit Firefox und Chrome ausführlich getestet wurden.

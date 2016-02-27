@@ -29,6 +29,7 @@
               %span
       - box.footer do
         = simple_form_for @score_list, html: { class: "hide score_list_form" } do |f|
+          = cancel_link
           = f.primary_button :submit, "Liste speichern"
         
   .col-md-4
@@ -36,8 +37,6 @@
       %p Einfach die Zeilen in die neue Position ziehen. Danach unter der Tabelle auf Speichern klicken.
   .col-md-4
     = box("Aktionen") do
-      = link_to "Ansehen", score_list_path(@score_list), class: "btn btn-sm btn-default"
-      %br
-      = link_to "Bearbeiten", edit_score_list_path(@score_list), class: "btn btn-sm btn-default"
-      %br
-      = link_to "Excel-Liste", score_list_path(@score_list, format: :xlsx), class: "btn btn-sm btn-default"
+      = link_to "Ansehen", { action: :show }, class: "btn btn-sm btn-default btn-block"
+      = link_to "Bearbeiten", { action: :edit }, class: "btn btn-sm btn-default btn-block"
+      = link_to "Excel-Liste", { action: :show, format: :xlsx }, class: "btn btn-sm btn-default btn-block"

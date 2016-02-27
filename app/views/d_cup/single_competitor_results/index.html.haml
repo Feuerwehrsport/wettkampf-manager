@@ -8,10 +8,8 @@
               = discipline_image(result.assessment.discipline)
               = result.to_s
             %td.text-right
-              = link_to "Ansehen", url_for(action: :show, id: result.id), class: "btn btn-sm btn-default"
+              = btn_link_to "Ansehen", { action: :show, id: result.id }
         
       - box.footer do
-        .pull-right
-          = link_btn "als PDF", url_for(format: :pdf)
-          = link_btn "als XLS", url_for(format: :xlsx)
-        .clearfix
+        = btn_link_to "als PDF", format: :pdf
+        = btn_link_to "als XLS", format: :xlsx
