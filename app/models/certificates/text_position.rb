@@ -8,6 +8,10 @@ class Certificates::TextPosition < ActiveRecord::Base
       description: "Name des Wettkämpfers",
       example: "Tom Gehlert",
     },
+    person_bib_number: {
+      description: "Startnummer",
+      example: "1033",
+    },
     time_long: {
       description: "Zeit (Sekunden)",
       example: "23,39 Sekunden",

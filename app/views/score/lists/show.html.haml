@@ -2,29 +2,10 @@
   .col-md-9
     = box @score_list.name do |box|
       %table.table
-        %thead
-          %tr
-            %th Lauf
-            %th Bahn
-            - if single_discipline?
-              %th Vorname
-              %th Nachname
-            %th Mannschaft
-            %th Zeit
-
+        = render 'list_headline', times: true
         %tbody
           - score_list_entries do |entry, run, track|
             = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do |first|
-              - if single_discipline?
-                %td= entry.try(:entity).try(:first_name)
-                %td= entry.try(:entity).try(:last_name)
-                %td= entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type))
-              - else
-                %td
-                  = entry.try(:entity).try(:to_s, multiple_assessments?)
-                  - if multiple_assessments?
-                    %br
-                    .tiny= entry.try(:assessment).try(:decorate)
               %td.time-col
                 = result_for entry
                 - if logged_in?

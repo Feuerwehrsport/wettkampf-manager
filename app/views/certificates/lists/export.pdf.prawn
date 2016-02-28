@@ -29,6 +29,8 @@ end
         row.entity.team.try(:numbered_name)
       when :person_name
         row.entity
+      when :person_bib_number
+        row.entity.try(:bib_number)
       when :time_long
         time.to_s.gsub("s", "Sekunden").gsub("D", "ungültig")
       when :time_short

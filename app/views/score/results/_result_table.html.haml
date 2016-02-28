@@ -2,6 +2,8 @@
   %tr
     - if places
       %th
+    - if @score_result.assessment.discipline.single_discipline? && Competition.one.show_bib_numbers?
+      %th Nr.
     %th Name
     - if @score_result.is_a? Score::DoubleEventResult
       %th Summe
@@ -17,6 +19,8 @@
     %tr
       - if places
         %td= "#{place_for_row row}."
+      - if @score_result.assessment.discipline.single_discipline? && Competition.one.show_bib_numbers?
+        %td= row.entity.try(:bib_number)
       %th= row.entity
       - if row.is_a? Score::DoubleEventResultRow
         %th= row.sum_stopwatch_time

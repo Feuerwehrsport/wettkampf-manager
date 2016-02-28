@@ -3,6 +3,8 @@
 - else
   %table.table.table-bordered.table-hover.table-condensed.people-index-table
     %tr
+      - if Competition.one.show_bib_numbers?
+        %th{ style: "width: 15%" } Nr.
       %th{ style: "width: 35%" } Name
       %th{ style: "width: 35%" }= Person.human_attribute_name(:team)
       - if decorated_competition.youth_name.present?
@@ -15,6 +17,8 @@
         %th
     - collection.each do |person|
       %tr
+        - if Competition.one.show_bib_numbers?
+          %td= person.bib_number
         %td= link_to person.full_name, person_path(person)
         %td= person.team
         - if decorated_competition.youth_name.present?

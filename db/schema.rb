@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20160224145037) do
     t.integer  "group_people_count",      default: 10,    null: false
     t.integer  "group_run_count",         default: 8,     null: false
     t.integer  "group_score_count",       default: 6,     null: false
+    t.boolean  "show_bib_numbers",        default: false, null: false
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.string   "youth_name",              default: "",    null: false
@@ -172,6 +173,7 @@ ActiveRecord::Schema.define(version: 20160224145037) do
     t.string   "first_name",                                      null: false
     t.integer  "gender",                                          null: false
     t.integer  "team_id"
+    t.string   "bib_number",                      default: "",    null: false
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.boolean  "youth",                           default: false, null: false

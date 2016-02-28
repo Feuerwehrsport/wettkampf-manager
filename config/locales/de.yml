@@ -63,6 +63,7 @@ de:
         hostname: Hostname des Systems
         place: Ort
         youth_name: Name der Jugendwertung
+        show_bib_numbers: Startnummer anzeigen
       discipline:
         name: Name
         short_name: Kurzname
@@ -72,6 +73,7 @@ de:
         gender: Geschlecht
         last_name: Nachname
         team: Mannschaft
+        bib_number: Startnummer
       score/list:
         assessments: Wertungsgruppen
         name: Name

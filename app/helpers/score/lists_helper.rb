@@ -110,6 +110,7 @@ module Score
     def show_export_data(options={})
       header = ["Lauf", "Bahn"]
       if single_discipline?
+        header.push("Nr.") if Competition.one.show_bib_numbers?
         header.push("Vorname")
         header.push("Nachname")
       end
@@ -133,6 +134,7 @@ module Score
 
         line.push(track)
         if single_discipline?
+          line.push(entry.try(:entity).try(:bib_number)) if Competition.one.show_bib_numbers?
           line.push(entry.try(:entity).try(:first_name))
           line.push(entry.try(:entity).try(:last_name))
           line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))

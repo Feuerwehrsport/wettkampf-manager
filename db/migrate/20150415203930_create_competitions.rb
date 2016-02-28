@@ -8,6 +8,7 @@ class CreateCompetitions < ActiveRecord::Migration
       t.integer :group_people_count, null: false, default: 10
       t.integer :group_run_count, null: false, default: 8
       t.integer :group_score_count, null: false, default: 6
+      t.boolean :show_bib_numbers, null: false, default: false
 
       t.timestamps null: false
     end

@@ -11,6 +11,7 @@
     = f.input :hostname
     = f.input :competition_result_type, collection: Score::CompetitionResult.result_types.invert, include_blank: "Keine Gesamtwertung"
     = f.input :d_cup
+    = f.input :show_bib_numbers
   = f.actions do
     = cancel_link
     = f.primary_button :submit, "Speichern"
