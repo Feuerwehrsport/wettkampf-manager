@@ -10,4 +10,5 @@
     - if Competition.one.show_bib_numbers?
       = f.input :bib_number
   = f.actions do
+    = cancel_link
     = f.primary_button :submit, "Speichern"

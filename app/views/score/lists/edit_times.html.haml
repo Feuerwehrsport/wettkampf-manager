@@ -16,6 +16,7 @@
                       = n.simple_fields_for :time_entries, entry.time_entries do |t|
                         = t.input :second_time, label: t.object.class.model_name.human
         = f.actions do
+          = cancel_link
           = f.primary_button :submit, "Speichern"
 .row
   .col-md-6

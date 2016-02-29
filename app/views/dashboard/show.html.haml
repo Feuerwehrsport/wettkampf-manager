@@ -7,7 +7,7 @@
           - CompetitionSeed.all.each do |seed|
             %tr
               %th= seed.name
-              %td= link_btn "Ansehen", competition_seed_path(seed.id)
+              %td= btn_link_to "Ansehen", competition_seed_path(seed.id)
   - else
     .col-md-7
       = box decorated_competition do |box|

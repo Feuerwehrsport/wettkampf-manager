@@ -21,5 +21,6 @@
               = g.input :result, collection: Score::Result.all.map(&:decorate), input_html: { class: "select-result" }
             .generator-config{ data: { classes: form_generator_config_classes(:best_count) } }
               = g.input :best_count, as: :integer
+          = cancel_link
           = f.primary_button :submit, "Speichern"
  

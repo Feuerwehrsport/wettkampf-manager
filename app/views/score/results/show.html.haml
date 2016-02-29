@@ -36,22 +36,19 @@
   - if logged_in?
     .col-md-4
       = box("Aktionen") do
-        = link_btn "Bearbeiten", edit_score_result_path(@score_result)
-        %br
-        = link_btn "Löschen", score_result_path(@score_result), method: :delete, data: { confirm: 'Ergebnisliste wirklich löschen? Die zugehörigen Startlisten werden verändert!' }
+        = block_link_to "Bearbeiten", action: :edit
+        = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Ergebnisliste wirklich löschen? Die zugehörigen Startlisten werden verändert!' }
 
   - if @rows.count > 0
     .col-md-12
       = box @score_result do |box|
         = render 'result_table', rows: @rows, places: true
         - box.footer do
-          .pull-right
-            = link_btn "Urkunden", new_certificates_list_path(score_result_id: @score_result.id)
-            = link_btn "Mannschaftswertung als PDF", url_for(format: :pdf, only: :group_assessment)
-            = link_btn "Einzelwertung als PDF", url_for(format: :pdf, only: :single_competitors)
-            = link_btn "Komplett als PDF", url_for(format: :pdf)
-            = link_btn "als XLS", url_for(format: :xlsx)
-          .clearfix
+          = btn_link_to "Urkunden", new_certificates_list_path(score_result_id: @score_result.id)
+          = btn_link_to "Mannschaftswertung als PDF", format: :pdf, only: :group_assessment
+          = btn_link_to "Einzelwertung als PDF", format: :pdf, only: :single_competitors
+          = btn_link_to "Komplett als PDF", format: :pdf
+          = btn_link_to "als XLS", format: :xlsx
 
     - if @score_result.group_assessment? && @discipline.single_discipline?
       .col-md-12

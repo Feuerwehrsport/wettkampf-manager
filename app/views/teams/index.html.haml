@@ -20,13 +20,11 @@
                 - unless team.list_entries_group_competitor_valid?
                   %i.ion.ion-close{ title: "Mannschaftswertung nicht korrekt"}
             %td.text-right
-              = link_to "Ansehen", team_path(team), class: "btn btn-sm btn-default"
+              = block_link_to "Ansehen", team
               - if logged_in?
-                = link_to "Bearbeiten", edit_team_path(team), class: "btn btn-sm btn-default"
+                = block_link_to "Bearbeiten", { action: :edit, id: team }
       - box.footer do
-        .pull-right
-          = link_btn "als PDF", url_for(format: :pdf)
-          = link_btn "als XLS", url_for(format: :xlsx)
-          - if logged_in?
-            = link_to "Hinzufügen", new_team_path, class: "btn btn-sm btn-info"
-        .clearfix
+        = btn_link_to "als PDF", format: :pdf
+        = btn_link_to "als XLS", format: :xlsx
+        - if logged_in?
+          = link_to "Hinzufügen", { action: :new }, class: "btn btn-sm btn-info"

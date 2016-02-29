@@ -3,7 +3,6 @@
     = box Score::Result.model_name.human do |box|
       = render 'index_table', score_results: @score_results
                
-      = box.footer do
-        - if logged_in?
-          .pull-right= link_to "Hinzufügen", new_score_result_path, class: "btn btn-sm btn-default"
-        .clearfix
+      - if logged_in?
+        = box.footer do
+          = btn_link_to "Hinzufügen", { action: :new }

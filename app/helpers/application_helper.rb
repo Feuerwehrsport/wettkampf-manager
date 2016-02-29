@@ -28,7 +28,7 @@ module ApplicationHelper
   end
 
   def icon_link_btn icon_classes, path, options = {}
-    link_btn(content_tag(:i, '', class: icon_classes), path, options)
+    btn_link_to(content_tag(:i, '', class: icon_classes), path, options)
   end
 
   def discipline_image discipline, options = {}

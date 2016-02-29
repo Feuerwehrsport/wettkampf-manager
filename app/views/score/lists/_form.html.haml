@@ -5,4 +5,5 @@
     = f.input :shortcut, input_html: { maxlength: 8 }
     = f.association :results, collection: Score::Result.all
   = f.actions do
+    = cancel_link
     = f.primary_button :submit, "Speichern"

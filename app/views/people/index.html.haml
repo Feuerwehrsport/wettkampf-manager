@@ -8,18 +8,14 @@
         - if @without_statistics_id.present?
           .alert.alert-danger
             = "Es konnten zu #{@without_statistics_id.count} Wettkämpfern keine D-Cup-Ergebnisse gefunden wurden."
-            = link_btn "Probleme ansehen", without_statistics_id_people_path
+            = btn_link_to "Probleme ansehen", without_statistics_id_people_path
 
 
       %h4 Weiblich
       = render "index_table", collection: @female
       %h4 Männlich
       = render "index_table", collection: @male
-      
-      - if logged_in?
-        = box.footer do
-          .clearfix
-          
+
       - box.footer do
         = btn_link_to "als PDF", format: :pdf
         = btn_link_to "als XLS", format: :xlsx

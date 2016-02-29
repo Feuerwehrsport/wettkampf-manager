@@ -7,4 +7,5 @@
     - if decorated_competition.youth_name.present?
       = f.input :youth, as: :boolean, label: decorated_competition.youth_name
   = f.actions do
+    = cancel_link
     = f.primary_button :submit, "Speichern"

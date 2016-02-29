@@ -52,12 +52,6 @@ module UIHelper
     end
   end
 
-  def link_btn name, path, options = {}
-    options[:class] ||= ""
-    options[:class] += " btn btn-sm btn-default"
-    link_to name, path, options
-  end
-
   def btn_link_to(label, url, options = {})
     options[:class] ||= ""
     options[:class] += " btn btn-sm btn-default"

@@ -35,7 +35,7 @@
                   %br
                   .small= suggestion.person.team
                 %td= "#{suggestion.suggestions.count} Vorschläge"
-                %td= link_btn "Vorschlag auswählen", statistic_suggestions_person_path(suggestion.person), remote: true
+                %td= btn_link_to "Vorschlag auswählen", statistic_suggestions_person_path(suggestion.person), remote: true
             - else
               %tr.danger
                 %td
@@ -43,4 +43,4 @@
                   %br
                   .small= suggestion.person.team
                 %td Keine Vorschläge
-                %td= link_btn "Vorschlag suchen", statistic_suggestions_person_path(suggestion.person), remote: true
+                %td= btn_link_to "Vorschlag suchen", statistic_suggestions_person_path(suggestion.person), remote: true
