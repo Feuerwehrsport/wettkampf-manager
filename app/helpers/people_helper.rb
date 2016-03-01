@@ -13,10 +13,10 @@ module PeopleHelper
       "Vorname",
       "Nachname",
       Person.human_attribute_name(:team),
-      "U20",
     )
+    @tags.each { |tag| headline.push(tag.to_s) }
+    assessments.each { |assessment| headline.push(assessment.discipline.to_short) }
     data = [headline]
-    assessments.each { |assessment| data.first.push(assessment.discipline.to_short) }
     
     collection.each do |person|
       line = []
@@ -25,17 +25,17 @@ module PeopleHelper
         person.first_name,
         person.last_name,
         person.team.to_s,
-        person.youth ? 'X' : '',
       )
-      data.push(line)
+      @tags.each { |tag| line.push(person.tags.include?(tag) ? 'X' : '') }
       assessments.each do |assessment|
         request = person.request_for(assessment.object)
         if request.present?
-          data.last.push(t("assessment_types.#{request.assessment_type}_short"))
+          line.push(t("assessment_types.#{request.assessment_type}_short"))
         else
-          data.last.push("")
+          line.push("")
         end
       end
+      data.push(line)
     end
     data
   end
