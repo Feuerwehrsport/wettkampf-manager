@@ -7,8 +7,8 @@
         %th{ style: "width: 15%" } Nr.
       %th{ style: "width: 35%" } Name
       %th{ style: "width: 35%" }= Person.human_attribute_name(:team)
-      - if decorated_competition.youth_name.present?
-        %th{ style: "width: 5%" }= decorated_competition.youth_name
+      - @tags.each do |tag|
+        %th{ style: "width: 5%" }= tag
 
       - assessments = Assessment.requestable_for(collection.first).map(&:decorate)
       - assessments.each do |assessment|
@@ -21,8 +21,8 @@
           %td= person.bib_number
         %td= link_to person.full_name, person_path(person)
         %td= person.team
-        - if decorated_competition.youth_name.present?
-          %td= person.youth? ? 'X' : ''
+        - @tags.each do |tag|
+          %td= person.tags.include?(tag) ? 'X' : ''
         - assessments.each do |assessment|
           - request = person.request_for(assessment.object).try(:decorate)
           - if request.present?

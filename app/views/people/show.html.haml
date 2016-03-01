@@ -12,10 +12,10 @@
           %th= @person.class.human_attribute_name :gender
           %td= @person.translated_gender
 
-        - if decorated_competition.youth_name.present?
+        - @tags.each do |tag|
           %tr
-            %th= decorated_competition.youth_name
-            %td= @person.translated_youth
+            %th= tag
+            %td= @person.tags.include?(tag) ? 'Ja' : 'Nein'
 
         %tr
           %th= @person.class.human_attribute_name :team

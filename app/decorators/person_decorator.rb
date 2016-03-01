@@ -1,6 +1,7 @@
 class PersonDecorator < ApplicationDecorator
   decorates_association :team
   decorates_association :fire_sport_statistics_person
+  decorates_association :tags
 
   def full_name
     "#{first_name} #{last_name}"

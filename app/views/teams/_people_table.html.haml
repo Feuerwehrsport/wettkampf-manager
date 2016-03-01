@@ -5,8 +5,8 @@
     %thead
       %tr
         %th Name
-        - if decorated_competition.youth_name.present?
-          %th= decorated_competition.youth_name
+        - @person_tags.each do |tag|
+          %th{ style: "width: 5%" }= tag
 
         - assessments = Assessment.requestable_for(collection.first).map(&:decorate)
         - assessments.each do |assessment|
@@ -17,8 +17,8 @@
       - collection.each do |person|
         %tr
           %td= link_to person.full_name, person_path(person)
-          - if decorated_competition.youth_name.present?
-            %td= person.youth? ? 'X' : ''
+          - @person_tags.each do |tag|
+            %td= person.tags.include?(tag) ? 'X' : ''
           - assessments.each do |assessment|
             - request = person.request_for(assessment.object).try(:decorate)
             - if request.present?

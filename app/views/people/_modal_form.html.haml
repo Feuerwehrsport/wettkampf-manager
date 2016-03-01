@@ -7,12 +7,12 @@
     .suggestions-entries
       %table.table.table-hover.table-condensed
     .row
-      - if decorated_competition.youth_name.present?
-        .col-md-1
-          = f.input :youth, as: :boolean, label: decorated_competition.youth_name
-      .col-md-4
+      - if PersonTag.all.present?
+        .col-md-3
+          = render 'tag_form', f: f
+      .col-md-3
         = f.input :first_name
-      .col-md-4
+      .col-md-3
         = f.input :last_name
       .col-md-3
         = f.input :gender, collection: [:male, :female]

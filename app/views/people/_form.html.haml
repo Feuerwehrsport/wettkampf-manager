@@ -9,6 +9,8 @@
       = f.input :youth, as: :boolean, label: decorated_competition.youth_name
     - if Competition.one.show_bib_numbers?
       = f.input :bib_number
+
+    = render 'tag_form', f: f
   = f.actions do
     = cancel_link
     = f.primary_button :submit, "Speichern"

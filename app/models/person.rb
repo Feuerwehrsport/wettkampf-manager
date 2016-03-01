@@ -1,4 +1,6 @@
 class Person < ActiveRecord::Base
+  include Taggable
+
   belongs_to :team
   belongs_to :fire_sport_statistics_person, class_name: "FireSportStatistics::Person"
   has_many :requests, class_name: "AssessmentRequest", as: :entity, dependent: :destroy

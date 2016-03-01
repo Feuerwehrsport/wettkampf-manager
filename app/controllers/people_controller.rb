@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   implement_crud_actions
+  before_action :assign_person_tags
   before_action :assign_resource_for_action, only: [:edit_assessment_requests, :statistic_suggestions]
 
   def edit_assessment_requests
@@ -28,6 +29,10 @@ class PeopleController < ApplicationController
 
   protected
 
+  def assign_person_tags
+    @tags = PersonTag.all.decorate
+  end
+
   def assign_resource_for_action
     assign_existing_resource
   end
@@ -49,6 +54,8 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(:first_name, :last_name, :team_id, :gender, :youth, :fire_sport_statistics_person_id,
       :registration_order, :bib_number,
-      { requests_attributes: [:assessment_type, :_destroy, :assessment_id, :id, :group_competitor_order, :single_competitor_order] })
+      requests_attributes: [:assessment_type, :_destroy, :assessment_id, :id, :group_competitor_order, :single_competitor_order],
+      tag_references_attributes: [:id, :tag_id, :_destroy]
+    )
   end
 end
