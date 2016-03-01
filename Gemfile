@@ -48,6 +48,7 @@ gem 'prawn'
 gem 'prawn-table'
 gem 'prawnto'
 gem 'rqrcode_png'
+gem 'prawn-qrcode'
 
 # for windows time zones
 gem 'tzinfo-data'

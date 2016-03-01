@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-competition = Competition.new(name: "Wettkampf", date: Date.today)
+competition = Competition.new(name: "Wettkampf", date: Date.today, flyer_text: "Beispiel:\n\n* WLAN-Name: Wettkampf-WLAN\n* WLAN-Passwort: Feuerwehrsport")
 competition.create_possible = true
 competition.save!
 

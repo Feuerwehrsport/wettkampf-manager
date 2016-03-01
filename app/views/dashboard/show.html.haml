@@ -33,9 +33,7 @@
           = block_link_to "Wettkampf", edit_competition_path(decorated_competition.id)
           = block_link_to "Passwort", edit_user_path(User.first)
     .col-md-5
-      - if decorated_competition.hostname.present?
-        = box link_to(hostname_url, hostname_url) do
-          = image_tag qrcode(hostname_url)
-      - else
-        = box link_to(ip_url, ip_url) do
-          = image_tag qrcode(ip_url)
+      = box link_to(hostname_url, hostname_url) do
+        = image_tag qrcode(hostname_url)
+        - if logged_in?
+          = block_link_to("Flyer anzeigen", format: :pdf, action: :flyer)

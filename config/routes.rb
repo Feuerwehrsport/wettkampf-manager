@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get :logout, to: "sessions#destroy", as: :logout
   get :login, to: "sessions#new", as: :login
+  get :flyer, to: 'dashboard#flyer'
   resources :sessions, only: [:create]
   resources :users, only: [:edit, :update]
 

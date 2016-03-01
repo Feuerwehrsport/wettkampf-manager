@@ -7,7 +7,7 @@ module PDFHelper
     end
   end
 
-  def pdf_footer pdf
+  def pdf_footer(pdf, options={})
     competition = Competition.one
     name = [competition.name, l(competition.date)].join(" - ")
     pdf.page_count.times do |i|
@@ -15,7 +15,10 @@ module PDFHelper
         pdf.go_to_page i+1
         pdf.move_down 3
 
-        pdf.text "#{name} - Seite #{i+1} von #{pdf.page_count}", align: :center
+        text = [name]
+        text.push("Seite #{i+1} von #{pdf.page_count}") unless options[:no_page_count]
+
+        pdf.text(text.join(' - '), align: :center)
       end
     end
   end

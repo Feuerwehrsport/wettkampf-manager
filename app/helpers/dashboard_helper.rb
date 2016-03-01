@@ -4,7 +4,11 @@ module DashboardHelper
   end
 
   def hostname_url
-    "http://#{decorated_competition.hostname}/"
+    if decorated_competition.hostname.present?
+      "http://#{decorated_competition.hostname}/"
+    else
+      ip_url
+    end
   end
 
   def ip_url
