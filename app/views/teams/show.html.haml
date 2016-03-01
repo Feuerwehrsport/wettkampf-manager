@@ -17,6 +17,10 @@
         %tr
           %th= @team.class.human_attribute_name :people
           %td= @team.people.count
+        - @tags.each do |tag|
+          %tr
+            %th= tag
+            %td= @team.tags.include?(tag) ? 'Ja' : 'Nein'
         - if logged_in?
           - @team.people_assessments.each do |assessment|
             %tr{ @team.list_entries_group_competitor(assessment) > Competition.one.group_run_count ? { class: "danger"} : {} }

@@ -1,6 +1,7 @@
 class TeamDecorator < ApplicationDecorator
   decorates_association :people
   decorates_association :team_relays
+  decorates_association :tags
 
   def numbered_name
     multi_team? ? "#{name} #{number}" : name

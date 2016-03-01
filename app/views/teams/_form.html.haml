@@ -7,6 +7,7 @@
     = f.input :shortcut, input_html: { maxlength: 12 }
     = f.input :number
     = f.input :gender, collection: [:male, :female]
+    = render 'tag_form', f: f
   = f.actions do
     = cancel_link
     = f.primary_button :submit, "Speichern"

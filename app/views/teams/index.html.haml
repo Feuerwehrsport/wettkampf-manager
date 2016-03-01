@@ -9,6 +9,8 @@
           %th= Team.human_attribute_name(:name)
           %th= Team.human_attribute_name(:gender)
           %th= Team.human_attribute_name(:people)
+          - @tags.each do |tag|
+            %th= tag
           %th
         - @teams.each do |team|
           %tr{ team.list_entries_group_competitor_valid? ? {} : { class: "danger" } }
@@ -19,10 +21,12 @@
               - if logged_in?
                 - unless team.list_entries_group_competitor_valid?
                   %i.ion.ion-close{ title: "Mannschaftswertung nicht korrekt"}
+            - @tags.each do |tag|
+              %td= team.tags.include?(tag) ? 'X' : ''
             %td.text-right
-              = block_link_to "Ansehen", team
+              = btn_link_to "Ansehen", team
               - if logged_in?
-                = block_link_to "Bearbeiten", { action: :edit, id: team }
+                = btn_link_to "Bearbeiten", { action: :edit, id: team }
       - box.footer do
         = btn_link_to "als PDF", format: :pdf
         = btn_link_to "als XLS", format: :xlsx
