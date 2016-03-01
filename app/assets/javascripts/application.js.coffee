@@ -8,3 +8,4 @@
 #= require lib/jquery.inputmask.date.extensions
 #= require lib/jquery.knob
 #= require lib/jquery.sortable
+#= require cocoon

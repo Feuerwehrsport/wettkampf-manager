@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224145037) do
+ActiveRecord::Schema.define(version: 20160229204201) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -254,6 +254,22 @@ ActiveRecord::Schema.define(version: 20160224145037) do
   end
 
   add_index "score_stopwatch_times", ["list_entry_id"], name: "index_score_stopwatch_times_on_list_entry_id"
+
+  create_table "tag_references", force: :cascade do |t|
+    t.integer  "tag_id",        null: false
+    t.integer  "taggable_id",   null: false
+    t.string   "taggable_type", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.string   "type",           null: false
+    t.integer  "competition_id", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "team_relays", force: :cascade do |t|
     t.integer  "team_id",                null: false

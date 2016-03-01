@@ -1,4 +1,10 @@
 class Competition < ActiveRecord::Base
+  has_many :person_tags
+  has_many :team_tags
+
+  accepts_nested_attributes_for :person_tags, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :team_tags, reject_if: :all_blank, allow_destroy: true
+
   before_destroy { false }
   before_create { create_possible || false }
   after_save { self.class.reload_class_instances }

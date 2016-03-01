@@ -14,6 +14,7 @@ gem "cancancan"
 gem 'haml-rails', '~> 0.8'
 # Use SimpleForm for Forms
 gem 'simple_form'
+gem 'cocoon' # nested_form helper
 # Draper as model decorator
 gem 'draper'
 

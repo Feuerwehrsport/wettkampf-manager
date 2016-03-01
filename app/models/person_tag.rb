@@ -1,0 +1,2 @@
+class PersonTag < Tag
+end

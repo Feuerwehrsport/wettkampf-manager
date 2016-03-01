@@ -30,7 +30,7 @@
     - if logged_in?
       .col-md-5
         = box "Konfigurieren" do |box|
-          = block_link_to "Name und Datum", edit_competition_path(decorated_competition.id)
+          = block_link_to "Wettkampf", edit_competition_path(decorated_competition.id)
           = block_link_to "Passwort", edit_user_path(User.first)
     .col-md-5
       - if decorated_competition.hostname.present?
