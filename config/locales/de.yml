@@ -27,6 +27,7 @@ de:
         one: 100m Hindernisbahn
         other: HB
       person: Wettkämpfer
+      person_tag: Wettkämpferkennzeichung
       score/list: 
         one: Startliste
         other: Startlisten
@@ -43,6 +44,7 @@ de:
       team:
         one: Mannschaft
         other: Mannschaften
+      team_tag: Mannschaftkennzeichnung
     attributes:
       assessment:
         discipline: Disziplin
@@ -62,7 +64,6 @@ de:
         group_score_count: Wettkämpfer in Wertung
         hostname: Hostname des Systems
         place: Ort
-        youth_name: Name der Jugendwertung
         show_bib_numbers: Startnummer anzeigen
       discipline:
         name: Name

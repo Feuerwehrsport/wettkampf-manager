@@ -5,11 +5,7 @@ module DCup
     decorates_association :competitions
 
     def to_s
-      [assessment.to_s, youth_name].reject(&:blank?).join(" - ")
-    end
-
-    def youth_name
-      youth ? Competition.one.youth_name : ""
+      [assessment.to_s].reject(&:blank?).join(" - ")
     end
   end
 end

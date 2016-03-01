@@ -4,8 +4,7 @@
     = f.input :name
     = f.association :assessment
     = f.input :group_assessment, as: :boolean
-    - if decorated_competition.youth_name.present?
-      = f.input :youth, as: :boolean, label: decorated_competition.youth_name
+    = render 'tag_form', f: f
   = f.actions do
     = cancel_link
     = f.primary_button :submit, "Speichern"

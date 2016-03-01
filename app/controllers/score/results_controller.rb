@@ -2,6 +2,8 @@ module Score
   class ResultsController < ApplicationController
     implement_crud_actions
 
+    before_action :assign_tags
+
     def show
       super
       @rows = @score_result.rows.map(&:decorate)
@@ -16,8 +18,14 @@ module Score
 
     protected
 
+    def assign_tags
+      @tags = Tag.all.decorate
+    end
+
     def score_result_params
-      params.require(:score_result).permit(:name, :assessment_id, :group_assessment, :youth)
+      params.require(:score_result).permit(:name, :assessment_id, :group_assessment,
+        tag_references_attributes: [:id, :tag_id, :_destroy]
+      )
     end
   end
 end

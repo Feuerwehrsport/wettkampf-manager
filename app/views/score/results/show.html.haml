@@ -2,16 +2,15 @@
   .col-md-8
     = box @score_result.name do |box|
       %table.table
-        - if @score_result.name.present?
-          %tr
-            %th= @score_result.class.human_attribute_name :name
-            %td= @score_result.name
+        %tr
+          %th= @score_result.class.human_attribute_name :name
+          %td= @score_result
         %tr
           %th= @score_result.class.human_attribute_name :assessment
           %td= @score_result.assessment
-        - if @score_result.youth?
+        - @score_result.tags.each do |tag|
           %tr
-            %th= decorated_competition.youth_name
+            %th= "#{tag.object.model_name.human} - #{tag.name}"
             %td Ja
 
         - if @score_result.is_a? Score::DoubleEventResult

@@ -5,8 +5,6 @@
     = f.input :first_name
     = f.input :last_name
     = f.input :gender, collection: [:male, :female]
-    - if decorated_competition.youth_name.present?
-      = f.input :youth, as: :boolean, label: decorated_competition.youth_name
     - if Competition.one.show_bib_numbers?
       = f.input :bib_number
 

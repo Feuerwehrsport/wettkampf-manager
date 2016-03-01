@@ -3,13 +3,14 @@ module Score
     decorates_association :assessment
     decorates_association :lists
     decorates_association :results
+    decorates_association :tags
 
     def to_s
-      [assessment.to_s, youth_name, name].reject(&:blank?).join(" - ")
+      [name, generated_name].reject(&:blank?).first
     end
 
-    def youth_name
-      youth? ? Competition.one.youth_name : ""
+    def generated_name
+      ([assessment] + tag_names).join(" - ")
     end
 
     def translated_group_assessment

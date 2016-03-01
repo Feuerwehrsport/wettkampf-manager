@@ -9,7 +9,7 @@ module FireSportStatistics
       suggestions = suggestions.order_by_teams(FireSportStatistics::Team.where_name_like(params[:team_name])) if params[:team_name]
 
       render json: suggestions.to_json(
-        only: [:id, :first_name, :last_name, :gender, :youth], 
+        only: [:id, :first_name, :last_name, :gender], 
         include: [ teams: { only: [:short] } ]
       )
     end

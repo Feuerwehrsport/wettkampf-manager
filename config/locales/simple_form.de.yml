@@ -33,7 +33,6 @@ de:
         hostname: Wird ein Hostname angegeben, wird daraus auf der Startseite ein QR-Code angezeigt. Die Auflösung von Namen in IP-Adresse kann zum Beispiel vom Router übernommen werden. Der Wettkampf-Manger kann das nicht.
         name: 'Zum Beispiel: Deutschland-Cup in Rostock'
         place: Wettkampfort wird für die Ergebnislisten separat gebraucht.
-        youth_name: "Wird ein Name angegeben, wird die Jugendwertung aktiviert. Beispiel: <i>U20</i>"
       discipline:
         name: Wird ein Name angegeben, ersetzt dieser den eigentlichen Disziplinnamen (z. B. Spaßwettkampf)
         short_name: Ersetzt den Namen, wo nicht genügend Platz ist

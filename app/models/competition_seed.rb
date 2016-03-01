@@ -115,10 +115,10 @@ class CompetitionSeed
     Competition.update_all(
       group_score_count: 4, 
       group_assessment: true, 
-      youth_name: "U20", 
       competition_result_type: "dcup",
       d_cup: true,
     )
+    youth_tag = PersonTag.create!(name: "U20", competition: Competition.first)
 
     hb = Disciplines::ObstacleCourse.create!
     hl = Disciplines::ClimbingHookLadder.create!
@@ -132,15 +132,15 @@ class CompetitionSeed
 
       zk_assessment = Assessment.create!(discipline: zk, gender: gender)
       zk_result = Score::DoubleEventResult.create!(assessment: zk_assessment)
-      zk_result_youth = Score::DoubleEventResult.create!(assessment: zk_assessment, youth: true)
+      zk_result_youth = Score::DoubleEventResult.create!(assessment: zk_assessment, tag_references_attributes: [{ tag_id: youth_tag.id }])
 
       hb_assessment = Assessment.create!(discipline: hb, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result)
-      Score::Result.create!(assessment: hb_assessment, youth: true, double_event_result: zk_result_youth)
+      Score::Result.create!(assessment: hb_assessment, double_event_result: zk_result_youth, tag_references_attributes: [{ tag_id: youth_tag.id }])
 
       hl_assessment = Assessment.create!(discipline: hl, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: hl_assessment, group_assessment: true, double_event_result: zk_result)
-      Score::Result.create!(assessment: hl_assessment, youth: true, double_event_result: zk_result_youth)
+      Score::Result.create!(assessment: hl_assessment, double_event_result: zk_result_youth, tag_references_attributes: [{ tag_id: youth_tag.id }])
 
       la_assessment = Assessment.create!(discipline: la, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: la_assessment, group_assessment: true)
@@ -163,8 +163,7 @@ class CompetitionSeed
 
   def seed_method_jugend_elbe_elster
     Competition.update_all(
-      group_assessment: true, 
-      youth_name: "", 
+      group_assessment: true,
       competition_result_type: "places_to_points"
     )
 
@@ -232,8 +231,7 @@ class CompetitionSeed
       name: "Stadtmeisterschaften Sonnewalde",
       place: "Sonnewalde",
       date: Date.parse("2015-07-04"),
-      group_assessment: true, 
-      youth_name: "", 
+      group_assessment: true,
       competition_result_type: ""
     )
 

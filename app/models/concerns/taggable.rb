@@ -9,4 +9,8 @@ module Taggable
   def tag_names
     tags.map(&:name)
   end
+
+  def include_tags?(other_tags)
+    other_tags.all? { |tag| tags.include?(tag) }
+  end
 end

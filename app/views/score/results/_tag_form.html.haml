@@ -1,0 +1,14 @@
+- if @tags.present?
+  %h3 Ergebnisse eingrenzen
+  - @tags.each do |tag|
+    - if @score_result.tag_references.find {|tag_ref| tag_ref.tag_id == tag.id }.present?
+      = f.simple_fields_for :tag_references, @score_result.tag_references.find {|tag_ref| tag_ref.tag_id == tag.id } do |g|
+        = g.input :_destroy, as: :boolean, label: "#{tag.object.model_name.human} - #{tag.name}", input_html: { checked: true }, checked_value: "0", unchecked_value: "1"
+        = g.input :tag_id, as: :hidden
+    - else
+      = f.simple_fields_for :tag_references, @score_result.tag_references.find_or_initialize_by(tag: tag) do |g|
+        = g.input :_destroy, as: :boolean, label: "#{tag.object.model_name.human} - #{tag.name}", input_html: { checked: false }, checked_value: "0", unchecked_value: "1"
+        = g.input :tag_id, as: :hidden
+  .alert.alert-info
+    %span.glyphicon.glyphicon-info-sign
+    Wenn Sie hier einen oder mehrere Kennzeichnungen auswählen, werden auf der Ergebnisliste nur Einträge mit diesen Kennzeichnungen gelistet. 

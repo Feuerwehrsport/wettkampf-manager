@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 20160229204201) do
     t.boolean  "show_bib_numbers",        default: false, null: false
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.string   "youth_name",              default: "",    null: false
     t.string   "hostname",                default: "",    null: false
     t.string   "competition_result_type"
     t.boolean  "d_cup",                   default: false, null: false
@@ -116,13 +115,12 @@ ActiveRecord::Schema.define(version: 20160229204201) do
   add_index "fire_sport_statistics_d_cup_single_results", ["result_id"], name: "index_fire_sport_statistics_d_cup_single_results_on_result_id"
 
   create_table "fire_sport_statistics_people", force: :cascade do |t|
-    t.string   "last_name",                   null: false
-    t.string   "first_name",                  null: false
-    t.integer  "gender",                      null: false
-    t.string   "external_id",                 null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.boolean  "youth",       default: false, null: false
+    t.string   "last_name",   null: false
+    t.string   "first_name",  null: false
+    t.integer  "gender",      null: false
+    t.string   "external_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "fire_sport_statistics_people", ["external_id"], name: "index_fire_sport_statistics_people_on_external_id"
@@ -169,16 +167,15 @@ ActiveRecord::Schema.define(version: 20160229204201) do
   add_index "fire_sport_statistics_teams", ["external_id"], name: "index_fire_sport_statistics_teams_on_external_id"
 
   create_table "people", force: :cascade do |t|
-    t.string   "last_name",                                       null: false
-    t.string   "first_name",                                      null: false
-    t.integer  "gender",                                          null: false
+    t.string   "last_name",                                    null: false
+    t.string   "first_name",                                   null: false
+    t.integer  "gender",                                       null: false
     t.integer  "team_id"
-    t.string   "bib_number",                      default: "",    null: false
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.boolean  "youth",                           default: false, null: false
+    t.string   "bib_number",                      default: "", null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "fire_sport_statistics_person_id"
-    t.integer  "registration_order",              default: 0,     null: false
+    t.integer  "registration_order",              default: 0,  null: false
   end
 
   add_index "people", ["team_id"], name: "index_people_on_team_id"
@@ -239,7 +236,6 @@ ActiveRecord::Schema.define(version: 20160229204201) do
     t.datetime "updated_at",                                       null: false
     t.integer  "double_event_result_id"
     t.string   "type",                   default: "Score::Result", null: false
-    t.boolean  "youth",                  default: false,           null: false
   end
 
   add_index "score_results", ["assessment_id"], name: "index_score_results_on_assessment_id"

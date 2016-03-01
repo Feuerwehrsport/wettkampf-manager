@@ -52,7 +52,7 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:first_name, :last_name, :team_id, :gender, :youth, :fire_sport_statistics_person_id,
+    params.require(:person).permit(:first_name, :last_name, :team_id, :gender, :fire_sport_statistics_person_id,
       :registration_order, :bib_number,
       requests_attributes: [:assessment_type, :_destroy, :assessment_id, :id, :group_competitor_order, :single_competitor_order],
       tag_references_attributes: [:id, :tag_id, :_destroy]

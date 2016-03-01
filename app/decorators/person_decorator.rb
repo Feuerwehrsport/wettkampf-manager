@@ -37,8 +37,4 @@ class PersonDecorator < ApplicationDecorator
     team = shortcut ? team_shortcut_name(assessment_type) : team_name(assessment_type)
     [first_name, last_name, team]
   end
-
-  def translated_youth
-    youth? ? "Ja" : "Nein"
-  end
 end

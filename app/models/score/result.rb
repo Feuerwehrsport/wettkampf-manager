@@ -2,6 +2,8 @@ require 'score'
 
 module Score
   class Result < ActiveRecord::Base
+    include Taggable
+
     belongs_to :assessment
     belongs_to :double_event_result, dependent: :destroy
     has_many :result_lists, dependent: :destroy
@@ -31,6 +33,14 @@ module Score
       @group_result_rows ||= generate_rows(true).sort
     end
 
+    def person_tags
+      @person_tags ||= tags.where(type: PersonTag)
+    end
+
+    def team_tags
+      @team_tags ||= tags.where(type: TeamTag)
+    end
+
     def generate_rows(group_result=false)
       out_of_competition_rows = {}
       rows = {}
@@ -39,7 +49,19 @@ module Score
           next if list_entry.assessment != assessment
           entity = list_entry.entity
           entity = entity.team if group_result && entity.is_a?(TeamRelay)
-          next if youth? && !entity.youth?
+          if tags.present?
+            no_skip = case entity
+            when TeamRelay
+              entity.team.include_tags?(team_tags)
+            when Team
+              entity.include_tags?(team_tags)
+            when Person
+              entity.include_tags?(person_tags) && (!team_tags.present? || (entity.team.present? && entity.team.include_tags?(team_tags)))
+            else
+              false
+            end
+            next unless no_skip
+          end
 
           if list_entry.out_of_competition?
             if out_of_competition_rows[entity.id].nil?
