@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301204234) do
+ActiveRecord::Schema.define(version: 20160302131016) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160301204234) do
     t.boolean  "d_cup",                   default: false, null: false
     t.string   "place",                   default: "",    null: false
     t.text     "flyer_text",              default: "",    null: false
+    t.string   "backup_path",             default: "",    null: false
   end
 
   create_table "disciplines", force: :cascade do |t|

@@ -29,6 +29,9 @@
     = f.input :hostname
     = f.input :flyer_text
 
+    %h3 Backups
+    = f.input :backup_path
+
   = f.actions do
     = cancel_link
     = f.primary_button :submit, "Speichern"
