@@ -1,4 +1,4 @@
-#= require jquery-ui/draggable
+#= require lib/jquery.ui.draggable
 
 textAligns = ['left', 'center', 'right']
 textSizes = [8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 31, 35, 39]
