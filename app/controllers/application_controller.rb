@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
 
   def check_user_configured
-    redirect_to edit_user_path(User.first) if controller_name != "users" && !User.configured?
+    redirect_to edit_users_path if controller_name != "users" && !User.configured?
   end
 
 end

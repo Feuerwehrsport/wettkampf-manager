@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def after_save
+    session[:user_id] = @user.id
     redirect_to root_path
   end
 
