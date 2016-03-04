@@ -1,6 +1,6 @@
-= boxed_form_for Person.model_name.human, @person, remote: true, modal: true do |f|
-  = f.error_notification
-  = f.inputs do
+= box Person.model_name.human, modal: true do |box|
+  = simple_form_for @person, remote: true do |f|
+    = f.error_notification
     .form-group.string
       %label.string.control-label{ for: "person_suggestion" } Schnelleingabe
       %input.string.form-control{ name: "person_suggestion", id: "person_suggestion", type: "text", data: { team_name: @person.try(:team).try(:name) } }
@@ -26,5 +26,5 @@
         .col-md-6
           = f.input :bib_number
     = f.hidden_field :fire_sport_statistics_person_id
-  = f.actions do
-    = f.primary_button :submit, "Speichern"
+    .modal-footer
+      = f.primary_button :submit, "Speichern"

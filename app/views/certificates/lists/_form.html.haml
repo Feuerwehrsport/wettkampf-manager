@@ -1,9 +1,9 @@
-= boxed_form_for "Urkunden", @certificates_list do |f|
-  = f.error_notification
-  = f.inputs do
+= simple_form_for @certificates_list do |f|
+  = box "Urkunden" do |box|
+    = f.error_notification
     = f.input :template_id, collection: Certificates::Template.all
     = f.input :image, as: :boolean
     = f.input :score_result_id, collection: Score::Result.all
-  = f.actions do
-    = cancel_link(controller: "score/results")
-    = f.primary_button :submit, "Speichern"
+    - box.footer do
+      = cancel_link(controller: "score/results")
+      = f.primary_button :submit, "Speichern"

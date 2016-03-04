@@ -2,37 +2,36 @@
 %html
   %head
     %meta{ charset: "UTF-8" }
-    %title= @page_title || t('application.name')
-    %meta{ content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", name: "viewport" }
-    = stylesheet_link_tag '/adminlte/css/AdminLTE.css', media: 'all'
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
     = stylesheet_link_tag 'application', media: 'all'
-    /[if lt IE 9]
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     = javascript_include_tag 'application'
     = javascript_include_tag "controllers/#{controller_path}" if Rails.application.assets.find_asset("controllers/#{controller_path}.js")
     = csrf_meta_tag
-  %body.skin-blue
-    %header.header
+    %title= @page_title || t('application.name')
+  %body
+    %nav.navbar.navbar-default.navbar-static-top
       .container
-        = link_to root_path, class: 'logo' do
-          %i.ion.ion-ribbon-a
-          = t('application.name')
-        %nav.navbar.navbar-static-top{ role: "navigation" }
-          %a.navbar-btn.sidebar-toggle{ "data-toggle" => "offcanvas", href: "#", role: "button" }
-            %span.sr-only= t('application.toggle_navigation')
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", type: "button"}
+            %span.sr-only Toggle navigation
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
+          %a.navbar-brand.hidden-lg.hidden-md.hidden-sm{ href: root_path } Wettkampf-Manager
+        #navbar.navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            - main_menu_items.each do |item|
+              %li{ "/#{controller_path}" == item.controller_path ? { class: 'active' } : {} }= link_to(item.label, item.url)
+          - if logged_in?
+            %ul.nav.navbar-nav.navbar-right
+              %li.dropdown
+                %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+                  %span.glyphicon.glyphicon-wrench
+                  %span.caret
+                  %ul.dropdown-menu
+                    - admin_menu_items.each do |item|
+                      %li{ "/#{controller_path}" == item.controller_path ? { class: 'active' } : {} }= link_to(item.label, item.url)
+
     .container
-      .wrapper.row-offcanvas.row-offcanvas-left
-        %aside.left-side.sidebar-offcanvas
-          %section.sidebar
-            = render 'sidebar_menu'
-        %aside.right-side
-          %section.content-header
-            / %h1= t("#{controller_path.gsub('/', '.')}.content_header")
-            = render 'breadcrumb_wrapper'
-          %section.content
-            = render 'flash_messages'
-            = yield
+      = render 'flash_messages'
+      = yield

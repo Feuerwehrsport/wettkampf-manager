@@ -1,9 +1,9 @@
-- if @text_position_form
-  - if @certificates_template.font.present?
-    = render 'font_style'
-  = boxed_form_for @certificates_template.name, @certificates_template do |f|
+- if @certificates_template.font.present?
+  = render 'font_style'
+= simple_form_for @certificates_template do |f|
+  = box @certificates_template.name do |box|
     = f.error_notification
-    = f.inputs do
+    - if @text_position_form
       .row
         .col-md-10
           #certificates-template-position{ data: { font_family:  @certificates_template.font.present? ? "certificates_template_#{@certificates_template.id}" : "" } }
@@ -22,13 +22,7 @@
             = tpf.input :size, as: :hidden
             = tpf.input :id, as: :hidden
             = tpf.input :_destroy, as: :hidden, input_html: { value: tpf.object.persisted? ? 'false' : 'true' }
-    = f.actions do
-      = cancel_link
-      = f.primary_button :submit, "Speichern"
-- else
-  = boxed_form_for Certificates::Template.model_name.human, @certificates_template do |f|
-    = f.error_notification
-    = f.inputs do
+    - else
       = f.input :name
       = f.input :image
       - if f.object.image.present?
@@ -36,7 +30,6 @@
       = f.input :font
       - if f.object.font.present?
         = f.input :remove_font, as: :boolean, hint: "Zur Zeit: #{f.object.font.file.filename}"
-
-    = f.actions do
+    - box.footer do
       = cancel_link
       = f.primary_button :submit, "Speichern"

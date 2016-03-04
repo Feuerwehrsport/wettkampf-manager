@@ -1,9 +1,9 @@
-= boxed_form_for Discipline.model_name.human, @discipline do |f|
-  = f.error_notification
-  = f.inputs do
+= simple_form_for @discipline do |f|
+  = box Discipline.model_name.human do |box|
+    = f.error_notification
     = f.input :type, collection: Discipline.types.map { |k| [k.model_name.human, k.name] }
     = f.input :name
     = f.input :short_name
-  = f.actions do
-    = cancel_link
-    = f.primary_button :submit, "Speichern"
+    - box.footer do
+      = cancel_link
+      = f.primary_button :submit, "Speichern"

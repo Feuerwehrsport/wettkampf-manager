@@ -3,5 +3,5 @@
     = box Assessment.model_name.human count: 0 do |box|
       = render 'index_table', assessments: @assessments
                
-      = box.footer do
+      - box.footer do
         = btn_link_to "Hinzufügen", { action: :new }

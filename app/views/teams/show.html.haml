@@ -44,10 +44,10 @@
               - if @team.request_for(assessment).present?
                 - if assessment.fire_relay?
                   = "#{@team.request_for(assessment).relay_count} x"
-                %i.ion.ion-checkmark
+                %span.glyphicon.glyphicon-ok
                 = t("assessment_types.#{@team.request_for(assessment).assessment_type}")
               - else
-                %i.ion.ion-close
+                %span.glyphicon.glyphicon-remove
       - if logged_in?
         - box.footer do
           = btn_link_to "Wertungsgruppen bearbeiten", { action: :edit_assessment_requests }, remote: true

@@ -1,6 +1,6 @@
-= boxed_form_for @person, @person, remote: true, modal: true do |f|
-  = f.error_notification
-  = f.inputs do
+= box @person, modal: true do |box|
+  = simple_form_for @person, remote: true do |f|
+    = f.error_notification
     - Assessment.requestable_for(@person).each do |assessment|
       .assessment-request
         = f.simple_fields_for :requests, @person.requests.find_or_initialize_by(assessment: assessment) do |g|
@@ -14,6 +14,6 @@
               = g.input :group_competitor_order
             .col-md-3.single-competitor-order
               = g.input :single_competitor_order
-  = f.actions do
-    = f.primary_button :submit, "Speichern"
+    .modal-footer
+      = f.primary_button :submit, "Speichern"
 

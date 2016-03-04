@@ -1,10 +1,5 @@
-//= require_self
-
 @import bootstrap-sprockets
 @import bootstrap
-@import font-awesome
-@import ionicons
-@import font-kit-rails/open-sans
 @import modal
 
 .suggestions-entries
@@ -41,8 +36,11 @@
 
 .time-types
   border-bottom: 1px solid #ccc
+  input
+    margin-right: 5px
   span
-    margin-left: 4px
+    margin-left: 10px
+    background: #eee
     label
       font-size: 10px
 .time-entries
@@ -72,11 +70,7 @@ table.competition-results
     width: 35px
     text-align: center
 
-.box-header-right
-  float: right
-  margin: 10px
-
-.box .box-footer
+.panel-footer
   text-align: right
 
 .box.modal-open.modal.in

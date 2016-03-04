@@ -1,6 +1,6 @@
-= boxed_form_for Team.model_name.human, @team, remote: true, modal: true do |f|
-  = f.error_notification
-  = f.inputs do
+= box Team.model_name.human, modal: true do |box|
+  = simple_form_for @team, remote: true do |f|
+    = f.error_notification
     - Assessment.requestable_for(@team).each do |assessment|
       .assessment-request
         = f.simple_fields_for :requests, @team.requests.find_or_initialize_by(assessment: assessment) do |g|
@@ -10,6 +10,6 @@
             = g.input :assessment_type, as: :select, collection: AssessmentRequest.group_assessment_type_keys, label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }
             - if assessment.fire_relay?
               = g.input :relay_count
-  = f.actions do
-    = f.primary_button :submit, "Speichern"
+    .modal-footer
+      = f.primary_button :submit, "Speichern"
 

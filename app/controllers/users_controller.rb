@@ -3,6 +3,10 @@ class UsersController < ApplicationController
 
   protected
 
+  def find_resource
+    base_collection.first
+  end
+
   def after_save
     redirect_to root_path
   end

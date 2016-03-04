@@ -2,7 +2,6 @@
 #= require lib/refresh_partials
 #= require lib/modals
 #= require bootstrap-sprockets
-#= require lib/adminlte
 #= require jquery_ujs
 #= require lib/jquery.inputmask
 #= require lib/jquery.inputmask.date.extensions

@@ -1,10 +1,10 @@
-= boxed_form_for Score::Result.model_name.human, @score_result do |f|
-  = f.error_notification
-  = f.inputs do
+= simple_form_for @score_result do |f|
+  = box Score::Result.model_name.human do |box|
+    = f.error_notification
     = f.input :name
     = f.association :assessment
     = f.input :group_assessment, as: :boolean
     = render 'tag_form', f: f
-  = f.actions do
-    = cancel_link
-    = f.primary_button :submit, "Speichern"
+    - box.footer do
+      = cancel_link
+      = f.primary_button :submit, "Speichern"

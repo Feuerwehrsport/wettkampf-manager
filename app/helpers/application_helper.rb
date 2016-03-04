@@ -1,5 +1,7 @@
 module ApplicationHelper
-  include UIHelper
+  include Helpers::MenuHelper
+  include Helpers::LinkHelper
+  include Helpers::BoxHelper
   include PDFHelper
   include TranslationHelper
   include FlashHelper
@@ -14,17 +16,17 @@ module ApplicationHelper
 
   def short_edit_link path, options = {}
     options[:title] ||= "Bearbeiten"
-    icon_link_btn('ion ion-edit', path, options)
+    icon_link_btn('glyphicon glyphicon-edit', path, options)
   end
 
   def short_destroy_link path, options = {}
     options[:title] ||= "Löschen"
-    icon_link_btn('ion ion-trash-a', path, options)
+    icon_link_btn('glyphicon glyphicon-remove', path, options)
   end
 
   def short_show_link path, options = {}
     options[:title] ||= "Ansehen"
-    icon_link_btn('ion ion-eye', path, options)
+    icon_link_btn('glyphicon glyphicon-eye', path, options)
   end
 
   def icon_link_btn icon_classes, path, options = {}

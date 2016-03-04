@@ -6,7 +6,6 @@ $ () ->
         context.find('.time-entries').removeClass('disabled').find('input:first').focus()
       else
         context.find('.time-entries').addClass('disabled')
-    $('input:radio', context).on 'ifChecked', disableHandler
-    $('.iradio_minimal.checked input', context).each disableHandler
+    $('input:radio', context).on('change', disableHandler).trigger('change')
 
     

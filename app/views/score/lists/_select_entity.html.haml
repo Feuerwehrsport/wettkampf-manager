@@ -1,9 +1,9 @@
-= boxed_form_for "Teilnehmer hinzufügen", @score_list, remote: true, modal: true do |f|
-  - if not_yet_present_entities.count == 0
-    .alert.alert-danger Es wurde alle möglichen Teilnehmer zugeordnet
-  - else
-    = f.error_notification
-    = f.inputs do
+= box "Teilnehmer hinzufügen", modal: true do |box|
+  = simple_form_for @score_list, remote: true do |f|
+    - if not_yet_present_entities.count == 0
+      .alert.alert-danger Es wurde alle möglichen Teilnehmer zugeordnet
+    - else
+      = f.error_notification
       - free_run, free_track = @score_list.next_free_track
       = f.simple_fields_for :entries, @score_list.entries.build(run: free_run, track: free_track, entity_type: discipline_klass.name) do |g|
         = g.association :entity, collection: not_yet_present_entities, label_method: lambda { |entity| label_method_for_select_entity(entity) }
@@ -14,6 +14,6 @@
         = g.input :assessment_type, as: :select, collection: AssessmentRequest.assessment_types.keys, label_method: lambda { |type| t("assessment_types.#{type}") }
 
         = "Wird in Lauf #{free_run} auf Bahn #{free_track} eingeordnet."
-    = f.actions do
-      = f.primary_button :submit, "Hinzufügen"
+      .model-footer
+        = f.primary_button :submit, "Hinzufügen"
 

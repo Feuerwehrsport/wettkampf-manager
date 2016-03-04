@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    = box @assessment.name do |box|
+    = box @assessment do |box|
       %table.table
         %tr
           %th= @assessment.class.human_attribute_name :name
@@ -17,3 +17,4 @@
       = box("Aktionen") do
         = block_link_to "Bearbeiten", { action: :edit }
         = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Wertungsgruppe wirklich löschen? Dies ist nur möglich, wenn keine Ergebnisse verknüpft sind.' }
+        = block_link_to "Übersicht Wertungsgruppen", { action: :index }

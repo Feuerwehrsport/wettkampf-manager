@@ -1,10 +1,11 @@
-.nav-tabs-custom.box.box-primary
-  %ul.nav.nav-tabs
-    - tabs.each do |key, tab|
-      %li{ class: tab.class_name }
-        %a{ href: "#tab-#{key}", data: { toggle: "tab" } }
-          = capture(&tab.name)
-  .tab-content
-    - tabs.each do |key, tab|
-      .tab-pane{ id: "tab-#{key}", class: tab.class_name }
-        = capture(&tab.content)
+.panel.panel-default
+  .panel-body
+    %ul.nav.nav-tabs
+      - boxed_tab.tabs.each do |key, tab|
+        %li{ class: tab.class_name }
+          %a{ href: "#tab-#{key}", data: { toggle: "tab" } }
+            = tab.label.html_safe
+    .tab-content
+      - boxed_tab.tabs.each do |key, tab|
+        .tab-pane{ id: "tab-#{key}", class: tab.class_name }
+          = tab.content.html_safe

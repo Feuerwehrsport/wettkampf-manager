@@ -24,11 +24,12 @@
 
   .col-md-4
     = box("Aktionen") do
-      = block_link_to "Textpositionen", { action: :edit, form_type: :text_positions}
-      = block_link_to "Bearbeiten", { action: :edit}
-      = block_link_to "Vorschau als PDF", { format: :pdf }
+      = block_link_to "Textpositionen", action: :edit, form_type: :text_positions
+      = block_link_to "Bearbeiten", action: :edit
+      = block_link_to "Vorschau als PDF", format: :pdf
       = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Vorlage wirklich löschen?' }
+      = block_link_to "Übersicht Urkundenvorlagen", action: :index
 
   .col-md-6
     = box("Vorschau") do
-      %iframe#certificates-template-preview{ src: "/pdfjs/web/viewer.html?file=#{url_for(format: :pdf)}" }
+      %iframe#certificates-template-preview{ src: url_for(format: :pdf) }

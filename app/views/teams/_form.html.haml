@@ -1,6 +1,6 @@
-= boxed_form_for Team.model_name.human, @team do |f|
-  = f.error_notification
-  = f.inputs do
+= simple_form_for @team do |f|
+  = box Team.model_name.human do |box|
+    = f.error_notification
     = f.input :name
     .suggestions-entries
       %table.table.table-hover.table-condensed
@@ -8,6 +8,6 @@
     = f.input :number
     = f.input :gender, collection: [:male, :female]
     = render 'tag_form', f: f
-  = f.actions do
-    = cancel_link
-    = f.primary_button :submit, "Speichern"
+    - box.footer do
+      = cancel_link
+      = f.primary_button :submit, "Speichern"

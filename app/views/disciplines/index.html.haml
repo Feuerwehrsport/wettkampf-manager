@@ -1,6 +1,6 @@
 .row
   .col-md-12
-    = box Discipline.model_name.human do |box|
+    = box Discipline.model_name.human(count: 0) do |box|
       %table.table
         %tr
           %th= Discipline.human_attribute_name(:type)
@@ -15,5 +15,5 @@
             %td.text-right
               = btn_link_to "Ansehen", discipline
                
-      = box.footer do
+      - box.footer do
         = btn_link_to "Hinzufügen", { action: :new }

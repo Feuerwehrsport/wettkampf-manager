@@ -1,9 +1,9 @@
-= boxed_form_for @score_list, @score_list do |f|
-  = f.error_notification
-  = f.inputs do
+= simple_form_for @score_list do |f|
+  = box @score_list do |box|
+    = f.error_notification
     = f.input :name
     = f.input :shortcut, input_html: { maxlength: 8 }
     = f.association :results, collection: Score::Result.all
-  = f.actions do
-    = cancel_link
-    = f.primary_button :submit, "Speichern"
+    - box.footer do
+      = cancel_link
+      = f.primary_button :submit, "Speichern"

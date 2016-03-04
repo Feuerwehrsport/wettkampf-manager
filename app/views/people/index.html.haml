@@ -3,7 +3,9 @@
     = box Person.model_name.human count: 0 do |box|
       - if logged_in?
         - box.header do
-          = link_to "Hinzufügen", new_person_path, class: "btn btn-sm btn-info", remote: true
+          .pull-right
+            = link_to "Hinzufügen", new_person_path, class: "btn btn-sm btn-info", remote: true
+          .clearfix
         
         - if @without_statistics_id.present?
           .alert.alert-danger

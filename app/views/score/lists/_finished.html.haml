@@ -1,6 +1,6 @@
-= boxed_form_for "List", @score_list, remote: true, modal: true do |f|
-  = f.error_notification
-  = f.inputs do
+= box "#{@score_list} abschließen", modal: true do |box|
+  = simple_form_for @score_list, remote: true do |f|
+    = f.error_notification
     - if @waiting_entries.present? || @unvalid_entries.present?
       .alert.alert-danger
         - if @waiting_entries.present?
@@ -18,6 +18,6 @@
       %p.alert.alert-danger Es konnte keine passende Berechnungsart gefunden werden.
     - else
       = f.input :result_time_type, collection: available_time_types_collection
-  - if @available_time_types.present?
-    = f.actions do
-      = f.primary_button :submit, "Durchführen"
+    - if @available_time_types.present?
+      .modal-footer
+        = f.primary_button :submit, "Durchführen"

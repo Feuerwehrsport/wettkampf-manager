@@ -30,10 +30,12 @@
     - if logged_in?
       .col-md-5
         = box "Konfigurieren" do |box|
-          = block_link_to "Wettkampf", edit_competition_path(decorated_competition.id)
-          = block_link_to "Passwort", edit_user_path(User.first)
+          = block_link_to "Wettkampf", edit_competitions_path
+          = block_link_to "Passwort", edit_users_path
     .col-md-5
       = box link_to(hostname_url, hostname_url) do
         = image_tag qrcode(hostname_url)
         - if logged_in?
           = block_link_to("Flyer anzeigen", format: :pdf, action: :flyer)
+        - else logged_in?
+          = block_link_to("Anmelden", login_path)

@@ -1,23 +1,24 @@
 .row
   .col-md-12
-    = boxed_form_for @score_list.name, @score_list do |f, box|
-      %table.table
-        = render 'list_headline', times: true
-        %tbody
-          - score_list_entries do |entry, run, track|
-            = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
-              %td.edit-time
-                - if entry.present?
-                  = f.simple_fields_for :entries, entry do |n|
-                    = n.input :track, as: :hidden
-                    .time-types
-                      = n.collection_radio_buttons :result_type, Score::ListEntry.result_types, :first, :last
-                    .time-entries
-                      = n.simple_fields_for :time_entries, entry.time_entries do |t|
-                        = t.input :second_time, label: t.object.class.model_name.human
-        = f.actions do
-          = cancel_link
-          = f.primary_button :submit, "Speichern"
+    = simple_form_for @score_list do |f|
+      = box @score_list.name do |box|
+        %table.table
+          = render 'list_headline', times: true
+          %tbody
+            - score_list_entries do |entry, run, track|
+              = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
+                %td.edit-time
+                  - if entry.present?
+                    = f.simple_fields_for :entries, entry do |n|
+                      = n.input :track, as: :hidden
+                      .time-types
+                        = n.collection_radio_buttons :result_type, Score::ListEntry.result_types, :first, :last
+                      .time-entries
+                        = n.simple_fields_for :time_entries, entry.time_entries do |t|
+                          = t.input :second_time, label: t.object.class.model_name.human
+          - box.footer do
+            = cancel_link
+            = f.primary_button :submit, "Speichern"
 .row
   .col-md-6
     = box("Hinweise") do

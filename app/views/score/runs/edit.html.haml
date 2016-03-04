@@ -1,7 +1,7 @@
 .row
   .col-md-12
-    = boxed_form_for @score_run.to_s, @score_run, url: score_list_run_path  do |f, box|
-      = f.inputs do
+    = simple_form_for @score_run, url: score_list_run_path  do |f|
+      = box @score_run.to_s do |box|
         %table.table
           %tr
             %th= "Bahn"
@@ -31,7 +31,8 @@
                   .time-entries
                     = n.simple_fields_for :time_entries, entry.time_entries do |t|
                       = t.input :second_time, label: t.object.class.model_name.human
-        = f.actions do
+        - box.footer do
+          = cancel_link(@score_run.list)
           = f.primary_button :submit, "Speichern"
 .row
   .col-md-6

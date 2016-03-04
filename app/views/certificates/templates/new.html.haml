@@ -1,9 +1,11 @@
-= boxed_form_for Certificates::Template.model_name.human, @certificates_template do |f|
-  = f.error_notification
-  = f.inputs do
-    = f.input :name, hint: "Interner Name"
-    = f.input :image, as: :file, hint: "Hintergrundbild zur Orientierung"
-    = f.input :font, as: :file, hint: "Schriftart für variable Texte"
-  = f.actions do
-    = cancel_link
-    = f.primary_button :submit, "Speichern"
+.row
+  .col-md-8
+    = simple_form_for @certificates_template do |f|
+      = box Certificates::Template.model_name.human do |box|
+        = f.error_notification
+        = f.input :name, hint: "Interner Name"
+        = f.input :image, as: :file, hint: "Hintergrundbild zur Orientierung"
+        = f.input :font, as: :file, hint: "Schriftart für variable Texte"
+        - box.footer do
+          = cancel_link
+          = f.primary_button :submit, "Speichern"

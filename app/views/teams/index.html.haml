@@ -3,7 +3,9 @@
     = box Team.model_name.human(count: 0) do |box|
       - if logged_in?
         - box.header do
-          = link_to "Hinzufügen", new_team_path, class: "btn btn-sm btn-info"
+          .pull-right
+            = link_to "Hinzufügen", { action: :new }, class: "btn btn-sm btn-info"
+          .clearfix
       %table.table
         %tr
           %th= Team.human_attribute_name(:name)
@@ -20,7 +22,7 @@
               = team.people.count
               - if logged_in?
                 - unless team.list_entries_group_competitor_valid?
-                  %i.ion.ion-close{ title: "Mannschaftswertung nicht korrekt"}
+                  %span.glyphicon.glyphicon-remove{ title: "Mannschaftswertung nicht korrekt"}
             - @tags.each do |tag|
               %td= team.tags.include?(tag) ? 'X' : ''
             %td.text-right

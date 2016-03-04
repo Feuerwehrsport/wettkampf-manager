@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   get :login, to: "sessions#new", as: :login
   get :flyer, to: 'dashboard#flyer'
   resources :sessions, only: [:create]
-  resources :users, only: [:edit, :update]
+  resource :users, only: [:edit, :update]
 
   resources :competition_seeds, only: [:show] do
     member { post :execute }
   end
-  resources :competitions, only: [:show, :edit, :update]
+  resource :competitions, only: [:show, :edit, :update]
   resources :disciplines, only: [:index, :new, :create, :show, :destroy]
   resources :assessments do
     member { get :possible_associations }

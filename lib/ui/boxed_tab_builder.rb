@@ -1,30 +1,24 @@
-module UI
-  class BoxedTabBuilder
-    attr_reader :tabs
+class UI::BoxedTabBuilder < Struct.new(:options, :view, :block)
+  Tab = Struct.new(:label, :content, :class_name)
+  attr_reader :tabs
 
-    def initialize
-      @tabs = {}
-      @first = true
-    end
+  def initialize(*args)
+    super
+    @tabs = {}
+    block.call(self)
+  end
 
-    def name key, &block
-      @tabs[key] ||= new_entry
-      @tabs[key].name = block
-    end
+  def label(id, &block)
+    @tabs[id] ||= new_tab
+    @tabs[id].label = view.capture_haml(&block)
+  end
 
-    def content key, &block
-      @tabs[key] ||= new_entry
-      @tabs[key].content = block
-    end
+  def content(id, &block)
+    @tabs[id] ||= new_tab
+    @tabs[id].content = view.capture_haml(&block)
+  end
 
-    def new_entry
-      if @first
-        active_class = "active"
-        @first = false
-      else
-        active_class = ""
-      end
-      OpenStruct.new(content: nil, name: nil, class_name: active_class)
-    end
+  def new_tab
+    Tab.new(nil, nil, @tabs.keys.present? ? "" : "active")
   end
 end

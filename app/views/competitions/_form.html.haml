@@ -1,6 +1,6 @@
-= boxed_form_for Competition.model_name.human, @competition do |f|
-  = f.error_notification
-  = f.inputs do
+= simple_form_for @competition, url: { action: :update } do |f|
+  = box Competition.model_name.human do |box|
+    = f.error_notification
     = f.input :name
     = f.input :place
     = f.input :date, as: :string
@@ -32,6 +32,6 @@
     %h3 Backups
     = f.input :backup_path
 
-  = f.actions do
-    = cancel_link
-    = f.primary_button :submit, "Speichern"
+    - box.footer do
+      = cancel_link
+      = f.primary_button :submit, "Speichern"
