@@ -18,6 +18,7 @@ RSpec.feature "Start configuration" do
 
     expect(page).to have_content "Vorgang erfolgreich durchgeführt"
 
-    perform_login
+    visit root_path
+    expect(page).to have_content "Flyer anzeigen"
   end
 end

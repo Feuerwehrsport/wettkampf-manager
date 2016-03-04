@@ -8,10 +8,10 @@ RSpec.feature "Teams and People" do
     perform_login
 
     click_on 'Mannschaften'
-    within(:css, "h2") { expect(page).to have_content "Mannschaften" }
+    within(:css, ".panel-heading") { expect(page).to have_content "Mannschaften" }
     click_on 'Hinzufügen', match: :first
 
-    within(:css, "h2") { expect(page).to have_content "Mannschaft" }
+    within(:css, ".panel-heading") { expect(page).to have_content "Mannschaft" }
     fill_in "Name", with: "FF Warin"
     select 'Männlich', from: 'Geschlecht'
     click_on "Speichern"
@@ -20,7 +20,7 @@ RSpec.feature "Teams and People" do
     expect(page).to have_content "Keine Einträge gefunden"
     click_on "Wettkämpfer hinzufügen"
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       expect(page).to have_content "Wettkämpfer"
       fill_in "Schnelleingabe", with: "Alfred Meier"
       expect(find_field('Vorname').value).to have_content "Alfred"
@@ -29,7 +29,7 @@ RSpec.feature "Teams and People" do
       click_on "Speichern"
     end
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       within(:css, ".assessment-request:nth-of-type(1)") do
         expect(page).to have_content "100m Hindernisbahn - männlich"
         check 'Teilnahme'
@@ -43,7 +43,7 @@ RSpec.feature "Teams and People" do
 
     click_on "Wettkämpfer hinzufügen"
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       expect(page).to have_content "Wettkämpfer"
       fill_in "Schnelleingabe", with: "Peter"
       expect(find_field('Vorname').value).to have_content "Peter"
@@ -52,7 +52,7 @@ RSpec.feature "Teams and People" do
       click_on "Speichern"
     end
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       expect(page).to have_content "Bitte prüfen Sie die folgenden Felder:"
       expect(find_field('Vorname').value).to have_content "Peter"
       fill_in "Nachname", with: "Müller"
@@ -60,7 +60,7 @@ RSpec.feature "Teams and People" do
       click_on "Speichern"
     end
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       within(:css, ".assessment-request:nth-of-type(1)") do
         expect(page).to have_content "100m Hindernisbahn - männlich"
         check 'Teilnahme'
@@ -85,7 +85,7 @@ RSpec.feature "Teams and People" do
     visit people_path
     click_on 'Hinzufügen', match: :first
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       expect(page).to have_content "Wettkämpfer"
       fill_in "Schnelleingabe", with: "Wilhelm Busch"
       expect(find_field('Vorname').value).to have_content "Wilhelm"
@@ -95,7 +95,7 @@ RSpec.feature "Teams and People" do
       click_on "Speichern"
     end
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       within(:css, ".assessment-request:nth-of-type(1)") do
         expect(page).to have_content "100m Hindernisbahn - männlich"
         check 'Teilnahme'
@@ -110,7 +110,7 @@ RSpec.feature "Teams and People" do
 
     click_on 'Hinzufügen', match: :first
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       expect(page).to have_content "Wettkämpfer"
       fill_in "Schnelleingabe", with: "Karl Marx"
       expect(find_field('Vorname').value).to have_content "Karl"
@@ -119,7 +119,7 @@ RSpec.feature "Teams and People" do
       click_on "Speichern"
     end
 
-    within(:css, ".modal.box") do
+    within(:css, ".modal") do
       within(:css, ".assessment-request:nth-of-type(1)") do
         expect(page).to have_content "100m Hindernisbahn - männlich"
         check 'Teilnahme'
