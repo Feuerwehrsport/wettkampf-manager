@@ -10,6 +10,10 @@ module Imports
 
     protected
 
+    def after_create
+      redirect_to action: :edit
+    end
+
     def imports_configuration_params
       params.require(:imports_configuration).permit(:file, :execute,
         tags_attributes: [:id, :use], 
