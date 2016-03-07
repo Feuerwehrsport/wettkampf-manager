@@ -10,13 +10,15 @@ module Imports
       end
       data[:assessment_participations].each do |participation|
         assessment = configuration.assessments.find_by(foreign_key: participation[:assessment_id]).try(:assessment)
-        AssessmentRequest.create!(
-          entity: @person, 
-          assessment: assessment, 
-          assessment_type: participation[:assessment_type],
-          single_competitor_order: participation[:single_competitor_order],
-          group_competitor_order: participation[:group_competitor_order],
-        )
+        if assessment.present?
+          AssessmentRequest.create!(
+            entity: @person, 
+            assessment: assessment, 
+            assessment_type: participation[:assessment_type],
+            single_competitor_order: participation[:single_competitor_order],
+            group_competitor_order: participation[:group_competitor_order],
+          )
+        end
       end
     end
   end
