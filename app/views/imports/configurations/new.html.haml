@@ -1,0 +1,7 @@
+= simple_form_for @imports_configuration do |f|
+  = box "Importkonfiguration" do |box|
+    = f.error_notification
+    = f.input :file, hint: "Beispiel: deutschland-cup-20.06.2013.wettkampf_manager_import"
+    - box.footer do
+      = cancel_link(root_path)
+      = f.primary_button :submit, "Speichern"

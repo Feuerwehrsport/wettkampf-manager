@@ -1,0 +1,11 @@
+de:
+  activerecord: &activerecord
+    models:
+      imports/configuration: Importkonfiguration
+    attributes:
+      imports/configuration:
+        file: Import-Datei
+      imports/tag:
+        use: importieren
+  activemodel:
+    <<: *activerecord

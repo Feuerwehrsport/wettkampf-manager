@@ -61,5 +61,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  namespace :imports do
+    resources :configurations
+  end
 end
 

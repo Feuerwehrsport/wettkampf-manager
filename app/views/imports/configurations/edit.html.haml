@@ -1,0 +1,49 @@
+= simple_form_for @imports_configuration do |f|
+  = f.object.errors.inspect
+  .row
+    .col-md-6
+      = box "Import von Feuerwehrsport-Statistik.de" do
+        %table.table
+          %tr
+            %th Name
+            %td= @imports_configuration.name
+          %tr
+            %th Ort
+            %td= @imports_configuration.place
+          %tr
+            %th Datum
+            %td= @imports_configuration.date.present? ? l(@imports_configuration.date) : ""
+          %tr
+            %th Wettkämpfer
+            %td= @imports_configuration.data[:people].count
+          %tr
+            %th Mannschaften
+            %td= @imports_configuration.data[:teams].count
+
+    - if @imports_configuration.tags.present?
+      .col-md-6
+        = box "Kennzeichnungen" do |box|
+          = f.simple_fields_for :tags do |t|
+            %h4
+              = t.object.name
+              %small= t.object.target
+
+            = t.input :use, as: :boolean
+          - box.footer do
+            .text-center Wählen Sie die zu importierenden Kennzeichnungen aus.
+  = box "Wertungen" do |box|
+    .row
+      = f.simple_fields_for :assessments do |t|
+        .col-md-4
+          = box do
+            = t.input :assessment_id, collection: t.object.possible_assessments, label: t.object
+    - box.footer do
+      .text-center Ordnen Sie die lokalen Wertungsgruppen zu. Angabe leer lassen, um die Wertung beim Import zu ignorieren.
+  .row
+    .col-md-6
+      = box "Aktionen" do |box|
+        .text-center
+          = cancel_link
+          = f.primary_button :submit, "Weiter"
+        - box.footer do
+          .text-center Sie können die Eingabe vor dem Import nochein überprüfen.

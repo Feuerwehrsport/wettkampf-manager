@@ -20,6 +20,7 @@ class Team < ActiveRecord::Base
   scope :gender, -> (gender) { where(gender: Team.genders[gender]) }
 
   after_create :create_assessment_requests
+  attr_accessor :disable_autocreate_assessment_requests
 
   def request_for assessment
     requests.where(assessment: assessment).first
@@ -51,9 +52,11 @@ class Team < ActiveRecord::Base
   private
 
   def create_assessment_requests
-    Assessment.requestable_for(self).each do |assessment|
-      count = assessment.fire_relay? ? 2 : 1
-      self.requests.create(assessment: assessment, relay_count: count)
+    unless disable_autocreate_assessment_requests.present?
+      Assessment.requestable_for(self).each do |assessment|
+        count = assessment.fire_relay? ? 2 : 1
+        self.requests.create(assessment: assessment, relay_count: count)
+      end
     end
   end
 end

@@ -32,6 +32,8 @@
         = box "Konfigurieren" do |box|
           = block_link_to "Wettkampf", edit_competitions_path
           = block_link_to "Passwort", edit_users_path
+          - if Imports::Configuration.possible?
+            = block_link_to "Import von Feuerwehrsport-Statistik.de", imports_configurations_path
     .col-md-5
       = box link_to(hostname_url, hostname_url) do
         = image_tag qrcode(hostname_url)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302131016) do
+ActiveRecord::Schema.define(version: 20160307092226) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -167,6 +167,40 @@ ActiveRecord::Schema.define(version: 20160302131016) do
   end
 
   add_index "fire_sport_statistics_teams", ["external_id"], name: "index_fire_sport_statistics_teams_on_external_id"
+
+  create_table "imports_assessments", force: :cascade do |t|
+    t.integer  "foreign_key",      null: false
+    t.integer  "configuration_id"
+    t.string   "name"
+    t.string   "gender"
+    t.string   "discipline"
+    t.integer  "assessment_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "imports_assessments", ["assessment_id"], name: "index_imports_assessments_on_assessment_id"
+  add_index "imports_assessments", ["configuration_id"], name: "index_imports_assessments_on_configuration_id"
+  add_index "imports_assessments", ["foreign_key"], name: "index_imports_assessments_on_foreign_key"
+
+  create_table "imports_configurations", force: :cascade do |t|
+    t.string   "file",                       null: false
+    t.datetime "executed_at"
+    t.text     "data",        default: "{}", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "imports_tags", force: :cascade do |t|
+    t.integer  "configuration_id",                null: false
+    t.string   "name",                            null: false
+    t.string   "target",                          null: false
+    t.boolean  "use",              default: true, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "imports_tags", ["configuration_id"], name: "index_imports_tags_on_configuration_id"
 
   create_table "people", force: :cascade do |t|
     t.string   "last_name",                                    null: false

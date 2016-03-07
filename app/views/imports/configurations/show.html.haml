@@ -1,0 +1,55 @@
+.row
+  .col-md-6
+    = box "Import von Feuerwehrsport-Statistik.de" do
+      %table.table
+        %tr
+          %th Name
+          %td= @imports_configuration.name
+        %tr
+          %th Ort
+          %td= @imports_configuration.place
+        %tr
+          %th Datum
+          %td= @imports_configuration.date.present? ? l(@imports_configuration.date) : ""
+        %tr
+          %th Wettkämpfer
+          %td= @imports_configuration.data[:people].count
+        %tr
+          %th Mannschaften
+          %td= @imports_configuration.data[:teams].count
+
+  - if @imports_configuration.tags.present?
+    .col-md-6
+      = box "Kennzeichnungen" do
+        - @imports_configuration.tags.each do |tag|
+          %h4
+            - if tag.use
+              %span.glyphicon.glyphicon-ok
+            - else
+              %span.glyphicon.glyphicon-remove
+            = tag.name
+            %small= tag.target
+
+= box "Wertungen" do
+  .row
+    - @imports_configuration.assessments.each do |assessment|
+      .col-md-4
+        = box do
+          .text-center
+            = assessment
+          .text-center
+            %span.glyphicon.glyphicon-arrow-down
+          .text-center
+            - if assessment.assessment.present?
+              = link_to(assessment.assessment.decorate, assessment.assessment)
+            - else
+              %span.glyphicon.glyphicon-remove
+.row
+  .col-md-4
+    = box "Aktionen" do
+      = simple_form_for(@imports_configuration) do |f|
+        = f.input :execute, input_html: { value: '1' }, as: :hidden
+        = f.button :submit, "Importieren", class: "btn btn-info btn-block", data: { confirm: 'Import durchführen?' }
+      %hr
+      = block_link_to("Bearbeiten", action: :edit)
+      = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Importkonfiguration wirklich löschen?' }
