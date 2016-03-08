@@ -29,6 +29,6 @@ ratings:
   - lib/**
   - "**.rb"
 exclude_paths:
-- app/assets/lib/jquery.*
+- app/assets/javascripts/lib/jquery.*
 - spec/**/*
 - "**/vendor/**/*"
