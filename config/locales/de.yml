@@ -45,6 +45,7 @@ de:
         one: Mannschaft
         other: Mannschaften
       team_tag: Mannschaftkennzeichnung
+      user: Benutzer
     attributes:
       assessment:
         discipline: Disziplin
@@ -65,6 +66,8 @@ de:
         hostname: Hostname des Systems
         place: Ort
         show_bib_numbers: Startnummer anzeigen
+        flyer_text: Text auf PDF-Flyer
+        backup_path: Verzeichnis für Backups
       discipline:
         name: Name
         short_name: Kurzname

@@ -1,0 +1,55 @@
+= simple_form_for @competition, url: { action: :update } do |f|
+  .row
+    .col-md-6
+      = box "Allgemeine Informationen" do |box|
+        = f.error_notification
+        = f.input :name
+        = f.input :place
+        = f.input :date, as: :string
+        %hr
+        = f.input :show_bib_numbers, hint: "Zusätzliche Angabe von Startnummern bei Wettkämpfern ermöglichen"
+
+    .col-md-6
+      = box "Berechnungen" do |box|
+        = f.input :group_people_count
+        = f.input :group_run_count
+        = f.input :group_score_count
+        = f.input :competition_result_type, collection: Score::CompetitionResult.result_types.invert, include_blank: "Keine Gesamtwertung"
+        = f.input :d_cup
+
+    .col-md-6
+      = box "Spezielle Kennzeichnungen" do |box|
+        %h4 Wettkämpfermarkierungen
+        #person_tags.row
+          = f.simple_fields_for :person_tags do |person_tag|
+            = render 'person_tag_fields', f: person_tag
+          .col-md-3
+            = link_to_add_association 'Neue Markierung', f, :person_tags, class: "btn btn-default btn-xs btn-block"
+
+        %h4 Mannschaftsmarkierungen
+        #team_tags.row
+          = f.simple_fields_for :team_tags do |team_tag|
+            = render 'team_tag_fields', f: team_tag
+          .col-md-3
+            = link_to_add_association 'Neue Markierung', f, :team_tags, class: "btn btn-default btn-xs btn-block"
+
+    .col-md-6
+      = box "Öffentlichkeitsinfos" do |box|
+        = f.input :hostname
+        = f.input :flyer_text, input_html: { rows: 7 } 
+
+    .col-md-6
+      = box "Backups" do |box|
+        = f.input :backup_path
+        .help-block Beispiel: E:\wettkampf-manager\
+        .help-block
+          Der Wettkampf-Manager muss dort schreiben dürfen. Startet man das beiliegende Skript 
+          %code backup_im_hintergrund.bat
+          und alle 5 Minuten wird unter dem angegeben Pfad ein Backup aller Ergebnisse geschrieben.
+
+    .col-md-6
+      = box "Aktionen" do |box|
+        %p Bitte schauen Sie sich die Screencasts an, wenn Sie zu einzelnen Einstellungen Fragen haben. Sie können auch gerne eine E-Mail an den Entwickler schreiben.
+        - box.footer do
+          = cancel_link
+          = f.primary_button :submit, "Speichern"
