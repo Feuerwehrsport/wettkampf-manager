@@ -41,3 +41,16 @@
           = block_link_to("Flyer anzeigen", format: :pdf, action: :flyer)
         - else logged_in?
           = block_link_to("Anmelden", login_path)
+
+    .col-md-6
+      = box "Wettkampf-Manager" do |box|
+        %p 
+          Dieses Programm ist eine 
+          %strong kostenlose und freie Software.
+          Sie steht unter der Software-Lizenz
+          %em AGPLv3
+          und kann 
+          = link_to("hier", "https://github.com/Feuerwehrsport/wettkampf-manager")
+          heruntergeladen werden.
+        - box.footer do
+          = btn_link_to("Weitere Informationen", action: :impressum)
