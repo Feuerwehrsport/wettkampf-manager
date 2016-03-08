@@ -11,7 +11,7 @@ module Imports
     protected
 
     def after_create
-      redirect_to action: :edit
+      redirect_to action: :edit, id: resource_instance.id
     end
 
     def imports_configuration_params

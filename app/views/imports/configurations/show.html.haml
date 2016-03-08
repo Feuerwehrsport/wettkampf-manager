@@ -24,9 +24,9 @@
         - @imports_configuration.tags.each do |tag|
           %h4
             - if tag.use
-              %span.glyphicon.glyphicon-ok
+              %span.glyphicon.glyphicon-ok.text-success
             - else
-              %span.glyphicon.glyphicon-remove
+              %span.glyphicon.glyphicon-remove.text-danger
             = tag.name
             %small= tag.target
 
@@ -36,14 +36,16 @@
       .col-md-4
         = box do
           .text-center
+            Online: 
             = assessment
           .text-center
             %span.glyphicon.glyphicon-arrow-down
           .text-center
+            Lokal:
             - if assessment.assessment.present?
               = link_to(assessment.assessment.decorate, assessment.assessment)
             - else
-              %span.glyphicon.glyphicon-remove
+              %span.glyphicon.glyphicon-remove.text-danger
 .row
   .col-md-4
     = box "Aktionen" do
