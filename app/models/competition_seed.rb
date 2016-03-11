@@ -9,6 +9,21 @@ class CompetitionSeed
   def self.seeds
     [
       [
+        "Leere Vorlage", 
+        [
+          "Es wird nichts angelegt.",
+        ], 
+        :seed_method_nothing
+      ],
+      [
+        "Hallenpokal HB + FS", 
+        [
+          "100m Hindernisbahn für Frauen und Männer",
+          "4x100m für Frauen und Männer",
+        ], 
+        :seed_method_hallenpokal
+      ],
+      [
         "Deutschland-Cup (HL, HB, GS, LA)", 
         [
           "Hakenleitersteigen, 100m Hindernisbahn, Zweikampf für Frauen und Männer",
@@ -325,6 +340,22 @@ class CompetitionSeed
     [:female, :male].map do |gender|
       la_assessment = Assessment.create!(discipline: la, gender: gender)
       Score::Result.create!(assessment: la_assessment, group_assessment: true)
+    end
+  end
+
+  def seed_method_nothing
+  end
+
+  def seed_method_hallenpokal
+    hb = Disciplines::ObstacleCourse.create!
+    fs = Disciplines::FireRelay.create!
+
+    [:female, :male].each do |gender|
+      hb_assessment = Assessment.create!(discipline: hb, gender: gender)
+      Score::Result.create!(assessment: hb_assessment, group_assessment: false)
+
+      fs_assessment = Assessment.create!(discipline: fs, gender: gender)
+      Score::Result.create!(assessment: fs_assessment, group_assessment: false)
     end
   end
 end
