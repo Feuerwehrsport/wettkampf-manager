@@ -24,7 +24,12 @@ module FireSportStatistics
       end
    
       def conn
-        @@conn ||= Net::HTTP.new("www.feuerwehrsport-statistik.de", 80)
+        @@conn ||= begin
+          http = Net::HTTP.new("www.feuerwehrsport-statistik.de", 443)
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          http
+        end
       end
     end
   end
