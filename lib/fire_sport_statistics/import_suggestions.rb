@@ -1,29 +1,23 @@
 module FireSportStatistics
-  class ImportSuggestions
+  class ImportSuggestions < Import
     def initialize
       ActiveRecord::Base.transaction do
-        TeamAssociation.destroy_all
-        TeamSpelling.destroy_all
-        PersonSpelling.destroy_all
-        Team.destroy_all
-        Person.destroy_all
+        destroy_old_imports
 
-        people = []
-        teams = []
         fetch(:people) do |person|
           people[person.id.to_i] = Person.create!(
+            id: person.id,
             last_name: person.last_name,
             first_name: person.first_name,
             gender: person.gender,
-            external_id: person.id,
           )
         end
 
         fetch(:teams) do |team|
           teams[team.id.to_i] = Team.create!(
+            id: team.id,
             name: team.name,
             short: team.shortcut,
-            external_id: team.id,
           )
         end
         
@@ -50,18 +44,94 @@ module FireSportStatistics
             gender: spelling.gender,
           )
         end
+        
+        fetch('series/rounds') do |round|
+          if round.year.to_i >= Date.today.year - 1
+            series_rounds[round.id.to_i] = Series::Round.create!(
+              id: round.id,
+              name: round.name,
+              year: round.year,
+              aggregate_type: round.aggregate_type,
+            )
+          end
+        end
+
+        fetch('series/cups') do |cup|
+          if series_rounds[cup.round_id.to_i].present?
+            series_cups[cup.id.to_i] = Series::Cup.create!(
+              id: cup.id,
+              round: series_rounds[cup.round_id.to_i],
+              competition_place: cup.place,
+              competition_date: cup.date,
+            )
+          end
+        end
+
+        fetch('series/assessments') do |assessment|
+          if series_rounds[assessment.round_id.to_i].present?
+            series_assessments[assessment.id.to_i] = Series::Assessment.create!(
+              id: assessment.id,
+              name: assessment.name,
+              discipline: assessment.discipline,
+              round: series_rounds[assessment.round_id.to_i],
+              gender: assessment.gender,
+              type: assessment.type,
+            )
+          end
+        end
+
+        fetch('series/participations') do |participation|
+          if series_cups[participation.cup_id.to_i].present? && series_assessments[participation.assessment_id.to_i].present?
+            Series::Participation.create!(
+              id: participation.id,
+              points: participation.points,
+              rank: participation.rank,
+              time: participation.time,
+              cup: series_cups[participation.cup_id.to_i],
+              assessment: series_assessments[participation.assessment_id.to_i],
+              type: participation.type,
+              team_id: participation.team_id,
+              team_number: participation.team_number,
+              person_id: participation.person_id,
+            )
+          end
+        end
+
+        Series::Cup.create_today!
       end
     end
 
-    def fetch(key)
-      collection = API::Get.fetch(key)
-      all_count = collection.count.to_f
-      collection.each_with_index do |entry, index|
-        yield(entry)
-        print "#{key}: #{(index.to_f/all_count*100).round}%\r"
-        STDOUT.flush
-      end
-      puts ""
+    def people
+      @people ||= []
+    end
+
+    def teams
+      @teams ||= []
+    end
+
+    def series_rounds
+      @series_rounds ||= []
+    end
+
+    def series_cups
+      @series_cups ||= []
+    end
+
+    def series_assessments
+      @series_assessments ||= []
+    end
+
+    def destroy_old_imports
+      TeamAssociation.delete_all
+      TeamSpelling.delete_all
+      PersonSpelling.delete_all
+      Team.delete_all
+      Person.delete_all
+
+      Series::Participation.delete_all
+      Series::Assessment.delete_all
+      Series::Cup.delete_all
+      Series::Round.delete_all
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307092226) do
+ActiveRecord::Schema.define(version: 20160309102536) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -72,7 +72,6 @@ ActiveRecord::Schema.define(version: 20160307092226) do
     t.datetime "updated_at",                              null: false
     t.string   "hostname",                default: "",    null: false
     t.string   "competition_result_type"
-    t.boolean  "d_cup",                   default: false, null: false
     t.string   "place",                   default: "",    null: false
     t.text     "flyer_text",              default: "",    null: false
     t.string   "backup_path",             default: "",    null: false
@@ -86,46 +85,13 @@ ActiveRecord::Schema.define(version: 20160307092226) do
     t.string   "short_name", default: "", null: false
   end
 
-  create_table "fire_sport_statistics_competitions", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.date     "date",        null: false
-    t.integer  "external_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "fire_sport_statistics_d_cup_results", force: :cascade do |t|
-    t.string   "discipline_key",                 null: false
-    t.integer  "gender",                         null: false
-    t.boolean  "youth",          default: false, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-  end
-
-  create_table "fire_sport_statistics_d_cup_single_results", force: :cascade do |t|
-    t.integer  "result_id",                  null: false
-    t.integer  "person_id",                  null: false
-    t.integer  "competition_id",             null: false
-    t.integer  "points",         default: 0, null: false
-    t.integer  "time"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "fire_sport_statistics_d_cup_single_results", ["competition_id"], name: "fire_sport_statistics_d_cup_single_competition_id"
-  add_index "fire_sport_statistics_d_cup_single_results", ["person_id"], name: "index_fire_sport_statistics_d_cup_single_results_on_person_id"
-  add_index "fire_sport_statistics_d_cup_single_results", ["result_id"], name: "index_fire_sport_statistics_d_cup_single_results_on_result_id"
-
   create_table "fire_sport_statistics_people", force: :cascade do |t|
-    t.string   "last_name",   null: false
-    t.string   "first_name",  null: false
-    t.integer  "gender",      null: false
-    t.string   "external_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "last_name",  null: false
+    t.string   "first_name", null: false
+    t.integer  "gender",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "fire_sport_statistics_people", ["external_id"], name: "index_fire_sport_statistics_people_on_external_id"
 
   create_table "fire_sport_statistics_person_spellings", force: :cascade do |t|
     t.string   "last_name",  null: false
@@ -159,14 +125,11 @@ ActiveRecord::Schema.define(version: 20160307092226) do
   add_index "fire_sport_statistics_team_spellings", ["team_id"], name: "index_fire_sport_statistics_team_spellings_on_team_id"
 
   create_table "fire_sport_statistics_teams", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "short",       null: false
-    t.string   "external_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",       null: false
+    t.string   "short",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "fire_sport_statistics_teams", ["external_id"], name: "index_fire_sport_statistics_teams_on_external_id"
 
   create_table "imports_assessments", force: :cascade do |t|
     t.integer  "foreign_key",      null: false
@@ -265,17 +228,21 @@ ActiveRecord::Schema.define(version: 20160307092226) do
   add_index "score_result_lists", ["result_id"], name: "index_score_result_lists_on_result_id"
 
   create_table "score_results", force: :cascade do |t|
-    t.string   "name",                   default: "",              null: false
-    t.boolean  "group_assessment",       default: false,           null: false
-    t.integer  "assessment_id",                                    null: false
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
+    t.string   "name",                        default: "",              null: false
+    t.boolean  "group_assessment",            default: false,           null: false
+    t.integer  "assessment_id",                                         null: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.integer  "double_event_result_id"
-    t.string   "type",                   default: "Score::Result", null: false
+    t.string   "type",                        default: "Score::Result", null: false
+    t.integer  "series_team_assessment_id"
+    t.integer  "series_person_assessment_id"
   end
 
   add_index "score_results", ["assessment_id"], name: "index_score_results_on_assessment_id"
   add_index "score_results", ["double_event_result_id"], name: "index_score_results_on_double_event_result_id"
+  add_index "score_results", ["series_person_assessment_id"], name: "index_score_results_on_series_person_assessment_id"
+  add_index "score_results", ["series_team_assessment_id"], name: "index_score_results_on_series_team_assessment_id"
 
   create_table "score_stopwatch_times", force: :cascade do |t|
     t.integer  "list_entry_id", null: false
@@ -286,6 +253,46 @@ ActiveRecord::Schema.define(version: 20160307092226) do
   end
 
   add_index "score_stopwatch_times", ["list_entry_id"], name: "index_score_stopwatch_times_on_list_entry_id"
+
+  create_table "series_assessments", force: :cascade do |t|
+    t.integer  "round_id",                null: false
+    t.string   "discipline",              null: false
+    t.string   "name",       default: "", null: false
+    t.string   "type",                    null: false
+    t.integer  "gender",                  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "series_cups", force: :cascade do |t|
+    t.integer  "round_id",          null: false
+    t.string   "competition_place", null: false
+    t.date     "competition_date",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "series_participations", force: :cascade do |t|
+    t.integer  "assessment_id",             null: false
+    t.integer  "cup_id",                    null: false
+    t.string   "type",                      null: false
+    t.integer  "team_id"
+    t.integer  "team_number"
+    t.integer  "person_id"
+    t.integer  "time",                      null: false
+    t.integer  "points",        default: 0, null: false
+    t.integer  "rank",                      null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "series_rounds", force: :cascade do |t|
+    t.string   "name",           null: false
+    t.integer  "year",           null: false
+    t.string   "aggregate_type", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "tag_references", force: :cascade do |t|
     t.integer  "tag_id",        null: false

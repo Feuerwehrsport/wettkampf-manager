@@ -2,7 +2,7 @@ module FireSportStatistics
   class Team < ActiveRecord::Base
     include TeamScopes
     has_many :team_associations
-    validates :name, :short, :external_id, presence: true
+    validates :name, :short, presence: true
 
     scope :where_name_like, -> (name) do
       name = name.strip.gsub(/^FF\s/i, "").gsub(/^Team\s/i, "").strip
