@@ -41,4 +41,8 @@ class Discipline < ActiveRecord::Base
   def image
     self.class.name.demodulize.underscore
   end
+
+  def key
+    ""
+  end
 end

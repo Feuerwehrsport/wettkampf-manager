@@ -58,7 +58,6 @@ de:
       competition:
         competition_result_type: Gesamtwertungsberechnung
         date: Datum
-        d_cup: Deutschland-Cup
         name: Name
         group_people_count: Wettkämpfer pro Mannschaft
         group_run_count: Wettkämpfer pro Disziplin

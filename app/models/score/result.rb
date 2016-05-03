@@ -1,10 +1,11 @@
 require 'score'
-
 module Score
   class Result < ActiveRecord::Base
     include Taggable
 
     belongs_to :assessment
+    belongs_to :series_team_assessment, class_name: "Series::TeamAssessment"
+    belongs_to :series_person_assessment, class_name: "Series::PersonAssessment"
     belongs_to :double_event_result, dependent: :destroy
     has_many :result_lists, dependent: :destroy
     has_many :lists, through: :result_lists
@@ -18,6 +19,14 @@ module Score
 
     def to_label
       decorate.to_s
+    end
+
+    def possible_team_assessments
+      Series::TeamAssessment.gender(assessment.gender).where(discipline: assessment.discipline.key)
+    end
+
+    def possible_person_assessments
+      Series::PersonAssessment.gender(assessment.gender).where(discipline: assessment.discipline.key)
     end
 
     def rows

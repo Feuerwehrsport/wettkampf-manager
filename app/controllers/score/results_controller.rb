@@ -16,6 +16,11 @@ module Score
       @only = params[:only].try(:to_sym)
     end
 
+    def edit
+      @series_form = params[:series].present?
+      super
+    end
+
     protected
 
     def assign_tags
@@ -23,7 +28,8 @@ module Score
     end
 
     def score_result_params
-      params.require(:score_result).permit(:name, :assessment_id, :group_assessment,
+      params.require(:score_result).permit(:name, :assessment_id, :group_assessment, 
+        :series_team_assessment_id, :series_person_assessment_id,
         tag_references_attributes: [:id, :tag_id, :_destroy]
       )
     end

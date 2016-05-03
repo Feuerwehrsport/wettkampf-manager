@@ -25,17 +25,28 @@
           %tr
             %th= @score_result.class.human_attribute_name :group_assessment
             %td= @score_result.translated_group_assessment
+        %tr
+          %th= @score_result.class.human_attribute_name :lists
+          %td
+            %table.table.table-condensed
+              - @score_result.lists.each do |list|
+                %tr
+                  %td= link_to list.name, score_list_path(list)
+
+        - if @score_result.series_person_assessment.present?
           %tr
-            %th= @score_result.class.human_attribute_name :lists
-            %td
-              %table.table.table-condensed
-                - @score_result.lists.each do |list|
-                  %tr
-                    %td= link_to list.name, score_list_path(list)
+            %th Cup-Serie Einzelwertung
+            %td= @score_result.series_person_assessment.to_label
+
+        - if @score_result.series_team_assessment.present?
+          %tr
+            %th Cup-Serie Mannschaftswertung
+            %td= @score_result.series_team_assessment.to_label
   - if logged_in?
     .col-md-4
       = box("Aktionen") do
         = block_link_to "Bearbeiten", action: :edit
+        = block_link_to "Cup-Serie-Zugehörigkeit", action: :edit, series: 1
         = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Ergebnisliste wirklich löschen? Die zugehörigen Startlisten werden verändert!' }
 
   - if @rows.count > 0

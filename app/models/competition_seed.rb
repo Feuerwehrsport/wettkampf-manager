@@ -131,7 +131,6 @@ class CompetitionSeed
       group_score_count: 4, 
       group_assessment: true, 
       competition_result_type: "dcup",
-      d_cup: true,
     )
     youth_tag = PersonTag.create!(name: "U20", competition: Competition.first)
 

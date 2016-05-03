@@ -1,0 +1,14 @@
+%table.table
+  %tr
+    %th Name
+    %th Jahr
+    %th Disziplinen
+    %th Mannschaften
+    %th Wettkämpfer
+  - @rounds.each do |row|
+    %tr
+      %td= link_to(row.name, row)
+      %td= link_to(row.year, row)
+      %td= row.disciplines.join(" ").html_safe
+      %td= row.team_count
+      %td= row.person_count

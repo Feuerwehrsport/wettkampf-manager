@@ -41,4 +41,15 @@ module ApplicationHelper
   def decorated_competition
     @decorated_competition ||= Competition.one.decorate
   end
+
+  def count_table rows, options={}, &block
+    table_class = options.delete(:table_class) || UI::CountTable
+    ct = table_class.new(self, rows, options, &block)
+    render 'ui/count_table', ct: ct
+  end
+  
+  def series_assessment_cup_participation(cup, row)
+    result = row.participation_for_cup(cup)
+    result ? content_tag(:div, result.second_time_with_points, class: "series-participation", data: { id: result.id }) : ""
+  end
 end

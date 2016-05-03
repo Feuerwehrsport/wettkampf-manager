@@ -1,0 +1,12 @@
+%table.table.table-condensed
+  %thead
+    %tr
+      %th Cups
+      %th{ title: "Mannschaften" } Mann.
+      %th{ title: "Einzelstarter" } Einzel
+  %tbody
+    - cups.each do |cup|
+      %tr
+        %td= cup.competition_date
+        %td= cup.team_count
+        %td= cup.person_count
