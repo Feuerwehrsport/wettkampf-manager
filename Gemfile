@@ -2,11 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-
 # authentication
-gem "bcrypt"
 gem "cancancan"
 
 # Use HAML for views
@@ -41,10 +37,15 @@ gem 'prawn-table'
 gem 'prawnto'
 gem 'rqrcode_png'
 gem 'prawn-qrcode'
-gem 'json', '1.8.2'
 
 # for windows time zones
 gem 'tzinfo-data'
+
+# hold versions for windows binaries
+gem 'nokogiri', '1.6.6.2'
+gem 'json', '1.8.2'
+gem 'bcrypt', '3.1.10'
+gem 'sqlite3', '1.3.10'
 
 group :development do
   gem 'guard-rspec'
