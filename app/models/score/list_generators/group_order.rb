@@ -14,10 +14,10 @@ module Score
       end
       team_requests = teams.values.shuffle
       loop do
+        break if team_requests.blank?
         requests.push(team_requests.first.shift)
         team_requests.rotate!
         team_requests.select!(&:present?)
-        break if team_requests.blank?
       end
       requests
     end
