@@ -57,6 +57,15 @@ class CompetitionSeed
         :seed_method_la
       ],
       [
+        "Landesmeisterschaft Thüringen 2016", 
+        [
+          "Löschangriff für Frauen und Männer",
+          "Mehrkampf für Frauen und Männer mit (HL, HB, GS, LA, FS)",
+          "10 Personen dürfen starten",
+        ], 
+        :seed_method_landesmeisterschaft_thueringen_2016
+      ],
+      [
         "Jugend-Elbe-Elster 2015", 
         [], 
         :seed_method_jugend_elbe_elster
@@ -355,6 +364,79 @@ class CompetitionSeed
 
       fs_assessment = Assessment.create!(discipline: fs, gender: gender)
       Score::Result.create!(assessment: fs_assessment, group_assessment: false)
+    end
+  end
+
+  def seed_method_landesmeisterschaft_thueringen_2016
+    Competition.update_all(
+      group_score_count: 4,
+      group_run_count: 10, 
+      group_assessment: true, 
+      competition_result_type: "places_to_points",
+      place: "Zeulenroda",
+      date: Date.parse("2016-05-21"),
+      name: "Landesmeisterschaft Thüringen",
+    )
+
+    hb = Disciplines::ObstacleCourse.create!
+    hl = Disciplines::ClimbingHookLadder.create!
+    gs = Disciplines::GroupRelay.create!
+    fs = Disciplines::FireRelay.create!
+    zk = Disciplines::DoubleEvent.create!
+    la = Disciplines::FireAttack.create!
+
+    mehrkampf = TeamTag.create!(name: "Mehrkampf", competition: Competition.first)
+    nur_la = TeamTag.create!(name: "Nur LA", competition: Competition.first)
+
+    competition_results = [:female, :male].map do |gender|
+      competition_result = Score::CompetitionResult.create(gender: gender, name: "Mehrkampf")
+
+      zk_assessment = Assessment.create!(discipline: zk, gender: gender)
+      zk_result = Score::DoubleEventResult.create!(assessment: zk_assessment)
+
+      hb_assessment = Assessment.create!(discipline: hb, gender: gender, score_competition_result: competition_result)
+      Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result)
+
+      hl_assessment = Assessment.create!(discipline: hl, gender: gender, score_competition_result: competition_result)
+      Score::Result.create!(assessment: hl_assessment, group_assessment: true, double_event_result: zk_result)
+
+      la_assessment = Assessment.create!(
+        discipline: la, 
+        gender: gender, 
+        score_competition_result: competition_result, 
+        name: "Löschangriff - Mehrkampf - #{I18n.t("gender.#{gender}")}", 
+        tag_references_attributes: [{ tag_id: mehrkampf.id }],
+      )
+      Score::Result.create!(assessment: la_assessment, group_assessment: true)
+
+      fs_assessment = Assessment.create!(
+        discipline: fs, 
+        gender: gender, 
+        score_competition_result: competition_result, 
+        tag_references_attributes: [{ tag_id: mehrkampf.id }],
+      )
+      Score::Result.create!(assessment: fs_assessment, group_assessment: true)
+
+      competition_result
+    end
+
+    gs_assessment = Assessment.create!(
+      discipline: gs, 
+      gender: :female, 
+      score_competition_result: competition_results.first, 
+      tag_references_attributes: [{ tag_id: mehrkampf.id }],
+    )
+    Score::Result.create!(assessment: gs_assessment, group_assessment: true)
+
+
+    competition_results = [:female, :male].map do |gender|
+      la_assessment = Assessment.create!(
+        discipline: la, 
+        gender: gender, 
+        name: "Löschangriff - nur LA - #{I18n.t("gender.#{gender}")}", 
+        tag_references_attributes: [{ tag_id: nur_la.id }],
+      )
+      Score::Result.create!(assessment: la_assessment)
     end
   end
 end

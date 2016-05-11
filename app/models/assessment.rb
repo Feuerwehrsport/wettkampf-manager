@@ -1,4 +1,6 @@
 class Assessment < ActiveRecord::Base
+  include Taggable
+
   belongs_to :discipline
   belongs_to :score_competition_result, class_name: "Score::CompetitionResult"
   has_many :requests, class_name: "AssessmentRequest", dependent: :destroy
@@ -21,14 +23,22 @@ class Assessment < ActiveRecord::Base
     discipline.is_a?(Disciplines::FireRelay)
   end
 
+  def person_tags
+    @person_tags ||= tags.where(type: PersonTag)
+  end
+
+  def team_tags
+    @team_tags ||= tags.where(type: TeamTag)
+  end
+
   def self.requestable_for entity
     if entity.is_a? Person
       where(arel_table[:gender].eq(nil).or(arel_table[:gender].eq(Person.genders[entity.gender]))).select do |assessment|
-        assessment.discipline.single_discipline?
+        assessment.discipline.single_discipline? && (assessment.person_tags.blank? || entity.include_tags?(assessment.person_tags))
       end
     else
       where(arel_table[:gender].eq(nil).or(arel_table[:gender].eq(Team.genders[entity.gender]))).select do |assessment|
-        assessment.discipline.group_discipline?
+        assessment.discipline.group_discipline? && (assessment.team_tags.blank? || entity.include_tags?(assessment.team_tags))
       end
     end
   end

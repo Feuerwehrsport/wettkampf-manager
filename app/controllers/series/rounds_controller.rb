@@ -9,7 +9,7 @@ module Series
       round = Round.find(params[:id])
       @person_assessments = PersonAssessment.where(round: round)
       @team_assessments_exists = TeamAssessment.where(round: round).present?
-      @round = round
+      @round = round.decorate
       @page_title = "#{@round} - Wettkampfserie"
     end
   end

@@ -4,6 +4,7 @@
     = f.association :discipline
     = f.input :gender, collection: [:male, :female]
     = f.input :name
+    = render 'tag_form', f: f
     - box.footer do
       = cancel_link
       = f.primary_button :submit, "Speichern"
