@@ -1,7 +1,7 @@
 = simple_form_for @team do |f|
   = box Team.model_name.human do |box|
     = f.error_notification
-    = f.input :name
+    = f.input :name, input_html: { autocomplete: :off }
     .suggestions-entries
       %table.table.table-hover.table-condensed
     = f.input :shortcut, input_html: { maxlength: 12 }
