@@ -10,7 +10,7 @@
       - @tags.each do |tag|
         %th{ style: "width: 5%" }= tag
 
-      - assessments = Assessment.requestable_for(collection.first).map(&:decorate)
+      - assessments = Assessment.single_discipline(collection.first.gender).map(&:decorate)
       - assessments.each do |assessment|
         %th{ title: assessment }= discipline_image assessment.discipline
       - if logged_in?

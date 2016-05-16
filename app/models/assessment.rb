@@ -31,6 +31,10 @@ class Assessment < ActiveRecord::Base
     @team_tags ||= tags.where(type: TeamTag)
   end
 
+  def self.single_discipline(gender)
+    gender(gender).select { |assessment| assessment.discipline.single_discipline? }
+  end
+
   def self.requestable_for entity
     if entity.is_a? Person
       where(arel_table[:gender].eq(nil).or(arel_table[:gender].eq(Person.genders[entity.gender]))).select do |assessment|

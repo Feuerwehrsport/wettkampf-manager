@@ -3,6 +3,7 @@ module Series
     decorates_association :cups
     decorates_association :participations
     decorates_association :round
+    decorates_association :discipline_model
 
     def to_s
       name

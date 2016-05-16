@@ -1,7 +1,9 @@
 module Series
   module TeamAssessmentRows
     class BaseDecorator < ApplicationDecorator
-      decorates_association :team
+      def to_s
+        "#{team.name} #{team_number}"
+      end
 
       def participations_for_cup(cup)
         object.participations_for_cup(cup).map(&:decorate)

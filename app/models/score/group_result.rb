@@ -11,6 +11,9 @@ module Score
       run_count = competition.group_run_count
       score_count = competition.group_score_count
 
+      run_count = result.group_run_count if result.group_run_count.present?
+      score_count = result.group_score_count if result.group_score_count.present?
+
       result.rows.each do |result_row|
         next unless result_row.list_entries.first.group_competitor?
         next if result_row.entity.team.nil?

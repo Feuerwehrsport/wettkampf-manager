@@ -1,5 +1,5 @@
 module Score
-  class CompetitionResultRow < Struct.new(:team)
+  class CompetitionResultRow < Struct.new(:competition_result, :team)
     include Draper::Decoratable
     attr_reader :assessment_results
 
@@ -28,7 +28,7 @@ module Score
     end
 
     def <=> other
-      Competition.result_type.nil? ? 0 : send(:"#{Competition.result_type}_compare", other)
+      competition_result.result_type.nil? ? 0 : send(:"#{competition_result.result_type}_compare", other)
     end
 
     private

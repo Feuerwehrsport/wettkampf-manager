@@ -90,7 +90,7 @@ module Score
       if @score_list.assessments.first.fire_relay?
         Team.all.map { |team| TeamRelay.create_next_free_for(team, @score_list.entries.pluck(:entity_id)) }
       else
-        discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)) 
+        discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)).sort_by { |e| label_method_for_select_entity(e) }
       end
     end
 

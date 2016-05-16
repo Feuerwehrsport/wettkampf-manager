@@ -13,8 +13,8 @@ module Score
 
     def self.configuration
       {
-        "Score::ListGenerators::Simple" => Configuration.new { |discipline| !discipline.is_a?(Disciplines::FireRelay) },
         "Score::ListGenerators::GroupOrder" => Configuration.new { |discipline| discipline.single_discipline? },
+        "Score::ListGenerators::Simple" => Configuration.new { |discipline| !discipline.is_a?(Disciplines::FireRelay) },
         "Score::ListGenerators::FireRelay" => Configuration.new { |discipline| discipline.is_a?(Disciplines::FireRelay) },
         "Score::ListGenerators::TrackChange" => Configuration.new([:before_list]) { |discipline| !discipline.is_a?(Disciplines::FireRelay) },
         "Score::ListGenerators::TrackSame" => Configuration.new([:before_list]) { |discipline| !discipline.is_a?(Disciplines::FireRelay) },

@@ -3,9 +3,14 @@ module Score
     has_many :assessments, foreign_key: :score_competition_result_id
     has_many :results, -> { where(score_results: { group_assessment: true }) }, through: :assessments
     enum gender: { female: 0, male: 1 }
+    validates :result_type, presence: true
 
     def rows
-      @rows ||= Competition.result_type.nil? ? [] : send(Competition.result_type)
+      @rows ||= result_type.present? ? send(result_type) : []
+    end
+
+    def result_type
+      super.presence || Competition.result_type
     end
 
     def self.result_types
@@ -32,7 +37,7 @@ module Score
         result_rows.each do |row|
           points -= 1 if points > 0
           assessment_result = AssessmentResult.new(row.competition_result_valid? ? points : 0, result.assessment, row.time, row.entity, row)
-          teams[row.entity.id] = CompetitionResultRow.new(row.entity) if teams[row.entity.id].nil?
+          teams[row.entity.id] = CompetitionResultRow.new(self, row.entity) if teams[row.entity.id].nil?
           teams[row.entity.id].add_assessment_result(assessment_result)
           current_assessment_results.push(assessment_result)
         end
@@ -63,7 +68,7 @@ module Score
         result_rows.each do |row|
           points += 1
           assessment_result = AssessmentResult.new(points, result.assessment, row.time, row.entity, row)
-          teams[row.entity.id] = CompetitionResultRow.new(row.entity) if teams[row.entity.id].nil?
+          teams[row.entity.id] = CompetitionResultRow.new(self, row.entity) if teams[row.entity.id].nil?
           teams[row.entity.id].add_assessment_result(assessment_result)
           current_assessment_results.push(assessment_result)
         end

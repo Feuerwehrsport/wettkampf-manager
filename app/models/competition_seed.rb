@@ -66,6 +66,14 @@ class CompetitionSeed
         :seed_method_landesmeisterschaft_thueringen_2016
       ],
       [
+        "D-Cup Doberlug-Kirchhain 2016", 
+        [
+          "Kreiswertung",
+          "D-Cup-Wertung",
+        ], 
+        :seed_method_doki_2016
+      ],
+      [
         "Jugend-Elbe-Elster 2015", 
         [], 
         :seed_method_jugend_elbe_elster
@@ -143,40 +151,40 @@ class CompetitionSeed
     )
     youth_tag = PersonTag.create!(name: "U20", competition: Competition.first)
 
-    hb = Disciplines::ObstacleCourse.create!
-    hl = Disciplines::ClimbingHookLadder.create!
-    gs = Disciplines::GroupRelay.create!
-    fs = Disciplines::FireRelay.create! if all_disciplines
-    zk = Disciplines::DoubleEvent.create!
-    la = Disciplines::FireAttack.create!
+    @hb = Disciplines::ObstacleCourse.create!
+    @hl = Disciplines::ClimbingHookLadder.create!
+    @gs = Disciplines::GroupRelay.create!
+    @fs = Disciplines::FireRelay.create! if all_disciplines
+    @zk = Disciplines::DoubleEvent.create!
+    @la = Disciplines::FireAttack.create!
 
     competition_results = [:female, :male].map do |gender|
-      competition_result = Score::CompetitionResult.create(gender: gender)
+      competition_result = Score::CompetitionResult.create(gender: gender, result_type: "dcup", name: "D-Cup")
 
-      zk_assessment = Assessment.create!(discipline: zk, gender: gender)
+      zk_assessment = Assessment.create!(discipline: @zk, gender: gender)
       zk_result = Score::DoubleEventResult.create!(assessment: zk_assessment)
       zk_result_youth = Score::DoubleEventResult.create!(assessment: zk_assessment, tag_references_attributes: [{ tag_id: youth_tag.id }])
 
-      hb_assessment = Assessment.create!(discipline: hb, gender: gender, score_competition_result: competition_result)
+      hb_assessment = Assessment.create!(discipline: @hb, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result)
       Score::Result.create!(assessment: hb_assessment, double_event_result: zk_result_youth, tag_references_attributes: [{ tag_id: youth_tag.id }])
 
-      hl_assessment = Assessment.create!(discipline: hl, gender: gender, score_competition_result: competition_result)
+      hl_assessment = Assessment.create!(discipline: @hl, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: hl_assessment, group_assessment: true, double_event_result: zk_result)
       Score::Result.create!(assessment: hl_assessment, double_event_result: zk_result_youth, tag_references_attributes: [{ tag_id: youth_tag.id }])
 
-      la_assessment = Assessment.create!(discipline: la, gender: gender, score_competition_result: competition_result)
+      la_assessment = Assessment.create!(discipline: @la, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: la_assessment, group_assessment: true)
 
       if all_disciplines
-        fs_assessment = Assessment.create!(discipline: fs, gender: gender, score_competition_result: competition_result)
+        fs_assessment = Assessment.create!(discipline: @fs, gender: gender, score_competition_result: competition_result)
         Score::Result.create!(assessment: fs_assessment, group_assessment: true)
       end
 
       competition_result
     end
 
-    gs_assessment = Assessment.create!(discipline: gs, gender: :female, score_competition_result: competition_results.first)
+    gs_assessment = Assessment.create!(discipline: @gs, gender: :female, score_competition_result: competition_results.first)
     Score::Result.create!(assessment: gs_assessment, group_assessment: true)
   end
 
@@ -438,5 +446,54 @@ class CompetitionSeed
       )
       Score::Result.create!(assessment: la_assessment)
     end
+  end
+
+  def seed_method_doki_2016
+    dcup_seed
+    Competition.update_all(
+      place: "Doberlug-Kirchhain",
+      date: Date.parse("2016-05-28"),
+      name: "D-Cup und KM - DoKi 2016",
+    )
+    km_single = PersonTag.create!(name: "Kreiswertung", competition: Competition.first)
+    km_team = TeamTag.create!(name: "Kreiswertung", competition: Competition.first)
+
+    competition_results = [:female, :male].map do |gender|
+      competition_result = Score::CompetitionResult.create!(gender: gender, name: "Kreiswertung", result_type: "places_to_points")
+      zk_assessment = Assessment.create!(discipline: @zk, gender: gender)
+      zk_result = Score::DoubleEventResult.create!(assessment: zk_assessment, name: "Zweikampf - #{I18n.t("gender.#{gender}")}")
+
+      hb_assessment = Assessment.create!(discipline: @hb, gender: gender, score_competition_result: competition_result, tag_references_attributes: [{ tag_id: km_single.id }] )
+      Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result, group_run_count: 4, group_score_count: 3)
+
+      hl_assessment = Assessment.create!(discipline: @hl, gender: gender, score_competition_result: competition_result, tag_references_attributes: [{ tag_id: km_single.id }] )
+      Score::Result.create!(assessment: hl_assessment, group_assessment: true, double_event_result: zk_result, group_run_count: 4, group_score_count: 3)
+
+      la_assessment = Assessment.create!(
+        discipline: @la, 
+        gender: gender, 
+        score_competition_result: competition_result,
+        tag_references_attributes: [{ tag_id: km_team.id }],
+      )
+      Score::Result.create!(assessment: la_assessment, group_assessment: true)
+
+      fs_assessment = Assessment.create!(
+        discipline: @fs, 
+        gender: gender, 
+        score_competition_result: competition_result, 
+        tag_references_attributes: [{ tag_id: km_team.id }],
+      )
+      Score::Result.create!(assessment: fs_assessment, group_assessment: true)
+
+      competition_result
+    end
+
+    gs_assessment = Assessment.create!(
+      discipline: @gs, 
+      gender: :female, 
+      score_competition_result: competition_results.first, 
+      tag_references_attributes: [{ tag_id: km_team.id }],
+    )
+    Score::Result.create!(assessment: gs_assessment, group_assessment: true)
   end
 end

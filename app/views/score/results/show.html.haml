@@ -36,12 +36,12 @@
         - if @score_result.series_person_assessment.present?
           %tr
             %th Cup-Serie Einzelwertung
-            %td= @score_result.series_person_assessment.to_label
+            %td= link_to(@score_result.series_person_assessment.to_label, series_assessment_path(@score_result.series_person_assessment))
 
         - if @score_result.series_team_assessment.present?
           %tr
             %th Cup-Serie Mannschaftswertung
-            %td= @score_result.series_team_assessment.to_label
+            %td= link_to(@score_result.series_team_assessment.to_label, series_round_path(@score_result.series_team_assessment.round))
   - if logged_in?
     .col-md-4
       = box("Aktionen") do

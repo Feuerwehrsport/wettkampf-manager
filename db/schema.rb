@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309102536) do
+ActiveRecord::Schema.define(version: 20160512200651) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -182,8 +182,9 @@ ActiveRecord::Schema.define(version: 20160309102536) do
   create_table "score_competition_results", force: :cascade do |t|
     t.string   "name"
     t.integer  "gender"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "result_type"
   end
 
   create_table "score_list_assessments", force: :cascade do |t|
@@ -237,6 +238,8 @@ ActiveRecord::Schema.define(version: 20160309102536) do
     t.string   "type",                        default: "Score::Result", null: false
     t.integer  "series_team_assessment_id"
     t.integer  "series_person_assessment_id"
+    t.integer  "group_score_count"
+    t.integer  "group_run_count"
   end
 
   add_index "score_results", ["assessment_id"], name: "index_score_results_on_assessment_id"
