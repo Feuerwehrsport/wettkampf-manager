@@ -1,0 +1,21 @@
+%table.table.table-bordered.table-hover.table-condensed.people-index-table
+  %tr
+    %th= Team.human_attribute_name(:name)
+    %th= Team.human_attribute_name(:people)
+    - @tags.each do |tag|
+      %th= tag
+    %th
+  - collection.each do |team|
+    %tr{ team.list_entries_group_competitor_valid? ? {} : { class: "danger" } }
+      %td= team.numbered_name
+      %td
+        = team.people.count
+        - if logged_in?
+          - unless team.list_entries_group_competitor_valid?
+            %span.glyphicon.glyphicon-remove{ title: "Mannschaftswertung nicht korrekt"}
+      - @tags.each do |tag|
+        %td= team.tags.include?(tag) ? 'X' : ''
+      %td.text-right
+        = btn_link_to "Ansehen", team
+        - if logged_in?
+          = btn_link_to "Bearbeiten", { action: :edit, id: team }
