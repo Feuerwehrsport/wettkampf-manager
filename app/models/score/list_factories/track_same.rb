@@ -7,7 +7,7 @@ class Score::ListFactories::TrackSame < Score::ListFactory
   end
 
   def perform
-    list.transaction do
+    transaction do
       before_list.entries.each do |entry|
         create_list_entry(entry, entry.run, entry.track)
       end

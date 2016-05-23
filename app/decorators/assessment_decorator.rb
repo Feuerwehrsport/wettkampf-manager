@@ -6,7 +6,7 @@ class AssessmentDecorator < ApplicationDecorator
   end
 
   def name_with_request_count
-    if object.discipline.is_a?(Disciplines::FireRelay)
+    if object.discipline.is_a?(Disciplines::FireRelay) && assessment.requests.present?
       numbers = []
       (1..assessment.requests.map(&:relay_count).max).each do |number|
         count = assessment.requests.where('relay_count >= ?', number).count

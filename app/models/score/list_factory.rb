@@ -1,4 +1,6 @@
 class Score::ListFactory < ActiveRecord::Base
+  include Score::ListFactoryDefaults
+
   STEPS = %i(discipline assessments names tracks results generator generator_params finish create)
   GENERATORS = [
     Score::ListFactories::GroupOrder,
@@ -40,7 +42,10 @@ class Score::ListFactory < ActiveRecord::Base
     end
   end
   after_save do
-    perform if status_changed? && status == :create
+    if status_changed? && status == :create
+      create_list
+      perform
+    end
   end
 
   def possible_types
@@ -87,75 +92,35 @@ class Score::ListFactory < ActiveRecord::Base
     next_step_number >= STEPS.find_index(step)
   end
 
-  def possible_assessments
-    Assessment.where(discipline: discipline)
-  end
-
-  def possible_results
-    Score::Result.where(id: assessments.joins(:results).pluck("score_results.id"))
-  end
-
-  def possible_before_results
-    Score::Result.where(id: assessments.joins(:results).pluck("score_results.id"))
-  end
-
-  def possible_before_lists
-    Score::List.where(id: assessments.joins(:lists).pluck("score_lists.id"))
-  end
-
   def perform
-    create_list
     for_run_and_track_for(perform_rows)
   end
 
   def default_name
     name.presence || begin
-      if assessments.count == 1
-        "#{assessments.first.decorate.to_s} - Lauf 1"
-      else
-        "#{discipline.decorate.to_s} - Lauf 1"
+      main_name = assessments.count == 1 ? assessments.first.decorate.to_s : discipline.decorate.to_s
+      if !discipline.is_a?(Disciplines::FireRelay)
+        run = 1
+        loop do
+          break if Score::List.where(name: "#{main_name} - Lauf #{run}").blank?
+          run += 1
+        end
+        main_name = "#{main_name} - Lauf #{run}"
       end
+      main_name
     end
-  end
-
-  def default_shortcut
-    shortcut.presence || 'Lauf 1'
-  end
-
-  def default_track_count
-    track_count.presence || 2
-  end
-
-  def default_results
-    results.presence || possible_results
-  end
-
-  def default_type
-    type.presence || possible_types.first
-  end
-
-  def default_before_list
-    before_list.presence || possible_before_lists.first
-  end
-
-  def default_before_result
-    before_result.presence || possible_before_results.first
-  end
-
-  def default_best_count
-    best_count.presence || 30
   end
 
   protected
 
   def create_list
-    @list = Score::List.create!(name: name, shortcut: shortcut, assessments: assessments, results: results, track_count: track_count)
+    @list ||= Score::List.create!(name: name, shortcut: shortcut, assessments: assessments, results: results, track_count: track_count)
   end
 
   def for_run_and_track_for rows
     rows = rows.dup
     run = 0
-    list.transaction do
+    transaction do
       while true
         run += 1
         for track in (1..list.track_count)

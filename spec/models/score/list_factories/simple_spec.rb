@@ -10,6 +10,7 @@ RSpec.describe Score::ListFactories::Simple, type: :model do
   
   describe 'perform' do
     it "create list entries" do
+      subject.send(:create_list)
       expect { subject.perform }.to change(Score::ListEntry, :count).by(5)
     end
   end

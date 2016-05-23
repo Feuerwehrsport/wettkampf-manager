@@ -85,7 +85,7 @@ de:
         results: Ergebnislisten
         type: Listenerstellung
         before_list: Vorherige Liste
-        best_count: Anzahl Starter auf der neuen Liste (X)
+        best_count: Anzahl der Finalisten auf der neuen Liste (X)
         before_result: Ergebnisliste
       score/list_factories/best:
         description: Man wählt man eine Ergebnisliste aus, von der die X Besten auf der neuen Liste erscheinen.

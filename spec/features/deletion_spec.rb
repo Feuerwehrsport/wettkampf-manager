@@ -17,6 +17,7 @@ RSpec.feature "Deletion of things" do
   let(:result) { Score::Result.where(assessment: assessment).first }
   let(:score_list) do
     factory = create(:score_list_factory_simple, assessments: [assessment], results: [result])
+    factory.send(:create_list)
     factory.perform
     factory.list
   end
