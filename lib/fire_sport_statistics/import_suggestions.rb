@@ -1,6 +1,8 @@
 module FireSportStatistics
   class ImportSuggestions < Import
-    def initialize
+    def initialize(quiet = false)
+      @quiet = quiet
+
       ActiveRecord::Base.transaction do
         destroy_old_imports
 
