@@ -10,26 +10,9 @@ module Score
     has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry", dependent: :destroy
     validates :name, :assessments, :track_count, :shortcut, presence: true
     validates :track_count, numericality: { greater_than: 0 }
-    validates :generator, on: :create, presence: true
     validates :result_time_type, inclusion: { in: proc { |l| l.available_time_types.map(&:to_s) } }, allow_nil: true
     validates :shortcut, length: { maximum: 8 }
-    validate :generator_valid?
-    validate :results_match_assessments
     accepts_nested_attributes_for :entries, allow_destroy: true
-
-    attr_accessor :generator
-    after_create :perform_generator
-
-    def generator= generator
-      if generator.present?
-        @generator = generator.constantize.new(list: self) rescue nil
-      else
-        @generator = generator
-      end
-      if @generator_attributes.present?
-        generator_attributes = @generator_attributes
-      end
-    end
 
     def next_free_track
       last_entry = entries.last
@@ -43,23 +26,8 @@ module Score
       [run, track]
     end
 
-    def generator_attributes= attributes
-      if @generator.present?
-        attributes.each do |key, value|
-          @generator.send("#{key}=".to_sym, value)
-        end
-        @generator_attributes = nil
-      else
-        @generator_attributes = attributes
-      end
-    end
-
     def open?
       result_time_type.nil?
-    end
-
-    def perform_generator
-      generator.perform
     end
 
     def electronic_time_all_available?
@@ -86,29 +54,6 @@ module Score
       types.push(:handheld_average) if handheld_count > 0
       types.push(:calculated) if handheld_time_count_for_non_electronic_time > 0
       types
-    end
-
-    private
-
-    def results_match_assessments
-      results.each do |result|
-        unless result.assessment.in? assessments
-          errors.add(:results, 'müssen gleiche Wertungsgruppe haben')
-        end
-      end
-      assessments.each do |assessment|
-        unless assessment.id.in? results.map(&:assessment_id)
-          errors.add(:assessments, 'müssen passende Ergebnislisten haben')
-        end
-      end
-    end
-
-    def generator_valid?
-      if generator.present? && !generator.valid?
-        generator.errors.full_messages.each do |msg|
-          errors.add(:generator, msg)
-        end
-      end
     end
   end
 end

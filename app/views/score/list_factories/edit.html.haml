@@ -1,0 +1,68 @@
+.col-md-6
+  = box "Startliste erstellen - Schritt #{@score_list_factory.current_step_number + 1}" do |box|
+    = simple_form_for @score_list_factory, url: url_for(action: :update), as: :score_list_factory do |f|
+      = f.error_notification
+      = render @score_list_factory.current_step.to_s, f: f
+
+    - box.footer do
+      - if @score_list_factory.current_step_number > 1
+        = simple_form_for @score_list_factory, url: url_for(action: :update), as: :score_list_factory do |f|
+          = f.input :next_step, as: :hidden, input_html: { value: Score::ListFactory::STEPS[@score_list_factory.current_step_number - 1] }
+          = link_to 'Abbrechen', { action: :destroy }, method: :delete, data: { confirm: 'Listenerstellung abbrechen?' }, class: 'btn btn-default btn-sm'
+          = f.button :submit, 'Zurück', class: 'btn-sm'
+      - else
+        = link_to 'Abbrechen', { action: :destroy }, method: :delete, data: { confirm: 'Listenerstellung abbrechen?' }, class: 'btn btn-default btn-sm'
+.col-md-6
+  = box 'Bisher ausgewählt' do
+    %table.table
+      %tr
+        %th Disziplin
+        %td
+          = discipline_image @score_list_factory.discipline.decorate
+          = @score_list_factory.discipline.decorate
+
+      - if @score_list_factory.current_step_number > 1
+        %tr
+          %th Wertungsgruppen
+          %td
+            %ul
+              - @score_list_factory.assessments.decorate.each do |assessment|
+                %li= link_to(assessment, assessment)
+
+      - if @score_list_factory.current_step_number > 2
+        %tr
+          %th Name
+          %td= @score_list_factory.name
+        %tr
+          %th Abkürzung
+          %td= @score_list_factory.shortcut
+
+      - if @score_list_factory.current_step_number > 3
+        %tr
+          %th Wettkampfbahnen
+          %td= @score_list_factory.track_count
+
+      - if @score_list_factory.current_step_number > 4
+        %tr
+          %th Ergebnislisten
+          %td
+            %ul
+              - @score_list_factory.results.decorate.each do |result|
+                %li= link_to(result, result)
+
+      - if @score_list_factory.current_step_number > 5
+        = render 'generator_description', generator_class: @score_list_factory.object.class
+
+      - if @score_list_factory.current_step_number > 6
+        - if :before_list.in? @score_list_factory.object.class.generator_params
+          %tr
+            %th Vorherige Startliste
+            %td= link_to(@score_list_factory.before_list.decorate, @score_list_factory.before_list)
+        - if :before_result.in? @score_list_factory.object.class.generator_params
+          %tr
+            %th Vorherige Ergebnisliste
+            %td= link_to(@score_list_factory.before_result.decorate, @score_list_factory.before_result)
+        - if :best_count.in? @score_list_factory.object.class.generator_params
+          %tr
+            %th Anzahl auf neuer Liste
+            %td= @score_list_factory.best_count

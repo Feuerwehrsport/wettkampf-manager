@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe Score::ListGenerators::GroupOrder, type: :model do
+RSpec.describe Score::ListFactories::GroupOrder, type: :model do
+  subject { create(:score_list_factory_group_order, assessments: [assessment], discipline: assessment.discipline) }
   
   describe '#perform_rows' do
     let(:list) { build_stubbed :score_list, assessments: [assessment] }
-    let(:generator) { described_class.new(list: list) }
     let(:assessment) { create :assessment }
 
     let(:team1) { create(:team, :generated) }
@@ -45,7 +45,7 @@ RSpec.describe Score::ListGenerators::GroupOrder, type: :model do
     end
     
     it "returns requests seperated by team and group competitor order" do
-      requests = generator.send(:perform_rows)
+      requests = subject.send(:perform_rows)
       expect(requests).to have(13).items
 
       requests_team1 = requests.select { |r| r.entity.team == team1 }

@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.feature "Teams and People" do
   before do
     User.first.update_attributes!(password: "my-password", password_confirmation: "my-password")
-    CompetitionSeed.all.first.execute
+    CompetitionSeed.all[3].execute
   end
   it "is available after first start", js: true do
     perform_login

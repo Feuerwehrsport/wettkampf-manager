@@ -1,0 +1,14 @@
+= f.input :next_step, as: :hidden, input_html: { value: :finish }
+- if :before_list.in? @score_list_factory.object.class.generator_params
+  = f.association :before_list, collection: @score_list_factory.possible_before_lists, selected: @score_list_factory.default_before_list.try(:id)
+- if :before_result.in? @score_list_factory.object.class.generator_params
+  = f.association :before_result, collection: @score_list_factory.possible_before_results, selected: @score_list_factory.default_before_result.try(:id)
+- if :best_count.in? @score_list_factory.object.class.generator_params
+  = f.input :best_count, input_html: { value: @score_list_factory.default_best_count }
+
+
+%table.table.table-condensed
+  = render 'generator_description', generator_class: @score_list_factory.object.class
+
+.pull-right
+  = f.primary_button :submit, 'Weiter'

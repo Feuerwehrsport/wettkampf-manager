@@ -26,7 +26,7 @@ RSpec.describe Imports::Configuration, type: :model do
     context "without assessments" do
       it "imports only entities" do
         Rails.application.load_seed
-        CompetitionSeed.find(2).execute
+        CompetitionSeed.find(4).execute # dcup mit allen Disziplinen
         configuration.update_attributes!(execute: "1")
         expect(configuration.executed_at).to_not be_nil
         

@@ -31,12 +31,12 @@ de:
       score/list: 
         one: Startliste
         other: Startlisten
-      score/list_generators/best: die x Besten
-      score/list_generators/fire_relay: Staffellauf mit A, B
-      score/list_generators/group_order: Mannschaftsreihenfolge beachten
-      score/list_generators/simple: Zufällig anordnen
-      score/list_generators/track_change: Bahnwechsel
-      score/list_generators/track_same: Bahn behalten
+      score/list_factories/best: die x Besten (Finale)
+      score/list_factories/fire_relay: Staffellauf mit A, B
+      score/list_factories/group_order: Mannschaftsreihenfolge beachten
+      score/list_factories/simple: Zufällig anordnen
+      score/list_factories/track_change: Bahnwechsel
+      score/list_factories/track_same: Bahn behalten
       score/electronic_time: Elektronisch
       score/handheld_time: Hand
       score/result: Ergebnisse
@@ -77,11 +77,31 @@ de:
         last_name: Nachname
         team: Mannschaft
         bib_number: Startnummer
+      score/list_factory:
+        assessments: Wertungsgruppen
+        name: Name
+        shortcut: Abkürzung
+        track_count: Wettkampfbahnen
+        results: Ergebnislisten
+        type: Listenerstellung
+        before_list: Vorherige Liste
+        best_count: Anzahl Starter auf der neuen Liste (X)
+        before_result: Ergebnisliste
+      score/list_factories/best:
+        description: Man wählt man eine Ergebnisliste aus, von der die X Besten auf der neuen Liste erscheinen.
+      score/list_factories/fire_relay:
+        description: Für Staffelläufe mit mehreren Staffeln pro Mannschaft.
+      score/list_factories/group_order:
+        description: Für Einzeldisziplinen, wobei die Startreihenfolge innerhalb der Mannschaft beachtet wird.
+      score/list_factories/simple:
+        description: Alle Einzelstarter werden zufällig angeordnet.
+      score/list_factories/track_change:
+        description: Die Bahn wird gegenüber einer vorherigen Liste getauscht.
+      score/list_factories/track_same:
+        description: Die Bahn wird gegenüber einer vorherigen Liste behalten.
       score/list:
         assessments: Wertungsgruppen
         name: Name
-        track_count: Wettkampfbahnen
-        generator: Listenerstellung
         result_time_type: Zeitenberechnung
         results: Ergebnislisten
         shortcut: Abkürzung
@@ -91,10 +111,6 @@ de:
         entity: Teilnehmer
         track: Bahn
         run: Lauf
-      score/list_generator:
-        before_list: Vorherige Liste
-        best_count: Anzahl auf der neuen Liste
-        result: Ergebnisliste
       score/result:
         assessment: Wertungsgruppe
         group_assessment: Mannschaftswertung

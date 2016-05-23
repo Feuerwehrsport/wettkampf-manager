@@ -1,0 +1,14 @@
+= f.input :next_step, as: :hidden, input_html: { value: :create }
+
+%h2 Voraussichtliche Liste
+%table.table
+  %tr
+    %th Anzahl der Starter
+    %td= @score_list_factory.preview_entries_count
+  %tr
+    %th Anzahl der Läufe
+    %td= @score_list_factory.preview_run_count
+
+
+.pull-right
+  = f.primary_button :submit, 'Startliste erstellen'

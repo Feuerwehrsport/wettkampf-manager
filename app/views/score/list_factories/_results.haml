@@ -1,0 +1,6 @@
+%p Bitte alle Ergebnislisten auswählen, auf denen die Ergebnisse gelistet werden sollen. Übrlicherweise sind dies alle. Manchmal sind Finalläufe für U20 oder Mannschaftswertung irrelevant.
+= f.association :results, as: :check_boxes, collection: @score_list_factory.possible_results.decorate, checked: @score_list_factory.default_results.map(&:id)
+= f.input :next_step, as: :hidden, input_html: { value: :generator }
+
+.pull-right
+  = f.primary_button :submit, 'Weiter'

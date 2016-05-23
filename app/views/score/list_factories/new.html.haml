@@ -1,0 +1,11 @@
+.col-md-6
+  = box "Startliste erstellen - Schritt 1" do
+    - @factories.each do |factory|
+      = simple_form_for factory do |f|
+        = f.input :discipline_id, as: :hidden
+        = f.input :next_step, as: :hidden, input_html: { value: :assessments }
+        .row.panel
+          .col-md-5
+            = discipline_image factory.discipline, size: "40x40"
+          .col-md-7
+            = f.primary_button :submit, factory.discipline, class: "btn btn-block"

@@ -16,26 +16,6 @@ RSpec.describe Score::List, type: :model do
         expect(score_list).to be_valid
       end
     end
-
-    context 'assessment and result' do
-      let(:climbing_hook_ladder) { create :climbing_hook_ladder }
-      let(:obstacle_course) { create :obstacle_course }
-      let(:chl_assessment) { create :assessment, discipline: climbing_hook_ladder }
-      let(:oc_assessment) { create :assessment, discipline: obstacle_course }
-      let(:score_list) { build :score_list, assessments: [] }
-      let(:score_result) { create :score_result, assessment: oc_assessment }
-
-      it "" do
-        expect(score_list).to_not be_valid
-        score_list.assessments = [chl_assessment]
-        expect(score_list).to_not be_valid
-        score_list.results.push score_result
-        expect(score_list).to_not be_valid
-        expect(score_list).to have(2).errors_on(:results)
-        score_list.assessments = score_list.results.map(&:assessment)
-        expect(score_list).to be_valid
-      end
-    end
   end
 
   describe ".available_time_types" do

@@ -1,11 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Score::ListGenerators::TrackSame, type: :model do
-  
-  describe '#perform' do
-    let(:generator) { described_class.new(best_count: 2) }
-
-  end
+RSpec.describe Score::ListFactories::TrackSame, type: :model do
+  subject { build :score_list_factory_track_same, before_list: before_list, assessments: [assessment] }
 
   describe "validation" do
     let(:assessment) { create :assessment }
@@ -13,17 +9,16 @@ RSpec.describe Score::ListGenerators::TrackSame, type: :model do
     let(:before_assessment) { create :assessment }
     let(:before_result) { create :score_result, assessment: before_assessment }
     let(:before_list) { create :score_list, assessments: [before_assessment], results: [before_result] }
-    let(:generator) { described_class.new(best_count: 2, list: list, before_list: before_list.id) }
 
     it "compares assessment from list and before_list" do
-      expect(generator.valid?).to be_falsey
-      expect(generator).to have(1).error_on(:before_list)
+      expect(subject.valid?).to be_falsey
+      expect(subject).to have(1).error_on(:before_list)
     end
 
     context "with same assessment" do
       let(:before_assessment) { assessment }
       it "is valid" do
-        expect(generator.valid?).to be_truthy
+        expect(subject.valid?).to be_truthy
       end
     end
   end

@@ -72,10 +72,6 @@ module Score
       end
     end
 
-    def form_generator_config_classes type
-      ListGenerator.configuration.select { |key, configuration| type.in? configuration.generator_attributes }.keys.join(" ")
-    end
-
     def discipline_klass
       if single_discipline?
         Person

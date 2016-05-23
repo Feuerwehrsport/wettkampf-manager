@@ -57,7 +57,7 @@ FactoryGirl.define do
   end
 
   factory :assessment_request do
-    entity { build(:team, :generated) }
+    entity { build(:team, :generated, disable_autocreate_assessment_requests: true) }
     assessment_type :group_competitor
   end
 
@@ -66,7 +66,6 @@ FactoryGirl.define do
     results { [ Score::Result.first || create(:score_result)] }
     name "Hakenleitersteigen - männlich - Lauf 1"
     shortcut "Lauf 1"
-    generator { "Score::ListGenerators::Simple" }
   end  
 
   factory :score_list_entry, class: "Score::ListEntry" do

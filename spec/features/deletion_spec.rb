@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.feature "Deletion of things" do
   before do
     User.first.update_attributes!(password: "my-password", password_confirmation: "my-password")
-    CompetitionSeed.all.first.execute
+    CompetitionSeed.all[3].execute
     assessment_request
     score_list
     list_entry = Score::ListEntry.first
@@ -15,7 +15,11 @@ RSpec.feature "Deletion of things" do
   let(:assessment) { Assessment.requestable_for(person).first }
   let(:assessment_request) { create(:assessment_request, entity: person, assessment: assessment) }
   let(:result) { Score::Result.where(assessment: assessment).first }
-  let(:score_list) { create(:score_list, assessments: [assessment], results: [result]) }
+  let(:score_list) do
+    factory = create(:score_list_factory_simple, assessments: [assessment], results: [result])
+    factory.perform
+    factory.list
+  end
 
 
   it "is available after first start", js: true do

@@ -1,0 +1,4 @@
+= f.input :track_count, input_html: { value: @score_list_factory.default_track_count }, hint: 'Anzahl der Bahnen auf denen gelaufen wird'
+= f.input :next_step, as: :hidden, input_html: { value: :results }
+.pull-right
+  = f.primary_button :submit, 'Weiter'

@@ -1,0 +1,6 @@
+%p Der Name erscheint auf den erstellten PDFs in der Fußzeile. Die Abkürzung erscheint auf den Ergebnislisten als Spaltenbezeichnung.
+= f.input :name, input_html: { value: @score_list_factory.default_name }, hint: 'Vollständiger Name, sollte eindeutig sein'
+= f.input :shortcut, input_html: { value: @score_list_factory.default_shortcut }, hint: 'z.B.: Lauf 1, Vorlauf oder Finale, max. 8 Zeichen'
+= f.input :next_step, as: :hidden, input_html: { value: :tracks }
+.pull-right
+  = f.primary_button :submit, 'Weiter'

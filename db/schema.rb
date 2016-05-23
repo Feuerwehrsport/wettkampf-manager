@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512200651) do
+ActiveRecord::Schema.define(version: 20160520195846) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -209,6 +209,31 @@ ActiveRecord::Schema.define(version: 20160512200651) do
 
   add_index "score_list_entries", ["list_id"], name: "index_score_list_entries_on_list_id"
 
+  create_table "score_list_factories", force: :cascade do |t|
+    t.string   "session_id"
+    t.integer  "discipline_id",    null: false
+    t.string   "name"
+    t.string   "shortcut"
+    t.integer  "track_count"
+    t.string   "type"
+    t.integer  "before_result_id"
+    t.integer  "before_list_id"
+    t.integer  "best_count"
+    t.string   "status"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "score_list_factory_assessments", force: :cascade do |t|
+    t.integer  "assessment_id",   null: false
+    t.integer  "list_factory_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "score_list_factory_assessments", ["assessment_id"], name: "index_score_list_factory_assessments_on_assessment_id"
+  add_index "score_list_factory_assessments", ["list_factory_id"], name: "index_score_list_factory_assessments_on_list_factory_id"
+
   create_table "score_lists", force: :cascade do |t|
     t.string   "name",             default: "", null: false
     t.integer  "track_count",      default: 2,  null: false
@@ -217,6 +242,16 @@ ActiveRecord::Schema.define(version: 20160512200651) do
     t.datetime "updated_at",                    null: false
     t.string   "shortcut",         default: "", null: false
   end
+
+  create_table "score_result_list_factories", force: :cascade do |t|
+    t.integer  "list_factory_id", null: false
+    t.integer  "result_id",       null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "score_result_list_factories", ["list_factory_id"], name: "index_score_result_list_factories_on_list_factory_id"
+  add_index "score_result_list_factories", ["result_id"], name: "index_score_result_list_factories_on_result_id"
 
   create_table "score_result_lists", force: :cascade do |t|
     t.integer  "list_id",    null: false

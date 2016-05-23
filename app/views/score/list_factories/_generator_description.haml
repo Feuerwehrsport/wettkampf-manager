@@ -1,0 +1,3 @@
+%tr{ class: generator_class.in?(@score_list_factory.possible_types) ? nil : "text-muted" }
+  %th= generator_class.model_name.human
+  %td= generator_class.human_attribute_name(:description)

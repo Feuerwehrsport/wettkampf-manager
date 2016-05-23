@@ -27,7 +27,8 @@ Rails.application.routes.draw do
     member { get :edit_assessment_requests }
   end
   namespace :score do
-    resources :lists do
+    resource :list_factories, only: [:new, :create, :edit, :update, :destroy]
+    resources :lists, only: [:show, :edit, :update, :index, :destroy] do
       member do
         get :move
         get :finished

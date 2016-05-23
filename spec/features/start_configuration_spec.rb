@@ -9,9 +9,7 @@ RSpec.feature "Start configuration" do
     click_on "Passwort ändern"
     
     expect(page).to have_content "Wettkampf-Manager konfigurieren"
-    within(:css, "table.table") do
-      click_on 'Ansehen', match: :first
-    end
+    visit competition_seed_path(3)
 
     expect(page).to have_content "Deutschland-Cup (HL, HB, GS, LA)"
     click_on 'Ausführen'
