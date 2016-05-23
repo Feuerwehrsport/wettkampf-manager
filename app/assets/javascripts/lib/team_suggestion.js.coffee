@@ -18,7 +18,6 @@ class TeamSuggestion
     params =
       name: @lastValue
     $.get "/fire_sport_statistics/suggestions/teams", params, (entries) =>
-      console.log(entries)
       table.children().remove()
       for entry in entries
         table.append(@buildTr(entry))

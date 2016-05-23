@@ -49,7 +49,6 @@ gem 'sqlite3', '1.3.10'
 
 group :development do
   gem 'guard-rspec'
-  gem 'guard-livereload'
 end
 
 group :development, :test do
@@ -67,7 +66,7 @@ group :test do
   gem 'database_cleaner'
   gem 'connection_pool'
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'factory_girl_rails', '~> 4.0'
 end
 

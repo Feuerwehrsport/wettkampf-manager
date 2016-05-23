@@ -18,10 +18,22 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 require 'factory_girl'
 
 RSpec.configure do |config|
-  Capybara.javascript_driver = :webkit
+  Capybara.register_driver :poltergeist do |app|
+    Capybara::Poltergeist::Driver.new(app, window_size: [1280, 1024], :phantomjs_options => ['--debug=no', '--load-images=yes', '--ignore-ssl-errors=yes', '--ssl-protocol=TLSv1'], debug: false)
+  end
+
+  Capybara.configure do |config|
+    config.app_host = "http://127.0.0.1:7787"
+    config.default_host = "http://127.0.0.1"
+    config.run_server = true
+    config.server_port = 7787
+    config.javascript_driver = :poltergeist
+    config.default_driver = config.javascript_driver
+  end
 
 
   # rspec-expectations config goes here. You can use an alternate
