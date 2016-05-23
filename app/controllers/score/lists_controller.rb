@@ -3,6 +3,10 @@ module Score
     implement_crud_actions 
     before_action :assign_resource_for_action, only: [:move, :finished, :select_entity, :destroy_entity, :edit_times]
 
+    def index
+      @list_factory = Score::ListFactory.find_by_session_id(session.id)
+    end
+
     def show
       super
       page_title @score_list.decorate.to_s

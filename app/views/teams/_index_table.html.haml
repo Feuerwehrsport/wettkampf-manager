@@ -17,5 +17,3 @@
         %td= team.tags.include?(tag) ? 'X' : ''
       %td.text-right
         = btn_link_to "Ansehen", team
-        - if logged_in?
-          = btn_link_to "Bearbeiten", { action: :edit, id: team }

@@ -1,7 +1,7 @@
 .row.refreshable#teams-index
   .col-md-8
     = box(@team.numbered_name) do |box|
-      %table.table
+      %table.table.table-condensed
         %tr
           %th= @team.class.human_attribute_name :name
           %td= @team.name
@@ -27,13 +27,9 @@
               %th= assessment.decorate
               %td= "#{@team.list_entries_group_competitor(assessment)} von #{Competition.one.group_run_count}"
 
-      - if logged_in?
-        - box.footer do
-          = btn_link_to "Bearbeiten", { action: :edit }
-
 
     = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
-      %table.table
+      %table.table.table-condensed
         - Assessment.requestable_for(@team).each do |assessment|
           - decorated_assessment = assessment.decorate
           %tr
@@ -57,6 +53,8 @@
       = box("Aktionen") do
         = block_link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), remote: true
         = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Mannschaft wirklich löschen? Alle Zeiten usw. werden auch gelöscht!' }
+        = block_link_to "Name bearbeiten", { action: :edit }
+        = block_link_to "Wertungsgruppen bearbeiten", { action: :edit_assessment_requests }, remote: true
 
   .col-md-12
     = box(@team.class.human_attribute_name :people) do |box|

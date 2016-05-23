@@ -20,8 +20,8 @@
         %tr
           %th= @person.class.human_attribute_name :team
           %td
-          - if @person.team
-            = link_to @person.team.name, team_path(@person.team)
+            - if @person.team
+              = link_to @person.team.name, team_path(@person.team)
 
       - if logged_in?
         - box.footer do

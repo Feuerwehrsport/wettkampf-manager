@@ -13,3 +13,9 @@
       - if logged_in?
         - box.footer do
           = btn_link_to "Hinzufügen", action: :new, controller: 'score/list_factories'
+
+  - if logged_in? && @list_factory.present?
+    .col-md-4
+      = box 'Erstellungsvorgang' do |box|
+        = block_link_to "Weiter mit Schritt #{@list_factory.current_step_number + 1}", edit_score_list_factories_path
+        = block_link_to 'Abbrechen', score_list_factories_path, method: :delete, data: { confirm: 'Listenerstellung abbrechen?' }, class: 'btn btn-default btn-sm'
