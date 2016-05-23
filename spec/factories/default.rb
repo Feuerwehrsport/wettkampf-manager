@@ -40,6 +40,8 @@ FactoryGirl.define do
   end
   factory :fire_attack, class: "Disciplines::FireAttack" do
   end
+  factory :double_event, class: "Disciplines::DoubleEvent" do
+  end
 
   factory :assessment do
     discipline { Disciplines::ClimbingHookLadder.first || create(:climbing_hook_ladder) }
