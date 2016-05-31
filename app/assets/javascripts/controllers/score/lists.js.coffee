@@ -3,6 +3,9 @@
 listEntries = null
 
 buildForm = () ->
+  $(window).bind 'beforeunload', ->
+    'Wollen Sie die veränderte Reihenfolge verwerfen?'
+
   form = $('.score_list_form').hide().removeClass('hide').slideDown().submit () ->
     params =
       authenticity_token: form.find('input[name=authenticity_token]').val()
@@ -54,6 +57,8 @@ recalculateRuns = () ->
     table.animate opacity: 1, () ->
 
 bindSortedTable = () ->
+  $(window).unbind 'beforeunload'
+
   $('.sorted_table tbody').sortable(
     forcePlaceholderSize: true
     items: 'tr'
