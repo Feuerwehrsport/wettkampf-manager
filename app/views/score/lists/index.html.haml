@@ -1,6 +1,11 @@
 .row
   .col-md-8
     = box 'Startlisten' do |box|
+      - if logged_in?
+        - box.header do
+          .pull-right
+            = btn_link_to "Hinzufügen", action: :new, controller: 'score/list_factories'
+          .clearfix
       %table.table
         - @score_lists.each do |list|
           %tr

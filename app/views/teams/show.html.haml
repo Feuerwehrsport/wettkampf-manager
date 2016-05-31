@@ -58,6 +58,11 @@
 
   .col-md-12
     = box(@team.class.human_attribute_name :people) do |box|
+      - if logged_in?
+        - box.header do
+          .pull-right
+            = btn_link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), remote: true
+          .clearfix
       = render "people_table", collection: @team.object.people.registration_order.map(&:decorate)
       - if logged_in?
         - box.footer do

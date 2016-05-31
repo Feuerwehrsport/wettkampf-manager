@@ -3,7 +3,7 @@
   %table.team_assessments
     - participations.each do |participation|
       %tr
-        / %th.small= discipline_name_short(participation.assessment.discipline)
-        / %td.series-participation{ data: { id: participation.id } }= participation.second_time_with_points
+        %th.small= participation.assessment.discipline.upcase
+        %td.series-participation{ data: { id: participation.id } }= participation.second_time_with_points
 - else
   %div= free
