@@ -13,4 +13,4 @@ first = true
   end
 end
 
-pdf_footer pdf
+pdf_footer pdf, name: 'Gesamtwertung'

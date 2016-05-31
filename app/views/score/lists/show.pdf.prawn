@@ -18,4 +18,4 @@ pdf.table(show_export_data, {
   end
 end
 
-pdf_footer pdf
+pdf_footer pdf, name: @score_list.name

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     
     if request.format.pdf?
       info = { Title: title }
-      prawnto prawn: prawn_options.merge(info: info), filename: "#{title.parameterize}.pdf"
+      prawnto prawn: prawn_options.merge(info: info, page_size: 'A4'), filename: "#{title.parameterize}.pdf"
     elsif request.format.xlsx?
       response.headers['Content-Disposition'] = "attachment; filename=\"#{title.parameterize}.xlsx\""
     end

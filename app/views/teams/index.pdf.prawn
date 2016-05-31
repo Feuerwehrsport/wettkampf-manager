@@ -10,4 +10,4 @@ pdf.table(index_export_data, {
   column(2).style(align: :center )
 end
 
-pdf_footer pdf
+pdf_footer pdf, name: 'Liste der Mannschaften'

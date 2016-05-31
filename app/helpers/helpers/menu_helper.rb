@@ -7,7 +7,7 @@ module Helpers::MenuHelper
 
   def main_menu_items
     items = [
-      MenuItem.new("Überslicht", '/dashboard', :show),
+      MenuItem.new("Übersicht", '/dashboard', :show),
       MenuItem.new("Mannschaften", '/teams'),
       MenuItem.new("Wettkämpfer", '/people'),
       MenuItem.new("Startlisten", '/score/lists'),

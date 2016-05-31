@@ -49,4 +49,4 @@ if @only != :single_competitors && @score_result.group_assessment? && @disciplin
   end
 end
 
-pdf_footer pdf
+pdf_footer pdf, name: @score_result.to_s

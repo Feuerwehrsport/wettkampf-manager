@@ -13,12 +13,12 @@ module PDFHelper
     pdf.page_count.times do |i|
       pdf.bounding_box([pdf.bounds.left, pdf.bounds.bottom], width: pdf.bounds.width, height: 30) do
         pdf.go_to_page i+1
-        pdf.move_down 3
 
         text = [name]
         text.push("Seite #{i+1} von #{pdf.page_count}") unless options[:no_page_count]
 
-        pdf.text(text.join(' - '), align: :center)
+        pdf.text(text.join(' - '), align: :center, size: 8)
+        pdf.text(options[:name], align: :center, size: 8) if options[:name].present?
       end
     end
   end

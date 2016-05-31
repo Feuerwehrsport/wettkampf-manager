@@ -30,4 +30,4 @@ if @male.count > 0
   end
 end
 
-pdf_footer pdf
+pdf_footer pdf, name: 'Liste der Wettkämpfer'
