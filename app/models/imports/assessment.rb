@@ -1,6 +1,6 @@
 class Imports::Assessment < ActiveRecord::Base
-  belongs_to :configuration
-  belongs_to :assessment, class_name: "::Assessment"
+  belongs_to :configuration, class_name: 'Imports::Configuration'
+  belongs_to :assessment, class_name: '::Assessment'
   validates :gender, :discipline, :configuration, :foreign_key, presence: true
 
   before_create do

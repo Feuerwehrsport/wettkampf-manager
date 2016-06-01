@@ -1,5 +1,3 @@
-module Score
-  class ListEntryDecorator < ApplicationDecorator
-    decorates_association :entity
-  end
+class Score::ListEntryDecorator < Score::ResultEntryDecorator
+  decorates_association :entity
 end

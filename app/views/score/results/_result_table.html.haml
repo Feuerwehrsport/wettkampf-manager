@@ -22,11 +22,11 @@
       - if @score_result.assessment.discipline.single_discipline? && Competition.one.show_bib_numbers?
         %td= row.entity.try(:bib_number)
       %th= row.entity
-      - if row.is_a? Score::DoubleEventResultRow
-        %th= row.sum_stopwatch_time
+      - if row.is_a?(Score::DoubleEventResultRow)
+        %th= row.sum_result_entry
         - @score_result.results.each do |result|
-          %td= row.time_from(result)
+          %td= row.result_entry_from(result)
       - else
-        %th= row.best_stopwatch_time
+        %th= row.best_result_entry
         - @score_result.lists.each do |list|
-          %td= row.time_from(list)
+          %td= row.result_entry_from(list)

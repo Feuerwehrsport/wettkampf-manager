@@ -16,7 +16,7 @@ if @score_result.group_assessment? && @discipline.single_discipline?
     sheet.add_row []
     sheet.add_row []
     build_group_data_details_rows.each do |team_result|
-      sheet.add_row [team_result.team.to_s, team_result.time.to_s], style: bold
+      sheet.add_row [team_result.team.to_s, team_result.result_entry.to_s], style: bold
       team_result.rows_in.each { |row| sheet.add_row(row) }
       team_result.rows_out.each { |row| sheet.add_row(row, style: italic) }
 

@@ -13,9 +13,9 @@ end
   end
 
   if row.is_a?(Score::DoubleEventResultRow)
-    time = row.sum_stopwatch_time
+    time = row.sum_result_entry
   else
-    time = row.best_stopwatch_time
+    time = row.best_result_entry
   end
 
   @certificates_template.text_positions.each do |tp|

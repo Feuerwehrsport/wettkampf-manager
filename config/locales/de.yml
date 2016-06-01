@@ -37,8 +37,6 @@ de:
       score/list_factories/simple: Zufällig anordnen
       score/list_factories/track_change: Bahnwechsel
       score/list_factories/track_same: Bahn behalten
-      score/electronic_time: Elektronisch
-      score/handheld_time: Hand
       score/result: Ergebnisse
       score/run: Lauf
       team:
@@ -102,7 +100,6 @@ de:
       score/list:
         assessments: Wertungsgruppen
         name: Name
-        result_time_type: Zeitenberechnung
         results: Ergebnislisten
         shortcut: Abkürzung
       score/list_entry:
@@ -111,6 +108,7 @@ de:
         entity: Teilnehmer
         track: Bahn
         run: Lauf
+        second_time: Zeit in Sekunden
       score/result:
         assessment: Wertungsgruppe
         group_assessment: Mannschaftswertung
@@ -141,17 +139,17 @@ de:
     name: Wettkampf-Manager
     toggle_navigation: Menü ein-/ausklappen
 
+  result_types:
+    waiting: Ausstehend
+    valid: Gültig
+    invalid: Ungültig
+    no_run: Nicht angetreten
+
   gender:
     female: weiblich
     female_symbol: ♀
     male: männlich
     male_symbol: ♂
-
-  result_time_types:
-    electronic: Elektronisch
-    handheld_median: Handstoppung - mittlerer Wert
-    handheld_average: Handstoppung - Durchschnitt
-    calculated: Alle Zeiten auf elektronisch umrechnen
 
   assessment_types:
     group_competitor: Mannschaftswertung

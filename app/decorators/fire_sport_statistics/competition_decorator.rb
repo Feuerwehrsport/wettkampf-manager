@@ -1,11 +1,9 @@
-module FireSportStatistics
-  class CompetitionDecorator < ApplicationDecorator
-    def to_s
-      name
-    end
+class FireSportStatistics::CompetitionDecorator < ApplicationDecorator
+  def to_s
+    name
+  end
 
-    def place
-      name
-    end
+  def place
+    name
   end
 end

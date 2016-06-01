@@ -28,7 +28,7 @@ class TeamDecorator < ApplicationDecorator
   end
 
   def self.human_name_cols
-    ["Mannschaft"]
+    ['Mannschaft']
   end
 
   def name_cols assessment_type, shortcut

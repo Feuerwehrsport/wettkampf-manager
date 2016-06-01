@@ -87,15 +87,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :score_stopwatch_time, class: "Score::StopwatchTime" do
-    association :list_entry, factory: :score_list_entry
-    time 1799
-    factory :score_electronic_time, class: "Score::ElectronicTime" do
-    end
-    factory :score_handheld_time, class: "Score::HandheldTime" do
-    end
-  end
-
   factory :score_result_row, class: "Score::ResultRow" do
     initialize_with do
       new(build(:person), build(:score_result))

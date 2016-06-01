@@ -56,19 +56,19 @@ RSpec.feature "list factory" do
 
     within(page.all('td.edit-time')[0]) do
       choose 'Gültig'
-      fill_in('Elektronisch', with: '19,99')
+      fill_in('Zeit in Sekunden', with: '19,99')
     end
 
     within(page.all('td.edit-time')[1]) do
       choose 'Gültig'
-      fill_in('Elektronisch', with: '17,11')
+      fill_in('Zeit in Sekunden', with: '17,11')
     end
     click_on('Speicher')
 
     # Lauf 2
 
     click_on 'Startlisten'
-    click_on 'Hinzufügen'
+    click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
     check '100m Hindernisbahn - männlich (2 Starter)'
     click_on 'Weiter'
@@ -99,7 +99,7 @@ RSpec.feature "list factory" do
     # Lauf 3
 
     click_on 'Startlisten'
-    click_on 'Hinzufügen'
+    click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
     check '100m Hindernisbahn - männlich (2 Starter)'
     click_on 'Weiter'
@@ -130,7 +130,7 @@ RSpec.feature "list factory" do
     # Lauf 4
 
     click_on 'Startlisten'
-    click_on 'Hinzufügen'
+    click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
     check '100m Hindernisbahn - männlich (2 Starter)'
     click_on 'Weiter'
@@ -158,7 +158,7 @@ RSpec.feature "list factory" do
     # Lauf 5
 
     click_on 'Startlisten'
-    click_on 'Hinzufügen'
+    click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
     check '100m Hindernisbahn - männlich (2 Starter)'
     click_on 'Weiter'
@@ -196,7 +196,7 @@ RSpec.feature "list factory" do
     visit root_path
  
     click_on 'Startlisten'
-    click_on 'Hinzufügen'
+    click_on 'Hinzufügen', match: :first
     click_on '4x100m Feuerwehrstafette'
     check '4x100m Feuerwehrstafette - weiblich (2x A, 1x B)'
     click_on 'Weiter'

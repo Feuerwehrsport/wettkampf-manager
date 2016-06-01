@@ -5,7 +5,7 @@ class CompetitionSeedsController < ApplicationController
   def execute
     begin
       @competition_seed.execute
-      flash[:success] = "Vorgang erfolgreich durchgeführt"
+      flash[:success] = 'Vorgang erfolgreich durchgeführt'
     rescue ActiveRecord::RecordInvalid => e
       flash[:error] = "Vorgang konnte nicht durchgeführt werden: #{e.message}"
     end

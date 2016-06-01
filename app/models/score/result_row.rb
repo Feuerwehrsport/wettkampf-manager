@@ -1,49 +1,47 @@
-module Score
-  class ResultRow < Struct.new(:entity, :result)
-    include Draper::Decoratable
-    attr_reader :list_entries
+class Score::ResultRow < Struct.new(:entity, :result)
+  include Draper::Decoratable
+  attr_reader :list_entries
 
-    def add_list list_entry
-      @list_entries ||= []
-      @list_entries.push(list_entry)
-    end
+  def add_list(list_entry)
+    @list_entries ||= []
+    @list_entries.push(list_entry)
+  end
 
-    def assessment_type
-      @list_entries.first.assessment_type
-    end
+  def assessment_type
+    @list_entries.first.assessment_type
+  end
 
-    def best_stopwatch_time
-      @best_time ||= StopwatchTime.aggregated_time(valid_times.first)
-    end
+  def best_result_entry
+    @best_result_entry ||= result_entries.first
+  end
 
-    def time
-      best_stopwatch_time
-    end
+  def result_entry
+    best_result_entry
+  end
 
-    def time_from list
-      @list_entries.select { |entry| entry.list == list }.map(&:stopwatch_time).first
-    end
+  def result_entry_from(list)
+    @list_entries.select { |entry| entry.list == list }.first
+  end
 
-    def valid_times
-      @valid_times ||= @list_entries.select(&:result_valid?).map(&:stopwatch_time).sort
-    end
+  def result_entries
+    @result_entries ||= @list_entries.reject(&:result_waiting?).sort
+  end
 
-    def valid?
-      @valid ||= valid_times.present?
-    end
+  def valid?
+    @valid ||= result_entries.select(&:result_valid?).present?
+  end
 
-    def competition_result_valid?
-      true
-    end
+  def competition_result_valid?
+    true
+  end
 
-    def <=> other
-      both = [valid_times, other.valid_times].map(&:count)
-      (0..(both.min - 1)).each do |i|
-        compare = valid_times[i] <=> other.valid_times[i]
-        next if compare == 0
-        return compare
-      end
-      both.last <=> both.first
+  def <=> other
+    both = [result_entries, other.result_entries].map(&:count)
+    (0..(both.min - 1)).each do |i|
+      compare = result_entries[i] <=> other.result_entries[i]
+      next if compare == 0
+      return compare
     end
+    both.last <=> both.first
   end
 end

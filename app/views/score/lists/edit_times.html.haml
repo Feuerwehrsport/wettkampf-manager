@@ -7,15 +7,7 @@
           %tbody
             - score_list_entries do |entry, run, track|
               = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
-                %td.edit-time
-                  - if entry.present?
-                    = f.simple_fields_for :entries, entry do |n|
-                      = n.input :track, as: :hidden
-                      .time-types
-                        = n.collection_radio_buttons :result_type, Score::ListEntry.result_types, :first, :last
-                      .time-entries
-                        = n.simple_fields_for :time_entries, entry.time_entries do |t|
-                          = t.input :second_time, label: t.object.class.model_name.human
+                = render 'score/runs/edit_time', entry: entry, f: f, fields_for: :entries
           - box.footer do
             = cancel_link
             = f.primary_button :submit, "Speichern"

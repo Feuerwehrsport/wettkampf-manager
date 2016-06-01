@@ -29,7 +29,7 @@ if @only != :single_competitors && @score_result.group_assessment? && @disciplin
   pdf.start_new_page
   build_group_data_details_rows.each do |team_result|
 
-    data = [[team_result.team.to_s, team_result.time.to_s]]
+    data = [[team_result.team.to_s, team_result.result_entry.to_s]]
     team_result.rows_in.each { |row| data.push(row) }
     team_result.rows_out.each { |row| data.push(row) }
 

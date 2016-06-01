@@ -9,7 +9,7 @@
               %th= "Vorname"
               %th= "Nachname"
             %th= "Mannschaft"
-            %th= "Zeiten"
+            %th= "Zeit"
           - @score_run.list_entries.each do |entry|
             %tr
               %td= entry.track
@@ -23,14 +23,7 @@
                   - if multiple_assessments?
                     %br
                     .tiny= entry.try(:assessment).try(:decorate)
-              %td.edit-time
-                = f.simple_fields_for :list_entries, entry do |n|
-                  = n.input :track, as: :hidden
-                  .time-types
-                    = n.collection_radio_buttons :result_type, Score::ListEntry.result_types, :first, :last
-                  .time-entries
-                    = n.simple_fields_for :time_entries, entry.time_entries do |t|
-                      = t.input :second_time, label: t.object.class.model_name.human
+              = render 'edit_time', entry: entry, f: f, fields_for: :list_entries
         - box.footer do
           = cancel_link(@score_run.list)
           = f.primary_button :submit, "Speichern"

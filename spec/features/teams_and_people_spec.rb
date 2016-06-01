@@ -18,7 +18,7 @@ RSpec.feature "Teams and People" do
 
     expect(page).to have_content "Mannschaft erfolgreich erstellt"
     expect(page).to have_content "Keine Einträge gefunden"
-    click_on "Wettkämpfer hinzufügen"
+    click_on "Wettkämpfer hinzufügen", match: :first
 
     within(:css, ".modal") do
       expect(page).to have_content "Wettkämpfer"
@@ -41,7 +41,7 @@ RSpec.feature "Teams and People" do
       click_on "Speichern"
     end
 
-    click_on "Wettkämpfer hinzufügen"
+    click_on "Wettkämpfer hinzufügen", match: :first
 
     within(:css, ".modal") do
       expect(page).to have_content "Wettkämpfer"

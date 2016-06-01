@@ -12,9 +12,9 @@ class PersonDecorator < ApplicationDecorator
   end
 
   def team_assessment_type_name name, assessment_type
-    name.push("E") if assessment_type == "single_competitor"
-    name.push("A") if assessment_type == "out_of_competition"
-    name.join(" ")
+    name.push('E') if assessment_type == 'single_competitor'
+    name.push('A') if assessment_type == 'out_of_competition'
+    name.join(' ')
   end
 
   def team_shortcut_name assessment_type=nil
@@ -30,7 +30,7 @@ class PersonDecorator < ApplicationDecorator
   end
 
   def self.human_name_cols
-    ["Vorname", "Nachname", "Mannschaft"]
+    ['Vorname', 'Nachname', 'Mannschaft']
   end
 
   def name_cols assessment_type, shortcut

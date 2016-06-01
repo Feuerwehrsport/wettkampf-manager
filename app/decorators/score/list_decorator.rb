@@ -1,11 +1,9 @@
-module Score
-  class ListDecorator < ApplicationDecorator
-    def discipline
-      object.assessments.first.discipline.decorate
-    end
+class Score::ListDecorator < ApplicationDecorator
+  def discipline
+    object.assessments.first.discipline.decorate
+  end
 
-    def to_s
-      name
-    end
+  def to_s
+    name
   end
 end

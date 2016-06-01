@@ -1,5 +1,3 @@
-module Score
-  module RunsHelper
-    include ListsHelper
-  end
+module Score::RunsHelper
+  include Score::ListsHelper
 end

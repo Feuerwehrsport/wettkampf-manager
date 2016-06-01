@@ -20,6 +20,6 @@ module ResourceAccess
   end
 
   def resource_name
-    controller_path.singularize.underscore.gsub('/', '_')
+    controller_path.singularize.underscore.tr('/', '_')
   end
 end

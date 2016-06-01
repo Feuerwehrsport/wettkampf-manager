@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520195846) do
+ActiveRecord::Schema.define(version: 20160531131813) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 20160520195846) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "assessment_id",                       null: false
+    t.integer  "time"
   end
 
   add_index "score_list_entries", ["list_id"], name: "index_score_list_entries_on_list_id"
@@ -235,12 +236,11 @@ ActiveRecord::Schema.define(version: 20160520195846) do
   add_index "score_list_factory_assessments", ["list_factory_id"], name: "index_score_list_factory_assessments_on_list_factory_id"
 
   create_table "score_lists", force: :cascade do |t|
-    t.string   "name",             default: "", null: false
-    t.integer  "track_count",      default: 2,  null: false
-    t.integer  "result_time_type"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.string   "shortcut",         default: "", null: false
+    t.string   "name",        default: "", null: false
+    t.integer  "track_count", default: 2,  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "shortcut",    default: "", null: false
   end
 
   create_table "score_result_list_factories", force: :cascade do |t|
@@ -281,16 +281,6 @@ ActiveRecord::Schema.define(version: 20160520195846) do
   add_index "score_results", ["double_event_result_id"], name: "index_score_results_on_double_event_result_id"
   add_index "score_results", ["series_person_assessment_id"], name: "index_score_results_on_series_person_assessment_id"
   add_index "score_results", ["series_team_assessment_id"], name: "index_score_results_on_series_team_assessment_id"
-
-  create_table "score_stopwatch_times", force: :cascade do |t|
-    t.integer  "list_entry_id", null: false
-    t.integer  "time",          null: false
-    t.string   "type",          null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "score_stopwatch_times", ["list_entry_id"], name: "index_score_stopwatch_times_on_list_entry_id"
 
   create_table "series_assessments", force: :cascade do |t|
     t.integer  "round_id",                null: false

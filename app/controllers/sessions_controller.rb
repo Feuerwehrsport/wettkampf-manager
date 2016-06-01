@@ -6,16 +6,16 @@ class SessionsController < ApplicationController
     user = User.authenticate(user_params[:password])
     if user
       session[:user_id] = user.id
-      redirect_to root_url, notice: "Anmeldung erfolgreich"
+      redirect_to root_url, notice: 'Anmeldung erfolgreich'
     else
-      flash.now.alert = "Passwort nicht korrekt"
+      flash.now.alert = 'Passwort nicht korrekt'
       render :new
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: "Abgemeldet"
+    redirect_to root_url, notice: 'Abgemeldet'
   end
 
   def user_params

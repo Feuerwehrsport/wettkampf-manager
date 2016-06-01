@@ -6,8 +6,7 @@ RSpec.feature "Deletion of things" do
     assessment_request
     score_list
     list_entry = Score::ListEntry.first
-    list_entry.update_attribute(:result_type, "valid")
-    create(:score_electronic_time, list_entry: list_entry)
+    list_entry.update_attributes(result_type: :valid, time: 2222)
   end
 
   let(:team) { create(:team) }
@@ -36,7 +35,7 @@ RSpec.feature "Deletion of things" do
       click_on "Löschen"
       page.driver.browser.accept_confirm
       expect(page).to have_content "Startliste erfolgreich entfernt"
-    }.to change(Score::ElectronicTime, :count).by(-1)
+    }.to change(Score::ListEntry, :count).by(-1)
 
     visit team_path(team)
     click_on "Löschen"

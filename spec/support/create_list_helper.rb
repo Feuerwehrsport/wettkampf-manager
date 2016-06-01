@@ -4,8 +4,7 @@ def create_score_list result, entities
     if time.nil?
       create :score_list_entry, :result_invalid, entity: entity, list: list, assessment: result.assessment
     else
-      entry = create :score_list_entry, :result_valid, entity: entity, list: list, assessment: result.assessment
-      create :score_electronic_time, list_entry: entry, time: time
+      entry = create :score_list_entry, :result_valid, entity: entity, list: list, assessment: result.assessment, time: time
     end
   end
   list.reload

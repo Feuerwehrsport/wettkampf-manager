@@ -17,21 +17,21 @@ RSpec.describe Score::Result, type: :model do
         rows = result.rows
         expect(rows).to have(4).entries
 
-        expect(rows.first.time_from(list1).time).to eq 2020
-        expect(rows.first.time_from(list2).time).to eq 1911
-        expect(rows.first.best_stopwatch_time.time).to eq 1911
+        expect(rows.first.result_entry_from(list1).time).to eq 2020
+        expect(rows.first.result_entry_from(list2).time).to eq 1911
+        expect(rows.first.best_result_entry.time).to eq 1911
 
-        expect(rows.second.time_from(list1).time).to eq 2040
-        expect(rows.second.time_from(list2).time).to eq 1912
-        expect(rows.second.best_stopwatch_time.time).to eq 1912
+        expect(rows.second.result_entry_from(list1).time).to eq 2040
+        expect(rows.second.result_entry_from(list2).time).to eq 1912
+        expect(rows.second.best_result_entry.time).to eq 1912
 
-        expect(rows.third.time_from(list1).time).to eq 1912
-        expect(rows.third.time_from(list2).time).to be_nil
-        expect(rows.third.best_stopwatch_time.time).to eq 1912
+        expect(rows.third.result_entry_from(list1).time).to eq 1912
+        expect(rows.third.result_entry_from(list2).time).to be_nil
+        expect(rows.third.best_result_entry.time).to eq 1912
 
-        expect(rows.last.time_from(list1).time).to be_nil
-        expect(rows.last.time_from(list2).time).to eq 2040
-        expect(rows.last.best_stopwatch_time.time).to eq 2040
+        expect(rows.last.result_entry_from(list1).time).to be_nil
+        expect(rows.last.result_entry_from(list2).time).to eq 2040
+        expect(rows.last.best_result_entry.time).to eq 2040
       end
     end
 
@@ -45,12 +45,12 @@ RSpec.describe Score::Result, type: :model do
         expect(rows).to have(2).entries
 
         expect(rows.first.entity).to eq person2
-        expect(rows.first.time_from(list1).time).to eq 1912
-        expect(rows.first.time_from(list2).time).to eq 1913
+        expect(rows.first.result_entry_from(list1).time).to eq 1912
+        expect(rows.first.result_entry_from(list2).time).to eq 1913
 
         expect(rows.second.entity).to eq person1
-        expect(rows.second.time_from(list1).time).to eq 1912
-        expect(rows.second.time_from(list2)).to be_nil
+        expect(rows.second.result_entry_from(list1).time).to eq 1912
+        expect(rows.second.result_entry_from(list2)).to be_nil
       end
     end
   end

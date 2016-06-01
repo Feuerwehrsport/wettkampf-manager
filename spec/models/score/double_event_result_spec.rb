@@ -23,13 +23,13 @@ RSpec.describe Score::DoubleEventResult, type: :model do
           rows = subject.rows
           expect(rows).to have(3).entries
 
-          expect(rows.first.sum_stopwatch_time.time).to eq 3932
+          expect(rows.first.sum_result_entry.time).to eq 3932
           expect(rows.first.entity).to eq person2
 
-          expect(rows.second.sum_stopwatch_time.time).to eq 3932
+          expect(rows.second.sum_result_entry.time).to eq 3932
           expect(rows.second.entity).to eq person1
 
-          expect(rows.third.sum_stopwatch_time.time).to eq 5070
+          expect(rows.third.sum_result_entry.time).to eq 5070
           expect(rows.third.entity).to eq person3
         end
       end
@@ -40,13 +40,13 @@ RSpec.describe Score::DoubleEventResult, type: :model do
           rows = subject.rows
           expect(rows).to have(3).entries
 
-          expect(rows.first.sum_stopwatch_time.time).to eq 3932
+          expect(rows.first.sum_result_entry.time).to eq 3932
           expect(rows.first.entity).to eq person1
 
-          expect(rows.second.sum_stopwatch_time.time).to eq 3932
+          expect(rows.second.sum_result_entry.time).to eq 3932
           expect(rows.second.entity).to eq person2
 
-          expect(rows.third.sum_stopwatch_time.time).to eq 5070
+          expect(rows.third.sum_result_entry.time).to eq 5070
           expect(rows.third.entity).to eq person3
         end
       end

@@ -2,7 +2,7 @@ class AssessmentDecorator < ApplicationDecorator
   decorates_association :discipline
 
   def to_s
-    name.present? ? name : ([discipline, translated_gender] + tag_names).reject(&:blank?).join(" - ")
+    name.present? ? name : ([discipline, translated_gender] + tag_names).reject(&:blank?).join(' - ')
   end
 
   def name_with_request_count
@@ -19,6 +19,6 @@ class AssessmentDecorator < ApplicationDecorator
   end
 
   def translated_gender
-    gender.present? ? t("gender.#{gender}") : ""
+    gender.present? ? t("gender.#{gender}") : ''
   end
 end

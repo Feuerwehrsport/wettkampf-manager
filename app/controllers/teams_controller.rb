@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
 
   def index
     super
-    page_title "Mannschaften"
+    page_title 'Mannschaften'
   end
 
   def edit_assessment_requests

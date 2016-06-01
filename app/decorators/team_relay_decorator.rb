@@ -10,7 +10,7 @@ class TeamRelayDecorator < ApplicationDecorator
   end
   
   def self.human_name_cols
-    ["Mannschaft"]
+    ['Mannschaft']
   end
 
   def shortcut_name
