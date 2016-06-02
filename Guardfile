@@ -27,7 +27,7 @@
 # More info at https://github.com/guard/guard#readme
 
 guard 'rspec', cmd: 'bin/rspec', run_all: { cli: '--tag ~slow' }, failed_mode: :none do
-  watch(%r{^spec/factories/.+\.rb$})                  { |m| "spec/" }
+  watch(%r{^spec/factories/.+\.rb$})                  { 'spec/' }
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
   watch(%r{^app/(.*)(\.erb|\.haml)$})                 { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }

@@ -87,29 +87,20 @@ module Score::ListsHelper
   end
 
   def show_export_data
-    header = ["Lauf", "Bahn"]
+    header = ['Lauf', 'Bahn']
     if single_discipline?
-      header.push("Nr.") if Competition.one.show_bib_numbers?
-      header.push("Vorname")
-      header.push("Nachname")
+      header.push('Nr.') if Competition.one.show_bib_numbers?
+      header.push('Vorname', 'Nachname')
     end
-    header.push("Mannschaft")
-    header.push("Zeit")
-
+    header.push('Mannschaft', 'Zeit')
     data = [header]
+
     score_list_entries do |entry, run, track|
       line = []
-      if track == 1
-        line.push(run)
-      else
-        line.push("")
-      end
-
-      line.push(track)
+      line.push((track == 1 ? run : ''), track)
       if single_discipline?
         line.push(entry.try(:entity).try(:bib_number)) if Competition.one.show_bib_numbers?
-        line.push(entry.try(:entity).try(:first_name))
-        line.push(entry.try(:entity).try(:last_name))
+        line.push(entry.try(:entity).try(:first_name), entry.try(:entity).try(:last_name))
         line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))
       else
         team_name = entry.try(:entity).to_s

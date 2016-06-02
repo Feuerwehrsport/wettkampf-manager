@@ -12,9 +12,9 @@ class AssessmentDecorator < ApplicationDecorator
         count = assessment.requests.where('relay_count >= ?', number).count
         numbers.push("#{count}x #{(64+number).chr}")
       end
-      "#{to_s} (#{numbers.join(', ')})"
+      "#{self} (#{numbers.join(', ')})"
     else
-      "#{to_s} (#{requests.count} Starter)"
+      "#{self} (#{requests.count} Starter)"
     end
   end
 

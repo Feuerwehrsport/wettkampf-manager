@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 
 # authentication
-gem "cancancan"
+gem 'cancancan'
 
 # Use HAML for views
 gem 'haml-rails', '~> 0.8'
