@@ -1,10 +1,6 @@
-module Series
-  class Participation < ActiveRecord::Base
-    include TimeInvalid
+class Series::Participation < ActiveRecord::Base
+  belongs_to :cup, class_name: 'Series::Cup'
+  belongs_to :assessment, class_name: 'Series::Asessment'
 
-    belongs_to :cup
-    belongs_to :assessment
-
-    validates :cup, :assessment, :time, :points, :rank, presence: true
-  end
+  validates :cup, :assessment, :time, :points, :rank, presence: true
 end

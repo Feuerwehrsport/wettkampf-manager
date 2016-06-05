@@ -23,6 +23,10 @@ module Series
       "#{name} (#{round.name} #{round.year})"
     end
 
+    def discipline_model
+      Discipline.types_with_key[discipline.to_sym].new
+    end
+
     protected
 
     def calculate_rows

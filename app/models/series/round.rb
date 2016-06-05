@@ -73,6 +73,15 @@ module Series
         teams[participation.entity_id] ||= aggregate_class.new(participation.team, participation.team_number)
         teams[participation.entity_id].add_participation(participation)
       end
+      assessments.gender(gender).each do |assessment|
+        result = Score::Result.where(series_team_assessment: assessment).first
+        if result.present?
+          aggregate_class.convert_result_rows(Cup.today_cup_for_round(self), result.group_result_rows).each do |row|
+            entities[row.entity_id] ||= aggregate_class.new(row.entity)
+            entities[row.entity_id].add_participation(row)
+          end
+        end
+      end
       teams
     end
   end

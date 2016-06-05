@@ -1,9 +1,7 @@
 - if @person_assessments.present?
   %h3 Einzelwertungen
   = count_table(@person_assessments) do |ct|
-    - ct.col("Disziplin") { |row| link_to("#{row.discipline} #{row.discipline}".html_safe, controller: 'series/assessments', action: :show, id: row) }
-    / - ct.col("Geschlecht") { |row| g(row.gender) }
-    - ct.col("Name", :name)
+    - ct.col("Disziplin") { |row| link_to("#{discipline_image(row.decorate.discipline_model)} #{row.name}".html_safe, controller: 'series/assessments', action: :show, id: row) }
     - ct.col("Wettkämpfer") { |row| row.participations.pluck(:person_id).uniq.count }
 - if @team_assessments_exists
   - [:female, :male].each do |gender|
@@ -11,9 +9,8 @@
       
       %h3
         Mannschaftswertung
-        / = g(gender)
-        / = g_symbol(gender)
-      = count_table(@round.team_assessment_rows(gender, false)) do |ct|
+        = t("gender.#{gender}")
+      = count_table(@round.team_assessment_rows(gender, false).map(&:decorate)) do |ct|
         - ct.col("Platz", :rank, class: "col-5")
         - ct.col("Team", class: "col-15") { |row| row }
         - @round.cups.each do |cup|
