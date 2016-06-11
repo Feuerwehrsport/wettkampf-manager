@@ -1,5 +1,6 @@
 class Series::ParticipationDecorator < ApplicationDecorator
-  def second_time_with_points
-    "#{second_time} (#{points})"
+  decorates_association :result_entry
+  def result_entry_with_points
+    "#{result_entry} (#{points})"
   end
 end

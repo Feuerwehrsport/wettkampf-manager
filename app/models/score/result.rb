@@ -7,6 +7,7 @@ class Score::Result < ActiveRecord::Base
   belongs_to :double_event_result, dependent: :destroy, class_name: 'Score::DoubleEventResult'
   has_many :result_lists, dependent: :destroy
   has_many :lists, through: :result_lists
+  delegate :discipline, to: :assessment
 
   validates :assessment, presence: true
 

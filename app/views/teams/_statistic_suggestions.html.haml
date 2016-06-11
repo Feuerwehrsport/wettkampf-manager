@@ -1,0 +1,14 @@
+= box @team, modal: true do |box|
+  = simple_form_for @team, remote: true do |f|
+    = f.error_notification
+    .form-group.string
+      %label.string.control-label{ for: 'team_name' } Name
+      %input.string.form-control{ name: 'team_name', id: 'team_name', value: @team.name, type: :text }
+    .suggestions-entries
+      %table.table.table-hover.table-condensed
+    .row.fire-sport-statistics-team
+      .col-md-3.name= @team.fire_sport_statistics_team.try(:name)
+      .col-md-6.shortcut.small= @team.fire_sport_statistics_team.try(:shortcut)
+    = f.hidden_field :fire_sport_statistics_team_id
+    .modal-footer
+      = f.primary_button :submit, "Speichern"

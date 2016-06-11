@@ -18,7 +18,7 @@ class FireSportStatistics::SuggestionsController < ApplicationController
     suggestions = suggestions.where_name_like(params[:name]) if params[:name]
 
     render json: suggestions.to_json(
-      only: [:name, :short]
+      only: [:id, :name, :short]
     )
   end
 

@@ -1,0 +1,40 @@
+- if logged_in?
+  .row
+    .col-md-12.refreshable#without-statistics-id-index
+      = box Team.model_name.human count: 0 do |box|
+        %p Bei folgenden Einträgen konnten keine Serien-Ergebnisse zugeordnet werden. Dies kann zwei Ursachen haben:
+        %ul
+          %li Name wurde falsch geschrieben
+          %li Erste Teilnahme bei dieser Serie
+
+        %table.table.table-bordered
+          %tr
+            %th Wettkampf-Name
+            %th Online-Name
+            %th Aktion
+          - @team_suggestions.each do |suggestion|
+            - if suggestion.match?
+              %tr.success
+                %td
+                  = suggestion.team
+                %td
+                  = suggestion.first
+                %td
+                  = simple_form_for suggestion.team, remote: true do |f|
+                    = f.hidden_field :fire_sport_statistics_team_id
+                    = f.primary_button :submit, "Übernehmen", class: "btn-sm"
+
+            - elsif suggestion.present?
+              %tr.info
+                %td
+                  = suggestion.team
+                %td= "#{suggestion.suggestions.count} Vorschläge"
+                %td= btn_link_to "Vorschlag auswählen", statistic_suggestions_team_path(suggestion.team), remote: true
+            - else
+              %tr.danger
+                %td
+                  = suggestion.team
+                  %br
+                  .small= suggestion.team.team
+                %td Keine Vorschläge
+                %td= btn_link_to "Vorschlag suchen", statistic_suggestions_team_path(suggestion.team), remote: true

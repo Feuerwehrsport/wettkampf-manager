@@ -13,6 +13,10 @@ class TeamSuggestion
     $(document).on "keyup", '#team_shortcut', () =>
       @shortcutChanged = true
 
+    $(document).on 'modal.ready', () =>
+      @lastValue = ""
+      $('#team_name').trigger('keyup')
+
   updateSuggestions: () =>
     table = $('.suggestions-entries').slideDown().find('table')
     params =
@@ -28,6 +32,8 @@ class TeamSuggestion
     .click () =>
       $('.suggestions-entries').slideUp()
       $('#team_name').val(entry.name)
+      console.log(entry)
+      $('#team_fire_sport_statistics_team_id').val(entry.id)
       @setShortcut(entry.short)
       @shortcutChanged = false
 

@@ -2,36 +2,38 @@ class Series::TeamAssessmentRows::Base < Struct.new(:team, :team_number)
   include Draper::Decoratable
   attr_reader :rank
 
-  def initialize(*args)
-    super(*args)
-    @rank = 0
+  def self.max_points
+    10
   end
 
-  def self.convert_result_rows(cup, result_rows)
-    points = 10
+  def self.decrement_points(points, rank)
+    points -= 1 if points > 0
+    points
+  end
+
+  def self.convert_result_rows(cup, result_rows, assessment)
+    points = max_points
     rank = 1
     participations = []
     result_rows.each do |row|
-      participations.push(TeamParticipation.new(
+      participations.push(Series::TeamParticipation.new(
         cup: cup,
         team: row.entity.fire_sport_statistics_team,
-        team_number: row.entity.team_number,
-        time: row.time.to_i || 99999999,
+        team_number: row.entity.number,
+        time: row.result_entry.time.to_i || 99999999,
         points: points,
         rank: rank,
+        assessment: assessment,
       ))
-      points -= 1 if points > 0
+      points = decrement_points(points, rank)
       rank += 1
     end
     participations
   end
 
-  def self.honor_rank
-    3
-  end
-
-  def self.single_honor_rank
-    3
+  def initialize(*args)
+    super(*args)
+    @rank = 0
   end
 
   def team_id
@@ -66,7 +68,7 @@ class Series::TeamAssessmentRows::Base < Struct.new(:team, :team_number)
 
   def best_time
     @best_time ||= begin
-      @cups.values.flatten.select { |p| p.assessment.discipline == "la" }.map(&:time).min
+      @cups.values.flatten.select { |p| p.assessment.discipline == 'la' }.map(&:time).min
     end
   end
 

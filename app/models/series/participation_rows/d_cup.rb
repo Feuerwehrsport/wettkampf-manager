@@ -1,6 +1,2 @@
-module Series
-  module ParticipationRows
-    class DCup < Base
-    end
-  end
+class Series::ParticipationRows::DCup < Series::ParticipationRows::Base
 end

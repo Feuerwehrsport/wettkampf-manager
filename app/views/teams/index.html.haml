@@ -7,6 +7,11 @@
             = link_to "Hinzufügen", { action: :new }, class: "btn btn-sm btn-info"
           .clearfix
 
+        - if @without_statistics_id.present?
+          .alert.alert-danger
+            = "Es konnten zu #{@without_statistics_id.count} Mannschaften keine Serien-Ergebnisse gefunden wurden."
+            = btn_link_to "Probleme ansehen", without_statistics_id_teams_path
+
       %h4 Weiblich
       = render "index_table", collection: @teams.select { |t| t.gender == "female" }
       %h4 Männlich

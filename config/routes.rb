@@ -24,7 +24,11 @@ Rails.application.routes.draw do
     collection { get :without_statistics_id }
   end
   resources :teams do
-    member { get :edit_assessment_requests }
+    member do
+      get :edit_assessment_requests
+      get :statistic_suggestions
+    end
+    collection { get :without_statistics_id }
   end
   namespace :score do
     resource :list_factories, only: [:new, :create, :edit, :update, :destroy]

@@ -1,6 +1,2 @@
-module Series
-  module ParticipationRows
-    class MVHindernisCup < MVCup
-    end
-  end
+class Series::ParticipationRows::MVHindernisCup < Series::ParticipationRows::MVSingleCup
 end

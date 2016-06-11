@@ -1,6 +1,2 @@
-module Series
-  module TeamAssessmentRows
-    class MVSteigerCup < MVCup
-    end
-  end
+class Series::TeamAssessmentRows::MVSteigerCup < Series::TeamAssessmentRows::Base
 end

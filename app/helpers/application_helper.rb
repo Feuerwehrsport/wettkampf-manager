@@ -50,6 +50,6 @@ module ApplicationHelper
   
   def series_assessment_cup_participation(cup, row)
     result = row.participation_for_cup(cup)
-    result ? content_tag(:div, result.second_time_with_points, class: "series-participation", data: { id: result.id }) : ""
+    result ? content_tag(:div, result.result_entry_with_points, class: "series-participation", data: { id: result.id }) : ""
   end
 end

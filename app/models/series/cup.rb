@@ -1,34 +1,32 @@
-module Series
-  class Cup < ActiveRecord::Base
-    TODAY_ID = 99999000
-    include Participationable
+class Series::Cup < ActiveRecord::Base
+  TODAY_ID = 99999000
+  include Series::Participationable
 
-    belongs_to :round
-    has_many :assessments, through: :round
-    has_many :participations, dependent: :destroy
+  belongs_to :round, class_name: 'Series::Round'
+  has_many :assessments, through: :round, class_name: 'Series::Assessment'
+  has_many :participations, dependent: :destroy, class_name: 'Series::Participation'
 
-    default_scope -> { order(:competition_date) }
+  default_scope -> { order(:competition_date) }
 
-    validates :round, :competition_place, :competition_date, presence: true
+  validates :round, :competition_place, :competition_date, presence: true
 
-    def self.create_today!
-      id = TODAY_ID
-      Round.all.each do |round|
-        id += 1
-        create!(round: round, id: id, competition_date: Date.today, competition_place: "-")
-      end
+  def self.create_today!
+    id = TODAY_ID
+    Series::Round.all.each do |round|
+      id += 1
+      create!(round: round, id: id, competition_date: Date.today, competition_place: "-")
     end
+  end
 
-    def self.today_cup_for_round(round)
-      round.cups.where("id > ?", TODAY_ID).first
-    end
+  def self.today_cup_for_round(round)
+    round.cups.where("id > ?", TODAY_ID).first
+  end
 
-    def competition_place
-      persisted? && id > TODAY_ID ? Competition.one.place : super
-    end
+  def competition_place
+    persisted? && id > TODAY_ID ? Competition.one.place : super
+  end
 
-    def competition_date
-      persisted? && id > TODAY_ID ? Competition.one.date : super
-    end
+  def competition_date
+    persisted? && id > TODAY_ID ? Competition.one.date : super
   end
 end

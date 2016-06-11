@@ -1,6 +1,2 @@
-module Series
-  module TeamAssessmentRows
-    class MVHindernisCup < MVCup
-    end
-  end
+class Series::TeamAssessmentRows::MVHindernisCup < Series::TeamAssessmentRows::Base
 end

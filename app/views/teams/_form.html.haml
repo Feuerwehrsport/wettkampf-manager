@@ -8,6 +8,7 @@
     = f.input :number
     = f.input :gender, collection: [:male, :female]
     = render 'tag_form', f: f
+    = f.hidden_field :fire_sport_statistics_team_id
     - box.footer do
       = cancel_link
       = f.primary_button :submit, "Speichern"

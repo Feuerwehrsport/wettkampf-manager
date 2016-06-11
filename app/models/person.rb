@@ -21,6 +21,10 @@ class Person < ActiveRecord::Base
   def request_for assessment
     requests.where(assessment: assessment).first
   end
+
+  def fire_sport_statistics_person_with_dummy
+    fire_sport_statistics_person.presence || FireSportStatistics::Person.new
+  end
  
   private
 

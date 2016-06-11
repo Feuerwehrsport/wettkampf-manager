@@ -1,8 +1,15 @@
 class Imports::Team < Struct.new(:configuration, :data)
   def import
     number = [1, data[:team_number].to_i].max
-    fsst = FireSportStatistics::Person.find_by(id: data[:statitics_team_id])
-    @team = ::Team.create!(name: data[:name], gender: data[:gender], number: number, shortcut: data[:shortcut].first(12), disable_autocreate_assessment_requests: true)
+    fsst = FireSportStatistics::Team.find_by(id: data[:statitics_team_id])
+    @team = ::Team.create!(
+      name: data[:name], 
+      gender: data[:gender], 
+      number: number, 
+      shortcut: data[:shortcut].first(12), 
+      disable_autocreate_assessment_requests: true, 
+      fire_sport_statistics_team: fsst,
+    )
     data[:tag_names].each do |tag_name|
       tag = configuration.tags.find_by(target: :team, name: tag_name, use: true).try(:competition_tag)
       @team.tag_references.create!(tag: tag) if tag.present?

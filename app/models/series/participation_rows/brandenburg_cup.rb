@@ -1,6 +1,2 @@
-module Series
-  module ParticipationRows
-    class BrandenburgCup < Base
-    end
-  end
+class Series::ParticipationRows::BrandenburgCup < Series::ParticipationRows::Base
 end

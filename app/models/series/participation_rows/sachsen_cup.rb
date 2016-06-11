@@ -1,6 +1,2 @@
-module Series
-  module ParticipationRows
-    class SachsenCup < Base
-    end
-  end
+class Series::ParticipationRows::SachsenCup < Series::ParticipationRows::MVSingleCup
 end

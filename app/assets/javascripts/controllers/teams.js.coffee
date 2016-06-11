@@ -25,3 +25,9 @@ bindSortedTable = () ->
 $ () ->
   bindSortedTable()
   $(document).on('partials-refreshed', bindSortedTable)
+
+  $(document).on 'ajax:complete', '#without-statistics-id-index form', () ->
+    setTimeout () ->
+      $(document).refreshPartials()
+    , 150
+    true
