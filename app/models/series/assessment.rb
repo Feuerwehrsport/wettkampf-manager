@@ -7,6 +7,8 @@ class Series::Assessment < ActiveRecord::Base
 
   scope :with_person, -> (person_id) { joins(:participations).where(series_participations: { person_id: person_id }).uniq }
   scope :round, -> (round_id) { where(round_id: round_id) }
+  scope :year, -> (year) { joins(:round).where(series_rounds: { year: year }) }
+  scope :round_name, -> (round_name) { joins(:round).where(series_rounds: { name: round_name }) }
 
   validates :round, :discipline, :gender, presence: true
 
