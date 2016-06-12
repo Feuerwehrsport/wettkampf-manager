@@ -1,9 +1,10 @@
-.row
-  .col-md-12
-    = box "Gesamtwertung" do |box|
-      - @score_competition_results.each do |result|
-        = render "index_table", competition_result: result
-        
-      - box.footer do
-        = btn_link_to "als PDF", format: :pdf
-        = btn_link_to "als XLS", format: :xlsx
+- cache do
+  .row
+    .col-md-12
+      = box "Gesamtwertung" do |box|
+        - @score_competition_results.each do |result|
+          = render "index_table", competition_result: result
+          
+        - box.footer do
+          = btn_link_to "als PDF", format: :pdf
+          = btn_link_to "als XLS", format: :xlsx

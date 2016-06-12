@@ -7,7 +7,7 @@ class CacheDependendRecord < ActiveRecord::Base
   private
 
   def clean_cache
-    Rails.cache.clean
+    Rails.cache.clear
     ModelCache.clean
   end
 end
