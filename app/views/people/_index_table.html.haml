@@ -5,8 +5,9 @@
     %tr
       - if Competition.one.show_bib_numbers?
         %th{ style: "width: 15%" } Nr.
-      %th{ style: "width: 35%" } Name
-      %th{ style: "width: 35%" }= Person.human_attribute_name(:team)
+      %th{ style: "width: 20%" } Vorname
+      %th{ style: "width: 20%" } Nachname
+      %th{ style: "width: 35%" } Mannschaft
       - @tags.each do |tag|
         %th{ style: "width: 5%" }= tag
 
@@ -19,7 +20,8 @@
       %tr
         - if Competition.one.show_bib_numbers?
           %td= person.bib_number
-        %td= link_to person.full_name, person_path(person)
+        %td= link_to person.first_name, person_path(person)
+        %td= link_to person.last_name, person_path(person)
         %td= person.team
         - @tags.each do |tag|
           %td= person.tags.include?(tag) ? 'X' : ''
