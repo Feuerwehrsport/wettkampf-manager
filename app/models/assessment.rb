@@ -1,4 +1,4 @@
-class Assessment < ActiveRecord::Base
+class Assessment < CacheDependendRecord
   include Taggable
 
   belongs_to :discipline

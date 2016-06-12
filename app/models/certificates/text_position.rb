@@ -1,4 +1,4 @@
-class Certificates::TextPosition < ActiveRecord::Base
+class Certificates::TextPosition < CacheDependendRecord
   KEY_CONFIG = {
     team_name: {
       description: "Name der Mannschaft",

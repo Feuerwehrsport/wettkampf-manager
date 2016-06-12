@@ -1,4 +1,4 @@
-class Team < ActiveRecord::Base
+class Team < CacheDependendRecord
   include Taggable
 
   has_many :people, dependent: :nullify

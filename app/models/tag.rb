@@ -1,4 +1,4 @@
-class Tag < ActiveRecord::Base
+class Tag < CacheDependendRecord
   belongs_to :competition
   has_many :tag_references, dependent: :destroy
 

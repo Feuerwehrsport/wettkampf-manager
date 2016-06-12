@@ -1,4 +1,4 @@
-class Score::List < ActiveRecord::Base
+class Score::List < CacheDependendRecord
   has_many :list_assessments, dependent: :destroy
   has_many :assessments, through: :list_assessments
   has_many :result_lists, dependent: :destroy

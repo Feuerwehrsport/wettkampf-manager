@@ -1,4 +1,4 @@
-class Imports::Tag < ActiveRecord::Base
+class Imports::Tag < CacheDependendRecord
   belongs_to :configuration
   validates :name, :configuration, :target, presence: true
 

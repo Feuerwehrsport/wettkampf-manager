@@ -1,4 +1,4 @@
-class Score::ListFactory < ActiveRecord::Base
+class Score::ListFactory < CacheDependendRecord
   include Score::ListFactoryDefaults
 
   STEPS = %i(discipline assessments names tracks results generator generator_params finish create)

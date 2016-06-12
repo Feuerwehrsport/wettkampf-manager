@@ -1,4 +1,4 @@
-class TagReference < ActiveRecord::Base
+class TagReference < CacheDependendRecord
   belongs_to :tag
   belongs_to :taggable, polymorphic: true
 

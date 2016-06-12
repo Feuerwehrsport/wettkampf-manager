@@ -1,4 +1,4 @@
-class Certificates::Template < ActiveRecord::Base
+class Certificates::Template < CacheDependendRecord
   mount_uploader :image, Certificates::ImageUploader
   mount_uploader :font, Certificates::FontUploader
   has_many :text_positions, dependent: :destroy

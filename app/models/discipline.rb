@@ -1,4 +1,4 @@
-class Discipline < ActiveRecord::Base
+class Discipline < CacheDependendRecord
   validates :type, presence: true
   has_many :assessments, dependent: :restrict_with_error
   before_destroy :destroy_possible?

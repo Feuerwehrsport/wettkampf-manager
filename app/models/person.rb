@@ -1,4 +1,4 @@
-class Person < ActiveRecord::Base
+class Person < CacheDependendRecord
   include Taggable
 
   belongs_to :team

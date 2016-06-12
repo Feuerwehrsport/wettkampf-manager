@@ -1,4 +1,4 @@
-class Score::Result < ActiveRecord::Base
+class Score::Result < CacheDependendRecord
   include Taggable
 
   belongs_to :assessment

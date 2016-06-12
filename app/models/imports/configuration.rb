@@ -1,4 +1,4 @@
-class Imports::Configuration < ActiveRecord::Base
+class Imports::Configuration < CacheDependendRecord
   serialize :data, JSON
   mount_uploader :file, Imports::ConfigurationUploader
 

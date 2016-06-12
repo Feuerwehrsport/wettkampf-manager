@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < CacheDependendRecord
   attr_accessor :password
   before_save :encrypt_password
   

@@ -1,4 +1,4 @@
-class Score::ListEntry < ActiveRecord::Base
+class Score::ListEntry < CacheDependendRecord
   include Score::ResultEntrySupport
 
   belongs_to :list, class_name: 'Score::List'

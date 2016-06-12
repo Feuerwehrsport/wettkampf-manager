@@ -1,4 +1,4 @@
-class Imports::Assessment < ActiveRecord::Base
+class Imports::Assessment < CacheDependendRecord
   belongs_to :configuration, class_name: 'Imports::Configuration'
   belongs_to :assessment, class_name: '::Assessment'
   validates :gender, :discipline, :configuration, :foreign_key, presence: true

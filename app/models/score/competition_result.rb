@@ -1,4 +1,4 @@
-class Score::CompetitionResult < ActiveRecord::Base
+class Score::CompetitionResult < CacheDependendRecord
   include Genderable
 
   has_many :assessments, foreign_key: :score_competition_result_id
