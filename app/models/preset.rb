@@ -14,6 +14,7 @@ class Preset
       Presets::HallCup,
       Presets::MvCupSingle,
       Presets::Sonnenwalde,
+      Presets::DM,
     ]
   end
 
