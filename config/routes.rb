@@ -8,9 +8,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   resource :users, only: [:edit, :update]
 
-  resources :competition_seeds, only: [:show] do
-    member { post :execute }
-  end
+  resources :presets, only: [:index, :show, :update]
   resource :competitions, only: [:show, :edit, :update]
   resources :disciplines, only: [:index, :new, :create, :show, :destroy]
   resources :assessments do

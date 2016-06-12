@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.feature "Deletion of things" do
   before do
     User.first.update_attributes!(password: "my-password", password_confirmation: "my-password")
-    CompetitionSeed.all[3].execute
+    Preset.find(4).save # D-Cup ohne 4x100
     assessment_request
     score_list
     list_entry = Score::ListEntry.first

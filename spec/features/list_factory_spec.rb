@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.feature "list factory" do
   before do
     User.first.update_attributes!(password: "my-password", password_confirmation: "my-password")
-    CompetitionSeed.all[3].execute
+    Preset.find(3).save # D-Cup mit 4x100
   end
 
   let(:team1) { create(:team, :generated) }

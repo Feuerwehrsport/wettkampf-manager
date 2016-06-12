@@ -9,7 +9,7 @@ RSpec.feature "Start configuration" do
     click_on "Passwort ändern"
     
     expect(page).to have_content "Wettkampf-Manager konfigurieren"
-    visit competition_seed_path(3)
+    visit preset_path(4) # D-Cup ohne 4x100
 
     expect(page).to have_content "Deutschland-Cup (HL, HB, GS, LA)"
     click_on 'Ausführen'

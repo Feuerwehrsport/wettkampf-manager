@@ -1,59 +1,49 @@
 .row
-  - unless Competition.one.configured?
-    .col-md-12
-      = box "Wettkampf-Manager konfigurieren" do |box|
-        %p Bitte wählen Sie eine Startkonfiguration für den Wettkampf aus:
-        %table.table
-          - CompetitionSeed.all.each do |seed|
-            %tr
-              %th= seed.name
-              %td= btn_link_to "Ansehen", competition_seed_path(seed.id)
-  - else
-    .col-md-7
-      = box decorated_competition do |box|
-        %h4= "#{l decorated_competition.date} - #{decorated_competition.place}"
-        %table.table
+  .col-md-7
+    = box decorated_competition do |box|
+      %h4= "#{l decorated_competition.date} - #{decorated_competition.place}"
+      %table.table
+        %tr
+          %th
+          %th weiblich
+          %th männlich
+        - if Person.count > 0
           %tr
-            %th
-            %th weiblich
-            %th männlich
-          - if Person.count > 0
-            %tr
-              %th Angemeldete Wettkämpfer
-              %th= Person.female.count
-              %th= Person.male.count
-          - if Team.count > 0
-            %tr
-              %th Angemeldete Mannschaften
-              %th= Team.female.count
-              %th= Team.male.count
-    - if logged_in?
-      .col-md-5
-        = box "Konfigurieren" do |box|
-          = block_link_to "Wettkampf", edit_competitions_path
-          = block_link_to "Passwort", edit_users_path
-          - if Imports::Configuration.possible?
-            = block_link_to "Import von Feuerwehrsport-Statistik.de", imports_configurations_path
-        = box "Aktionen" do |box|
-          = block_link_to "Mannschaft hinzufügen", new_team_path
-          = block_link_to "Startliste hinzufügen", new_score_list_factories_path
+            %th Angemeldete Wettkämpfer
+            %th= Person.female.count
+            %th= Person.male.count
+        - if Team.count > 0
+          %tr
+            %th Angemeldete Mannschaften
+            %th= Team.female.count
+            %th= Team.male.count
+  - if logged_in?
     .col-md-5
-      = box link_to(hostname_url, hostname_url) do
-        = image_tag qrcode(hostname_url)
-        - if logged_in?
-          = block_link_to("Flyer anzeigen", format: :pdf, action: :flyer)
-        - else logged_in?
-          = block_link_to("Anmelden", login_path)
+      = box "Konfigurieren" do |box|
+        = block_link_to "Wettkampf", edit_competitions_path
+        = block_link_to "Passwort", edit_users_path
+        - if Imports::Configuration.possible?
+          = block_link_to "Import von Feuerwehrsport-Statistik.de", imports_configurations_path
+      = box "Aktionen" do |box|
+        = block_link_to "Mannschaft hinzufügen", new_team_path
+        = block_link_to "Startliste hinzufügen", new_score_list_factories_path
+  .col-md-5
+    = box link_to(hostname_url, hostname_url) do
+      = image_tag qrcode(hostname_url)
+      - if logged_in?
+        = block_link_to("Flyer anzeigen", format: :pdf, action: :flyer)
+      - else logged_in?
+        = block_link_to("Anmelden", login_path)
 
-    .col-md-6
-      = box "Wettkampf-Manager" do |box|
-        %p 
-          Dieses Programm ist eine 
-          %strong kostenlose und freie Software.
-          Sie steht unter der Software-Lizenz
-          %em AGPLv3
-          und kann 
-          = link_to("hier", "https://github.com/Feuerwehrsport/wettkampf-manager")
-          heruntergeladen werden.
-        - box.footer do
-          = btn_link_to("Weitere Informationen", action: :impressum)
+  .col-md-6
+    = box "Wettkampf-Manager" do |box|
+      %p 
+        Dieses Programm ist eine 
+        %strong kostenlose und freie Software.
+        Sie steht unter der Software-Lizenz
+        %em AGPLv3
+        und kann 
+        = link_to("hier", "https://github.com/Feuerwehrsport/wettkampf-manager")
+        heruntergeladen werden.
+      - box.footer do
+        = btn_link_to("Weitere Informationen", action: :impressum)

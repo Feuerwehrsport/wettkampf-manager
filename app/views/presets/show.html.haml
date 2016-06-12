@@ -1,0 +1,11 @@
+.row
+  .col-md-8
+    = box(@preset.name) do |box|
+      %ul
+        - @preset.description_items.each do |hint|
+          %li= hint
+
+  .col-md-4
+    = box('Aktionen') do
+      = form_for @preset, url: preset_path(@preset.id), method: :patch do |f|
+        = f.submit 'Ausführen', class: 'btn btn-default btn-sm'

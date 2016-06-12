@@ -10,7 +10,9 @@ module CRUD::AuthorizeAction
   protected
 
   def base_collection
-    super.accessible_by(current_ability, :index)
+    collection = super
+    collection = collection.accessible_by(current_ability, :index) if collection.respond_to?(:accessible_by)
+    collection
   end
 
   def assign_new_resource

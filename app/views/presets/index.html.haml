@@ -1,0 +1,8 @@
+.col-md-12
+  = box 'Wettkampf-Manager konfigurieren' do |box|
+    %p Bitte wählen Sie eine Startkonfiguration für den Wettkampf aus:
+    %table.table
+      - @presets.each do |preset|
+        %tr
+          %th= preset.name
+          %td= btn_link_to('Ansehen', action: :show, id: preset)

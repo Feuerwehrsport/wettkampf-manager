@@ -15,7 +15,7 @@ module AutoDecorate
     end
     if collection_instance
       begin
-        self.collection_instance = collection_instance.decorate
+        self.collection_instance = collection_instance.decorate if collection_instance.respond_to? :decorate
       rescue Draper::UninferrableDecoratorError => e
       end
     end
