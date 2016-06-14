@@ -11,7 +11,7 @@ class Score::ListFactories::FireRelay < Score::ListFactory
 
   def perform_rows
     number_requests = {}
-    assessment_requests.shuffle.each do |request|
+    assessment_requests.each do |request|
       (1..request.relay_count).each do |number|
         number_requests[number] ||= []
         relay = TeamRelay.find_or_create_by!(team: request.entity, number: number)

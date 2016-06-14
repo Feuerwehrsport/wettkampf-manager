@@ -4,8 +4,9 @@ class Score::ListFactory < CacheDependendRecord
   STEPS = %i(discipline assessments names tracks results generator generator_params finish create)
   GENERATORS = [
     Score::ListFactories::GroupOrder,
-    Score::ListFactories::Simple, 
-    Score::ListFactories::Best, 
+    Score::ListFactories::LotteryNumber,
+    Score::ListFactories::Simple,
+    Score::ListFactories::Best,
     Score::ListFactories::FireRelay,
     Score::ListFactories::TrackChange,
     Score::ListFactories::TrackSame,
@@ -139,7 +140,15 @@ class Score::ListFactory < CacheDependendRecord
   def assessment_requests
     requests = []
     assessments.each { |assessment| requests += assessment.requests.to_a }
-    requests
+    if team_shuffle?
+      requests.shuffle
+    else
+      requests.sort_by { |request| request.entity.try(:lottery_number) }
+    end
+  end
+
+  def team_shuffle?
+    !Competition.one.lottery_numbers?
   end
 
   def create_list_entry(request, run, track)

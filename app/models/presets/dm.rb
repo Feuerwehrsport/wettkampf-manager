@@ -23,6 +23,7 @@ class Presets::DM < Preset
       group_assessment: true, 
       competition_result_type: 'places_to_points',
       show_bib_numbers: true,
+      lottery_numbers: true,
     )
     youth_tag = PersonTag.create!(name: 'U20', competition: Competition.first)
     complete_tag = TeamTag.create!(name: 'Komplett', competition: Competition.first)

@@ -35,6 +35,7 @@ de:
       score/list_factories/fire_relay: Staffellauf mit A, B
       score/list_factories/group_order: Mannschaftsreihenfolge beachten
       score/list_factories/simple: Zufällig anordnen
+      score/list_factories/lottery_number: Losnummernreihenfolge beachten
       score/list_factories/track_change: Bahnwechsel
       score/list_factories/track_same: Bahn behalten
       score/result: Ergebnisse
@@ -63,6 +64,7 @@ de:
         hostname: Hostname des Systems
         place: Ort
         show_bib_numbers: Startnummer anzeigen
+        lottery_numbers: Losnummern anzeigen
         flyer_text: Text auf PDF-Flyer
         backup_path: Verzeichnis für Backups
       discipline:
@@ -93,6 +95,8 @@ de:
         description: Für Einzeldisziplinen, wobei die Startreihenfolge innerhalb der Mannschaft beachtet wird.
       score/list_factories/simple:
         description: Alle Einzelstarter werden zufällig angeordnet.
+      score/list_factories/lottery_number:
+        description: Alle Mannschaften werden nach Losreihenfolge angeordnet.
       score/list_factories/track_change:
         description: Die Bahn wird gegenüber einer vorherigen Liste getauscht.
       score/list_factories/track_same:
@@ -121,6 +125,7 @@ de:
         number: Nummer
         people: Wettkämpfer
         shortcut: Abkürzung
+        lottery_number: Losnummer
       user:
         password: Passwort
         password_confirmation: Passwort wiederholen

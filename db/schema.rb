@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606074358) do
+ActiveRecord::Schema.define(version: 20160612124908) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160606074358) do
     t.string   "place",                   default: "",    null: false
     t.text     "flyer_text",              default: "",    null: false
     t.string   "backup_path",             default: "",    null: false
+    t.boolean  "lottery_numbers",         default: false, null: false
   end
 
   create_table "disciplines", force: :cascade do |t|
@@ -355,6 +356,7 @@ ActiveRecord::Schema.define(version: 20160606074358) do
     t.datetime "updated_at",                                 null: false
     t.string   "shortcut",                      default: "", null: false
     t.integer  "fire_sport_statistics_team_id"
+    t.integer  "lottery_number"
   end
 
   add_index "teams", ["fire_sport_statistics_team_id"], name: "index_teams_on_fire_sport_statistics_team_id"

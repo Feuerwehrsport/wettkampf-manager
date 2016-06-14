@@ -15,7 +15,7 @@ class Score::ListFactories::GroupOrder < Score::ListFactory
       teams[request.entity.team_id] ||= []
       teams[request.entity.team_id].push(request)
     end
-    team_requests = teams.values.shuffle
+    team_requests = sort_or_shuffle(teams)
     loop do
       break if team_requests.blank?
       requests.push(team_requests.first.shift)
@@ -23,5 +23,13 @@ class Score::ListFactories::GroupOrder < Score::ListFactory
       team_requests.select!(&:present?)
     end
     requests
+  end
+
+  def sort_or_shuffle(hash)
+    if team_shuffle?
+      hash.values.shuffle
+    else
+      Team.where(team_id: hash.keys).order(:lottery_number).pluck(:team_id).map { |id| hash[id] }
+    end
   end
 end

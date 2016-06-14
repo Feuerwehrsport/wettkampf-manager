@@ -111,6 +111,10 @@ RSpec.configure do |config|
       DatabaseCleaner.strategy = :transaction
     end
 
+    config.before(:each) do 
+      allow(Competition).to receive(:one).and_return(build_stubbed(:competition))
+    end
+
     config.before(type: :feature) do
       Capybara.reset_sessions!
       browser = Capybara.current_session.driver.browser
