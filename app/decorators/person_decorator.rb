@@ -3,6 +3,14 @@ class PersonDecorator < ApplicationDecorator
   decorates_association :fire_sport_statistics_person
   decorates_association :tags
 
+  def short_first_name
+    first_name.truncate(15)
+  end
+
+  def short_last_name
+    last_name.truncate(15)
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
