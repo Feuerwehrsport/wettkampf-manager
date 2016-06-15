@@ -15,7 +15,7 @@ module Helpers::MenuHelper
     ]
     
     items.push(MenuItem.new("Gesamtwertung", '/score/competition_results')) if Competition.result_type.present?
-    items.push(MenuItem.new("Cup-Wertung", '/series/rounds'))
+    items.push(MenuItem.new("Cup-Wertung", '/series/rounds')) if Series::Round.with_local_results.present?
 
     items
   end
