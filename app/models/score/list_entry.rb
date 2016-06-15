@@ -15,4 +15,8 @@ class Score::ListEntry < CacheDependendRecord
 
   scope :result_valid, -> { where(result_type: :valid) }
   scope :not_waiting, -> { where.not(result_type: :waiting) }
+
+  def self.insert_random_values
+    where(result_type: :waiting).each {|l| l.update!(time_with_valid_calculation: 1900 + rand(0..400)) }
+  end
 end
