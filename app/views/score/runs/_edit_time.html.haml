@@ -5,7 +5,7 @@
       .row
         .col-md-4
           .time-entries
-            = n.input :second_time
+            = n.input :second_time, as: :second_time
         .col-md-8
           .time-types
             = n.collection_radio_buttons :result_type, Score::ResultEntrySupport::ENTRY_STATUS, :to_s, -> (t) { t("result_types.#{t}") }
