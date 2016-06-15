@@ -10,8 +10,4 @@
                 = render 'score/runs/edit_time', entry: entry, f: f, fields_for: :entries
           - box.footer do
             = cancel_link
-            = f.primary_button :submit, "Speichern"
-.row
-  .col-md-6
-    = box("Hinweise") do
-      %p Haben alle Zeiten in einer Wertungsliste eine elektronische Zeit, wird diese für alle Teilnehmer genommen.
+            = f.primary_button :submit, 'Speichern'

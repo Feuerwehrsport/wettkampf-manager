@@ -10,26 +10,27 @@
                 = entry.try(:human_time)
                 - if logged_in?
                   .pull-right
-                    = short_edit_link edit_score_list_run_path(@score_list, run: run), title: "Zeiten bearbeiten", class: "btn-xs"
+                    - if track == 1
+                      = short_edit_link edit_score_list_run_path(@score_list, run: run), title: 'Zeiten bearbeiten', class: 'btn-xs'
                     - if entry.present?
-                      = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: "Aus Liste entfernen", class: "btn-xs", remote: true
+                      = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: 'Aus Liste entfernen', class: 'btn-xs', remote: true
       - box.footer do
-        = btn_link_to "als PDF", format: :pdf
-        = btn_link_to "als PDF für Kampfrichter", format: :pdf, more_columns: true
-        = btn_link_to "als XLS", format: :xlsx
+        = btn_link_to 'als PDF', format: :pdf
+        = btn_link_to 'als PDF für Kampfrichter', format: :pdf, more_columns: true
+        = btn_link_to 'als XLS', format: :xlsx
 
   .col-md-3
     - if logged_in?
-      = box("Aktionen") do
-        = block_link_to "Reihenfolge bearbeiten", { action: :move }
-        = block_link_to "Zeiten im Block eintragen", { action: :edit_times }
-        = block_link_to "Teilnehmer hinzufügen", { action: :select_entity }, remote: true
+      = box('Aktionen') do
+        = block_link_to 'Reihenfolge bearbeiten', { action: :move }
+        = block_link_to 'Zeiten im Block eintragen', { action: :edit_times }
+        = block_link_to 'Teilnehmer hinzufügen', { action: :select_entity }, remote: true
 
-      = box("Allgemein") do
-        = block_link_to "Bearbeiten", { action: :edit }
-        = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }
+      = box('Allgemein') do
+        = block_link_to 'Bearbeiten', { action: :edit }
+        = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }
 
-      = box("Ausgabe") do
-        = block_link_to("PDF (Drucken)", format: :pdf)
-        = block_link_to("PDF für Kampfrichter", format: :pdf, more_columns: true)
-        = block_link_to("XLS (Excel)", format: :xlsx)
+      = box('Ausgabe') do
+        = block_link_to('PDF (Drucken)', format: :pdf)
+        = block_link_to('PDF für Kampfrichter', format: :pdf, more_columns: true)
+        = block_link_to('XLS (Excel)', format: :xlsx)
