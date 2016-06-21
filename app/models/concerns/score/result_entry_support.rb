@@ -4,13 +4,25 @@ module Score::ResultEntrySupport
     
   def second_time
     return "" if time.blank? || time == 0
-    sprintf("%.2f", (time.to_f/100)).sub(".", ",")
+    seconds = time.to_i / 100
+    millis = time.to_i % 100
+    "#{seconds},#{sprintf('%02d', millis)}"
+  end
+
+  def edit_second_time
+    second_time.gsub(',', '.')
+  end
+
+  def edit_second_time=(new_second_time)
+    self.second_time = new_second_time
   end
 
   def second_time=(new_second_time)
     if result = new_second_time.match(/^(\d+):(\d{1,2})[,.](\d{1,2})$/)
       self.time = result[1].to_i*6000 + result[2].to_i*100 + result[3].to_i
-    elsif result = new_second_time.match(/^(\d{1,3})[,.](\d{1,2})$/)
+    elsif result = new_second_time.match(/^(\d{1,4})[,.](\d)$/)
+      self.time = result[1].to_i*100 + (result[2].to_i * 10)
+    elsif result = new_second_time.match(/^(\d{1,3})[,.](\d\d)$/)
       self.time = result[1].to_i*100 + result[2].to_i
     else
       self.time = new_second_time.to_i

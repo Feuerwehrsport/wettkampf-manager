@@ -13,6 +13,6 @@ class Score::RunsController < ApplicationController
   end
 
   def score_run_params
-    params.require(:score_run).permit(list_entries_attributes: [ :track, :result_type, :second_time ])
+    params.require(:score_run).permit(list_entries_attributes: [ :id, :track, :result_type, :edit_second_time ])
   end
 end
