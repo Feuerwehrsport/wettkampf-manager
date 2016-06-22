@@ -30,8 +30,8 @@ class Series::TeamAssessmentRows::ThueringenCup < Series::TeamAssessmentRows::La
   def sum_time
     @sum_time ||= begin
       sum = ordered_participations.map(&:time).sum
-      if sum >= TimeInvalid::INVALID
-        TimeInvalid::INVALID
+      if sum >= Score::ResultEntrySupport::INVALID_TIME
+        Score::ResultEntrySupport::INVALID_TIME
       else
         sum
       end

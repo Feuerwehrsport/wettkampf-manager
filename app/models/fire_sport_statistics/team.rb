@@ -1,6 +1,7 @@
 class FireSportStatistics::Team < ActiveRecord::Base
   include FireSportStatistics::TeamScopes
   has_many :team_associations, class_name: 'FireSportStatistics::TeamAssociation'
+  has_one :team, class_name: '::Team', inverse_of: :fire_sport_statistics_team, foreign_key: :fire_sport_statistics_team_id
   validates :name, :short, presence: true
 
   scope :where_name_like, -> (name) do
@@ -12,5 +13,10 @@ class FireSportStatistics::Team < ActiveRecord::Base
   end
   scope :for_team, -> (team) do
     where_name_like("#{team.name}")
+  end
+  scope :dummies, -> { where(dummy: true) }
+
+  def self.dummy(team)
+    self.find_or_create_by(name: team.name, short: team.shortcut, dummy: true)
   end
 end

@@ -5,28 +5,35 @@ class Series::TeamAssessmentRows::Base < Struct.new(:team, :team_number)
   def self.max_points
     10
   end
-
-  def self.decrement_points(points, rank)
-    points -= 1 if points > 0
-    points
+  
+  def self.points_for_rank(row, ranks)
+    rank = ranks[row]
+    double_rank_count = ranks.values.select { |v| v == rank }.count - 1
+    [(max_points + 1 - ranks[row] - double_rank_count), 0].max
   end
 
   def self.convert_result_rows(cup, result_rows, assessment)
-    points = max_points
-    rank = 1
     participations = []
+    ranks = {}
+    result_rows.each do |row|
+      result_rows.each_with_index do |rank_row, rank|
+        if 0 == (row <=> rank_row)
+          ranks[row] = (rank + 1)
+          break
+        end
+      end
+    end
+
     result_rows.each do |row|
       participations.push(Series::TeamParticipation.new(
         cup: cup,
-        team: row.entity.fire_sport_statistics_team,
+        team: row.entity.fire_sport_statistics_team_with_dummy,
         team_number: row.entity.number,
         time: row.result_entry.time.to_i || 99999999,
-        points: points,
-        rank: rank,
+        points: points_for_rank(row, ranks),
+        rank: ranks[row],
         assessment: assessment,
       ))
-      points = decrement_points(points, rank)
-      rank += 1
     end
     participations
   end
@@ -73,7 +80,7 @@ class Series::TeamAssessmentRows::Base < Struct.new(:team, :team_number)
   end
 
   def best_time_without_nil
-    best_time || (TimeInvalid::INVALID + 1)
+    best_time || (Score::ResultEntrySupport::INVALID_TIME + 1)
   end
 
   def <=> other

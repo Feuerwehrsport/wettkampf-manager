@@ -5,4 +5,8 @@ class Score::ResultEntry
   include Draper::Decoratable
 
   attr_accessor :time, :result_type
+
+  def self.invalid
+    new(time_with_valid_calculation: nil)
+  end
 end

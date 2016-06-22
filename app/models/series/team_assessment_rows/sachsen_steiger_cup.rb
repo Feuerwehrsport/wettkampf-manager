@@ -12,8 +12,8 @@ module Series
       def sum_time
         @sum_time ||= begin
           sum = @cups.values.flatten.map(&:time).sum
-          if sum >= TimeInvalid::INVALID
-            TimeInvalid::INVALID
+          if sum >= Score::ResultEntrySupport::INVALID_TIME
+            Score::ResultEntrySupport::INVALID_TIME
           else
             sum
           end
@@ -22,7 +22,7 @@ module Series
 
       def best_time
         @best_time ||= begin
-          @cups.values.flatten.reject(&:time_invalid?).map(&:time).sort.first || TimeInvalid::INVALID
+          @cups.values.flatten.reject(&:time_invalid?).map(&:time).sort.first || Score::ResultEntrySupport::INVALID_TIME
         end
       end
     end

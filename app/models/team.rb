@@ -42,6 +42,10 @@ class Team < CacheDependendRecord
     end
   end
 
+  def fire_sport_statistics_team_with_dummy
+    fire_sport_statistics_team.presence || FireSportStatistics::Team.dummy(self)
+  end
+
   def list_entries_group_competitor_valid?
     @list_entries_group_competitor_valid ||= begin
       people_assessments.map do |assessment|

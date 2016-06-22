@@ -2,7 +2,7 @@ class Person < CacheDependendRecord
   include Taggable
 
   belongs_to :team
-  belongs_to :fire_sport_statistics_person, class_name: "FireSportStatistics::Person"
+  belongs_to :fire_sport_statistics_person, class_name: "FireSportStatistics::Person", inverse_of: :person
   has_many :requests, class_name: "AssessmentRequest", as: :entity, dependent: :destroy
   has_many :list_entries, class_name: "Score::ListEntry", as: :entity, dependent: :destroy
   has_many :requested_assessments, through: :requests, source: :assessment
@@ -23,7 +23,7 @@ class Person < CacheDependendRecord
   end
 
   def fire_sport_statistics_person_with_dummy
-    fire_sport_statistics_person.presence || FireSportStatistics::Person.new
+    fire_sport_statistics_person.presence || FireSportStatistics::Person.dummy(self)
   end
  
   private

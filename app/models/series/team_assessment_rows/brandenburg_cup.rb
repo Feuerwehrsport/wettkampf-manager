@@ -66,8 +66,8 @@ class Series::TeamAssessmentRows::BrandenburgCup < Series::TeamAssessmentRows::B
   def sum_time
     @sum_time ||= begin
       sum = @cups.values.flatten.map(&:time).sum
-      if sum >= TimeInvalid::INVALID
-        TimeInvalid::INVALID
+      if sum >= Score::ResultEntrySupport::INVALID_TIME
+        Score::ResultEntrySupport::INVALID_TIME
       else
         sum
       end

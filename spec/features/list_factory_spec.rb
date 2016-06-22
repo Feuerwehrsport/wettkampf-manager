@@ -56,12 +56,12 @@ RSpec.feature "list factory" do
 
     within(page.all('td.edit-time')[0]) do
       choose 'Gültig'
-      fill_in('Zeit in Sekunden', with: '19,99')
+      fill_in('Zeit in Sekunden', with: '19.99')
     end
 
     within(page.all('td.edit-time')[1]) do
       choose 'Gültig'
-      fill_in('Zeit in Sekunden', with: '17,11')
+      fill_in('Zeit in Sekunden', with: '17.11')
     end
     click_on('Speicher')
 

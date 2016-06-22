@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612124908) do
+ActiveRecord::Schema.define(version: 20160615140026) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -87,11 +87,12 @@ ActiveRecord::Schema.define(version: 20160612124908) do
   end
 
   create_table "fire_sport_statistics_people", force: :cascade do |t|
-    t.string   "last_name",  null: false
-    t.string   "first_name", null: false
-    t.integer  "gender",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "last_name",                  null: false
+    t.string   "first_name",                 null: false
+    t.integer  "gender",                     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "dummy",      default: false, null: false
   end
 
   create_table "fire_sport_statistics_person_spellings", force: :cascade do |t|
@@ -126,10 +127,11 @@ ActiveRecord::Schema.define(version: 20160612124908) do
   add_index "fire_sport_statistics_team_spellings", ["team_id"], name: "index_fire_sport_statistics_team_spellings_on_team_id"
 
   create_table "fire_sport_statistics_teams", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "short",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                       null: false
+    t.string   "short",                      null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "dummy",      default: false, null: false
   end
 
   create_table "imports_assessments", force: :cascade do |t|

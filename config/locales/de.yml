@@ -113,6 +113,7 @@ de:
         track: Bahn
         run: Lauf
         second_time: Zeit in Sekunden
+        edit_second_time: Zeit in Sekunden
       score/result:
         assessment: Wertungsgruppe
         group_assessment: Mannschaftswertung
