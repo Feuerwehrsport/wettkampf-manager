@@ -25,7 +25,7 @@ module Score::ResultEntrySupport
     elsif result = new_second_time.match(/^(\d{1,3})[,.](\d\d)$/)
       self.time = result[1].to_i*100 + result[2].to_i
     else
-      self.time = new_second_time.to_i
+      self.time = new_second_time.to_i*100
     end
   end
 
