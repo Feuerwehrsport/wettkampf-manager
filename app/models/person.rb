@@ -11,6 +11,7 @@ class Person < CacheDependendRecord
 
   validates :last_name, :first_name, :gender, presence: true
   validate :validate_team_gender
+  before_validation :strip_names
 
   accepts_nested_attributes_for :requests, allow_destroy: true
 
@@ -27,6 +28,11 @@ class Person < CacheDependendRecord
   end
  
   private
+
+  def strip_names
+    self.last_name = last_name.try(:strip)
+    self.first_name = first_name.try(:strip)
+  end
 
   def validate_team_gender
     errors.add(:team, :has_other_gender) if team.present? && team.gender != gender

@@ -14,6 +14,7 @@ class Team < CacheDependendRecord
   validates :number, numericality: { greater_than: 0 }
   validates :name, uniqueness: { scope: [:number, :gender] }
   validates :shortcut, length: { maximum: 12 }
+  before_validation :strip_names
 
   accepts_nested_attributes_for :requests, allow_destroy: true
 
@@ -55,6 +56,11 @@ class Team < CacheDependendRecord
   end
 
   private
+
+  def strip_names
+    self.name = name.try(:strip)
+    self.shortcut = shortcut.try(:strip)
+  end
 
   def create_assessment_requests
     unless disable_autocreate_assessment_requests.present?
