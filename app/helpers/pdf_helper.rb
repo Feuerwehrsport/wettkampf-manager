@@ -1,6 +1,6 @@
 module PDFHelper  
   def pdf_default_row_colors
-    color = 264
+    color = 267
     (1..2).map do
       color -= 12
       color.to_s(16) * 3
