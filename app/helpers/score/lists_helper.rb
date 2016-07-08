@@ -90,7 +90,7 @@ module Score::ListsHelper
     header = ['Lauf', 'Bahn']
     if single_discipline?
       header.push('Nr.') if Competition.one.show_bib_numbers?
-      header.push('Vorname', 'Nachname')
+      header.push('Nachname', 'Vorname')
     end
     header.push('Mannschaft')
     if params[:more_columns].present?
@@ -106,7 +106,7 @@ module Score::ListsHelper
       line.push((track == 1 ? run : ''), track)
       if single_discipline?
         line.push(entry.try(:entity).try(:bib_number)) if Competition.one.show_bib_numbers?
-        line.push(entry.try(:entity).try(:short_first_name), entry.try(:entity).try(:short_last_name))
+        line.push(entry.try(:entity).try(:short_last_name), entry.try(:entity).try(:short_first_name))
         line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))
       else
         team_name = entry.try(:entity).to_s

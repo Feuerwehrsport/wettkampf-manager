@@ -34,7 +34,7 @@ module Score::ResultsHelper
 
   def build_data_rows(shortcut)
     header = ["Platz"]
-    if @discipline.single_discipline? || @discipline.is_a?(Disciplines::DoubleEvent)
+    if @discipline.single_discipline_or_double_event?
       PersonDecorator.human_name_cols.each { |col| header.push col }
     else
       TeamDecorator.human_name_cols.each { |col| header.push col }

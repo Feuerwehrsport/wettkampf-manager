@@ -9,7 +9,7 @@ module PeopleHelper
     assessments = Assessment.requestable_for(collection.first).map(&:decorate)
     headline = []
     headline.push('Nr.') if Competition.one.show_bib_numbers?
-    headline.push('Vorname', 'Nachname', 'Mannschaft')
+    headline.push('Nachname', 'Vorname', 'Mannschaft')
     @tags.each { |tag| headline.push(tag.to_s) }
     assessments.each { |assessment| headline.push(assessment.discipline.to_short) }
     data = [headline]
@@ -17,7 +17,7 @@ module PeopleHelper
     collection.each do |person|
       line = []
       line.push(person.bib_number) if Competition.one.show_bib_numbers?
-      line.push(person.first_name, person.last_name, person.team.to_s)
+      line.push(person.last_name, person.first_name, person.team.numbered_shortcut_name)
       @tags.each { |tag| line.push(person.tags.include?(tag) ? 'X' : '') }
       assessments.each do |assessment|
         request = person.request_for(assessment.object)

@@ -3,7 +3,7 @@ pdf_header pdf, @score_list.name, @score_list.discipline
 track_count = @score_list.track_count
 
 column_widths = { 0 => 35, 1 => 35, -1 => 50 }
-column_widths[2] = 35 if Competition.one.show_bib_numbers?
+column_widths[2] = 35 if Competition.one.show_bib_numbers? && single_discipline?
 if params[:more_columns].present?
   column_widths[-1] = 40
   column_widths[-2] = 40

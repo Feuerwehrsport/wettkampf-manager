@@ -7,7 +7,8 @@ pdf.table(index_export_data, {
 }) do
   row(0).style(align: :center, font_style: :bold)
   column(1).style(align: :center)
-  column(2).style(align: :center )
+  column(2).style(align: :center)
+  column(3).style(align: :center) if Competition.one.lottery_numbers?
 end
 
 pdf_footer pdf, name: 'Liste der Mannschaften'

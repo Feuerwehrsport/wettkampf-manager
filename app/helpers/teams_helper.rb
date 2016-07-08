@@ -5,6 +5,8 @@ module TeamsHelper
       Team.human_attribute_name(:gender),
       Team.human_attribute_name(:people),
     ]
+    headline.push('Los') if Competition.one.lottery_numbers?
+    
     @tags.each { |tag| headline.push(tag.to_s) }
     data = [headline]
     @teams.each do |team|
@@ -13,6 +15,7 @@ module TeamsHelper
         team.translated_gender,
         team.people.count,
       ]
+      line.push(team.lottery_number) if Competition.one.lottery_numbers?
       @tags.each { |tag| line.push(team.tags.include?(tag) ? 'X' : '') }
       data.push(line)
     end

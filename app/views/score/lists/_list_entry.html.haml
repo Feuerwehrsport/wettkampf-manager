@@ -6,8 +6,8 @@
   - if single_discipline?
     - if Competition.one.show_bib_numbers?
       %td= entry.try(:entity).try(:bib_number)
-    %td= entry.try(:entity).try(:first_name).to_s.truncate(20)
     %td= entry.try(:entity).try(:last_name).to_s.truncate(20)
+    %td= entry.try(:entity).try(:first_name).to_s.truncate(20)
     %td= entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)).to_s.truncate(20)
   - else
     %td

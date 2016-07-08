@@ -11,6 +11,10 @@ class Discipline < CacheDependendRecord
     false
   end
 
+  def single_discipline_or_double_event?
+    single_discipline? || is_a?(Disciplines::DoubleEvent)
+  end
+
   def to_label
     decorate.to_s
   end
