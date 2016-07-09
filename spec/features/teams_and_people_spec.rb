@@ -131,15 +131,15 @@ RSpec.feature "Teams and People" do
       click_on "Speichern"
     end
 
-    expect(page).to have_content "Alfred Meier"
-    expect(page).to have_content "M1"
-    expect(page).to have_content "Wilhelm Busch"
-    expect(page).to have_content "M2"
-    expect(page).to have_content "M6"
-    expect(page).to have_content "Karl Marx"
-    expect(page).to have_content "M0"
-    expect(page).to have_content "Peter Müller"
-    expect(page).to have_content "E1"
+    expect(page).to have_content 'Meier Alfred'
+    expect(page).to have_content 'M1'
+    expect(page).to have_content 'Busch Wilhelm'
+    expect(page).to have_content 'M2'
+    expect(page).to have_content 'M6'
+    expect(page).to have_content 'Marx Karl'
+    expect(page).to have_content 'M0'
+    expect(page).to have_content 'Müller Peter'
+    expect(page).to have_content 'E1'
 
     assessment_requests = AssessmentRequest.where(entity_type: "Person")
     expect(assessment_requests.assessment_type(:group_competitor)).to have(6).items
