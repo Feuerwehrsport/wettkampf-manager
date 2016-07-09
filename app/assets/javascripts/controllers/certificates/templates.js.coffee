@@ -128,8 +128,6 @@ class TextElement
     @savePosition()
 
   setPosition: =>
-    @textLine.css(width: 'auto')
-    @textLine.innerWidth(@textLine.innerWidth() + 100)
     width = parseInt(@element.css('width').replace(/px/, ''), 10)
 
     if @formElement.get('left') isnt ""
@@ -157,8 +155,6 @@ class TextElement
       top: top + @parentOffset.top
 
   savePosition: =>
-    @textLine.css(width: 'auto')
-    @textLine.innerWidth(@textLine.innerWidth() + 100)
     width = parseInt(@element.css('width').replace(/px/, ''), 10)
     switch textAligns[@textAlign]
       when 'left'
