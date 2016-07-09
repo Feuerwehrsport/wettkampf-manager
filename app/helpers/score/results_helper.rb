@@ -55,7 +55,11 @@ module Score::ResultsHelper
     @rows.each do |row|
       line = []
       line.push "#{place_for_row row}."
-      row.entity.name_cols(row.try(:assessment_type), shortcut).each { |col| line.push col }
+      if @discipline.single_discipline_or_double_event?
+        row.entity.name_cols(row.try(:assessment_type), shortcut).each { |col| line.push col }
+      else
+        row.entity.name_cols(row.try(:assessment_type), false).each { |col| line.push col }
+      end
       if row.is_a? Score::DoubleEventResultRow
         @score_result.results.each { |result| line.push(row.result_entry_from(result)) }
         line.push row.sum_result_entry
