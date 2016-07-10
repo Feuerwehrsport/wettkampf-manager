@@ -77,6 +77,7 @@ class Score::CompetitionResult < CacheDependendRecord
       end
     end
     for_results do |result, result_rows, ranks|
+      next if result_rows.empty?
       points = ranks.values.max + 1
       teams.keys.each do |team_id|
         if teams[team_id].assessment_result_from(result.assessment).blank?
