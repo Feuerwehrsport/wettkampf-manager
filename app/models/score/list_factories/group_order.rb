@@ -29,7 +29,7 @@ class Score::ListFactories::GroupOrder < Score::ListFactory
     if team_shuffle?
       hash.values.shuffle
     else
-      Team.where(id: hash.keys).order(:lottery_number).pluck(:id).map { |id| hash[id] }
+      Team.where(id: hash.keys).reorder(:lottery_number).pluck(:id).map { |id| hash[id] }
     end
   end
 end

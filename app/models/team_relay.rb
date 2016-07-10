@@ -9,13 +9,13 @@ class TeamRelay < CacheDependendRecord
   end
 
   def self.create_next_free_for team, not_ids
-    existing = where(team: team).where.not(id: not_ids).order(:number).first
+    existing = where(team: team).where.not(id: not_ids).reorder(:number).first
     return existing if existing.present?
     create_next_free team
   end
 
   def self.create_next_free team
-    new_number = (team.team_relays.order(:number).pluck(:number).last || 0) + 1
+    new_number = (team.team_relays.reorder(:number).pluck(:number).last || 0) + 1
     team.team_relays.create(number: new_number)
   end
 end

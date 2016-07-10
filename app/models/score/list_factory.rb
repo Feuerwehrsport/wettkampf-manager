@@ -143,7 +143,7 @@ class Score::ListFactory < CacheDependendRecord
     if team_shuffle?
       requests.shuffle
     else
-      requests.sort_by { |request| request.entity.try(:lottery_number) }
+      requests.sort_by { |request| request.entity.try(:lottery_number) || -1 }
     end
   end
 
