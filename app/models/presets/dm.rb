@@ -45,10 +45,12 @@ class Presets::DM < Preset
       hb_assessment = Assessment.create!(discipline: @hb, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result)
       Score::Result.create!(assessment: hb_assessment, double_event_result: zk_result_youth, tag_references_attributes: [{ tag_id: youth_tag.id }])
+      Score::Result.create!(assessment: hb_assessment, name: "#{hb_assessment.decorate.to_s} - Finale")
 
       hl_assessment = Assessment.create!(discipline: @hl, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: hl_assessment, group_assessment: true, double_event_result: zk_result)
       Score::Result.create!(assessment: hl_assessment, double_event_result: zk_result_youth, tag_references_attributes: [{ tag_id: youth_tag.id }])
+      Score::Result.create!(assessment: hl_assessment, name: "#{hl_assessment.decorate.to_s} - Finale")
 
       la_assessment = Assessment.create!(discipline: @la, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: la_assessment, group_assessment: false)
