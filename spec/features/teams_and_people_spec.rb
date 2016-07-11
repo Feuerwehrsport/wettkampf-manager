@@ -13,7 +13,7 @@ RSpec.feature "Teams and People" do
 
     within(:css, ".panel-heading") { expect(page).to have_content "Mannschaft" }
     fill_in "Name", with: "FF Warin"
-    select 'Männlich', from: 'Geschlecht'
+    select 'Männer', from: 'Geschlecht'
     click_on "Speichern"
 
     expect(page).to have_content "Mannschaft erfolgreich erstellt"
@@ -25,17 +25,17 @@ RSpec.feature "Teams and People" do
       fill_in "Schnelleingabe", with: "Alfred Meier"
       expect(find_field('Vorname').value).to have_content "Alfred"
       expect(find_field('Nachname').value).to have_content "Meier"
-      select 'Männlich', from: 'Geschlecht'
+      select 'Männer', from: 'Geschlecht'
       click_on "Speichern"
     end
 
     within(:css, ".modal") do
       within(:css, ".assessment-request:nth-of-type(1)") do
-        expect(page).to have_content "100m Hindernisbahn - männlich"
+        expect(page).to have_content "100m Hindernisbahn - Männer"
         check 'Teilnahme'
       end
       within(:css, ".assessment-request:nth-of-type(2)") do
-        expect(page).to have_content "Hakenleitersteigen - männlich"
+        expect(page).to have_content "Hakenleitersteigen - Männer"
         check 'Teilnahme'
       end
       click_on "Speichern"
@@ -48,7 +48,7 @@ RSpec.feature "Teams and People" do
       fill_in "Schnelleingabe", with: "Peter"
       expect(find_field('Vorname').value).to have_content "Peter"
       expect(find_field('Nachname').value).to have_content ""
-      select 'Männlich', from: 'Geschlecht'
+      select 'Männer', from: 'Geschlecht'
       click_on "Speichern"
     end
 
@@ -56,20 +56,20 @@ RSpec.feature "Teams and People" do
       expect(page).to have_content "Bitte prüfen Sie die folgenden Felder:"
       expect(find_field('Vorname').value).to have_content "Peter"
       fill_in "Nachname", with: "Müller"
-      select 'Männlich', from: 'Geschlecht'
+      select 'Männer', from: 'Geschlecht'
       click_on "Speichern"
     end
 
     within(:css, ".modal") do
       within(:css, ".assessment-request:nth-of-type(1)") do
-        expect(page).to have_content "100m Hindernisbahn - männlich"
+        expect(page).to have_content "100m Hindernisbahn - Männer"
         check 'Teilnahme'
-        select "Einzelstarter", from: "100m Hindernisbahn - männlich"
+        select "Einzelstarter", from: "100m Hindernisbahn - Männer"
       end
       within(:css, ".assessment-request:nth-of-type(2)") do
-        expect(page).to have_content "Hakenleitersteigen - männlich"
+        expect(page).to have_content "Hakenleitersteigen - Männer"
         check 'Teilnahme'
-        select "Einzelstarter", from: "Hakenleitersteigen - männlich"
+        select "Einzelstarter", from: "Hakenleitersteigen - Männer"
       end
       click_on "Speichern"
     end
@@ -90,18 +90,18 @@ RSpec.feature "Teams and People" do
       fill_in "Schnelleingabe", with: "Wilhelm Busch"
       expect(find_field('Vorname').value).to have_content "Wilhelm"
       expect(find_field('Nachname').value).to have_content "Busch"
-      select 'Männlich', from: 'Geschlecht'
+      select 'Männer', from: 'Geschlecht'
       select 'FF Warin', from: 'Mannschaft'
       click_on "Speichern"
     end
 
     within(:css, ".modal") do
       within(:css, ".assessment-request:nth-of-type(1)") do
-        expect(page).to have_content "100m Hindernisbahn - männlich"
+        expect(page).to have_content "100m Hindernisbahn - Männer"
         check 'Teilnahme'
       end
       within(:css, ".assessment-request:nth-of-type(2)") do
-        expect(page).to have_content "Hakenleitersteigen - männlich"
+        expect(page).to have_content "Hakenleitersteigen - Männer"
         check 'Teilnahme'
         fill_in "Reihenfolge", with: "6"
       end
@@ -115,17 +115,17 @@ RSpec.feature "Teams and People" do
       fill_in "Schnelleingabe", with: "Karl Marx"
       expect(find_field('Vorname').value).to have_content "Karl"
       expect(find_field('Nachname').value).to have_content "Marx"
-      select 'Männlich', from: 'Geschlecht'
+      select 'Männer', from: 'Geschlecht'
       click_on "Speichern"
     end
 
     within(:css, ".modal") do
       within(:css, ".assessment-request:nth-of-type(1)") do
-        expect(page).to have_content "100m Hindernisbahn - männlich"
+        expect(page).to have_content "100m Hindernisbahn - Männer"
         check 'Teilnahme'
       end
       within(:css, ".assessment-request:nth-of-type(2)") do
-        expect(page).to have_content "Hakenleitersteigen - männlich"
+        expect(page).to have_content "Hakenleitersteigen - Männer"
         check 'Teilnahme'
       end
       click_on "Speichern"

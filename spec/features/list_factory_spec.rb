@@ -28,15 +28,15 @@ RSpec.feature "list factory" do
 
     click_on 'Startliste hinzufügen'
     click_on '100m Hindernisbahn'
-    check '100m Hindernisbahn - männlich (2 Starter)'
+    check '100m Hindernisbahn - Männer (2 Starter)'
     click_on 'Weiter'
-    expect(find_field('Name').value).to eq '100m Hindernisbahn - männlich - Lauf 1'
+    expect(find_field('Name').value).to eq '100m Hindernisbahn - Männer - Lauf 1'
     expect(find_field('Abkürzung').value).to eq 'Lauf 1'
     click_on 'Weiter'
     expect(find_field('Wettkampfbahnen').value).to eq '2'
     click_on 'Weiter'
-    expect(find_field('100m Hindernisbahn - männlich')).to be_checked
-    expect(find_field('100m Hindernisbahn - männlich - U20')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer - U20')).to be_checked
     click_on 'Weiter'
     expect(find_field('Mannschaftsreihenfolge beachten')).to be_checked
     click_on 'Weiter'
@@ -44,7 +44,7 @@ RSpec.feature "list factory" do
     click_on 'Startliste erstellen'
 
     within('.panel-heading', match: :first) do
-      expect(page).to have_content('100m Hindernisbahn - männlich - Lauf 1')
+      expect(page).to have_content('100m Hindernisbahn - Männer - Lauf 1')
     end
 
     expect(Score::List.last.entries.count).to eq 2
@@ -70,15 +70,15 @@ RSpec.feature "list factory" do
     click_on 'Startlisten'
     click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
-    check '100m Hindernisbahn - männlich (2 Starter)'
+    check '100m Hindernisbahn - Männer (2 Starter)'
     click_on 'Weiter'
-    expect(find_field('Name').value).to eq '100m Hindernisbahn - männlich - Lauf 2'
+    expect(find_field('Name').value).to eq '100m Hindernisbahn - Männer - Lauf 2'
     expect(find_field('Abkürzung').value).to eq 'Lauf 2'
     click_on 'Weiter'
     expect(find_field('Wettkampfbahnen').value).to eq '2'
     click_on 'Weiter'
-    expect(find_field('100m Hindernisbahn - männlich')).to be_checked
-    expect(find_field('100m Hindernisbahn - männlich - U20')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer - U20')).to be_checked
     click_on 'Weiter'
     expect(find_field('Mannschaftsreihenfolge beachten')).to be_checked
     choose 'Bahnwechsel'
@@ -89,7 +89,7 @@ RSpec.feature "list factory" do
     click_on 'Startliste erstellen'
 
     within('.panel-heading', match: :first) do
-      expect(page).to have_content('100m Hindernisbahn - männlich - Lauf 2')
+      expect(page).to have_content('100m Hindernisbahn - Männer - Lauf 2')
     end
 
     expect(Score::List.last.entries.count).to eq 2
@@ -101,26 +101,26 @@ RSpec.feature "list factory" do
     click_on 'Startlisten'
     click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
-    check '100m Hindernisbahn - männlich (2 Starter)'
+    check '100m Hindernisbahn - Männer (2 Starter)'
     click_on 'Weiter'
-    expect(find_field('Name').value).to eq '100m Hindernisbahn - männlich - Lauf 3'
+    expect(find_field('Name').value).to eq '100m Hindernisbahn - Männer - Lauf 3'
     expect(find_field('Abkürzung').value).to eq 'Lauf 3'
     click_on 'Weiter'
     expect(find_field('Wettkampfbahnen').value).to eq '2'
     click_on 'Weiter'
-    expect(find_field('100m Hindernisbahn - männlich')).to be_checked
-    expect(find_field('100m Hindernisbahn - männlich - U20')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer - U20')).to be_checked
     click_on 'Weiter'
     expect(find_field('Mannschaftsreihenfolge beachten')).to be_checked
     choose 'Bahn behalten'
     click_on 'Weiter'
-    select('100m Hindernisbahn - männlich - Lauf 2', from: 'Vorherige Liste')
+    select('100m Hindernisbahn - Männer - Lauf 2', from: 'Vorherige Liste')
     click_on 'Weiter'
     expect(page).to have_content('Voraussichtliche Liste')
     click_on 'Startliste erstellen'
 
     within('.panel-heading', match: :first) do
-      expect(page).to have_content('100m Hindernisbahn - männlich - Lauf 3')
+      expect(page).to have_content('100m Hindernisbahn - Männer - Lauf 3')
     end
 
     expect(Score::List.last.entries.count).to eq 2
@@ -132,15 +132,15 @@ RSpec.feature "list factory" do
     click_on 'Startlisten'
     click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
-    check '100m Hindernisbahn - männlich (2 Starter)'
+    check '100m Hindernisbahn - Männer (2 Starter)'
     click_on 'Weiter'
-    expect(find_field('Name').value).to eq '100m Hindernisbahn - männlich - Lauf 4'
+    expect(find_field('Name').value).to eq '100m Hindernisbahn - Männer - Lauf 4'
     expect(find_field('Abkürzung').value).to eq 'Lauf 4'
     click_on 'Weiter'
     expect(find_field('Wettkampfbahnen').value).to eq '2'
     click_on 'Weiter'
-    expect(find_field('100m Hindernisbahn - männlich')).to be_checked
-    expect(find_field('100m Hindernisbahn - männlich - U20')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer - U20')).to be_checked
     click_on 'Weiter'
     expect(find_field('Mannschaftsreihenfolge beachten')).to be_checked
     choose 'Zufällig anordnen'
@@ -149,7 +149,7 @@ RSpec.feature "list factory" do
     click_on 'Startliste erstellen'
 
     within('.panel-heading', match: :first) do
-      expect(page).to have_content('100m Hindernisbahn - männlich - Lauf 4')
+      expect(page).to have_content('100m Hindernisbahn - Männer - Lauf 4')
     end
 
     expect(Score::List.last.entries.count).to eq 2
@@ -160,27 +160,27 @@ RSpec.feature "list factory" do
     click_on 'Startlisten'
     click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
-    check '100m Hindernisbahn - männlich (2 Starter)'
+    check '100m Hindernisbahn - Männer (2 Starter)'
     click_on 'Weiter'
-    expect(find_field('Name').value).to eq '100m Hindernisbahn - männlich - Lauf 5'
+    expect(find_field('Name').value).to eq '100m Hindernisbahn - Männer - Lauf 5'
     expect(find_field('Abkürzung').value).to eq 'Lauf 5'
     click_on 'Weiter'
     expect(find_field('Wettkampfbahnen').value).to eq '2'
     click_on 'Weiter'
-    expect(find_field('100m Hindernisbahn - männlich')).to be_checked
-    expect(find_field('100m Hindernisbahn - männlich - U20')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer')).to be_checked
+    expect(find_field('100m Hindernisbahn - Männer - U20')).to be_checked
     click_on 'Weiter'
     expect(find_field('Mannschaftsreihenfolge beachten')).to be_checked
     choose 'die x Besten (Finale)'
     click_on 'Weiter'
-    select('100m Hindernisbahn - männlich', from: 'Ergebnisliste')
+    select('100m Hindernisbahn - Männer', from: 'Ergebnisliste')
     fill_in('Anzahl der Finalisten auf der neuen Liste (X)', with: '1')
     click_on 'Weiter'
     expect(page).to have_content('Voraussichtliche Liste')
     click_on 'Startliste erstellen'
 
     within('.panel-heading', match: :first) do
-      expect(page).to have_content('100m Hindernisbahn - männlich - Lauf 5')
+      expect(page).to have_content('100m Hindernisbahn - Männer - Lauf 5')
     end
 
     expect(Score::List.last.entries.count).to eq 1
@@ -198,14 +198,14 @@ RSpec.feature "list factory" do
     click_on 'Startlisten'
     click_on 'Hinzufügen', match: :first
     click_on '4x100m Feuerwehrstafette'
-    check '4x100m Feuerwehrstafette - weiblich (2x A, 1x B)'
+    check '4x100m Feuerwehrstafette - Frauen (2x A, 1x B)'
     click_on 'Weiter'
-    expect(find_field('Name').value).to eq '4x100m Feuerwehrstafette - weiblich'
+    expect(find_field('Name').value).to eq '4x100m Feuerwehrstafette - Frauen'
     expect(find_field('Abkürzung').value).to eq 'Lauf'
     click_on 'Weiter'
     expect(find_field('Wettkampfbahnen').value).to eq '2'
     click_on 'Weiter'
-    expect(find_field('4x100m Feuerwehrstafette - weiblich')).to be_checked
+    expect(find_field('4x100m Feuerwehrstafette - Frauen')).to be_checked
     click_on 'Weiter'
     expect(find_field('Staffellauf mit A, B')).to be_checked
     click_on 'Weiter'
@@ -213,7 +213,7 @@ RSpec.feature "list factory" do
     click_on 'Startliste erstellen'
 
     within('.panel-heading', match: :first) do
-      expect(page).to have_content('4x100m Feuerwehrstafette - weiblich')
+      expect(page).to have_content('4x100m Feuerwehrstafette - Frauen')
     end
 
     expect(Score::List.last.entries.count).to eq 3

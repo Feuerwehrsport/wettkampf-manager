@@ -15,7 +15,7 @@ RSpec.describe Score::ListFactory, type: :model do
         instance.update!(assessment_ids: [assessment.id], next_step: 'names')
 
         expect(instance.current_step).to eq :names
-        expect(instance.default_name).to eq 'Hakenleitersteigen - männlich - Lauf 1'
+        expect(instance.default_name).to eq 'Hakenleitersteigen - Männer - Lauf 1'
         expect(instance.default_shortcut).to eq 'Lauf 1'
         instance.update!(name: 'long name', shortcut: 'short', next_step: 'tracks')
 

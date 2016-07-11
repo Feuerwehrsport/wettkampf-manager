@@ -34,11 +34,11 @@ class Certificates::TextPosition < CacheDependendRecord
     },
     assessment_with_gender: {
       description: "Wertung mit Geschlecht",
-      example: "Hakenleitersteigen - U20 - männlich",
+      example: "Hakenleitersteigen - U20 - Männer",
     },
     gender: {
       description: "Geschlecht",
-      example: "männlich",
+      example: "Männer",
     },
     date: {
       description: "Datum",

@@ -1,5 +1,5 @@
 if @female.count > 0
-  pdf_header pdf, "Weiblich"
+  pdf_header pdf, "Frauen"
 
   pdf.table(index_export_data(@female), {
     header: true, 
@@ -16,7 +16,7 @@ end
 pdf.start_new_page if @female.count + @male.count > 0
 
 if @male.count > 0
-  pdf_header pdf, "Männlich"
+  pdf_header pdf, "Männer"
 
   pdf.table(index_export_data(@male), {
     header: true, 

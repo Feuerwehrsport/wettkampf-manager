@@ -152,9 +152,9 @@ de:
     no_run: Nicht angetreten
 
   gender:
-    female: weiblich
+    female: Frauen
     female_symbol: ♀
-    male: männlich
+    male: Männer
     male_symbol: ♂
 
   assessment_types:
