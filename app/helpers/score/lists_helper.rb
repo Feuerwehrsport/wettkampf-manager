@@ -105,8 +105,14 @@ module Score::ListsHelper
       line = []
       line.push((track == 1 ? run : ''), track)
       if single_discipline?
-        line.push(entry.try(:entity).try(:bib_number)) if Competition.one.show_bib_numbers?
-        line.push(entry.try(:entity).try(:short_last_name), entry.try(:entity).try(:short_first_name))
+        line.push(entry.try(:entity).try(:bib_number).to_s) if Competition.one.show_bib_numbers?
+
+        last_name = entry.try(:entity).try(:short_last_name).to_s
+        tags = (entry.try(:entity).try(:tag_names)) || [] & @score_list.tag_names
+        last_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
+        line.push(content: last_name, inline_format: true)
+
+        line.push(entry.try(:entity).try(:short_first_name).to_s)
         line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))
       else
         team_name = entry.try(:entity).to_s
