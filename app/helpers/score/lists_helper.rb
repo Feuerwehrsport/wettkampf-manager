@@ -95,6 +95,8 @@ module Score::ListsHelper
     header.push('Mannschaft')
     if params[:more_columns].present?
       header.push('', '', '')
+    elsif params[:double_run].present?
+      header.push('Lauf 1', 'Lauf 2')
     else
       header.push('Zeit')
     end
@@ -127,6 +129,7 @@ module Score::ListsHelper
       end
       line.push(entry.try(:human_time))
       line.push('', '') if params[:more_columns].present?
+      line.push('') if params[:double_run].present?
       data.push(line)
     end
     data

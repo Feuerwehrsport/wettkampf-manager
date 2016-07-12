@@ -122,5 +122,5 @@ entries.where(entity: Team.find_by(name: "Team Sachsen", gender: 1, number: 2)).
 entries.where(entity: Team.find_by(name: "Stadt Berlin", gender: 1, number: 3)).update_all(run: 9, track: 1)
 entries.where(entity: Team.find_by(name: "FF Zella", gender: 1, number: 1)).update_all(run: 9, track: 2)
 entries.where(entity: Team.find_by(name: "FF Genschmar", gender: 1, number: 1)).update_all(run: 9, track: 3)
-entries.where(entity: Team.find_by(name: "FF Niederalbertsdorf", gender: 1, number: 1)).update_all(run: 10 track:, 1)
-entries.where(entity: Team.find_by(name: "Stadt Berlin", gender: 1, number: 1)).update_all(run: 10 track:, 2)
+entries.where(entity: Team.find_by(name: "FF Niederalbertsdorf", gender: 1, number: 1)).update_all(run: 10, track: 1)
+entries.where(entity: Team.find_by(name: "Stadt Berlin", gender: 1, number: 1)).update_all(run: 10, track: 2)

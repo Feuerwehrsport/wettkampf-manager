@@ -1,4 +1,6 @@
-pdf_header pdf, @score_list.name, discipline: @score_list.discipline, date: @score_list.date
+name = @score_list.name
+name = name.gsub(/\s-\sLauf\s\d/, '') if params[:double_run].present?
+pdf_header pdf, name, discipline: @score_list.discipline, date: @score_list.date
 
 track_count = @score_list.track_count
 
@@ -9,6 +11,9 @@ if params[:more_columns].present?
   column_widths[-1] = 40
   column_widths[-2] = 40
   column_widths[-3] = 40
+elsif params[:double_run].present?
+  column_widths[-1] = 40
+  column_widths[-2] = 40
 end
 
 lines_per_page = (32/track_count)*track_count
@@ -38,4 +43,4 @@ loop do
   end
 end
 
-pdf_footer pdf, name: @score_list.name
+pdf_footer pdf, name: name, date: @score_list.date

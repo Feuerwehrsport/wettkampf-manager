@@ -39,7 +39,7 @@ if @only != :single_competitors && @score_result.group_assessment? && @disciplin
       position: :center,
     }) do
       team_result.rows_in.each_with_index { |row, i| row(i+1).style(size: 10)}
-      team_result.rows_out.each_with_index { |row, i| row(i+1+team_result.count).style(font_style: :italic, size: 8)}
+      team_result.rows_out.each_with_index { |row, i| row(i+1+team_result.rows_in.count).style(font_style: :italic, size: 8)}
       column(0).style(align: :right)
       column(1).style(align: :center)
       row(0).style(align: :center, font_style: :bold)
@@ -49,4 +49,4 @@ if @only != :single_competitors && @score_result.group_assessment? && @disciplin
   end
 end
 
-pdf_footer pdf, name: @score_result.to_s
+pdf_footer pdf, name: @score_result.to_s, date: @score_result.date

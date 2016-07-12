@@ -48,6 +48,10 @@
         = block_link_to "Bearbeiten", action: :edit
         = block_link_to "Cup-Serie-Zugehörigkeit", action: :edit, series: 1
         = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Ergebnisliste wirklich löschen? Die zugehörigen Startlisten werden verändert!' }
+      = box('Ausgabe') do
+        = block_link_to 'als PDF', format: :pdf
+        = block_link_to 'als XLS', format: :xlsx
+        = block_link_to 'Urkunden', new_certificates_list_path(score_result_id: @score_result.id)
 
   - if @rows.count > 0
     .col-md-12

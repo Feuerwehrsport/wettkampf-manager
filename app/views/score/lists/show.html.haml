@@ -16,6 +16,7 @@
                       = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: 'Aus Liste entfernen', class: 'btn-xs', remote: true
       - box.footer do
         = btn_link_to 'als PDF', format: :pdf
+        = btn_link_to 'als PDF mit vorgetäuschtem zweiten Lauf', format: :pdf, double_run: true
         = btn_link_to 'als PDF für Kampfrichter', format: :pdf, more_columns: true
         = btn_link_to 'als XLS', format: :xlsx
 
