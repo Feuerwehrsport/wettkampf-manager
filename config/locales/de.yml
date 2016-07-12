@@ -106,6 +106,7 @@ de:
         name: Name
         results: Ergebnislisten
         shortcut: Abkürzung
+        date: Datum
       score/list_entry:
         assessment: Wertungsgruppe
         assessment_type: Wertung
@@ -120,6 +121,7 @@ de:
         lists: Startlisten
         name: Name
         results: Ergebnislisten
+        date: Datum
       team:
         gender: Geschlecht
         name: Name

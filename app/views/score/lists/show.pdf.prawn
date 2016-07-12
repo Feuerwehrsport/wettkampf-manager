@@ -1,4 +1,4 @@
-pdf_header pdf, @score_list.name, @score_list.discipline
+pdf_header pdf, @score_list.name, discipline: @score_list.discipline, date: @score_list.date
 
 track_count = @score_list.track_count
 

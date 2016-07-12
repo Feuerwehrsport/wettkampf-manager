@@ -23,9 +23,10 @@ module PDFHelper
     end
   end
 
-  def pdf_header pdf, name, discipline=nil
+  def pdf_header pdf, name, discipline: nil, date: nil
     competition = Competition.one
-    competition_name = [competition.name, l(competition.date)].join(" - ")
+    date = competition.date if date.nil?
+    competition_name = [competition.name, l(date)].join(" - ")
     headline_y = pdf.cursor
     pdf.text name, align: :center, size: 17
     pdf.text competition_name, align: :center, size: 15

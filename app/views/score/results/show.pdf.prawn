@@ -1,5 +1,5 @@
 if @only != :group_assessment
-  pdf_header pdf, @score_result.to_s, @discipline
+  pdf_header pdf, @score_result.to_s, discipline: @discipline, date: @score_result.date
   
   pdf.table(build_data_rows(true), {
     header: true, 
@@ -14,7 +14,7 @@ end
 
 if @only != :single_competitors && @score_result.group_assessment? && @discipline.single_discipline?
   pdf.start_new_page if @only.nil?
-  pdf_header pdf, "#{@score_result.to_s} - Mannschaftswertung", @discipline
+  pdf_header pdf, "#{@score_result.to_s} - Mannschaftswertung", discipline: @discipline, date: @score_result.date
 
   pdf.table(build_group_data_rows, {
     header: true, 

@@ -6,6 +6,7 @@
       = f.association :series_person_assessment, collection: @score_result.possible_person_assessments
     - else
       = f.input :name
+      = f.input :date, as: :string
       = f.association :assessment
       = f.input :group_assessment, as: :boolean
       = render 'tag_form', f: f

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615140026) do
+ActiveRecord::Schema.define(version: 20160712182234) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -254,6 +254,7 @@ ActiveRecord::Schema.define(version: 20160615140026) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "shortcut",    default: "", null: false
+    t.date     "date"
   end
 
   create_table "score_result_list_factories", force: :cascade do |t|
@@ -288,6 +289,7 @@ ActiveRecord::Schema.define(version: 20160615140026) do
     t.integer  "series_person_assessment_id"
     t.integer  "group_score_count"
     t.integer  "group_run_count"
+    t.date     "date"
   end
 
   add_index "score_results", ["assessment_id"], name: "index_score_results_on_assessment_id"

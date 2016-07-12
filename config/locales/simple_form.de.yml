@@ -40,6 +40,9 @@ de:
       score_list:
         name: Gesamter Name dieser Startliste, sollte eindeutig sein, zum Beispiel <em>100m Hindernisbahn - Frauen - Lauf 1</em>
         shortcut: Zum Beispiel <em>Lauf 1</em>, <em>Vorlauf</em> oder <em>Finale</em>, (maximal 8 Zeichen)
+        date: Überschreibt bei Angabe das Datum des Wettkampfes YYYY-MM-DD
+      score_result:
+        date: Überschreibt bei Angabe das Datum des Wettkampfes YYYY-MM-DD
       team:
         name: Der Name wird ohne Nummer angegeben.
         number: Die Nummer wird nur angezeigt, wenn es mehrere Mannschaften gibt.
