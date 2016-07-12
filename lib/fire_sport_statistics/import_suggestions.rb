@@ -20,6 +20,7 @@ module FireSportStatistics
             id: team.id,
             name: team.name,
             short: team.shortcut,
+            federal_state: FederalState.find_by_shortcut(team.state),
           )
         end
         

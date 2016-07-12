@@ -108,7 +108,7 @@ module Score::ListsHelper
         line.push(entry.try(:entity).try(:bib_number).to_s) if Competition.one.show_bib_numbers?
 
         last_name = entry.try(:entity).try(:short_last_name).to_s
-        tags = (entry.try(:entity).try(:tag_names)) || [] & @score_list.tag_names
+        tags = (entry.try(:entity).try(:tag_names) || []) & @score_list.tag_names
         last_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
         line.push(content: last_name, inline_format: true)
 
@@ -116,7 +116,13 @@ module Score::ListsHelper
         line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))
       else
         team_name = entry.try(:entity).to_s
-        team_name += " <font size='6'>(#{entry.try(:assessment).try(:decorate)})</font>" if multiple_assessments? && entry.present?
+        team_name += "<font size='6'> (#{entry.try(:assessment).try(:decorate)})</font>" if multiple_assessments? && entry.present?
+
+        tags = (entry.try(:entity).try(:tag_names) || []) & @score_list.tag_names
+        team_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
+
+        federal_state_shortcut = entry.try(:entity).try(:federal_state).try(:shortcut)
+        team_name += "<font size='6'> <i>#{federal_state_shortcut}</i></font>" if federal_state_shortcut.present?
         line.push(content: team_name, inline_format: true)
       end
       line.push(entry.try(:human_time))

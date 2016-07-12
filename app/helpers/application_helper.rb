@@ -52,4 +52,14 @@ module ApplicationHelper
     result = row.participation_for_cup(cup)
     result ? content_tag(:div, result.result_entry_with_points, class: "series-participation", data: { id: result.id }) : ""
   end
+
+  def content_row(row)
+    row.map do |entry|
+      if entry.is_a?(Hash)
+        strip_tags(entry[:content])
+      else
+        entry
+      end
+    end
+  end
 end

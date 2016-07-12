@@ -3,6 +3,7 @@ class Team < CacheDependendRecord
 
   has_many :people, dependent: :nullify
   belongs_to :fire_sport_statistics_team, class_name: 'FireSportStatistics::Team'
+  belongs_to :federal_state
   has_many :requests, class_name: "AssessmentRequest", as: :entity, dependent: :destroy
   has_many :list_entries, class_name: "Score::ListEntry", as: :entity, dependent: :destroy
   has_many :requested_assessments, through: :requests, source: :assessment

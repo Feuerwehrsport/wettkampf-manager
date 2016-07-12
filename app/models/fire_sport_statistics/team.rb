@@ -2,6 +2,7 @@ class FireSportStatistics::Team < ActiveRecord::Base
   include FireSportStatistics::TeamScopes
   has_many :team_associations, class_name: 'FireSportStatistics::TeamAssociation'
   has_one :team, class_name: '::Team', inverse_of: :fire_sport_statistics_team, foreign_key: :fire_sport_statistics_team_id
+  belongs_to :federal_state
   validates :name, :short, presence: true
 
   scope :where_name_like, -> (name) do

@@ -37,7 +37,8 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:name, :gender, :number, :shortcut, :fire_sport_statistics_team_id, :lottery_number,
+    params.require(:team).permit(
+      :name, :gender, :number, :shortcut, :fire_sport_statistics_team_id, :lottery_number, :federal_state_id,
       requests_attributes: [:assessment_type, :relay_count, :_destroy, :assessment_id, :id],
       tag_references_attributes: [:id, :tag_id, :_destroy]
     )

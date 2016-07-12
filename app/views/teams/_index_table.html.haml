@@ -7,7 +7,9 @@
     %th
   - collection.each do |team|
     %tr{ team.list_entries_group_competitor_valid? ? {} : { class: "danger" } }
-      %td= team.numbered_name
+      %td
+        = team.numbered_name
+        %em.small= team.federal_state.try(:shortcut)
       %td
         = team.people.count
         - if logged_in?

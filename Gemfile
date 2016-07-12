@@ -50,6 +50,7 @@ gem 'sqlite3', '1.3.10'
 group :development do
   gem 'guard-rspec'
   gem 'rubocop', require: false
+  gem 'faker'
 end
 
 group :development, :test do

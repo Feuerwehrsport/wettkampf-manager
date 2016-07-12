@@ -127,6 +127,7 @@ de:
         people: Wettkämpfer
         shortcut: Abkürzung
         lottery_number: Losnummer
+        federal_state: Bundesland
       user:
         password: Passwort
         password_confirmation: Passwort wiederholen

@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(version: 20160615140026) do
     t.string   "short_name", default: "", null: false
   end
 
+  create_table "federal_states", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "shortcut",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "fire_sport_statistics_people", force: :cascade do |t|
     t.string   "last_name",                  null: false
     t.string   "first_name",                 null: false
@@ -127,12 +134,15 @@ ActiveRecord::Schema.define(version: 20160615140026) do
   add_index "fire_sport_statistics_team_spellings", ["team_id"], name: "index_fire_sport_statistics_team_spellings_on_team_id"
 
   create_table "fire_sport_statistics_teams", force: :cascade do |t|
-    t.string   "name",                       null: false
-    t.string   "short",                      null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "dummy",      default: false, null: false
+    t.string   "name",                             null: false
+    t.string   "short",                            null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "dummy",            default: false, null: false
+    t.integer  "federal_state_id"
   end
+
+  add_index "fire_sport_statistics_teams", ["federal_state_id"], name: "index_fire_sport_statistics_teams_on_federal_state_id"
 
   create_table "imports_assessments", force: :cascade do |t|
     t.integer  "foreign_key",      null: false
@@ -359,8 +369,10 @@ ActiveRecord::Schema.define(version: 20160615140026) do
     t.string   "shortcut",                      default: "", null: false
     t.integer  "fire_sport_statistics_team_id"
     t.integer  "lottery_number"
+    t.integer  "federal_state_id"
   end
 
+  add_index "teams", ["federal_state_id"], name: "index_teams_on_federal_state_id"
   add_index "teams", ["fire_sport_statistics_team_id"], name: "index_teams_on_fire_sport_statistics_team_id"
 
   create_table "users", force: :cascade do |t|

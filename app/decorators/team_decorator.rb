@@ -2,6 +2,7 @@ class TeamDecorator < ApplicationDecorator
   decorates_association :people
   decorates_association :team_relays
   decorates_association :tags
+  decorates_association :federal_state
 
   def numbered_name
     multi_team? ? "#{name} #{number}" : name
