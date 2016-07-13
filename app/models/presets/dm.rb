@@ -54,7 +54,7 @@ class Presets::DM < Preset
 
       la_assessment = Assessment.create!(discipline: @la, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: la_assessment, group_assessment: false)
-      Score::Result.create!(assessment: la_assessment, group_assessment: true, tag_references_attributes: [{ tag_id: complete_tag.id }])
+      Score::Result.create!(assessment: la_assessment, group_assessment: true, tag_references_attributes: [{ tag_id: complete_tag.id }], name: "#{la_assessment.decorate.to_s} - Sport")
 
       fs_assessment = Assessment.create!(discipline: @fs, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: fs_assessment, group_assessment: true, date: Date.parse('2016-07-29'))

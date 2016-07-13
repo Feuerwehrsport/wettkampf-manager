@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 
 @score_competition_results.each do |result|
-  wb.add_worksheet(name: result.to_s) do |sheet|
+  wb.add_worksheet(name: result.short_name) do |sheet|
     table_data(result, false).each do |row|
       sheet.add_row row
     end

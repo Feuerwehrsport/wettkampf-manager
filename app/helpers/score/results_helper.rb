@@ -48,7 +48,7 @@ module Score::ResultsHelper
       @score_result.lists.each do |list|
         header.push(list.object.shortcut)
       end
-      header.push("Bestzeit")
+      header.push('Bestzeit') unless @score_result.lists.count == 1
     end
 
     data = [header]
@@ -65,7 +65,7 @@ module Score::ResultsHelper
         line.push row.sum_result_entry
       else
         @score_result.lists.each { |list| line.push(row.result_entry_from(list)) }
-        line.push row.best_result_entry
+        line.push row.best_result_entry unless @score_result.lists.count == 1
       end
       data.push(line)
     end
