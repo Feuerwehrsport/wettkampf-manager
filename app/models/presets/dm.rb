@@ -26,7 +26,7 @@ class Presets::DM < Preset
       lottery_numbers: true,
     )
     youth_tag = PersonTag.create!(name: 'U20', competition: Competition.first)
-    complete_tag = TeamTag.create!(name: 'Komplett', competition: Competition.first)
+    complete_tag = TeamTag.create!(name: 'Sport', competition: Competition.first)
 
     @hb = Disciplines::ObstacleCourse.create!
     @hl = Disciplines::ClimbingHookLadder.create!
