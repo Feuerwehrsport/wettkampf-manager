@@ -1,0 +1,82 @@
+# Schritt 1
+
+* Wettkampf-Manager aufsetzen
+
+# Schritt 2
+
+* Importieren
+
+# Schritt 3
+
+* Losnummer-Reihenfolge über Konsole festlegen
+
+# Schritt 4
+
+* Startlisten für LA erstellen
+* 3 Bahnen
+* Losnummer-Reihenfolge über Konsole für LA festlegen
+
+```
+x = ID von female
+y = ID von male
+```
+
+* Zweiter Lauf ist "Bahn wechseln"
+
+# Schritt 5
+
+* Startlisten für FS erstellen
+* 2 Bahnen
+* Datum anpassen 2016-07-29
+* Bei Männern die B-Staffeln die Bahn tauschen
+
+# Schritt 6
+
+* Startlisten für GS erstellen
+* 2 Bahnen
+* Datum anpassen 2016-07-29
+* Zweiter Lauf ist "Bahn wechseln"
+* Bei zweitem Lauf den freien Lauf an den Anfang setzen
+
+# Schritt 7
+
+* Einzelpersonen mit Startnummern aufnehmen (eventuell stehen die schon in der Import-Datei)
+
+# Schritt 8
+
+## Vorläufe
+
+* Startlisten für HL erstellen
+* 4 Bahnen
+* Bei Ergebnisse NICHT Finale anklicken!
+* Zweiter Lauf ist "Bahn behalten"
+* Datum anpassen 2016-07-28
+* Druck über 1. Lauf ->  "als PDF mit vorgetäuschtem zweiten Lauf" (ganz unten auf der Seite)
+
+## Finale
+
+* Startlisten für HL erstellen
+* Name: Finale statt Lauf 3
+* 4 Bahnen
+* Bei Ergebnisse NUR Finale anklicken!
+* Die X Besten: 24
+* Datum anpassen 2016-07-28
+
+# Schritt 9
+
+## Vorläufe
+
+* Startlisten für HB erstellen
+* Männer: 4 Bahnen, Frauen: 3 Bahnen
+* Bei Ergebnisse NICHT Finale anklicken!
+* Zweiter Lauf ist "Bahn behalten"
+* Datum anpassen 2016-07-29
+* Druck über 1. Lauf ->  "als PDF mit vorgetäuschtem zweiten Lauf" (ganz unten auf der Seite)
+
+## Finale
+
+* Startlisten für HB erstellen
+* Name: Finale statt Lauf 3
+* 4 Bahnen bei beiden Geschlechtern
+* Bei Ergebnisse NUR Finale anklicken!
+* Die X Besten: 24
