@@ -7,6 +7,8 @@ task :backup_data, [:path, :verbose] => :environment do |task, args|
   Score::Result.all.each { |list| backup.download("/score/results/#{list.id}", "result-#{list.id}") }
   backup.download("/people", "people")
   backup.download("/teams", "teams")
+  backup.cp('db/*.sqlite3')
+  backup.cp('log/*.log')
 end
 
 
@@ -42,6 +44,10 @@ class LiveBackup < Struct.new(:path, :verbose)
       end
       print "Speichere #{name}.#{format}"
     end
+  end
+
+  def cp(path)
+    FileUtils.cp_r(Dir.glob(File.join(Rails.root, path)), @backup_path, verbose: true)
   end
 
   def print(message)
