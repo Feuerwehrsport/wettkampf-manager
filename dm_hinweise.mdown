@@ -35,7 +35,7 @@ y = ID von male
 * Startlisten für GS erstellen
 * 2 Bahnen
 * Datum anpassen 2016-07-29
-* Zweiter Lauf ist "Bahn wechseln"
+* Zweiter Lauf ist "Bahn behalten"
 * Bei zweitem Lauf den freien Lauf an den Anfang setzen
 
 # Schritt 7
