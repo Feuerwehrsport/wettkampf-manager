@@ -9,6 +9,6 @@
         %button.close{ type: :button, data: { dismiss: :modal }, "aria-hidden" => true } ×
         .clearfix
   .panel-body
-    = box.body.html_safe
+    = box.body.try(:html_safe)
   - if box.footer.present?
     .panel-footer= box.footer

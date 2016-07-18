@@ -131,6 +131,8 @@ de:
         lottery_number: Losnummer
         federal_state: Bundesland
       user:
+        name: Benutzername
+        assessments: Wertungsgruppen
         password: Passwort
         password_confirmation: Passwort wiederholen
 

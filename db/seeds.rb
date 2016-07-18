@@ -10,7 +10,7 @@ competition = Competition.new(name: "Wettkampf", date: Date.today, flyer_text: "
 competition.create_possible = true
 competition.save!
 
-user = User.new()
+user = User.new(name: 'admin')
 user.save!(validate: false)
 
 

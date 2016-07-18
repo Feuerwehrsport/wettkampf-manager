@@ -8,7 +8,7 @@
             = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do |first|
               %td.time-col
                 = entry.try(:human_time)
-                - if logged_in?
+                - if logged_in? && can?(:edit_times, @score_list)
                   .pull-right
                     - if track == 1
                       = short_edit_link edit_score_list_run_path(@score_list, run: run), title: 'Zeiten bearbeiten', class: 'btn-xs'
@@ -23,13 +23,17 @@
   .col-md-3
     - if logged_in?
       = box('Aktionen') do
-        = block_link_to 'Reihenfolge bearbeiten', { action: :move }
-        = block_link_to 'Zeiten im Block eintragen', { action: :edit_times }
-        = block_link_to 'Teilnehmer hinzufügen', { action: :select_entity }, remote: true
+        - if can?(:edit, @score_list)
+          = block_link_to 'Reihenfolge bearbeiten', { action: :move }
+        - if can?(:edit_times, @score_list)
+          = block_link_to 'Zeiten im Block eintragen', { action: :edit_times }
+        - if can?(:edit, @score_list)
+          = block_link_to 'Teilnehmer hinzufügen', { action: :select_entity }, remote: true
 
-      = box('Allgemein') do
-        = block_link_to 'Bearbeiten', { action: :edit }
-        = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }
+      - if can?(:edit, @score_list)
+        = box('Allgemein') do
+          = block_link_to 'Bearbeiten', { action: :edit }
+          = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }
 
       = box('Ausgabe') do
         = block_link_to('PDF (Drucken)', format: :pdf)

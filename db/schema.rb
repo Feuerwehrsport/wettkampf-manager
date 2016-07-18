@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712182234) do
+ActiveRecord::Schema.define(version: 20160717192830) do
 
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
@@ -377,11 +377,24 @@ ActiveRecord::Schema.define(version: 20160712182234) do
   add_index "teams", ["federal_state_id"], name: "index_teams_on_federal_state_id"
   add_index "teams", ["fire_sport_statistics_team_id"], name: "index_teams_on_fire_sport_statistics_team_id"
 
+  create_table "user_assessment_abilities", force: :cascade do |t|
+    t.integer  "user_id",       null: false
+    t.integer  "assessment_id", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "user_assessment_abilities", ["assessment_id"], name: "index_user_assessment_abilities_on_assessment_id"
+  add_index "user_assessment_abilities", ["user_id"], name: "index_user_assessment_abilities_on_user_id"
+
   create_table "users", force: :cascade do |t|
     t.string   "password_hash"
     t.string   "password_salt"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "name",          null: false
   end
+
+  add_index "users", ["name"], name: "index_users_on_name", unique: true
 
 end

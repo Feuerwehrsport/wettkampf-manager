@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get :flyer, to: 'dashboard#flyer'
   get :impressum, to: 'dashboard#impressum'
   resources :sessions, only: [:create]
-  resource :users, only: [:edit, :update]
+  resources :users
 
   resources :presets, only: [:index, :show, :update]
   resource :competitions, only: [:show, :edit, :update]

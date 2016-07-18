@@ -1,7 +1,7 @@
 .row
   .col-md-8
     = box 'Startlisten' do |box|
-      - if logged_in?
+      - if admin_logged_in?
         - box.header do
           .pull-right
             = btn_link_to "Hinzufügen", action: :new, controller: 'score/list_factories'
@@ -14,12 +14,15 @@
               = list.name
             %td
               = btn_link_to "Ansehen", list
+              - if logged_in? && can?(:edit_times, list)
+              - else
+                %span.glyphicon.glyphicon-ban-circle
 
-      - if logged_in?
+      - if admin_logged_in?
         - box.footer do
           = btn_link_to "Hinzufügen", action: :new, controller: 'score/list_factories'
 
-  - if logged_in? && @list_factory.present?
+  - if admin_logged_in? && @list_factory.present?
     .col-md-4
       = box 'Erstellungsvorgang' do |box|
         = block_link_to "Weiter mit Schritt #{@list_factory.current_step_number + 1}", edit_score_list_factories_path

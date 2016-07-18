@@ -1,9 +1,11 @@
 class SessionsController < ApplicationController
   def new
+    @user_names = User.all.pluck(:name)
   end
 
   def create
-    user = User.authenticate(user_params[:password])
+    @user_names = User.all.pluck(:name)
+    user = User.authenticate(user_params[:name], user_params[:password])
     if user
       session[:user_id] = user.id
       redirect_to root_url, notice: 'Anmeldung erfolgreich'
@@ -19,6 +21,6 @@ class SessionsController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:password)
+    params.require(:user).permit(:name, :password)
   end
 end

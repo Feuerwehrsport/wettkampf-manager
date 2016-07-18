@@ -21,13 +21,19 @@ module Helpers::MenuHelper
   end
 
   def admin_menu_items
-    [
-      MenuItem.new("Disziplinen", '/disciplines'),
-      MenuItem.new("Wertungen", '/assessments'),
-      MenuItem.new("Urkunden", '/certificates/templates'),
-      MenuItem.new("Wettkampf", '/competitions', :edit),
-      MenuItem.new("Passwort", '/users', :edit),
-      MenuItem.new("Abmelden", '/sessions', :destroy),
-    ]
+    if admin_logged_in?
+      [
+        MenuItem.new("Disziplinen", '/disciplines'),
+        MenuItem.new("Wertungen", '/assessments'),
+        MenuItem.new("Urkunden", '/certificates/templates'),
+        MenuItem.new("Wettkampf", '/competitions', :edit),
+        MenuItem.new('Benutzer', '/users'),
+        MenuItem.new("Abmelden", '/sessions', :destroy),
+      ]
+    else
+      [
+        MenuItem.new("Abmelden", '/sessions', :destroy),
+      ]
+    end
   end
 end

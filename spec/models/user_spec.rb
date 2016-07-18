@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
       end
     end
     context "when user exists" do
-      let!(:user) { u = User.new ; u.save!(validate: false) ; u }
+      let!(:user) { u = User.new(name: 'admin') ; u.save!(validate: false) ; u }
 
       context "when user is not configured" do
         it "returns false" do
@@ -29,20 +29,20 @@ RSpec.describe User, type: :model do
   describe '.authenticate' do
     let!(:user) { create(:user) }
     it "returns authenticated user or nil" do
-      expect(User.authenticate("a")).to eq user
-      expect(User.authenticate("b")).to be_nil
+      expect(User.authenticate('admin', 'a')).to eq user
+      expect(User.authenticate('admin', 'b')).to be_nil
     end
   end
 
   describe 'password' do
     let!(:user) { create(:user) }
     it "does not show password" do
-      user = User.authenticate("a")
+      user = User.authenticate('admin', 'a')
       expect(user.password).to be_nil
       expect(user.password_salt).to_not be_nil
-      expect(user.password_salt).to_not eq "a"
+      expect(user.password_salt).to_not eq 'a'
       expect(user.password_hash).to_not be_nil
-      expect(user.password_hash).to_not eq "a"
+      expect(user.password_hash).to_not eq 'a'
     end
   end
 end

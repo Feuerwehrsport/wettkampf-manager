@@ -1,0 +1,16 @@
+.row
+  .col-md-12
+    = box 'Benutzer' do |box|
+      %table.table
+        %tr
+          %th Benutzername
+          %th
+        - @users.each do |user|
+          %tr
+            %td= user
+            %td.text-right
+              = btn_link_to 'Bearbeiten', { action: :edit, id: user }
+              - if !user.admin?
+                = btn_link_to "Löschen", { action: :destroy, id: user }, method: :delete, data: { confirm: 'Benutzer wirklich löschen?' }
+      - box.footer do
+        = btn_link_to 'Hinzufügen', { action: :new }

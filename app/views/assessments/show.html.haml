@@ -12,7 +12,7 @@
           %th= @assessment.class.human_attribute_name :gender
           %td= t("gender.#{@assessment.gender}")
 
-  - if logged_in?
+  - if admin_logged_in?
     .col-md-4
       = box("Aktionen") do
         = block_link_to "Bearbeiten", { action: :edit }

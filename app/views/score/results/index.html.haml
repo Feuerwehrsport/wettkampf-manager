@@ -3,6 +3,6 @@
     = box Score::Result.model_name.human do |box|
       = render 'index_table', score_results: @score_results
                
-      - if logged_in?
+      - if admin_logged_in?
         - box.footer do
           = btn_link_to "Hinzufügen", { action: :new }

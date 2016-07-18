@@ -1,6 +1,7 @@
 = simple_form_for User.new, url: sessions_path do |f|
-  = box "Anmeldung im System" do |box|
+  = box 'Anmeldung im System' do |box|
     = f.error_notification
+    = f.input :name, collection: @user_names, selected: @user_names.first
     = f.input :password
     - box.footer do
       = cancel_link(root_path)

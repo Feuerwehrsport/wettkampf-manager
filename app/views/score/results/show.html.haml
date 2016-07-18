@@ -42,7 +42,7 @@
           %tr
             %th Cup-Serie Mannschaftswertung
             %td= link_to(@score_result.series_team_assessment.to_label, series_round_path(@score_result.series_team_assessment.round))
-  - if logged_in?
+  - if admin_logged_in?
     .col-md-4
       = box("Aktionen") do
         = block_link_to "Bearbeiten", action: :edit

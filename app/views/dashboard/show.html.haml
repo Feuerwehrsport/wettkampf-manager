@@ -17,11 +17,11 @@
             %th Angemeldete Mannschaften
             %th= Team.female.count
             %th= Team.male.count
-  - if logged_in?
+  - if admin_logged_in?
     .col-md-5
       = box "Konfigurieren" do |box|
         = block_link_to "Wettkampf", edit_competitions_path
-        = block_link_to "Passwort", edit_users_path
+        = block_link_to "Passwort", edit_user_path(User.first)
         - if Imports::Configuration.possible?
           = block_link_to "Import von Feuerwehrsport-Statistik.de", imports_configurations_path
       = box "Aktionen" do |box|
@@ -30,9 +30,9 @@
   .col-md-5
     = box link_to(hostname_url, hostname_url) do
       = image_tag qrcode(hostname_url)
-      - if logged_in?
+      - if admin_logged_in?
         = block_link_to("Flyer anzeigen", format: :pdf, action: :flyer)
-      - else logged_in?
+      - elsif !logged_in?
         = block_link_to("Anmelden", login_path)
 
   .col-md-6

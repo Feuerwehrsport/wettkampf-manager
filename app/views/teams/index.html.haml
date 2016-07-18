@@ -1,7 +1,7 @@
 .row
   .col-md-12
     = box Team.model_name.human(count: 0) do |box|
-      - if logged_in?
+      - if admin_logged_in?
         - box.header do
           .pull-right
             = link_to "Hinzufügen", { action: :new }, class: "btn btn-sm btn-info"
@@ -20,5 +20,5 @@
       - box.footer do
         = btn_link_to "als PDF", format: :pdf
         = btn_link_to "als XLS", format: :xlsx
-        - if logged_in?
+        - if admin_logged_in?
           = link_to "Hinzufügen", { action: :new }, class: "btn btn-sm btn-info"

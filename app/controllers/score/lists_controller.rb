@@ -13,6 +13,7 @@ class Score::ListsController < ApplicationController
   end
 
   def edit_times
+    authorize!(:edit_times, resource_instance)
   end
 
   protected

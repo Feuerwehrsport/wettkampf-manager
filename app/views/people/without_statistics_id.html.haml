@@ -1,4 +1,4 @@
-- if logged_in?
+- if admin_logged_in?
   .row
     .col-md-12.refreshable#without-statistics-id-index
       = box Person.model_name.human count: 0 do |box|

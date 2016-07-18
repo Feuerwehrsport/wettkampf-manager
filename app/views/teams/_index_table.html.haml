@@ -12,7 +12,7 @@
         %em.small= team.federal_state.try(:shortcut)
       %td
         = team.people.count
-        - if logged_in?
+        - if admin_logged_in?
           - unless team.list_entries_group_competitor_valid?
             %span.glyphicon.glyphicon-remove{ title: "Mannschaftswertung nicht korrekt"}
       - @tags.each do |tag|

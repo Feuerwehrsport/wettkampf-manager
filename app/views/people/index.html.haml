@@ -1,7 +1,7 @@
 .row
   .col-md-12.refreshable#people-index
     = box Person.model_name.human count: 0 do |box|
-      - if logged_in?
+      - if admin_logged_in?
         - box.header do
           .pull-right
             = link_to "Hinzufügen", new_person_path, class: "btn btn-sm btn-info", remote: true
@@ -21,5 +21,5 @@
       - box.footer do
         = btn_link_to "als PDF", format: :pdf
         = btn_link_to "als XLS", format: :xlsx
-        - if logged_in?
+        - if admin_logged_in?
           = link_to "Hinzufügen", { action: :new }, class: "btn btn-sm btn-info", remote: true
