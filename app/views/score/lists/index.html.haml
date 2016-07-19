@@ -14,8 +14,7 @@
               = list.name
             %td
               = btn_link_to "Ansehen", list
-              - if logged_in? && can?(:edit_times, list)
-              - else
+              - if logged_in? && !can?(:edit_times, list)
                 %span.glyphicon.glyphicon-ban-circle
 
       - if admin_logged_in?
