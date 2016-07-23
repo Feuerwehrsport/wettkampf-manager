@@ -1,5 +1,5 @@
 module Score::CompetitionResultsHelper
-  def table_data(competition_result, shortcut)
+  def table_data(competition_result)
     header = ['Platz', 'Mannschaft']
     competition_result.results.each do |result|
       header.push(result.assessment.discipline.to_short)
@@ -10,7 +10,7 @@ module Score::CompetitionResultsHelper
 
     all_rows = competition_result.rows
     all_rows.each do |row|
-      team = shortcut ? row.team.shortcut_name : row.team.to_s
+      team = row.team.to_s
 
       current = ["#{place_for_row(row, all_rows)}.", team]
       competition_result.results.each do |result|

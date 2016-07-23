@@ -1,19 +1,19 @@
 %h3= competition_result
 %table.table.table-bordered.competition-results
   %tr
-    %th.sum-points Platz
+    %th.small.sum-points Platz
     %th Mannschaft
     - competition_result.results.each do |result|
       %th.assessment{colspan: 2}
         = discipline_image result.assessment.discipline
         = result.assessment.discipline.to_short
-    %th.sum-points Punkte
+    %th.small.sum-points Punkte
   - competition_result.rows.each do |row|
     %tr
       %td.sum-points= "#{place_for_row(row, competition_result.rows)}."
       %td= row.team.shortcut_name
       - competition_result.results.each do |result|
         - assessment_result = row.assessment_result_from(result.assessment)
-        %td.time= assessment_result.try(:result_entry).try(:decorate)
-        %td.points= assessment_result.try(:points)
+        %td.small.time= assessment_result.try(:result_entry).try(:decorate)
+        %td.small.points= assessment_result.try(:points)
       %td.sum-points= row.points
