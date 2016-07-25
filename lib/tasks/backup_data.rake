@@ -8,7 +8,6 @@ task :backup_data, [:path, :verbose] => :environment do |task, args|
   backup.download("/people", "people")
   backup.download("/teams", "teams")
   backup.cp('db/*.sqlite3')
-  backup.cp('log/*.log')
 end
 
 
