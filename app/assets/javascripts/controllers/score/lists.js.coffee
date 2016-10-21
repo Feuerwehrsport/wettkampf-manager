@@ -65,6 +65,21 @@ bindSortedTable = () ->
     placeholder: $('.sorted_table tr.placeholder').remove().removeClass('hide')
   ).on 'sortupdate', recalculateRuns
 
+  $('.sorted_table tbody tr').each ->
+    tr = $(@)
+    down = $('<div class="btn btn-default btn-xs" title="Ganz nach unten">↡</div>').click ->
+      last = tr.parent().find('tr:last')
+      unless last.is(tr)
+        tr.insertAfter(last)
+        recalculateRuns()
+    up = $('<div class="btn btn-default btn-xs" title="Ganz nach oben">↟</div>').click ->
+      first = tr.parent().find('tr:first')
+      unless first.is(tr)
+        tr.insertBefore(first)
+        recalculateRuns()
+    $('<td/>').append(down).append(up).appendTo(tr)
+
+
 $ () ->
   bindSortedTable()
   $(document).on('partials-refreshed', bindSortedTable)
