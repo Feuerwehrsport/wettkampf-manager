@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0'
+gem 'rails', '~> 4.2.0'
 
 # authentication
 gem 'cancancan'
 
 # Use HAML for views
-gem 'haml-rails', '~> 0.8'
+gem 'haml-rails'
 # Use SimpleForm for Forms
 gem 'simple_form'
 gem 'cocoon' # nested_form helper
@@ -18,14 +18,14 @@ gem 'draper'
 gem 'carrierwave'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
-gem 'coffee-script-source', '1.8.0'
+gem 'coffee-rails'
+gem 'coffee-script-source'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -41,11 +41,10 @@ gem 'prawn-qrcode'
 # for windows time zones
 gem 'tzinfo-data'
 
-# hold versions for windows binaries
-gem 'nokogiri', '1.6.6.2'
-gem 'json', '1.8.2'
-gem 'bcrypt', '3.1.10'
-gem 'sqlite3', '1.3.10'
+gem 'nokogiri'
+gem 'json'
+gem 'bcrypt'
+gem 'sqlite3'
 
 group :development do
   gem 'guard-rspec'
@@ -55,7 +54,8 @@ end
 
 group :development, :test do
 
-  gem 'pry-debugger'
+  gem 'pry'
+  gem 'pry-byebug'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -69,6 +69,6 @@ group :test do
   gem 'connection_pool'
   gem 'capybara'
   gem 'poltergeist'
-  gem 'factory_girl_rails', '~> 4.0'
+  gem 'factory_girl_rails'
 end
 

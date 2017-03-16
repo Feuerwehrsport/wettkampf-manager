@@ -112,7 +112,7 @@ RSpec.configure do |config|
     end
 
     config.before(:each) do 
-      allow(Competition).to receive(:one).and_return(build_stubbed(:competition))
+      allow(Competition).to receive(:one).and_return(create(:competition))
     end
 
     config.before(type: :feature) do
