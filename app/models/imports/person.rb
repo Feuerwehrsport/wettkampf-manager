@@ -1,6 +1,18 @@
 class Imports::Person < Struct.new(:configuration, :data)
   def import
     team = configuration.teams.find { |team| team.foreign_key == data[:team_id] }.try(:competition_team)
+
+    if team.blank? && data[:team_name].present?
+      team = ::Team.create_with(
+        disable_autocreate_assessment_requests: true,
+        shortcut: data[:team_name].first(12),
+        number: 1,
+      ).find_or_create_by!(
+        name: data[:team_name], 
+        gender: Genderable::GENDERS[data[:gender].to_sym], 
+      )
+    end
+
     fssp = FireSportStatistics::Person.find_by(id: data[:statitics_person_id])
     @person = ::Person.create!(last_name: data[:last_name], first_name: data[:first_name], gender: data[:gender], team: team, fire_sport_statistics_person: fssp)
     data[:tag_names].each do |tag_name|
