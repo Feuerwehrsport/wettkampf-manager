@@ -11,15 +11,7 @@ de:
     error_notification:
       default_message: "Bitte prüfen Sie die folgenden Felder:"
     options:
-      assessment:
-        gender:
-          male: Männer
-          female: Frauen
-      person:
-        gender:
-          male: Männer
-          female: Frauen
-      team:
+      defaults:
         gender:
           male: Männer
           female: Frauen

@@ -38,6 +38,7 @@ de:
       score/list_factories/lottery_number: Losnummernreihenfolge beachten
       score/list_factories/track_change: Bahnwechsel
       score/list_factories/track_same: Bahn behalten
+      score/list_factories/track_genderable: Bahn geschlechtsabhängig
       score/result: Ergebnisse
       score/run: Lauf
       team:
@@ -82,6 +83,8 @@ de:
         name: Name
         shortcut: Abkürzung
         track_count: Wettkampfbahnen
+        track: Wettkampfbahn
+        gender: Geschlecht
         results: Ergebnislisten
         type: Listenerstellung
         before_list: Vorherige Liste
@@ -101,6 +104,8 @@ de:
         description: Die Bahn wird gegenüber einer vorherigen Liste getauscht.
       score/list_factories/track_same:
         description: Die Bahn wird gegenüber einer vorherigen Liste behalten.
+      score/list_factories/track_genderable:
+        description: Eine Bahn kann geschlechtsabhängig definiert werden.
       score/list:
         assessments: Wertungsgruppen
         name: Name

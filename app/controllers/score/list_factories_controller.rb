@@ -47,7 +47,7 @@ class Score::ListFactoriesController < ApplicationController
 
   def score_list_factory_params
     params.require(:score_list_factory).permit(:discipline_id, :next_step, :name, :shortcut, :track_count, 
-      :type, :before_result_id, :before_list_id, :best_count,
+      :type, :before_result_id, :before_list_id, :best_count, :track, :gender,
       result_ids: [], assessment_ids: [])
   end
 end

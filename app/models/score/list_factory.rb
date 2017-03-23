@@ -1,5 +1,6 @@
 class Score::ListFactory < CacheDependendRecord
   include Score::ListFactoryDefaults
+  include Genderable
 
   STEPS = %i(discipline assessments names tracks results generator generator_params finish create)
   GENERATORS = [
@@ -10,6 +11,7 @@ class Score::ListFactory < CacheDependendRecord
     Score::ListFactories::FireRelay,
     Score::ListFactories::TrackChange,
     Score::ListFactories::TrackSame,
+    Score::ListFactories::TrackGenderable,
   ]
 
   belongs_to :discipline
@@ -118,13 +120,14 @@ class Score::ListFactory < CacheDependendRecord
     @list ||= Score::List.create!(name: name, shortcut: shortcut, assessments: assessments, results: results, track_count: track_count)
   end
 
-  def for_run_and_track_for rows
+  def for_run_and_track_for rows, tracks=nil
+    tracks = (1..list.track_count) if tracks.nil?
     rows = rows.dup
     run = 0
     transaction do
       while true
         run += 1
-        for track in (1..list.track_count)
+        for track in tracks
           row = rows.shift
           return if row.nil?
           create_list_entry(row, run, track)

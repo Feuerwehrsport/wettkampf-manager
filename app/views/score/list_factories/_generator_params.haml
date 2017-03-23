@@ -5,6 +5,10 @@
   = f.association :before_result, collection: @score_list_factory.possible_before_results, selected: @score_list_factory.default_before_result.try(:id)
 - if :best_count.in? @score_list_factory.object.class.generator_params
   = f.input :best_count, input_html: { value: @score_list_factory.default_best_count }
+- if :track.in? @score_list_factory.object.class.generator_params
+  = f.input :track, collection: (1..@score_list_factory.object.track_count)
+- if :gender.in? @score_list_factory.object.class.generator_params
+  = f.input :gender, collection: [:male, :female]
 
 
 %table.table.table-condensed
