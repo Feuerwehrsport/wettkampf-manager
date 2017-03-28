@@ -10,7 +10,7 @@ Team.all.each do |t|
   p t
   (1..8).each do |i|
     person = Person.create!(team: t, last_name: Faker::Name.last_name , first_name: "#{Faker::Name.first_name} #{i}", gender: t.gender, bib_number: "#{tcount}#{i}")
-    person.tags.push(youth_tag) if [0, 1, 1, 1].shuffle.first == 0
+    person.tags.push(youth_tag) if [0, 1, 1, 1].sample == 0
     person.save!
     Assessment.requestable_for(person).each do |assessment|
       person.requests.create(assessment: assessment)

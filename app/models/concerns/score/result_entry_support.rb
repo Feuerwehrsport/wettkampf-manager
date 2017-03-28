@@ -10,7 +10,7 @@ module Score::ResultEntrySupport
   end
 
   def edit_second_time
-    second_time.gsub(',', '.')
+    second_time.tr(',', '.')
   end
 
   def edit_second_time=(new_second_time)

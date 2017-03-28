@@ -4,7 +4,7 @@ module FireSportStatistics
       def self.fetch(type)
         json_object = new.get(type)
         begin
-          json_object.fetch(type.to_s.gsub("/","_")).map { |e| OpenStruct.new e }
+          json_object.fetch(type.to_s.tr('/', '_')).map { |e| OpenStruct.new e }
         rescue KeyError => e
           raise e, OpenStruct.new(
             message: e.message,
