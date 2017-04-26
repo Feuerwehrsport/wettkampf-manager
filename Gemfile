@@ -49,6 +49,7 @@ gem 'sqlite3'
 # for rs232
 gem 'rubyserial'
 gem 'highline'
+gem 'ffi', '1.9.6'
 
 group :development do
   gem 'guard-rspec'
