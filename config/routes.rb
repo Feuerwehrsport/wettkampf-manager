@@ -69,5 +69,13 @@ Rails.application.routes.draw do
     resources :rounds, only: [:index, :show]
     resources :assessments, only: [:show]
   end
+
+  namespace :api do
+    resources :time_entries, only: [:index, :show, :edit, :update, :create] do
+      member do
+        patch :ignore
+      end
+    end
+  end
 end
 

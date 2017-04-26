@@ -1,0 +1,19 @@
+.row
+  .col-md-4
+    = box 'Zeiteintrag', class: 'panel-info' do |box|      
+      %table.table
+        %tr
+          %th Sender
+          %td= @api_time_entry.sender
+        %tr
+          %th Hinweis
+          %td= @api_time_entry.hint
+        %tr
+          %th Zeit
+          %td= "#{@api_time_entry.second_time} s"
+        %tr
+          %th Erstellt
+          %td= l @api_time_entry.created_at
+      = btn_link_to 'Übersicht', action: :index
+  .col-md-8
+    = render 'form'

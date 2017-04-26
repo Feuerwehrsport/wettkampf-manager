@@ -1,0 +1,47 @@
+#time-entries-refreshable.refreshable
+  = box 'Zeiteinträge' do |box|
+    - if @waiting_time_entries.present?
+      %table.table
+        %tr
+          %th Sender
+          %th Hinweis
+          %th Zeit
+          %th
+        - @waiting_time_entries.each do |entry|
+          %tr
+            %td= entry.sender
+            %td= entry.hint
+            %td= entry.second_time
+            %td
+              = link_to entry, class: 'btn btn-default btn-sm' do
+                %span.glyphicon.glyphicon-pushpin
+                Zuordnen
+              = link_to ignore_api_time_entry_path(entry), method: :patch, class: 'btn btn-default btn-sm', data: { confirm: "Eintrag #{entry.second_time} wirklich ignorieren?" } do
+                %span.glyphicon.glyphicon-ban-circle
+                Ignorieren
+    - else
+      .alert.alert-info
+        Derzeit keine Einträge vorhanden
+    - box.footer do
+      = btn_link_to 'Aktualisieren', url_for
+
+  - if @closed_time_entries.present?
+    = box 'Zugeordnete Zeiteinträge' do |box|
+      %table.table
+        %tr
+          %th Sender
+          %th Hinweis
+          %th Zeit
+          %th Erstellt
+          %th
+        - @closed_time_entries.each do |entry|
+          %tr
+            %td= entry.sender
+            %td= entry.hint
+            %td= entry.second_time
+            %td= l entry.created_at
+            %td
+              - if entry.score_list_entry.present?
+                = entry.score_list_entry.overview
+              - else
+                Ignoriert

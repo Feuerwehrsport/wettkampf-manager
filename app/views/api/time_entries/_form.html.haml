@@ -1,0 +1,14 @@
+= simple_form_for @api_time_entry do |f|
+  = hidden_field_tag :score_list_entry_id, params[:score_list_entry_id]
+  = box Person.model_name.human do |box|
+
+    = f.error_notification
+    = f.fields_for :score_list_entry do |fle|
+      %table.table
+        = render 'score/lists/list_headline', times: true
+        %tbody
+          = render layout: 'score/lists/list_entry', locals: { entry: @list_entry, run: @list_entry.run, track: @list_entry.track } do
+            = render 'score/runs/edit_time', entry: @list_entry, f: fle, fields_for: :entries
+    - box.footer do
+      = cancel_link
+      = f.primary_button :submit, "Speichern"

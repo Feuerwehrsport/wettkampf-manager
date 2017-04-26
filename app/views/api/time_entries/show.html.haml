@@ -1,0 +1,57 @@
+.row
+  .col-md-4
+    = box 'Zeiteintrag', class: 'panel-info' do |box|      
+      %table.table
+        %tr
+          %th Sender
+          %td= @api_time_entry.sender
+        %tr
+          %th Hinweis
+          %td= @api_time_entry.hint
+        %tr
+          %th Zeit
+          %td= "#{@api_time_entry.second_time} s"
+        %tr
+          %th Erstellt
+          %td= l @api_time_entry.created_at
+      = btn_link_to 'Übersicht', action: :index
+  .col-md-8
+    = box 'Zeiteintrag zuordnen' do |box|
+      %ul
+      - @lists.each do |list|
+        %li.waiting-score-list
+          .btn.btn-default.waiting-score-list-switch{ class: "list-#{list.id}" }= list
+          %table.table
+            %tr
+              %th Lauf
+              %th Bahn
+              - if list.assessments.first.discipline.single_discipline?
+                - if Competition.one.show_bib_numbers?
+                  %th Startnr.
+                %th Nachname
+                %th Vorname
+                %th Team
+              - else
+                %th
+                  Name
+              %th
+
+
+            - list.waiting_entries.each do |entry|
+              %tr
+                %td= entry.run
+                %th= entry.track
+                - if list.assessments.first.discipline.single_discipline?
+                  - if Competition.one.show_bib_numbers?
+                    %td= entry.try(:entity).try(:bib_number)
+                  %td= entry.try(:entity).try(:last_name).to_s.truncate(20)
+                  %td= entry.try(:entity).try(:first_name).to_s.truncate(20)
+                  %td= entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)).to_s.truncate(20)
+                - else
+                  %td
+                    = entry.try(:entity).try(:to_s, list.assessments.count > 1)
+                    - if list.assessments.count > 1
+                      %br
+                      .tiny= entry.try(:assessment).try(:decorate)
+                %td
+                  = btn_link_to('Zeit zuordnen', action: :edit, score_list_entry_id: entry.id)

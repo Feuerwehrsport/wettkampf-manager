@@ -46,6 +46,10 @@ gem 'json'
 gem 'bcrypt'
 gem 'sqlite3'
 
+# for rs232
+gem 'rubyserial'
+gem 'highline'
+
 group :development do
   gem 'guard-rspec'
   gem 'rubocop', require: false

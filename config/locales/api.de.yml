@@ -1,0 +1,13 @@
+de:
+  activerecord: &activerecord
+    models:
+      api/time_entry: 
+        one: API-Zeiteintrag
+        other: API-Zeiteinträge
+    attributes:
+      api/time_entry: 
+        sender: Sender
+
+  activemodel:
+    <<: *activerecord
+

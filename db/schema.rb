@@ -13,6 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20170323131100) do
 
+  create_table "api_time_entries", force: :cascade do |t|
+    t.integer  "time",                null: false
+    t.string   "hint"
+    t.string   "sender"
+    t.datetime "used_at"
+    t.integer  "score_list_entry_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
   create_table "assessment_requests", force: :cascade do |t|
     t.integer  "assessment_id",                       null: false
     t.integer  "entity_id",                           null: false
