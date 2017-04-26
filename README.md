@@ -1,7 +1,7 @@
 # wettkampf-manager
 Wettkampf-Manager für Wettkämpfe im Feuerwehrsport
 
-[![Build Status](https://travis-ci.org/Feuerwehrsport/wettkampf-manager.svg?branch=master)](https://travis-ci.org/Feuerwehrsport/wettkampf-manager)
+[![Build Status](https://travis-ci.org/Feuerwehrsport/wettkampf-manager.svg?branch=release)](https://travis-ci.org/Feuerwehrsport/wettkampf-manager)
 [![Code Climate](https://codeclimate.com/github/Feuerwehrsport/wettkampf-manager/badges/gpa.svg)](https://codeclimate.com/github/Feuerwehrsport/wettkampf-manager)
 
 Die Software steht unter der GNU Affero General Public License version 3.
