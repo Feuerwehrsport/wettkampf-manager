@@ -17,11 +17,7 @@ module CRUD::IndexAction
   protected
 
   def scope_index_collection
-    if params[:index_scope] && collection_instance.respond_to?(params[:index_scope])
-      self.collection_instance = collection_instance.send(params[:index_scope])
-    else
-      self.collection_instance = default_index_scope
-    end
+    self.collection_instance = default_index_scope
   end
 
   def default_index_scope
