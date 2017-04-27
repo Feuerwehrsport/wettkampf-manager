@@ -16,7 +16,7 @@ class API::Runner
     serial_connection = cli.ask('Angeschlossene Schnittstelle? ') { |q| q.default = (os == :posix) ? '/dev/ttyUSB0' : 'COM0' }
     cli.say("\n")
 
-    serial_connection = cli.ask('Angezeigter Sender? ') { |q| q.default = klass::DEFAULT_SENDER }
+    sender = cli.ask('Angezeigter Sender? ') { |q| q.default = klass::DEFAULT_SENDER }
     cli.say("\n")
 
     url = cli.ask('URL zu Wettkampf-Manager? ') { |q| q.default = 'http://localhost:3000' }
@@ -25,7 +25,7 @@ class API::Runner
     password = cli.ask('Admin-Passwort für Wettkampf-Manager:  ') { |q| q.echo = '*' }
     cli.say("\n")
 
-    klass.start_with_check(url: url, password: password, serial_connection: serial_connection, cli: cli)
+    klass.start_with_check(url: url, password: password, serial_connection: serial_connection, cli: cli, sender: sender)
   end
 
   def cli
