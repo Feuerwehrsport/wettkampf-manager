@@ -75,7 +75,7 @@ module FireSportStatistics
             series_assessments[assessment.id.to_i] = Series::Assessment.create!(
               id: assessment.id,
               name: assessment.name,
-              discipline: assessment.discipline,
+              discipline: assessment.discipline.to_sym == :hw ? :hb : assessment.discipline,
               round: series_rounds[assessment.round_id.to_i],
               gender: assessment.gender,
               type: assessment.type,
