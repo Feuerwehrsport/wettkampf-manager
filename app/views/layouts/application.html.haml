@@ -5,7 +5,7 @@
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
-    = javascript_include_tag "controllers/#{controller_path}" if ::Sprockets::Railtie.build_environment(Rails.application).find_asset("controllers/#{controller_path}.js").present?
+    = javascript_include_tag "controllers/#{controller_path}" if asset_exists?("controllers/#{controller_path}.js")
     = csrf_meta_tag
     %title= @page_title || t('application.name')
   %body

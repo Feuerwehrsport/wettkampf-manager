@@ -10,6 +10,14 @@ module ApplicationHelper
     lookup_context.template_exists?(partial_path, controller._prefixes, true)
   end
 
+  def asset_exists?(asset_path)
+    if Rails.configuration.assets.compile
+      Rails.application.precompiled_assets.include?(asset_path)
+    else
+      Rails.application.assets_manifest.assets[asset_path].present?
+    end
+  end
+
   def page_title
     controller_path.classify.constantize.model_name.human
   end
