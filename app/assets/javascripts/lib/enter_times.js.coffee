@@ -24,7 +24,7 @@ $ () ->
     text = label.text()
     input.on('change keyup paste', () ->
       value = input.val()
-      if (!input[0].validity? || !input[0].validity.badInput) && (value.match(/^\d+[.,]\d{1,2}$/) || value.match(/^\s*$/))
+      if (!input[0].validity? || !input[0].validity.badInput) && (value.match(/^\d+([.,]\d{1,2})?$/) || value.match(/^\s*$/))
         label.text(text)
         tr.removeClass('danger')
       else
