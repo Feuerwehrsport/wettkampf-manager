@@ -1,3 +1,5 @@
+#= require lib/enter_times
+
 $ ->
   $('#time-entries-refreshable').each ->
     refresh = () ->
@@ -15,3 +17,5 @@ $ ->
   
   if result = window.location.hash.match(/^#list-(\d+)$/)
     $(".waiting-score-list-switch.list-#{result[1]}").trigger('click')
+  else
+    $('.discipline-matches .waiting-score-list-switch').trigger('click')

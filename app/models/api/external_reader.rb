@@ -5,7 +5,7 @@ class API::ExternalReader
   DEFAULT_SENDER = ''
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
-  attr_accessor :url, :password, :sender, :cli
+  attr_accessor :url, :password, :sender, :cli, :serial_connection
 
   def self.start_with_check(options)
     instance = new(options)
@@ -17,9 +17,22 @@ class API::ExternalReader
     end
   end
 
+  def perform
+    loop do
+      begin
+        evaluate_output(serial_adapter.read(10))
+        sleep 0.3
+      rescue RubySerial::Exception => error
+        return log_send_error("Schnittstelle: #{error.message}")
+      end
+    end
+  end
+
   def check
     send_data(0, 'System-Check')
   end
+
+  protected
 
   def log_raw(line)
     Rails.logger.info(line)
@@ -61,5 +74,18 @@ class API::ExternalReader
   def evaluate_with_log_line(line)
     log_start = evaluate_line(line) ? 'valid:  ' : 'invalid:'
     log_raw(log_start + ' ' + line)
+  end
+
+  def serial_adapter
+    @serial_adapter ||= Serial.new(serial_connection)
+  end
+
+  def evaluate_output(string)
+    @current_line ||= ''
+    @current_line += string
+    while result = @current_line.match(line_regexp)
+      evaluate_with_log_line(result[1])
+      @current_line = result[2]
+    end
   end
 end

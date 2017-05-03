@@ -1,25 +1,10 @@
 class API::TimyReader < API::ExternalReader
   DEFAULT_SENDER = 'Timy'
-  attr_accessor :serial_connection
 
-  def perform
-    loop do
-      begin
-        evaluate_output(serial_adapter.read(10))
-        sleep 0.3
-      rescue RubySerial::Exception => error
-        return log_send_error("Schnittstelle: #{error.message}")
-      end
-    end
-  end
+  protected
 
-  def evaluate_output(string)
-    @current_line ||= ''
-    @current_line += string
-    while result = @current_line.match(/\A([^\r]*\r)(.*)\z/)
-      evaluate_with_log_line(result[1])
-      @current_line = result[2]
-    end
+  def line_regexp
+    /\A([^\r]*\r)(.*)\z/
   end
 
   def evaluate_line(line)
@@ -38,17 +23,13 @@ class API::TimyReader < API::ExternalReader
           hours = result[1].to_i
           minutes = result[2].to_i
           seconds = result[3].to_i
-          milliseconds = result[4].to_i
-          time = milliseconds + seconds*100 + minutes*60*100 + hours*100*60*60
-          send_data(time, "Bahn #{track}: (#{channel} #{bib_number})")
+          centiseconds = result[4].to_i
+          time = centiseconds + seconds*100 + minutes*60*100 + hours*100*60*60
+          send_data(time, "Bahn #{track}")
           return true
         end
       end
     end
     false
-  end
-
-  def serial_adapter
-    @serial_adapter ||= Serial.new(serial_connection)
   end
 end

@@ -3,24 +3,24 @@
     = box 'Zeiteintrag', class: 'panel-info' do |box|      
       %table.table
         %tr
-          %th Sender
-          %td= @api_time_entry.sender
+          %th
+          %th= @api_time_entry.hint
         %tr
-          %th Hinweis
-          %td= @api_time_entry.hint
-        %tr
-          %th Zeit
+          %td Zeit
           %td= "#{@api_time_entry.second_time} s"
         %tr
-          %th Erstellt
+          %td Sender
+          %td= @api_time_entry.sender
+        %tr
+          %td Erstellt
           %td= l @api_time_entry.created_at
       = btn_link_to 'Übersicht', action: :index
   .col-md-8
     = box 'Zeiteintrag zuordnen' do |box|
-      %ul
       - @lists.each do |list|
-        %li.waiting-score-list
-          .btn.btn-default.waiting-score-list-switch{ class: "list-#{list.id}" }= list
+        .waiting-score-list{ class: list.discipline.to_s == @api_time_entry.sender ? 'discipline-matches' : '' }
+          %p
+            .btn.btn-default.waiting-score-list-switch{ class: "list-#{list.id}" }= list
           %table.table
             %tr
               %th Lauf
