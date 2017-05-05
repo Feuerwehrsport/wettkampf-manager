@@ -28,7 +28,7 @@ class Score::ResultsController < ApplicationController
 
   def score_result_params
     params.require(:score_result).permit(:name, :assessment_id, :group_assessment, :date,
-      :series_team_assessment_id, :series_person_assessment_id,
+      series_assessment_ids: [],
       tag_references_attributes: [:id, :tag_id, :_destroy]
     )
   end

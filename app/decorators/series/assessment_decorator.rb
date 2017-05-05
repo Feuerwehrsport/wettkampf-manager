@@ -11,4 +11,8 @@ class Series::AssessmentDecorator < ApplicationDecorator
   def rows
     object.rows.map(&:decorate)
   end
+
+  def score_result_label
+    "#{object.class.model_name.human}: #{to_label}"
+  end
 end

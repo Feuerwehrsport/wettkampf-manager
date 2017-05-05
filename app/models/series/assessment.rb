@@ -4,6 +4,8 @@ class Series::Assessment < ActiveRecord::Base
   belongs_to :round, class_name: 'Series::Round'
   has_many :cups, through: :round, class_name: 'Series::Cup'
   has_many :participations, class_name: 'Series::Participation'
+  has_many :assessment_results, class_name: 'Series::AssessmentResult', dependent: :destroy
+  has_many :score_results, through: :assessment_results
 
   scope :with_person, -> (person_id) { joins(:participations).where(series_participations: { person_id: person_id }).uniq }
   scope :round, -> (round_id) { where(round_id: round_id) }
@@ -41,7 +43,7 @@ class Series::Assessment < ActiveRecord::Base
       entities[participation.entity_id] ||= aggregate_class.new(participation.entity)
       entities[participation.entity_id].add_participation(participation)
     end
-    result = Score::Result.where(series_person_assessment: self).first
+    result = score_results.first
     if result.present?
       aggregate_class.convert_result_rows(Series::Cup.today_cup_for_round(round), result.rows).each do |row|
         entities[row.entity_id] ||= aggregate_class.new(row.entity)

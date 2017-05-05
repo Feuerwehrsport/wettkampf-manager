@@ -17,7 +17,7 @@ class Series::Round < ActiveRecord::Base
     joins(:participations).where(series_participations:  { team_id: team_id }).merge(Series::TeamAssessment.gender(gender)).uniq
   end
   scope :with_local_results, -> do
-    assessment_ids = Score::Result.pluck(:series_team_assessment_id) + Score::Result.pluck(:series_person_assessment_id)
+    assessment_ids = Series::AssessmentResult.select(:assessment_id)
     joins(:assessments).where(series_assessments: { id: assessment_ids })
   end
 
@@ -71,7 +71,7 @@ class Series::Round < ActiveRecord::Base
       teams[participation.entity_id].add_participation(participation)
     end
     assessments.gender(gender).each do |assessment|
-      result = Score::Result.where(series_team_assessment: assessment).first
+      result = assessment.score_results.first
       if result.present?
         rows =  result.discipline.single_discipline? ? Score::GroupResult.new(result).rows : result.group_result_rows
         aggregate_class.convert_result_rows(Series::Cup.today_cup_for_round(self), rows, assessment).each do |row|

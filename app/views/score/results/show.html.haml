@@ -33,12 +33,12 @@
                 %tr
                   %td= link_to list.name, score_list_path(list)
 
-        - if @score_result.series_person_assessment.present?
+        - if false && @score_result.series_person_assessment.present?
           %tr
             %th Cup-Serie Einzelwertung
             %td= link_to(@score_result.series_person_assessment.to_label, series_assessment_path(@score_result.series_person_assessment))
 
-        - if @score_result.series_team_assessment.present?
+        - if false && @score_result.series_team_assessment.present?
           %tr
             %th Cup-Serie Mannschaftswertung
             %td= link_to(@score_result.series_team_assessment.to_label, series_round_path(@score_result.series_team_assessment.round))

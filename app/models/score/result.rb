@@ -2,8 +2,8 @@ class Score::Result < CacheDependendRecord
   include Taggable
 
   belongs_to :assessment
-  belongs_to :series_team_assessment, class_name: "Series::TeamAssessment"
-  belongs_to :series_person_assessment, class_name: "Series::PersonAssessment"
+  has_many :series_assessment_results, class_name: 'Series::AssessmentResult', dependent: :destroy, foreign_key: :score_result_id
+  has_many :series_assessments, through: :series_assessment_results, source: :assessment, class_name: 'Series::Assessment'
   belongs_to :double_event_result, dependent: :destroy, class_name: 'Score::DoubleEventResult'
   has_many :result_lists, dependent: :destroy
   has_many :lists, through: :result_lists
@@ -20,12 +20,8 @@ class Score::Result < CacheDependendRecord
     decorate.to_s
   end
 
-  def possible_team_assessments
-    Series::TeamAssessment.gender(assessment.gender).where(discipline: assessment.discipline.key)
-  end
-
-  def possible_person_assessments
-    Series::PersonAssessment.gender(assessment.gender).where(discipline: assessment.discipline.key)
+  def possible_series_assessments
+    Series::Assessment.gender(assessment.gender).where(discipline: assessment.discipline.key)
   end
 
   def rows

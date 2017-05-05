@@ -27,11 +27,11 @@ class Presets::MvCupSingle < Preset
 
       hb_assessment = Assessment.create!(discipline: hb, gender: gender)
       hb_result = Score::Result.create!(assessment: hb_assessment, double_event_result: zk_result)
-      hb_result.update!(series_person_assessment: hb_result.possible_person_assessments.year(Date.today.year).round_name('MV-Hinderniscup').first)
+      hb_result.update!(series_assessments: [hb_result.possible_series_assessments.year(Date.today.year).round_name('MV-Hinderniscup').first].compact)
 
       hl_assessment = Assessment.create!(discipline: hl, gender: gender)
       hl_result = Score::Result.create!(assessment: hl_assessment, double_event_result: zk_result)
-      hl_result.update!(series_person_assessment: hb_result.possible_person_assessments.year(Date.today.year).round_name('MV-Steigercup').first)
+      hl_result.update!(series_assessments: [hb_result.possible_series_assessments.year(Date.today.year).round_name('MV-Steigercup').first].compact)
     end
   end
 end

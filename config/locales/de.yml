@@ -41,6 +41,8 @@ de:
       score/list_factories/track_genderable: Bahn geschlechtsabhängig
       score/result: Ergebnisse
       score/run: Lauf
+      series/team_assessment: Mannschaftswertung
+      series/person_assessment: Einzelwertung
       team:
         one: Mannschaft
         other: Mannschaften
@@ -127,6 +129,7 @@ de:
         name: Name
         results: Ergebnislisten
         date: Datum
+        series_assessments: Wertungen
       team:
         gender: Geschlecht
         name: Name

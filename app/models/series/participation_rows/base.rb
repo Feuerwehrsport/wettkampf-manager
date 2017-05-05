@@ -25,15 +25,28 @@ class Series::ParticipationRows::Base < Struct.new(:entity)
     end
 
     result_rows.each do |row|
-      participations.push(Series::PersonParticipation.new(
-        cup: cup,
-        person: row.entity.fire_sport_statistics_person_with_dummy,
-        time: row.result_entry.time.to_i || 99999999,
-        points: points_for_rank(row, ranks),
-        rank: ranks[row],
-      ))
+      participations.push(
+        Series::PersonParticipation.new(person_participation_attributes(
+          row: row,
+          cup: cup,
+          person: row.entity.fire_sport_statistics_person_with_dummy,
+          time: row.result_entry.compare_time.try(:to_i) || 99999999,
+          points: points_for_rank(row, ranks),
+          rank: ranks[row],
+        ))
+      )
     end
     participations
+  end
+
+  def self.person_participation_attributes(row:, cup:, person:, time:, points:, rank:)
+    {
+      cup: cup,
+      person: person,
+      time: time,
+      points: points,
+      rank: rank,
+    }
   end
 
   def add_participation(participation)

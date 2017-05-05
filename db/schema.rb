@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323131100) do
+ActiveRecord::Schema.define(version: 20170505064729) do
 
   create_table "api_time_entries", force: :cascade do |t|
     t.integer  "time",                null: false
@@ -290,15 +290,13 @@ ActiveRecord::Schema.define(version: 20170323131100) do
   add_index "score_result_lists", ["result_id"], name: "index_score_result_lists_on_result_id"
 
   create_table "score_results", force: :cascade do |t|
-    t.string   "name",                        default: "",              null: false
-    t.boolean  "group_assessment",            default: false,           null: false
-    t.integer  "assessment_id",                                         null: false
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.string   "name",                   default: "",              null: false
+    t.boolean  "group_assessment",       default: false,           null: false
+    t.integer  "assessment_id",                                    null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.integer  "double_event_result_id"
-    t.string   "type",                        default: "Score::Result", null: false
-    t.integer  "series_team_assessment_id"
-    t.integer  "series_person_assessment_id"
+    t.string   "type",                   default: "Score::Result", null: false
     t.integer  "group_score_count"
     t.integer  "group_run_count"
     t.date     "date"
@@ -306,8 +304,16 @@ ActiveRecord::Schema.define(version: 20170323131100) do
 
   add_index "score_results", ["assessment_id"], name: "index_score_results_on_assessment_id"
   add_index "score_results", ["double_event_result_id"], name: "index_score_results_on_double_event_result_id"
-  add_index "score_results", ["series_person_assessment_id"], name: "index_score_results_on_series_person_assessment_id"
-  add_index "score_results", ["series_team_assessment_id"], name: "index_score_results_on_series_team_assessment_id"
+
+  create_table "series_assessment_results", force: :cascade do |t|
+    t.integer  "assessment_id",   null: false
+    t.integer  "score_result_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "series_assessment_results", ["assessment_id"], name: "index_series_assessment_results_on_assessment_id"
+  add_index "series_assessment_results", ["score_result_id"], name: "index_series_assessment_results_on_score_result_id"
 
   create_table "series_assessments", force: :cascade do |t|
     t.integer  "round_id",                null: false

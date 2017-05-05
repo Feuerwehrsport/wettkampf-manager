@@ -2,8 +2,7 @@
   = box Score::Result.model_name.human do |box|
     = f.error_notification
     - if @series_form
-      = f.association :series_team_assessment, collection: @score_result.possible_team_assessments
-      = f.association :series_person_assessment, collection: @score_result.possible_person_assessments
+      = f.association :series_assessments, as: :check_boxes, collection: @score_result.possible_series_assessments, label_method: -> (assessment) { assessment.decorate.score_result_label }
     - else
       = f.input :name
       = f.input :date, as: :string
