@@ -43,6 +43,7 @@ class API::ExternalReader
     params = { api_time_entry: { time: time, hint: hint, password: password, sender: sender } }
     begin
       http = Net::HTTP.new(http_url.host, http_url.port)
+      http.use_ssl = (http_url.scheme == 'https')
       response = http.post(http_url.path, params.to_query)
       response =  JSON.parse(response.body)
       if !response['success']
