@@ -1,4 +1,4 @@
-class Competition < CacheDependendRecord
+class Competition < ActiveRecord::Base
   has_many :person_tags
   has_many :team_tags
 
