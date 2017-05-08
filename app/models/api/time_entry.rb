@@ -8,7 +8,7 @@ class API::TimeEntry < ActiveRecord::Base
 
   accepts_nested_attributes_for :score_list_entry
   scope :waiting, -> { where(used_at: nil).order(:created_at) }
-  scope :closed, -> { where.not(used_at: nil).order(:created_at) }
+  scope :closed, -> { where.not(used_at: nil).order(created_at: :desc) }
 
   def self.next_waiting_entry
     waiting.first
