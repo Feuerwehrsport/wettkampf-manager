@@ -4,7 +4,7 @@ class Score::CompetitionResult < CacheDependendRecord
   has_many :assessments, foreign_key: :score_competition_result_id
   has_many :results, -> { where(score_results: { group_assessment: true }) }, through: :assessments, class_name: 'Score::Result'
 
-  validates :result_type, presence: true
+  validates :result_type, :gender, presence: true
 
   def rows
     @rows ||= result_type.present? ? send(result_type) : []

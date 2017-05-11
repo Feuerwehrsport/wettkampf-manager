@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       resources :runs, only: [:edit, :update], param: :run
     end
     resources :results
-    resources :competition_results, only: [:index]
+    resources :competition_results, only: [:new, :create, :index, :edit, :update, :destroy]
   end
 
   namespace :fire_sport_statistics do

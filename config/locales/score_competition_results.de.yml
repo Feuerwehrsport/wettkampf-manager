@@ -1,0 +1,12 @@
+de:
+  activerecord:
+    models:
+      score/competition_result: 
+        one: Gesamtwertung
+        other: Gesamtwertungen
+    attributes:
+      score/competition_result:
+        assessments: Wertungen
+        gender: Geschlecht
+        name: Name
+        result_type: Punkteberechnung
