@@ -17,7 +17,7 @@ class Imports::Team < Struct.new(:configuration, :data)
     end
     data[:assessments].each do |assessment_foreign_key|
       assessment = configuration.assessments.find_by(foreign_key: assessment_foreign_key).try(:assessment)
-      if assessment.present?
+      if assessment.present? && assessment.discipline.group_discipline?
         count = assessment.fire_relay? ? 2 : 1
         AssessmentRequest.create!(entity: @team, assessment: assessment, relay_count: count)
       end

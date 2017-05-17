@@ -21,7 +21,7 @@ class Imports::Person < Struct.new(:configuration, :data)
     end
     data[:assessment_participations].each do |participation|
       assessment = configuration.assessments.find_by(foreign_key: participation[:assessment_id]).try(:assessment)
-      if assessment.present?
+      if assessment.present? && assessment.discipline.single_discipline?
         AssessmentRequest.create!(
           entity: @person, 
           assessment: assessment, 
