@@ -1,6 +1,11 @@
+#= require lib/jquery.cookie
 #= require lib/enter_times
 
 $ ->
+  $('#preselect-list input').change ->
+    $.cookie('preselect-list', $(@).val())
+  $("#preselect-list input[value=#{$.cookie('preselect-list')}]").click()
+
   $('#time-entries-refreshable').each ->
     refresh = () ->
       $(document).refreshPartials()
@@ -17,5 +22,7 @@ $ ->
   
   if result = window.location.hash.match(/^#list-(\d+)$/)
     $(".waiting-score-list-switch.list-#{result[1]}").trigger('click')
+  else if $(".waiting-score-list-switch.#{$.cookie('preselect-list')}").length > 0
+    $(".waiting-score-list-switch.#{$.cookie('preselect-list')}").trigger('click')
   else
     $('.discipline-matches .waiting-score-list-switch').trigger('click')

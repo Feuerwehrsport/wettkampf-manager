@@ -6,15 +6,14 @@ class API::TimeEntriesController < ApplicationController
 
   def show
     super
-    @lists = []
-    Score::List.where(id: Score::ListEntry.waiting.group(:list_id).select(:list_id)).each do |list|
-      @lists.push(list.decorate)
-    end
+    @lists = open_lists
   end
 
   def index
+    limit = params[:all].present? ? nil : 30
     @waiting_time_entries = @api_time_entries.waiting.decorate
-    @closed_time_entries = @api_time_entries.closed.decorate
+    @closed_time_entries = @api_time_entries.closed.limit(limit).decorate
+    @lists = open_lists
   end
 
   def ignore
@@ -25,6 +24,10 @@ class API::TimeEntriesController < ApplicationController
   end
 
   protected
+
+  def open_lists
+    Score::List.where(id: Score::ListEntry.waiting.group(:list_id).select(:list_id)).map(&:decorate)
+  end
 
   def after_create
     render json: { success: true }
