@@ -51,6 +51,9 @@ gem 'rubyserial'
 gem 'highline'
 gem 'ffi', '1.9.18'
 
+gem 'firesport', path: 'firesport'
+gem 'firesport-series', path: 'firesport-series'
+
 group :development do
   gem 'guard-rspec'
   gem 'rubocop', require: false

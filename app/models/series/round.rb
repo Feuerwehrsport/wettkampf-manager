@@ -1,5 +1,6 @@
 class Series::Round < ActiveRecord::Base
   include Series::Participationable
+  include Series::Importable
 
   has_many :cups, class_name: 'Series::Cup'
   has_many :assessments, class_name: 'Series::Assessment'
@@ -31,7 +32,7 @@ class Series::Round < ActiveRecord::Base
   end
 
   def aggregate_class
-    @aggregate_class ||= "Series::TeamAssessmentRows::#{aggregate_type}".constantize
+    @aggregate_class ||= Firesport::Series::Handler.team_class_for(aggregate_type)
   end
 
   def self.for_team(team_id, gender)
@@ -73,10 +74,22 @@ class Series::Round < ActiveRecord::Base
     assessments.gender(gender).each do |assessment|
       result = assessment.score_results.first
       if result.present?
-        rows =  result.discipline.single_discipline? ? Score::GroupResult.new(result).rows : result.group_result_rows
-        aggregate_class.convert_result_rows(Series::Cup.today_cup_for_round(self), rows, assessment).each do |row|
-          teams[row.entity_id] ||= aggregate_class.new(row.team, row.team_number)
-          teams[row.entity_id].add_participation(row)
+        cup  = Series::Cup.today_cup_for_round(self)
+        rows = result.discipline.single_discipline? ? Score::GroupResult.new(result).rows : result.group_result_rows
+
+        convert_result_rows(rows) do |row, time, points, rank|
+          participation = Series::TeamParticipation.new(
+            cup: cup,
+            team: row.entity.fire_sport_statistics_team_with_dummy,
+            team_number: row.entity.number,
+            time: time,
+            points: points,
+            rank: rank,
+            assessment: assessment,
+          )
+
+          teams[participation.entity_id] ||= aggregate_class.new(participation.team, participation.team_number)
+          teams[participation.entity_id].add_participation(participation)
         end
       end
     end

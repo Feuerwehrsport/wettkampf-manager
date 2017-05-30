@@ -1,5 +1,4 @@
 module Score::ResultEntrySupport
-  INVALID_TIME = 99999999
   ENTRY_STATUS = [:waiting, :valid, :invalid, :no_run]
     
   def second_time
@@ -31,7 +30,7 @@ module Score::ResultEntrySupport
 
   def time_with_valid_calculation=(time)
     self.time = time
-    self.result_valid = time.present? && time < INVALID_TIME
+    self.result_valid = time.present? && time < Firesport::INVALID_TIME
   end
 
   def result_valid=(valid)
@@ -59,7 +58,7 @@ module Score::ResultEntrySupport
   end
 
   def compare_time
-    result_valid? && time < INVALID_TIME ? time : INVALID_TIME
+    result_valid? && time < Firesport::INVALID_TIME ? time : Firesport::INVALID_TIME
   end
 
   def <=>(other)

@@ -1,5 +1,6 @@
 class Series::Assessment < ActiveRecord::Base
   include Genderable
+  include Series::Importable
 
   belongs_to :round, class_name: 'Series::Round'
   has_many :cups, through: :round, class_name: 'Series::Cup'
@@ -19,7 +20,7 @@ class Series::Assessment < ActiveRecord::Base
   end
 
   def aggregate_class
-    @aggregate_class ||= "Series::ParticipationRows::#{round.aggregate_type}".constantize
+    @aggregate_class ||= Firesport::Series::Handler.person_class_for(round.aggregate_type)
   end
 
   def to_label
@@ -45,9 +46,18 @@ class Series::Assessment < ActiveRecord::Base
     end
     result = score_results.first
     if result.present?
-      aggregate_class.convert_result_rows(Series::Cup.today_cup_for_round(round), result.rows).each do |row|
-        entities[row.entity_id] ||= aggregate_class.new(row.entity)
-        entities[row.entity_id].add_participation(row)
+      cup = Series::Cup.today_cup_for_round(round)
+      convert_result_rows(result.rows) do |row, time, points, rank|
+        participation = Series::PersonParticipation.new(
+          cup: cup,
+          person: row.entity.fire_sport_statistics_person_with_dummy,
+          time: time,
+          points: points,
+          rank: rank,
+        )
+
+        entities[participation.entity_id] ||= aggregate_class.new(participation.entity)
+        entities[participation.entity_id].add_participation(participation)
       end
     end
     entities
