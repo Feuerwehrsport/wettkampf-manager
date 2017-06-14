@@ -1,6 +1,6 @@
 class Score::ListFactories::LotteryNumber < Score::ListFactory
   def self.generator_possible?(discipline)
-    discipline.group_discipline? && Competition.one.lottery_numbers? && !discipline.is_a?(Disciplines::FireRelay)
+    discipline.group_discipline? && Competition.one.lottery_numbers? && !discipline.like_fire_relay?
   end
 
   protected

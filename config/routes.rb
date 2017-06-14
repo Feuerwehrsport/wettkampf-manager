@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :presets, only: [:index, :show, :update]
   resource :competitions, only: [:show, :edit, :update]
-  resources :disciplines, only: [:index, :new, :create, :show, :destroy]
+  resources :disciplines
   resources :assessments do
     member { get :possible_associations }
   end

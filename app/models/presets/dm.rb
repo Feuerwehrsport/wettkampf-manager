@@ -31,7 +31,7 @@ class Presets::DM < Preset
     @hb = Disciplines::ObstacleCourse.create!
     @hl = Disciplines::ClimbingHookLadder.create!
     @gs = Disciplines::GroupRelay.create!
-    @fs = Disciplines::FireRelay.create!
+    @fs = Disciplines::FireRelay.create!(like_fire_relay: true)
     @zk = Disciplines::DoubleEvent.create!
     @la = Disciplines::FireAttack.create!
 

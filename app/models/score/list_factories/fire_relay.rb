@@ -1,6 +1,6 @@
 class Score::ListFactories::FireRelay < Score::ListFactory
   def self.generator_possible?(discipline)
-    discipline.is_a?(Disciplines::FireRelay)
+    discipline.like_fire_relay?
   end
 
   def preview_entries_count

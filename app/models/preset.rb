@@ -52,7 +52,7 @@ class Preset
     @hb = Disciplines::ObstacleCourse.create!
     @hl = Disciplines::ClimbingHookLadder.create!
     @gs = Disciplines::GroupRelay.create!
-    @fs = Disciplines::FireRelay.create! if all_disciplines
+    @fs = Disciplines::FireRelay.create!(like_fire_relay: true) if all_disciplines
     @zk = Disciplines::DoubleEvent.create!
     @la = Disciplines::FireAttack.create!
 

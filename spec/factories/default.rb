@@ -37,6 +37,7 @@ FactoryGirl.define do
   factory :obstacle_course, class: "Disciplines::ObstacleCourse" do
   end
   factory :fire_relay, class: "Disciplines::FireRelay" do
+    like_fire_relay true
   end
   factory :fire_attack, class: "Disciplines::FireAttack" do
   end

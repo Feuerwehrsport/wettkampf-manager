@@ -14,7 +14,7 @@ RSpec.feature "list factory" do
   let(:assessment_request2) { create(:assessment_request, entity: person2, assessment: assessment, group_competitor_order: 2) }
   let(:result) { Score::Result.where(assessment: assessment).first }
 
-  let(:fire_relay_assessment) { Assessment.all.to_a.find {|a| a.discipline.is_a?(Disciplines::FireRelay) } }
+  let(:fire_relay_assessment) { Assessment.all.to_a.find {|a| a.discipline.like_fire_relay? } }
   let(:assessment_request_fire_relay1) { create(:assessment_request, entity: team1, assessment: fire_relay_assessment, relay_count: 2) }
   let(:assessment_request_fire_relay2) { create(:assessment_request, entity: team2, assessment: fire_relay_assessment, relay_count: 1) }
 

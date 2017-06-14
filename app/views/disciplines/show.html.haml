@@ -14,6 +14,7 @@
 
   .col-md-4
     = box("Aktionen") do
+      %p= block_link_to 'Bearbeiten', { action: :edit }
       - if @discipline.destroy_possible?
         = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Disziplin wirklich löschen?' }
       - else

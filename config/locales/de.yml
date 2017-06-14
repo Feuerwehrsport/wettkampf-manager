@@ -74,6 +74,7 @@ de:
         name: Name
         short_name: Kurzname
         type: Disziplin
+        like_fire_relay: Wie Feuerwehrstafette (pro Mannschaft 2 Staffeln A/B)
       person:
         first_name: Vorname
         gender: Geschlecht

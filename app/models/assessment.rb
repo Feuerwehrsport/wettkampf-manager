@@ -22,7 +22,7 @@ class Assessment < CacheDependendRecord
   end
 
   def fire_relay?
-    discipline.is_a?(Disciplines::FireRelay)
+    discipline.like_fire_relay?
   end
 
   def person_tags

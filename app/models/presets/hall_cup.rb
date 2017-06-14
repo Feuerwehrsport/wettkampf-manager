@@ -14,7 +14,7 @@ class Presets::HallCup < Preset
 
   def perform
     hb = Disciplines::ObstacleCourse.create!
-    fs = Disciplines::FireRelay.create!
+    fs = Disciplines::FireRelay.create!(like_fire_relay: true)
 
     [:female, :male].each do |gender|
       hb_assessment = Assessment.create!(discipline: hb, gender: gender)

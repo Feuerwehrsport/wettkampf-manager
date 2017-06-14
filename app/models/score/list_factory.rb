@@ -60,7 +60,7 @@ class Score::ListFactory < CacheDependendRecord
   end
 
   def self.generator_possible?(discipline)
-    !discipline.is_a?(Disciplines::FireRelay)
+    !discipline.like_fire_relay?
   end
 
   def preview_entries_count
@@ -102,7 +102,7 @@ class Score::ListFactory < CacheDependendRecord
   def default_name
     name.presence || begin
       main_name = assessments.count == 1 ? assessments.first.decorate.to_s : discipline.decorate.to_s
-      if !discipline.is_a?(Disciplines::FireRelay)
+      if !discipline.like_fire_relay?
         run = 1
         loop do
           break if Score::List.where(name: "#{main_name} - Lauf #{run}").blank?

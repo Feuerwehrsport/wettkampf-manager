@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170505064729) do
+ActiveRecord::Schema.define(version: 20170614092035) do
 
   create_table "api_time_entries", force: :cascade do |t|
     t.integer  "time",                null: false
@@ -89,11 +89,12 @@ ActiveRecord::Schema.define(version: 20170505064729) do
   end
 
   create_table "disciplines", force: :cascade do |t|
-    t.string   "name",       default: "", null: false
-    t.string   "type",                    null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "short_name", default: "", null: false
+    t.string   "name",            default: "",    null: false
+    t.string   "type",                            null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "short_name",      default: "",    null: false
+    t.boolean  "like_fire_relay", default: false, null: false
   end
 
   create_table "federal_states", force: :cascade do |t|

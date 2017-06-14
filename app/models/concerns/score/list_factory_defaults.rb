@@ -17,7 +17,7 @@ module Score::ListFactoryDefaults
 
   def default_name
     name.presence || begin
-      if !discipline.is_a?(Disciplines::FireRelay)
+      if !discipline.like_fire_relay?
         "#{default_main_name} - Lauf #{default_run}"
       else
         default_main_name
@@ -27,7 +27,7 @@ module Score::ListFactoryDefaults
 
   def default_shortcut
     shortcut.presence || begin
-      if !discipline.is_a?(Disciplines::FireRelay)
+      if !discipline.like_fire_relay?
         "Lauf #{default_run}"
       else
         'Lauf'
