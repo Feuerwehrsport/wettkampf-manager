@@ -28,6 +28,10 @@ class User < CacheDependendRecord
     name == 'admin'
   end
 
+  def api?
+    name == 'API'
+  end
+
   private
   
   def encrypt_password

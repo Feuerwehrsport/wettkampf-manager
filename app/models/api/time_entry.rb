@@ -24,6 +24,8 @@ class API::TimeEntry < ActiveRecord::Base
   private
 
   def password_matches
-    errors.add(:password, :invalid) if User.authenticate('admin', password).blank?
+    if User.authenticate('admin', password).blank? || User.authenticate('API', password).blank?
+      errors.add(:password, :invalid)
+    end
   end
 end

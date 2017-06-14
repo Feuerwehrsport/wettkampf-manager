@@ -6,7 +6,7 @@
     = f.input :name, disabled: true
     = f.input :password
     = f.input :password_confirmation
-    - if !@user.admin?
+    - if !@user.admin? && !@user.api?
       = f.association :assessments, as: :check_boxes
     - box.footer do
       = f.primary_button :submit, "Passwort ändern"

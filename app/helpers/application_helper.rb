@@ -70,4 +70,11 @@ module ApplicationHelper
       end
     end
   end
+
+  def can?(verb, resource)
+    if resource.is_a?(Draper::Decorator)
+      resource = resource.object
+    end
+    super(verb, resource)
+  end
 end

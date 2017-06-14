@@ -43,7 +43,7 @@ class API::Runner
     config[:url] = url
     cli.say("\n")
 
-    password = cli.ask('Admin-Passwort für Wettkampf-Manager:  ') { |q| q.echo = '*' }
+    password = cli.ask('Admin/API-Passwort für Wettkampf-Manager:  ') { |q| q.echo = '*' }
     cli.say("\n")
 
     write_config(config)

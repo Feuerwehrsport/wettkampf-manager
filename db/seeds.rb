@@ -13,6 +13,9 @@ competition.save!
 user = User.new(name: 'admin')
 user.save!(validate: false)
 
+user = User.new(name: 'API')
+user.save!(validate: false)
+
 
 # Team.transaction do
 #   old_logger = ActiveRecord::Base.logger
