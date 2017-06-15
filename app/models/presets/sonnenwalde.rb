@@ -66,7 +66,7 @@ class Presets::Sonnenwalde < Preset
     Score::Result.create!(assessment: assessment, group_assessment: true)
 
     # 5x80 Meter-Staffel
-    fire_relay = Disciplines::FireRelay.create!(name: "5x80-Meter-Staffel", short_name: "5x80", like_fire_relay: true)
+    fire_relay = Disciplines::FireRelay.create!(name: "5x80-Meter-Staffel", short_name: "5x80")
     assessment = Assessment.create!(discipline: fire_relay, gender: :female, name: "AK1 Staffel Mädchen")
     Score::Result.create!(assessment: assessment, group_assessment: true)
     assessment = Assessment.create!(discipline: fire_relay, gender: :male, name: "AK1 Staffel Jungen")

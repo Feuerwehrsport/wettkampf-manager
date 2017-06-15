@@ -13,6 +13,7 @@ class Preset
       Presets::DCupSmall,
       Presets::HallCup,
       Presets::MvCupSingle,
+      Presets::BrandenburgJugend,
       Presets::Sonnenwalde,
       Presets::DM,
     ]
