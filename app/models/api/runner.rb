@@ -13,6 +13,7 @@ class API::Runner
       menu.prompt = "Bitte das angeschlossene Gerät angeben#{default}: "
       menu.choice('Timy von Alge-Timing') { |a| config[:klass_select] = a; klass = API::TimyReader }
       menu.choice('Computer vom Team-MV') { |a| config[:klass_select] = a; klass = API::TeamComputerReader }
+      menu.choice('Landesanlage MV') { |a| config[:klass_select] = a; klass = API::LandesanlageMVReader }
       menu.default = config[:klass_select]
     end
     cli.say("\n")
