@@ -5,7 +5,7 @@ class Ability
     if (user.present? && user.admin?) || !User.configured?
       can :manage, :all
       cannot(:destroy, User) { |u| u.admin? || u.api? }
-    elsif user.api?
+    elsif user.present? && user.api?
       can :create, API::TimeEntry
     elsif user.present?
       can([:edit, :update, :edit_times], Score::Run) { |r| can?(:edit_times, r.list) }
