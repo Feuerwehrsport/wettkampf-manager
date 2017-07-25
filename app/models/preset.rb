@@ -16,6 +16,7 @@ class Preset
       Presets::BrandenburgJugend,
       Presets::Sonnenwalde,
       Presets::DM,
+      Presets::LandesmeisterschaftBrandenburg2017,
     ]
   end
 
