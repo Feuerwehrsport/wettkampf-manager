@@ -20,6 +20,12 @@ RSpec.describe API::LandesanlageMVReader, type: :model do
       expect(reader).to receive(:send_data).with(566, 'Bahn 2')
       expect(reader).to receive(:send_data).with(9955, 'Bahn 3')
       reader.send(:evaluate_output, "*9:99,990:05,660:99,55#\r\n")
+
+      expect(reader).to receive(:log_raw).with("valid:   *-:--,--0:05,660:99,55#\r\n")
+      expect(reader).to receive(:send_data).with(9*6000 + 9999, 'Bahn 1')
+      expect(reader).to receive(:send_data).with(566, 'Bahn 2')
+      expect(reader).to receive(:send_data).with(9955, 'Bahn 3')
+      reader.send(:evaluate_output, "*-:--,--0:05,660:99,55#\r\n")
     end
   end
 end

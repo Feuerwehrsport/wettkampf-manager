@@ -10,7 +10,7 @@ class API::LandesanlageMVReader < API::ExternalReader
   def evaluate_line(line)
     # "*m:ss,zhm:ss,zhm:ss,zh#\r\n"
     line = line.strip
-    result = line.match(/\A\*(\d):(\d\d),(\d\d)(\d):(\d\d),(\d\d)(\d):(\d\d),(\d\d)#\z/)
+    result = line.gsub('-', '9').match(/\A\*(\d):(\d\d),(\d\d)(\d):(\d\d),(\d\d)(\d):(\d\d),(\d\d)#\z/)
     if result
       [
         { minutes: result[1].to_i, seconds: result[2].to_i, centiseconds: result[3].to_i },
