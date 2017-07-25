@@ -36,6 +36,10 @@ class TeamDecorator < ApplicationDecorator
     [shortcut ? shortcut_name : to_s]
   end
 
+  def team
+    self
+  end
+
   private
 
   def multi_team?
