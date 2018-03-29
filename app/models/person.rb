@@ -2,9 +2,9 @@ class Person < CacheDependendRecord
   include Taggable
 
   belongs_to :team
-  belongs_to :fire_sport_statistics_person, class_name: "FireSportStatistics::Person", inverse_of: :person
-  has_many :requests, class_name: "AssessmentRequest", as: :entity, dependent: :destroy
-  has_many :list_entries, class_name: "Score::ListEntry", as: :entity, dependent: :destroy
+  belongs_to :fire_sport_statistics_person, class_name: 'FireSportStatistics::Person', inverse_of: :person
+  has_many :requests, class_name: 'AssessmentRequest', as: :entity, dependent: :destroy
+  has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy
   has_many :requested_assessments, through: :requests, source: :assessment
   enum gender: { female: 0, male: 1 }
   before_save :assign_registration_order
@@ -16,17 +16,16 @@ class Person < CacheDependendRecord
   accepts_nested_attributes_for :requests, allow_destroy: true
 
   default_scope { order(:gender, :last_name, :first_name) }
-  scope :registration_order, -> () { reorder(:registration_order) }
+  scope :registration_order, -> { reorder(:registration_order) }
 
-
-  def request_for assessment
+  def request_for(assessment)
     requests.where(assessment: assessment).first
   end
 
   def fire_sport_statistics_person_with_dummy
     fire_sport_statistics_person.presence || FireSportStatistics::Person.dummy(self)
   end
- 
+
   private
 
   def strip_names
@@ -39,7 +38,7 @@ class Person < CacheDependendRecord
   end
 
   def assign_registration_order
-    if registration_order == 0 && team.present?
+    if registration_order .zero? && team.present?
       self.registration_order = (team.people.maximum(:registration_order) || 0) + 1
     end
   end

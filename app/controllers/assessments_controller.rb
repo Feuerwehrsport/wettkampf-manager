@@ -1,5 +1,5 @@
 class AssessmentsController < ApplicationController
-  implement_crud_actions 
+  implement_crud_actions
   before_action :assign_resource_for_action, only: [:possible_associations]
   before_action :assign_tags
 
@@ -19,6 +19,6 @@ class AssessmentsController < ApplicationController
 
   def assessment_params
     params.require(:assessment).permit(:name, :discipline_id, :gender,
-        tag_references_attributes: [:id, :tag_id, :_destroy])
+                                       tag_references_attributes: %i[id tag_id _destroy])
   end
 end

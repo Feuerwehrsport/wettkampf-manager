@@ -1,15 +1,15 @@
-class Imports::Team < Struct.new(:configuration, :data)
+Imports::Team = Struct.new(:configuration, :data) do
   def import
     number = [1, data[:team_number].to_i].max
     fsst = FireSportStatistics::Team.find_by(id: data[:statitics_team_id])
     @team = ::Team.create!(
-      name: data[:name], 
-      gender: data[:gender], 
-      number: number, 
-      shortcut: data[:shortcut].first(12), 
-      disable_autocreate_assessment_requests: true, 
+      name: data[:name],
+      gender: data[:gender],
+      number: number,
+      shortcut: data[:shortcut].first(12),
+      disable_autocreate_assessment_requests: true,
       fire_sport_statistics_team: fsst,
-      federal_state: FederalState.find_by_shortcut(data[:federal_state]),
+      federal_state: FederalState.find_by(shortcut: data[:federal_state]),
     )
     data[:tag_names].each do |tag_name|
       tag = configuration.tags.find_by(target: :team, name: tag_name, use: true).try(:competition_tag)

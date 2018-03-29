@@ -29,14 +29,13 @@ RSpec.describe Score::CompetitionResult, type: :model do
 
   let!(:fire_attack_list) { create_score_list(fire_attack_result, team1 => 2200, team2 => 2300, team3 => nil) }
   let!(:obstacle_course_list) do
-    create_score_list(obstacle_course_result, 
-      team1_person1 => 1900, team1_person2 => 1950, 
-      team2_person1 => 1900, team2_person2 => 2000, team2_person3 => 1999,
-      team3_person1 => 1800, team3_person2 => nil,
-      team4_person1 => 1900
-    )
+    create_score_list(obstacle_course_result,
+                      team1_person1 => 1900, team1_person2 => 1950,
+                      team2_person1 => 1900, team2_person2 => 2000, team2_person3 => 1999,
+                      team3_person1 => 1800, team3_person2 => nil,
+                      team4_person1 => 1900)
   end
-  let!(:fire_relay_list) { create_score_list(fire_relay_result, team1_a => 6000, team2_a => 6001, team3_a => 60002, team3_b => 5999) }
+  let!(:fire_relay_list) { create_score_list(fire_relay_result, team1_a => 6000, team2_a => 6001, team3_a => 60_002, team3_b => 5999) }
 
   describe '.dcup' do
     it 'calculates correct results' do
@@ -71,9 +70,9 @@ RSpec.describe Score::CompetitionResult, type: :model do
     end
   end
 
-
   describe '.places_to_points' do
     let(:competition_result) { create(:score_competition_result, result_type: 'places_to_points') }
+
     it 'calculates correct results' do
       rows = competition_result.send(:places_to_points)
       expect(rows.first.points).to eq 4

@@ -1,7 +1,7 @@
 class API::TimeEntriesController < ApplicationController
-  implement_crud_actions only: [:create, :index, :show, :edit, :update]
-  before_action :skip_closed_entries, only: [:show, :edit, :update]
-  before_action :assign_list_entry, only: [:edit, :update]
+  implement_crud_actions only: %i[create index show edit update]
+  before_action :skip_closed_entries, only: %i[show edit update]
+  before_action :assign_list_entry, only: %i[edit update]
   skip_before_action :verify_authenticity_token, only: :create
 
   def show
@@ -19,7 +19,7 @@ class API::TimeEntriesController < ApplicationController
   def ignore
     assign_existing_resource
     skip_closed_entries
-    resource_instance.update_attributes(used_at: Time.now)
+    resource_instance.update(used_at: Time.current)
     redirect_to action: :index
   end
 
@@ -58,7 +58,7 @@ class API::TimeEntriesController < ApplicationController
     if action_name == 'create'
       params.require(:api_time_entry).permit(:time, :hint, :password, :sender)
     else
-      params.require(:api_time_entry).permit(score_list_entry_attributes: [:id, :edit_second_time, :result_type])
+      params.require(:api_time_entry).permit(score_list_entry_attributes: %i[id edit_second_time result_type])
     end
   end
 end

@@ -6,20 +6,20 @@ class FireSportStatistics::Person < ActiveRecord::Base
 
   validates :last_name, :first_name, :gender, presence: true
 
-  scope :where_name_like, -> (name) do
-    query = "%#{name.split("").join("%")}%"
+  scope :where_name_like, ->(name) do
+    query = "%#{name.split('').join('%')}%"
     spelling_query = FireSportStatistics::PersonSpelling.where("(first_name || ' ' || last_name) LIKE ?", query).select(:person_id)
     where("(first_name || ' ' || last_name) LIKE ? OR id IN (#{spelling_query.to_sql})", query)
   end
-  scope :order_by_gender, -> (gender) do
-    order(gender: (gender == 'female') ? :asc : :desc)
+  scope :order_by_gender, ->(gender) do
+    order(gender: gender == 'female' ? :asc : :desc)
   end
-  scope :order_by_teams, -> (teams) do
+  scope :order_by_teams, ->(teams) do
     sql = teams.joins(:team_associations).where(fire_sport_statistics_team_associations: { person_id: arel_table[:id] }).to_sql
     order("EXISTS(#{sql}) DESC")
   end
-  scope :gender, -> (gender) { where(gender: genders[gender]) }
-  scope :for_person, -> (person) do
+  scope :gender, ->(gender) { where(gender: genders[gender]) }
+  scope :for_person, ->(person) do
     where_name_like("#{person.first_name}#{person.last_name}").gender(person.gender)
   end
   scope :dummies, -> { where(dummy: true) }

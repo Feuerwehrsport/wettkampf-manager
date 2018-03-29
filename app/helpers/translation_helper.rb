@@ -13,11 +13,11 @@ module TranslationHelper
     @virtual_path = virtual_path_backup
     output
   end
-  alias :t :translate
+  alias t translate
 
   def translate_or_use(sym_or_string)
-    if sym_or_string.kind_of?(Symbol)
-      t(".#{sym_or_string.to_s}")
+    if sym_or_string.is_a?(Symbol)
+      t(".#{sym_or_string}")
     else
       sym_or_string
     end

@@ -5,7 +5,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :first_name, null: false
       t.integer :gender, null: false
       t.references :team, index: true
-      t.string :bib_number, default: "", null: false
+      t.string :bib_number, default: '', null: false
 
       t.timestamps null: false
     end

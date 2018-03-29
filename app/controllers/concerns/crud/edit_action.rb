@@ -6,9 +6,7 @@ module CRUD::EditAction
     before_action :assign_resource_for_edit, only: :edit
   end
 
-  def edit
-  end
-
+  def edit; end
 
   protected
 

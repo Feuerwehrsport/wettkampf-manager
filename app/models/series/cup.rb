@@ -1,5 +1,5 @@
 class Series::Cup < ActiveRecord::Base
-  TODAY_ID = 99999000
+  TODAY_ID = 99_999_000
   include Series::Participationable
 
   belongs_to :round, class_name: 'Series::Round'
@@ -12,14 +12,14 @@ class Series::Cup < ActiveRecord::Base
 
   def self.create_today!
     id = TODAY_ID
-    Series::Round.all.each do |round|
+    Series::Round.all.find_each do |round|
       id += 1
-      create!(round: round, id: id, competition_date: Date.today, competition_place: "-")
+      create!(round: round, id: id, competition_date: Date.current, competition_place: '-')
     end
   end
 
   def self.today_cup_for_round(round)
-    round.cups.where("id > ?", TODAY_ID).first
+    round.cups.where('id > ?', TODAY_ID).first
   end
 
   def competition_place

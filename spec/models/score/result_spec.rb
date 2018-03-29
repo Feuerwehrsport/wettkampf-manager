@@ -2,18 +2,18 @@ require 'rails_helper'
 
 RSpec.describe Score::Result, type: :model do
   let(:result) { create :score_result }
-  
+
   describe '.rows' do
     let(:person1) { create :person, :generated }
     let(:person2) { create :person, :generated }
     let(:person3) { create :person, :generated }
     let(:person4) { create :person, :generated }
-    context "entries given" do
+
+    context 'entries given' do
       let!(:list1) { create_score_list(result, person1 => 1912, person2 => 2020, person3 => 2040, person4 => nil) }
       let!(:list2) { create_score_list(result, person1 => nil, person2 => 1911, person3 => 1912, person4 => 2040) }
 
-
-      it "return results in correct order" do
+      it 'return results in correct order' do
         rows = result.rows
         expect(rows).to have(4).entries
 
@@ -35,12 +35,11 @@ RSpec.describe Score::Result, type: :model do
       end
     end
 
-    context "entries similar" do
+    context 'entries similar' do
       let!(:list1) { create_score_list(result, person1 => 1912, person2 => 1912) }
       let!(:list2) { create_score_list(result, person2 => 1913) }
 
-
-      it "return results in correct order" do
+      it 'return results in correct order' do
         rows = result.rows
         expect(rows).to have(2).entries
 

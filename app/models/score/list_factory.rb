@@ -2,7 +2,7 @@ class Score::ListFactory < CacheDependendRecord
   include Score::ListFactoryDefaults
   include Genderable
 
-  STEPS = %i(discipline assessments names tracks results generator generator_params finish create)
+  STEPS = %i[discipline assessments names tracks results generator generator_params finish create].freeze
   GENERATORS = [
     Score::ListFactories::GroupOrder,
     Score::ListFactories::LotteryNumber,
@@ -12,7 +12,7 @@ class Score::ListFactory < CacheDependendRecord
     Score::ListFactories::TrackChange,
     Score::ListFactories::TrackSame,
     Score::ListFactories::TrackGenderable,
-  ]
+  ].freeze
 
   belongs_to :discipline
   belongs_to :before_list, class_name: 'Score::List'
@@ -38,11 +38,11 @@ class Score::ListFactory < CacheDependendRecord
   attr_writer :next_step
   attr_reader :list
   before_save do
-    if status == :generator && next_step == :generator_params && type.constantize.generator_params.empty?
-      self.status = :finish
-    else
-      self.status = next_step || STEPS[1]
-    end
+    self.status = if status == :generator && next_step == :generator_params && type.constantize.generator_params.empty?
+                    :finish
+                  else
+                    next_step || STEPS[1]
+                  end
   end
   after_save do
     if status_changed? && status == :create
@@ -102,7 +102,7 @@ class Score::ListFactory < CacheDependendRecord
   def default_name
     name.presence || begin
       main_name = assessments.count == 1 ? assessments.first.decorate.to_s : discipline.decorate.to_s
-      if !discipline.like_fire_relay?
+      unless discipline.like_fire_relay?
         run = 1
         loop do
           break if Score::List.where(name: "#{main_name} - Lauf #{run}").blank?
@@ -120,12 +120,12 @@ class Score::ListFactory < CacheDependendRecord
     @list ||= Score::List.create!(name: name, shortcut: shortcut, assessments: assessments, results: results, track_count: track_count)
   end
 
-  def for_run_and_track_for rows, tracks=nil
+  def for_run_and_track_for(rows, tracks = nil)
     tracks = (1..list.track_count) if tracks.nil?
     rows = rows.dup
     run = 0
     transaction do
-      while true
+      loop do
         run += 1
         for track in tracks
           row = rows.shift
@@ -133,9 +133,7 @@ class Score::ListFactory < CacheDependendRecord
           create_list_entry(row, run, track)
         end
 
-        if run > 1000
-          raise "Something went wrong"
-        end
+        raise 'Something went wrong' if run > 1000
       end
     end
   end
@@ -156,11 +154,11 @@ class Score::ListFactory < CacheDependendRecord
 
   def create_list_entry(request, run, track)
     list.entries.create!(
-      entity: request.entity, 
-      run: run, 
-      track: track, 
+      entity: request.entity,
+      run: run,
+      track: track,
       assessment_type: request.assessment_type,
-      assessment: request.assessment
+      assessment: request.assessment,
     )
   end
 
@@ -172,17 +170,13 @@ class Score::ListFactory < CacheDependendRecord
 
   def assessments_possible
     assessments.each do |assessment|
-      unless assessment.in?(possible_assessments)
-        errors.add(:assessments, :invalid)
-      end
+      errors.add(:assessments, :invalid) unless assessment.in?(possible_assessments)
     end
   end
 
   def results_possible
     results.each do |result|
-      unless result.in?(possible_results)
-        errors.add(:results, :invalid)
-      end
+      errors.add(:results, :invalid) unless result.in?(possible_results)
     end
   end
 
@@ -190,6 +184,3 @@ class Score::ListFactory < CacheDependendRecord
     errors.add(:type, :invalid) unless type.in?(possible_types.map(&:to_s))
   end
 end
-
-
-

@@ -4,7 +4,7 @@ class Score::ListFactories::Best < Score::ListFactory
   validate :result_assessments_match, if: -> { step_reached?(:finish) }
 
   def self.generator_params
-    [:before_result, :best_count]
+    %i[before_result best_count]
   end
 
   def preview_entries_count
@@ -13,14 +13,14 @@ class Score::ListFactories::Best < Score::ListFactory
 
   protected
 
-  def create_list_entry result_row, run, track
+  def create_list_entry(result_row, run, track)
     any_list = result_row.list_entries.first
     list.entries.create!(
-      entity: result_row.entity, 
-      run: run, 
-      track: track, 
+      entity: result_row.entity,
+      run: run,
+      track: track,
       assessment_type: any_list.assessment_type,
-      assessment: result_row.result.assessment
+      assessment: result_row.result.assessment,
     )
   end
 
@@ -31,9 +31,7 @@ class Score::ListFactories::Best < Score::ListFactory
   def perform_rows
     all_rows = result_rows.dup
     result_rows = all_rows.shift(best_count.to_i)
-    while all_rows.count > 0 && (result_rows.last <=> all_rows.first) == 0
-      result_rows.push(all_rows.shift)
-    end
+    result_rows.push(all_rows.shift) while all_rows.count > 0 && (result_rows.last <=> all_rows.first) .zero?
     result_rows.reverse
   end
 
@@ -41,9 +39,9 @@ class Score::ListFactories::Best < Score::ListFactory
 
   def result_assessments_match
     if assessments.length != 1
-      errors.add(:before_result, "Es darf nur eine Wertungsgruppe ausgewählt werden")
+      errors.add(:before_result, 'Es darf nur eine Wertungsgruppe ausgewählt werden')
     elsif before_result.present? && before_result.assessment != assessments.first
-      errors.add(:before_result, "muss mit jetziger Wertungsgruppe übereinstimmen")
+      errors.add(:before_result, 'muss mit jetziger Wertungsgruppe übereinstimmen')
     end
   end
 end

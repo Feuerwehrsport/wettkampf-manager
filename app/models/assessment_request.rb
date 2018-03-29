@@ -10,10 +10,10 @@ class AssessmentRequest < CacheDependendRecord
   after_initialize :assign_next_free_competitor_order
   before_save :set_valid_competitor_order
 
-  scope :assessment_type, -> (type) { where(assessment_type: AssessmentRequest.assessment_types[type]) }
+  scope :assessment_type, ->(type) { where(assessment_type: AssessmentRequest.assessment_types[type]) }
 
   def self.group_assessment_type_keys
-    [:group_competitor, :out_of_competition]
+    %i[group_competitor out_of_competition]
   end
 
   private
@@ -21,7 +21,7 @@ class AssessmentRequest < CacheDependendRecord
   def next_free_competitor_order(type)
     return 0 if entity.nil? || entity.is_a?(Team) || entity.team.nil?
     free = 1
-    type_order = :"#{type}_competitor_order" 
+    type_order = :"#{type}_competitor_order"
     assessment.requests.where(
       assessment_type: AssessmentRequest.assessment_types[:"#{type}_competitor"],
       entity: entity.team.people,
@@ -29,7 +29,7 @@ class AssessmentRequest < CacheDependendRecord
       return free if free < existing
       free += 1
     end
-    return free
+    free
   end
 
   def set_valid_competitor_order
@@ -37,18 +37,17 @@ class AssessmentRequest < CacheDependendRecord
       self.group_competitor_order = 0
       self.single_competitor_order = 0
     elsif group_competitor?
-      self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order == 0
+      self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order .zero?
       self.single_competitor_order = 0
     elsif single_competitor?
-      self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order == 0
+      self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order .zero?
       self.group_competitor_order = 0
     end
   end
 
   def assign_next_free_competitor_order
-    if !persisted?
-      self.group_competitor_order = next_free_competitor_order(:group)  if group_competitor_order == 0
-      self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order == 0
-    end
+    return if persisted?
+    self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order .zero?
+    self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order .zero?
   end
 end

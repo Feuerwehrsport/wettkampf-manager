@@ -4,7 +4,7 @@ class Score::ListEntry < CacheDependendRecord
   belongs_to :list, class_name: 'Score::List'
   belongs_to :entity, polymorphic: true
   belongs_to :assessment
-  
+
   enum assessment_type: { group_competitor: 0, single_competitor: 1, out_of_competition: 2 }
 
   validates :list, :entity, :track, :run, :assessment_type, :assessment, presence: true
@@ -18,6 +18,6 @@ class Score::ListEntry < CacheDependendRecord
   scope :waiting, -> { where(result_type: :waiting) }
 
   def self.insert_random_values
-    where(result_type: :waiting).each {|l| l.update!(time_with_valid_calculation: 1900 + rand(0..400)) }
+    where(result_type: :waiting).find_each { |l| l.update!(time_with_valid_calculation: rand(1900..2300)) }
   end
 end

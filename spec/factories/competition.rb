@@ -1,7 +1,7 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :competition do
     name  'Wettkampf'
-    date  Date.today
+    date  { Date.current }
     flyer_text 'Beispiel'
     create_possible true
   end

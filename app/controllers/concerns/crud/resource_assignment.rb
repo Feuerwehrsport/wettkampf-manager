@@ -1,7 +1,6 @@
 module CRUD::ResourceAssignment
   extend ActiveSupport::Concern
 
-
   protected
 
   def base_collection

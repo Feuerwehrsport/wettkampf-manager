@@ -16,7 +16,6 @@ module CRUD::DestroyAction
     end
   end
 
-
   protected
 
   def assign_resource_for_destroy

@@ -1,4 +1,4 @@
-def create_score_list result, entities
+def create_score_list(result, entities)
   list = create :score_list, results: [result], assessments: [result.assessment]
   entities.each do |entity, time|
     if time.nil?

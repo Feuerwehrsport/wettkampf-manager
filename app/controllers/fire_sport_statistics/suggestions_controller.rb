@@ -1,15 +1,16 @@
 class FireSportStatistics::SuggestionsController < ApplicationController
-
   def people
     suggestions = FireSportStatistics::Person.limit(10)
     suggestions = suggestions.where_name_like(params[:name]) if params[:name]
     suggestions = suggestions.order_by_gender(params[:gender]) if params[:gender]
     suggestions = suggestions.gender(params[:real_gender]) if params[:real_gender]
-    suggestions = suggestions.order_by_teams(FireSportStatistics::Team.where_name_like(params[:team_name])) if params[:team_name]
+    if params[:team_name]
+      suggestions = suggestions.order_by_teams(FireSportStatistics::Team.where_name_like(params[:team_name]))
+    end
 
     render json: suggestions.to_json(
-      only: [:id, :first_name, :last_name, :gender], 
-      include: [ teams: { only: [:short] } ]
+      only: %i[id first_name last_name gender],
+      include: [teams: { only: [:short] }],
     )
   end
 
@@ -18,8 +19,7 @@ class FireSportStatistics::SuggestionsController < ApplicationController
     suggestions = suggestions.where_name_like(params[:name]) if params[:name]
 
     render json: suggestions.to_json(
-      only: [:id, :name, :short, :federal_state_id]
+      only: %i[id name short federal_state_id],
     )
   end
-
 end

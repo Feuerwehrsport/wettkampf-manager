@@ -1,12 +1,12 @@
 require 'rails_helper'
-RSpec.feature "Deletion of things" do
+RSpec.describe 'Deletion of things' do
   before do
-    User.first.update_attributes!(password: "my-password", password_confirmation: "my-password")
+    User.first.update!(password: 'my-password', password_confirmation: 'my-password')
     Preset.find(4).save # D-Cup ohne 4x100
     assessment_request
     score_list
     list_entry = Score::ListEntry.first
-    list_entry.update_attributes(result_type: :valid, time: 2222)
+    list_entry.update(result_type: :valid, time: 2222)
   end
 
   let(:team) { create(:team) }
@@ -21,57 +21,56 @@ RSpec.feature "Deletion of things" do
     factory.list
   end
 
-
-  it "is available after first start", js: true do
+  it 'is available after first start', js: true do
     perform_login
 
     visit score_result_path(result)
-    click_on "Löschen"
+    click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content "Ergebnisse erfolgreich entfernt"
+    expect(page).to have_content 'Ergebnisse erfolgreich entfernt'
 
-    expect {
+    expect do
       visit score_list_path(score_list)
-      click_on "Löschen"
+      click_on 'Löschen'
       page.driver.browser.accept_confirm
-      expect(page).to have_content "Startliste erfolgreich entfernt"
-    }.to change(Score::ListEntry, :count).by(-1)
+      expect(page).to have_content 'Startliste erfolgreich entfernt'
+    end.to change(Score::ListEntry, :count).by(-1)
 
     visit team_path(team)
-    click_on "Löschen"
+    click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content "Mannschaft erfolgreich entfernt"
+    expect(page).to have_content 'Mannschaft erfolgreich entfernt'
     expect(person.reload.team).to be_nil
 
     visit person_path(person)
-    click_on "Löschen"
+    click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content "Wettkämpfer erfolgreich entfernt"
+    expect(page).to have_content 'Wettkämpfer erfolgreich entfernt'
 
     visit assessment_path(assessment)
-    click_on "Löschen"
+    click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content "Wertungsgruppe konnte nicht entfernt werden "
+    expect(page).to have_content 'Wertungsgruppe konnte nicht entfernt werden '
 
     visit discipline_path(assessment.discipline)
-    expect(page).to have_content "Diese Disziplin kann nicht gelöscht werden"
+    expect(page).to have_content 'Diese Disziplin kann nicht gelöscht werden'
 
     Score::Result.destroy_all
-    
+
     visit assessment_path(assessment)
-    click_on "Löschen"
+    click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content "Wertungsgruppe erfolgreich entfernt"
+    expect(page).to have_content 'Wertungsgruppe erfolgreich entfernt'
 
     visit discipline_path(assessment.discipline)
-    click_on "Ansehen"
-    click_on "Löschen"
+    click_on 'Ansehen'
+    click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content "Wertungsgruppe erfolgreich entfernt"
-    
+    expect(page).to have_content 'Wertungsgruppe erfolgreich entfernt'
+
     visit discipline_path(assessment.discipline)
-    click_on "Löschen"
+    click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content "Disziplin erfolgreich entfernt"
+    expect(page).to have_content 'Disziplin erfolgreich entfernt'
   end
 end

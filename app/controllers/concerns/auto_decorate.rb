@@ -7,17 +7,9 @@ module AutoDecorate
   private
 
   def auto_decorate
-    if resource_instance
-      begin
-        self.resource_instance = resource_instance.decorate if resource_instance.respond_to? :decorate
-      rescue Draper::UninferrableDecoratorError => e
-      end
-    end
-    if collection_instance
-      begin
-        self.collection_instance = collection_instance.decorate if collection_instance.respond_to? :decorate
-      rescue Draper::UninferrableDecoratorError => e
-      end
+    self.resource_instance = resource_instance.decorate if resource_instance && resource_instance.respond_to?(:decorate)
+    if collection_instance && collection_instance.respond_to?(:decorate)
+      self.collection_instance = collection_instance.decorate
     end
   end
 end

@@ -18,14 +18,13 @@ class API::TimeEntry < ActiveRecord::Base
     super
     list_entry.time = time
     list_entry.result_type = :valid
-    self.used_at = Time.now
+    self.used_at = Time.current
   end
 
   private
 
   def password_matches
-    if User.authenticate('admin', password).blank? || User.authenticate('API', password).blank?
-      errors.add(:password, :invalid)
-    end
+    return if User.authenticate('admin', password).present? || User.authenticate('API', password).present?
+    errors.add(:password, :invalid)
   end
 end

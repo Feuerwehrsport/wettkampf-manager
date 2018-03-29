@@ -1,9 +1,9 @@
 class Score::CompetitionResultsController < ApplicationController
-  implement_crud_actions only: [:new, :create, :index, :edit, :update, :destroy]
+  implement_crud_actions only: %i[new create index edit update destroy]
 
   def index
     super
-    page_title 'Gesamtwertung', { page_layout: :landscape }
+    page_title 'Gesamtwertung', page_layout: :landscape
   end
 
   protected

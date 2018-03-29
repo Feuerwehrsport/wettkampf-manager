@@ -1,5 +1,4 @@
 class Score::ListFactories::GroupOrder < Score::ListFactory
-
   def self.generator_possible?(discipline)
     discipline.single_discipline?
   end

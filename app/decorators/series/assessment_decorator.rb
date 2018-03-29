@@ -7,7 +7,7 @@ class Series::AssessmentDecorator < ApplicationDecorator
   def to_s
     name
   end
-  
+
   def rows
     object.rows.map(&:decorate)
   end

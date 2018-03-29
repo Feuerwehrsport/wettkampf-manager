@@ -1,7 +1,7 @@
 class Score::ResultEntryDecorator < ApplicationDecorator
   def human_time
     if result_valid?
-      "#{second_time}"
+      second_time.to_s
     elsif result_invalid?
       'D'
     elsif result_no_run?

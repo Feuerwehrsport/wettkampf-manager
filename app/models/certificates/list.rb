@@ -11,11 +11,11 @@ class Certificates::List
   validates :template, :score_result, presence: true
 
   def template
-    Certificates::Template.find_by_id(template_id)
+    Certificates::Template.find_by(id: template_id)
   end
 
   def score_result
-    Score::Result.find_by_id(score_result_id)
+    Score::Result.find_by(id: score_result_id)
   end
 
   def save
@@ -26,16 +26,16 @@ class Certificates::List
     page_text_values = []
 
     result.rows.map(&:decorate).each do |row|
-      if row.is_a?(Score::DoubleEventResultRow)
-        result_entry = row.sum_result_entry
-      else
-        result_entry = row.best_result_entry
-      end
+      result_entry = if row.is_a?(Score::DoubleEventResultRow)
+                       row.sum_result_entry
+                     else
+                       row.best_result_entry
+                     end
 
       page_text_values.push(
         team_name: row.entity,
         person_name: row.entity,
-        time_long: result_entry.long_human_time(seconds: 'Sekunden') ,
+        time_long: result_entry.long_human_time(seconds: 'Sekunden'),
         time_short:  result_entry.long_human_time(seconds: 's'),
         rank: "#{place_for_row row}.",
         assessment: assessment,

@@ -24,7 +24,7 @@ class Presets::BrandenburgJugend < Preset
     group_relay = Disciplines::GroupRelay.create!(name: 'Gruppenstafette Jugend', short_name: 'GS')
     fire_relay = Disciplines::FireRelay.create!(name: '5x80-Meter-Staffel', short_name: '5x80')
     fire_attack = Disciplines::FireAttack.create!(name: 'Löschangriff Jugend', short_name: 'LA')
-    
+
     {
       'Mädchen 10-14' => :female,
       'Mädchen 15-18' => :female,

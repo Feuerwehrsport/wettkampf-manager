@@ -11,6 +11,5 @@ class Presets::Nothing < Preset
 
   protected
 
-  def perform
-  end
+  def perform; end
 end

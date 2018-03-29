@@ -35,11 +35,11 @@ class Score::ResultRow < Struct.new(:entity, :result)
     true
   end
 
-  def <=> other
+  def <=>(other)
     both = [result_entries, other.result_entries].map(&:count)
     (0..(both.min - 1)).each do |i|
       compare = result_entries[i] <=> other.result_entries[i]
-      next if compare == 0
+      next if compare .zero?
       return compare
     end
     both.last <=> both.first

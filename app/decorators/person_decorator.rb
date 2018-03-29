@@ -15,17 +15,17 @@ class PersonDecorator < ApplicationDecorator
     "#{first_name} #{last_name}"
   end
 
-  def team_name assessment_type=nil
+  def team_name(assessment_type = nil)
     team_assessment_type_name [team.to_s], assessment_type
   end
 
-  def team_assessment_type_name name, assessment_type
+  def team_assessment_type_name(name, assessment_type)
     name.push('E') if assessment_type == 'single_competitor'
     name.push('A') if assessment_type == 'out_of_competition'
     name.join(' ')
   end
 
-  def team_shortcut_name assessment_type=nil
+  def team_shortcut_name(assessment_type = nil)
     team_assessment_type_name [team.try(:shortcut_name)], assessment_type
   end
 
@@ -38,10 +38,10 @@ class PersonDecorator < ApplicationDecorator
   end
 
   def self.human_name_cols
-    ['Vorname', 'Nachname', 'Mannschaft']
+    %w[Vorname Nachname Mannschaft]
   end
 
-  def name_cols assessment_type, shortcut
+  def name_cols(assessment_type, shortcut)
     team = shortcut ? team_shortcut_name(assessment_type) : team_name(assessment_type)
     [first_name, last_name, team]
   end

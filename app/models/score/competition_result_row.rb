@@ -29,13 +29,13 @@ class Score::CompetitionResultRow < Struct.new(:competition_result, :team)
 
   def dcup_compare(other)
     compare = other.points <=> points
-    return fire_attack_result_entry <=> other.fire_attack_result_entry if compare == 0
+    return fire_attack_result_entry <=> other.fire_attack_result_entry if compare .zero?
     compare
   end
 
   def places_to_points_compare(other)
     compare = points <=> other.points
-    return fire_attack_result_entry <=> other.fire_attack_result_entry if compare == 0
+    return fire_attack_result_entry <=> other.fire_attack_result_entry if compare .zero?
     compare
   end
 end

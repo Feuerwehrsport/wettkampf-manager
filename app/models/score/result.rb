@@ -11,10 +11,10 @@ class Score::Result < CacheDependendRecord
 
   validates :assessment, presence: true
 
-  default_scope { includes(:assessment).order("assessments.discipline_id", "assessments.gender") }
-  scope :gender, -> (gender) { joins(:assessment).merge(Assessment.gender(gender)) }
-  scope :group_assessment_for, -> (gender) { gender(gender).where(group_assessment: true) }
-  scope :discipline, -> (discipline) { where(assessment: Assessment.discipline(discipline)) }
+  default_scope { includes(:assessment).order('assessments.discipline_id', 'assessments.gender') }
+  scope :gender, ->(gender) { joins(:assessment).merge(Assessment.gender(gender)) }
+  scope :group_assessment_for, ->(gender) { gender(gender).where(group_assessment: true) }
+  scope :discipline, ->(discipline) { where(assessment: Assessment.discipline(discipline)) }
 
   def to_label
     decorate.to_s
@@ -45,7 +45,7 @@ class Score::Result < CacheDependendRecord
     @team_tags ||= tags.where(type: TeamTag)
   end
 
-  def generate_rows(group_result=false)
+  def generate_rows(group_result = false)
     out_of_competition_rows = {}
     rows = {}
     lists.each do |list|
@@ -55,14 +55,14 @@ class Score::Result < CacheDependendRecord
         entity = entity.team if group_result && entity.is_a?(TeamRelay)
         if tags.present?
           no_skip = case entity
-          when TeamRelay
-            entity.team.include_tags?(team_tags)
-          when Team
-            entity.include_tags?(team_tags)
-          when Person
-            entity.include_tags?(person_tags) && (!team_tags.present? || (entity.team.present? && entity.team.include_tags?(team_tags)))
-          else
-            false
+                    when TeamRelay
+                      entity.team.include_tags?(team_tags)
+                    when Team
+                      entity.include_tags?(team_tags)
+                    when Person
+                      entity.include_tags?(person_tags) && (team_tags.blank? || (entity.team.present? && entity.team.include_tags?(team_tags)))
+                    else
+                      false
           end
           next unless no_skip
         end
@@ -73,9 +73,7 @@ class Score::Result < CacheDependendRecord
           end
           out_of_competition_rows[entity.id].add_list(list_entry)
         else
-          if rows[entity.id].nil?
-            rows[entity.id] = Score::ResultRow.new(entity, self)
-          end
+          rows[entity.id] = Score::ResultRow.new(entity, self) if rows[entity.id].nil?
           rows[entity.id].add_list(list_entry)
         end
       end

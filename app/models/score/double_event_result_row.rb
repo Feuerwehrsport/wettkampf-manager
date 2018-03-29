@@ -22,7 +22,7 @@ class Score::DoubleEventResultRow < Struct.new(:entity)
   def <=>(other)
     compare = sum_result_entry <=> other.sum_result_entry
     return compare if compare != 0
-    if entity.gender.to_s == "female"
+    if entity.gender.to_s == 'female'
       compare = obstacle_course_time <=> other.obstacle_course_time
       return compare if compare != 0
       climbing_hook_ladder_time <=> other.climbing_hook_ladder_time
@@ -42,7 +42,7 @@ class Score::DoubleEventResultRow < Struct.new(:entity)
   def climbing_hook_ladder_time
     time_by_discipline(Disciplines::ClimbingHookLadder)
   end
-  
+
   def obstacle_course_time
     time_by_discipline(Disciplines::ObstacleCourse)
   end

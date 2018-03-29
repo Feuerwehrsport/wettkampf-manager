@@ -1,7 +1,7 @@
 class CreateCompetitions < ActiveRecord::Migration
   def change
     create_table :competitions do |t|
-      t.string :name, null: false, default: ""
+      t.string :name, null: false, default: ''
       t.date :date, null: false
       t.boolean :configured, null: false, default: false
       t.boolean :group_assessment, null: false, default: false

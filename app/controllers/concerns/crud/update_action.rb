@@ -17,7 +17,6 @@ module CRUD::UpdateAction
     end
   end
 
-
   protected
 
   def assign_resource_for_update
@@ -25,7 +24,7 @@ module CRUD::UpdateAction
   end
 
   def update_resource
-    resource_instance.update_attributes(resource_params)
+    resource_instance.update(resource_params)
   end
 
   def after_update

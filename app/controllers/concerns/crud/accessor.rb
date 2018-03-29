@@ -6,7 +6,7 @@ module CRUD::Accessor
   class_methods do
     def implement_crud_actions(options = {})
       only = options[:only]
-      only ||= [:index, :new, :create, :show, :edit, :update, :destroy]
+      only ||= %i[index new create show edit update destroy]
       only = [only].flatten
       include CRUD::IndexAction if only.include?(:index)
       include CRUD::NewAction if only.include?(:new)

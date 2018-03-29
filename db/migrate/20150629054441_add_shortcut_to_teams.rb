@@ -1,6 +1,6 @@
 class AddShortcutToTeams < ActiveRecord::Migration
   def change
-    add_column :teams, :shortcut, :string, null: false, default: ""
+    add_column :teams, :shortcut, :string, null: false, default: ''
     Team.reset_column_information
     Team.all.each do |team|
       team.update_attribute(:shortcut, team.name.truncate(12))

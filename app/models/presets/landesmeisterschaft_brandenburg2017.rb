@@ -18,7 +18,7 @@ class Presets::LandesmeisterschaftBrandenburg2017 < Preset
     Competition.update_all(
       group_score_count: 3,
       group_run_count: 4,
-      group_assessment: true, 
+      group_assessment: true,
       date: Date.parse('2017-09-16'),
       name: 'Landesmeisterschaft Brandenburg 2017',
       place: 'Doberlug-Kirchhain',
@@ -30,10 +30,10 @@ class Presets::LandesmeisterschaftBrandenburg2017 < Preset
     @zk = Disciplines::DoubleEvent.create!
     @la = Disciplines::FireAttack.create!
 
-    [:female, :male].map do |gender|
+    %i[female male].map do |gender|
       zk_assessment = Assessment.create!(discipline: @zk, gender: gender)
       zk_result = Score::DoubleEventResult.create!(assessment: zk_assessment)
-    
+
       hb_assessment = Assessment.create!(discipline: @hb, gender: gender)
       Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result, date: Date.parse('2017-09-15'))
 

@@ -4,9 +4,11 @@ class Imports::Configuration < CacheDependendRecord
 
   before_create do
     self.data = JSON.parse(file.file.read)
-    data[:person_tag_list].each { |tag| self.tags.build(name: tag, use: true, target: :person) }
-    data[:team_tag_list].each { |tag| self.tags.build(name: tag, use: true, target: :team) }
-    data[:assessments].each {|a| self.assessments.build(name: a[:name], gender: a[:gender], discipline: a[:discipline], foreign_key: a[:id]) }
+    data[:person_tag_list].each { |tag| tags.build(name: tag, use: true, target: :person) }
+    data[:team_tag_list].each { |tag| tags.build(name: tag, use: true, target: :team) }
+    data[:assessments].each do |a|
+      assessments.build(name: a[:name], gender: a[:gender], discipline: a[:discipline], foreign_key: a[:id])
+    end
   end
 
   has_many :tags, class_name: 'Imports::Tag'
@@ -33,7 +35,9 @@ class Imports::Configuration < CacheDependendRecord
   end
 
   def date
-    Date.parse(data[:date]) rescue nil
+    Date.parse(data[:date])
+  rescue StandardError
+    nil
   end
 
   def teams
@@ -44,14 +48,14 @@ class Imports::Configuration < CacheDependendRecord
     @people ||= data[:people].map { |t| Imports::Person.new(self, t) }
   end
 
-  def execute=(value)
-    self.executed_at = Time.now
+  def execute=(_value)
+    self.executed_at = Time.current
     import
   end
 
   def import
     Competition.transaction do
-      Competition.first.update_attributes!(name: name, place: place, date: date)
+      Competition.first.update!(name: name, place: place, date: date)
       tags.each(&:import)
       teams.each(&:import)
       people.each(&:import)

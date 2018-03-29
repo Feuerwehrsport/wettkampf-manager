@@ -16,8 +16,8 @@ class Score::CompetitionResult < CacheDependendRecord
 
   def self.result_types
     {
-      dcup: "D-Cup",
-      places_to_points: "Plätze zu Punkte",
+      dcup: 'D-Cup',
+      places_to_points: 'Plätze zu Punkte',
     }
   end
 
@@ -26,17 +26,16 @@ class Score::CompetitionResult < CacheDependendRecord
   def for_results
     results.each do |result|
       discipline = result.assessment.discipline
-      if discipline.single_discipline?
-        result_rows = Score::GroupResult.new(result).rows
-      else
-        result_rows = result.group_result_rows
-      end
-
+      result_rows = if discipline.single_discipline?
+                      Score::GroupResult.new(result).rows
+                    else
+                      result.group_result_rows
+                    end
 
       ranks = {}
       result_rows.each do |row|
         result_rows.each_with_index do |rank_row, rank|
-          if 0 == (row <=> rank_row)
+          if (row <=> rank_row) .zero?
             ranks[row] = (rank + 1)
             break
           end
@@ -52,7 +51,6 @@ class Score::CompetitionResult < CacheDependendRecord
     for_results do |result, result_rows, ranks|
       points = 11
       result_rows.each do |row|
-
         rank = ranks[row]
         double_rank_count = ranks.values.select { |v| v == rank }.count - 1
         points = [(11 - ranks[row] - double_rank_count), 0].max

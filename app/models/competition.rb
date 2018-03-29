@@ -24,7 +24,7 @@ class Competition < ActiveRecord::Base
       result_type = one.competition_result_type.try(:to_sym)
       Score::CompetitionResult.result_types.keys.include?(result_type) ? result_type : nil
     end
-  end 
+  end
 
   def self.reload_class_instances
     @one = nil

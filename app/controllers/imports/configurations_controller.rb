@@ -1,7 +1,7 @@
 class Imports::ConfigurationsController < ApplicationController
-  before_action :redirect_to_show, only: [:new, :create]
-  before_action :redirect_to_new, only: [:show, :edit, :update, :destroy]
-  implement_crud_actions only: [:new, :create, :show, :edit, :update, :destroy]
+  before_action :redirect_to_show, only: %i[new create]
+  before_action :redirect_to_new, only: %i[show edit update destroy]
+  implement_crud_actions only: %i[new create show edit update destroy]
 
   def index
     redirect_to action: :new
@@ -15,9 +15,8 @@ class Imports::ConfigurationsController < ApplicationController
 
   def imports_configuration_params
     params.require(:imports_configuration).permit(:file, :execute,
-      tags_attributes: [:id, :use], 
-      assessments_attributes: [:id, :assessment_id]
-    )
+                                                  tags_attributes: %i[id use],
+                                                  assessments_attributes: %i[id assessment_id])
   end
 
   def redirect_to_show
@@ -27,11 +26,9 @@ class Imports::ConfigurationsController < ApplicationController
   def redirect_to_new
     if resource_class.possible?
       redirect_to(action: :new)
-    else
-      if resource_class.first.executed_at.present?
-        flash[:notice] = 'Import wurde durchgeführt'
-        redirect_to(root_path)
-      end
+    elsif resource_class.first.executed_at.present?
+      flash[:notice] = 'Import wurde durchgeführt'
+      redirect_to(root_path)
     end
   end
 end

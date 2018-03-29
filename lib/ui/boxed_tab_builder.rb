@@ -1,4 +1,4 @@
-class UI::BoxedTabBuilder < Struct.new(:options, :view, :block)
+UI::BoxedTabBuilder = Struct.new(:options, :view, :block) do
   Tab = Struct.new(:label, :content, :class_name)
   attr_reader :tabs
 
@@ -19,6 +19,6 @@ class UI::BoxedTabBuilder < Struct.new(:options, :view, :block)
   end
 
   def new_tab
-    Tab.new(nil, nil, @tabs.keys.present? ? "" : "active")
+    Tab.new(nil, nil, @tabs.keys.present? ? '' : 'active')
   end
 end

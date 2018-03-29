@@ -19,14 +19,14 @@ module Score::ListsHelper
     @score_list.assessments.count > 1
   end
 
-  def list_entry_options track, entry
+  def list_entry_options(track, entry)
     options = {}
-    options[:class] = "next-run" if track == list_track_count
+    options[:class] = 'next-run' if track == list_track_count
     options[:data] = { id: entry.id } if entry.present?
     options
   end
 
-  def score_list_entries(move_modus=false)
+  def score_list_entries(move_modus = false)
     entries = @score_list.entries.includes(:entity).to_a
     track = 0
     run = 1
@@ -34,9 +34,7 @@ module Score::ListsHelper
     invalid_count = 0
     extra_run = move_modus
     while entry.present? || track != 0 || extra_run
-      if entry.blank? && track == 0 && extra_run
-        extra_run = false
-      end
+      extra_run = false if entry.blank? && track.zero? && extra_run
       track += 1
       if entry && entry.track == track && entry.run == run
         yield entry.decorate, run, track
@@ -44,7 +42,7 @@ module Score::ListsHelper
       else
         yield nil, run, track
       end
-      
+
       if track == list_track_count
         track = 0
         run += 1
@@ -69,11 +67,12 @@ module Score::ListsHelper
     if @score_list.assessments.first.fire_relay?
       Team.all.map { |team| TeamRelay.create_next_free_for(team, @score_list.entries.pluck(:entity_id)) }
     else
-      discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id)).sort_by { |e| label_method_for_select_entity(e) }
+      discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id))
+                      .sort_by { |e| label_method_for_select_entity(e) }
     end
   end
 
-  def label_method_for_select_entity entity
+  def label_method_for_select_entity(entity)
     decorated = entity.decorate
     if single_discipline?
       "#{decorated.full_name} #{decorated.translated_gender}"
@@ -87,7 +86,7 @@ module Score::ListsHelper
   end
 
   def show_export_data
-    header = ['Lauf', 'Bahn']
+    header = %w[Lauf Bahn]
     if single_discipline?
       header.push('Nr.') if Competition.one.show_bib_numbers?
       header.push('Nachname', 'Vorname')
@@ -118,7 +117,9 @@ module Score::ListsHelper
         line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))
       else
         team_name = entry.try(:entity).to_s
-        team_name += "<font size='6'> (#{entry.try(:assessment).try(:decorate)})</font>" if multiple_assessments? && entry.present?
+        if multiple_assessments? && entry.present?
+          team_name += "<font size='6'> (#{entry.try(:assessment).try(:decorate)})</font>"
+        end
 
         tags = (entry.try(:entity).try(:tag_names) || []) & @score_list.tag_names
         team_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?

@@ -1,5 +1,5 @@
 class API::TeamComputerReader < API::ExternalReader
-  DEFAULT_SENDER = 'Team Computer'
+  DEFAULT_SENDER = 'Team Computer'.freeze
 
   protected
 
@@ -17,7 +17,7 @@ class API::TeamComputerReader < API::ExternalReader
         { minutes: result[4].to_i, seconds: result[5].to_i, milliseconds: result[6].to_i },
       ].each_with_index do |time_hash, track|
         centiseconds = (time_hash[:milliseconds].to_f / 10).floor
-        time = centiseconds + time_hash[:seconds]*100 + time_hash[:minutes]*60*100
+        time = centiseconds + time_hash[:seconds] * 100 + time_hash[:minutes] * 60 * 100
         send_data(time, "Bahn #{track + 1}")
       end
       return true

@@ -19,22 +19,21 @@
 
 require 'capybara/rspec'
 require 'capybara/poltergeist'
-require 'factory_girl'
+require 'factory_bot'
 
 RSpec.configure do |config|
   Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, window_size: [1280, 1024], :phantomjs_options => ['--debug=no', '--load-images=yes', '--ignore-ssl-errors=yes', '--ssl-protocol=TLSv1'], debug: false)
+    Capybara::Poltergeist::Driver.new(app, window_size: [1280, 1024], phantomjs_options: ['--debug=no', '--load-images=yes', '--ignore-ssl-errors=yes', '--ssl-protocol=TLSv1'], debug: false)
   end
 
   Capybara.configure do |config|
-    config.app_host = "http://127.0.0.1:7787"
-    config.default_host = "http://127.0.0.1"
+    config.app_host = 'http://127.0.0.1:7787'
+    config.default_host = 'http://127.0.0.1'
     config.run_server = true
     config.server_port = 7787
     config.javascript_driver = :poltergeist
     config.default_driver = config.javascript_driver
   end
-
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -87,7 +86,7 @@ RSpec.configure do |config|
     # Print the 10 slowest examples and example groups at the
     # end of the spec run, to help surface which specs are running
     # particularly slow.
-    config.profile_examples = 10
+    # config.profile_examples = 10
 
     # Run specs in random order to surface order dependencies. If you find an
     # order dependency and want to debug it, you can fix the order by providing
@@ -101,17 +100,17 @@ RSpec.configure do |config|
     # as the one that triggered the failure.
     Kernel.srand config.seed
 
-    config.include FactoryGirl::Syntax::Methods
+    config.include FactoryBot::Syntax::Methods
 
     config.before(:suite) do
-      FileUtils.mkdir_p(File.join(Rails.root, "tmp", "cache"))
+      FileUtils.mkdir_p(File.join(Rails.root, 'tmp', 'cache'))
       # Do truncation once per suite to vacuum for Postgres
       DatabaseCleaner.clean_with :truncation
       # Normally do transactions-based cleanup
       DatabaseCleaner.strategy = :transaction
     end
 
-    config.before(:each) do 
+    config.before do
       allow(Competition).to receive(:one).and_return(create(:competition))
     end
 
@@ -120,12 +119,12 @@ RSpec.configure do |config|
       browser = Capybara.current_session.driver.browser
       browser.try(:clear_cookies)
       browser.try(:manage).try(:delete_all_cookies)
-      load File.join(Rails.root, "db", "seeds.rb")
+      load File.join(Rails.root, 'db', 'seeds.rb')
     end
 
-    config.around(:each) do |spec|
+    config.around do |spec|
       if spec.metadata[:js]
-        # JS => run with Poltergeist/Selenium that doesn't share connections 
+        # JS => run with Poltergeist/Selenium that doesn't share connections
         # => can't use transactions
         # deletion is often faster than truncation on Postgres - doesn't vacuum
         # no need to 'start', clean_with is sufficient for deletion
@@ -140,4 +139,3 @@ RSpec.configure do |config|
     end
   end
 end
-

@@ -8,7 +8,7 @@ module Series::Importable
     ranks = {}
     result_rows.each do |row|
       result_rows.each_with_index do |rank_row, rank|
-        if 0 == (row <=> rank_row)
+        if (row <=> rank_row) .zero?
           ranks[row] = (rank + 1)
           break
         end

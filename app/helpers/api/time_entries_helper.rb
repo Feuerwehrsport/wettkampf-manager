@@ -7,7 +7,7 @@ module API::TimeEntriesHelper
     @list_entry.list.assessments.count > 1
   end
 
-  def list_entry_options track, entry
+  def list_entry_options(_track, _entry)
     {}
   end
 end

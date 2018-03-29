@@ -1,58 +1,58 @@
 class Certificates::TextPosition < CacheDependendRecord
   KEY_CONFIG = {
     team_name: {
-      description: "Name der Mannschaft",
-      example: "FF Warin",
+      description: 'Name der Mannschaft',
+      example: 'FF Warin',
     },
     person_name: {
-      description: "Name des Wettkämpfers",
-      example: "Tom Gehlert",
+      description: 'Name des Wettkämpfers',
+      example: 'Tom Gehlert',
     },
     person_bib_number: {
-      description: "Startnummer",
-      example: "1033",
+      description: 'Startnummer',
+      example: '1033',
     },
     time_long: {
-      description: "Zeit (Sekunden)",
-      example: "23,39 Sekunden",
+      description: 'Zeit (Sekunden)',
+      example: '23,39 Sekunden',
     },
     time_short: {
-      description: "Zeit (s)",
-      example: "23,39 s",
+      description: 'Zeit (s)',
+      example: '23,39 s',
     },
     points: {
-      description: "Punkte",
-      example: "Punkte",
+      description: 'Punkte',
+      example: 'Punkte',
     },
     rank: {
-      description: "Platz",
-      example: "42.",
+      description: 'Platz',
+      example: '42.',
     },
     assessment: {
-      description: "Wertung",
-      example: "Hakenleitersteigen - U20",
+      description: 'Wertung',
+      example: 'Hakenleitersteigen - U20',
     },
     assessment_with_gender: {
-      description: "Wertung mit Geschlecht",
-      example: "Hakenleitersteigen - U20 - Männer",
+      description: 'Wertung mit Geschlecht',
+      example: 'Hakenleitersteigen - U20 - Männer',
     },
     gender: {
-      description: "Geschlecht",
-      example: "Männer",
+      description: 'Geschlecht',
+      example: 'Männer',
     },
     date: {
-      description: "Datum",
-      example: "31.07.2012",
+      description: 'Datum',
+      example: '31.07.2012',
     },
     place: {
-      description: "Ort",
-      example: "Cottbus",
+      description: 'Ort',
+      example: 'Cottbus',
     },
     competition_name: {
-      description: "Name des Wettkampfes",
-      example: "Deutschland-Cup",
+      description: 'Name des Wettkampfes',
+      example: 'Deutschland-Cup',
     },
-  }
+  }.freeze
 
   belongs_to :template
   validates :template, :key, :top, :left, :align, :size, presence: true

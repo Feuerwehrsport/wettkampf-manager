@@ -1,7 +1,7 @@
 Capybara::Selenium::Driver.class_eval do
   def quit
     sleep 3
-    puts "Press RETURN to quit the browser"
+    puts 'Press RETURN to quit the browser'
     $stdin.gets
     @browser.quit
   rescue Errno::ECONNREFUSED
@@ -10,10 +10,7 @@ Capybara::Selenium::Driver.class_eval do
 end
 
 Capybara::Session.class_eval do
-  def reset!
-  end
+  def reset!; end
 end
 
-if Rails.application.config.cache_classes
-  puts "Warning: Rails.application.config.cache_classes is true"
-end
+puts 'Warning: Rails.application.config.cache_classes is true' if Rails.application.config.cache_classes

@@ -16,9 +16,9 @@ class Score::ListFactories::FireRelay < Score::ListFactory
         number_requests[number] ||= []
         relay = TeamRelay.find_or_create_by!(team: request.entity, number: number)
         number_requests[number].push(OpenStruct.new(
-          entity: relay, 
-          assessment_type: request.assessment_type, 
-          assessment: request.assessment
+                                       entity: relay,
+                                       assessment_type: request.assessment_type,
+                                       assessment: request.assessment,
         ))
       end
     end

@@ -13,7 +13,7 @@ class Presets::FireAttack < Preset
 
   def perform
     la = Disciplines::FireAttack.create!
-    [:female, :male].map do |gender|
+    %i[female male].map do |gender|
       la_assessment = Assessment.create!(discipline: la, gender: gender)
       Score::Result.create!(assessment: la_assessment, group_assessment: true)
     end

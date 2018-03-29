@@ -8,9 +8,7 @@ module CRUD::IndexAction
   end
 
   def index
-    if collection_instance.respond_to?(:index_order)
-      self.collection_instance = collection_instance.index_order
-    end
+    self.collection_instance = collection_instance.index_order if collection_instance.respond_to?(:index_order)
     scope_index_collection
   end
 
@@ -34,9 +32,7 @@ module CRUD::IndexAction
 
   def index_collection
     collection = base_collection
-    if resource_class.respond_to?(:search) and params[:search].present?
-      collection = collection.search(params[:search])
-    end
+    collection = collection.search(params[:search]) if resource_class.respond_to?(:search) && params[:search].present?
     collection
   end
 end

@@ -1,7 +1,6 @@
 module CRUD::ResourceParams
   extend ActiveSupport::Concern
 
-
   protected
 
   def resource_params

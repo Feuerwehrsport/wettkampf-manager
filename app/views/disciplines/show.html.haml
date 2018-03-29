@@ -1,7 +1,7 @@
 .row
   .col-md-8
     = box "Wertungsgruppen von #{@discipline}" do |box|
-      - if @discipline.assessments.count == 0
+      - if @discipline.assessments.count .zero?
         .alert.alert-info Keine Einträge gefunden
       - else
         %table.table

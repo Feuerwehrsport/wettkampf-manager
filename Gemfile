@@ -57,6 +57,7 @@ gem 'firesport-series', path: 'firesport-series'
 group :development do
   gem 'guard-rspec'
   gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
   gem 'faker'
 end
 
@@ -73,6 +74,5 @@ group :test do
   gem 'connection_pool'
   gem 'capybara'
   gem 'poltergeist'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 end
-

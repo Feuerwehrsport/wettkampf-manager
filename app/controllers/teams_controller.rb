@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
   implement_crud_actions
   before_action :assign_team_tags
-  before_action :assign_resource_for_edit_assessment_requests, only: [:edit_assessment_requests, :statistic_suggestions]
+  before_action :assign_resource_for_edit_assessment_requests, only: %i[edit_assessment_requests statistic_suggestions]
 
   def show
     super
@@ -14,8 +14,7 @@ class TeamsController < ApplicationController
     page_title 'Mannschaften'
   end
 
-  def edit_assessment_requests
-  end
+  def edit_assessment_requests; end
 
   def without_statistics_id
     @team_suggestions = base_collection.where(fire_sport_statistics_team_id: nil).map do |team|
@@ -23,8 +22,7 @@ class TeamsController < ApplicationController
     end
   end
 
-  def statistic_suggestions
-  end
+  def statistic_suggestions; end
 
   protected
 
@@ -39,8 +37,8 @@ class TeamsController < ApplicationController
   def team_params
     params.require(:team).permit(
       :name, :gender, :number, :shortcut, :fire_sport_statistics_team_id, :lottery_number, :federal_state_id,
-      requests_attributes: [:assessment_type, :relay_count, :_destroy, :assessment_id, :id],
-      tag_references_attributes: [:id, :tag_id, :_destroy]
+      requests_attributes: %i[assessment_type relay_count _destroy assessment_id id],
+      tag_references_attributes: %i[id tag_id _destroy]
     )
   end
 

@@ -1,4 +1,4 @@
-class UI::BoxBuilder < Struct.new(:title, :options, :view, :block)
+UI::BoxBuilder = Struct.new(:title, :options, :view, :block) do
   attr_reader :body
 
   def initialize(*args)

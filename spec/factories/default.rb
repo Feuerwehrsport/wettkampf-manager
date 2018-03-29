@@ -1,11 +1,11 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence(:first_name) { |n| "Alfred#{n}" }
   sequence(:last_name) { |n| "Meier#{n}" }
   sequence(:name) { |n| "Team#{n}" }
 
   factory :team do
-    name "Mecklenburg-Vorpommern"
-    shortcut "Team MV"
+    name 'Mecklenburg-Vorpommern'
+    shortcut 'Team MV'
     gender :male
 
     trait(:male) { gender :male }
@@ -16,8 +16,8 @@ FactoryGirl.define do
   end
 
   factory :person do
-    first_name "Alfred"
-    last_name "Meier"
+    first_name 'Alfred'
+    last_name 'Meier'
     gender :male
 
     trait(:generated) do
@@ -32,21 +32,21 @@ FactoryGirl.define do
     end
   end
 
-  factory :climbing_hook_ladder, class: "Disciplines::ClimbingHookLadder" do
+  factory :climbing_hook_ladder, class: 'Disciplines::ClimbingHookLadder' do
   end
-  factory :obstacle_course, class: "Disciplines::ObstacleCourse" do
+  factory :obstacle_course, class: 'Disciplines::ObstacleCourse' do
   end
-  factory :fire_relay, class: "Disciplines::FireRelay" do
+  factory :fire_relay, class: 'Disciplines::FireRelay' do
     like_fire_relay true
   end
-  factory :fire_attack, class: "Disciplines::FireAttack" do
+  factory :fire_attack, class: 'Disciplines::FireAttack' do
   end
-  factory :double_event, class: "Disciplines::DoubleEvent" do
+  factory :double_event, class: 'Disciplines::DoubleEvent' do
   end
 
   factory :assessment do
     discipline { Disciplines::ClimbingHookLadder.first || create(:climbing_hook_ladder) }
-    name ""
+    name ''
     gender :male
     trait :obstacle_course do
       discipline { create :obstacle_course }
@@ -64,31 +64,31 @@ FactoryGirl.define do
     assessment_type :group_competitor
   end
 
-  factory :score_list, class: "Score::List" do
+  factory :score_list, class: 'Score::List' do
     assessments { [Assessment.first || create(:assessment)] }
-    results { [ Score::Result.first || create(:score_result)] }
-    name "Hakenleitersteigen - Männer - Lauf 1"
-    shortcut "Lauf 1"
-  end  
+    results { [Score::Result.first || create(:score_result)] }
+    name 'Hakenleitersteigen - Männer - Lauf 1'
+    shortcut 'Lauf 1'
+  end
 
-  factory :score_list_entry, class: "Score::ListEntry" do
-    association :list, factory: :score_list 
+  factory :score_list_entry, class: 'Score::ListEntry' do
+    association :list, factory: :score_list
     assessment { Assessment.first || create(:assessment) }
     track 1
     run 1
-    entity { Person.first || build(:person, :with_team) }    
+    entity { Person.first || build(:person, :with_team) }
     trait :result_valid do
-      result_type "valid"
+      result_type 'valid'
     end
     trait :result_invalid do
-      result_type "invalid"
+      result_type 'invalid'
     end
     trait :generate_person do
-      entity { build :person, :with_team, first_name: generate(:first_name), last_name: generate(:last_name) }    
+      entity { build :person, :with_team, first_name: generate(:first_name), last_name: generate(:last_name) }
     end
   end
 
-  factory :score_result_row, class: "Score::ResultRow" do
+  factory :score_result_row, class: 'Score::ResultRow' do
     initialize_with do
       new(build(:person), build(:score_result))
     end
@@ -97,9 +97,9 @@ FactoryGirl.define do
     end
   end
 
-  factory :score_result, class: "Score::Result" do
+  factory :score_result, class: 'Score::Result' do
     assessment { Assessment.first || build(:assessment) }
-    name ""
+    name ''
   end
 
   factory :team_relay do

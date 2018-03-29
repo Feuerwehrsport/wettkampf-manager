@@ -47,6 +47,6 @@ class Discipline < CacheDependendRecord
   end
 
   def key
-    ""
+    ''
   end
 end

@@ -2,7 +2,7 @@ class AssessmentDecorator < ApplicationDecorator
   decorates_association :discipline
 
   def to_s
-    name.present? ? name : ([discipline, translated_gender] + tag_names).reject(&:blank?).join(' - ')
+    name.presence || ([discipline, translated_gender] + tag_names).reject(&:blank?).join(' - ')
   end
 
   def name_with_request_count
@@ -10,7 +10,7 @@ class AssessmentDecorator < ApplicationDecorator
       numbers = []
       (1..assessment.requests.map(&:relay_count).max).each do |number|
         count = assessment.requests.where('relay_count >= ?', number).count
-        numbers.push("#{count}x #{(64+number).chr}")
+        numbers.push("#{count}x #{(64 + number).chr}")
       end
       "#{self} (#{numbers.join(', ')})"
     else

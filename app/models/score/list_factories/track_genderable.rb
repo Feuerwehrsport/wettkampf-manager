@@ -3,7 +3,7 @@ class Score::ListFactories::TrackGenderable < Score::ListFactories::Simple
   validates :track, numericality: { only_integer: true, graeter_than: 0, less_than_or_equal_to: :track_count }, if: -> { step_reached?(:finish) }
 
   def self.generator_params
-    [:track, :gender]
+    %i[track gender]
   end
 
   def perform

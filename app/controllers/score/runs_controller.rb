@@ -1,5 +1,5 @@
 class Score::RunsController < ApplicationController
-  implement_crud_actions only: [:edit, :update]
+  implement_crud_actions only: %i[edit update]
 
   protected
 
@@ -13,6 +13,6 @@ class Score::RunsController < ApplicationController
   end
 
   def score_run_params
-    params.require(:score_run).permit(list_entries_attributes: [ :id, :track, :result_type, :edit_second_time ])
+    params.require(:score_run).permit(list_entries_attributes: %i[id track result_type edit_second_time])
   end
 end

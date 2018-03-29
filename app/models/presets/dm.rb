@@ -20,7 +20,7 @@ class Presets::DM < Preset
   def perform
     Competition.update_all(
       group_score_count: 6,
-      group_assessment: true, 
+      group_assessment: true,
       competition_result_type: 'places_to_points',
       show_bib_numbers: true,
       lottery_numbers: true,
@@ -35,7 +35,7 @@ class Presets::DM < Preset
     @zk = Disciplines::DoubleEvent.create!
     @la = Disciplines::FireAttack.create!
 
-    competition_results = [:female, :male].map do |gender|
+    competition_results = %i[female male].map do |gender|
       competition_result = Score::CompetitionResult.create(gender: gender, result_type: 'places_to_points', name: 'Deutsche Feuerwehrmeisterschaft')
 
       zk_assessment = Assessment.create!(discipline: @zk, gender: gender)
@@ -45,16 +45,16 @@ class Presets::DM < Preset
       hb_assessment = Assessment.create!(discipline: @hb, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result, date: Date.parse('2016-07-29'))
       Score::Result.create!(assessment: hb_assessment, double_event_result: zk_result_youth, tag_references_attributes: [{ tag_id: youth_tag.id }], date: Date.parse('2016-07-29'))
-      Score::Result.create!(assessment: hb_assessment, name: "#{hb_assessment.decorate.to_s} - Finale")
+      Score::Result.create!(assessment: hb_assessment, name: "#{hb_assessment.decorate} - Finale")
 
       hl_assessment = Assessment.create!(discipline: @hl, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: hl_assessment, group_assessment: true, double_event_result: zk_result, date: Date.parse('2016-07-28'))
       Score::Result.create!(assessment: hl_assessment, double_event_result: zk_result_youth, tag_references_attributes: [{ tag_id: youth_tag.id }], date: Date.parse('2016-07-28'))
-      Score::Result.create!(assessment: hl_assessment, name: "#{hl_assessment.decorate.to_s} - Finale", date: Date.parse('2016-07-28'))
+      Score::Result.create!(assessment: hl_assessment, name: "#{hl_assessment.decorate} - Finale", date: Date.parse('2016-07-28'))
 
       la_assessment = Assessment.create!(discipline: @la, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: la_assessment, group_assessment: false)
-      Score::Result.create!(assessment: la_assessment, group_assessment: true, tag_references_attributes: [{ tag_id: complete_tag.id }], name: "#{la_assessment.decorate.to_s} - Sport")
+      Score::Result.create!(assessment: la_assessment, group_assessment: true, tag_references_attributes: [{ tag_id: complete_tag.id }], name: "#{la_assessment.decorate} - Sport")
 
       fs_assessment = Assessment.create!(discipline: @fs, gender: gender, score_competition_result: competition_result)
       Score::Result.create!(assessment: fs_assessment, group_assessment: true, date: Date.parse('2016-07-29'))

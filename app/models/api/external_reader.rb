@@ -2,7 +2,7 @@ require 'uri'
 require 'net/http'
 
 class API::ExternalReader
-  DEFAULT_SENDER = ''
+  DEFAULT_SENDER = ''.freeze
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
   attr_accessor :url, :password, :sender, :cli, :serial_connection
@@ -19,12 +19,10 @@ class API::ExternalReader
 
   def perform
     loop do
-      begin
-        evaluate_output(serial_adapter.read(10))
-        sleep 0.3
-      rescue RubySerial::Exception => error
-        return log_send_error("Schnittstelle: #{error.message}")
-      end
+      evaluate_output(serial_adapter.read(10))
+      sleep 0.3
+    rescue RubySerial::Exception => error
+      return log_send_error("Schnittstelle: #{error.message}")
     end
   end
 
@@ -45,7 +43,7 @@ class API::ExternalReader
       http = Net::HTTP.new(http_url.host, http_url.port)
       http.use_ssl = (http_url.scheme == 'https')
       response = http.post(http_url.path, params.to_query)
-      response =  JSON.parse(response.body)
+      response = JSON.parse(response.body)
       if !response['success']
         log_send_error(response['error'])
       else

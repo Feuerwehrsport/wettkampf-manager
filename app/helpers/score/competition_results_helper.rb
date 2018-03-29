@@ -1,9 +1,9 @@
 module Score::CompetitionResultsHelper
   def table_data(competition_result)
-    header = ['Platz', 'Mannschaft']
+    header = %w[Platz Mannschaft]
     competition_result.results.each do |result|
       header.push(result.assessment.discipline.to_short)
-      header.push("")
+      header.push('')
     end
     header.push('Punkte')
     rows = [header]
@@ -26,9 +26,7 @@ module Score::CompetitionResultsHelper
 
   def place_for_row(row, rows)
     rows.each_with_index do |place_row, place|
-      if 0 == (row <=> place_row)
-        return (place + 1) 
-      end
+      return (place + 1) if (row <=> place_row).zero?
     end
   end
 end

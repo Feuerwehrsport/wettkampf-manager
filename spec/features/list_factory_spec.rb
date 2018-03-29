@@ -1,7 +1,7 @@
 require 'rails_helper'
-RSpec.feature "list factory" do
+RSpec.describe 'list factory' do
   before do
-    User.first.update_attributes!(password: "my-password", password_confirmation: "my-password")
+    User.first.update!(password: 'my-password', password_confirmation: 'my-password')
     Preset.find(3).save # D-Cup mit 4x100
   end
 
@@ -14,10 +14,9 @@ RSpec.feature "list factory" do
   let(:assessment_request2) { create(:assessment_request, entity: person2, assessment: assessment, group_competitor_order: 2) }
   let(:result) { Score::Result.where(assessment: assessment).first }
 
-  let(:fire_relay_assessment) { Assessment.all.to_a.find {|a| a.discipline.like_fire_relay? } }
+  let(:fire_relay_assessment) { Assessment.all.to_a.find { |a| a.discipline.like_fire_relay? } }
   let(:assessment_request_fire_relay1) { create(:assessment_request, entity: team1, assessment: fire_relay_assessment, relay_count: 2) }
   let(:assessment_request_fire_relay2) { create(:assessment_request, entity: team2, assessment: fire_relay_assessment, relay_count: 1) }
-
 
   it 'creates lists for most disciplines', js: true do
     assessment_request1
@@ -83,7 +82,7 @@ RSpec.feature "list factory" do
     expect(find_field('Mannschaftsreihenfolge beachten')).to be_checked
     choose 'Bahnwechsel'
     click_on 'Weiter'
-    expect(find_field('Vorherige Liste').value).to eq "#{Score::List.last.id}"
+    expect(find_field('Vorherige Liste').value).to eq Score::List.last.id.to_s
     click_on 'Weiter'
     expect(page).to have_content('Voraussichtliche Liste')
     click_on 'Startliste erstellen'
@@ -194,7 +193,7 @@ RSpec.feature "list factory" do
 
     perform_login
     visit root_path
- 
+
     click_on 'Startlisten'
     click_on 'Hinzufügen', match: :first
     click_on '4x100m Feuerwehrstafette'

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :score_list_factory, class: Score::ListFactory do
     assessments { [create(:assessment)] }
     discipline { assessments.first.discipline }

@@ -1,22 +1,18 @@
 module Score::ResultsHelper
-  def place_for_row row
+  def place_for_row(row)
     @rows.each_with_index do |place_row, place|
-      if 0 == (row <=> place_row)
-        return (place + 1) 
-      end
+      return (place + 1) if (row <=> place_row).zero?
     end
   end
 
-  def place_for_group_row row
+  def place_for_group_row(row)
     @group_result_rows.each_with_index do |place_row, place|
-      if 0 == (row <=> place_row)
-        return (place + 1) 
-      end
+      return (place + 1) if (row <=> place_row).zero?
     end
   end
 
   def build_group_data_rows
-    data = [["Platz", "Name", "Summe"]]
+    data = [%w[Platz Name Summe]]
     @group_result_rows.each do |row|
       data.push ["#{place_for_group_row(row)}.", row.team.to_s, row.result_entry.to_s]
     end
@@ -33,7 +29,7 @@ module Score::ResultsHelper
   end
 
   def build_data_rows(shortcut)
-    header = ["Platz"]
+    header = ['Platz']
     if @discipline.single_discipline_or_double_event?
       PersonDecorator.human_name_cols.each { |col| header.push col }
     else
@@ -43,7 +39,7 @@ module Score::ResultsHelper
       @score_result.results.each do |result|
         header.push(result.assessment.discipline.decorate.to_short)
       end
-      header.push("Summe")
+      header.push('Summe')
     else
       @score_result.lists.each do |list|
         header.push(list.object.shortcut)
@@ -70,10 +66,10 @@ module Score::ResultsHelper
       data.push(line)
     end
 
-    data.map! {|row| row.map!(&:to_s) }
+    data.map! { |row| row.map!(&:to_s) }
   end
 
-  def row_invalid_class row
-    row.valid? ? "" : "danger"
+  def row_invalid_class(row)
+    row.valid? ? '' : 'danger'
   end
 end

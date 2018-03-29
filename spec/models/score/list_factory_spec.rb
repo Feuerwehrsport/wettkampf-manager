@@ -7,9 +7,9 @@ RSpec.describe Score::ListFactory, type: :model do
   let(:older_result) { create :score_result, assessment: assessment }
   let(:created_list) { Score::List.last }
 
-  describe "steps" do
-    describe "" do
-      it "" do
+  describe 'steps' do
+    describe '' do
+      it '' do
         instance = Score::ListFactory.create!(discipline: discipline, next_step: 'assessments')
         expect(instance.current_step).to eq :assessments
         instance.update!(assessment_ids: [assessment.id], next_step: 'names')
@@ -47,11 +47,11 @@ RSpec.describe Score::ListFactory, type: :model do
     end
   end
 
-  describe "#for_run_and_track_for" do
+  describe '#for_run_and_track_for' do
     let(:factory) { Score::ListFactories::Simple.create!(discipline: discipline, assessments: [assessment], name: 'long name', shortcut: 'short', track_count: 2, results: [result]) }
     let(:rows) { [1, 2, 3, 4, 5] }
 
-    it "calls create_list_entry for each run and track" do
+    it 'calls create_list_entry for each run and track' do
       factory.send(:create_list)
       expect(factory).to receive(:create_list_entry).with(1, 1, 1)
       expect(factory).to receive(:create_list_entry).with(2, 1, 2)

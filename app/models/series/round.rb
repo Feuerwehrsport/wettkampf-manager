@@ -10,12 +10,12 @@ class Series::Round < ActiveRecord::Base
 
   default_scope -> { order(year: :desc, name: :asc) }
   scope :cup_count, -> do
-    select("#{table_name}.*, COUNT(#{Cup.table_name}.id) AS cup_count").
-    joins(:cups).
-    group("#{table_name}.id")
+    select("#{table_name}.*, COUNT(#{Cup.table_name}.id) AS cup_count")
+      .joins(:cups)
+      .group("#{table_name}.id")
   end
-  scope :with_team, -> (team_id, gender) do
-    joins(:participations).where(series_participations:  { team_id: team_id }).merge(Series::TeamAssessment.gender(gender)).uniq
+  scope :with_team, ->(team_id, gender) do
+    joins(:participations).where(series_participations: { team_id: team_id }).merge(Series::TeamAssessment.gender(gender)).uniq
   end
   scope :with_local_results, -> do
     assessment_ids = Series::AssessmentResult.select(:assessment_id)
@@ -26,7 +26,7 @@ class Series::Round < ActiveRecord::Base
     assessments.pluck(:discipline).uniq.sort
   end
 
-  def team_assessment_rows(gender, cache=true)
+  def team_assessment_rows(gender, cache = true)
     @team_assessment_rows ||= calculate_rows(cache)
     @team_assessment_rows[gender]
   end
@@ -55,42 +55,41 @@ class Series::Round < ActiveRecord::Base
 
   protected
 
-  def calculate_rows(cache)
+  def calculate_rows(_cache)
     rows = {}
-    [:female, :male].each do |gender|
+    %i[female male].each do |gender|
       rows[gender] = teams(gender).values.sort
       rows[gender].each { |row| row.calculate_rank!(rows[gender]) }
-      rows[gender].each { |row| aggregate_class.special_sort!(rows[gender]) }
+      rows[gender].each { |_row| aggregate_class.special_sort!(rows[gender]) }
     end
     rows
   end
 
   def teams(gender)
     teams = {}
-    Series::TeamParticipation.where(assessment: assessments.gender(gender)).each do |participation|
+    Series::TeamParticipation.where(assessment: assessments.gender(gender)).find_each do |participation|
       teams[participation.entity_id] ||= aggregate_class.new(participation.team, participation.team_number)
       teams[participation.entity_id].add_participation(participation)
     end
     assessments.gender(gender).each do |assessment|
       result = assessment.score_results.first
-      if result.present?
-        cup  = Series::Cup.today_cup_for_round(self)
-        rows = result.discipline.single_discipline? ? Score::GroupResult.new(result).rows : result.group_result_rows
+      next if result.blank?
+      cup  = Series::Cup.today_cup_for_round(self)
+      rows = result.discipline.single_discipline? ? Score::GroupResult.new(result).rows : result.group_result_rows
 
-        convert_result_rows(rows) do |row, time, points, rank|
-          participation = Series::TeamParticipation.new(
-            cup: cup,
-            team: row.entity.fire_sport_statistics_team_with_dummy,
-            team_number: row.entity.number,
-            time: time,
-            points: points,
-            rank: rank,
-            assessment: assessment,
-          )
+      convert_result_rows(rows) do |row, time, points, rank|
+        participation = Series::TeamParticipation.new(
+          cup: cup,
+          team: row.entity.fire_sport_statistics_team_with_dummy,
+          team_number: row.entity.number,
+          time: time,
+          points: points,
+          rank: rank,
+          assessment: assessment,
+        )
 
-          teams[participation.entity_id] ||= aggregate_class.new(participation.team, participation.team_number)
-          teams[participation.entity_id].add_participation(participation)
-        end
+        teams[participation.entity_id] ||= aggregate_class.new(participation.team, participation.team_number)
+        teams[participation.entity_id].add_participation(participation)
       end
     end
     teams

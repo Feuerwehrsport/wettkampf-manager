@@ -1,5 +1,5 @@
 module PeopleHelper
-  def specific_request(assessment) 
+  def specific_request(assessment)
     request = @person.requests.find_or_initialize_by(assessment: assessment)
     request.assessment_type = :no_request unless request.persisted?
     request
@@ -13,7 +13,7 @@ module PeopleHelper
     @tags.each { |tag| headline.push(tag.to_s) }
     assessments.each { |assessment| headline.push(assessment.discipline.to_short) }
     data = [headline]
-    
+
     collection.each do |person|
       line = []
       line.push(person.bib_number) if Competition.one.show_bib_numbers?

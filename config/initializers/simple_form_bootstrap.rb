@@ -136,17 +136,16 @@ SimpleForm.setup do |config|
 end
 
 module SimpleFormBootstrapPrimaryButton
-
   def primary_button(type, *args, &block)
-    styled_button("btn btn-primary", type, *args, &block)
+    styled_button('btn btn-primary', type, *args, &block)
   end
 
   def success_button(type, *args, &block)
-    styled_button("btn btn-success", type, *args, &block)
+    styled_button('btn btn-success', type, *args, &block)
   end
 
   def danger_button(type, *args, &block)
-    styled_button("btn btn-danger", type, *args, &block)
+    styled_button('btn btn-danger', type, *args, &block)
   end
 
   private
@@ -159,7 +158,6 @@ module SimpleFormBootstrapPrimaryButton
     args << options
     send(:button_button, *args, &block)
   end
-  
 end
 
 SimpleForm::FormBuilder.send :include, SimpleFormBootstrapPrimaryButton

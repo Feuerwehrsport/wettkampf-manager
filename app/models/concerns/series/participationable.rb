@@ -1,6 +1,6 @@
 module Series::Participationable
   extend ActiveSupport::Concern
-      
+
   def team_count
     team_participations.pluck(:team_id, :team_number).uniq.count
   end

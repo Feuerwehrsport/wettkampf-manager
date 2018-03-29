@@ -4,15 +4,15 @@ module Score::ListFactoryDefaults
   end
 
   def possible_results
-    Score::Result.where(id: assessments.joins(:results).pluck("score_results.id"))
+    Score::Result.where(id: assessments.joins(:results).pluck('score_results.id'))
   end
 
   def possible_before_results
-    Score::Result.where(id: assessments.joins(:results).pluck("score_results.id"))
+    Score::Result.where(id: assessments.joins(:results).pluck('score_results.id'))
   end
 
   def possible_before_lists
-    Score::List.where(id: assessments.joins(:lists).pluck("score_lists.id"))
+    Score::List.where(id: assessments.joins(:lists).pluck('score_lists.id'))
   end
 
   def default_name
@@ -74,4 +74,3 @@ module Score::ListFactoryDefaults
     run
   end
 end
-

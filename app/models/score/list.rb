@@ -5,7 +5,7 @@ class Score::List < CacheDependendRecord
   has_many :assessments, through: :list_assessments
   has_many :result_lists, dependent: :destroy
   has_many :results, through: :result_lists
-  has_many :entries, -> { order(:run).order(:track) }, class_name: "Score::ListEntry", dependent: :destroy
+  has_many :entries, -> { order(:run).order(:track) }, class_name: 'Score::ListEntry', dependent: :destroy
 
   default_scope { order(:name) }
 

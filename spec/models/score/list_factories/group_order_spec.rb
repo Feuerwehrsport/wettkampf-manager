@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Score::ListFactories::GroupOrder, type: :model do
   subject { create(:score_list_factory_group_order, assessments: [assessment], discipline: assessment.discipline) }
-  
+
   describe '#perform_rows' do
     let(:list) { build_stubbed :score_list, assessments: [assessment] }
     let(:assessment) { create :assessment }
@@ -20,7 +20,7 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
     let(:person2_team2) { create(:person, :generated, team: team2) }
     let(:person3_team2) { create(:person, :generated, team: team2) }
     let(:person4_team2) { create(:person, :generated, team: team2) }
-    
+
     let(:team3) { create(:team, :generated) }
     let(:person1_team3) { create(:person, :generated, team: team3) }
     let(:person2_team3) { create(:person, :generated, team: team3) }
@@ -43,8 +43,8 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
       create_assessment_request(person2_team3, 2)
       create_assessment_request(person3_team3, 3)
     end
-    
-    it "returns requests seperated by team and group competitor order" do
+
+    it 'returns requests seperated by team and group competitor order' do
       requests = subject.send(:perform_rows)
       expect(requests).to have(13).items
 
@@ -76,12 +76,11 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
   end
 end
 
-def create_assessment_request(entity, group_order, single_order=0, assessment_type=:group_competitor)
-  create(:assessment_request, 
-    assessment: assessment,
-    entity: entity, 
-    group_competitor_order: group_order,
-    single_competitor_order: single_order,
-    assessment_type: assessment_type,
-  )
+def create_assessment_request(entity, group_order, single_order = 0, assessment_type = :group_competitor)
+  create(:assessment_request,
+         assessment: assessment,
+         entity: entity,
+         group_competitor_order: group_order,
+         single_competitor_order: single_order,
+         assessment_type: assessment_type)
 end

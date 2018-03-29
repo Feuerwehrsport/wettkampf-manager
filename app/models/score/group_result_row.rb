@@ -41,7 +41,7 @@ class Score::GroupResultRow < Struct.new(:team, :score_count, :run_count)
 
   def <=>(other)
     compare = valid_compare <=> other.valid_compare
-    compare == 0 ? result_entry <=> other.result_entry : compare
+    compare .zero? ? result_entry <=> other.result_entry : compare
   end
 
   protected
@@ -52,7 +52,7 @@ class Score::GroupResultRow < Struct.new(:team, :score_count, :run_count)
     @rows_in = []
     @rows_out = []
     @result_rows ||= []
-    if !competition_result_valid?
+    unless competition_result_valid?
       @time = nil
       return
     end

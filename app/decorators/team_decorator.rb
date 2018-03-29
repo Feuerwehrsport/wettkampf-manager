@@ -12,7 +12,7 @@ class TeamDecorator < ApplicationDecorator
     "#{numbered_name} #{translated_gender}"
   end
 
-  def to_s(full=false)
+  def to_s(full = false)
     full ? numbered_name_with_gender : numbered_name
   end
 
@@ -24,7 +24,7 @@ class TeamDecorator < ApplicationDecorator
     "#{numbered_shortcut_name} #{gender_symbol}"
   end
 
-  def shortcut_name(full=false)
+  def shortcut_name(full = false)
     full ? numbered_shortcut_name_with_gender : numbered_shortcut_name
   end
 
@@ -43,6 +43,6 @@ class TeamDecorator < ApplicationDecorator
   private
 
   def multi_team?
-    Team.gender(gender).where(name: name).where.not(id: id).count > 0
+    Team.gender(gender).where(name: name).where.not(id: id).count.positive?
   end
 end

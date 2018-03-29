@@ -1,5 +1,5 @@
 class PresetsController < ApplicationController
-  implement_crud_actions only: [:show, :index, :update]
+  implement_crud_actions only: %i[show index update]
   before_action do
     redirect_to(root_path) if Competition.one.configured?
   end

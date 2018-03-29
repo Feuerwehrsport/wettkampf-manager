@@ -1,11 +1,11 @@
 module Score::ResultEntrySupport
-  ENTRY_STATUS = [:waiting, :valid, :invalid, :no_run]
-    
+  ENTRY_STATUS = %i[waiting valid invalid no_run].freeze
+
   def second_time
-    return "" if time.blank? || time == 0
+    return '' if time.blank? || time .zero?
     seconds = time.to_i / 100
     millis = time.to_i % 100
-    "#{seconds},#{sprintf('%02d', millis)}"
+    "#{seconds},#{format('%02d', millis)}"
   end
 
   def edit_second_time
@@ -17,15 +17,15 @@ module Score::ResultEntrySupport
   end
 
   def second_time=(new_second_time)
-    if result = new_second_time.match(/^(\d+):(\d{1,2})[,.](\d{1,2})$/)
-      self.time = result[1].to_i*6000 + result[2].to_i*100 + result[3].to_i
-    elsif result = new_second_time.match(/^(\d{1,4})[,.](\d)$/)
-      self.time = result[1].to_i*100 + (result[2].to_i * 10)
-    elsif result = new_second_time.match(/^(\d{1,3})[,.](\d\d)$/)
-      self.time = result[1].to_i*100 + result[2].to_i
-    else
-      self.time = new_second_time.to_i*100
-    end
+    self.time = if result = new_second_time.match(/^(\d+):(\d{1,2})[,.](\d{1,2})$/)
+                  result[1].to_i * 6000 + result[2].to_i * 100 + result[3].to_i
+                elsif result = new_second_time.match(/^(\d{1,4})[,.](\d)$/)
+                  result[1].to_i * 100 + (result[2].to_i * 10)
+                elsif result = new_second_time.match(/^(\d{1,3})[,.](\d\d)$/)
+                  result[1].to_i * 100 + result[2].to_i
+                else
+                  new_second_time.to_i * 100
+                end
   end
 
   def time_with_valid_calculation=(time)

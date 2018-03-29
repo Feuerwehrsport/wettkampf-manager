@@ -1,6 +1,6 @@
 = box "Teilnehmer hinzufügen", modal: true do |box|
   = simple_form_for @score_list, remote: true do |f|
-    - if not_yet_present_entities.count == 0
+    - if not_yet_present_entities.count .zero?
       .alert.alert-danger Es wurde alle möglichen Teilnehmer zugeordnet
     - else
       = f.error_notification

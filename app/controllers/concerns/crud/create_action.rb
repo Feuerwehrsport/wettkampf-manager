@@ -17,7 +17,6 @@ module CRUD::CreateAction
     end
   end
 
-
   protected
 
   def assign_resource_for_create

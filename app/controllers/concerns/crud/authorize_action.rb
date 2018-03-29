@@ -1,5 +1,4 @@
 module CRUD::AuthorizeAction
-
   extend ActiveSupport::Concern
 
   def index
@@ -44,5 +43,4 @@ module CRUD::AuthorizeAction
     authorize!(:destroy, resource_instance)
     resource_instance
   end
-
 end

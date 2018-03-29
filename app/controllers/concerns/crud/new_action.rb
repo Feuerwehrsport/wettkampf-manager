@@ -6,9 +6,7 @@ module CRUD::NewAction
     before_action :assign_resource_for_new, only: :new
   end
 
-  def new
-  end
-
+  def new; end
 
   protected
 
