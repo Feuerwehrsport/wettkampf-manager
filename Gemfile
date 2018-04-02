@@ -44,13 +44,17 @@ gem 'tzinfo-data'
 
 gem 'nokogiri'
 gem 'json'
-gem 'bcrypt'
+if RUBY_PLATFORM =~ /(mingw)|(cygwin)/
+  gem 'bcrypt', platform: :ruby
+else
+  gem 'bcrypt'
+end
 gem 'sqlite3'
 
 # for rs232
 gem 'rubyserial'
 gem 'highline'
-gem 'ffi', '1.9.18'
+gem 'ffi', '~> 1.9.0'
 
 gem 'firesport', path: 'firesport'
 gem 'firesport-series', path: 'firesport-series'
