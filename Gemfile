@@ -32,6 +32,7 @@ gem 'jquery-rails'
 
 # exports
 gem 'axlsx_rails'
+gem 'axlsx', '~> 3.0.0.pre'
 gem 'prawn'
 gem 'prawn-table'
 gem 'prawnto'
@@ -56,9 +57,11 @@ gem 'firesport-series', path: 'firesport-series'
 
 group :development do
   gem 'guard-rspec'
+  gem 'guard-rubocop'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'faker'
+  gem 'coffeelint'
 end
 
 group :development, :test do

@@ -24,17 +24,22 @@
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
 # More info at https://github.com/guard/guard#readme
+group :red_green_refactor, halt_on_fail: true do
+  guard 'rspec', cmd: 'bin/rspec', run_all: { cli: '--tag ~slow' }, failed_mode: :none do
+    watch(%r{^spec/factories/.+\.rb$}) { 'spec/' }
+    watch(%r{^spec/.+_spec\.rb$})
+    watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
+    watch(%r{^app/(.*)(\.erb|\.haml)$})                 { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
+    watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| "spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb" }
+    watch('app/controllers/application_controller.rb')  { 'spec/controllers' }
+    watch(%r{^app/views/(.+)/_.*\.(erb|haml)$})         { |m| "spec/views/#{m[1]}/" }
+    watch(%r{^app/views/(.+_mailer)/.*\.(erb|haml)$})   { |m| "spec/mailers/#{m[1]}_spec.rb" }
+    watch(%r{^lib/(.+)\.rb$})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
+  end
 
-guard 'rspec', cmd: 'bin/rspec', run_all: { cli: '--tag ~slow' }, failed_mode: :none do
-  watch(%r{^spec/factories/.+\.rb$}) { 'spec/' }
-  watch(%r{^spec/.+_spec\.rb$})
-  watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }
-  watch(%r{^app/(.*)(\.erb|\.haml)$})                 { |m| "spec/#{m[1]}#{m[2]}_spec.rb" }
-  watch(%r{^app/controllers/(.+)_(controller)\.rb$})  { |m| "spec/#{m[2]}s/#{m[1]}_#{m[2]}_spec.rb" }
-  watch('app/controllers/application_controller.rb')  { 'spec/controllers' }
-  watch(%r{^app/views/(.+)/_.*\.(erb|haml)$})         { |m| "spec/views/#{m[1]}/" }
-  watch(%r{^app/views/(.+_mailer)/.*\.(erb|haml)$})   { |m| "spec/mailers/#{m[1]}_spec.rb" }
-  watch(%r{^lib/(.+)\.rb$})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
+  guard :rubocop, all_on_start: false, keep_failed: false, cli: ['-a'] do
+    watch(%r{})
+  end
 end
 
 puts ''

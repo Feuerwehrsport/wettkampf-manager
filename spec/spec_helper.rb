@@ -23,16 +23,21 @@ require 'factory_bot'
 
 RSpec.configure do |config|
   Capybara.register_driver :poltergeist do |app|
-    Capybara::Poltergeist::Driver.new(app, window_size: [1280, 1024], phantomjs_options: ['--debug=no', '--load-images=yes', '--ignore-ssl-errors=yes', '--ssl-protocol=TLSv1'], debug: false)
+    options = {
+      window_size: [1280, 1024],
+      phantomjs_options: %w[--debug=no --load-images=yes --ignore-ssl-errors=yes --ssl-protocol=TLSv1'],
+      debug: false,
+    }
+    Capybara::Poltergeist::Driver.new(app, options)
   end
 
-  Capybara.configure do |config|
-    config.app_host = 'http://127.0.0.1:7787'
-    config.default_host = 'http://127.0.0.1'
-    config.run_server = true
-    config.server_port = 7787
-    config.javascript_driver = :poltergeist
-    config.default_driver = config.javascript_driver
+  Capybara.configure do |cc|
+    cc.app_host = 'http://127.0.0.1:7787'
+    cc.default_host = 'http://127.0.0.1'
+    cc.run_server = true
+    cc.server_port = 7787
+    cc.javascript_driver = :poltergeist
+    cc.default_driver = cc.javascript_driver
   end
 
   # rspec-expectations config goes here. You can use an alternate
@@ -103,7 +108,7 @@ RSpec.configure do |config|
     config.include FactoryBot::Syntax::Methods
 
     config.before(:suite) do
-      FileUtils.mkdir_p(File.join(Rails.root, 'tmp', 'cache'))
+      FileUtils.mkdir_p(Rails.root.join('tmp', 'cache'))
       # Do truncation once per suite to vacuum for Postgres
       DatabaseCleaner.clean_with :truncation
       # Normally do transactions-based cleanup
@@ -119,7 +124,7 @@ RSpec.configure do |config|
       browser = Capybara.current_session.driver.browser
       browser.try(:clear_cookies)
       browser.try(:manage).try(:delete_all_cookies)
-      load File.join(Rails.root, 'db', 'seeds.rb')
+      load Rails.root.join('db', 'seeds.rb')
     end
 
     config.around do |spec|
