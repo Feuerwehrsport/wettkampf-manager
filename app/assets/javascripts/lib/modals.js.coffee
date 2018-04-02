@@ -1,4 +1,4 @@
-@Modals = 
+@Modals = {
   modals: []
   push: (content) ->
     modal = $(content).prependTo('body').modal()
@@ -10,6 +10,7 @@
     modal.on 'hidden.bs.modal', ->
       modal.remove()
       $(document).refreshPartials()
+}
 
 $(document).on 'submit', '.modal form', ->
   Modals.pop()

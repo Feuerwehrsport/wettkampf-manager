@@ -5,6 +5,7 @@ engines:
     enabled: true
   coffeelint:
     enabled: true
+    config: config/coffeelint.json
   csslint:
     enabled: true
   duplication:
