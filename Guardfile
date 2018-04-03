@@ -38,7 +38,7 @@ group :red_green_refactor, halt_on_fail: true do
   end
 
   guard :rubocop, all_on_start: false, keep_failed: false, cli: ['-a'] do
-    watch(%r{})
+    watch(//)
   end
 end
 

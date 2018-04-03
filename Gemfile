@@ -44,7 +44,7 @@ gem 'tzinfo-data'
 
 gem 'nokogiri'
 gem 'json'
-if RUBY_PLATFORM =~ /(mingw)|(cygwin)/
+if RUBY_PLATFORM.match?(/(mingw)|(cygwin)/)
   gem 'bcrypt', platform: :ruby
 else
   gem 'bcrypt'

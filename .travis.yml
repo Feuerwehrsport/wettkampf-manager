@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.5.0
+  - 2.4.4
 bundler_args: --without production
 cache: bundler
 script: xvfb-run bundle exec rspec
