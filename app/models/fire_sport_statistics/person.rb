@@ -2,6 +2,7 @@ class FireSportStatistics::Person < ActiveRecord::Base
   enum gender: { female: 0, male: 1 }
   has_many :team_associations, class_name: 'FireSportStatistics::TeamAssociation'
   has_many :teams, through: :team_associations, class_name: 'FireSportStatistics::Team'
+  has_many :series_participations, class_name: 'Series::PersonParticipation'
   has_one :person, class_name: '::Person', inverse_of: :fire_sport_statistics_person, foreign_key: :fire_sport_statistics_person_id
 
   validates :last_name, :first_name, :gender, presence: true

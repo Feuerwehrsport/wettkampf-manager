@@ -1,5 +1,5 @@
 class Series::PersonParticipation < Series::Participation
-  belongs_to :person, class_name: 'FireSportStatistics::Person'
+  belongs_to :person, class_name: 'FireSportStatistics::Person', inverse_of: :series_participations
 
   validates :person, presence: true
 

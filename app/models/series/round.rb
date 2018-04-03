@@ -2,8 +2,8 @@ class Series::Round < ActiveRecord::Base
   include Series::Participationable
   include Series::Importable
 
-  has_many :cups, class_name: 'Series::Cup'
-  has_many :assessments, class_name: 'Series::Assessment'
+  has_many :cups, class_name: 'Series::Cup', dependent: :destroy, inverse_of: :round
+  has_many :assessments, class_name: 'Series::Assessment', dependent: :destroy, inverse_of: :round
   has_many :participations, through: :assessments, class_name: 'Series::Participation'
 
   validates :name, :year, :aggregate_type, presence: true
@@ -15,7 +15,8 @@ class Series::Round < ActiveRecord::Base
       .group("#{table_name}.id")
   end
   scope :with_team, ->(team_id, gender) do
-    joins(:participations).where(series_participations: { team_id: team_id }).merge(Series::TeamAssessment.gender(gender)).uniq
+    joins(:participations).where(series_participations: { team_id: team_id })
+                          .merge(Series::TeamAssessment.gender(gender)).uniq
   end
   scope :with_local_results, -> do
     assessment_ids = Series::AssessmentResult.select(:assessment_id)

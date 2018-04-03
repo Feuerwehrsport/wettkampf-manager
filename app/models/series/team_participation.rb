@@ -1,5 +1,5 @@
 class Series::TeamParticipation < Series::Participation
-  belongs_to :team, class_name: 'FireSportStatistics::Team'
+  belongs_to :team, class_name: 'FireSportStatistics::Team', inverse_of: :series_participations
 
   validates :team, :team_number, presence: true
 

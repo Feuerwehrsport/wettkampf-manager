@@ -2,13 +2,15 @@ class Series::Assessment < ActiveRecord::Base
   include Genderable
   include Series::Importable
 
-  belongs_to :round, class_name: 'Series::Round'
+  belongs_to :round, class_name: 'Series::Round', inverse_of: :assessments
   has_many :cups, through: :round, class_name: 'Series::Cup'
-  has_many :participations, class_name: 'Series::Participation'
-  has_many :assessment_results, class_name: 'Series::AssessmentResult', dependent: :destroy
+  has_many :participations, class_name: 'Series::Participation', dependent: :destroy, inverse_of: :assessment
+  has_many :assessment_results, class_name: 'Series::AssessmentResult', dependent: :destroy, inverse_of: :assessment
   has_many :score_results, through: :assessment_results
 
-  scope :with_person, ->(person_id) { joins(:participations).where(series_participations: { person_id: person_id }).uniq }
+  scope :with_person, ->(person_id) do
+                        joins(:participations).where(series_participations: { person_id: person_id }).uniq
+                      end
   scope :round, ->(round_id) { where(round_id: round_id) }
   scope :year, ->(year) { joins(:round).where(series_rounds: { year: year }) }
   scope :round_name, ->(round_name) { joins(:round).where(series_rounds: { name: round_name }) }

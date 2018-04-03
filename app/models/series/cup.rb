@@ -2,9 +2,9 @@ class Series::Cup < ActiveRecord::Base
   TODAY_ID = 99_999_000
   include Series::Participationable
 
-  belongs_to :round, class_name: 'Series::Round'
+  belongs_to :round, class_name: 'Series::Round', inverse_of: :cups
   has_many :assessments, through: :round, class_name: 'Series::Assessment'
-  has_many :participations, dependent: :destroy, class_name: 'Series::Participation'
+  has_many :participations, dependent: :destroy, class_name: 'Series::Participation', inverse_of: :cup
 
   default_scope -> { order(:competition_date) }
 
@@ -19,7 +19,7 @@ class Series::Cup < ActiveRecord::Base
   end
 
   def self.today_cup_for_round(round)
-    round.cups.where('id > ?', TODAY_ID).first
+    round.cups.find_by('id > ?', TODAY_ID)
   end
 
   def competition_place
