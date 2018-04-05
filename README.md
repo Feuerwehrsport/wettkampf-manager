@@ -1,10 +1,13 @@
 # wettkampf-manager
 Wettkampf-Manager für Wettkämpfe im Feuerwehrsport
 
-[![Build Status](https://travis-ci.org/Feuerwehrsport/wettkampf-manager.svg?branch=release)](https://travis-ci.org/Feuerwehrsport/wettkampf-manager)
+Release-Branch: [![Build Status](https://travis-ci.org/Feuerwehrsport/wettkampf-manager.svg?branch=release)](https://travis-ci.org/Feuerwehrsport/wettkampf-manager)
+
+Master-Branch: [![Build Status](https://travis-ci.org/Feuerwehrsport/wettkampf-manager.svg)](https://travis-ci.org/Feuerwehrsport/wettkampf-manager)
 [![Code Climate](https://codeclimate.com/github/Feuerwehrsport/wettkampf-manager/badges/gpa.svg)](https://codeclimate.com/github/Feuerwehrsport/wettkampf-manager)
 
-Die Software steht unter der GNU Affero General Public License version 3.
+Die Software steht unter der GNU Affero General Public License version 3. [![AGPL](https://www.gnu.org/graphics/agplv3-88x31.png)](https://www.gnu.org/licenses/agpl)
+
 
 Weitere Informationen und Pakete zum Download:
   * [Projektseite](http://www.feuerwehrsport-statistik.de/wettkampf_manager)
@@ -14,9 +17,9 @@ Weitere Informationen und Pakete zum Download:
 
 ### Über
       
-Der Wettkampf-Manager wird seit Frühjahr 2015 hauptsächlich von [Georg Limbach](https://georf.de) als quelloffene Software entwickelt. Ziel ist es, die Ergebnisberechnung von Feuerwehrsportwettkämpfen so einfach wie möglich zu gestalten.
+Der Wettkampf-Manager wird seit Frühjahr 2015 von [Georg Limbach](https://georf.de) als quelloffene Software entwickelt. Ziel ist es, die Ergebnisberechnung von Feuerwehrsportwettkämpfen so einfach wie möglich zu gestalten.
 
-Als Basis wird das Framework Ruby on Rails 4.2 mit Ruby 2.3 benutzt. Weitere Informationen dazu finden sich auf [Feuerwehrsport-Statistik.de](https://feuerwehrsport-statistik.de/wettkampf_manager) oder auf [Github](https://github.com/Feuerwehrsport/wettkampf-manager).
+Als Basis wird das Framework Ruby on Rails 4.2 mit Ruby 2.4 benutzt. Weitere Informationen dazu finden sich auf [Feuerwehrsport-Statistik.de](https://feuerwehrsport-statistik.de/wettkampf_manager) oder auf [Github](https://github.com/Feuerwehrsport/wettkampf-manager).
 
 Die aktuelle Entwicklung wird durch die [Lichtbit GmbH](https://lichtbit.com) aus Rostock unterstützt.
 
