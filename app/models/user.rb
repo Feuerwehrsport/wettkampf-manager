@@ -13,7 +13,7 @@ class User < CacheDependendRecord
 
   def self.authenticate(name, password)
     user = find_by(name: name)
-    user if user && user.password_hash == OpenSSL::HMAC.hexdigest('SHA512', user.password_salt, password)
+    user if user && user.password_hash == OpenSSL::HMAC.hexdigest('SHA512', user.password_salt.to_s, password.to_s)
   end
 
   def self.configured?
@@ -33,7 +33,7 @@ class User < CacheDependendRecord
   def encrypt_password
     if password.present?
       self.password_salt = SecureRandom.uuid
-      self.password_hash = OpenSSL::HMAC.hexdigest('SHA512', password_salt, password)
+      self.password_hash = OpenSSL::HMAC.hexdigest('SHA512', password_salt.to_s, password.to_s)
     end
   end
 end
