@@ -1,5 +1,5 @@
 class Score::DoubleEventResult < Score::Result
-  has_many :results, class_name: 'Score::Result'
+  has_many :results, class_name: 'Score::Result', dependent: :nullify, inverse_of: :double_event_result
 
   def generate_rows
     rows = {}

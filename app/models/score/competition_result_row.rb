@@ -1,4 +1,4 @@
-class Score::CompetitionResultRow < Struct.new(:competition_result, :team)
+Score::CompetitionResultRow = Struct.new(:competition_result, :team) do
   include Draper::Decoratable
   attr_reader :assessment_results
 

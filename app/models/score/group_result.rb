@@ -1,6 +1,6 @@
-class Score::GroupResult < Struct.new(:result)
+Score::GroupResult = Struct.new(:result) do
   def rows
-    @sorted ||= calculated_rows.sort
+    @rows ||= calculated_rows.sort
   end
 
   def calculated_rows

@@ -1,4 +1,4 @@
-class Score::DoubleEventResultRow < Struct.new(:entity)
+Score::DoubleEventResultRow = Struct.new(:entity) do
   include Draper::Decoratable
   attr_reader :result_rows
 
@@ -8,7 +8,8 @@ class Score::DoubleEventResultRow < Struct.new(:entity)
   end
 
   def sum_result_entry
-    @sum_result_entry ||= Score::ResultEntry.new(time_with_valid_calculation: result_rows.map(&:best_result_entry).map(&:compare_time).sum)
+    @sum_result_entry ||= Score::ResultEntry.new(time_with_valid_calculation: result_rows.map(&:best_result_entry)
+      .map(&:compare_time).sum)
   end
 
   def result_entry

@@ -1,8 +1,10 @@
 class Score::CompetitionResult < CacheDependendRecord
   include Genderable
 
-  has_many :assessments, foreign_key: :score_competition_result_id
-  has_many :results, -> { where(score_results: { group_assessment: true }) }, through: :assessments, class_name: 'Score::Result'
+  has_many :assessments, foreign_key: :score_competition_result_id, dependent: :nullify,
+                         inverse_of: :score_competition_result
+  has_many :results, -> { where(score_results: { group_assessment: true }) },
+           through: :assessments, class_name: 'Score::Result'
 
   validates :result_type, :gender, presence: true
 
@@ -78,10 +80,10 @@ class Score::CompetitionResult < CacheDependendRecord
       next if result_rows.empty?
       points = ranks.values.max + 1
       teams.keys.each do |team_id|
-        if teams[team_id].assessment_result_from(result.assessment).blank?
-          assessment_result = Score::AssessmentResult.new(points, result.assessment, Score::ResultEntry.invalid, Team.find(team_id), nil)
-          teams[team_id].add_assessment_result(assessment_result)
-        end
+        next if teams[team_id].assessment_result_from(result.assessment).present?
+        assessment_result = Score::AssessmentResult.new(points, result.assessment, Score::ResultEntry.invalid,
+                                                        Team.find(team_id), nil)
+        teams[team_id].add_assessment_result(assessment_result)
       end
     end
     teams.values.sort

@@ -1,4 +1,4 @@
-class Score::GroupResultRow < Struct.new(:team, :score_count, :run_count)
+Score::GroupResultRow = Struct.new(:team, :score_count, :run_count) do
   include Draper::Decoratable
 
   def entity
