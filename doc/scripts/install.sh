@@ -3,6 +3,7 @@
 set -eu
 gem install bundler
 bundle --without development test staging
+export RAILS_ENV=production
 
 SECRET_KEY_BASE=$(rake secret)
 sed -i "s/<%= ENV\[\"CHANGED_BY_BUILDING_TOOL\"\] %>/$SECRET_KEY_BASE/" "config/secrets.yml"
