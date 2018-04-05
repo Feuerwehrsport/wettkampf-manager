@@ -7,7 +7,7 @@ Rails.application.load_tasks
 
 require 'rake'
 
-begin
+if ENV['RAILS_ENV'] != 'production'
   require 'rspec/core'
   require 'rspec/core/rake_task'
   require 'rubocop/rake_task'
@@ -16,6 +16,4 @@ begin
   RuboCop::RakeTask.new(:rubocop) # .tap { |task| task.options = ['--config .rubocop.yml'] }
 
   task default: %i[spec coffeelint rubocop]
-rescue LoadError
-  puts 'production environment'
 end
