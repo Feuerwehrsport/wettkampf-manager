@@ -1,6 +1,8 @@
 #!/bin/bash
 
 set -eu
+gem install bundler
+bundle --without development test staging
 
 SECRET_KEY_BASE=$(rake secret)
 sed -i "s/<%= ENV\[\"CHANGED_BY_BUILDING_TOOL\"\] %>/$SECRET_KEY_BASE/" "config/secrets.yml"
@@ -14,8 +16,6 @@ if [[ -f "db/production.sqlite3" ]] ; then
   fi
 fi
 
-gem install bundler
-bundle --without development test staging
 
 RAILS_ENV=production bundle exec rake assets:precompile
 RAILS_ENV=production bundle exec rake db:drop
