@@ -13,7 +13,7 @@ class User < CacheDependendRecord
 
   def self.authenticate(name, password)
     user = find_by(name: name)
-    user if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+    user if user && user.password_hash == OpenSSL::HMAC.hexdigest('SHA512', user.password_salt, password)
   end
 
   def self.configured?
@@ -32,8 +32,8 @@ class User < CacheDependendRecord
 
   def encrypt_password
     if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
+      self.password_salt = SecureRandom.uuid
+      self.password_hash = OpenSSL::HMAC.hexdigest('SHA512', password_salt, password)
     end
   end
 end

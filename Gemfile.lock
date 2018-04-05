@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/codahale/bcrypt-ruby.git
-  revision: f2db689ba567d1a018f4dacb1ccf909adc93e887
-  specs:
-    bcrypt (3.1.11)
-
 PATH
   remote: firesport-series
   specs:
@@ -338,7 +332,6 @@ PLATFORMS
 DEPENDENCIES
   axlsx (~> 3.0.0.pre)
   axlsx_rails
-  bcrypt!
   bootstrap-sass
   cancancan
   capybara
