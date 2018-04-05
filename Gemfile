@@ -44,7 +44,7 @@ gem 'tzinfo-data'
 
 gem 'nokogiri'
 gem 'json'
-gem 'bcrypt'
+gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', require: 'bcrypt'
 gem 'sqlite3'
 
 # for rs232
