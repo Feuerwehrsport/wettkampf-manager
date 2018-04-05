@@ -1,7 +1,7 @@
 require 'rails_helper'
-RSpec.describe 'Deletion of things' do
+
+RSpec.describe 'Deletion of things', seed: :configured do
   before do
-    User.first.update!(password: 'my-password', password_confirmation: 'my-password')
     Preset.find(4).save # D-Cup ohne 4x100
     assessment_request
     score_list

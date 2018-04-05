@@ -1,7 +1,7 @@
 class API::TimeEntry < ActiveRecord::Base
   include Score::ResultEntrySupport
   belongs_to :score_list_entry, class_name: 'Score::ListEntry'
-  attr_accessor :password
+  attr_accessor :password, :skip_password_authenticaton
 
   validates :time, presence: true
   validate :password_matches, on: :create
@@ -24,6 +24,7 @@ class API::TimeEntry < ActiveRecord::Base
   private
 
   def password_matches
+    return if skip_password_authenticaton
     return if User.authenticate('admin', password).present? || User.authenticate('API', password).present?
     errors.add(:password, :invalid)
   end

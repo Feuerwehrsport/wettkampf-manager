@@ -1,7 +1,6 @@
 require 'rails_helper'
-RSpec.describe 'list factory' do
+RSpec.describe 'list factory', seed: :configured do
   before do
-    User.first.update!(password: 'my-password', password_confirmation: 'my-password')
     Preset.find(3).save # D-Cup mit 4x100
   end
 
@@ -10,13 +9,21 @@ RSpec.describe 'list factory' do
   let(:person1) { create(:person, team: team1) }
   let(:person2) { create(:person, team: team1) }
   let(:assessment) { Assessment.requestable_for(person1).first }
-  let(:assessment_request1) { create(:assessment_request, entity: person1, assessment: assessment, group_competitor_order: 1) }
-  let(:assessment_request2) { create(:assessment_request, entity: person2, assessment: assessment, group_competitor_order: 2) }
+  let(:assessment_request1) do
+    create(:assessment_request, entity: person1, assessment: assessment, group_competitor_order: 1)
+  end
+  let(:assessment_request2) do
+    create(:assessment_request, entity: person2, assessment: assessment, group_competitor_order: 2)
+  end
   let(:result) { Score::Result.where(assessment: assessment).first }
 
   let(:fire_relay_assessment) { Assessment.all.to_a.find { |a| a.discipline.like_fire_relay? } }
-  let(:assessment_request_fire_relay1) { create(:assessment_request, entity: team1, assessment: fire_relay_assessment, relay_count: 2) }
-  let(:assessment_request_fire_relay2) { create(:assessment_request, entity: team2, assessment: fire_relay_assessment, relay_count: 1) }
+  let(:assessment_request_fire_relay1) do
+    create(:assessment_request, entity: team1, assessment: fire_relay_assessment, relay_count: 2)
+  end
+  let(:assessment_request_fire_relay2) do
+    create(:assessment_request, entity: team2, assessment: fire_relay_assessment, relay_count: 1)
+  end
 
   it 'creates lists for most disciplines', js: true do
     assessment_request1

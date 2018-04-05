@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'jump through pages' do
+RSpec.describe 'jump through pages', seed: :configured do
   before do
-    User.first.update!(password: 'my-password', password_confirmation: 'my-password')
     Preset.find(1).save # nothing
   end
 

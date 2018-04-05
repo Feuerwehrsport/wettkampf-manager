@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'Start configuration' do
+RSpec.describe 'Start configuration', seed: :load do
   it 'is available after first start' do
     visit root_path
     expect(page).to have_content 'Passwort für Systemanmeldung'

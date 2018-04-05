@@ -1,4 +1,4 @@
-def perform_login(password = 'my-password')
+def perform_login(password = 'admin')
   visit root_path
   click_on 'Anmelden'
   expect(page).to have_content 'Anmeldung im System'

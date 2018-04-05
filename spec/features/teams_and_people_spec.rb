@@ -1,7 +1,6 @@
 require 'rails_helper'
-RSpec.describe 'Teams and People' do
+RSpec.describe 'Teams and People', seed: :configured do
   before do
-    User.first.update!(password: 'my-password', password_confirmation: 'my-password')
     Preset.find(4).save # D-Cup ohne 4x100
   end
   it 'is available after first start', js: true do

@@ -124,7 +124,6 @@ RSpec.configure do |config|
       browser = Capybara.current_session.driver.browser
       browser.try(:clear_cookies)
       browser.try(:manage).try(:delete_all_cookies)
-      load Rails.root.join('db', 'seeds.rb')
     end
 
     config.around do |spec|
