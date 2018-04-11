@@ -15,12 +15,9 @@ engines:
         - ruby
   eslint:
     enabled: true
-  reek:
-    enabled: true
   rubocop:
     enabled: true
-  rubymotion:
-    enabled: true
+    config: config/rubocop.yml
   scss-lint:
     enabled: true
 
