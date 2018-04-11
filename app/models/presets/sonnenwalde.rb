@@ -5,8 +5,10 @@ class Presets::Sonnenwalde < Preset
 
   def description_items
     [
-      'Frauen: Gruppenstaffete, 4x100m Feuerwehrstaffette, 100m Hindernisbahn, Hakenleitersteigen, Löschangriff Nass; Ü40 Löschangriff Nass',
-      'Männer: 4x100m Feuerwehrstaffette, 100m Hindernisbahn, Hakenleitersteigen, Löschangriff Nass, Ü40 Löschangriff Nass',
+      'Frauen: Gruppenstaffete, 4x100m Feuerwehrstaffette, 100m Hindernisbahn, Hakenleitersteigen, ' \
+      'Löschangriff Nass; Ü40 Löschangriff Nass',
+      'Männer: 4x100m Feuerwehrstaffette, 100m Hindernisbahn, Hakenleitersteigen, Löschangriff Nass, ' \
+      'Ü40 Löschangriff Nass',
       'Kinder jeweils m/w und AKI AKII: Gruppenstaffete, 5x80m Feuerwehrstaffette, Löschangriff Nass',
       'Kinder AKI 10-12; AKI 13-14; AKII 15-16; AKII 17-18 jeweils m/w: 100m Hindernisbahn, Hakenleitersteigen',
     ]
@@ -43,7 +45,8 @@ class Presets::Sonnenwalde < Preset
       la_assessment = Assessment.create!(discipline: la, gender: gender)
       Score::Result.create!(assessment: la_assessment, group_assessment: true)
 
-      la_assessment = Assessment.create!(discipline: la, gender: gender, name: "Löschangriff - #{I18n.t("gender.#{gender}")} - Ü40")
+      la_assessment = Assessment.create!(discipline: la, gender: gender,
+                                         name: "Löschangriff - #{I18n.t("gender.#{gender}")} - Ü40")
       Score::Result.create!(assessment: la_assessment, group_assessment: true)
 
       fs_assessment = Assessment.create!(discipline: fs, gender: gender)
@@ -100,7 +103,8 @@ class Presets::Sonnenwalde < Preset
       [:male, 'AK2 15-16 DIS Jungen'],
       [:male, 'AK2 17-18 DIS Jungen'],
     ].each do |ak|
-      assessment = Assessment.create!(discipline: chl, gender: ak.first, name: ak.last.gsub('DIS', 'Hakenleitersteigen'))
+      assessment = Assessment.create!(discipline: chl, gender: ak.first,
+                                      name: ak.last.gsub('DIS', 'Hakenleitersteigen'))
       Score::Result.create!(assessment: assessment)
       assessment = Assessment.create!(discipline: oc, gender: ak.first, name: ak.last.gsub('DIS', 'Hindernisbahn'))
       Score::Result.create!(assessment: assessment)

@@ -1,4 +1,6 @@
 class Presets::DCupFull < Preset
+  include Presets::DcupSupport
+
   def name
     'Deutschland-Cup (HL, HB, GS, LA, FS)'
   end

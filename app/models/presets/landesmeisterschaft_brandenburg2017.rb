@@ -35,10 +35,12 @@ class Presets::LandesmeisterschaftBrandenburg2017 < Preset
       zk_result = Score::DoubleEventResult.create!(assessment: zk_assessment)
 
       hb_assessment = Assessment.create!(discipline: @hb, gender: gender)
-      Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result, date: Date.parse('2017-09-15'))
+      Score::Result.create!(assessment: hb_assessment, group_assessment: true, double_event_result: zk_result,
+                            date: Date.parse('2017-09-15'))
 
       hl_assessment = Assessment.create!(discipline: @hl, gender: gender)
-      Score::Result.create!(assessment: hl_assessment, group_assessment: true, double_event_result: zk_result, date: Date.parse('2017-09-15'))
+      Score::Result.create!(assessment: hl_assessment, group_assessment: true, double_event_result: zk_result,
+                            date: Date.parse('2017-09-15'))
 
       la_assessment = Assessment.create!(discipline: @la, gender: gender)
       Score::Result.create!(assessment: la_assessment, group_assessment: true, date: Date.parse('2017-09-16'))

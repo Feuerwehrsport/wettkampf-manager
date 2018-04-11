@@ -32,13 +32,16 @@ class Presets::BrandenburgJugend < Preset
       'Jungen 15-18' => :male,
     }.each do |name, gender|
       competition_result = Score::CompetitionResult.create!(gender: gender, result_type: :places_to_points, name: name)
-      assessment = Assessment.create!(discipline: group_relay, gender: gender, name: "Gruppenstafette #{name}", score_competition_result: competition_result)
+      assessment = Assessment.create!(discipline: group_relay, gender: gender, name: "Gruppenstafette #{name}",
+                                      score_competition_result: competition_result)
       Score::Result.create!(assessment: assessment, group_assessment: true)
 
-      assessment = Assessment.create!(discipline: fire_relay, gender: gender, name: "5x80-Meter-Staffel #{name}", score_competition_result: competition_result)
+      assessment = Assessment.create!(discipline: fire_relay, gender: gender, name: "5x80-Meter-Staffel #{name}",
+                                      score_competition_result: competition_result)
       Score::Result.create!(assessment: assessment, group_assessment: true)
 
-      assessment = Assessment.create!(discipline: fire_attack, gender: gender, name: "Löschangriff Mädchen #{name}", score_competition_result: competition_result)
+      assessment = Assessment.create!(discipline: fire_attack, gender: gender, name: "Löschangriff Mädchen #{name}",
+                                      score_competition_result: competition_result)
       Score::Result.create!(assessment: assessment, group_assessment: true)
     end
 

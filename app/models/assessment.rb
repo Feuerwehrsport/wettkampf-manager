@@ -9,6 +9,7 @@ class Assessment < CacheDependendRecord
   has_many :lists, class_name: 'Score::List', through: :list_assessments, dependent: :restrict_with_error
   has_many :user_assessment_abilities, dependent: :destroy
   has_many :users, through: :user_assessment_abilities
+  has_many :imports_assessment, class_name: 'Imports::Assessment'
   enum gender: { female: 0, male: 1 }
 
   validates :discipline, presence: true
