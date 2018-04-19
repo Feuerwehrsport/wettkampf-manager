@@ -25,7 +25,7 @@ class Score::Run
     end
   end
 
-  def update_attributes(attributes)
+  def update(attributes)
     self.list_entries_attributes = attributes[:list_entries_attributes]
   end
 end
