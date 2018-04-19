@@ -1,9 +1,11 @@
 class Score::ListEntry < CacheDependendRecord
   include Score::ResultEntrySupport
 
-  belongs_to :list, class_name: 'Score::List'
+  belongs_to :list, class_name: 'Score::List', inverse_of: :entries
   belongs_to :entity, polymorphic: true
   belongs_to :assessment
+  has_many :api_time_entries, class_name: 'API::TimeEntry', inverse_of: :score_list_entry, dependent: :nullify,
+                              foreign_key: :score_list_entry_id
 
   enum assessment_type: { group_competitor: 0, single_competitor: 1, out_of_competition: 2 }
 

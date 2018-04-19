@@ -11,8 +11,8 @@ class Imports::Configuration < CacheDependendRecord
     end
   end
 
-  has_many :tags, class_name: 'Imports::Tag'
-  has_many :assessments, class_name: 'Imports::Assessment'
+  has_many :tags, class_name: 'Imports::Tag', inverse_of: :configuration, dependent: :destroy
+  has_many :assessments, class_name: 'Imports::Assessment', inverse_of: :configuration, dependent: :destroy
   accepts_nested_attributes_for :tags
   accepts_nested_attributes_for :assessments
 

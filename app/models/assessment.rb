@@ -1,15 +1,16 @@
 class Assessment < CacheDependendRecord
   include Taggable
 
-  belongs_to :discipline
-  belongs_to :score_competition_result, class_name: 'Score::CompetitionResult'
-  has_many :requests, class_name: 'AssessmentRequest', dependent: :destroy
-  has_many :results, class_name: 'Score::Result', dependent: :restrict_with_error
-  has_many :list_assessments, class_name: 'Score::ListAssessment', dependent: :restrict_with_error
+  belongs_to :discipline, inverse_of: :assessments
+  belongs_to :score_competition_result, class_name: 'Score::CompetitionResult', inverse_of: :assessments
+  has_many :requests, class_name: 'AssessmentRequest', dependent: :destroy, inverse_of: :assessment
+  has_many :results, class_name: 'Score::Result', dependent: :restrict_with_error, inverse_of: :assessment
+  has_many :list_assessments, class_name: 'Score::ListAssessment', dependent: :restrict_with_error,
+                              inverse_of: :assessment
   has_many :lists, class_name: 'Score::List', through: :list_assessments, dependent: :restrict_with_error
   has_many :user_assessment_abilities, dependent: :destroy
   has_many :users, through: :user_assessment_abilities
-  has_many :imports_assessment, class_name: 'Imports::Assessment'
+  has_many :imports_assessment, class_name: 'Imports::Assessment', inverse_of: :assessment, dependent: :nullify
   enum gender: { female: 0, male: 1 }
 
   validates :discipline, presence: true

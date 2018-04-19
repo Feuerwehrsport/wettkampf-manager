@@ -1,6 +1,6 @@
 class API::TimeEntry < ActiveRecord::Base
   include Score::ResultEntrySupport
-  belongs_to :score_list_entry, class_name: 'Score::ListEntry'
+  belongs_to :score_list_entry, class_name: 'Score::ListEntry', inverse_of: :api_time_entries
   attr_accessor :password, :skip_password_authenticaton
 
   validates :time, presence: true

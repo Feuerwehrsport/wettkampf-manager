@@ -1,11 +1,13 @@
 class Score::Result < CacheDependendRecord
   include Taggable
 
-  belongs_to :assessment
-  has_many :series_assessment_results, class_name: 'Series::AssessmentResult', dependent: :destroy, foreign_key: :score_result_id
-  has_many :series_assessments, through: :series_assessment_results, source: :assessment, class_name: 'Series::Assessment'
-  belongs_to :double_event_result, dependent: :destroy, class_name: 'Score::DoubleEventResult'
-  has_many :result_lists, dependent: :destroy
+  belongs_to :assessment, inverse_of: :results
+  has_many :series_assessment_results, class_name: 'Series::AssessmentResult', dependent: :destroy,
+                                       foreign_key: :score_result_id, inverse_of: :score_result
+  has_many :series_assessments, through: :series_assessment_results, source: :assessment,
+                                class_name: 'Series::Assessment'
+  belongs_to :double_event_result, dependent: :destroy, class_name: 'Score::DoubleEventResult', inverse_of: :results
+  has_many :result_lists, dependent: :destroy, inverse_of: :result
   has_many :lists, through: :result_lists
   delegate :discipline, to: :assessment
 
@@ -63,7 +65,7 @@ class Score::Result < CacheDependendRecord
                       entity.include_tags?(person_tags) && (team_tags.blank? || (entity.team.present? && entity.team.include_tags?(team_tags)))
                     else
                       false
-          end
+                    end
           next unless no_skip
         end
 

@@ -1,5 +1,5 @@
 class Imports::Tag < CacheDependendRecord
-  belongs_to :configuration
+  belongs_to :configuration, class_name: 'Imports::Configuration', inverse_of: :tags
   validates :name, :configuration, :target, presence: true
 
   def target
