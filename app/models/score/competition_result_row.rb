@@ -25,6 +25,10 @@ Score::CompetitionResultRow = Struct.new(:competition_result, :team) do
     competition_result.result_type.nil? ? 0 : send(:"#{competition_result.result_type}_compare", other)
   end
 
+  def entity
+    team
+  end
+
   private
 
   def dcup_compare(other)

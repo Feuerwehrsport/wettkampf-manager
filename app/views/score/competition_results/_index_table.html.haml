@@ -1,5 +1,6 @@
 - if admin_logged_in?
   .pull-right
+    = btn_link_to 'Urkunden', new_certificates_list_path(competition_result_id: competition_result.id)
     = btn_link_to 'Bearbeiten', action: :edit, id: competition_result
     = btn_link_to 'Löschen', { action: :destroy, id: competition_result }, method: :delete, data: { confirm: 'Gesamtwertung wirklich löschen?' }
 %h3= competition_result

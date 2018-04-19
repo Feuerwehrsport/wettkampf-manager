@@ -6,9 +6,10 @@ class Certificates::List
   include ActiveRecord::AttributeAssignment
   include ActiveRecord::Callbacks
   include Draper::Decoratable
-  attr_accessor :template_id, :score_result_id, :score_result, :image
+  attr_accessor :template_id, :score_result_id, :competition_result_id, :image
 
-  validates :template, :score_result, presence: true
+  validates :template, presence: true
+  validate :result_present
 
   def template
     Certificates::Template.find_by(id: template_id)
@@ -18,33 +19,24 @@ class Certificates::List
     Score::Result.find_by(id: score_result_id)
   end
 
+  def competition_result
+    Score::CompetitionResult.find_by(id: competition_result_id)
+  end
+
+  def result
+    score_result || competition_result
+  end
+
   def save
     valid?
   end
 
-  def pages
-    page_text_values = []
+  private
 
-    result.rows.map(&:decorate).each do |row|
-      result_entry = if row.is_a?(Score::DoubleEventResultRow)
-                       row.sum_result_entry
-                     else
-                       row.best_result_entry
-                     end
-
-      page_text_values.push(
-        team_name: row.entity,
-        person_name: row.entity,
-        time_long: result_entry.long_human_time(seconds: 'Sekunden'),
-        time_short:  result_entry.long_human_time(seconds: 's'),
-        rank: "#{place_for_row row}.",
-        assessment: assessment,
-        assessment_with_gender: assessment,
-        gender: assessment.gender,
-        date: Competition.one.date,
-        place: Competition.one.place,
-        competition_name: Competition.name,
-      )
-    end
+  def result_present
+    return if score_result.present?
+    return if competition_result.present?
+    errors.add(:score_result_id, :invalid)
+    errors.add(:competition_result_id, :invalid)
   end
 end

@@ -4,10 +4,8 @@ class Certificates::ListsController < ApplicationController
 
   def export
     if create_resource
-      flash_notice_created
-
       @certificates_template = @certificates_list.template
-      @score_result = @certificates_list.score_result.decorate
+      @score_result = @certificates_list.result.decorate
       @rows = @score_result.rows.map(&:decorate)
       page_title('Urkunde', margin: [0, 0, 0, 0])
     else
@@ -18,11 +16,11 @@ class Certificates::ListsController < ApplicationController
   protected
 
   def certificates_list_params
-    params.require(:certificates_list).permit(:template_id, :image, :score_result_id)
+    params.require(:certificates_list).permit(:template_id, :image, :score_result_id, :competition_result_id)
   end
 
   def build_resource
-    resource_class.new(score_result_id: params[:score_result_id])
+    resource_class.new(score_result_id: params[:score_result_id], competition_result_id: params[:competition_result_id])
   end
 
   def after_create; end

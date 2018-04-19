@@ -1,0 +1,80 @@
+#certificates-template-position
+  width: 595px
+  height: 842px
+  border: 3px black solid
+  display: inline-block
+  vertical-align: top
+  position: relative
+
+#certificates-template-preview
+  width: 100%
+  height: 500px
+
+.text-element
+  display: inline-block
+  position: absolute
+  z-index: 1
+
+  .text-line
+    padding: 0
+    margin: 0
+    outline: 2px solid #aa0000
+    overflow: hidden
+    color: #aa0000
+
+  .button-line
+    display: none
+    z-index: 1
+    position: relative
+
+  &.is-focused
+    z-index: 2
+    .text-line
+      outline: 2px solid #00aa00
+      color: #00aa00
+    .button-line
+      display: block
+body.show-all-button-lines
+  .text-element .button-line
+    display: block
+
+.curtain
+  position: absolute
+  bottom: 0
+  top: 0
+  left: 0
+  right: 0
+  background-color: rgba(0,0,0,0.5)
+  z-index: 100
+
+.information-table
+  text-align: right
+  position: fixed
+  right: 50px
+  bottom: 132px
+  display: none
+  width: 210px
+  border: 1px solid black
+  background-color: white
+  td, th
+    padding: 2px 1px
+
+#position-buttons
+  position: fixed
+  right: 50px
+  bottom: 82px
+  width: 210px
+  border: 1px solid black
+  background-color: white
+  padding: 2px
+  text-align: center
+
+.edit_certificates_template .actions
+  position: fixed
+  bottom: 30px
+  right: 50px
+  width: 210px
+  height: 40px
+  padding: 2px
+  border: 1px solid black
+  background-color: white

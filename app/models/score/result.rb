@@ -26,6 +26,12 @@ class Score::Result < CacheDependendRecord
     Series::Assessment.gender(assessment.gender).where(discipline: assessment.discipline.key)
   end
 
+  def place_for_row(row)
+    rows.each_with_index do |place_row, place|
+      return (place + 1) if (row <=> place_row).zero?
+    end
+  end
+
   def rows
     @rows ||= generate_rows.sort
   end

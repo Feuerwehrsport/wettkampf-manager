@@ -1,4 +1,5 @@
 class Score::DoubleEventResultRowDecorator < ApplicationDecorator
+  include Certificates::StorageSupport
   decorates_association :entity
   decorates_association :sum_result_entry
 

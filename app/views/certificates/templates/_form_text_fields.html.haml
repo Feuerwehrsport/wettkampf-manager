@@ -1,0 +1,41 @@
+- if @certificates_template.font.present?
+  = render 'font_style'
+= simple_form_for @certificates_template do |f|
+  = box @certificates_template.name do |box|
+    = f.error_notification
+    .row
+      .col-md-10
+        #certificates-template-position{ data: { font_family:  @certificates_template.font.present? ? "certificates_template_#{@certificates_template.id}" : "", background: @certificates_template.image, config: Certificates::TextField::KEY_CONFIG.to_json } }
+      
+      .col-md-2#position-buttons
+        #add-new-field.btn.btn-default.btn-sm Feld hinzufügen
+        #field-tables
+
+    - @certificates_template.text_fields.each do |text_field|
+      = f.simple_fields_for(:text_fields, text_field) do |tf|
+        = tf.input :left, as: :hidden
+        = tf.input :top, as: :hidden
+        = tf.input :width, as: :hidden
+        = tf.input :height, as: :hidden
+        = tf.input :size, as: :hidden
+        = tf.input :key, as: :hidden
+        = tf.input :align, as: :hidden
+        = tf.input :text, as: :hidden
+        = tf.input :id, as: :hidden
+        = tf.input :_destroy, as: :hidden, input_html: { value: tf.object.persisted? ? 'false' : 'true' }
+    .new-position-form
+      .modal.fade
+        .modal-header
+          %button.close{ type: :button, data: { dismiss: :modal }, "aria-hidden" => true } ×
+        .modal-body
+          = simple_form_for Certificates::TextField.new, url: '' do |f|
+            = box 'Textposition' do |box|
+              = f.input :key, as: :select, collection: Certificates::TextField::KEY_CONFIG.map { |k, v| ["#{v[:description]} (z.B.: #{v[:example]})", k] }
+              = f.input :text
+              - box.footer do
+                = f.primary_button :submit, "Speichern"
+    - box.footer do
+      &nbsp;
+      .actions
+        = cancel_link
+        = f.primary_button :submit, "Speichern"

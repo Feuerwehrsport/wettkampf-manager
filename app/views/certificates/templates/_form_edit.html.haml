@@ -1,0 +1,13 @@
+= simple_form_for @certificates_template do |f|
+  = box @certificates_template.name do |box|
+    = f.error_notification
+    = f.input :name
+    = f.input :image
+    - if f.object.image.present?
+      = f.input :remove_image, as: :boolean, hint: "Zur Zeit: #{f.object.image.file.filename}"
+    = f.input :font
+    - if f.object.font.present?
+      = f.input :remove_font, as: :boolean, hint: "Zur Zeit: #{f.object.font.file.filename}"
+    - box.footer do
+      = cancel_link
+      = f.primary_button :submit, "Speichern"

@@ -1,4 +1,4 @@
-class Certificates::TextPosition < CacheDependendRecord
+class Certificates::TextField < ActiveRecord::Base
   KEY_CONFIG = {
     team_name: {
       description: 'Name der Mannschaft',
@@ -52,20 +52,23 @@ class Certificates::TextPosition < CacheDependendRecord
       description: 'Name des Wettkampfes',
       example: 'Deutschland-Cup',
     },
+    text: {
+      description: 'Freitext',
+      example: 'Hier kommt dein Text',
+    },
   }.freeze
 
-  belongs_to :template
-  validates :template, :key, :top, :left, :align, :size, presence: true
+  belongs_to :template, class_name: 'Certificates::Template', inverse_of: :text_fields
+
+  validates :template, :left, :top, :width, :height, :size, :key, :align, presence: true
+  validates :key, inclusion: { in: KEY_CONFIG.keys }
+  validates :align, inclusion: { in: %i[left center right] }
 
   def key
     super.try(:to_sym)
   end
 
-  def description
-    KEY_CONFIG[key][:description]
-  end
-
-  def example
-    KEY_CONFIG[key][:example]
+  def align
+    super.try(:to_sym)
   end
 end

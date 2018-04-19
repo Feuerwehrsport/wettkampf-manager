@@ -15,15 +15,13 @@ class Certificates::TemplatesController < ApplicationController
 
   def assign_resource_for_edit
     super
-    Certificates::TextPosition::KEY_CONFIG.keys.each do |key|
-      resource_instance.text_positions.find_or_initialize_by(key: key)
-    end
+    resource_instance.text_fields.build(key: :template, width: 100, height: 20, left: 20, top: 400, align: :center)
   end
 
   def certificates_template_params
     params.require(:certificates_template).permit(
       :name, :image, :font, :remove_image, :remove_font,
-      text_positions_attributes: %i[key top left align size id _destroy]
+      text_fields_attributes: %i[left top width height size key align text id _destroy]
     )
   end
 end
