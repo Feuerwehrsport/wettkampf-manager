@@ -37,7 +37,7 @@ group :red_green_refactor, halt_on_fail: true do
     watch(%r{^lib/(.+)\.rb$})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
   end
 
-  guard :rubocop, all_on_start: false, keep_failed: false, cli: ['-a'] do
+  guard :rubocop, all_on_start: false, keep_failed: false, cli: %w[-a --config config/rubocop.yml] do
     watch(/\.rb$/)
   end
 end
