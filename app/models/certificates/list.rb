@@ -6,7 +6,7 @@ class Certificates::List
   include ActiveRecord::AttributeAssignment
   include ActiveRecord::Callbacks
   include Draper::Decoratable
-  attr_accessor :template_id, :score_result_id, :competition_result_id, :image
+  attr_accessor :template_id, :score_result_id, :competition_result_id, :group_score_result_id, :image
 
   validates :template, presence: true
   validate :result_present
@@ -16,15 +16,23 @@ class Certificates::List
   end
 
   def score_result
-    Score::Result.find_by(id: score_result_id)
+    @score_result ||= Score::Result.find_by(id: score_result_id)
+  end
+
+  def group_score_result
+    @group_score_result ||= Score::Result.find_by(id: group_score_result_id)
   end
 
   def competition_result
-    Score::CompetitionResult.find_by(id: competition_result_id)
+    @competition_result ||= Score::CompetitionResult.find_by(id: competition_result_id)
   end
 
   def result
-    score_result || competition_result
+    @result ||= score_result || competition_result || group_score_result
+  end
+
+  def rows
+    @rows ||= score_result.try(:rows) || competition_result.try(:rows) || group_score_result.try(:group_result_rows)
   end
 
   def save
@@ -34,9 +42,9 @@ class Certificates::List
   private
 
   def result_present
-    return if score_result.present?
-    return if competition_result.present?
+    return if [score_result, competition_result, group_score_result].select(&:itself).count == 1
     errors.add(:score_result_id, :invalid)
     errors.add(:competition_result_id, :invalid)
+    errors.add(:group_score_result_id, :invalid)
   end
 end

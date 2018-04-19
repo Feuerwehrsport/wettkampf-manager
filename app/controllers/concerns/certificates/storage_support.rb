@@ -12,7 +12,7 @@ module Certificates::StorageSupport
     when :time_short
       result_entry.human_time
     when :rank
-      "#{result.place_for_row(row)}."
+      "#{result.place_for_row(self)}."
     when :assessment
       result.assessment.try(:name).presence || result.assessment.try(:discipline)
     when :assessment_with_gender

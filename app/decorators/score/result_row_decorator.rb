@@ -10,7 +10,7 @@ class Score::ResultRowDecorator < ApplicationDecorator
   end
 
   def <=>(other)
-    object <=> other.object
+    object <=> (other.is_a?(Draper::Decorator) ? other.object : other)
   end
 
   def to_s

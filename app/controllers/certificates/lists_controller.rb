@@ -6,7 +6,7 @@ class Certificates::ListsController < ApplicationController
     if create_resource
       @certificates_template = @certificates_list.template
       @score_result = @certificates_list.result.decorate
-      @rows = @score_result.rows.map(&:decorate)
+      @rows = @certificates_list.rows.map(&:decorate)
       page_title('Urkunde', margin: [0, 0, 0, 0])
     else
       after_create_failed
@@ -16,7 +16,8 @@ class Certificates::ListsController < ApplicationController
   protected
 
   def certificates_list_params
-    params.require(:certificates_list).permit(:template_id, :image, :score_result_id, :competition_result_id)
+    params.require(:certificates_list)
+          .permit(:template_id, :image, :score_result_id, :competition_result_id, :group_score_result_id)
   end
 
   def build_resource

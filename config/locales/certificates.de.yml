@@ -1,24 +1,26 @@
 de:
-  activerecord: &activerecord
-    models:
-      certificates/list: Urkunden
-      certificates/template:
-        one: Urkundenvorlage
-        other: Urkundenvorlagen
+  activemodel:
     attributes:
-      certificates/list:
-        image: Hintergrundbild einbetten
-        template_id: Urkundenvorlage
-        score_result_id: Ergebnisliste
-        competition_result_id: Gesamtwertung
+      certificates/template:
+        font: Schriftart
+        image: Hintergrundbild
+        name: Name
+        remove_font: Schriftart entfernen
+        remove_image: Hintergrundbild entfernen
       certificates/text_field:
         key: Wert
         text: Freitext
+    models:
       certificates/template:
-        name: Name
-        image: Hintergrundbild
-        remove_image: Hintergrundbild entfernen
-        font: Schriftart
-        remove_font: Schriftart entfernen
-  activemodel:
-    <<: *activerecord
+        one: Urkundenvorlage
+        other: Urkundenvorlagen
+  activerecord:
+    attributes:
+      certificates/list:
+        competition_result_id: Gesamtwertung
+        group_score_result_id: Mannschaftwertung
+        image: Hintergrundbild einbetten
+        score_result_id: Ergebnisliste
+        template_id: Urkundenvorlage
+    models:
+      certificates/list: Urkunden
