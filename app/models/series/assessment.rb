@@ -43,7 +43,7 @@ class Series::Assessment < ActiveRecord::Base
   def entities
     entities = {}
     participations.each do |participation|
-      entities[participation.entity_id] ||= aggregate_class.new(participation.entity)
+      entities[participation.entity_id] ||= aggregate_class.new(round, participation.entity)
       entities[participation.entity_id].add_participation(participation)
     end
     result = score_results.first
@@ -58,7 +58,7 @@ class Series::Assessment < ActiveRecord::Base
           rank: rank,
         )
 
-        entities[participation.entity_id] ||= aggregate_class.new(participation.entity)
+        entities[participation.entity_id] ||= aggregate_class.new(round, participation.entity)
         entities[participation.entity_id].add_participation(participation)
       end
     end

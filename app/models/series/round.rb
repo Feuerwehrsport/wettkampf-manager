@@ -69,7 +69,7 @@ class Series::Round < ActiveRecord::Base
   def teams(gender)
     teams = {}
     Series::TeamParticipation.where(assessment: assessments.gender(gender)).find_each do |participation|
-      teams[participation.entity_id] ||= aggregate_class.new(participation.team, participation.team_number)
+      teams[participation.entity_id] ||= aggregate_class.new(self, participation.team, participation.team_number)
       teams[participation.entity_id].add_participation(participation)
     end
     assessments.gender(gender).each do |assessment|
@@ -89,7 +89,7 @@ class Series::Round < ActiveRecord::Base
           assessment: assessment,
         )
 
-        teams[participation.entity_id] ||= aggregate_class.new(participation.team, participation.team_number)
+        teams[participation.entity_id] ||= aggregate_class.new(self, participation.team, participation.team_number)
         teams[participation.entity_id].add_participation(participation)
       end
     end
