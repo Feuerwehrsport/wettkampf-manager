@@ -51,16 +51,18 @@
       = box('Ausgabe') do
         = block_link_to 'als PDF', format: :pdf
         = block_link_to 'als XLS', format: :xlsx
-        - if Certificates::Template.count > 0
-          = block_link_to 'Urkunden', new_certificates_list_path(score_result_id: @score_result.id)
+        - if admin_logged_in?
+          - if Certificates::Template.count > 0
+            = block_link_to 'Urkunden', new_certificates_list_path(score_result_id: @score_result.id)
 
   - if @rows.count > 0
     .col-md-12
       = box @score_result do |box|
         = render 'result_table', rows: @rows, places: true
         - box.footer do
-          - if Certificates::Template.count > 0
-            = btn_link_to "Urkunden", new_certificates_list_path(score_result_id: @score_result.id)
+          - if admin_logged_in?
+            - if Certificates::Template.count > 0
+              = btn_link_to "Urkunden", new_certificates_list_path(score_result_id: @score_result.id)
           - if @score_result.group_assessment? && @discipline.single_discipline?
             = btn_link_to "Mannschaftswertung als PDF", format: :pdf, only: :group_assessment
             = btn_link_to "Einzelwertung als PDF", format: :pdf, only: :single_competitors
