@@ -11,6 +11,17 @@ class Certificates::TemplatesController < ApplicationController
     @text_position_form = params[:form_type] == 'text_positions'
   end
 
+  def duplicate
+    assign_existing_resource
+    new_instance = resource_instance.clone
+    resource_instance.text_fields.each do |field|
+      new_instance.text_fields << field.clone
+    end
+    new_instance.name += ' (Duplikat)'
+    new_instance.save!
+    redirect_to action: :show, id: new_instance
+  end
+
   protected
 
   def assign_resource_for_edit

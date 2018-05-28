@@ -29,6 +29,7 @@
       = block_link_to "Vorschau als PDF", format: :pdf
       = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Vorlage wirklich löschen?' }
       = block_link_to "Übersicht Urkundenvorlagen", action: :index
+      = button_to 'Vorlage duplizieren', { action: :duplicate }, class: 'btn-default btn-block btn btn-sm'
 
   .col-md-6
     = box("Vorschau") do

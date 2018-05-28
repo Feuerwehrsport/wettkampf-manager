@@ -53,7 +53,9 @@ Rails.application.routes.draw do
   end
 
   namespace :certificates do
-    resources :templates
+    resources :templates do
+      member { post :duplicate }
+    end
     resources :lists, only: %i[new create] do
       collection do
         post :export

@@ -11,3 +11,9 @@ RSpec.shared_context 'seed loaded', seed: :load do
     Rails.application.load_seed
   end
 end
+
+RSpec.shared_context 'logged in', user: :logged_in do
+  before do
+    allow(controller).to receive(:current_user).and_return(User.first)
+  end
+end
