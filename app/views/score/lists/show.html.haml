@@ -39,3 +39,8 @@
         = block_link_to('PDF (Drucken)', format: :pdf)
         = block_link_to('PDF für Kampfrichter', format: :pdf, more_columns: true)
         = block_link_to('XLS (Excel)', format: :xlsx)
+
+    - if @score_list.results.present?
+      = box('Ergebnisse') do
+        - @score_list.results.each do |result|
+          = block_link_to(result.decorate, url_for(result))
