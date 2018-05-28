@@ -1,5 +1,5 @@
 de:
-  activemodel:
+  activerecord:
     attributes:
       certificates/template:
         font: Schriftart
@@ -14,7 +14,7 @@ de:
       certificates/template:
         one: Urkundenvorlage
         other: Urkundenvorlagen
-  activerecord:
+  activemodel:
     attributes:
       certificates/list:
         competition_result_id: Gesamtwertung
