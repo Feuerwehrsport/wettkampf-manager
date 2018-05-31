@@ -29,6 +29,7 @@
           = block_link_to 'Zeiten im Block eintragen', { action: :edit_times }
         - if can?(:edit, @score_list)
           = block_link_to 'Teilnehmer hinzufügen', { action: :select_entity }, remote: true
+        = block_link_to 'Startliste klonen', copy_list_score_list_factories_path(@score_list)
 
       - if can?(:edit, @score_list)
         = box('Allgemein') do

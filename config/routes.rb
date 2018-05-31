@@ -29,7 +29,9 @@ Rails.application.routes.draw do
     collection { get :without_statistics_id }
   end
   namespace :score do
-    resource :list_factories, only: %i[new create edit update destroy]
+    resource :list_factories, only: %i[new create edit update destroy] do
+      collection { get 'copy_list/:list_id', action: :copy_list, as: :copy_list }
+    end
     resources :lists, only: %i[show edit update index destroy] do
       member do
         get :move

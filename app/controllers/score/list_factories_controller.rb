@@ -3,6 +3,23 @@ class Score::ListFactoriesController < ApplicationController
   before_action :redirect_to_edit, only: %i[new create]
   before_action :assign_disciplines, only: :new
 
+  def copy_list
+    list = Score::List.find(params[:list_id])
+    base_collection.where(session_id: session.id).destroy_all
+
+    factory = Score::ListFactories::TrackChange.create!(
+      session_id: session.id,
+      discipline_id: list.assessments.first.discipline_id,
+      next_step: :assessments,
+    )
+    factory.update!(assessments: list.assessments, next_step: :names)
+    factory.update!(next_step: :tracks, name: factory.default_name, shortcut: factory.default_shortcut)
+    factory.update!(next_step: :results, track_count: list.track_count)
+    factory.update!(next_step: :generator, results: list.results)
+
+    redirect_to action: :edit
+  end
+
   protected
 
   def assign_disciplines
