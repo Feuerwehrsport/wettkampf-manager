@@ -13,6 +13,10 @@ module Certificates::StorageSupport
       result_entry.human_time
     when :rank
       "#{result.place_for_row(self)}."
+    when :rank_with_rank
+      "#{result.place_for_row(self)}. Platz"
+    when :rank_without_dot
+      result.place_for_row(self)
     when :assessment
       result.assessment.try(:name).presence || result.assessment.try(:discipline)
     when :assessment_with_gender

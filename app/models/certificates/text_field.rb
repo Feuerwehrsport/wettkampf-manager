@@ -25,8 +25,16 @@ class Certificates::TextField < ActiveRecord::Base
       example: 'Punkte',
     },
     rank: {
-      description: 'Platz',
+      description: 'Platz mit Punkt',
       example: '42.',
+    },
+    rank_with_rank: {
+      description: 'Platz mit Platz',
+      example: '42. Platz',
+    },
+    rank_without_dot: {
+      description: 'Platz ohne Punkt',
+      example: '42',
     },
     assessment: {
       description: 'Wertung',
