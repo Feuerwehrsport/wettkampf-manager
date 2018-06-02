@@ -29,7 +29,9 @@ $ ->
       if badInput and badValue
         label.text(text)
         tr.removeClass('danger')
+        $('button[type=submit]').prop('disabled', false)
       else
         label.text('Format: SS,MM')
         tr.addClass('danger')
+        $('button[type=submit]').prop('disabled', true)
     )
