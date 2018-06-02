@@ -57,6 +57,7 @@ class TextElement
   constructor: (@formElement, @parent) ->
     @description = config[@formElement.get('key')].description
     @example = config[@formElement.get('key')].example
+    @example = @formElement.get('text') if @formElement.get('key') == 'text'
     @parentOffset = @parent.offset()
     buttonLine = $('<div/>').addClass('button-line')
     @textLine = $('<div/>').addClass('text-line')
