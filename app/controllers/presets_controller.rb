@@ -2,6 +2,7 @@ class PresetsController < ApplicationController
   implement_crud_actions only: %i[show index update]
   before_action do
     redirect_to(root_path) if Competition.one.configured?
+    redirect_to(login_path) unless logged_in?
   end
 
   protected
