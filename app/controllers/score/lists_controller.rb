@@ -28,6 +28,7 @@ class Score::ListsController < ApplicationController
 
   def score_list_params
     params.require(:score_list).permit(:name, :shortcut, :date,
+                                       result_ids: [],
                                        entries_attributes: %i[
                                          id run track entity_id entity_type _destroy assessment_type
                                          result_type assessment_id edit_second_time
