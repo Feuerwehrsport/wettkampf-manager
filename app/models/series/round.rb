@@ -54,6 +54,10 @@ class Series::Round < ActiveRecord::Base
     round_structs
   end
 
+  def round
+    self
+  end
+
   protected
 
   def calculate_rows(_cache)
