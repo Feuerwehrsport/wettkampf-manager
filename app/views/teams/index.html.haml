@@ -12,10 +12,9 @@
             = "Es konnten zu #{@without_statistics_id.count} Mannschaften keine Serien-Ergebnisse gefunden wurden."
             = btn_link_to "Probleme ansehen", without_statistics_id_teams_path
 
-      %h4 Frauen
-      = render "index_table", collection: @teams.select { |t| t.gender == "female" }
-      %h4 Männer
-      = render "index_table", collection: @teams.select { |t| t.gender == "male" }
+      - { female: 'Frauen', male: 'Männer' }.each do |gender, name|
+        %h4= name
+        = render "index_table", collection: @teams.select { |t| t.gender == gender.to_s }, assessments: Assessment.requestable_for(Team.new(gender: gender))
       
       - box.footer do
         = btn_link_to "als PDF", format: :pdf
