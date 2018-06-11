@@ -79,4 +79,17 @@ class Certificates::TextField < ActiveRecord::Base
   def align
     super.try(:to_sym)
   end
+
+  def to_export_hash
+    {
+      left: left,
+      top: top,
+      width: width,
+      height: height,
+      size: size,
+      key: key,
+      align: align,
+      text: text,
+    }
+  end
 end

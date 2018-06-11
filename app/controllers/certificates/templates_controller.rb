@@ -3,6 +3,11 @@ class Certificates::TemplatesController < ApplicationController
 
   def show
     super
+    if request.format.json?
+      send_data resource_instance.to_json,
+                type: 'text/json',
+                disposition: "attachment; filename=\"urkundenvorlage-#{resource_instance.name.parameterize}.json\""
+    end
     page_title('Urkundenvorlage', margin: [0, 0, 0, 0])
   end
 

@@ -1,0 +1,7 @@
+= simple_form_for @certificates_import, url: certificates_import_path do |f|
+  = box 'Vorlagenimport' do |box|
+    = f.error_notification
+    = f.input :file, as: :file, hint: 'Eine Vorlagendatei, die zuvor durch den Wettkampf-Manager exportiert wurde.'
+    - box.footer do
+      = cancel_link(certificates_templates_path)
+      = f.primary_button :submit, 'Importieren'

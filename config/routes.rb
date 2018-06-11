@@ -63,6 +63,7 @@ Rails.application.routes.draw do
         post :export
       end
     end
+    resource :import, only: %i[new create]
   end
 
   namespace :imports do

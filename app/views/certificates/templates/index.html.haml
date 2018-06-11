@@ -12,7 +12,8 @@
               = btn_link_to "Ansehen", template
               = btn_link_to "Bearbeiten", { action: :edit, id: template }
       - box.footer do
-        = btn_link_to "Hinzufügen", { action: :new }
+        = btn_link_to 'Hinzufügen', { action: :new }
+        = btn_link_to 'Importieren', new_certificates_import_path
   .col-md-4
     = box 'Erläuterung' do |box|
       %p Hier können Sie Vorlagen für Urkunden anlegen, die später mit den Ergebnislisten automatisch ausgefüllt werden.
