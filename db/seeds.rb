@@ -9,6 +9,7 @@
 competition = Competition.new(
   name: 'Wettkampf',
   date: Date.current,
+  flyer_headline: 'Webseite mit Ergebnissen im WLAN',
   flyer_text: "Beispiel:\n\n* WLAN-Name: Wettkampf-WLAN\n* WLAN-Passwort: Feuerwehrsport",
 )
 competition.create_possible = true

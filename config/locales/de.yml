@@ -68,6 +68,7 @@ de:
         place: Ort
         show_bib_numbers: Startnummer anzeigen
         lottery_numbers: Losnummern anzeigen
+        flyer_headline: Überschrift auf PDF-Flyer
         flyer_text: Text auf PDF-Flyer
         backup_path: Verzeichnis für Backups
       discipline:

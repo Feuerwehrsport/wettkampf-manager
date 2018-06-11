@@ -1,5 +1,4 @@
-pdf.text "Webseite mit Ergebnissen", align: :center, size: 20
-pdf.text "im WLAN", align: :center, size: 20
+pdf.text decorated_competition.flyer_headline, align: :center, size: 20
 Discipline.types.first(5).each_with_index do |discipline, i|
   pdf.image "#{Rails.root}/app/assets/images/disciplines/#{discipline.new.decorate.image}", width: 50, at: [10, 700-i*60]
 end
