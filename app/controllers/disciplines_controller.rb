@@ -3,6 +3,10 @@ class DisciplinesController < ApplicationController
 
   protected
 
+  def index_collection
+    super.decorate.sort_by(&:to_s)
+  end
+
   def discipline_params
     attrs = %i[name short_name like_fire_relay]
     attrs.push(:type) if action_name.in?(%w[new create])

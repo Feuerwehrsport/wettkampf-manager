@@ -9,6 +9,10 @@ class AssessmentsController < ApplicationController
 
   protected
 
+  def index_collection
+    super.decorate.sort_by(&:to_s)
+  end
+
   def assign_resource_for_action
     assign_existing_resource
   end

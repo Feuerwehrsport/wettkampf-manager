@@ -29,6 +29,10 @@ class Certificates::TemplatesController < ApplicationController
 
   protected
 
+  def index_collection
+    super.reorder(:name)
+  end
+
   def assign_resource_for_edit
     super
     resource_instance.text_fields.build(key: :template, width: 100, height: 20, left: 20, top: 400, align: :center)

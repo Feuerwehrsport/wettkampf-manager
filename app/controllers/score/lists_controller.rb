@@ -18,6 +18,10 @@ class Score::ListsController < ApplicationController
 
   protected
 
+  def index_collection
+    super.decorate.sort_by(&:to_s)
+  end
+
   def assign_tags
     @tags = Tag.all.decorate
   end
