@@ -4,6 +4,6 @@ class Series::AssessmentsController < ApplicationController
   def show
     @assessment = Series::Assessment.find(params[:id])
     @person_assessments = Series::PersonAssessment.where(round: @assessment.round).where.not(id: @assessment.id)
-    @page_title = "#{@assessment.round} #{@assessment} - Wettkampfserie"
+    @page_title = "#{@assessment.round.decorate} #{@assessment.decorate} - Wettkampfserie"
   end
 end
