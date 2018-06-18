@@ -7,7 +7,7 @@
             = link_to "Hinzufügen", new_person_path, class: "btn btn-sm btn-info", remote: true
           .clearfix
         
-        - if @without_statistics_id.present?
+        - if Series::Round.with_local_results.present? && @without_statistics_id.present?
           .alert.alert-danger
             = "Es konnten zu #{@without_statistics_id.count} Wettkämpfern keine D-Cup-Ergebnisse gefunden wurden."
             = btn_link_to "Probleme ansehen", without_statistics_id_people_path
