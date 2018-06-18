@@ -20,7 +20,10 @@ class Certificates::List
   end
 
   def group_score_result
-    @group_score_result ||= Score::Result.find_by(id: group_score_result_id)
+    @group_score_result ||= begin
+      result = Score::Result.find_by(id: group_score_result_id)
+      Score::GroupResult.new(result) if result
+    end
   end
 
   def competition_result
@@ -32,7 +35,7 @@ class Certificates::List
   end
 
   def rows
-    @rows ||= score_result.try(:rows) || competition_result.try(:rows) || group_score_result.try(:group_result_rows)
+    @rows ||= result.try(:rows)
   end
 
   def save

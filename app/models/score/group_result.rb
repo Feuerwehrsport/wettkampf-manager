@@ -1,4 +1,6 @@
 Score::GroupResult = Struct.new(:result) do
+  include Draper::Decoratable
+
   def rows
     @rows ||= calculated_rows.sort
   end
