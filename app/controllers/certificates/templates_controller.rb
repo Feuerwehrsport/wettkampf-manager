@@ -18,9 +18,9 @@ class Certificates::TemplatesController < ApplicationController
 
   def duplicate
     assign_existing_resource
-    new_instance = resource_instance.clone
+    new_instance = resource_instance.dup
     resource_instance.text_fields.each do |field|
-      new_instance.text_fields << field.clone
+      new_instance.text_fields << field.dup
     end
     new_instance.name += ' (Duplikat)'
     new_instance.save!

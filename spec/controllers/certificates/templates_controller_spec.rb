@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Certificates::TemplatesController, type: :controller, seed: :configured, user: :logged_in do
-  let(:template) { create(:certificates_template) }
+  let(:template) { create(:certificates_template, :with_text_fields) }
 
   describe 'GET new' do
     it 'renders form' do
@@ -19,8 +19,10 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
 
   describe 'POST duplicate' do
     it 'duplicate existing template' do
-      post :duplicate, id: template
-      expect(response).to redirect_to action: :show, id: Certificates::Template.last
+      expect do
+        post :duplicate, id: template
+        expect(response).to redirect_to action: :show, id: Certificates::Template.last
+      end.to change(Certificates::Template, :count).by(2)
     end
   end
 
