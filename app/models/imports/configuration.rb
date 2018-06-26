@@ -34,6 +34,15 @@ class Imports::Configuration < CacheDependendRecord
     data[:place]
   end
 
+  def error_infos
+    @error_infos ||= begin
+      import(true)
+      ''
+    rescue ActiveRecord::RecordInvalid => error
+      "#{error.record.decorate}: #{error.message}"
+    end
+  end
+
   def date
     Date.parse(data[:date])
   rescue StandardError
@@ -53,12 +62,13 @@ class Imports::Configuration < CacheDependendRecord
     import
   end
 
-  def import
+  def import(rollback = false)
     Competition.transaction do
       Competition.first.update!(name: name, place: place, date: date)
       tags.each(&:import)
       teams.each(&:import)
       people.each(&:import)
+      raise ActiveRecord::Rollback if rollback
     end
   end
 end

@@ -46,12 +46,19 @@
               = link_to(assessment.assessment.decorate, assessment.assessment)
             - else
               %span.glyphicon.glyphicon-remove.text-danger
+
+- if @imports_configuration.error_infos.present?
+  .panel.panel-danger
+    .panel-heading Fehler
+    .panel-body= @imports_configuration.error_infos
+
 .row
   .col-md-4
     = box "Aktionen" do
-      = simple_form_for(@imports_configuration) do |f|
-        = f.input :execute, input_html: { value: '1' }, as: :hidden
-        = f.button :submit, "Importieren", class: "btn btn-info btn-block", data: { confirm: 'Import durchführen?' }
-      %hr
+      - if @imports_configuration.error_infos.blank?
+        = simple_form_for(@imports_configuration) do |f|
+          = f.input :execute, input_html: { value: '1' }, as: :hidden
+          = f.button :submit, "Importieren", class: "btn btn-info btn-block", data: { confirm: 'Import durchführen?' }
+        %hr
       = block_link_to("Bearbeiten", action: :edit)
       = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Importkonfiguration wirklich löschen?' }
