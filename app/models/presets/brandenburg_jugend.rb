@@ -40,7 +40,7 @@ class Presets::BrandenburgJugend < Preset
                                       score_competition_result: competition_result)
       Score::Result.create!(assessment: assessment, group_assessment: true)
 
-      assessment = Assessment.create!(discipline: fire_attack, gender: gender, name: "Löschangriff Mädchen #{name}",
+      assessment = Assessment.create!(discipline: fire_attack, gender: gender, name: "Löschangriff #{name}",
                                       score_competition_result: competition_result)
       Score::Result.create!(assessment: assessment, group_assessment: true)
     end
