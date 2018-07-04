@@ -24,11 +24,8 @@ class Imports::ConfigurationsController < ApplicationController
   end
 
   def redirect_to_new
-    if resource_class.possible?
-      redirect_to(action: :new)
-    elsif resource_class.first.executed_at.present?
-      flash[:notice] = 'Import wurde durchgeführt'
-      redirect_to(root_path)
-    end
+    return if resource_class.first.executed_at.blank?
+    flash[:notice] = 'Import wurde durchgeführt'
+    redirect_to(root_path)
   end
 end

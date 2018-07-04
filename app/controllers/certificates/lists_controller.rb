@@ -3,13 +3,13 @@ class Certificates::ListsController < ApplicationController
   before_action :assign_resource_for_export, only: :export
 
   def export
-    if create_resource
+    if request.format.pdf? && create_resource
       @certificates_template = @certificates_list.template
       @score_result = @certificates_list.result.decorate
       @rows = @certificates_list.rows.map(&:decorate)
       page_title('Urkunde', margin: [0, 0, 0, 0])
     else
-      after_create_failed
+      redirect_to action: :new
     end
   end
 
