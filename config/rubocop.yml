@@ -53,6 +53,8 @@ RSpec/ExampleLength:
   Max: 120
 RSpec/MultipleExpectations:
   Enabled: false
+RSpec/NestedGroups:
+  Max: 5
 Rails:
   Enabled: true
 Rails/ApplicationRecord:
