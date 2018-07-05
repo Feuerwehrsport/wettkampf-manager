@@ -4,7 +4,6 @@ module CRUD::IndexAction
   included do
     include CRUD::ResourceAssignment
     before_action :assign_resource_for_index, only: :index
-    helper_method :collection_instance_json
   end
 
   def index
@@ -24,10 +23,6 @@ module CRUD::IndexAction
 
   def assign_resource_for_index
     self.collection_instance = index_collection
-  end
-
-  def collection_instance_json
-    render_to_string json: collection_instance
   end
 
   def index_collection
