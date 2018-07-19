@@ -140,7 +140,7 @@ class Score::ListFactory < CacheDependendRecord
 
   def assessment_requests
     requests = []
-    assessments.each { |assessment| requests += assessment.requests.to_a }
+    assessments.each { |assessment| requests += assessment.requests.for_assessment(assessment).to_a }
     if team_shuffle?
       requests.shuffle
     else

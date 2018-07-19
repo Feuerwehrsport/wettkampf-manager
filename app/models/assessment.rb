@@ -43,7 +43,8 @@ class Assessment < CacheDependendRecord
     g = arel_table[:gender]
     if entity.is_a? Person
       where(g.eq(nil).or(g.eq(Person.genders[entity.gender]))).select do |a|
-        a.discipline.single_discipline? && (a.person_tags.blank? || entity.include_tags?(a.person_tags))
+        a.discipline.group_discipline? ||
+          (a.discipline.single_discipline? && (a.person_tags.blank? || entity.include_tags?(a.person_tags)))
       end
     else
       where(g.eq(nil).or(g.eq(Team.genders[entity.gender]))).select do |a|

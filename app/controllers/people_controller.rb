@@ -49,7 +49,8 @@ class PeopleController < ApplicationController
     params.require(:person).permit(:first_name, :last_name, :team_id, :gender, :fire_sport_statistics_person_id,
                                    :registration_order, :bib_number,
                                    requests_attributes: %i[assessment_type _destroy assessment_id id
-                                                           group_competitor_order single_competitor_order],
+                                                           group_competitor_order single_competitor_order
+                                                           competitor_order],
                                    tag_references_attributes: %i[id tag_id _destroy])
   end
 end

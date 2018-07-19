@@ -7,15 +7,15 @@
         %th{ style: "width: 5%" } Nr.
       %th{ style: "width: 20%" } Nachname
       %th{ style: "width: 20%" } Vorname
-      %th{ style: "width: 35%" } Mannschaft
+      %th Mannschaft
       - @tags.each do |tag|
         %th{ style: "width: 5%" }= tag
 
-      - assessments = Assessment.single_discipline(collection.first.gender).map(&:decorate)
+      - assessments = Assessment.no_double_event.gender(collection.first.gender).map(&:decorate)
       - assessments.each do |assessment|
-        %th{ title: assessment }= discipline_image assessment.discipline
+        %th{ style: "width: 5%", title: assessment }= discipline_image assessment.discipline
       - if admin_logged_in?
-        %th
+        %th{ style: "width: 5%" }
     - collection.each do |person|
       %tr
         - if Competition.one.show_bib_numbers?

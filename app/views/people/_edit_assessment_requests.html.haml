@@ -9,11 +9,18 @@
 
           .row.edit-assesment-type
             .col-md-9
-              = g.input :assessment_type, as: :select, collection: AssessmentRequest.assessment_types.keys, label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }
+              = g.input :assessment_type, as: :select, collection: AssessmentRequest.possible_assessment_types(assessment), label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }, include_blank: false, input_html: { class: 'assessment-types' }
             .col-md-3.group-competitor-order
               = g.input :group_competitor_order
             .col-md-3.single-competitor-order
               = g.input :single_competitor_order
+            .col-md-3.competitor-order
+              - if assessment.discipline.key == :fs
+                = g.input :competitor_order, collection: AssessmentRequestDecorator.fs_names.each_with_index.map { |n, i| [n, i] }, include_blank: false
+              - elsif assessment.discipline.key == :la
+                = g.input :competitor_order, collection: AssessmentRequestDecorator.la_names.each_with_index.map { |n, i| [n, i] }, include_blank: false
+              - else
+                = g.input :competitor_order
     .modal-footer
       = f.primary_button :submit, "Speichern"
 

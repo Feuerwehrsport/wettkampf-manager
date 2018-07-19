@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180611091518) do
+ActiveRecord::Schema.define(version: 20180719070940) do
 
   create_table "api_time_entries", force: :cascade do |t|
     t.integer  "time",                null: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180611091518) do
     t.integer  "group_competitor_order",  default: 0, null: false
     t.integer  "relay_count",             default: 1, null: false
     t.integer  "single_competitor_order", default: 0, null: false
+    t.integer  "competitor_order",        default: 0, null: false
   end
 
   add_index "assessment_requests", ["assessment_id"], name: "index_assessment_requests_on_assessment_id"

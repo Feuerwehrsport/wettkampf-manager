@@ -39,6 +39,8 @@ FactoryBot.define do
   factory :fire_relay, class: 'Disciplines::FireRelay' do
     like_fire_relay true
   end
+  factory :group_relay, class: 'Disciplines::GroupRelay' do
+  end
   factory :fire_attack, class: 'Disciplines::FireAttack' do
   end
   factory :double_event, class: 'Disciplines::DoubleEvent' do
@@ -56,6 +58,9 @@ FactoryBot.define do
     end
     trait :fire_relay do
       discipline { create :fire_relay }
+    end
+    trait :group_relay do
+      discipline { create :group_relay }
     end
   end
 

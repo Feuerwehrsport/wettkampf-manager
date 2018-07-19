@@ -13,13 +13,14 @@ Imports::Person = Struct.new(:configuration, :data) do
     end
     data[:assessment_participations].each do |participation|
       assessment = configuration.assessments.find_by(foreign_key: participation[:assessment_id]).try(:assessment)
-      next unless assessment.present? && assessment.discipline.single_discipline?
+      next if assessment.blank?
       AssessmentRequest.create!(
         entity: @person,
         assessment: assessment,
         assessment_type: participation[:assessment_type],
-        single_competitor_order: participation[:single_competitor_order],
-        group_competitor_order: participation[:group_competitor_order],
+        single_competitor_order: participation[:single_competitor_order] || 0,
+        group_competitor_order: participation[:group_competitor_order] || 0,
+        competitor_order: participation[:competitor_order] || 0,
       )
     end
   end
