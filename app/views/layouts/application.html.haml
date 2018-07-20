@@ -7,7 +7,15 @@
     = javascript_include_tag 'application'
     = javascript_include_tag "controllers/#{controller_path}" if asset_exists?("controllers/#{controller_path}.js")
     = csrf_meta_tag
+
+    %meta{ property: 'og:url', content: request.url }
+    %meta{ property: 'og:locale', content: 'de_DE' }
     %title= @page_title || t('application.name')
+    %meta{ property: 'og:title', content: @page_title || t('application.name') }
+    - if @meta_description.present?
+      %meta{ property: 'og:description', content: @meta_description }
+      %meta{ name: 'description', content: @meta_description }
+
   %body
     %nav.navbar.navbar-default.navbar-static-top
       .container

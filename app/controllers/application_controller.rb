@@ -20,6 +20,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def default_meta_description(title: nil)
+    page_title(title) if title.present?
+    description = []
+    description.push("Der Wettkampf »#{Competition.one.name}« findet am #{l Competition.one.date} in " \
+      "#{Competition.one.place} statt.")
+    description.push("Angemeldete Wettkämpfer: #{Person.count}") if Person.present?
+    description.push("Angemeldete Mannschaften: #{Team.count}") if Team.present?
+    description.push('Das Programm »Wettkampf-Manager« ist eine kostenlose und freie Software. Sie steht unter der ' \
+      'Software-Lizenz AGPLv3.')
+    @meta_description = description.join("\n")
+  end
+
   private
 
   def check_user_configured

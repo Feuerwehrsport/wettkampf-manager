@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
   def index
     super
     @without_statistics_id = @teams.where(fire_sport_statistics_team_id: nil)
-    page_title 'Mannschaften'
+    default_meta_description title: 'Mannschaften'
   end
 
   def edit_assessment_requests; end
