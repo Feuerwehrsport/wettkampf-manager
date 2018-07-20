@@ -1,9 +1,11 @@
-Certificates::ExportPDF = Struct.new(:pdf, :template, :rows) do
+Certificates::ExportPDF = Struct.new(:pdf, :template, :rows, :background_image) do
   def render
     pdf.font_families.update('certificates_template' => { normal: font_path })
 
     rows.each_with_index do |row, i|
-      pdf.image(template.image.current_path, at: [0, height], width: width, height: height) if template.image.present?
+      if template.image.present? && background_image
+        pdf.image(template.image.current_path, at: [0, height], width: width, height: height)
+      end
 
       pdf.font('certificates_template') do
         template.text_fields.each { |position| render_position(position, row) }

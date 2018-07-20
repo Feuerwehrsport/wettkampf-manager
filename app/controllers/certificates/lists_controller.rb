@@ -7,6 +7,7 @@ class Certificates::ListsController < ApplicationController
       @certificates_template = @certificates_list.template
       @score_result = @certificates_list.result.decorate
       @rows = @certificates_list.rows.map(&:decorate)
+      @background_image = @certificates_list.background_image
       page_title('Urkunde', margin: [0, 0, 0, 0])
     else
       redirect_to action: :new
@@ -17,7 +18,7 @@ class Certificates::ListsController < ApplicationController
 
   def certificates_list_params
     params.require(:certificates_list)
-          .permit(:template_id, :image, :score_result_id, :competition_result_id, :group_score_result_id)
+          .permit(:template_id, :background_image, :score_result_id, :competition_result_id, :group_score_result_id)
   end
 
   def build_resource

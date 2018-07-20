@@ -6,10 +6,21 @@ class Certificates::List
   include ActiveRecord::AttributeAssignment
   include ActiveRecord::Callbacks
   include Draper::Decoratable
-  attr_accessor :template_id, :score_result_id, :competition_result_id, :group_score_result_id, :image
+  attr_accessor :template_id, :score_result_id, :competition_result_id, :group_score_result_id
+  attr_reader :background_image
 
   validates :template, presence: true
   validate :result_present
+
+  def background_image=(boolean_or_string)
+    @background_image = if boolean_or_string.nil?
+                          nil
+                        elsif boolean_or_string == true || boolean_or_string =~ /\A(true|t|yes|y|1)\z/i
+                          true
+                        elsif boolean_or_string == false || boolean_or_string =~ /\A(false|f|no|n|0)\z/i
+                          false
+                        end
+  end
 
   def template
     Certificates::Template.find_by(id: template_id)

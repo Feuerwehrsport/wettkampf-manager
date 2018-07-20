@@ -1,1 +1,1 @@
-Certificates::ExportPDF.new(pdf, @certificates_template, @rows).render
+Certificates::ExportPDF.new(pdf, @certificates_template, @rows, @background_image).render

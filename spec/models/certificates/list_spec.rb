@@ -24,4 +24,17 @@ RSpec.describe Certificates::List, type: :model do
       expect(instance).to be_valid
     end
   end
+
+  describe '#background_image' do
+    it do
+      instance = described_class.new(background_image: nil)
+      expect(instance.background_image).to eq nil
+      instance = described_class.new(background_image: '1')
+      expect(instance.background_image).to eq true
+      instance = described_class.new(background_image: '0')
+      expect(instance.background_image).to eq false
+      instance = described_class.new(background_image: 'foobar')
+      expect(instance.background_image).to eq nil
+    end
+  end
 end

@@ -3,7 +3,7 @@
     = simple_form_for @certificates_list, url: url_for(action: :export, format: :pdf) do |f|
       = box 'Urkunden' do |box|
         = f.input :template_id, as: :hidden
-        = f.input :image, as: :hidden
+        = f.input :background_image, as: :hidden
         = f.input :score_result_id, as: :hidden
         = f.input :group_score_result_id, as: :hidden
         = f.input :competition_result_id, as: :hidden
