@@ -26,3 +26,10 @@ de:
         template_id: Urkundenvorlage
     models:
       certificates/list: Urkunden
+
+  certificates:
+    lists:
+      export:
+        points:
+          one: 1 Punkt
+          other: '%{count} Punkte'

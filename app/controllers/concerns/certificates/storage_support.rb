@@ -11,6 +11,8 @@ module Certificates::StorageSupport
       result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig')
     when :time_short
       result_entry.human_time
+    when :time_without_seconds
+      result_entry.human_time.gsub(/DN/, '-').gsub('s', '').strip
     when :rank
       "#{result.place_for_row(self)}."
     when :rank_with_rank
@@ -30,8 +32,9 @@ module Certificates::StorageSupport
     when :competition_name
       Competition.one.name
     when :points
-      # TODO
-      nil
+      points
+    when :points_with_points
+      t('.points', count: points)
     when :text
       position.text
     end

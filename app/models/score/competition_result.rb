@@ -1,5 +1,6 @@
 class Score::CompetitionResult < CacheDependendRecord
   include Genderable
+  include Score::Resultable
 
   has_many :assessments, foreign_key: :score_competition_result_id, dependent: :nullify,
                          inverse_of: :score_competition_result

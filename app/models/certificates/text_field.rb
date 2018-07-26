@@ -20,9 +20,17 @@ class Certificates::TextField < ActiveRecord::Base
       description: 'Zeit (s)',
       example: '23,39 s',
     },
+    time_without_seconds: {
+      description: 'Zeit',
+      example: '23,39',
+    },
     points: {
       description: 'Punkte',
-      example: 'Punkte',
+      example: '5',
+    },
+    points_with_points: {
+      description: 'Punkte mit Punkte',
+      example: '5 Punkte',
     },
     rank: {
       description: 'Platz mit Punkt',

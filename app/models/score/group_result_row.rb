@@ -1,4 +1,4 @@
-Score::GroupResultRow = Struct.new(:team, :score_count, :run_count) do
+Score::GroupResultRow = Struct.new(:team, :score_count, :run_count, :result) do
   include Draper::Decoratable
 
   def entity
@@ -41,7 +41,7 @@ Score::GroupResultRow = Struct.new(:team, :score_count, :run_count) do
 
   def <=>(other)
     compare = valid_compare <=> other.valid_compare
-    compare .zero? ? result_entry <=> other.result_entry : compare
+    compare.zero? ? result_entry <=> other.result_entry : compare
   end
 
   protected

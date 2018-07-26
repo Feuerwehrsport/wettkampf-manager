@@ -1,4 +1,4 @@
-Score::CompetitionResultRow = Struct.new(:competition_result, :team) do
+Score::CompetitionResultRow = Struct.new(:result, :team) do
   include Draper::Decoratable
   attr_reader :assessment_results
 
@@ -22,7 +22,7 @@ Score::CompetitionResultRow = Struct.new(:competition_result, :team) do
   end
 
   def <=>(other)
-    competition_result.result_type.nil? ? 0 : send(:"#{competition_result.result_type}_compare", other)
+    result.result_type.nil? ? 0 : send(:"#{result.result_type}_compare", other)
   end
 
   def entity

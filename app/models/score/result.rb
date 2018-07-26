@@ -1,5 +1,6 @@
 class Score::Result < CacheDependendRecord
   include Taggable
+  include Score::Resultable
 
   belongs_to :assessment, inverse_of: :results
   has_many :series_assessment_results, class_name: 'Series::AssessmentResult', dependent: :destroy,
@@ -28,12 +29,6 @@ class Score::Result < CacheDependendRecord
 
   def single_group_result?
     group_assessment? && discipline.single_discipline?
-  end
-
-  def place_for_row(row)
-    rows.each_with_index do |place_row, place|
-      return (place + 1) if (row <=> place_row).zero?
-    end
   end
 
   def rows

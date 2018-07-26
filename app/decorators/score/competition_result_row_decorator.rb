@@ -5,6 +5,7 @@ class Score::CompetitionResultRowDecorator < ApplicationDecorator
   decorates_association :assessment_results
 
   def <=>(other)
-    object <=> other.object
+    other = other.object if other.is_a?(Draper::Decorator)
+    object <=> other
   end
 end
