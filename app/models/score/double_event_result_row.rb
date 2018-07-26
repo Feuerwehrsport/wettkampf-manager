@@ -1,4 +1,4 @@
-Score::DoubleEventResultRow = Struct.new(:entity) do
+Score::DoubleEventResultRow = Struct.new(:entity, :result) do
   include Draper::Decoratable
   attr_reader :result_rows
 

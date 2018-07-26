@@ -1,4 +1,5 @@
 class Score::DoubleEventResult < Score::Result
+  include Score::Resultable
   has_many :results, class_name: 'Score::Result', dependent: :nullify, inverse_of: :double_event_result
 
   def generate_rows
@@ -6,7 +7,7 @@ class Score::DoubleEventResult < Score::Result
     results.each do |result|
       result.rows.select(&:valid?).each do |result_row|
         if rows[result_row.entity.id].nil?
-          rows[result_row.entity.id] = Score::DoubleEventResultRow.new(result_row.entity)
+          rows[result_row.entity.id] = Score::DoubleEventResultRow.new(result_row.entity, self)
         end
         rows[result_row.entity.id].add_result_row(result_row)
       end
