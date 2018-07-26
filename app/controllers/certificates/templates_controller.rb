@@ -22,6 +22,8 @@ class Certificates::TemplatesController < ApplicationController
     resource_instance.text_fields.each do |field|
       new_instance.text_fields << field.dup
     end
+    new_instance.font = resource_instance.font if resource_instance.font.present?
+    new_instance.image = resource_instance.image if resource_instance.image.present?
     new_instance.name += ' (Duplikat)'
     new_instance.save!
     redirect_to action: :show, id: new_instance
