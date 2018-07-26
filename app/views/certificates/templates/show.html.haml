@@ -1,5 +1,7 @@
 - if @certificates_template.font.present?
-  = render 'font_style'
+  = render 'font_style', type: :regular, font: @certificates_template.font
+- if @certificates_template.font2.present?
+  = render 'font_style', type: :bold, font: @certificates_template.font2
 
 .row
   .col-md-8
@@ -18,7 +20,13 @@
         %tr
           %th= @certificates_template.class.human_attribute_name :font
           - if @certificates_template.font.present?
-            %td{ style: "font-family: certificates_template_#{@certificates_template.id}" } Beispieltext 
+            %td{ style: "font-family: certificates_template_#{@certificates_template.id}_regular" } Beispieltext 
+          - else
+            %td Nicht angegeben
+        %tr
+          %th= @certificates_template.class.human_attribute_name :font2
+          - if @certificates_template.font2.present?
+            %td{ style: "font-family: certificates_template_#{@certificates_template.id}_bold" } Beispieltext 
           - else
             %td Nicht angegeben
 

@@ -23,6 +23,7 @@ class FormElement
       key: $("#certificates_template_text_fields_attributes_#{@number}_key")
       align: $("#certificates_template_text_fields_attributes_#{@number}_align")
       text: $("#certificates_template_text_fields_attributes_#{@number}_text")
+      font: $("#certificates_template_text_fields_attributes_#{@number}_font")
       destroy: $("#certificates_template_text_fields_attributes_#{@number}__destroy")
     }
     if @get('key') isnt 'template'
@@ -90,6 +91,7 @@ class TextElement
     @setSize()
     @setPosition()
     @setAlign()
+    @setFont()
     @textLine.text(@example).attr('title', @description)
     @element.appendTo(@parent).draggable {
       containment: 'parent'
@@ -127,7 +129,6 @@ class TextElement
       @formElement.set('size', parseInt(@formElement.get('size'), 10) + distance)
       @setFontSize()
       @regenerateTable()
-
     @formElement
 
   regenerateTable: =>
@@ -166,6 +167,19 @@ class TextElement
       btn.addClass('btn-primary') if @formElement.get('align') is elem
       
     $('<tr/>').appendTo(@table).append('<td/>').append('<th>Text</th>').append(alignLine)
+
+    fontLine = $('<td colspan=2 class="text-center"/>')
+    $.each ['regular', 'bold'], (i, elem) =>
+      btn = $("<div class=\"btn btn-xs btn-default\"><span class=\"glyphicon glyphicon-font\"/></div>").
+      click( (e) =>
+        e.stopPropagation()
+        @formElement.set('font', elem)
+        @setFont()
+        @regenerateTable()
+      ).appendTo(fontLine)
+      btn.addClass('btn-primary') if @formElement.get('font') is elem
+      
+    $('<tr/>').appendTo(@table).append('<td/>').append('<th>Schrift</th>').append(fontLine)
     btn = $('<div><span class="glyphicon glyphicon-resize-horizontal"/> Element zentrieren</div>').
     addClass('btn btn-xs btn-default').click( (e) =>
       e.stopPropagation()
@@ -198,6 +212,18 @@ class TextElement
     @formElement.set('width', @width)
     @formElement.set('height', @height)
     @regenerateTable()
+
+  setFont: =>
+    if @formElement.get('font') is 'regular'
+      if @formElement.element.data('font-family-regular') isnt ''
+        @textLine.css({ fontFamily: @formElement.element.data('font-family-regular'), fontWeight: 'normal' })
+      else
+        @textLine.css({ fontFamily: @formElement.element.data('initial'), fontWeight: 'normal' })
+    else
+      if @formElement.element.data('font-family-bold') isnt ''
+        @textLine.css({ fontFamily: @formElement.element.data('font-family-bold'), fontWeight: 'normal' })
+      else
+        @textLine.css({ fontFamily: @formElement.element.data('initial'), fontWeight: 'bold' })
 
   setSize: =>
     if @formElement.get('width') isnt ''

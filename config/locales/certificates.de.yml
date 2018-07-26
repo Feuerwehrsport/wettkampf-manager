@@ -3,9 +3,11 @@ de:
     attributes:
       certificates/template:
         font: Schriftart
+        font2: Zweite Schriftart
         image: Hintergrundbild
         name: Name
         remove_font: Schriftart entfernen
+        remove_font2: Zweite Schriftart entfernen
         remove_image: Hintergrundbild entfernen
       certificates/text_field:
         key: Wert

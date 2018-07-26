@@ -23,6 +23,7 @@ class Certificates::TemplatesController < ApplicationController
       new_instance.text_fields << field.dup
     end
     new_instance.font = resource_instance.font if resource_instance.font.present?
+    new_instance.font2 = resource_instance.font2 if resource_instance.font2.present?
     new_instance.image = resource_instance.image if resource_instance.image.present?
     new_instance.name += ' (Duplikat)'
     new_instance.save!
@@ -42,8 +43,8 @@ class Certificates::TemplatesController < ApplicationController
 
   def certificates_template_params
     params.require(:certificates_template).permit(
-      :name, :image, :font, :remove_image, :remove_font,
-      text_fields_attributes: %i[left top width height size key align text id _destroy]
+      :name, :image, :font, :font2, :remove_image, :remove_font, :remove_font2,
+      text_fields_attributes: %i[left top width height size key font align text id _destroy]
     )
   end
 end

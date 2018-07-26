@@ -29,6 +29,9 @@ class Certificates::Import
     if json_data[:font]
       template.font = CarrierStringIO.new(json_data[:font], json_data[:font_name], json_data[:font_content_type])
     end
+    if json_data[:font2]
+      template.font2 = CarrierStringIO.new(json_data[:font2], json_data[:font2_name], json_data[:font2_content_type])
+    end
     json_data[:text_fields].each do |text_field|
       template.text_fields.build(
         left: text_field[:left],

@@ -6,6 +6,7 @@
         = f.input :name, hint: "Interner Name"
         = f.input :image, as: :file, hint: "Hintergrundbild zur Orientierung"
         = f.input :font, as: :file, hint: "Schriftart für variable Texte"
+        = f.input :font2, as: :file, hint: "Zweite Schriftart für variable Texte"
         - box.footer do
           = cancel_link
           = f.primary_button :submit, "Speichern"

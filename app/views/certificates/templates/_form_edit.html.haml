@@ -8,6 +8,9 @@
     = f.input :font
     - if f.object.font.present?
       = f.input :remove_font, as: :boolean, hint: "Zur Zeit: #{f.object.font.file.filename}"
+    = f.input :font2
+    - if f.object.font2.present?
+      = f.input :remove_font2, as: :boolean, hint: "Zur Zeit: #{f.object.font2.file.filename}"
     - box.footer do
       = cancel_link
       = f.primary_button :submit, "Speichern"

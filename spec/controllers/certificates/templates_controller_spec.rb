@@ -37,7 +37,8 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
         get :show, id: template, format: :json
         expect(response).to be_success
         expect(JSON.parse(response.body, symbolize_names: true).keys).to eq(
-          %i[name image image_content_type image_name font font_content_type font_name text_fields],
+          %i[name image image_content_type image_name font font_content_type font_name
+             font2 font2_content_type font2_name text_fields],
         )
       end
     end

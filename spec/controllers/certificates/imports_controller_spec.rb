@@ -15,6 +15,7 @@ RSpec.describe Certificates::ImportsController, type: :controller, seed: :config
       expect(Certificates::Template.last.text_fields.count).to eq 15
       expect(Certificates::Template.last.image).to be_present
       expect(Certificates::Template.last.font).to be_present
+      expect(Certificates::Template.last.font2).to be_present
       expect(Certificates::Template.last.name).to eq 'Mannschaft nur Wappen'
     end
   end

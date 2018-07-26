@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180719070940) do
+ActiveRecord::Schema.define(version: 20180726175719) do
 
   create_table "api_time_entries", force: :cascade do |t|
     t.integer  "time",                null: false
@@ -57,20 +57,22 @@ ActiveRecord::Schema.define(version: 20180719070940) do
     t.string   "font"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "font2"
   end
 
   create_table "certificates_text_fields", force: :cascade do |t|
-    t.integer  "template_id", null: false
-    t.decimal  "left",        null: false
-    t.decimal  "top",         null: false
-    t.decimal  "width",       null: false
-    t.decimal  "height",      null: false
-    t.integer  "size",        null: false
-    t.string   "key",         null: false
-    t.string   "align",       null: false
+    t.integer  "template_id",                     null: false
+    t.decimal  "left",                            null: false
+    t.decimal  "top",                             null: false
+    t.decimal  "width",                           null: false
+    t.decimal  "height",                          null: false
+    t.integer  "size",                            null: false
+    t.string   "key",                             null: false
+    t.string   "align",                           null: false
     t.string   "text"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "font",        default: "regular", null: false
   end
 
   add_index "certificates_text_fields", ["template_id"], name: "index_certificates_text_fields_on_template_id"
