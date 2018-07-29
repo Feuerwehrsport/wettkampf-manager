@@ -2,7 +2,7 @@ module Certificates::StorageSupport
   def get(position)
     case position.key
     when :team_name
-      entity.try(:team).try(:numbered_name)
+      entity.is_a?(TeamRelayDecorator) ? entity : entity.try(:team).try(:numbered_name)
     when :person_name
       entity
     when :person_bib_number
