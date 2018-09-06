@@ -22,7 +22,7 @@ class API::ExternalReader
       begin
         evaluate_output(serial_adapter.read(10))
         sleep 0.3
-      rescue RubySerial::Exception => error
+      rescue RubySerial::Error => error
         return log_send_error("Schnittstelle: #{error.message}")
       end
     end
