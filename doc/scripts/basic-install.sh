@@ -34,9 +34,14 @@ if [[ "$?" -ne "0" ]]; then
   set -e
   \curl -sSL https://get.rvm.io | bash -s stable --autolibs=read-fail
   echo 'source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
-  source "$HOME/.rvm/scripts/rvm"
 fi
 set -e
+
+if [ -f "$HOME/.rvm/scripts/rvm" ] ; then
+  source "$HOME/.rvm/scripts/rvm"
+elif [ -f /usr/share/rvm/scripts/rvm ] ; then
+  source /usr/share/rvm/scripts/rvm
+fi
 
 rvm install ruby-2.4.4
 git clone -b release --recursive https://github.com/Feuerwehrsport/wettkampf-manager.git "$INSTALL_PATH"
