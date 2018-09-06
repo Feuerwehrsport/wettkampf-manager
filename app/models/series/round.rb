@@ -72,6 +72,7 @@ class Series::Round < ActiveRecord::Base
 
   def teams(gender)
     teams = {}
+    assessments = self.assessments.where(type: Series::TeamAssessment)
     Series::TeamParticipation.where(assessment: assessments.gender(gender)).find_each do |participation|
       teams[participation.entity_id] ||= aggregate_class.new(self, participation.team, participation.team_number)
       teams[participation.entity_id].add_participation(participation)

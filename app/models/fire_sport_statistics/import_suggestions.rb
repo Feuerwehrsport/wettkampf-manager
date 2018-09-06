@@ -101,10 +101,14 @@ class FireSportStatistics::ImportSuggestions < FireSportStatistics::Import
   def import_series_assessments
     fetch('series/assessments') do |assessment|
       if series_rounds[assessment.round_id.to_i].present?
+        discipline = assessment.discipline.to_sym
+        discipline = :hb if discipline == :hw
+        discipline = :zk if discipline == :zw
+
         series_assessments[assessment.id.to_i] = Series::Assessment.create!(
           id: assessment.id,
           name: assessment.name,
-          discipline: assessment.discipline.to_sym == :hw ? :hb : assessment.discipline,
+          discipline: discipline,
           round: series_rounds[assessment.round_id.to_i],
           gender: assessment.gender,
           type: assessment.type,
