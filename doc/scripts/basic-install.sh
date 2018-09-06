@@ -26,10 +26,17 @@ if [[ "$INSTALL_APT" == "yes" ]] ; then
     libffi-dev libgmp-dev libreadline-dev libssl-dev
 fi
 
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-\curl -sSL https://get.rvm.io | bash -s stable --autolibs=read-fail
-echo 'source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
-source "$HOME/.rvm/scripts/rvm"
+gpg --list-keys 409B6B1796C275462A1703113804BB82D39DC0E3 || gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+gpg --list-keys 7D2BAF1CF37B13E2069D6956105BD0E739499BDB || gpg --keyserver hkp://keys.gnupg.net --recv-keys 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+set +e
+which rvm
+if [[ "$?" -ne "0" ]]; then
+  set -e
+  \curl -sSL https://get.rvm.io | bash -s stable --autolibs=read-fail
+  echo 'source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc
+  source "$HOME/.rvm/scripts/rvm"
+fi
+set -e
 
 rvm install ruby-2.4.4
 git clone -b release --recursive https://github.com/Feuerwehrsport/wettkampf-manager.git "$INSTALL_PATH"
