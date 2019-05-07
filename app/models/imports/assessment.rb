@@ -4,7 +4,7 @@ class Imports::Assessment < CacheDependendRecord
   validates :gender, :discipline, :configuration, :foreign_key, presence: true
 
   before_create do
-    self.assessment = possible_assessments.first
+    self.assessment = possible_assessments.find { |pa| pa.decorate.to_s == decorate.to_s } || possible_assessments.first
   end
 
   def discipline_model
