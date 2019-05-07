@@ -15,6 +15,7 @@ class Preset
       Presets::MvCupSingle,
       Presets::BrandenburgJugend,
       Presets::Sonnenwalde,
+      Presets::SonnenwaldeKreisausscheid,
       Presets::EuregioCup,
       Presets::LandesmeisterschaftBrandenburg2017,
     ]
