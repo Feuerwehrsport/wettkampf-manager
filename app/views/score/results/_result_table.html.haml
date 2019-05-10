@@ -21,7 +21,7 @@
   - rows.each do |row|
     %tr
       - if places
-        %td= "#{place_for_row row}."
+        %td= "#{place_for_row(rows, row)}."
       - if @discipline.single_discipline_or_double_event?
         - if Competition.one.show_bib_numbers?
           %td= row.entity.try(:bib_number)

@@ -88,4 +88,8 @@ class Score::Result < CacheDependendRecord
     @out_of_competition_rows = out_of_competition_rows.values
     rows.values
   end
+
+  def group_result
+    @group_result ||= Score::GroupResult.new(self)
+  end
 end

@@ -3,6 +3,7 @@ class Score::ResultDecorator < ApplicationDecorator
   decorates_association :lists
   decorates_association :results
   decorates_association :tags
+  decorates_association :group_result
 
   def to_s
     [name, generated_name].reject(&:blank?).first
@@ -14,5 +15,9 @@ class Score::ResultDecorator < ApplicationDecorator
 
   def translated_group_assessment
     object.group_assessment ? 'Ja' : 'Nein'
+  end
+
+  def rows
+    @rows ||= object.rows.map(&:decorate)
   end
 end
