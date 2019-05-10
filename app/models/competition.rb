@@ -30,4 +30,12 @@ class Competition < ActiveRecord::Base
     @one = nil
     @result_type = nil
   end
+
+  def hostname_url
+    hostname.present? ? "http://#{hostname}/" : ip_url
+  end
+
+  def ip_url
+    @ip_url ||= "http://#{Socket.ip_address_list.find { |a| a.ipv4? && !a.ipv4_loopback? }.try(:ip_address)}/"
+  end
 end

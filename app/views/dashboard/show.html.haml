@@ -28,8 +28,8 @@
         = block_link_to "Mannschaft hinzufügen", new_team_path
         = block_link_to "Startliste hinzufügen", new_score_list_factories_path
   .col-md-5
-    = box link_to(hostname_url, hostname_url) do
-      = image_tag qrcode(hostname_url)
+    = box link_to(decorated_competition.hostname_url, decorated_competition.hostname_url) do
+      = image_tag qrcode(decorated_competition.hostname_url)
       - if admin_logged_in?
         = block_link_to("Flyer anzeigen", format: :pdf, action: :flyer)
       - elsif !logged_in?

@@ -10,4 +10,9 @@ class DashboardController < ApplicationController
   def impressum
     default_meta_description title: "#{Competition.one.name} - Wettkampf-Manager - Impressum"
   end
+
+  def flyer
+    send_data PDF::Flyer.perform.bytestream,
+              filename: 'flyer.pdf', type: 'application/pdf', disposition: 'inline'
+  end
 end
