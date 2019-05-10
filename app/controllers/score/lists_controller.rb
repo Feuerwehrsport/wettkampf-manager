@@ -10,6 +10,8 @@ class Score::ListsController < ApplicationController
   def show
     super
     page_title @score_list.decorate.to_s
+    send_pdf(PDF::Score::Lists::Show,
+             args: [@score_list.decorate, params[:more_columns].present?, params[:double_run].present?])
   end
 
   def edit_times

@@ -5,7 +5,8 @@ class Score::List < CacheDependendRecord
   has_many :assessments, through: :list_assessments
   has_many :result_lists, dependent: :destroy
   has_many :results, through: :result_lists
-  has_many :entries, -> { order(:run).order(:track) }, class_name: 'Score::ListEntry', dependent: :destroy
+  has_many :entries, -> { order(:run).order(:track) }, class_name: 'Score::ListEntry', dependent: :destroy,
+                                                       inverse_of: :list
 
   default_scope { order(:name) }
 
@@ -24,5 +25,13 @@ class Score::List < CacheDependendRecord
       run += 1
     end
     [run, track]
+  end
+
+  def single_discipline?
+    @single_discipline ||= assessments.first.discipline.single_discipline?
+  end
+
+  def multiple_assessments?
+    @multiple_assessments ||= assessments.count > 1
   end
 end

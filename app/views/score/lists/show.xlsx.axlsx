@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: @score_list.name.truncate(30)) do |sheet|
-  show_export_data.each do |row|
+  show_export_data(@score_list).each do |row|
     sheet.add_row content_row(row)
   end
 end

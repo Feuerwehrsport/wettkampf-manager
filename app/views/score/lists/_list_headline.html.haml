@@ -2,7 +2,7 @@
   %tr{ class: "small" }
     %th Lauf
     %th Bahn
-    - if single_discipline?
+    - if @score_list.single_discipline?
       - if Competition.one.show_bib_numbers?
         %th Nr.
       %th Nachname

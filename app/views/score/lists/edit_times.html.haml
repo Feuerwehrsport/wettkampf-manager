@@ -5,7 +5,7 @@
         %table.table
           = render 'list_headline', times: true
           %tbody
-            - score_list_entries do |entry, run, track|
+            - score_list_entries(@score_list) do |entry, run, track|
               = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
                 = render 'score/runs/edit_time', entry: entry, f: f, fields_for: :entries
           - box.footer do

@@ -1,10 +1,10 @@
 .row.refreshable#score-list-show
   .col-md-8
     = box @score_list.name do |box|
-      %table.table.sorted_table{ data: { track_count: list_track_count } }
+      %table.table.sorted_table{ data: { track_count: @score_list.track_count } }
         = render 'list_headline', times: false
         %tbody
-          - score_list_entries(true) do |entry, run, track|
+          - score_list_entries(@score_list, true) do |entry, run, track|
             = render 'list_entry', entry: entry, run: run, track: track
           %tr.hide.placeholder
             %td{ colspan: 5 }

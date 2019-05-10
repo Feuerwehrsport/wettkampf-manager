@@ -5,7 +5,7 @@
         %table.table
           %tr
             %th= "Bahn"
-            - if single_discipline?
+            - if @score_run.list.single_discipline?
               %th= "Vorname"
               %th= "Nachname"
             %th= "Mannschaft"
@@ -13,14 +13,14 @@
           - @score_run.list_entries.each do |entry|
             %tr
               %td= entry.track
-              - if single_discipline?
+              - if @score_run.list.single_discipline?
                 %td= entry.entity.first_name.truncate(20)
                 %td= entry.entity.last_name.truncate(20)
                 %td= entry.entity.team.try :shortcut_name
               - else
                 %td
                   = entry.try(:entity).try(:decorate)
-                  - if multiple_assessments?
+                  - if @score_run.list.multiple_assessments?
                     %br
                     .tiny= entry.try(:assessment).try(:decorate)
               = render 'edit_time', entry: entry, f: f, fields_for: :list_entries
