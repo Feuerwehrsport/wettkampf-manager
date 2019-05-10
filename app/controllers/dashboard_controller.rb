@@ -12,7 +12,6 @@ class DashboardController < ApplicationController
   end
 
   def flyer
-    send_data PDF::Flyer.perform.bytestream,
-              filename: 'flyer.pdf', type: 'application/pdf', disposition: 'inline'
+    send_pdf(PDF::Flyer, 'flyer.pdf', format: nil)
   end
 end

@@ -37,4 +37,10 @@ class ApplicationController < ActionController::Base
   def check_user_configured
     redirect_to edit_user_path(User.first) if controller_name != 'users' && !User.configured?
   end
+
+  def send_pdf(pdf_class, filename, args: [], format: :pdf)
+    return if format.present? && request.format.to_sym != format
+
+    send_data(pdf_class.perform(*args).bytestream, filename: filename, type: 'application/pdf', disposition: 'inline')
+  end
 end

@@ -9,6 +9,10 @@ module PDF::Base
     end
   end
 
+  included do
+    delegate :t, :l, to: I18n
+  end
+
   def bytestream
     @bytestream ||= pdf.render
   end
@@ -40,21 +44,43 @@ module PDF::Base
     }
   end
 
+  def competition
+    @competition ||= Competition.one
+  end
+
+  def pdf_header(name, discipline: nil, date: nil)
+    date ||= competition.date
+    headline_y = pdf.cursor
+    pdf.text(name, align: :center, size: 17)
+    pdf.text([competition.name, l(date)].join(' - '), align: :center, size: 15)
+    return if discipline.blank?
+
+    pdf.image(Rails.root.join('app', 'assets', 'images', 'disciplines', discipline.decorate.image),
+              width: 30, at: [10, headline_y])
+  end
+
   def pdf_footer(name: nil, no_page_count: nil, date: nil)
-    competition = Competition.one
-    date = competition.date if date.nil?
-    base_footer_line = [competition.name, I18n.l(date)]
+    date ||= competition.date
+    base_footer_line = [competition.name, l(date)]
     base_footer_line.push(name) if name.present?
 
     pdf.page_count.times do |page|
       pdf.bounding_box([pdf.bounds.left, pdf.bounds.bottom - 2], width: pdf.bounds.width, height: 30) do
         pdf.go_to_page(page + 1)
 
-        footer_line = base_footer_line
+        footer_line = base_footer_line.dup
         footer_line.push("Seite #{page + 1} von #{pdf.page_count}") unless no_page_count
 
         pdf.text(footer_line.join(' - '), align: :center, size: 8)
       end
+    end
+  end
+
+  def pdf_default_row_colors
+    color = 267
+    (1..2).map do
+      color -= 12
+      color.to_s(16) * 3
     end
   end
 end

@@ -11,6 +11,8 @@ class PeopleController < ApplicationController
     @male = @people.male.decorate
     @without_statistics_id = @people.where(fire_sport_statistics_person_id: nil)
     page_title 'Wettkämpfer'
+
+    send_pdf(PDF::People::Index, 'wettkaempfer.pdf', args: [@female, @male])
   end
 
   def without_statistics_id

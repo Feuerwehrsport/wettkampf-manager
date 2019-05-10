@@ -51,6 +51,8 @@ RSpec/EmptyExampleGroup:
   - spec/rails_helper.rb
 RSpec/ExampleLength:
   Max: 120
+RSpec/LetSetup:
+  Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false
 RSpec/NestedGroups:

@@ -18,10 +18,4 @@ class PDF::Flyer
 
     pdf_footer(no_page_count: true)
   end
-
-  protected
-
-  def competition
-    @competition ||= Competition.one
-  end
 end
