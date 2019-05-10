@@ -14,7 +14,7 @@ RSpec.describe PDF::Score::Lists::Show, type: :model do
     it 'creates pdf' do
       expect(show_pdf.bytestream).to start_with '%PDF-1.4'
       expect(show_pdf.bytestream).to end_with "%%EOF\n"
-      expect(show_pdf.bytestream.size).to be_within(48_000).of(1000)
+      expect(show_pdf.bytestream.size).to be_within(48_000).of(2000)
     end
 
     context 'when more_columns set' do
@@ -23,7 +23,7 @@ RSpec.describe PDF::Score::Lists::Show, type: :model do
       it 'creates pdf' do
         expect(show_pdf.bytestream).to start_with '%PDF-1.4'
         expect(show_pdf.bytestream).to end_with "%%EOF\n"
-        expect(show_pdf.bytestream.size).to be_within(50_000).of(1000)
+        expect(show_pdf.bytestream.size).to be_within(50_000).of(2000)
       end
     end
 
@@ -33,7 +33,7 @@ RSpec.describe PDF::Score::Lists::Show, type: :model do
       it 'creates pdf' do
         expect(show_pdf.bytestream).to start_with '%PDF-1.4'
         expect(show_pdf.bytestream).to end_with "%%EOF\n"
-        expect(show_pdf.bytestream.size).to be_within(49_837).of(1000)
+        expect(show_pdf.bytestream.size).to be_within(49_837).of(2000)
       end
     end
     context 'when group discipline' do
@@ -45,7 +45,7 @@ RSpec.describe PDF::Score::Lists::Show, type: :model do
       it 'creates pdf' do
         expect(show_pdf.bytestream).to start_with '%PDF-1.4'
         expect(show_pdf.bytestream).to end_with "%%EOF\n"
-        expect(show_pdf.bytestream.size).to be_within(48_661).of(1000)
+        expect(show_pdf.bytestream.size).to be_within(48_661).of(2000)
       end
     end
   end
