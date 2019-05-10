@@ -12,6 +12,8 @@ class TeamsController < ApplicationController
     super
     @without_statistics_id = @teams.where(fire_sport_statistics_team_id: nil)
     default_meta_description title: 'Mannschaften'
+
+    send_pdf(PDF::Teams::Index, 'mannschaften.pdf', args: [@teams.decorate])
   end
 
   def edit_assessment_requests; end
