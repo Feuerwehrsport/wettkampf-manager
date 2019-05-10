@@ -38,9 +38,12 @@ class ApplicationController < ActionController::Base
     redirect_to edit_user_path(User.first) if controller_name != 'users' && !User.configured?
   end
 
-  def send_pdf(pdf_class, filename, args: [], format: :pdf)
+  def send_pdf(pdf_class, filename: nil, args: [], format: :pdf)
     return if format.present? && request.format.to_sym != format
 
-    send_data(pdf_class.perform(*args).bytestream, filename: filename, type: 'application/pdf', disposition: 'inline')
+    pdf = pdf_class.perform(*args)
+    filename ||= pdf.filename if pdf.respond_to?(:filename)
+    filename ||= "#{@page_title.parameterize}.pdf" if @page_title.present?
+    send_data(pdf.bytestream, filename: filename, type: 'application/pdf', disposition: 'inline')
   end
 end
