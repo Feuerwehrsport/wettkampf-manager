@@ -12,7 +12,7 @@ module Certificates::StorageSupport
     when :time_short
       result_entry.human_time
     when :time_without_seconds
-      result_entry.human_time.gsub(/DN/, '-').gsub('s', '').strip
+      result_entry.human_time.gsub(/DN/, '-').delete('s').strip
     when :rank
       "#{result.place_for_row(self)}."
     when :rank_with_rank

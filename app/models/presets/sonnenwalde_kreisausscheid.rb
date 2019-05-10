@@ -85,7 +85,7 @@ class Presets::SonnenwaldeKreisausscheid < Preset
       fs_assessment = Assessment.create!(discipline: fs, gender: gender)
       Score::Result.create!(assessment: fs_assessment, tag_references_attributes: [{ tag_id: kreis_team_tag.id }])
       Score::Result.create!(assessment: fs_assessment, tag_references_attributes: [{ tag_id: stadt_team_tag.id }])
-      
+
       gs_assessment = Assessment.create!(discipline: gs, gender: gender)
       Score::Result.create!(assessment: gs_assessment, tag_references_attributes: [{ tag_id: kreis_team_tag.id }])
       Score::Result.create!(assessment: gs_assessment, tag_references_attributes: [{ tag_id: stadt_team_tag.id }])
