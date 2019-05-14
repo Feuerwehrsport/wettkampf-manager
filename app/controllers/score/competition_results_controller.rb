@@ -3,7 +3,9 @@ class Score::CompetitionResultsController < ApplicationController
 
   def index
     super
-    page_title 'Gesamtwertung', page_layout: :landscape
+    page_title 'Gesamtwertung'
+
+    send_pdf(PDF::Score::CompetitionResults::Index, args: [@score_competition_results.decorate])
   end
 
   protected
