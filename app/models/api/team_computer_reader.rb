@@ -10,6 +10,8 @@ class API::TeamComputerReader < API::ExternalReader
   def evaluate_line(line)
     # "#0:08,000|0:09,343*\r\n"
     line = line.strip
+    line = line.gsub(/\A[^#]*#/, '#')
+    line = line.gsub(/\*[^\*]*\z/, '*')
     result = line.match(/\A#(\d+):(\d+),(\d+)\|(\d+):(\d+),(\d+)\*\z/)
     if result
       [
