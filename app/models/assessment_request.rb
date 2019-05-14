@@ -27,6 +27,7 @@ class AssessmentRequest < CacheDependendRecord
 
   def next_free_competitor_order(type)
     return 0 if entity.nil? || entity.is_a?(Team) || entity.team.nil?
+
     free = 1
     type_order = :"#{type}_competitor_order"
     assessment.requests.where(
@@ -34,6 +35,7 @@ class AssessmentRequest < CacheDependendRecord
       entity: entity.team.people,
     ).where.not(type_order => 0).order(type_order).pluck(type_order).each do |existing|
       return free if free < existing
+
       free += 1
     end
     free
@@ -54,6 +56,7 @@ class AssessmentRequest < CacheDependendRecord
 
   def assign_next_free_competitor_order
     return if persisted?
+
     self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order .zero?
     self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order .zero?
   end

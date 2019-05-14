@@ -22,7 +22,8 @@ Score::GroupResult = Struct.new(:result) do
       next if result_row.entity.team.nil?
 
       if team_scores[result_row.entity.team].nil?
-        team_scores[result_row.entity.team] = Score::GroupResultRow.new(result_row.entity.team, score_count, run_count, self)
+        team_scores[result_row.entity.team] =
+          Score::GroupResultRow.new(result_row.entity.team, score_count, run_count, self)
       end
       team_scores[result_row.entity.team].add_result_row(result_row)
     end

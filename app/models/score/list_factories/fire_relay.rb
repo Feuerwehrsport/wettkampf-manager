@@ -19,7 +19,7 @@ class Score::ListFactories::FireRelay < Score::ListFactory
                                        entity: relay,
                                        assessment_type: request.assessment_type,
                                        assessment: request.assessment,
-        ))
+                                     ))
       end
     end
     number_requests.values.flatten

@@ -1,23 +1,27 @@
 class FireSportStatistics::Person < ActiveRecord::Base
   enum gender: { female: 0, male: 1 }
-  has_many :team_associations, class_name: 'FireSportStatistics::TeamAssociation'
+  has_many :team_associations, class_name: 'FireSportStatistics::TeamAssociation', dependent: :destroy,
+                               inverse_of: :person
   has_many :teams, through: :team_associations, class_name: 'FireSportStatistics::Team'
-  has_many :series_participations, class_name: 'Series::PersonParticipation'
-  has_one :person, class_name: '::Person', inverse_of: :fire_sport_statistics_person, foreign_key: :fire_sport_statistics_person_id
+  has_many :series_participations, class_name: 'Series::PersonParticipation', dependent: :destroy, inverse_of: :person
+  has_one :person, class_name: '::Person', inverse_of: :fire_sport_statistics_person,
+                   foreign_key: :fire_sport_statistics_person_id, dependent: :nullify
+  has_many :spellings, class_name: 'FireSportStatistics::PersonSpelling', dependent: :destroy, inverse_of: :person
 
   validates :last_name, :first_name, :gender, presence: true
 
   scope :where_name_like, ->(name) do
     query = "%#{name.split('').join('%')}%"
-    spelling_query = FireSportStatistics::PersonSpelling.where("(first_name || ' ' || last_name) LIKE ?", query).select(:person_id)
+    spelling_query = FireSportStatistics::PersonSpelling.where("(first_name || ' ' || last_name) LIKE ?", query)
+                                                        .select(:person_id)
     where("(first_name || ' ' || last_name) LIKE ? OR id IN (#{spelling_query.to_sql})", query)
   end
   scope :order_by_gender, ->(gender) do
     order(gender: gender == 'female' ? :asc : :desc)
   end
   scope :order_by_teams, ->(teams) do
-    sql = teams.joins(:team_associations).where(fire_sport_statistics_team_associations: { person_id: arel_table[:id] }).to_sql
-    order("EXISTS(#{sql}) DESC")
+    sql = teams.joins(:team_associations).where(fire_sport_statistics_team_associations: { person_id: arel_table[:id] })
+    order("EXISTS(#{sql.to_sql}) DESC")
   end
   scope :gender, ->(gender) { where(gender: genders[gender]) }
   scope :for_person, ->(person) do

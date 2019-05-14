@@ -3,8 +3,8 @@ class Person < CacheDependendRecord
 
   belongs_to :team
   belongs_to :fire_sport_statistics_person, class_name: 'FireSportStatistics::Person', inverse_of: :person
-  has_many :requests, class_name: 'AssessmentRequest', as: :entity, dependent: :destroy
-  has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy
+  has_many :requests, class_name: 'AssessmentRequest', as: :entity, dependent: :destroy, inverse_of: :entity
+  has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy, inverse_of: :entity
   has_many :requested_assessments, through: :requests, source: :assessment
   enum gender: { female: 0, male: 1 }
   before_save :assign_registration_order
@@ -19,7 +19,7 @@ class Person < CacheDependendRecord
   scope :registration_order, -> { reorder(:registration_order) }
 
   def request_for(assessment)
-    requests.where(assessment: assessment).first
+    requests.find_by(assessment: assessment)
   end
 
   def fire_sport_statistics_person_with_dummy
@@ -38,8 +38,8 @@ class Person < CacheDependendRecord
   end
 
   def assign_registration_order
-    if registration_order .zero? && team.present?
-      self.registration_order = (team.people.maximum(:registration_order) || 0) + 1
-    end
+    return unless registration_order .zero? && team.present?
+
+    self.registration_order = (team.people.maximum(:registration_order) || 0) + 1
   end
 end

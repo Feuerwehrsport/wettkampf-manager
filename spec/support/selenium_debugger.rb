@@ -5,7 +5,7 @@ Capybara::Selenium::Driver.class_eval do
     $stdin.gets
     @browser.quit
   rescue Errno::ECONNREFUSED
-    # Browser must have already gone
+    puts 'Browser must have already gone'
   end
 end
 

@@ -4,8 +4,8 @@ class Team < CacheDependendRecord
   has_many :people, dependent: :nullify
   belongs_to :fire_sport_statistics_team, class_name: 'FireSportStatistics::Team'
   belongs_to :federal_state
-  has_many :requests, class_name: 'AssessmentRequest', as: :entity, dependent: :destroy
-  has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy
+  has_many :requests, class_name: 'AssessmentRequest', as: :entity, dependent: :destroy, inverse_of: :entity
+  has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy, inverse_of: :entity
   has_many :requested_assessments, through: :requests, source: :assessment
   has_many :team_relays, dependent: :destroy
 
@@ -26,7 +26,7 @@ class Team < CacheDependendRecord
   attr_accessor :disable_autocreate_assessment_requests
 
   def request_for(assessment)
-    requests.where(assessment: assessment).first
+    requests.find_by(assessment: assessment)
   end
 
   def list_entries_group_competitor(assessment)
@@ -64,11 +64,11 @@ class Team < CacheDependendRecord
   end
 
   def create_assessment_requests
-    if disable_autocreate_assessment_requests.blank?
-      Assessment.requestable_for(self).each do |assessment|
-        count = assessment.fire_relay? ? 2 : 1
-        requests.create(assessment: assessment, relay_count: count)
-      end
+    return if disable_autocreate_assessment_requests.present?
+
+    Assessment.requestable_for(self).each do |assessment|
+      count = assessment.fire_relay? ? 2 : 1
+      requests.create(assessment: assessment, relay_count: count)
     end
   end
 end

@@ -58,21 +58,10 @@ class Score::Result < CacheDependendRecord
     lists.each do |list|
       list.entries.not_waiting.each do |list_entry|
         next if list_entry.assessment != assessment
+
         entity = list_entry.entity
         entity = entity.team if group_result && entity.is_a?(TeamRelay)
-        if tags.present?
-          no_skip = case entity
-                    when TeamRelay
-                      entity.team.include_tags?(team_tags)
-                    when Team
-                      entity.include_tags?(team_tags)
-                    when Person
-                      entity.include_tags?(person_tags) && (team_tags.blank? || (entity.team.present? && entity.team.include_tags?(team_tags)))
-                    else
-                      false
-                    end
-          next unless no_skip
-        end
+        next if tags.present? && skip?(entity)
 
         if list_entry.out_of_competition?
           if out_of_competition_rows[entity.id].nil?
@@ -91,5 +80,21 @@ class Score::Result < CacheDependendRecord
 
   def group_result
     @group_result ||= Score::GroupResult.new(self)
+  end
+
+  protected
+
+  def skip?(entity)
+    case entity
+    when TeamRelay
+      !entity.team.include_tags?(team_tags)
+    when Team
+      !entity.include_tags?(team_tags)
+    when Person
+      !entity.include_tags?(person_tags) && (team_tags.blank? || (entity.team.present? &&
+        entity.team.include_tags?(team_tags)))
+    else
+      true
+    end
   end
 end

@@ -31,7 +31,7 @@ class Score::ListFactories::Best < Score::ListFactory
   def perform_rows
     all_rows = result_rows.dup
     result_rows = all_rows.shift(best_count.to_i)
-    result_rows.push(all_rows.shift) while all_rows.count > 0 && (result_rows.last <=> all_rows.first) .zero?
+    result_rows.push(all_rows.shift) while all_rows.present? && (result_rows.last <=> all_rows.first).zero?
     result_rows.reverse
   end
 

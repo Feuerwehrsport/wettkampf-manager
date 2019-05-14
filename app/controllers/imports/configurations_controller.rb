@@ -25,6 +25,7 @@ class Imports::ConfigurationsController < ApplicationController
 
   def redirect_to_new
     return if resource_class.first.executed_at.blank?
+
     flash[:notice] = 'Import wurde durchgeführt'
     redirect_to(root_path)
   end

@@ -4,7 +4,6 @@ module Series::Importable
   protected
 
   def convert_result_rows(result_rows)
-    participations = []
     ranks = {}
     result_rows.each do |row|
       result_rows.each_with_index do |rank_row, rank|

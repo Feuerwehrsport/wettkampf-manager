@@ -9,7 +9,7 @@ class Score::Run
   attr_reader :list_entries
 
   def initialize(*args)
-    super *args
+    super
     @list_entries = @list.entries.where(run: run_number)
     raise ActiveRecord::RecordNotFound if @list_entries.count .zero?
   end

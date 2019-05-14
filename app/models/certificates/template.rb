@@ -7,7 +7,7 @@ class Certificates::Template < CacheDependendRecord
   accepts_nested_attributes_for :text_fields, allow_destroy: true
   validates :name, presence: true
 
-  def to_json
+  def to_json(*_args)
     {
       name: name,
       image: image.present? ? Base64.encode64(image.file.read) : nil,

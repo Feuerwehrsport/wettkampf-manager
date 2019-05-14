@@ -5,7 +5,7 @@ RSpec.describe Score::ListEntry, type: :model do
   let(:score_list_entry) { build :score_list_entry, list: score_list }
 
   describe 'validation' do
-    context 'track count' do
+    context 'when track count' do
       it 'validates track count from list' do
         expect(score_list_entry).to be_valid
         score_list_entry.track = 5

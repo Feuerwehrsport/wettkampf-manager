@@ -1,7 +1,10 @@
 FactoryBot.define do
   factory :certificates_template, class: Certificates::Template do
     name  'Hindernisbahn'
-    image { Rack::Test::UploadedFile.new(Rails.root.join('app', 'assets', 'images', 'disciplines', 'climbing_hook_ladder.png')) }
+    image do
+      Rack::Test::UploadedFile.new(Rails.root.join('app', 'assets', 'images', 'disciplines',
+                                                   'climbing_hook_ladder.png'))
+    end
     font { Rack::Test::UploadedFile.new(Rails.root.join('app', 'assets', 'fonts', 'Arial.ttf')) }
 
     trait :with_text_fields do

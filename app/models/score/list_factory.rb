@@ -36,7 +36,7 @@ class Score::ListFactory < CacheDependendRecord
   validate :type_valid, if: -> { step_reached?(:generator_params) }
 
   attr_writer :next_step
-  attr_reader :list
+
   before_save do
     self.status = if status == :generator && next_step == :generator_params && type.constantize.generator_params.empty?
                     :finish
@@ -46,7 +46,7 @@ class Score::ListFactory < CacheDependendRecord
   end
   after_save do
     if status_changed? && status == :create
-      create_list
+      list
       perform
     end
   end
@@ -106,6 +106,7 @@ class Score::ListFactory < CacheDependendRecord
         run = 1
         loop do
           break if Score::List.where(name: "#{main_name} - Lauf #{run}").blank?
+
           run += 1
         end
         main_name = "#{main_name} - Lauf #{run}"
@@ -114,11 +115,12 @@ class Score::ListFactory < CacheDependendRecord
     end
   end
 
-  protected
-
-  def create_list
-    @list ||= Score::List.create!(name: name, shortcut: shortcut, assessments: assessments, results: results, track_count: track_count)
+  def list
+    @list ||= Score::List.create!(name: name, shortcut: shortcut, assessments: assessments, results: results,
+                                  track_count: track_count)
   end
+
+  protected
 
   def for_run_and_track_for(rows, tracks = nil)
     tracks = (1..list.track_count) if tracks.nil?
@@ -127,9 +129,10 @@ class Score::ListFactory < CacheDependendRecord
     transaction do
       loop do
         run += 1
-        for track in tracks
+        tracks.each do |track|
           row = rows.shift
-          return if row.nil?
+          return nil if row.nil?
+
           create_list_entry(row, run, track)
         end
 

@@ -32,6 +32,7 @@ module PDFHelper
     pdf.text name, align: :center, size: 17
     pdf.text competition_name, align: :center, size: 15
     return if discipline.blank?
+
     pdf.image("#{Rails.root}/app/assets/images/disciplines/#{discipline.decorate.image}",
               width: 30, at: [10, headline_y])
   end

@@ -2,25 +2,25 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe '.configured?' do
-    subject { User.configured? }
+    let(:configured) { User.configured? }
 
     context 'when user not exists' do
       it 'returns false' do
-        expect(subject).to be_falsey
+        expect(configured).to be_falsey
       end
     end
     context 'when user exists' do
-      let!(:user) { u = User.new(name: 'admin'); u.save!(validate: false); u }
+      let!(:user) { User.new(name: 'admin').tap { |u| u.save!(validate: false) } }
 
       context 'when user is not configured' do
         it 'returns false' do
-          expect(subject).to be_falsey
+          expect(configured).to be_falsey
         end
       end
       context 'when user is configured' do
         before { user.update!(password: 'a', password_confirmation: 'a') }
         it 'returns true' do
-          expect(subject).to be_truthy
+          expect(configured).to be_truthy
         end
       end
     end

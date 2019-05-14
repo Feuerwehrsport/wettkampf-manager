@@ -42,6 +42,7 @@ class Series::Round < ActiveRecord::Base
       round_structs[round.name] ||= []
       round.team_assessment_rows(gender).select { |r| r.team.id == team_id }.each do |row|
         next if row.rank.nil?
+
         round_structs[round.name].push OpenStruct.new(
           round: round,
           cups: round.cups,
@@ -80,6 +81,7 @@ class Series::Round < ActiveRecord::Base
     assessments.gender(gender).each do |assessment|
       result = assessment.score_results.first
       next if result.blank?
+
       cup  = Series::Cup.today_cup_for_round(self)
       rows = result.discipline.single_discipline? ? Score::GroupResult.new(result).rows : result.group_result_rows
 

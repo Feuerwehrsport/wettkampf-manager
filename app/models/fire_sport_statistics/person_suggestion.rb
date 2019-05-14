@@ -1,4 +1,4 @@
-class FireSportStatistics::PersonSuggestion < Struct.new(:person)
+FireSportStatistics::PersonSuggestion = Struct.new(:person) do
   include Draper::Decoratable
   delegate :first, :present?, to: :suggestions
 

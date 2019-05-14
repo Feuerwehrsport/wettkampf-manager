@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Score::ResultEntrySupport, type: :model do
-  let(:result_entry_class) { Class.new { include Score::ResultEntrySupport; attr_accessor :time } }
+  let(:result_entry_class) do
+    Class.new do
+      include Score::ResultEntrySupport
+      attr_accessor :time
+    end
+  end
   let(:result_entry) { result_entry_class.new }
 
   describe '.second_time' do

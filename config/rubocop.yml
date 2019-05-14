@@ -1,27 +1,30 @@
-require: rubocop-rspec
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
 AllCops:
   Exclude:
-  - vendor/**/*
+  - db/schema.rb
+  - firesport-series/**/*
   - spec/fixtures/**/*
   - tmp/**/*
-  - db/schema.rb
-  - m3/**/*
   TargetRailsVersion: 4.2
   TargetRubyVersion: 2.4
 Bundler/OrderedGems:
   Enabled: false
-Metrics/AbcSize:
-  Enabled: false
 RSpec/MessageSpies:
+  Enabled: false
+Metrics/AbcSize:
   Enabled: false
 Metrics/BlockLength:
   Exclude:
-  - Rakefile
   - '**/*.rake'
-  - spec/**/*.rb
+  - config/initializers/simple_form_bootstrap.rb
   - config/routes.rb
-  - Guardfile
   - db/migrate/*.rb
+  - Guardfile
+  - Rakefile
+  - spec/**/*.rb
   ExcludedMethods:
   - default_form
   - class_methods
@@ -35,13 +38,17 @@ Metrics/LineLength:
   Exclude:
   - Gemfile
   - db/migrate/*
+  - app/models/presets/*.rb
   Max: 120
 Metrics/MethodLength:
   Exclude:
   - db/migrate/*.rb
+  - app/models/presets/*.rb
   Max: 30
 Metrics/PerceivedComplexity:
   Max: 15
+Rails/ReversibleMigration:
+  Enabled: false
 RSpec/AnyInstance:
   Enabled: false
 RSpec/DescribeClass:
@@ -52,7 +59,7 @@ RSpec/EmptyExampleGroup:
   Exclude:
   - spec/rails_helper.rb
 RSpec/ExampleLength:
-  Max: 120
+  Enabled: false
 RSpec/LetSetup:
   Enabled: false
 RSpec/MultipleExpectations:

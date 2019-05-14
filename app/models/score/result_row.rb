@@ -1,4 +1,4 @@
-class Score::ResultRow < Struct.new(:entity, :result)
+Score::ResultRow = Struct.new(:entity, :result) do
   include Draper::Decoratable
   attr_reader :list_entries
 
@@ -40,6 +40,7 @@ class Score::ResultRow < Struct.new(:entity, :result)
     (0..(both.min - 1)).each do |i|
       compare = result_entries[i] <=> other.result_entries[i]
       next if compare .zero?
+
       return compare
     end
     both.last <=> both.first

@@ -8,6 +8,7 @@ class Imports::Tag < CacheDependendRecord
 
   def import
     return unless use
+
     klass.find_or_create_by!(name: name, competition: Competition.first)
   end
 

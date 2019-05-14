@@ -15,6 +15,7 @@ PDF::Score::List = Struct.new(:list, :more_columns, :double_run) do
     loop do
       current_lines = lines.shift(lines_per_page)
       break if current_lines.blank?
+
       pdf.start_new_page unless first
       first = false
 
@@ -29,6 +30,7 @@ PDF::Score::List = Struct.new(:list, :more_columns, :double_run) do
         loop do
           line += list_track_count
           break if line > row_length
+
           row(line).style(border_widths: [1, 1, 2, 1])
         end
       end

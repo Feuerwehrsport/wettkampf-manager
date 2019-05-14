@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     @page_title = title.to_s
 
     return unless request.format.xlsx?
+
     response.headers['Content-Disposition'] = "attachment; filename=\"#{title.parameterize}.xlsx\""
   end
 

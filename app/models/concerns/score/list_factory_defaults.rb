@@ -69,6 +69,7 @@ module Score::ListFactoryDefaults
     run = 1
     loop do
       break if Score::List.where(name: "#{default_main_name} - Lauf #{run}").blank?
+
       run += 1
     end
     run

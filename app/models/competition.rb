@@ -1,6 +1,6 @@
 class Competition < ActiveRecord::Base
-  has_many :person_tags
-  has_many :team_tags
+  has_many :person_tags, dependent: :destroy
+  has_many :team_tags, dependent: :destroy
 
   accepts_nested_attributes_for :person_tags, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :team_tags, reject_if: :all_blank, allow_destroy: true
@@ -13,7 +13,8 @@ class Competition < ActiveRecord::Base
 
   validates :name, :date, presence: true
   validates :group_people_count, :group_run_count, :group_score_count, numericality: { greater_than: 0 }
-  validates :competition_result_type, inclusion: { in: Score::CompetitionResult.result_types.keys.map(&:to_s) }, allow_blank: true
+  validates :competition_result_type, inclusion: { in: Score::CompetitionResult.result_types.keys.map(&:to_s) },
+                                      allow_blank: true
 
   def self.one
     @one ||= first
@@ -22,7 +23,7 @@ class Competition < ActiveRecord::Base
   def self.result_type
     @result_type ||= begin
       result_type = one.competition_result_type.try(:to_sym)
-      Score::CompetitionResult.result_types.keys.include?(result_type) ? result_type : nil
+      Score::CompetitionResult.result_types.key?(result_type) ? result_type : nil
     end
   end
 

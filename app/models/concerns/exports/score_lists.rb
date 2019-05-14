@@ -1,20 +1,6 @@
 module Exports::ScoreLists
   def show_export_data(list, more_columns: false, double_run: false)
-    header = %w[Lauf Bahn]
-    if list.single_discipline?
-      header.push('Nr.') if Competition.one.show_bib_numbers?
-      header.push('Nachname', 'Vorname')
-    end
-    header.push('Mannschaft')
-    if more_columns
-      header.push('', '', '')
-    elsif double_run
-      header.push('Lauf 1', 'Lauf 2')
-    else
-      header.push('Zeit')
-    end
-
-    data = [header]
+    data = [show_export_header(list, more_columns: more_columns, double_run: double_run)]
 
     score_list_entries(list) do |entry, run, track|
       line = []
@@ -48,6 +34,23 @@ module Exports::ScoreLists
       data.push(line)
     end
     data
+  end
+
+  def show_export_header(list, more_columns:, double_run:)
+    header = %w[Lauf Bahn]
+    if list.single_discipline?
+      header.push('Nr.') if Competition.one.show_bib_numbers?
+      header.push('Nachname', 'Vorname')
+    end
+    header.push('Mannschaft')
+    if more_columns
+      header.push('', '', '')
+    elsif double_run
+      header.push('Lauf 1', 'Lauf 2')
+    else
+      header.push('Zeit')
+    end
+    header
   end
 
   def score_list_entries(list, move_modus = false)

@@ -3,6 +3,7 @@ module Score::ResultEntrySupport
 
   def second_time
     return '' if time.blank? || time .zero?
+
     seconds = time.to_i / 100
     millis = time.to_i % 100
     "#{seconds},#{format('%02d', millis)}"
@@ -17,11 +18,11 @@ module Score::ResultEntrySupport
   end
 
   def second_time=(new_second_time)
-    self.time = if result = new_second_time.match(/^(\d+):(\d{1,2})[,.](\d{1,2})$/)
+    self.time = if (result = new_second_time.match(/^(\d+):(\d{1,2})[,.](\d{1,2})$/))
                   result[1].to_i * 6000 + result[2].to_i * 100 + result[3].to_i
-                elsif result = new_second_time.match(/^(\d{1,4})[,.](\d)$/)
+                elsif (result = new_second_time.match(/^(\d{1,4})[,.](\d)$/))
                   result[1].to_i * 100 + (result[2].to_i * 10)
-                elsif result = new_second_time.match(/^(\d{1,3})[,.](\d\d)$/)
+                elsif (result = new_second_time.match(/^(\d{1,3})[,.](\d\d)$/))
                   result[1].to_i * 100 + result[2].to_i
                 else
                   new_second_time.to_i * 100

@@ -1,6 +1,6 @@
 class TeamRelay < CacheDependendRecord
   belongs_to :team
-  has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy
+  has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy, inverse_of: :entity
 
   validates :team, :number, presence: true
 
@@ -11,6 +11,7 @@ class TeamRelay < CacheDependendRecord
   def self.create_next_free_for(team, not_ids)
     existing = where(team: team).where.not(id: not_ids).reorder(:number).first
     return existing if existing.present?
+
     create_next_free team
   end
 

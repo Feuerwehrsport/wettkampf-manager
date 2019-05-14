@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Score::DoubleEventResult, type: :model do
-  subject { Score::DoubleEventResult.create!(assessment: zk_assessment) }
+  let(:double_event_result) { Score::DoubleEventResult.create!(assessment: zk_assessment) }
 
   let(:hl_assessment) { create(:assessment, discipline: create(:climbing_hook_ladder), gender: gender) }
-  let(:hl_result) { create :score_result, assessment: hl_assessment, double_event_result: subject }
+  let(:hl_result) { create :score_result, assessment: hl_assessment, double_event_result: double_event_result }
   let(:hb_assessment) { create(:assessment, discipline: create(:obstacle_course), gender: gender) }
-  let(:hb_result) { create :score_result, assessment: hb_assessment, double_event_result: subject }
+  let(:hb_result) { create :score_result, assessment: hb_assessment, double_event_result: double_event_result }
   let(:zk_assessment) { create(:assessment, discipline: create(:double_event), gender: gender) }
 
   describe '.rows' do
@@ -15,15 +15,15 @@ RSpec.describe Score::DoubleEventResult, type: :model do
     let(:person3) { create :person, :generated, gender: gender }
     let(:person4) { create :person, :generated, gender: gender }
 
-    context 'entries given' do
+    context 'when entries given' do
       let!(:list1) { create_score_list(hb_result, person1 => 1912, person2 => 2020, person3 => 2040, person4 => nil) }
       let!(:list2) { create_score_list(hl_result, person1 => 2020, person2 => 1912, person3 => 3030, person4 => 1999) }
 
-      context 'male' do
+      context 'when male' do
         let(:gender) { :male }
 
         it 'return results in correct order' do
-          rows = subject.rows
+          rows = double_event_result.rows
           expect(rows).to have(3).entries
 
           expect(rows.first.sum_result_entry.time).to eq 3932
@@ -37,11 +37,11 @@ RSpec.describe Score::DoubleEventResult, type: :model do
         end
       end
 
-      context 'male' do
+      context 'when female' do
         let(:gender) { :female }
 
         it 'return results in correct order' do
-          rows = subject.rows
+          rows = double_event_result.rows
           expect(rows).to have(3).entries
 
           expect(rows.first.sum_result_entry.time).to eq 3932

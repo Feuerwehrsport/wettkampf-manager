@@ -38,8 +38,8 @@ class Imports::Configuration < CacheDependendRecord
     @error_infos ||= begin
       import(true)
       ''
-    rescue ActiveRecord::RecordInvalid => error
-      "#{error.record.decorate}: #{error.message}"
+                     rescue ActiveRecord::RecordInvalid => e
+                       "#{e.record.decorate}: #{e.message}"
     end
   end
 

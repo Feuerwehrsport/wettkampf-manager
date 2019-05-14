@@ -1,61 +1,17 @@
 require 'highline'
 require 'rbconfig'
+
 class API::Runner
+  attr_accessor :klass, :serial_connection, :sender, :url, :password
+
   def initialize
     cli.say("\n\n")
 
-    klass = nil
-
-    default = config[:klass_select].present? ? " |#{config[:klass_select]}|" : ''
-    cli.choose do |menu|
-      menu.prompt = "Bitte das angeschlossene Gerät angeben#{default}: "
-      menu.choice('Timy von Alge-Timing') do |a|
-        config[:klass_select] = a
-        klass = API::TimyReader
-      end
-      menu.choice('Computer vom Team-MV') do |a|
-        config[:klass_select] = a
-        klass = API::TeamComputerReader
-      end
-      menu.choice('Landesanlage MV') do |a|
-        config[:klass_select] = a
-        klass = API::LandesanlageMVReader
-      end
-      menu.default = config[:klass_select]
-    end
-    cli.say("\n")
-
-    default = config[:serial_connection] || (os == :posix ? '/dev/ttyUSB0' : 'COM0')
-    serial_connection = cli.ask('Angeschlossene Schnittstelle? ') { |q| q.default = default }
-    config[:serial_connection] = serial_connection
-    cli.say("\n")
-
-    sender = ''
-    default = config[:sender_select].present? ? " |#{config[:sender_select]}|" : ''
-    cli.choose do |menu|
-      menu.prompt = "Zeiten der Disziplin#{default}:  "
-      Discipline.types_with_key.each do |key, k|
-        next if key == :zk
-        menu.choice(k.model_name.human) do |a|
-          config[:sender_select] = a
-          sender = k.model_name.human
-        end
-      end
-      menu.choice('Anderes') do |a|
-        config[:sender_select] = a
-        sender = cli.ask('Name der Disziplin? ') { |q| q.default = klass::DEFAULT_SENDER }
-      end
-      menu.default = config[:sender_select]
-    end
-    cli.say("\n")
-
-    default = config[:url] || (os == :posix ? 'http://localhost:3000' : 'http://localhost')
-    url = cli.ask('URL zu Wettkampf-Manager? ') { |q| q.default = default }
-    config[:url] = url
-    cli.say("\n")
-
-    password = cli.ask('Admin/API-Passwort für Wettkampf-Manager:  ') { |q| q.echo = '*' }
-    cli.say("\n")
+    ask_klass
+    ask_serial_connection
+    ask_sender
+    ask_url
+    ask_password
 
     write_config(config)
 
@@ -86,6 +42,68 @@ class API::Runner
 
   def write_config(hash)
     File.write(config_file_path, hash.to_json)
+  end
+
+  def ask_klass
+    default = config[:klass_select].present? ? " |#{config[:klass_select]}|" : ''
+    cli.choose do |menu|
+      menu.prompt = "Bitte das angeschlossene Gerät angeben#{default}: "
+      menu.choice('Timy von Alge-Timing') do |a|
+        config[:klass_select] = a
+        self.klass = API::TimyReader
+      end
+      menu.choice('Computer vom Team-MV') do |a|
+        config[:klass_select] = a
+        self.klass = API::TeamComputerReader
+      end
+      menu.choice('Landesanlage MV') do |a|
+        config[:klass_select] = a
+        self.klass = API::LandesanlageMVReader
+      end
+      menu.default = config[:klass_select]
+    end
+    cli.say("\n")
+  end
+
+  def ask_serial_connection
+    default = config[:serial_connection] || (os == :posix ? '/dev/ttyUSB0' : 'COM0')
+    self.serial_connection = cli.ask('Angeschlossene Schnittstelle? ') { |q| q.default = default }
+    config[:serial_connection] = serial_connection
+    cli.say("\n")
+  end
+
+  def ask_sender
+    self.sender = ''
+    default = config[:sender_select].present? ? " |#{config[:sender_select]}|" : ''
+    cli.choose do |menu|
+      menu.prompt = "Zeiten der Disziplin#{default}:  "
+      Discipline.types_with_key.each do |key, k|
+        next if key == :zk
+
+        menu.choice(k.model_name.human) do |a|
+          config[:sender_select] = a
+          self.sender = k.model_name.human
+        end
+      end
+      menu.choice('Anderes') do |a|
+        config[:sender_select] = a
+        self.sender = cli.ask('Name der Disziplin? ') { |q| q.default = klass::DEFAULT_SENDER }
+      end
+      menu.default = config[:sender_select]
+    end
+    cli.say("\n")
+  end
+
+  def ask_url
+    default = config[:url] || (os == :posix ? 'http://localhost:3000' : 'http://localhost')
+    self.url = cli.ask('URL zu Wettkampf-Manager? ') { |q| q.default = default }
+    config[:url] = url
+    cli.say("\n")
+  end
+
+  def ask_password
+    self.password = cli.ask('Admin/API-Passwort für Wettkampf-Manager:  ') { |q| q.echo = '*' }
+    cli.say("\n")
   end
 
   def config

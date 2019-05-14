@@ -48,6 +48,7 @@ Score::GroupResultRow = Struct.new(:team, :score_count, :run_count, :result) do
 
   def calculate
     return if @calculated
+
     @time = 0
     @rows_in = []
     @rows_out = []

@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Score::ListFactories::GroupOrder, type: :model do
-  subject { create(:score_list_factory_group_order, assessments: [assessment], discipline: assessment.discipline) }
+  let(:factory) do
+    create(:score_list_factory_group_order, assessments: [assessment], discipline: assessment.discipline)
+  end
 
   describe '#perform_rows' do
     let(:list) { build_stubbed :score_list, assessments: [assessment] }
@@ -45,7 +47,7 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
     end
 
     it 'returns requests seperated by team and group competitor order' do
-      requests = subject.send(:perform_rows)
+      requests = factory.send(:perform_rows)
       expect(requests).to have(13).items
 
       requests_team1 = requests.select { |r| r.entity.team == team1 }

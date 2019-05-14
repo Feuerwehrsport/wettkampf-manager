@@ -14,6 +14,7 @@ Imports::Person = Struct.new(:configuration, :data) do
     data[:assessment_participations].each do |participation|
       assessment = configuration.assessments.find_by(foreign_key: participation[:assessment_id]).try(:assessment)
       next if assessment.blank?
+
       AssessmentRequest.create!(
         entity: @person,
         assessment: assessment,

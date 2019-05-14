@@ -5,7 +5,6 @@ RSpec.describe Team, type: :model do
     let(:team) { create(:team) }
     let!(:fire_attack_assessment) { create :assessment, :fire_attack }
     let!(:fire_relay_assessment) { create :assessment, :fire_relay }
-    let!(:fire_relay_assessment) { create :assessment, :fire_relay }
     let!(:obstacle_course_assessment) { create :assessment, :obstacle_course }
 
     it 'creates assessment requests for all available assessments' do

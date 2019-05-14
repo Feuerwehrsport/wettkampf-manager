@@ -31,9 +31,9 @@ class User < CacheDependendRecord
   private
 
   def encrypt_password
-    if password.present?
-      self.password_salt = SecureRandom.uuid
-      self.password_hash = OpenSSL::HMAC.hexdigest('SHA512', password_salt.to_s, password.to_s)
-    end
+    return if password.blank?
+
+    self.password_salt = SecureRandom.uuid
+    self.password_hash = OpenSSL::HMAC.hexdigest('SHA512', password_salt.to_s, password.to_s)
   end
 end

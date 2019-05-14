@@ -8,7 +8,9 @@ RSpec.describe Score::CompetitionResult, type: :model do
   let!(:fire_relay) { create(:assessment, :fire_relay, score_competition_result: competition_result) }
   let!(:fire_relay_result) { create(:score_result, assessment: fire_relay, group_assessment: true) }
   let!(:obstacle_course) { create(:assessment, :obstacle_course, score_competition_result: competition_result) }
-  let!(:obstacle_course_result) { create(:score_result, assessment: obstacle_course, group_score_count: 2, group_run_count: 3, group_assessment: true) }
+  let!(:obstacle_course_result) do
+    create(:score_result, assessment: obstacle_course, group_score_count: 2, group_run_count: 3, group_assessment: true)
+  end
 
   let!(:team1) { create(:team, :generated) }
   let!(:team1_person1) { create(:person, :generated, team: team1) }
@@ -35,7 +37,9 @@ RSpec.describe Score::CompetitionResult, type: :model do
                       team3_person1 => 1800, team3_person2 => nil,
                       team4_person1 => 1900)
   end
-  let!(:fire_relay_list) { create_score_list(fire_relay_result, team1_a => 6000, team2_a => 6001, team3_a => 60_002, team3_b => 5999) }
+  let!(:fire_relay_list) do
+    create_score_list(fire_relay_result, team1_a => 6000, team2_a => 6001, team3_a => 60_002, team3_b => 5999)
+  end
 
   describe '.dcup' do
     it 'calculates correct results' do

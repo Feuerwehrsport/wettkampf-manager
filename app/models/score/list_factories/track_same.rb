@@ -17,8 +17,8 @@ class Score::ListFactories::TrackSame < Score::ListFactory
   private
 
   def before_list_assessments_match
-    if before_list.blank? || before_list.assessment_ids.sort != assessment_ids.sort
-      errors.add(:before_list, 'muss mit jetziger Wertungsgruppe übereinstimmen')
-    end
+    return unless before_list.blank? || before_list.assessment_ids.sort != assessment_ids.sort
+
+    errors.add(:before_list, 'muss mit jetziger Wertungsgruppe übereinstimmen')
   end
 end

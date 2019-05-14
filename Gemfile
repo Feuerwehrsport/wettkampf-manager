@@ -58,6 +58,8 @@ group :development do
   gem 'guard-rubocop'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
+  gem 'rubocop-daemon', require: false
+  gem 'rubocop-performance', require: false
   gem 'faker'
   gem 'coffeelint'
 end

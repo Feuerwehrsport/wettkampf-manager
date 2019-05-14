@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Score::ListFactories::FireRelay, type: :model do
-  subject { create(:score_list_factory_fire_relay, assessments: [assessment], discipline: assessment.discipline) }
+  let(:factory) { create(:score_list_factory_fire_relay, assessments: [assessment], discipline: assessment.discipline) }
 
   let(:assessment) { create(:assessment, :fire_relay) }
 
@@ -11,7 +11,7 @@ RSpec.describe Score::ListFactories::FireRelay, type: :model do
     let!(:assessment_request3) { create :assessment_request, assessment: assessment, relay_count: 2 }
 
     it 'returns created team relays in request structs' do
-      team_relay_requests = subject.send(:perform_rows)
+      team_relay_requests = factory.send(:perform_rows)
       team_relays = team_relay_requests.map(&:entity)
       expect(team_relays).to have(5).items
       expect(team_relays.map(&:name)).to eq %w[A A A B B]

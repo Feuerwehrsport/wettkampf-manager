@@ -22,8 +22,8 @@ class API::ExternalReader
       begin
         evaluate_output(serial_adapter.read(10))
         sleep 0.3
-      rescue RubySerial::Error => error
-        return log_send_error("Schnittstelle: #{error.message}")
+      rescue RubySerial::Error => e
+        return log_send_error("Schnittstelle: #{e.message}")
       end
     end
   end
@@ -36,7 +36,7 @@ class API::ExternalReader
 
   def log_raw(line)
     Rails.logger.info(line)
-    p line
+    p line # rubocop:disable Rails/Output
   end
 
   def send_data(time, hint)
@@ -46,20 +46,19 @@ class API::ExternalReader
       http.use_ssl = (http_url.scheme == 'https')
       response = http.post(http_url.path, params.to_query)
       response = JSON.parse(response.body)
-      if !response['success']
-        log_send_error(response['error'])
-      else
-        return true
-      end
-    rescue JSON::ParserError => error
-      log_send_error(error.message)
-      Rails.logger.error(error.inspect)
-    rescue Errno::ECONNREFUSED => error
-      log_send_error(error.message)
-      Rails.logger.error(error.inspect)
-    rescue Net::ReadTimeout => error
-      log_send_error(error.message)
-      Rails.logger.error(error.inspect)
+
+      return true if response['success']
+
+      log_send_error(response['error'])
+    rescue JSON::ParserError => e
+      log_send_error(e.message)
+      Rails.logger.error(e.inspect)
+    rescue Errno::ECONNREFUSED => e
+      log_send_error(e.message)
+      Rails.logger.error(e.inspect)
+    rescue Net::ReadTimeout => e
+      log_send_error(e.message)
+      Rails.logger.error(e.inspect)
     end
     false
   end
@@ -84,7 +83,7 @@ class API::ExternalReader
   def evaluate_output(string)
     @current_line ||= ''
     @current_line += string
-    while result = @current_line.match(line_regexp)
+    while (result = @current_line.match(line_regexp))
       evaluate_with_log_line(result[1])
       @current_line = result[2]
     end

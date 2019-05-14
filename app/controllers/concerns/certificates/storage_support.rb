@@ -1,5 +1,5 @@
 module Certificates::StorageSupport
-  def get(position)
+  def get(position) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength
     case position.key
     when :team_name
       entity.is_a?(TeamRelayDecorator) ? entity : entity.try(:team).try(:numbered_name)

@@ -26,6 +26,7 @@ class API::TimeEntry < ActiveRecord::Base
   def password_matches
     return if skip_password_authenticaton
     return if User.authenticate('admin', password).present? || User.authenticate('API', password).present?
+
     errors.add(:password, :invalid)
   end
 end
