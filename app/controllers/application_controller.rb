@@ -8,16 +8,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def page_title(title, prawn_options = {})
+  def page_title(title)
     @page_title = title.to_s
 
-    if request.format.pdf?
-      info = { Title: title }
-      prawnto prawn: prawn_options.reverse_merge(margin: [45, 36, 40, 36], info: info, page_size: 'A4'),
-              filename: "#{title.parameterize}.pdf"
-    elsif request.format.xlsx?
-      response.headers['Content-Disposition'] = "attachment; filename=\"#{title.parameterize}.xlsx\""
-    end
+    return unless request.format.xlsx?
+    response.headers['Content-Disposition'] = "attachment; filename=\"#{title.parameterize}.xlsx\""
   end
 
   def default_meta_description(title: nil)
