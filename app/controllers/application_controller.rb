@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
   def send_pdf(pdf_class, filename: nil, args: [], format: :pdf)
     return if format.present? && request.format.to_sym != format
 
+    args = yield if block_given?
     pdf = pdf_class.perform(*args)
     filename ||= pdf.filename if pdf.respond_to?(:filename)
     filename ||= "#{@page_title.parameterize}.pdf" if @page_title.present?

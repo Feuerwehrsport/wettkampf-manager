@@ -12,7 +12,7 @@ class Score::ResultsController < ApplicationController
       @group_result_rows = Score::GroupResult.new(@score_result).rows.map(&:decorate)
     end
     page_title @score_result.decorate.to_s
-    send_pdf(PDF::Score::Result, args: [@score_result.decorate, params[:only].try(:to_sym)])
+    send_pdf(PDF::Score::Result) { [@score_result.decorate, params[:only].try(:to_sym)] }
   end
 
   def edit
