@@ -1,5 +1,7 @@
-Certificates::ExportPDF = Struct.new(:pdf, :template, :rows, :background_image) do
-  def render
+PDF::Certificates::Export = Struct.new(:template, :title, :rows, :background_image) do
+  include PDF::Base
+
+  def perform
     pdf.font_families.update('certificates_template_regular' => { normal: font_path })
     pdf.font_families.update('certificates_template_bold' => { normal: font2_path })
 
@@ -11,6 +13,16 @@ Certificates::ExportPDF = Struct.new(:pdf, :template, :rows, :background_image) 
 
       pdf.start_new_page if i != rows.count - 1
     end
+  end
+
+  def filename
+    title.parameterize + '.pdf'
+  end
+
+  protected
+
+  def default_prawn_options
+    super.merge(margin: [0, 0, 0, 0])
   end
 
   private

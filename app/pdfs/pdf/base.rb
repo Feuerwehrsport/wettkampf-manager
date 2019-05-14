@@ -41,7 +41,12 @@ module PDF::Base
   def default_prawn_options
     {
       page_size: 'A4',
+      info: { Title: title },
     }
+  end
+
+  def title
+    @title
   end
 
   def competition

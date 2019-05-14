@@ -8,7 +8,9 @@ class Certificates::TemplatesController < ApplicationController
                 type: 'text/json',
                 disposition: "attachment; filename=\"urkundenvorlage-#{resource_instance.name.parameterize}.json\""
     end
-    page_title('Urkundenvorlage', margin: [0, 0, 0, 0])
+    page_title('Urkundenvorlage')
+    send_pdf(PDF::Certificates::Export, args: [@certificates_template, "Urkundenvorlage: #{resource_instance.name}",
+                                               [Certificates::Example.new], true])
   end
 
   def edit

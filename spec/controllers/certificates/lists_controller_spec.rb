@@ -24,8 +24,8 @@ RSpec.describe Certificates::ListsController, type: :controller, seed: :configur
       post :export, certificates_list: { template_id: template.id, image: true, score_result_id: result.id },
                     format: :pdf
       expect(response).to be_success
-      expect(response.headers['Content-Type']).to eq 'application/pdf; charset=utf-8'
-      expect(response.headers['Content-Disposition']).to eq 'inline;filename=urkunde.pdf'
+      expect(response.headers['Content-Type']).to eq 'application/pdf'
+      expect(response.headers['Content-Disposition']).to eq 'inline; filename="urkunden-hakenleitersteigen-manner.pdf"'
     end
 
     context 'when params are not correct' do

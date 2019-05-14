@@ -12,6 +12,8 @@ Bundler/OrderedGems:
   Enabled: false
 Metrics/AbcSize:
   Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
 Metrics/BlockLength:
   Exclude:
   - Rakefile
