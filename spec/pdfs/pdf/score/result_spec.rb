@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PDF::Score::Results::Show, type: :model do
+RSpec.describe PDF::Score::Result, type: :model do
   let(:show_pdf) { described_class.perform(result.decorate, only) }
   let(:person1) { create(:person, :generated) }
   let(:person2) { create(:person, :generated) }

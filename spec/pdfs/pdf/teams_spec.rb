@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PDF::Teams::Index, type: :model do
+RSpec.describe PDF::Teams, type: :model do
   let(:index_pdf) { described_class.perform([team]) }
   let(:team) { create(:team).decorate }
 

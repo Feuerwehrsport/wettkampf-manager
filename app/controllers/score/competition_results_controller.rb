@@ -5,7 +5,7 @@ class Score::CompetitionResultsController < ApplicationController
     super
     page_title 'Gesamtwertung'
 
-    send_pdf(PDF::Score::CompetitionResults::Index, args: [@score_competition_results.decorate])
+    send_pdf(PDF::Score::CompetitionResults, args: [@score_competition_results.decorate])
   end
 
   protected

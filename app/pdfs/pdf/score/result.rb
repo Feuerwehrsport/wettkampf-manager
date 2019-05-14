@@ -1,4 +1,4 @@
-PDF::Score::Results::Show = Struct.new(:result, :only) do
+PDF::Score::Result = Struct.new(:result, :only) do
   include PDF::Base
   include Exports::ScoreResults
 

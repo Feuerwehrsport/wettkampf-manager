@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe PDF::Score::Lists::Show, type: :model do
+RSpec.describe PDF::Score::List, type: :model do
   let(:show_pdf) { described_class.perform(list.decorate, more_columns, double_run) }
   let(:person1) { create(:person, :generated) }
   let(:person2) { create(:person, :generated) }

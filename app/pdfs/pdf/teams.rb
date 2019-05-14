@@ -1,4 +1,4 @@
-PDF::Teams::Index = Struct.new(:teams) do
+PDF::Teams = Struct.new(:teams) do
   include PDF::Base
   include Exports::Teams
 

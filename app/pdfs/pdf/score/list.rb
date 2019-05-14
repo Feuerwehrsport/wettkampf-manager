@@ -1,4 +1,4 @@
-PDF::Score::Lists::Show = Struct.new(:list, :more_columns, :double_run) do
+PDF::Score::List = Struct.new(:list, :more_columns, :double_run) do
   include PDF::Base
   include Exports::ScoreLists
 

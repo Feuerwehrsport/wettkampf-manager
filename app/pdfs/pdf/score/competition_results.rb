@@ -1,4 +1,4 @@
-PDF::Score::CompetitionResults::Index = Struct.new(:results) do
+PDF::Score::CompetitionResults = Struct.new(:results) do
   include PDF::Base
   include Exports::CompetitionResults
 

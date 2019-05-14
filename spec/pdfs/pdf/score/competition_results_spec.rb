@@ -1,9 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe PDF::People::Index, type: :model do
-  let(:index_pdf) { described_class.perform([female], [male]) }
-  let(:female) { create(:person, :female).decorate }
-  let(:male) { create(:person, :male, :with_team).decorate }
+RSpec.describe PDF::Score::CompetitionResults, type: :model do
+  let(:index_pdf) { described_class.perform([score_competition_result]) }
+  let(:score_competition_result) { create(:score_competition_result).decorate }
 
   describe 'perform' do
     it 'creates pdf' do

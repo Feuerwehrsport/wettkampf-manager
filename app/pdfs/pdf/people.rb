@@ -1,4 +1,4 @@
-PDF::People::Index = Struct.new(:female, :male) do
+PDF::People = Struct.new(:female, :male) do
   include PDF::Base
   include Exports::People
 
