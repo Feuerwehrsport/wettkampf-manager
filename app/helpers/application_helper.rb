@@ -2,7 +2,6 @@ module ApplicationHelper
   include Helpers::MenuHelper
   include Helpers::LinkHelper
   include Helpers::BoxHelper
-  include TranslationHelper
   include FlashHelper
 
   def partial_exists?(partial_path)
