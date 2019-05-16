@@ -30,6 +30,32 @@ RSpec.describe Score::ResultsController, type: :controller, seed: :configured, u
     end
   end
 
+  describe 'GET show' do
+    it 'renders' do
+      get :show, id: result.id
+      expect(response).to be_success
+      expect(assigns(:tags)).to eq []
+    end
+
+    context 'when pdf requested' do
+      it 'sends pdf' do
+        get :show, id: result.id, format: :pdf
+        expect(response).to be_success
+        expect(response.headers['Content-Type']).to eq Mime::PDF
+        expect(response.headers['Content-Disposition']).to eq 'inline; filename="hakenleitersteigen-manner.pdf"'
+      end
+    end
+
+    context 'when xlsx requested' do
+      it 'sends xlsx' do
+        get :show, id: result.id, format: :xlsx
+        expect(response).to be_success
+        expect(response.headers['Content-Type']).to eq Mime::XLSX
+        expect(response.headers['Content-Disposition']).to eq 'attachment; filename="hakenleitersteigen-manner.xlsx"'
+      end
+    end
+  end
+
   describe 'GET edit' do
     it 'renders form' do
       get :edit, id: result.id

@@ -57,9 +57,6 @@ GEM
       mimemagic (~> 0.3)
       nokogiri (~> 1.8, >= 1.8.2)
       rubyzip (~> 1.2, >= 1.2.1)
-    axlsx_rails (0.5.1)
-      actionpack (>= 3.1)
-      axlsx (>= 2.0.1)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -338,7 +335,6 @@ PLATFORMS
 
 DEPENDENCIES
   axlsx (~> 3.0.0.pre)
-  axlsx_rails
   bootstrap-sass
   cancancan
   capybara

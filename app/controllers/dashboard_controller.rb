@@ -12,6 +12,6 @@ class DashboardController < ApplicationController
   end
 
   def flyer
-    send_pdf(PDF::Flyer, 'flyer.pdf', format: nil)
+    send_pdf(PDF::Flyer, filename: 'flyer.pdf', format: nil)
   end
 end

@@ -42,6 +42,15 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
         )
       end
     end
+
+    context 'when pdf requested' do
+      it 'sends pdf' do
+        get :show, id: template, format: :pdf
+        expect(response).to be_success
+        expect(response.headers['Content-Type']).to eq Mime::PDF
+        expect(response.headers['Content-Disposition']).to eq 'inline; filename="urkundenvorlage-hindernisbahn.pdf"'
+      end
+    end
   end
 
   describe 'GET index' do

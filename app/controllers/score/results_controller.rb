@@ -13,6 +13,7 @@ class Score::ResultsController < ApplicationController
     end
     page_title @score_result.decorate.to_s
     send_pdf(PDF::Score::Result) { [@score_result.decorate, params[:only].try(:to_sym)] }
+    send_xlsx(XLSX::Score::Result) { [@score_result.decorate] }
   end
 
   def edit

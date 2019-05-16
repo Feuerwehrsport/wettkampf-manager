@@ -24,6 +24,24 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
       get :index
       expect(response).to be_success
     end
+
+    context 'when pdf requested' do
+      it 'sends pdf' do
+        get :index, format: :pdf
+        expect(response).to be_success
+        expect(response.headers['Content-Type']).to eq Mime::PDF
+        expect(response.headers['Content-Disposition']).to eq 'inline; filename="gesamtwertung.pdf"'
+      end
+    end
+
+    context 'when xlsx requested' do
+      it 'sends xlsx' do
+        get :index, format: :xlsx
+        expect(response).to be_success
+        expect(response.headers['Content-Type']).to eq Mime::XLSX
+        expect(response.headers['Content-Disposition']).to eq 'attachment; filename="gesamtwertung.xlsx"'
+      end
+    end
   end
 
   describe 'GET edit' do

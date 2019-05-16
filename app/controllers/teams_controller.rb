@@ -14,6 +14,7 @@ class TeamsController < ApplicationController
     default_meta_description title: 'Mannschaften'
 
     send_pdf(PDF::Teams) { [@teams.decorate] }
+    send_xlsx(XLSX::Teams) { [@teams.decorate] }
   end
 
   def edit_assessment_requests; end

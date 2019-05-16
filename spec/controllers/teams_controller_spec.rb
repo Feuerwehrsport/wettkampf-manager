@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe PeopleController, type: :controller, seed: :configured, user: :logged_in do
+RSpec.describe TeamsController, type: :controller, seed: :configured, user: :logged_in do
   let(:team) { create(:team) }
-  let(:person) { create(:person) }
 
   describe 'GET new' do
     it 'renders form' do
@@ -13,42 +12,49 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
 
   describe 'GET statistic_suggestions' do
     it 'renders form' do
-      xhr :get, :statistic_suggestions, id: person.id
+      xhr :get, :statistic_suggestions, id: team.id
       expect(response).to be_success
       expect(response.content_type).to eq 'text/javascript'
     end
   end
 
   describe 'GET without_statistics_id' do
-    before { person }
+    before { team }
     it 'renders form' do
       get :without_statistics_id
       expect(response).to be_success
-      expect(assigns(:person_suggestions).map(&:person)).to eq [person]
+      expect(assigns(:team_suggestions).map(&:team)).to eq [team]
     end
   end
 
   describe 'GET edit_assessment_requests' do
     it 'renders form' do
-      xhr :get, :edit_assessment_requests, id: person.id
+      xhr :get, :edit_assessment_requests, id: team.id
       expect(response).to be_success
       expect(response.content_type).to eq 'text/javascript'
     end
   end
 
   describe 'POST create' do
-    it 'creates person' do
+    it 'creates team' do
       expect do
-        post :create, format: :js, person: { first_name: 'Alfred', last_name: 'Meier', gender: :male, team_id: team.id }
-        expect(response).to be_success
-        expect(response.content_type).to eq 'text/javascript'
-      end.to change(Person, :count).by(1)
+        post :create, team: { name: 'FF Warin', shortcut: 'Warin', gender: :male, number: 1 }
+        expect(response).to redirect_to teams_path
+      end.to change(Team, :count).by(1)
+    end
+
+    context 'when single_discipline exists' do
+      before { allow(controller).to receive(:single_discipline_exists?).and_return(true) }
+      it 'creates team' do
+        post :create, team: { name: 'FF Warin', shortcut: 'Warin', gender: :male, number: 1 }
+        expect(response).to redirect_to team_path(Team.last.id)
+      end
     end
   end
 
   describe 'GET show' do
     it 'renders form' do
-      get :show, id: person
+      get :show, id: team.id
       expect(response).to be_success
     end
   end
@@ -64,7 +70,7 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
         get :index, format: :pdf
         expect(response).to be_success
         expect(response.headers['Content-Type']).to eq Mime::PDF
-        expect(response.headers['Content-Disposition']).to eq 'inline; filename="wettkampfer.pdf"'
+        expect(response.headers['Content-Disposition']).to eq 'inline; filename="mannschaften.pdf"'
       end
     end
 
@@ -73,32 +79,32 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
         get :index, format: :xlsx
         expect(response).to be_success
         expect(response.headers['Content-Type']).to eq Mime::XLSX
-        expect(response.headers['Content-Disposition']).to eq 'attachment; filename="wettkampfer.xlsx"'
+        expect(response.headers['Content-Disposition']).to eq 'attachment; filename="mannschaften.xlsx"'
       end
     end
   end
 
   describe 'GET edit' do
     it 'renders form' do
-      get :edit, id: person.id
+      get :edit, id: team.id
       expect(response).to be_success
     end
   end
 
   describe 'PATCH update' do
-    it 'updates person' do
-      patch :update, id: person.id, person: { name: 'foo' }
-      expect(response).to redirect_to action: :show, id: person.id
+    it 'updates team' do
+      patch :update, id: team.id, team: { name: 'foo' }
+      expect(response).to redirect_to action: :show, id: team.id
     end
   end
 
   describe 'DELETE destroy' do
-    before { person }
-    it 'destroys person' do
+    before { team }
+    it 'destroys team' do
       expect do
-        delete :destroy, id: person.id
+        delete :destroy, id: team.id
         expect(response).to redirect_to action: :index
-      end.to change(Person, :count).by(-1)
+      end.to change(Team, :count).by(-1)
     end
   end
 end

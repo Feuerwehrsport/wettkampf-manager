@@ -28,19 +28,28 @@ class ApplicationController < ActionController::Base
     @meta_description = description.join("\n")
   end
 
+  def send_pdf(klass, filename: nil, args: [], format: :pdf, &block)
+    send_attachment(klass, filename: filename, args: args, format: format, type: :pdf, &block)
+  end
+
+  def send_xlsx(klass, filename: nil, args: [], format: :xlsx, &block)
+    send_attachment(klass, filename: filename, args: args, format: format, type: :xlsx, &block)
+  end
+
   private
 
   def check_user_configured
     redirect_to edit_user_path(User.first) if controller_name != 'users' && !User.configured?
   end
 
-  def send_pdf(pdf_class, filename: nil, args: [], format: :pdf)
+  def send_attachment(klass, filename: nil, args: [], format:, type:)
     return if format.present? && request.format.to_sym != format
 
     args = yield if block_given?
-    pdf = pdf_class.perform(*args)
-    filename ||= pdf.filename if pdf.respond_to?(:filename)
-    filename ||= "#{@page_title.parameterize}.pdf" if @page_title.present?
-    send_data(pdf.bytestream, filename: filename, type: 'application/pdf', disposition: 'inline')
+    model = klass.perform(*args)
+    filename ||= model.filename if model.respond_to?(:filename)
+    filename ||= "#{@page_title.parameterize}.#{type}" if @page_title.present?
+    options = { type: (type == :pdf ? Mime::PDF : Mime::XLSX), disposition: (type == :pdf ? 'inline' : 'attachment') }
+    send_data(model.bytestream, options.merge(filename: filename))
   end
 end

@@ -31,7 +31,6 @@ gem 'coffee-script-source'
 gem 'jquery-rails'
 
 # exports
-gem 'axlsx_rails'
 gem 'axlsx', '~> 3.0.0.pre'
 gem 'prawn'
 gem 'prawn-table'

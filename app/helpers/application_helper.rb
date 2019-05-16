@@ -2,7 +2,6 @@ module ApplicationHelper
   include Helpers::MenuHelper
   include Helpers::LinkHelper
   include Helpers::BoxHelper
-  include PDFHelper
   include TranslationHelper
   include FlashHelper
 
@@ -62,16 +61,6 @@ module ApplicationHelper
       content_tag(:div, result.result_entry_with_points, class: 'series-participation', data: { id: result.id })
     else
       ''
-    end
-  end
-
-  def content_row(row)
-    row.map do |entry|
-      if entry.is_a?(Hash)
-        strip_tags(entry[:content])
-      else
-        entry
-      end
     end
   end
 

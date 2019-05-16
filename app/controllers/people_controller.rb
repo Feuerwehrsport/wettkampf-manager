@@ -13,6 +13,7 @@ class PeopleController < ApplicationController
     page_title 'Wettkämpfer'
 
     send_pdf(PDF::People) { [@female, @male] }
+    send_xlsx(XLSX::People) { [@female, @male] }
   end
 
   def without_statistics_id
