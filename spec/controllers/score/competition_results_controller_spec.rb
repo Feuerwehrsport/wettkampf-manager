@@ -30,7 +30,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
         get :index, format: :pdf
         expect(response).to be_success
         expect(response.headers['Content-Type']).to eq Mime::PDF
-        expect(response.headers['Content-Disposition']).to eq 'inline; filename="gesamtwertung.pdf"'
+        expect(response.headers['Content-Disposition']).to eq 'inline; filename="gesamtwertungen.pdf"'
       end
     end
 
@@ -39,7 +39,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
         get :index, format: :xlsx
         expect(response).to be_success
         expect(response.headers['Content-Type']).to eq Mime::XLSX
-        expect(response.headers['Content-Disposition']).to eq 'attachment; filename="gesamtwertung.xlsx"'
+        expect(response.headers['Content-Disposition']).to eq 'attachment; filename="gesamtwertungen.xlsx"'
       end
     end
   end

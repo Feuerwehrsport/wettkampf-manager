@@ -7,4 +7,8 @@ Exports::JSON::Score::CompetitionResults = Struct.new(:results) do
       results: results.map { |result| { name: result.name, rows: table_data(result) } },
     }
   end
+
+  def filename
+    'gesamtwertungen.json'
+  end
 end

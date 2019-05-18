@@ -9,6 +9,8 @@ RSpec.describe Exports::JSON::Teams, type: :model do
       expect(export.bytestream).to eq(
         { teams: [['Name', 'BL', 'Geschlecht', 'Wettkä.'], ['Mecklenburg-Vorpommern', nil, 'Männer', '-']] }.to_json,
       )
+
+      expect(export.filename).to eq 'mannschaften.json'
     end
   end
 end

@@ -21,6 +21,8 @@ RSpec.describe Exports::JSON::Score::Result, type: :model do
           ['1.', 'Mecklenburg-Vorpommern', 'D'],
         ],
       }.to_json)
+
+      expect(export.filename).to eq 'hakenleitersteigen-manner.json'
     end
   end
 end

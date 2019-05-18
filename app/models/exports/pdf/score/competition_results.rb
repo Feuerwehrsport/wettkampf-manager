@@ -21,6 +21,10 @@ Exports::PDF::Score::CompetitionResults = Struct.new(:results) do
     pdf_footer(name: 'Gesamtwertung')
   end
 
+  def filename
+    'gesamtwertungen.pdf'
+  end
+
   protected
 
   def default_prawn_options

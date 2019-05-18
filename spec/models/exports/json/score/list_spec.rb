@@ -17,6 +17,8 @@ RSpec.describe Exports::JSON::Score::List, type: :model do
           ['', 2, person2.last_name, person2.first_name, '', 'D'],
         ],
       }.to_json)
+
+      expect(export.filename).to eq 'hakenleitersteigen-manner-lauf-1.json'
     end
   end
 end

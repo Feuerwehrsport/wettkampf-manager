@@ -10,6 +10,8 @@ RSpec.describe Exports::XLSX::People, type: :model do
       expect(index_xlsx.bytestream).to start_with "PK\u0003"
       expect(index_xlsx.bytestream).to end_with "\u0000\u0000"
       expect(index_xlsx.bytestream.size).to be_within(100).of(4526)
+
+      expect(index_xlsx.filename).to eq 'wettkaempfer.xlsx'
     end
   end
 end

@@ -9,6 +9,8 @@ RSpec.describe Exports::JSON::Score::CompetitionResults, type: :model do
       expect(export.bytestream).to eq({
         results: [{ name: 'Wettkampf', rows: [%w[Platz Mannschaft Punkte]] }],
       }.to_json)
+
+      expect(export.filename).to eq 'gesamtwertungen.json'
     end
   end
 end

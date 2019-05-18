@@ -13,6 +13,8 @@ RSpec.describe Exports::XLSX::Score::Result, type: :model do
       expect(show_xlsx.bytestream).to start_with "PK\u0003"
       expect(show_xlsx.bytestream).to end_with "\u0000\u0000"
       expect(show_xlsx.bytestream.size).to be_within(100).of(4623)
+
+      expect(show_xlsx.filename).to eq 'hakenleitersteigen-manner.xlsx'
     end
   end
 end

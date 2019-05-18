@@ -9,4 +9,8 @@ Exports::XLSX::Score::CompetitionResults = Struct.new(:results) do
       end
     end
   end
+
+  def filename
+    'gesamtwertungen.xlsx'
+  end
 end

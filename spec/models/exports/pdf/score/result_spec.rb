@@ -14,6 +14,8 @@ RSpec.describe Exports::PDF::Score::Result, type: :model do
       expect(show_pdf.bytestream).to start_with '%PDF-1.4'
       expect(show_pdf.bytestream).to end_with "%%EOF\n"
       expect(show_pdf.bytestream.size).to be_within(52_575).of(2000)
+
+      expect(show_pdf.filename).to eq 'hakenleitersteigen-manner.pdf'
     end
 
     context 'when only is group_assessment' do
@@ -23,6 +25,8 @@ RSpec.describe Exports::PDF::Score::Result, type: :model do
         expect(show_pdf.bytestream).to start_with '%PDF-1.4'
         expect(show_pdf.bytestream).to end_with "%%EOF\n"
         expect(show_pdf.bytestream.size).to be_within(50_000).of(2000)
+
+        expect(show_pdf.filename).to eq 'hakenleitersteigen-manner.pdf'
       end
     end
 
@@ -33,6 +37,8 @@ RSpec.describe Exports::PDF::Score::Result, type: :model do
         expect(show_pdf.bytestream).to start_with '%PDF-1.4'
         expect(show_pdf.bytestream).to end_with "%%EOF\n"
         expect(show_pdf.bytestream.size).to be_within(50_000).of(2000)
+
+        expect(show_pdf.filename).to eq 'hakenleitersteigen-manner.pdf'
       end
     end
   end

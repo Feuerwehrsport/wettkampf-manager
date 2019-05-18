@@ -11,6 +11,8 @@ RSpec.describe Exports::JSON::People, type: :model do
         female: [%w[Nachname Vorname Mannschaft], ['Meier', 'Alfred', nil]],
         male: [%w[Nachname Vorname Mannschaft], ['Meier', 'Alfred', 'Team MV']],
       }.to_json)
+
+      expect(export.filename).to eq 'wettkaempfer.json'
     end
   end
 end
