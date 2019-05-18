@@ -4,8 +4,8 @@ class Certificates::ListsController < ApplicationController
 
   def export
     if request.format.pdf? && create_resource
-      send_pdf(PDF::Certificates::Export, args: [list.template, "Urkunden: #{list.result.decorate}",
-                                                 list.rows.map(&:decorate), list.background_image])
+      send_pdf(Exports::PDF::Certificates::Export, args: [list.template, "Urkunden: #{list.result.decorate}",
+                                                          list.rows.map(&:decorate), list.background_image])
     else
       redirect_to action: :new
     end

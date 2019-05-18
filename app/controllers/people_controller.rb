@@ -12,8 +12,8 @@ class PeopleController < ApplicationController
     @without_statistics_id = @people.where(fire_sport_statistics_person_id: nil)
     page_title 'Wettkämpfer'
 
-    send_pdf(PDF::People) { [@female, @male] }
-    send_xlsx(XLSX::People) { [@female, @male] }
+    send_pdf(Exports::PDF::People) { [@female, @male] }
+    send_xlsx(Exports::XLSX::People) { [@female, @male] }
   end
 
   def without_statistics_id

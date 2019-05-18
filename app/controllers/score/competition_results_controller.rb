@@ -5,8 +5,8 @@ class Score::CompetitionResultsController < ApplicationController
     super
     page_title 'Gesamtwertung'
 
-    send_pdf(PDF::Score::CompetitionResults) { [@score_competition_results.decorate] }
-    send_xlsx(XLSX::Score::CompetitionResults) { [@score_competition_results.decorate] }
+    send_pdf(Exports::PDF::Score::CompetitionResults) { [@score_competition_results.decorate] }
+    send_xlsx(Exports::XLSX::Score::CompetitionResults) { [@score_competition_results.decorate] }
   end
 
   protected

@@ -64,7 +64,7 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
         get :index, format: :pdf
         expect(response).to be_success
         expect(response.headers['Content-Type']).to eq Mime::PDF
-        expect(response.headers['Content-Disposition']).to eq 'inline; filename="wettkampfer.pdf"'
+        expect(response.headers['Content-Disposition']).to eq 'inline; filename="wettkaempfer.pdf"'
       end
     end
 
@@ -73,7 +73,7 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
         get :index, format: :xlsx
         expect(response).to be_success
         expect(response.headers['Content-Type']).to eq Mime::XLSX
-        expect(response.headers['Content-Disposition']).to eq 'attachment; filename="wettkampfer.xlsx"'
+        expect(response.headers['Content-Disposition']).to eq 'attachment; filename="wettkaempfer.xlsx"'
       end
     end
   end
