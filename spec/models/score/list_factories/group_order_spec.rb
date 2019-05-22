@@ -29,21 +29,21 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
     let(:person3_team3) { create(:person, :generated, team: team3) }
 
     before do
-      create_assessment_request(person1_team1, 1)
-      create_assessment_request(person2_team1, 2)
-      create_assessment_request(person3_team1, 3)
-      create_assessment_request(person4_team1, 0, 1, :single_competitor)
-      create_assessment_request(person5_team1, 0, 2, :single_competitor)
-      create_assessment_request(person6_team1, 0, 3, :single_competitor)
+      create_assessment_request(person1_team1, assessment, 1)
+      create_assessment_request(person2_team1, assessment, 2)
+      create_assessment_request(person3_team1, assessment, 3)
+      create_assessment_request(person4_team1, assessment, 0, 1, :single_competitor)
+      create_assessment_request(person5_team1, assessment, 0, 2, :single_competitor)
+      create_assessment_request(person6_team1, assessment, 0, 3, :single_competitor)
 
-      create_assessment_request(person1_team2, 1)
-      create_assessment_request(person2_team2, 2)
-      create_assessment_request(person3_team2, 3)
-      create_assessment_request(person4_team2, 0, 1, :single_competitor)
+      create_assessment_request(person1_team2, assessment, 1)
+      create_assessment_request(person2_team2, assessment, 2)
+      create_assessment_request(person3_team2, assessment, 3)
+      create_assessment_request(person4_team2, assessment, 0, 1, :single_competitor)
 
-      create_assessment_request(person1_team3, 1)
-      create_assessment_request(person2_team3, 2)
-      create_assessment_request(person3_team3, 3)
+      create_assessment_request(person1_team3, assessment, 1)
+      create_assessment_request(person2_team3, assessment, 2)
+      create_assessment_request(person3_team3, assessment, 3)
     end
 
     it 'returns requests seperated by team and group competitor order' do
@@ -76,13 +76,4 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
       ]
     end
   end
-end
-
-def create_assessment_request(entity, group_order, single_order = 0, assessment_type = :group_competitor)
-  create(:assessment_request,
-         assessment: assessment,
-         entity: entity,
-         group_competitor_order: group_order,
-         single_competitor_order: single_order,
-         assessment_type: assessment_type)
 end

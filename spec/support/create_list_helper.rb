@@ -13,3 +13,12 @@ def create_score_list(result, entities)
   list.reload
   list
 end
+
+def create_assessment_request(entity, assessment, group_order, single_order = 0, assessment_type = :group_competitor)
+  create(:assessment_request,
+         assessment: assessment,
+         entity: entity,
+         group_competitor_order: group_order,
+         single_competitor_order: single_order,
+         assessment_type: assessment_type)
+end
