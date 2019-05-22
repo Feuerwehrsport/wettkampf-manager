@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://feuerwehrsport-statistik.de/api/team_spellings
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 22 May 2019 07:40:33 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - W/"67f7fa8f77bdbc39095bb862c6b55b6e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 902ae16a-38e0-40a7-a760-2f82866a45b0
+      X-Runtime:
+      - '0.055202'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJzdWNjZXNzIjp0cnVlLCJsb2dpbiI6ZmFsc2UsInRlYW1fc3BlbGxpbmdzIjpbeyJ0ZWFtX2lkIjoxOTMsIm5hbWUiOiJGRiBGcmllZGVyc2RvcmYgLyBPTCIsInNob3J0Y3V0IjoiRnJpZWRlcnNkb3JmIC8gT0wifSx7InRlYW1faWQiOjE5MywibmFtZSI6IkZGIEZyaWVkZXJzZG9yZi9PTCIsInNob3J0Y3V0IjoiRnJpZWRlcnNkb3JmL09MIn1dLCJjb2xsZWN0aW9uX25hbWUiOiJ0ZWFtX3NwZWxsaW5ncyJ9
+    http_version: 
+  recorded_at: Wed, 22 May 2019 07:40:33 GMT
+recorded_with: VCR 4.0.0

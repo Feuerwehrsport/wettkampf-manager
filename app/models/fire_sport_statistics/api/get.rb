@@ -8,15 +8,7 @@ class FireSportStatistics::API::Get
 
   def fetch(type)
     json_object = get(type)
-    begin
-      json_object.fetch(type.to_s.tr('/', '_')).map { |e| OpenStruct.new e }
-    rescue KeyError => e
-      raise e, OpenStruct.new(
-        message: e.message,
-        last_response: @last_response,
-        json_object: json_object,
-      )
-    end
+    json_object.fetch(type.to_s.tr('/', '_')).map { |e| OpenStruct.new e }
   end
 
   def get(type)
