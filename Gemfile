@@ -78,4 +78,6 @@ group :test do
   gem 'poltergeist'
   gem 'factory_bot_rails'
   gem 'simplecov', require: false
+  gem 'vcr'
+  gem 'webmock'
 end

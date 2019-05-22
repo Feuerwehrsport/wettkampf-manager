@@ -51,6 +51,13 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  VCR.configure do |vcr_config|
+    vcr_config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+    vcr_config.hook_into :webmock
+    vcr_config.ignore_localhost = true
+    vcr_config.configure_rspec_metadata!
+  end
 end
 
 class ActiveRecord::Base
