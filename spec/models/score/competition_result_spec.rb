@@ -108,4 +108,97 @@ RSpec.describe Score::CompetitionResult, type: :model do
       expect(rows.fourth.assessment_result_from(fire_relay).points).to eq 4
     end
   end
+
+  describe 'supports Certificates::StorageSupport' do
+    it 'supports all keys' do
+      rows = competition_result.send(:dcup).map(&:decorate)
+
+      [
+        {
+          team_name: team1.name,
+          person_name: team1.name,
+          person_bib_number: '',
+          time_long: '',
+          time_short: '',
+          time_without_seconds: '',
+          rank: '1.',
+          rank_with_rank: '1. Platz',
+          rank_without_dot: '1',
+          assessment: '',
+          assessment_with_gender: '',
+          gender: '',
+          date: I18n.l(Date.current),
+          place: '',
+          competition_name: 'Wettkampf',
+          points: '29',
+          points_with_points: '29 Punkte',
+          text: 'foo',
+        },
+        {
+          team_name: team2.name,
+          person_name: team2.name,
+          person_bib_number: '',
+          time_long: '',
+          time_short: '',
+          time_without_seconds: '',
+          rank: '2.',
+          rank_with_rank: '2. Platz',
+          rank_without_dot: '2',
+          assessment: '',
+          assessment_with_gender: '',
+          gender: '',
+          date: I18n.l(Date.current),
+          place: '',
+          competition_name: 'Wettkampf',
+          points: '26',
+          points_with_points: '26 Punkte',
+          text: 'foo',
+        },
+        {
+          team_name: team3.name,
+          person_name: team3.name,
+          person_bib_number: '',
+          time_long: '',
+          time_short: '',
+          time_without_seconds: '',
+          rank: '3.',
+          rank_with_rank: '3. Platz',
+          rank_without_dot: '3',
+          assessment: '',
+          assessment_with_gender: '',
+          gender: '',
+          date: I18n.l(Date.current),
+          place: '',
+          competition_name: 'Wettkampf',
+          points: '26',
+          points_with_points: '26 Punkte',
+          text: 'foo',
+        },
+        {
+          team_name: team4.name,
+          person_name: team4.name,
+          person_bib_number: '',
+          time_long: '',
+          time_short: '',
+          time_without_seconds: '',
+          rank: '4.',
+          rank_with_rank: '4. Platz',
+          rank_without_dot: '4',
+          assessment: '',
+          assessment_with_gender: '',
+          gender: '',
+          date: I18n.l(Date.current),
+          place: '',
+          competition_name: 'Wettkampf',
+          points: '0',
+          points_with_points: '0 Punkte',
+          text: 'foo',
+        },
+      ].each_with_index do |row_match, index|
+        row_match.each do |key, value|
+          expect(rows[index].get(OpenStruct.new(key: key, text: 'foo')).to_s).to eq value
+        end
+      end
+    end
+  end
 end

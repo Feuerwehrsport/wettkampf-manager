@@ -53,6 +53,79 @@ RSpec.describe Score::DoubleEventResult, type: :model do
           expect(rows.third.sum_result_entry.time).to eq 5070
           expect(rows.third.entity).to eq person3
         end
+
+        describe 'supports Certificates::StorageSupport' do
+          it 'supports all keys' do
+            rows = double_event_result.rows.map(&:decorate)
+
+            [
+              {
+                team_name: '',
+                person_name: person1.decorate.full_name,
+                person_bib_number: '',
+                time_long: '39,32 Sekunden',
+                time_short: '39,32 s',
+                time_without_seconds: '39,32',
+                rank: '1.',
+                rank_with_rank: '1. Platz',
+                rank_without_dot: '1',
+                assessment: 'Zweikampf',
+                assessment_with_gender: 'Zweikampf - Frauen',
+                gender: 'Frauen',
+                date: I18n.l(Date.current),
+                place: '',
+                competition_name: 'Wettkampf',
+                points: '',
+                points_with_points: '',
+                text: 'foo',
+              },
+              {
+                team_name: '',
+                person_name: person2.decorate.full_name,
+                person_bib_number: '',
+                time_long: '39,32 Sekunden',
+                time_short: '39,32 s',
+                time_without_seconds: '39,32',
+                rank: '2.',
+                rank_with_rank: '2. Platz',
+                rank_without_dot: '2',
+                assessment: 'Zweikampf',
+                assessment_with_gender: 'Zweikampf - Frauen',
+                gender: 'Frauen',
+                date: I18n.l(Date.current),
+                place: '',
+                competition_name: 'Wettkampf',
+                points: '',
+                points_with_points: '',
+                text: 'foo',
+              },
+              {
+                team_name: '',
+                person_name: person3.decorate.full_name,
+                person_bib_number: '',
+                time_long: '50,70 Sekunden',
+                time_short: '50,70 s',
+                time_without_seconds: '50,70',
+                rank: '3.',
+                rank_with_rank: '3. Platz',
+                rank_without_dot: '3',
+                assessment: 'Zweikampf',
+                assessment_with_gender: 'Zweikampf - Frauen',
+                gender: 'Frauen',
+                date: I18n.l(Date.current),
+                place: '',
+                competition_name: 'Wettkampf',
+                points: '',
+                points_with_points: '',
+                text: 'foo',
+              },
+            ].each_with_index do |row_match, index|
+              row_match.each do |key, value|
+                expect(rows[index].get(OpenStruct.new(key: key, text: 'foo')).to_s).to eq value
+              end
+            end
+          end
+        end
       end
     end
   end

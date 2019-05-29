@@ -1,5 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'Teams and People', seed: :configured do
+  let!(:federal_state) { create(:federal_state) }
+
   before do
     Preset.find(4).save # D-Cup ohne 4x100
   end
@@ -13,10 +15,12 @@ RSpec.describe 'Teams and People', seed: :configured do
     within(:css, '.panel-heading') { expect(page).to have_content 'Mannschaft' }
     fill_in 'Name', with: 'FF Warin'
     select 'Männer', from: 'Geschlecht'
+    select 'Mecklenburg-Vorpommern', from: 'Bundesland'
     click_on 'Speichern'
 
     expect(page).to have_content 'Mannschaft erfolgreich erstellt'
     expect(page).to have_content 'Keine Einträge gefunden'
+    expect(page).to have_content 'Mecklenburg-Vorpommern'
     click_on 'Wettkämpfer hinzufügen', match: :first
 
     within(:css, '.modal') do

@@ -8,6 +8,10 @@
         %tr
           %th= @team.class.human_attribute_name :shortcut
           %td= @team.shortcut
+        - if @team.federal_state.present?
+          %tr
+            %th= @team.class.human_attribute_name :federal_state
+            %td= @team.federal_state
         %tr
           %th= @team.class.human_attribute_name :number
           %td= @team.number

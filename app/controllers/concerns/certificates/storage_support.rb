@@ -8,11 +8,11 @@ module Certificates::StorageSupport
     when :person_bib_number
       entity.try(:bib_number)
     when :time_long
-      result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig')
+      result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig') if respond_to?(:result_entry)
     when :time_short
-      result_entry.human_time
+      result_entry.long_human_time(seconds: 's', invalid: 'D') if respond_to?(:result_entry)
     when :time_without_seconds
-      result_entry.human_time.gsub(/DN/, '-').delete('s').strip
+      result_entry.human_time.gsub(/[DN]/, '-').delete('s').strip if respond_to?(:result_entry)
     when :rank
       "#{result.place_for_row(self)}."
     when :rank_with_rank
@@ -20,11 +20,11 @@ module Certificates::StorageSupport
     when :rank_without_dot
       result.place_for_row(self)
     when :assessment
-      result.assessment.try(:name).presence || result.assessment.try(:discipline)
+      result.assessment.try(:name).presence || result.assessment.try(:discipline) if result.respond_to?(:assessment)
     when :assessment_with_gender
-      result.assessment
+      result.assessment if result.respond_to?(:assessment)
     when :gender
-      result.assessment.try(:translated_gender)
+      result.assessment.try(:translated_gender) if result.respond_to?(:assessment)
     when :date
       h.l(result.try(:date).presence || Competition.one.date)
     when :place
@@ -32,9 +32,9 @@ module Certificates::StorageSupport
     when :competition_name
       Competition.one.name
     when :points
-      points
+      points if respond_to?(:points)
     when :points_with_points
-      t('.points', count: points)
+      t('certificates.lists.export.points', count: points) if respond_to?(:points)
     when :text
       position.text
     end

@@ -36,7 +36,7 @@ class API::ExternalReader
 
   def log_raw(line)
     Rails.logger.info(line)
-    p line # rubocop:disable Rails/Output
+    cli.say(line.inspect)
   end
 
   def send_data(time, hint)
