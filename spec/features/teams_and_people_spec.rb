@@ -76,6 +76,9 @@ RSpec.describe 'Teams and People', seed: :configured do
       end
       click_on 'Speichern'
     end
+
+    visit team_path(Team.last)
+
     expect(page).to have_content 'Alfred Meier'
     expect(page).to have_content 'M1'
     expect(page).to have_content 'Peter Müller'
@@ -133,6 +136,8 @@ RSpec.describe 'Teams and People', seed: :configured do
       end
       click_on 'Speichern'
     end
+
+    visit people_path
 
     expect(page).to have_content 'Meier Alfred'
     expect(page).to have_content 'M1'
