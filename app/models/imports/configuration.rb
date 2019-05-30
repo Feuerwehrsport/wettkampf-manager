@@ -19,7 +19,7 @@ class Imports::Configuration < CacheDependendRecord
   validates :file, presence: true
 
   def self.possible?
-    first.blank?
+    !exists?
   end
 
   def data
