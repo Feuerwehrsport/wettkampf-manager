@@ -48,6 +48,7 @@ class API::TimeEntriesController < ApplicationController
   def assign_list_entry
     @api_time_entry.score_list_entry = Score::ListEntry.waiting.find(params[:score_list_entry_id])
     @list_entry = @api_time_entry.score_list_entry
+    @score_list = @list_entry.list
   end
 
   def skip_closed_entries
