@@ -27,6 +27,7 @@
       = box "Aktionen" do |box|
         = block_link_to "Mannschaft hinzufügen", new_team_path
         = block_link_to "Startliste hinzufügen", new_score_list_factories_path
+        = block_link_to "Backup anlegen", create_backup_path
   .col-md-5
     = box link_to(decorated_competition.hostname_url, decorated_competition.hostname_url) do
       = image_tag qrcode(decorated_competition.hostname_url)

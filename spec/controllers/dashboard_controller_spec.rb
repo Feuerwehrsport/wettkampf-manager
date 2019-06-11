@@ -25,4 +25,14 @@ RSpec.describe DashboardController, type: :controller, seed: :configured do
       expect(response).to be_success
     end
   end
+
+  describe 'GET create_backup', user: :logged_in do
+    it 'creates backup' do
+      expect_any_instance_of(Exports::FullDump).to receive(:to_path).and_return(nil)
+
+      get :create_backup
+      expect(response).to redirect_to root_path
+      expect(flash[:success]).to starting_with 'Backup wurde unter dem Pfad'
+    end
+  end
 end
