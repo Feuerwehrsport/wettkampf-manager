@@ -21,6 +21,8 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
 
   describe 'GET without_statistics_id' do
     before { person }
+    render_views
+
     it 'renders form' do
       get :without_statistics_id
       expect(response).to be_success

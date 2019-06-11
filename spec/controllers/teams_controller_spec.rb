@@ -20,6 +20,8 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
 
   describe 'GET without_statistics_id' do
     before { team }
+    render_views
+
     it 'renders form' do
       get :without_statistics_id
       expect(response).to be_success

@@ -109,6 +109,14 @@ RSpec.describe Score::CompetitionResult, type: :model do
     end
   end
 
+  describe 'some export features' do
+    it 'renders PDF' do
+      pdf = Exports::PDF::Score::CompetitionResults.perform([competition_result.decorate])
+      expect(pdf.bytestream).to start_with '%PDF-1.3'
+      expect(pdf.bytestream).to end_with "%%EOF\n"
+    end
+  end
+
   describe 'supports Certificates::StorageSupport' do
     it 'supports all keys' do
       rows = competition_result.send(:dcup).map(&:decorate)
