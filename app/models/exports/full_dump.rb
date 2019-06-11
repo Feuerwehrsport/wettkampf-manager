@@ -16,10 +16,11 @@ class Exports::FullDump
     add_file('Teams', [Team.all.decorate])
   end
 
-  def to_path(path)
+  def to_path(path, verbose = false)
     FileUtils.mkdir_p(path)
     files.each do |file|
       File.open(File.join(path, file.name), 'wb') { |f| f.write(file.data) }
+      puts "Schreibe #{file.name}" if verbose # rubocop:disable Rails/Output
     end
   end
 
