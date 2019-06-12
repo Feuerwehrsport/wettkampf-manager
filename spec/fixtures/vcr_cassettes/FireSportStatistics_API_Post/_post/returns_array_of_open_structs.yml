@@ -1,0 +1,106 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://feuerwehrsport-statistik.de/api/api_users
+    body:
+      encoding: UTF-8
+      string: api_user%5Bname%5D=Wettkampf
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 12 Jun 2019 09:34:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - W/"3e52e25d6bea3a1fd480e4d37e16569a"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _fwss_session=dDJiU1ZpcnpjT1k1UTVPaTdnRGF4UFZ2emg4Z1NIaEYzVEludHZvMFdUZ0k0QlVOVHd4RTNMaXdxVS9MNlZHdXZ6UEdwTXlXTDhncUZnei9Ec1h4VzZHSnhpS21pZ2ZWZGpHaENNYUluUHc9LS1VZXNKR0VFaFRWVTYyRXg0R0krUzJ3PT0%3D--6489a05fe8afcb85697203a2b6b9d0bbee37c1dc;
+        path=/; HttpOnly
+      - request_method=POST; path=/
+      X-Request-Id:
+      - b4e05d82-2b25-46a6-bc2c-51de9606a395
+      X-Runtime:
+      - '0.161486'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"login":true,"current_user":{"name":"Wettkampf","type":"api-user"}}'
+    http_version: 
+  recorded_at: Wed, 12 Jun 2019 09:34:57 GMT
+- request:
+    method: post
+    uri: https://feuerwehrsport-statistik.de/api/import_requests
+    body:
+      encoding: UTF-8
+      string: import_request%5Bcompressed_data%5D=x%9C%ABV%CAK%CCMU%B2R%0AO-%29%C9N%CC-H%D3%F5%03%09%E8%28%A5%24%96%80%C4%8D%0C%0C-u%0D%CCt%0D%8D%94j%01M%3C%0D8
+    headers:
+      Cookie:
+      - request_method=POST; _fwss_session=dDJiU1ZpcnpjT1k1UTVPaTdnRGF4UFZ2emg4Z1NIaEYzVEludHZvMFdUZ0k0QlVOVHd4RTNMaXdxVS9MNlZHdXZ6UEdwTXlXTDhncUZnei9Ec1h4VzZHSnhpS21pZ2ZWZGpHaENNYUluUHc9LS1VZXNKR0VFaFRWVTYyRXg0R0krUzJ3PT0%3D--6489a05fe8afcb85697203a2b6b9d0bbee37c1dc
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Wed, 12 Jun 2019 09:34:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Etag:
+      - W/"9263595201733bd01c5c446b133d9561"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      Set-Cookie:
+      - _fwss_session=U0lUaTJFY2ZrK0xyVTVPdEM0ZDIraVRBOUJtN1ZpbTBSeS9TeWViWDJTNkhOSDJUcUVPUGtkc2VMbzVEeGt5TGk3U1h3dVRSSkNORjI4UUpnek9Kb0tyUm9wUnBFSHFkRHFjQjhIc3BsUnc9LS1Sbk5tcUdXcWlJYUdqa0Q0TkQ4ODFBPT0%3D--c7ddb56194141c66d5d02b8ed0eca06146fe1abe;
+        path=/; HttpOnly
+      X-Request-Id:
+      - dcad3363-5cb9-4392-8ad6-f642348f8d5c
+      X-Runtime:
+      - '0.150901'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"success":true,"login":true,"current_user":{"name":"Wettkampf","type":"api-user"},"created_id":63}'
+    http_version: 
+  recorded_at: Wed, 12 Jun 2019 09:34:57 GMT
+recorded_with: VCR 4.0.0
