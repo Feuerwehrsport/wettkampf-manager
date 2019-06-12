@@ -43,7 +43,7 @@ class Exports::FullDump
       {
         name: name,
         mimetype: mimetype.to_s,
-        compressed_data: Base64.encode64(data),
+        base64_data: Base64.encode64(data),
       }
     end
   end
