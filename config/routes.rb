@@ -53,6 +53,7 @@ Rails.application.routes.draw do
         get :teams
       end
     end
+    resource :publishing, only: %i[new create]
   end
 
   namespace :certificates do

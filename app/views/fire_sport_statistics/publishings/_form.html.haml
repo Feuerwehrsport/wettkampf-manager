@@ -1,0 +1,8 @@
+= simple_form_for @fire_sport_statistics_publishing, url: { action: :create }do |f|
+  = box "Veröffentlichung auf Feuerwehrsport-Statistik.de" do |box|
+    = f.error_notification
+    = f.full_error(:base)
+    %p Falls der Server gerade eine aktive Internetverbindung hat, können Sie die Ergebnisse Ihres Wettkampfes direkt auf #{link_to("https://feuerwehrsport-statistik.de")} hochladen. Die Administratoren werden darüber informiert und pflegen die Ergebnisse in den nächsten Tagen ein.
+    %p Das Hochladen kann je nach Internetverbindung ein paar Minuten dauern.
+    - box.footer do
+      = f.primary_button :submit, "Veröffentlichung bereitstellen"

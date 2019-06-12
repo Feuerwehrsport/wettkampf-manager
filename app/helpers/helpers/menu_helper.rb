@@ -27,6 +27,7 @@ module Helpers::MenuHelper
         MenuItem.new('Wertungen', '/assessments'),
         MenuItem.new('Urkunden', '/certificates/templates'),
         MenuItem.new('Wettkampf', '/competitions', :edit),
+        MenuItem.new('Veröffentlichung', '/fire_sport_statistics/publishings', :new),
         MenuItem.new('API-Zeiten', '/api/time_entries'),
         MenuItem.new('Benutzer', '/users'),
         MenuItem.new('Abmelden', '/sessions', :destroy),
