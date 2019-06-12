@@ -13,6 +13,7 @@ module FireSportStatistics::API::Base
     @conn ||= begin
       http = Net::HTTP.new('feuerwehrsport-statistik.de', 443)
       http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       http
     end
   end
