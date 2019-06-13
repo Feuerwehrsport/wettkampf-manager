@@ -7,7 +7,7 @@ class FireSportStatistics::Publishing
 
   def save
     FireSportStatistics::API::Post.new.post(:import_requests, 'import_request[compressed_data]': export_data)
-  rescue OpenSSL::SSL::SSLError, Errno::ECONNREFUSED, SocketError => e
+  rescue OpenSSL::SSL::SSLError, Errno::ECONNREFUSED, SocketError, Net::ReadTimeout => e
     errors.add(:base, e.message)
     false
   end

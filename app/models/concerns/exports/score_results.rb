@@ -1,6 +1,6 @@
 module Exports::ScoreResults
-  def build_data_rows(result, discipline, shortcut)
-    data = [build_data_headline(result, discipline)]
+  def build_data_rows(result, discipline, shortcut, export_headers: false)
+    data = [build_data_headline(result, discipline, export_headers: export_headers)]
     result.rows.each do |row|
       line = []
       line.push "#{place_for_row(result.rows, row)}."
@@ -22,7 +22,7 @@ module Exports::ScoreResults
     data.map! { |row| row.map!(&:to_s) }
   end
 
-  def build_data_headline(result, discipline)
+  def build_data_headline(result, discipline, export_headers: false)
     header = ['Platz']
     if discipline.single_discipline_or_double_event?
       PersonDecorator.human_name_cols.each { |col| header.push col }
@@ -30,13 +30,13 @@ module Exports::ScoreResults
       TeamDecorator.human_name_cols.each { |col| header.push col }
     end
     if result.is_a? Score::DoubleEventResult
-      result.results.each do |_result|
-        header.push(discipline.decorate.to_short)
+      result.results.each do |sub_result|
+        header.push(sub_result.assessment.discipline.decorate.to_short)
       end
       header.push('Summe')
     else
       result.lists.each do |list|
-        header.push(list.object.shortcut)
+        header.push(export_headers ? 'time' : list.object.shortcut)
       end
       header.push('Bestzeit') unless result.lists.count == 1
     end

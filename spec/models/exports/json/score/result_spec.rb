@@ -10,17 +10,20 @@ RSpec.describe Exports::JSON::Score::Result, type: :model do
 
   describe 'perform' do
     it 'creates export' do
-      expect(export.bytestream).to eq({
+      expect(JSON.parse(export.bytestream, symbolize_names: true)).to eq(
         rows: [
-          ['Platz', 'Vorname', 'Nachname', 'Mannschaft', 'Lauf 1'],
+          %w[Platz Vorname Nachname Mannschaft time],
           ['1.', person1.first_name, person1.last_name, 'Mecklenburg-Vorpommern', '22,00'],
           ['2.', person2.first_name, person2.last_name, '', 'D'],
         ],
+        name: 'Hakenleitersteigen - Männer',
+        gender: 'male',
+        discipline: 'hl',
         group_rows: [
           %w[Platz Name Summe],
           ['1.', 'Mecklenburg-Vorpommern', 'D'],
         ],
-      }.to_json)
+      )
 
       expect(export.filename).to eq 'hakenleitersteigen-manner.json'
     end
