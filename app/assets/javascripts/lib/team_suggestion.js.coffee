@@ -31,7 +31,6 @@ class TeamSuggestion
     .click =>
       $('.suggestions-entries').slideUp()
       $('#team_name').val(entry.name)
-      console.log(entry)
       $('#team_fire_sport_statistics_team_id').val(entry.id)
       $('#team_federal_state_id').val(entry.federal_state_id)
       @setShortcut(entry.short)
