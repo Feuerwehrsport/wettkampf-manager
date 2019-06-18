@@ -14,7 +14,7 @@ RSpec.describe Exports::PDF::Score::List, type: :model do
     it 'creates pdf' do
       expect(show_pdf.bytestream).to start_with '%PDF-1.4'
       expect(show_pdf.bytestream).to end_with "%%EOF\n"
-      expect(show_pdf.bytestream.size).to be_within(48_000).of(2000)
+      expect(show_pdf.bytestream.size).to be_within(49_000).of(2500)
 
       expect(show_pdf.filename).to eq 'hakenleitersteigen-manner-lauf-1.pdf'
     end

@@ -77,9 +77,9 @@
               %th
               %th Mannschaft
               %th Zeit
-            - @group_result_rows.each do |row|
+            - @group_result.rows.each do |row|
               %tr{class: row_invalid_class(row)}
-                %td= "#{place_for_row(@group_result_rows, row)}."
+                %td= "#{@group_result.place_for_row(row)}."
                 %th= row.team
                 %th= row.result_entry
               %tr{class: row_invalid_class(row)}

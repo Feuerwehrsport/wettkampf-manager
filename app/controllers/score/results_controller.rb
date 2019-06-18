@@ -9,7 +9,7 @@ class Score::ResultsController < ApplicationController
     @out_of_competition_rows = @score_result.out_of_competition_rows.map(&:decorate)
     @discipline = @score_result.assessment.discipline.decorate
     if @score_result.group_assessment? && @discipline.single_discipline?
-      @group_result_rows = Score::GroupResult.new(@score_result).rows.map(&:decorate)
+      @group_result = Score::GroupResult.new(@score_result).decorate
     end
     page_title @score_result.decorate.to_s
     send_pdf(Exports::PDF::Score::Result) { [@score_result.decorate, params[:only].try(:to_sym)] }

@@ -3,7 +3,7 @@ module Exports::ScoreResults
     data = [build_data_headline(result, discipline, export_headers: export_headers)]
     result.rows.each do |row|
       line = []
-      line.push "#{place_for_row(result.rows, row)}."
+      line.push "#{result.place_for_row(row)}."
       if discipline.single_discipline_or_double_event?
         row.entity.name_cols(row.try(:assessment_type), shortcut).each { |col| line.push col }
       else
@@ -46,7 +46,7 @@ module Exports::ScoreResults
   def build_group_data_rows(result)
     data = [%w[Platz Name Summe]]
     result.group_result.rows.each do |row|
-      data.push ["#{place_for_row(result.group_result.rows, row)}.", row.team.to_s, row.result_entry.to_s]
+      data.push ["#{result.group_result.place_for_row(row)}.", row.team.to_s, row.result_entry.to_s]
     end
     data
   end
@@ -58,12 +58,6 @@ module Exports::ScoreResults
       rows_in = row.rows_in.map { |r| [r.entity.to_s, r.best_result_entry.to_s] }
       rows_out = row.rows_out.map { |r| [r.entity.to_s, r.best_result_entry.to_s] }
       GroupDetails.new(row.team, row.result_entry, rows_in, rows_out)
-    end
-  end
-
-  def place_for_row(rows, row)
-    rows.each_with_index do |place_row, place|
-      return (place + 1) if (row <=> place_row).zero?
     end
   end
 end
