@@ -118,8 +118,10 @@ RSpec.describe Score::CompetitionResult, type: :model do
   end
 
   describe 'supports Certificates::StorageSupport' do
+    let(:competition_result) { create(:score_competition_result, result_type: 'dcup') }
+
     it 'supports all keys' do
-      rows = competition_result.send(:dcup).map(&:decorate)
+      rows = competition_result.decorate.rows
 
       [
         {
@@ -134,6 +136,7 @@ RSpec.describe Score::CompetitionResult, type: :model do
           rank_without_dot: '1',
           assessment: '',
           assessment_with_gender: '',
+          result_name: 'Wettkampf - Männer',
           gender: '',
           date: I18n.l(Date.current),
           place: '',
@@ -154,6 +157,7 @@ RSpec.describe Score::CompetitionResult, type: :model do
           rank_without_dot: '2',
           assessment: '',
           assessment_with_gender: '',
+          result_name: 'Wettkampf - Männer',
           gender: '',
           date: I18n.l(Date.current),
           place: '',
@@ -174,6 +178,7 @@ RSpec.describe Score::CompetitionResult, type: :model do
           rank_without_dot: '3',
           assessment: '',
           assessment_with_gender: '',
+          result_name: 'Wettkampf - Männer',
           gender: '',
           date: I18n.l(Date.current),
           place: '',
@@ -194,6 +199,7 @@ RSpec.describe Score::CompetitionResult, type: :model do
           rank_without_dot: '4',
           assessment: '',
           assessment_with_gender: '',
+          result_name: 'Wettkampf - Männer',
           gender: '',
           date: I18n.l(Date.current),
           place: '',

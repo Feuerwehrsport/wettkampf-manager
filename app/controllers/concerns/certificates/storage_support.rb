@@ -21,6 +21,8 @@ module Certificates::StorageSupport
       result.place_for_row(self)
     when :assessment
       result.assessment.try(:name).presence || result.assessment.try(:discipline) if result.respond_to?(:assessment)
+    when :result_name
+      result.to_s
     when :assessment_with_gender
       result.assessment if result.respond_to?(:assessment)
     when :gender

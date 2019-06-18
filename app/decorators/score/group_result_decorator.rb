@@ -4,4 +4,8 @@ class Score::GroupResultDecorator < ApplicationDecorator
   def rows
     @rows ||= object.rows.map(&:decorate)
   end
+
+  def to_s
+    result.decorate.to_s
+  end
 end

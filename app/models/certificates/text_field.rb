@@ -50,7 +50,11 @@ class Certificates::TextField < ActiveRecord::Base
     },
     assessment_with_gender: {
       description: 'Wertung mit Geschlecht',
-      example: 'Hakenleitersteigen - U20 - Männer',
+      example: 'Hakenleitersteigen - Männer - U20',
+    },
+    result_name: {
+      description: 'Ergebnisname',
+      example: 'Hakenleitersteigen - Männer - U20',
     },
     gender: {
       description: 'Geschlecht',

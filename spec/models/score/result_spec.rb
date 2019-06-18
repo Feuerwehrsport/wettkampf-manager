@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Score::Result, type: :model do
-  let(:result) { create :score_result }
+  let(:result) { create :score_result, tags: tags }
+  let(:tags) { [] }
 
   describe '.rows' do
-    let(:person1) { create :person, :generated }
+    let(:person1) { create :person, :generated, tags: tags }
     let(:person2) { create :person, :generated }
     let(:person3) { create :person, :generated }
     let(:person4) { create :person, :generated }
@@ -53,6 +54,7 @@ RSpec.describe Score::Result, type: :model do
               rank_without_dot: '1',
               assessment: 'Hakenleitersteigen',
               assessment_with_gender: 'Hakenleitersteigen - Männer',
+              result_name: 'Hakenleitersteigen - Männer',
               gender: 'Männer',
               date: I18n.l(Date.current),
               place: '',
@@ -73,6 +75,7 @@ RSpec.describe Score::Result, type: :model do
               rank_without_dot: '2',
               assessment: 'Hakenleitersteigen',
               assessment_with_gender: 'Hakenleitersteigen - Männer',
+              result_name: 'Hakenleitersteigen - Männer',
               gender: 'Männer',
               date: I18n.l(Date.current),
               place: '',
@@ -93,6 +96,7 @@ RSpec.describe Score::Result, type: :model do
               rank_without_dot: '3',
               assessment: 'Hakenleitersteigen',
               assessment_with_gender: 'Hakenleitersteigen - Männer',
+              result_name: 'Hakenleitersteigen - Männer',
               gender: 'Männer',
               date: I18n.l(Date.current),
               place: '',
@@ -113,6 +117,42 @@ RSpec.describe Score::Result, type: :model do
               rank_without_dot: '4',
               assessment: 'Hakenleitersteigen',
               assessment_with_gender: 'Hakenleitersteigen - Männer',
+              result_name: 'Hakenleitersteigen - Männer',
+              gender: 'Männer',
+              date: I18n.l(Date.current),
+              place: '',
+              competition_name: 'Wettkampf',
+              points: '',
+              points_with_points: '',
+              text: 'foo',
+            },
+          ].each_with_index do |row_match, index|
+            row_match.each do |key, value|
+              expect(rows[index].get(OpenStruct.new(key: key, text: 'foo')).to_s).to eq value
+            end
+          end
+        end
+      end
+      context 'when person tags present' do
+        let(:tags) { [create(:person_tag)] }
+
+        it 'supports all keys' do
+          rows = result.rows.map(&:decorate)
+
+          [
+            {
+              team_name: '',
+              person_name: person1.decorate.full_name,
+              person_bib_number: '',
+              time_long: '19,12 Sekunden',
+              time_short: '19,12 s',
+              time_without_seconds: '19,12',
+              rank: '1.',
+              rank_with_rank: '1. Platz',
+              rank_without_dot: '1',
+              assessment: 'Hakenleitersteigen',
+              assessment_with_gender: 'Hakenleitersteigen - Männer',
+              result_name: 'Hakenleitersteigen - Männer - U20',
               gender: 'Männer',
               date: I18n.l(Date.current),
               place: '',
