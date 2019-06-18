@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180726175719) do
+ActiveRecord::Schema.define(version: 20190618090700) do
 
   create_table "api_time_entries", force: :cascade do |t|
     t.integer  "time",                null: false
@@ -78,23 +78,24 @@ ActiveRecord::Schema.define(version: 20180726175719) do
   add_index "certificates_text_fields", ["template_id"], name: "index_certificates_text_fields_on_template_id"
 
   create_table "competitions", force: :cascade do |t|
-    t.string   "name",                    default: "",    null: false
-    t.date     "date",                                    null: false
-    t.boolean  "configured",              default: false, null: false
-    t.boolean  "group_assessment",        default: false, null: false
-    t.integer  "group_people_count",      default: 10,    null: false
-    t.integer  "group_run_count",         default: 8,     null: false
-    t.integer  "group_score_count",       default: 6,     null: false
-    t.boolean  "show_bib_numbers",        default: false, null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.string   "hostname",                default: "",    null: false
+    t.string   "name",                     default: "",    null: false
+    t.date     "date",                                     null: false
+    t.boolean  "configured",               default: false, null: false
+    t.boolean  "group_assessment",         default: false, null: false
+    t.integer  "group_people_count",       default: 10,    null: false
+    t.integer  "group_run_count",          default: 8,     null: false
+    t.integer  "group_score_count",        default: 6,     null: false
+    t.boolean  "show_bib_numbers",         default: false, null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "hostname",                 default: "",    null: false
     t.string   "competition_result_type"
-    t.string   "place",                   default: "",    null: false
-    t.text     "flyer_text",              default: "",    null: false
-    t.string   "backup_path",             default: "",    null: false
-    t.boolean  "lottery_numbers",         default: false, null: false
+    t.string   "place",                    default: "",    null: false
+    t.text     "flyer_text",               default: "",    null: false
+    t.string   "backup_path",              default: "",    null: false
+    t.boolean  "lottery_numbers",          default: false, null: false
     t.string   "flyer_headline"
+    t.boolean  "hide_competition_results", default: false, null: false
   end
 
   create_table "disciplines", force: :cascade do |t|

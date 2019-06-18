@@ -11,6 +11,7 @@ class CompetitionsController < ApplicationController
     params.require(:competition).permit(:name, :date, :group_people_count, :group_run_count, :group_score_count,
                                         :hostname, :competition_result_type, :place, :show_bib_numbers,
                                         :flyer_headline, :flyer_text, :backup_path, :lottery_numbers,
+                                        :hide_competition_results,
                                         person_tags_attributes: %i[id name _destroy],
                                         team_tags_attributes: %i[id name _destroy])
   end
