@@ -10,6 +10,7 @@ class API::TimeEntriesController < ApplicationController
   end
 
   def index
+    super
     limit = params[:all].present? ? nil : 30
     @waiting_time_entries = @api_time_entries.waiting.decorate
     @closed_time_entries = @api_time_entries.closed.limit(limit).decorate

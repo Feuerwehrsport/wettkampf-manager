@@ -3,6 +3,10 @@ module Authentication
 
   included do
     helper_method :current_user, :logged_in?, :admin_logged_in?
+
+    rescue_from CanCan::AccessDenied do |_exception|
+      redirect_to login_path
+    end
   end
 
   def current_user

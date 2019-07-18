@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured do
+RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured, user: :logged_in do
   let(:entry) { create(:api_time_entry) }
 
   describe 'POST create' do
