@@ -4,7 +4,7 @@ Exports::XLSX::Teams = Struct.new(:teams) do
 
   def perform
     workbook.add_worksheet(name: Team.model_name.human(count: 0).truncate(30)) do |sheet|
-      index_export_data(teams).each { |row| sheet.add_row row }
+      index_export_data(teams, full: true).each { |row| sheet.add_row row }
     end
   end
 
