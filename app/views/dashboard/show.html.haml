@@ -32,7 +32,7 @@
     = box link_to(decorated_competition.hostname_url, decorated_competition.hostname_url) do
       = image_tag qrcode(decorated_competition.hostname_url)
       - if admin_logged_in?
-        = block_link_to("Flyer anzeigen", format: :pdf, action: :flyer)
+        = block_link_to("Flyer anzeigen", { format: :pdf, action: :flyer }, target: '_blank', rel: 'noopener')
       - elsif !logged_in?
         = block_link_to("Anmelden", login_path)
 

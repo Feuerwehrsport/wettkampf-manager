@@ -15,9 +15,9 @@
                     - if entry.present?
                       = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: 'Aus Liste entfernen', class: 'btn-xs', remote: true
       - box.footer do
-        = btn_link_to 'als PDF', format: :pdf
-        = btn_link_to 'als PDF mit vorgetäuschtem zweiten Lauf', format: :pdf, double_run: true
-        = btn_link_to 'als PDF für Kampfrichter', format: :pdf, more_columns: true
+        = btn_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
+        = btn_link_to 'als PDF mit vorgetäuschtem zweiten Lauf', { format: :pdf, double_run: true }, target: '_blank', rel: 'noopener'
+        = btn_link_to 'als PDF für Kampfrichter', { format: :pdf, more_columns: true }, target: '_blank', rel: 'noopener'
         = btn_link_to 'als XLS', format: :xlsx
 
   .col-md-3
@@ -37,8 +37,8 @@
           = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }
 
       = box('Ausgabe') do
-        = block_link_to('PDF (Drucken)', format: :pdf)
-        = block_link_to('PDF für Kampfrichter', format: :pdf, more_columns: true)
+        = block_link_to('PDF (Drucken)', { format: :pdf }, target: '_blank', rel: 'noopener')
+        = block_link_to('PDF für Kampfrichter', { format: :pdf, more_columns: true }, target: '_blank', rel: 'noopener')
         = block_link_to('XLS (Excel)', format: :xlsx)
 
     - if @score_list.results.present?

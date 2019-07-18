@@ -49,7 +49,7 @@
         = block_link_to "Cup-Serie-Zugehörigkeit", action: :edit, series: 1
         = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Ergebnisliste wirklich löschen? Die zugehörigen Startlisten werden verändert!' }
       = box('Ausgabe') do
-        = block_link_to 'als PDF', format: :pdf
+        = block_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
         = block_link_to 'als XLS', format: :xlsx
         - if admin_logged_in?
           - if Certificates::Template.count > 0
@@ -64,9 +64,9 @@
             - if Certificates::Template.count > 0
               = btn_link_to "Urkunden", new_certificates_list_path(score_result_id: @score_result.id)
           - if @score_result.group_assessment? && @discipline.single_discipline?
-            = btn_link_to "Mannschaftswertung als PDF", format: :pdf, only: :group_assessment
-            = btn_link_to "Einzelwertung als PDF", format: :pdf, only: :single_competitors
-          = btn_link_to "Komplett als PDF", format: :pdf
+            = btn_link_to "Mannschaftswertung als PDF", { format: :pdf, only: :group_assessment }, target: '_blank', rel: 'noopener'
+            = btn_link_to "Einzelwertung als PDF", { format: :pdf, only: :single_competitors }, target: '_blank', rel: 'noopener'
+          = btn_link_to "Komplett als PDF", { format: :pdf }, target: '_blank', rel: 'noopener'
           = btn_link_to "als XLS", format: :xlsx
 
     - if @score_result.group_assessment? && @discipline.single_discipline?

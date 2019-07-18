@@ -19,7 +19,7 @@
       = render "index_table", collection: @male
 
       - box.footer do
-        = btn_link_to "als PDF", format: :pdf
+        = btn_link_to "als PDF", { format: :pdf }, target: '_blank', rel: 'noopener'
         = btn_link_to "als XLS", format: :xlsx
         - if admin_logged_in?
           = link_to "Hinzufügen", { action: :new }, class: "btn btn-sm btn-info", remote: true
