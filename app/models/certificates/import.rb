@@ -42,6 +42,7 @@ class Certificates::Import
         key: text_field[:key],
         align: text_field[:align],
         text: text_field[:text],
+        color: text_field[:color].presence || '000000',
       )
     end
     template.save

@@ -24,6 +24,7 @@ class FormElement
       align: $("#certificates_template_text_fields_attributes_#{@number}_align")
       text: $("#certificates_template_text_fields_attributes_#{@number}_text")
       font: $("#certificates_template_text_fields_attributes_#{@number}_font")
+      color: $("#certificates_template_text_fields_attributes_#{@number}_color")
       destroy: $("#certificates_template_text_fields_attributes_#{@number}__destroy")
     }
     if @get('key') isnt 'template'
@@ -180,6 +181,14 @@ class TextElement
       btn.addClass('btn-primary') if @formElement.get('font') is elem
       
     $('<tr/>').appendTo(@table).append('<td/>').append('<th>Schrift</th>').append(fontLine)
+
+    colorLine = $('<td colspan=2 class="text-center"/>')
+    colorInput = $('<input type="color" value="#' + @formElement.get('color') + '"/>').appendTo(colorLine).change(=>
+      color = colorInput.val().replace(/[^0-9A-F]/, '')
+      @formElement.set('color', color.toUpperCase())
+      @formElement.focus()
+    )
+    $('<tr/>').appendTo(@table).append('<td/>').append('<th>Farbe</th>').append(colorLine)
     btn = $('<div><span class="glyphicon glyphicon-resize-horizontal"/> Element zentrieren</div>').
     addClass('btn btn-xs btn-default').click( (e) =>
       e.stopPropagation()

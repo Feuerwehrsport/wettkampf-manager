@@ -52,6 +52,7 @@ Exports::PDF::Certificates::Export = Struct.new(:template, :title, :rows, :backg
       align: position.align,
       valign: :center,
     }
+    pdf.fill_color position.color
     pdf.font("certificates_template_#{position.font}") do
       pdf.text_box(row.get(position).to_s, options.merge(min_font_size: 4, overflow: :shrink_to_fit))
     end
@@ -59,5 +60,7 @@ Exports::PDF::Certificates::Export = Struct.new(:template, :title, :rows, :backg
     pdf.font("certificates_template_#{position.font}") do
       pdf.text_box(row.get(position).to_s, options.merge(size: 4, overflow: :truncate))
     end
+  rescue Prawn::Errors::UnknownFont
+    pdf.text_box(row.get(position).to_s, options.merge(min_font_size: 4, overflow: :shrink_to_fit))
   end
 end

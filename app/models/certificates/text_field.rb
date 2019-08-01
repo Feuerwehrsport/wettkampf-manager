@@ -83,6 +83,7 @@ class Certificates::TextField < ActiveRecord::Base
   validates :template, :left, :top, :width, :height, :size, :key, :align, presence: true
   validates :key, inclusion: { in: KEY_CONFIG.keys }
   validates :align, inclusion: { in: %i[left center right] }
+  validates :color, format: { with: /\A[0-9A-Fa-f]{6}\z/ }
 
   def key
     super.try(:to_sym)
@@ -102,6 +103,7 @@ class Certificates::TextField < ActiveRecord::Base
       key: key,
       align: align,
       text: text,
+      color: color,
     }
   end
 end

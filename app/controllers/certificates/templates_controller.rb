@@ -47,7 +47,7 @@ class Certificates::TemplatesController < ApplicationController
   def certificates_template_params
     params.require(:certificates_template).permit(
       :name, :image, :font, :font2, :remove_image, :remove_font, :remove_font2,
-      text_fields_attributes: %i[left top width height size key font align text id _destroy]
+      text_fields_attributes: %i[left top width height size key font align text id color _destroy]
     )
   end
 end

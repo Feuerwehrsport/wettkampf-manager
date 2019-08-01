@@ -24,6 +24,7 @@
         = tf.input :align, as: :hidden
         = tf.input :text, as: :hidden
         = tf.input :font, as: :hidden
+        = tf.input :color, as: :hidden
         = tf.input :id, as: :hidden
         = tf.input :_destroy, as: :hidden, input_html: { value: tf.object.persisted? ? 'false' : 'true' }
     .new-position-form
