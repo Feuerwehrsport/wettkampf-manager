@@ -19,6 +19,8 @@
                 = g.input :competitor_order, collection: AssessmentRequestDecorator.fs_names.each_with_index.map { |n, i| [n, i] }, include_blank: false
               - elsif assessment.discipline.key == :la
                 = g.input :competitor_order, collection: AssessmentRequestDecorator.la_names.each_with_index.map { |n, i| [n, i] }, include_blank: false
+              - elsif assessment.discipline.key == :gs
+                = g.input :competitor_order, collection: AssessmentRequestDecorator.gs_names.each_with_index.map { |n, i| [n, i] }, include_blank: false
               - else
                 = g.input :competitor_order
     .modal-footer
