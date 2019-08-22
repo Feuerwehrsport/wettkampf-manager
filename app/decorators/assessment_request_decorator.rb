@@ -89,9 +89,9 @@ class AssessmentRequestDecorator < ApplicationDecorator
       when :fs
         self.class.fs_names[competitor_order]
       when :la
-        h.safe_join(self.class.la_names_short[competitor_order])
+        h.safe_join(self.class.la_names_short[competitor_order] || [])
       when :gs
-        h.safe_join(self.class.gs_names_short[competitor_order])
+        h.safe_join(self.class.gs_names_short[competitor_order] || [])
       end
     else
       0
