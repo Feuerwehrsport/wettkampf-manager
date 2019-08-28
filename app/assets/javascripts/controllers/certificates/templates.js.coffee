@@ -72,11 +72,17 @@ class TextElement
       window.currentDraggableForPrintDocument = this
       @.focus()
       e.stopPropagation()
-      $(document).one 'click', ->
-        window.currentDraggableForPrintDocument.blur() if window.currentDraggableForPrintDocument?
-        window.currentDraggableForPrintDocument = null
-    
+      @registerBlur()
     @table = $('<table/>').addClass('information-table').appendTo('#field-tables')
+
+  registerBlur: ->
+      $(document).one 'click', (e) ->
+        return unless window.currentDraggableForPrintDocument?
+        if e.target.tagName is 'INPUT' && e.target.type is 'color'
+          window.currentDraggableForPrintDocument.registerBlur()
+        else
+          window.currentDraggableForPrintDocument.blur()
+          window.currentDraggableForPrintDocument = null
 
   setFontSize: =>
     textSize = 16
