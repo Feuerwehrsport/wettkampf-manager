@@ -35,7 +35,7 @@
         %td
           = row.entity
           - if row.entity.fire_sport_statistics_team.present?
-            = link_to image_tag('statistiken-logo.png'), "https://feuerwehrsport-statistik.de/people/#{row.entity.fire_sport_statistics_team_id}", target: '_blank', rel: 'noopener', title: 'Informationen über diese Mannschaft auf Feuerwehrsport-Statistik.de aufrufen', class: 'firesport-statistic-link'
+            = link_to image_tag('statistiken-logo.png'), "https://feuerwehrsport-statistik.de/teams/#{row.entity.fire_sport_statistics_team_id}", target: '_blank', rel: 'noopener', title: 'Informationen über diese Mannschaft auf Feuerwehrsport-Statistik.de aufrufen', class: 'firesport-statistic-link'
       - if row.is_a?(Score::DoubleEventResultRow)
         %th= row.sum_result_entry
         - @score_result.results.each do |result|
