@@ -1,14 +1,13 @@
-- cache ['score_competition_results', Competition.one.updated_at] do
-  .row
-    .col-md-12
-      = box "Gesamtwertung" do |box|
-        - @score_competition_results.each_with_index do |result, i|
-          = render "index_table", competition_result: result
-          - if i != @score_competition_results.count
-            %hr
-          
-        - box.footer do
-          = btn_link_to "als PDF", { format: :pdf }, target: '_blank', rel: 'noopener'
-          = btn_link_to "als XLS", format: :xlsx
-          - if admin_logged_in?
-            = btn_link_to 'Hinzufügen', action: :new
+.row
+  .col-md-12
+    = box "Gesamtwertung" do |box|
+      - @score_competition_results.each_with_index do |result, i|
+        = render "index_table", competition_result: result
+        - if i != @score_competition_results.count
+          %hr
+
+      - box.footer do
+        = btn_link_to "als PDF", { format: :pdf }, target: '_blank', rel: 'noopener'
+        = btn_link_to "als XLS", format: :xlsx
+        - if admin_logged_in?
+          = btn_link_to 'Hinzufügen', action: :new

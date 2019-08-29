@@ -4,22 +4,23 @@
       = btn_link_to 'Urkunden', new_certificates_list_path(competition_result_id: competition_result.id)
     = btn_link_to 'Bearbeiten', action: :edit, id: competition_result
     = btn_link_to 'Löschen', { action: :destroy, id: competition_result }, method: :delete, data: { confirm: 'Gesamtwertung wirklich löschen?' }
-%h3= competition_result
-%table.table.table-bordered.competition-results
-  %tr
-    %th.small.sum-points Platz
-    %th Mannschaft
-    - competition_result.results.each do |result|
-      %th.assessment{colspan: 2}
-        = discipline_image result.assessment.discipline
-        = result.assessment.discipline.to_short
-    %th.small.sum-points Punkte
-  - competition_result.rows.each do |row|
+- cache ['score_competition_results', competition_result.id, Competition.one.updated_at] do
+  %h3= competition_result
+  %table.table.table-bordered.competition-results
     %tr
-      %td.sum-points= "#{competition_result.place_for_row(row)}."
-      %td= row.team.shortcut_name
+      %th.small.sum-points Platz
+      %th Mannschaft
       - competition_result.results.each do |result|
-        - assessment_result = row.assessment_result_from(result.assessment)
-        %td.small.time= assessment_result.try(:result_entry).try(:decorate)
-        %td.small.points= assessment_result.try(:points)
-      %td.sum-points= row.points
+        %th.assessment{colspan: 2}
+          = discipline_image result.assessment.discipline
+          = result.assessment.discipline.to_short
+      %th.small.sum-points Punkte
+    - competition_result.rows.each do |row|
+      %tr
+        %td.sum-points= "#{competition_result.place_for_row(row)}."
+        %td= row.team.shortcut_name
+        - competition_result.results.each do |result|
+          - assessment_result = row.assessment_result_from(result.assessment)
+          %td.small.time= assessment_result.try(:result_entry).try(:decorate)
+          %td.small.points= assessment_result.try(:points)
+        %td.sum-points= row.points
