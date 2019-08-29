@@ -26,7 +26,11 @@ module Certificates::StorageSupport
     when :assessment_with_gender
       result.assessment if result.respond_to?(:assessment)
     when :gender
-      result.assessment.try(:translated_gender) if result.respond_to?(:assessment)
+      if result.respond_to?(:assessment)
+        result.assessment.try(:translated_gender)
+      else
+        result.try(:translated_gender)
+      end
     when :date
       h.l(result.try(:date).presence || Competition.one.date)
     when :place
