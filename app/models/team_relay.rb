@@ -3,6 +3,7 @@ class TeamRelay < CacheDependendRecord
   has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy, inverse_of: :entity
 
   validates :team, :number, presence: true
+  delegate :fire_sport_statistics_team, :fire_sport_statistics_team_id, to: :team
 
   def name
     (64 + number).chr
