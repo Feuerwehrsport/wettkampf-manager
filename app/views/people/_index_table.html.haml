@@ -4,24 +4,24 @@
   %table.table.table-bordered.table-hover.table-condensed.people-index-table
     %tr
       - if Competition.one.show_bib_numbers?
-        %th{ style: "width: 5%" } Nr.
-      %th{ style: "width: 20%" } Nachname
-      %th{ style: "width: 20%" } Vorname
+        %th Nr.
+      %th Name
       %th Mannschaft
       - @tags.each do |tag|
-        %th{ style: "width: 5%" }= tag
+        %th= tag
 
       - assessments = Assessment.no_double_event.gender(collection.first.gender).map(&:decorate)
       - assessments.each do |assessment|
-        %th{ style: "width: 5%", title: assessment }= discipline_image assessment.discipline
+        %th{ title: assessment }= discipline_image assessment.discipline
       - if admin_logged_in?
-        %th{ style: "width: 5%" }
+        %th
     - collection.each do |person|
       %tr
         - if Competition.one.show_bib_numbers?
           %td= person.bib_number
-        %td= link_to person.last_name, person_path(person)
-        %td= link_to person.first_name, person_path(person)
+        %td
+          = link_to person, person_path(person)
+          = person.fire_sport_statistics_person&.personal_best_badge
         %td= person.team
         - @tags.each do |tag|
           %td= person.tags.include?(tag) ? 'X' : ''

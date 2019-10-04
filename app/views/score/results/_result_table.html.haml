@@ -5,8 +5,7 @@
     - if @discipline.single_discipline_or_double_event?
       - if Competition.one.show_bib_numbers?
         %th Nr.
-      %th Nachname
-      %th Vorname
+      %th Name
     %th Mannschaft
     - if @score_result.is_a? Score::DoubleEventResult
       %th Summe
@@ -26,10 +25,8 @@
         - if Competition.one.show_bib_numbers?
           %td= row.entity.try(:bib_number)
         %td
-          = row.entity.try(:last_name)
-          - if row.entity.fire_sport_statistics_person.present?
-            = link_to image_tag('statistiken-logo.png'), "https://feuerwehrsport-statistik.de/people/#{row.entity.fire_sport_statistics_person_id}", target: '_blank', rel: 'noopener', title: 'Informationen über diesen Wettkämpfer auf Feuerwehrsport-Statistik.de aufrufen', class: 'firesport-statistic-link'
-        %td= row.entity.try(:first_name)
+          = row.entity.try(:to_s)
+          = row.entity&.fire_sport_statistics_person&.personal_best_badge(row.best_result_entry)
         %td= row.entity.try(:team).try(:numbered_shortcut_name)
       - else
         %td
