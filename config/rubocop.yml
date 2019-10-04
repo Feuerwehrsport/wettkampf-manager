@@ -53,7 +53,6 @@ RSpec/AnyInstance:
   Enabled: false
 RSpec/DescribeClass:
   Exclude:
-  - spec/controllers/m3_index_structure_spec.rb
   - spec/features/**/*
 RSpec/EmptyExampleGroup:
   Exclude:
