@@ -1,8 +1,8 @@
 module FireSportStatistics::API::Base
   protected
 
-  def path(type)
-    "/api/#{type}"
+  def path(type, params = {})
+    "/api/#{type}?#{params&.to_query}"
   end
 
   def handle_response(response)

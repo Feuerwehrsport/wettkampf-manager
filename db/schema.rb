@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190731104543) do
+ActiveRecord::Schema.define(version: 20191003205715) do
 
   create_table "api_time_entries", force: :cascade do |t|
     t.integer  "time",                null: false
@@ -116,12 +116,24 @@ ActiveRecord::Schema.define(version: 20190731104543) do
   end
 
   create_table "fire_sport_statistics_people", force: :cascade do |t|
-    t.string   "last_name",                  null: false
-    t.string   "first_name",                 null: false
-    t.integer  "gender",                     null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "dummy",      default: false, null: false
+    t.string   "last_name",                                    null: false
+    t.string   "first_name",                                   null: false
+    t.integer  "gender",                                       null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.boolean  "dummy",                        default: false, null: false
+    t.integer  "personal_best_hb"
+    t.string   "personal_best_hb_competition"
+    t.integer  "personal_best_hl"
+    t.string   "personal_best_hl_competition"
+    t.integer  "personal_best_zk"
+    t.string   "personal_best_zk_competition"
+    t.integer  "saison_best_hb"
+    t.string   "saison_best_hb_competition"
+    t.integer  "saison_best_hl"
+    t.string   "saison_best_hl_competition"
+    t.integer  "saison_best_zk"
+    t.string   "saison_best_zk_competition"
   end
 
   create_table "fire_sport_statistics_person_spellings", force: :cascade do |t|

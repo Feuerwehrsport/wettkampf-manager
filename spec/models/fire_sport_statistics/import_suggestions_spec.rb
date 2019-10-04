@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe FireSportStatistics::ImportSuggestions, type: :model do
   describe 'import process' do
-    let(:person) { { id: 1757, last_name: 'Abel', first_name: 'Edmund', gender: 'male' } }
+    let(:person) do
+      { id: 1757, last_name: 'Abel', first_name: 'Edmund', gender: 'male',
+        best_scores: { 'pb' => { 'hb' => [1234, 'Wettkampf'] } } }
+    end
     let(:team) { { id: 1108, name: 'Zwickauer Land', shortcut: 'Zwickauer Land', state: 'SN' } }
     let(:team_member) { { person_id: 1757, team_id: 1108 } }
     let(:team_spelling) { { team_id: 1108, name: 'FF Putpus', shortcut: 'Putpus' } }
@@ -36,22 +39,25 @@ RSpec.describe FireSportStatistics::ImportSuggestions, type: :model do
       expect(Series::Cup).to receive(:create_today!)
 
       {
-        people: person,
-        teams: team,
-        team_members: team_member,
-        team_spellings: team_spelling,
-        person_spellings: person_spelling,
-        'series/rounds' => series_round,
-        'series/cups' => series_cup,
-        'series/assessments' => series_assessment,
-        'series/participations' => series_participation,
+        [:people, extended: 1] => person,
+        [:teams, nil] => team,
+        [:team_members, nil] => team_member,
+        [:team_spellings, nil] => team_spelling,
+        [:person_spellings, nil] => person_spelling,
+        ['series/rounds', nil] => series_round,
+        ['series/cups', nil] => series_cup,
+        ['series/assessments', nil] => series_assessment,
+        ['series/participations', nil] => series_participation,
       }.each do |api, hash|
-        expect(FireSportStatistics::API::Get).to receive(:fetch).with(api).and_return([OpenStruct.new(hash)])
+        expect(FireSportStatistics::API::Get).to receive(:fetch).with(*api).and_return([OpenStruct.new(hash)])
       end
 
       described_class.new(true)
 
       related_classes.each { |klass| expect(klass.count).to eq 1 }
+
+      expect(FireSportStatistics::Person.first.personal_best_hb).to eq 1234
+      expect(FireSportStatistics::Person.first.personal_best_hb_competition).to eq 'Wettkampf'
     end
   end
 end

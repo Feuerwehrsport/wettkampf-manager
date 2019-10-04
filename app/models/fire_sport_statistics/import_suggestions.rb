@@ -21,12 +21,24 @@ class FireSportStatistics::ImportSuggestions < FireSportStatistics::Import
   protected
 
   def import_people
-    fetch(:people) do |person|
+    fetch(:people, extended: 1) do |person|
       people[person.id.to_i] = FireSportStatistics::Person.create!(
         id: person.id,
         last_name: person.last_name,
         first_name: person.first_name,
         gender: person.gender,
+        personal_best_hb: person.best_scores.dig('pb', 'hb', 0),
+        personal_best_hb_competition: person.best_scores.dig('pb', 'hb', 1),
+        personal_best_hl: person.best_scores.dig('pb', 'hl', 0),
+        personal_best_hl_competition: person.best_scores.dig('pb', 'hl', 1),
+        personal_best_zk: person.best_scores.dig('pb', 'zk', 0),
+        personal_best_zk_competition: person.best_scores.dig('pb', 'zk', 1),
+        saison_best_hb: person.best_scores.dig('sb', 'hb', 0),
+        saison_best_hb_competition: person.best_scores.dig('sb', 'hb', 1),
+        saison_best_hl: person.best_scores.dig('sb', 'hl', 0),
+        saison_best_hl_competition: person.best_scores.dig('sb', 'hl', 1),
+        saison_best_zk: person.best_scores.dig('sb', 'zk', 0),
+        saison_best_zk_competition: person.best_scores.dig('sb', 'zk', 1),
       )
     end
   end

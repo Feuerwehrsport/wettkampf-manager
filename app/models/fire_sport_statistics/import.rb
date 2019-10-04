@@ -1,9 +1,9 @@
 class FireSportStatistics::Import
   protected
 
-  def fetch(key)
+  def fetch(key, params = nil)
     print_percent(key, 1, 0) unless @quiet
-    collection = FireSportStatistics::API::Get.fetch(key)
+    collection = FireSportStatistics::API::Get.fetch(key, params)
     count = collection.count
     collection.each_with_index do |entry, index|
       yield(entry)

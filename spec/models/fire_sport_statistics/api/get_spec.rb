@@ -17,7 +17,7 @@ RSpec.describe FireSportStatistics::API::Get, type: :model do
 
   describe '#fetch' do
     it 'delegates to instance' do
-      expect_any_instance_of(described_class).to receive(:fetch).with(:foo).and_return(:bar)
+      expect_any_instance_of(described_class).to receive(:fetch).with(:foo, nil).and_return(:bar)
       expect(described_class.fetch(:foo)).to eq :bar
     end
   end

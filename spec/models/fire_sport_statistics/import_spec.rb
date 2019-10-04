@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe FireSportStatistics::Import, type: :model do
   describe 'process bar' do
     it 'prints lines' do
-      expect(FireSportStatistics::API::Get).to receive(:fetch).with(:bar).and_return([:foo])
+      expect(FireSportStatistics::API::Get).to receive(:fetch).with(:bar, nil).and_return([:foo])
 
       expect do
         described_class.new.send(:fetch, :bar) { |arg| }

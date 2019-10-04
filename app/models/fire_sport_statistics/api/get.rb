@@ -4,16 +4,16 @@ require 'json'
 class FireSportStatistics::API::Get
   include FireSportStatistics::API::Base
 
-  def self.fetch(type)
-    new.fetch(type)
+  def self.fetch(type, params = nil)
+    new.fetch(type, params)
   end
 
-  def fetch(type)
-    json_object = get(type)
+  def fetch(type, params = nil)
+    json_object = get(type, params)
     json_object.fetch(type.to_s.tr('/', '_')).map { |e| OpenStruct.new e }
   end
 
-  def get(type)
-    handle_response(conn.get(path(type)))
+  def get(type, params = nil)
+    handle_response(conn.get(path(type, params)))
   end
 end
