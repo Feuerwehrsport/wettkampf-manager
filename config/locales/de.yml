@@ -173,6 +173,8 @@ de:
     female_symbol: ♀
     male: Männer
     male_symbol: ♂
+    youth: Jugend
+    youth_symbol: ⚤
 
   assessment_types:
     competitor: Teilnahme

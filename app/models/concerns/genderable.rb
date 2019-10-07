@@ -1,5 +1,5 @@
 module Genderable
-  GENDERS = { female: 0, male: 1 }.freeze
+  GENDERS = { female: 0, male: 1, youth: 2 }.freeze
   extend ActiveSupport::Concern
   included do
     enum gender: GENDERS

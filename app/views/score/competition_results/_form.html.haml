@@ -2,7 +2,7 @@
   = box 'Gesamtwertung' do |box|
     = f.error_notification
     = f.input :name
-    = f.input :gender, collection: [:male, :female]
+    = f.input :gender, collection: Genderable::GENDERS.keys
     = f.input :result_type, collection: Score::CompetitionResult.result_types.invert
     = f.association :assessments, as: :check_boxes
     .alert.alert-info

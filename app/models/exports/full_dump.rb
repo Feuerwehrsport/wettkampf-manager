@@ -12,7 +12,7 @@ class Exports::FullDump
     end
 
     people = Person.all.includes(:team)
-    add_file('People', [people.female.decorate, people.male.decorate])
+    add_file('People', [people])
     add_file('Teams', [Team.all.decorate])
   end
 

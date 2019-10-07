@@ -4,7 +4,7 @@
     = f.association :team, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
     = f.input :first_name
     = f.input :last_name
-    = f.input :gender, collection: [:male, :female]
+    = f.input :gender, collection: Genderable::GENDERS.keys
     - if Competition.one.show_bib_numbers?
       = f.input :bib_number
 

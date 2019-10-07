@@ -8,7 +8,7 @@
 - if :track.in? @score_list_factory.object.class.generator_params
   = f.input :track, collection: (1..@score_list_factory.object.track_count)
 - if :gender.in? @score_list_factory.object.class.generator_params
-  = f.input :gender, collection: [:male, :female]
+  = f.input :gender, collection: Genderable::GENDERS.keys
 
 
 %table.table.table-condensed

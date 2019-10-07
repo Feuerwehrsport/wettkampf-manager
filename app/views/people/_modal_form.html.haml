@@ -15,7 +15,7 @@
       .col-md-3
         = f.input :last_name
       .col-md-3
-        = f.input :gender, collection: [:male, :female]
+        = f.input :gender, collection: Genderable::GENDERS.keys
     .row
       - if @person.team.nil?
         .col-md-6

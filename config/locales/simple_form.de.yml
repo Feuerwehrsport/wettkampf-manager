@@ -15,6 +15,7 @@ de:
         gender:
           male: Männer
           female: Frauen
+          youth: Jugend
     hints:
       assessment:
         name: Wird ein Name angegeben, ersetzt dieser den generierten Namen

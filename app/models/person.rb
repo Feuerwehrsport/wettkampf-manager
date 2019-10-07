@@ -1,4 +1,5 @@
 class Person < CacheDependendRecord
+  include Genderable
   include Taggable
 
   belongs_to :team
@@ -6,7 +7,6 @@ class Person < CacheDependendRecord
   has_many :requests, class_name: 'AssessmentRequest', as: :entity, dependent: :destroy, inverse_of: :entity
   has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy, inverse_of: :entity
   has_many :requested_assessments, through: :requests, source: :assessment
-  enum gender: { female: 0, male: 1 }
   before_save :assign_registration_order
 
   validates :last_name, :first_name, :gender, presence: true
@@ -35,6 +35,7 @@ class Person < CacheDependendRecord
 
   def validate_team_gender
     errors.add(:team, :has_other_gender) if team.present? && team.gender != gender
+    errors.add(:gender, :has_other_gender) if team.present? && team.gender != gender
   end
 
   def assign_registration_order

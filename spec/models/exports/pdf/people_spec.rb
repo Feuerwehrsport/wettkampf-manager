@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Exports::PDF::People, type: :model do
-  let(:index_pdf) { described_class.perform([female], [male]) }
-  let(:female) { create(:person, :female).decorate }
-  let(:male) { create(:person, :male, :with_team).decorate }
+  let(:index_pdf) { described_class.perform(Person.all) }
+  let!(:female) { create(:person, :female).decorate }
+  let!(:male) { create(:person, :male, :with_team).decorate }
 
   describe 'perform' do
     it 'creates pdf' do

@@ -1,4 +1,5 @@
 class Team < CacheDependendRecord
+  include Genderable
   include Taggable
 
   has_many :people, dependent: :nullify
@@ -9,8 +10,6 @@ class Team < CacheDependendRecord
   has_many :requested_assessments, through: :requests, source: :assessment
   has_many :team_relays, dependent: :destroy
 
-  enum gender: { female: 0, male: 1 }
-
   validates :name, :gender, :number, :shortcut, presence: true
   validates :number, numericality: { greater_than: 0 }
   validates :name, uniqueness: { scope: %i[number gender] }
@@ -20,7 +19,6 @@ class Team < CacheDependendRecord
   accepts_nested_attributes_for :requests, allow_destroy: true
 
   default_scope { order(:gender, :name, :number) }
-  scope :gender, ->(gender) { where(gender: Team.genders[gender]) }
 
   after_create :create_assessment_requests
   attr_accessor :disable_autocreate_assessment_requests

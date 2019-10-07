@@ -13,10 +13,9 @@
             = btn_link_to "Probleme ansehen", without_statistics_id_people_path
 
 
-      %h4 Frauen
-      = render "index_table", collection: @female
-      %h4 Männer
-      = render "index_table", collection: @male
+      - Genderable::GENDERS.keys.each do |gender|
+        %h4= t("gender.#{gender}")
+        = render "index_table", collection: @people.object.gender(gender).decorate
 
       - box.footer do
         = btn_link_to "als PDF", { format: :pdf }, target: '_blank', rel: 'noopener'

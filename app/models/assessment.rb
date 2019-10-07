@@ -1,4 +1,5 @@
 class Assessment < CacheDependendRecord
+  include Genderable
   include Taggable
 
   belongs_to :discipline, inverse_of: :assessments
@@ -11,11 +12,9 @@ class Assessment < CacheDependendRecord
   has_many :user_assessment_abilities, dependent: :destroy
   has_many :users, through: :user_assessment_abilities
   has_many :imports_assessment, class_name: 'Imports::Assessment', inverse_of: :assessment, dependent: :nullify
-  enum gender: { female: 0, male: 1 }
 
   validates :discipline, presence: true
 
-  scope :gender, ->(gender) { where(gender: Assessment.genders[gender]) }
   scope :no_double_event, -> { joins(:discipline).where.not(disciplines: { type: 'Disciplines::DoubleEvent' }) }
   scope :discipline, ->(discipline) { joins(:discipline).where(disciplines: { type: discipline.type }) }
 

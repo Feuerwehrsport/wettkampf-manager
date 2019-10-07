@@ -1,10 +1,11 @@
-Exports::XLSX::People = Struct.new(:female, :male) do
+Exports::XLSX::People = Struct.new(:people) do
   include Exports::XLSX::Base
   include Exports::People
 
   def perform
-    people_table('Frauen', female) if female.present?
-    people_table('Männer', male)   if male.present?
+    Genderable::GENDERS.keys.each do |gender|
+      people_table(I18n.t("gender.#{gender}"), people.gender(gender).decorate) if people.gender(gender).exists?
+    end
   end
 
   def filename

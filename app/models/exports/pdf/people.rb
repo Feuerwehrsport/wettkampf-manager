@@ -1,11 +1,17 @@
-Exports::PDF::People = Struct.new(:female, :male) do
+Exports::PDF::People = Struct.new(:people) do
   include Exports::PDF::Base
   include Exports::People
 
   def perform
-    people_table('Frauen', female) if female.present?
-    pdf.start_new_page             if (female.count + male.count).positive?
-    people_table('Männer', male)   if male.present?
+    first = true
+    Genderable::GENDERS.keys.each do |gender|
+      collection = people.gender(gender)
+      next unless collection.exists?
+
+      pdf.start_new_page unless first
+      people_table(I18n.t("gender.#{gender}"), collection.decorate)
+      first = false
+    end
 
     pdf_footer(name: 'Liste der Wettkämpfer')
   end
