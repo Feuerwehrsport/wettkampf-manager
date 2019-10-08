@@ -1,6 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'Teams and People', seed: :configured do
   let!(:federal_state) { create(:federal_state) }
+  let!(:fire_sport_statistics_person) { create(:fire_sport_statistics_person, :with_statistics) }
 
   before do
     Preset.find(4).save # D-Cup ohne 4x100
@@ -28,6 +29,7 @@ RSpec.describe 'Teams and People', seed: :configured do
       fill_in 'Schnelleingabe', with: 'Alfred Meier'
       expect(find_field('Vorname').value).to have_content 'Alfred'
       expect(find_field('Nachname').value).to have_content 'Meier'
+      find('.suggestions-entries td.first_name').click
       select 'Männer', from: 'Geschlecht'
       click_on 'Speichern'
     end
@@ -43,6 +45,8 @@ RSpec.describe 'Teams and People', seed: :configured do
       end
       click_on 'Speichern'
     end
+
+    expect(Person.first.fire_sport_statistics_person).to eq fire_sport_statistics_person
 
     click_on 'Wettkämpfer hinzufügen', match: :first
 
