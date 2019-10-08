@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://t530:3000/api/time_entries
+    body:
+      encoding: UTF-8
+      string: api_time_entry%5Bhint%5D=Test-Data&api_time_entry%5Bpassword%5D=secret&api_time_entry%5Bsender%5D=&api_time_entry%5Btime%5D=1234
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: 'OK '
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Content-Type-Options:
+      - nosniff
+      Content-Type:
+      - text/plain; charset=utf-8
+      Etag:
+      - W/"2b11647efe8f83f5a87b3631bc463dfc"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a3ddd45e-736d-4c79-b365-9044dedf2565
+      X-Runtime:
+      - '0.134998'
+      Server:
+      - WEBrick/1.3.1 (Ruby/2.4.4/2018-03-28)
+      Date:
+      - Tue, 08 Oct 2019 15:52:34 GMT
+      Content-Length:
+      - '8'
+      Connection:
+      - Keep-Alive
+      Set-Cookie:
+      - _wettkampf-manager_session=MXdodThiOEJkU0tjYWVVMjBGRjV6Zk9YRlYrREQxcUdQN0w2UmVoSk05TXUzcm5adzl6YUFHTUt2OHR6M0hpaUh1SDJzcUFPVUo1OXp3eVU5aDZTNFV2QTJ6QkQrNDlvdjBSd0VmQ0F2RGEwZ3NzbGFkZXFRelBML2h4N2RmS2gyN1IxYzdFSmNBMTN1eWdRYzBGaGt1WnBkZ1BNQUUwR0E4M09ySzE0WG00S2lvYUVqakFLb0Z4M082cFRqb0ZoLS1MWC9QRnQzb0ZacEhBQkY0dk9jK2t3PT0%3D--fd74512b182495a0715be4702179b27cdea1ed02;
+        path=/; HttpOnly
+    body:
+      encoding: UTF-8
+      string: "{foobar}"
+    http_version: 
+  recorded_at: Tue, 08 Oct 2019 15:52:34 GMT
+recorded_with: VCR 4.0.0

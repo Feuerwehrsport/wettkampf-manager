@@ -41,4 +41,50 @@ RSpec.describe API::ExternalReader, type: :model do
       reader.send(:log_send_error, 'line')
     end
   end
+
+  describe '.send_data', vcr: true do
+    let(:password) { 'secret' }
+
+    before do
+      reader.url = 'http://t530:3000'
+      reader.password = password
+    end
+
+    it 'sends data to server' do
+      expect(terminal).not_to receive(:say)
+      expect(reader.send(:send_data, 1234, 'Test-Data')).to eq true
+    end
+
+    context 'when password is wrong' do
+      let(:password) { 'wrong' }
+
+      it 'catches error and says the message' do
+        expect(terminal).to receive(:say).with('Fehler: {"password"=>["ist nicht gültig"]}')
+        expect(reader.send(:send_data, 1234, 'Test-Data')).to eq false
+      end
+    end
+
+    context 'when json is not valid' do
+      it 'catches error and says the message' do
+        expect(terminal).to receive(:say).with("Fehler: 765: unexpected token at '{foobar}'")
+        expect(reader.send(:send_data, 1234, 'Test-Data')).to eq false
+      end
+    end
+
+    context 'when server is not responding' do
+      it 'catches error and says the message' do
+        expect(Net::HTTP).to receive(:new).and_raise(Errno::ECONNREFUSED)
+        expect(terminal).to receive(:say).with('Fehler: Connection refused')
+        expect(reader.send(:send_data, 1234, 'Test-Data')).to eq false
+      end
+    end
+
+    context 'when server is not responding to slow' do
+      it 'catches error and says the message' do
+        expect(Net::HTTP).to receive(:new).and_raise(Net::ReadTimeout)
+        expect(terminal).to receive(:say).with('Fehler: Net::ReadTimeout')
+        expect(reader.send(:send_data, 1234, 'Test-Data')).to eq false
+      end
+    end
+  end
 end
