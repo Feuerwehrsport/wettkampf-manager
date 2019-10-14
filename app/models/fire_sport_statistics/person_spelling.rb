@@ -1,4 +1,4 @@
-class FireSportStatistics::PersonSpelling < ActiveRecord::Base
+class FireSportStatistics::PersonSpelling < ApplicationRecord
   include Genderable
 
   belongs_to :person, class_name: 'FireSportStatistics::Person', inverse_of: :spellings

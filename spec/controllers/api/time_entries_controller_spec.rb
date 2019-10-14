@@ -6,7 +6,7 @@ RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured,
   describe 'POST create' do
     context 'when password doesnt match' do
       it 'creates time entries per API' do
-        post :create, api_time_entry: { time: '1122', hint: 'hint', password: 'bad', sender: 'sender' }
+        post :create, params: { api_time_entry: { time: '1122', hint: 'hint', password: 'bad', sender: 'sender' } }
         expect(response).to be_success
         expect(response.body).to eq '{"success":false,"error":{"password":["ist nicht gültig"]}}'
       end
@@ -14,7 +14,7 @@ RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured,
 
     context 'when password match' do
       it 'creates time entries per API' do
-        post :create, api_time_entry: { time: '1122', hint: 'hint', password: 'API', sender: 'sender' }
+        post :create, params: { api_time_entry: { time: '1122', hint: 'hint', password: 'API', sender: 'sender' } }
         expect(response).to be_success
         expect(response.body).to eq '{"success":true}'
       end
@@ -34,7 +34,7 @@ RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured,
 
   describe 'GET show' do
     it 'renders show' do
-      get :show, id: entry.id
+      get :show, params: { id: entry.id }
       expect(response).to be_success
 
       expect(assigns(:lists)).to eq([])

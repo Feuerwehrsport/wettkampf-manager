@@ -1,4 +1,4 @@
-class FireSportStatistics::Person < ActiveRecord::Base
+class FireSportStatistics::Person < ApplicationRecord
   include Genderable
 
   has_many :team_associations, class_name: 'FireSportStatistics::TeamAssociation', dependent: :destroy,
@@ -18,8 +18,11 @@ class FireSportStatistics::Person < ActiveRecord::Base
     where("(first_name || ' ' || last_name) LIKE ? OR id IN (#{spelling_query.to_sql})", query)
   end
   scope :order_by_teams, ->(teams) do
-    sql = teams.joins(:team_associations).where(fire_sport_statistics_team_associations: { person_id: arel_table[:id] })
-    order("EXISTS(#{sql.to_sql}) DESC")
+    order_condition = teams.joins(:team_associations)
+                           .where(arel_table[:id].eq(FireSportStatistics::TeamAssociation.arel_table[:person_id]))
+                           .exists
+                           .desc
+    order(order_condition)
   end
   scope :for_person, ->(person) do
     where_name_like("#{person.first_name}#{person.last_name}").gender(person.gender)

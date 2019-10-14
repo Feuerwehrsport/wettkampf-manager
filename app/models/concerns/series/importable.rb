@@ -17,7 +17,7 @@ module Series::Importable
     result_rows.each do |row|
       rank              = ranks[row]
       time              = row.result_entry.compare_time.try(:to_i) || Firesport::INVALID_TIME
-      double_rank_count = ranks.values.select { |v| v == rank }.count - 1
+      double_rank_count = ranks.values.count { |v| v == rank } - 1
       points            = aggregate_class.points_for_result(rank, time, round, double_rank_count: double_rank_count)
       yield(row, time, points, rank)
     end

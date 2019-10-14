@@ -10,6 +10,7 @@ RSpec.describe 'Teams and People', seed: :configured do
   before do
     Preset.find(4).save # D-Cup ohne 4x100
   end
+
   it 'is available after first start', js: true do
     allow(Series::Round).to receive(:with_local_results).and_return(1)
 

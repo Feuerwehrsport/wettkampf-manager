@@ -3,6 +3,7 @@ RSpec.describe 'configure competition', seed: :configured do
   before do
     Preset.find(1).save # nothing
   end
+
   it 'can add and remove tags' do
     perform_login
     visit edit_competitions_path

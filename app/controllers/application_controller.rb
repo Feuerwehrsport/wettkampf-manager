@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     model = klass.perform(*args)
     filename ||= model.filename if model.respond_to?(:filename)
     filename ||= "#{@page_title.parameterize}.#{type}" if @page_title.present?
-    options = { type: (type == :pdf ? Mime::PDF : Mime::XLSX), disposition: (type == :pdf ? 'inline' : 'attachment') }
+    options = { type: Mime[type], disposition: (type == :pdf ? 'inline' : 'attachment') }
     send_data(model.bytestream, options.merge(filename: filename))
   end
 end

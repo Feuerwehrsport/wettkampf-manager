@@ -13,6 +13,7 @@ RSpec.describe Person, type: :model do
         expect(person).to have(1).errors_on(:team)
       end
     end
+
     context 'when team gender is person gender' do
       let(:person) { build(:person, :male, team: team_male) }
 

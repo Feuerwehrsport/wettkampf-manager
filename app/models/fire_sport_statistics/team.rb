@@ -1,4 +1,4 @@
-class FireSportStatistics::Team < ActiveRecord::Base
+class FireSportStatistics::Team < ApplicationRecord
   include FireSportStatistics::TeamScopes
   has_many :team_associations, class_name: 'FireSportStatistics::TeamAssociation', dependent: :destroy,
                                inverse_of: :team

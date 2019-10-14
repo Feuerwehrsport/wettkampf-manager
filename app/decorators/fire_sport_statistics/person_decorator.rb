@@ -8,7 +8,7 @@ class FireSportStatistics::PersonDecorator < ApplicationDecorator
   end
 
   def personal_best_badge(current_result = nil)
-    classes = ['balloon', 'best-badge']
+    classes = %w[balloon best-badge]
     classes.push('personal-best') if new_personal_best?(current_result)
     h.content_tag(:span, 'i', class: classes, data: { balloon_content: h.render('people/best_badge', person: self) })
   end

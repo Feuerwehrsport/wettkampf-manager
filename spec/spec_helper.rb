@@ -24,6 +24,7 @@ require 'factory_bot'
 ENV['QT_LOGGING_RULES'] = 'qt5ct.debug=false' # prevent debug logs "qt5ct: using qt5ct plugin"
 
 RSpec.configure do |config|
+  Capybara.server = :webrick
   Capybara.register_driver :poltergeist do |app|
     options = {
       window_size: [1280, 1024],

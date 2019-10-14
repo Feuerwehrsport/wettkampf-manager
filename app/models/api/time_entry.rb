@@ -1,4 +1,4 @@
-class API::TimeEntry < ActiveRecord::Base
+class API::TimeEntry < ApplicationRecord
   include Score::ResultEntrySupport
   belongs_to :score_list_entry, class_name: 'Score::ListEntry', inverse_of: :api_time_entries
   attr_accessor :password, :skip_password_authenticaton

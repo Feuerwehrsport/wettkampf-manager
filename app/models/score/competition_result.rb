@@ -55,7 +55,7 @@ class Score::CompetitionResult < CacheDependendRecord
       points = 11
       result_rows.each do |row|
         rank = ranks[row]
-        double_rank_count = ranks.values.select { |v| v == rank }.count - 1
+        double_rank_count = ranks.values.count { |v| v == rank } - 1
         points = [(11 - ranks[row] - double_rank_count), 0].max
         points = 0 unless row.competition_result_valid?
 

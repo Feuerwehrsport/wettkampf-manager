@@ -50,7 +50,7 @@ RSpec.describe 'Deletion of things', seed: :configured do
     visit assessment_path(assessment)
     click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content 'Wertungsgruppe konnte nicht entfernt werden '
+    expect(page).to have_content 'Wertungsgruppe konnte nicht entfernt werden'
 
     visit discipline_path(assessment.discipline)
     expect(page).to have_content 'Diese Disziplin kann nicht gelöscht werden'

@@ -14,7 +14,7 @@ RSpec.describe DashboardController, type: :controller, seed: :configured do
     it 'renders' do
       get :flyer
       expect(response).to be_success
-      expect(response.headers['Content-Type']).to eq Mime::PDF
+      expect(response.headers['Content-Type']).to eq Mime[:pdf]
       expect(response.headers['Content-Disposition']).to eq 'inline; filename="flyer.pdf"'
     end
   end

@@ -19,6 +19,7 @@ RSpec.describe AssessmentRequestDecorator, type: :decorator do
         expect(instance.short_type).to eq 'M2'
       end
     end
+
     context 'when single_competitor' do
       let(:assessment_type) { :single_competitor }
 
@@ -27,6 +28,7 @@ RSpec.describe AssessmentRequestDecorator, type: :decorator do
         expect(instance.short_type).to eq 'E2'
       end
     end
+
     context 'when out_of_competition' do
       let(:assessment_type) { :out_of_competition }
 
@@ -35,6 +37,7 @@ RSpec.describe AssessmentRequestDecorator, type: :decorator do
         expect(instance.short_type).to eq 'A'
       end
     end
+
     context 'when competitor' do
       let(:assessment_type) { :competitor }
 
@@ -46,6 +49,7 @@ RSpec.describe AssessmentRequestDecorator, type: :decorator do
           expect(instance.short_type).to eq 'A3'
         end
       end
+
       context 'when group_relay' do
         let(:assessment) { build(:assessment, :group_relay) }
 
@@ -54,6 +58,7 @@ RSpec.describe AssessmentRequestDecorator, type: :decorator do
           expect(instance.short_type).to eq '3<span class="small">(C)</span>'
         end
       end
+
       context 'when fire_attack' do
         let(:assessment) { build(:assessment, :fire_attack) }
 
@@ -63,6 +68,7 @@ RSpec.describe AssessmentRequestDecorator, type: :decorator do
         end
       end
     end
+
     context 'when fallback' do
       let(:assessment_type) { nil }
 

@@ -56,7 +56,7 @@ class Exports::FullDump
       model = klass.perform(*args)
       name = model.filename
       name = "#{prefix}-#{name}" if prefix.present?
-      files.push(StoredFile.new(name, "Mime::#{module_name}".constantize, model.bytestream))
+      files.push(StoredFile.new(name, Mime[module_name.downcase.to_sym], model.bytestream))
     end
   end
 

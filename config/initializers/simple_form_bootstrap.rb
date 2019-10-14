@@ -160,4 +160,4 @@ module SimpleFormBootstrapPrimaryButton
   end
 end
 
-SimpleForm::FormBuilder.send :include, SimpleFormBootstrapPrimaryButton
+SimpleForm::FormBuilder.include SimpleFormBootstrapPrimaryButton

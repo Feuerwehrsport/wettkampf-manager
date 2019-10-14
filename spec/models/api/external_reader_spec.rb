@@ -66,7 +66,7 @@ RSpec.describe API::ExternalReader, type: :model do
 
     context 'when json is not valid' do
       it 'catches error and says the message' do
-        expect(terminal).to receive(:say).with("Fehler: 765: unexpected token at '{foobar}'")
+        expect(terminal).to receive(:say).with("Fehler: 785: unexpected token at '{foobar}'")
         expect(reader.send(:send_data, 1234, 'Test-Data')).to eq false
       end
     end

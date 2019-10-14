@@ -1,4 +1,4 @@
-class UserAssessmentAbility < ActiveRecord::Base
+class UserAssessmentAbility < ApplicationRecord
   belongs_to :user
   belongs_to :assessment
 

@@ -1,4 +1,4 @@
-class Competition < ActiveRecord::Base
+class Competition < ApplicationRecord
   has_many :person_tags, dependent: :destroy
   has_many :team_tags, dependent: :destroy
 

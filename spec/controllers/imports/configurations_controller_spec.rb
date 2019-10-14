@@ -8,8 +8,10 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
       get :new
       expect(response).to be_success
     end
+
     context 'when configuration exists' do
       before { configuration }
+
       it 'redirects' do
         get :new
         expect(response).to redirect_to action: :show, id: configuration
@@ -19,13 +21,15 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
 
   describe 'POST create' do
     it 'creates configuration' do
-      post :create, imports_configuration: { file: fixture_file_upload('import.wettkampf_manager_import') }
+      post :create, params: { imports_configuration: { file: fixture_file_upload('import.wettkampf_manager_import') } }
       expect(response).to redirect_to action: :edit, id: Imports::Configuration.last.id
     end
+
     context 'when configuration exists' do
       before { configuration }
+
       it 'redirects' do
-        post :create, imports_configuration: { file: fixture_file_upload('import.wettkampf_manager_import') }
+        post :create, params: { imports_configuration: { file: fixture_file_upload('import.wettkampf_manager_import') } }
         expect(response).to redirect_to action: :show, id: configuration
       end
     end
@@ -33,13 +37,15 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
 
   describe 'GET show' do
     it 'renders show' do
-      get :show, id: configuration
+      get :show, params: { id: configuration }
       expect(response).to be_success
     end
+
     context 'when configuration was imported' do
       before { configuration.update(executed_at: Time.current) }
+
       it 'redirects' do
-        get :show, id: configuration
+        get :show, params: { id: configuration }
         expect(response).to redirect_to root_path
       end
     end
@@ -54,13 +60,15 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
 
   describe 'GET edit' do
     it 'renders form' do
-      get :edit, id: configuration
+      get :edit, params: { id: configuration }
       expect(response).to be_success
     end
+
     context 'when configuration was imported' do
       before { configuration.update(executed_at: Time.current) }
+
       it 'redirects' do
-        get :edit, id: configuration
+        get :edit, params: { id: configuration }
         expect(response).to redirect_to root_path
       end
     end
@@ -68,13 +76,15 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
 
   describe 'PATCH update' do
     it 'updates' do
-      patch :update, id: configuration, imports_configuration: { name: 'neu' }
+      patch :update, params: { id: configuration, imports_configuration: { name: 'neu' } }
       expect(response).to redirect_to configuration
     end
+
     context 'when configuration was imported' do
       before { configuration.update(executed_at: Time.current) }
+
       it 'redirects' do
-        patch :update, id: configuration, imports_configuration: { name: 'neu' }
+        patch :update, params: { id: configuration, imports_configuration: { name: 'neu' } }
         expect(response).to redirect_to root_path
       end
     end
@@ -82,13 +92,15 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
 
   describe 'DELETE destroy' do
     it 'deletes' do
-      delete :destroy, id: configuration
+      delete :destroy, params: { id: configuration }
       expect(response).to redirect_to action: :index
     end
+
     context 'when configuration was imported' do
       before { configuration.update(executed_at: Time.current) }
+
       it 'redirects' do
-        delete :destroy, id: configuration
+        delete :destroy, params: { id: configuration }
         expect(response).to redirect_to root_path
       end
     end

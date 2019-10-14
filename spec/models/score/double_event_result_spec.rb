@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Score::DoubleEventResult, type: :model do
-  let(:double_event_result) { Score::DoubleEventResult.create!(assessment: zk_assessment) }
+  let(:double_event_result) { described_class.create!(assessment: zk_assessment) }
 
   let(:hl_assessment) { create(:assessment, discipline: create(:climbing_hook_ladder), gender: gender) }
   let(:hl_result) { create :score_result, assessment: hl_assessment, double_event_result: double_event_result }

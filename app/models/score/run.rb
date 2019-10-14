@@ -20,7 +20,7 @@ class Score::Run
 
   def list_entries_attributes=(attributes)
     attributes.each do |_key, entry_attributes|
-      entry = list_entries.select { |e| e.track == entry_attributes[:track].to_i }.first
+      entry = list_entries.find { |e| e.track == entry_attributes[:track].to_i }
       entry.update(entry_attributes)
     end
   end

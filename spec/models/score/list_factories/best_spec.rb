@@ -6,6 +6,7 @@ RSpec.describe Score::ListFactories::Best, type: :model do
   describe '#perform_rows' do
     context 'when not enough rows present' do
       before { allow(factory).to receive(:result_rows).and_return([1]) }
+
       it 'returns all rows' do
         expect(factory.send(:perform_rows)).to have(1).items
       end
@@ -13,6 +14,7 @@ RSpec.describe Score::ListFactories::Best, type: :model do
 
     context 'when result is empty' do
       before { allow(factory).to receive(:result_rows).and_return([]) }
+
       it 'returns an empty array' do
         expect(factory.send(:perform_rows)).to have(0).items
       end
@@ -20,9 +22,11 @@ RSpec.describe Score::ListFactories::Best, type: :model do
 
     context 'when more then best count rows are present' do
       before { allow(factory).to receive(:result_rows).and_return([1, 2, 3, 4]) }
+
       it 'returns first 2 rows' do
         expect(factory.send(:perform_rows)).to have(2).items
       end
+
       it 'returns in correct order' do
         expect(factory.send(:perform_rows)).to eq [2, 1]
       end
@@ -30,6 +34,7 @@ RSpec.describe Score::ListFactories::Best, type: :model do
 
     context 'when last best row and first row outside the range have same value' do
       before { allow(factory).to receive(:result_rows).and_return([1, 2, 2, 4]) }
+
       it 'returns one row more' do
         expect(factory.send(:perform_rows)).to have(3).items
       end

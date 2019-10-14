@@ -1,4 +1,4 @@
-class FireSportStatistics::TeamSpelling < ActiveRecord::Base
+class FireSportStatistics::TeamSpelling < ApplicationRecord
   include FireSportStatistics::TeamScopes
   belongs_to :team
 

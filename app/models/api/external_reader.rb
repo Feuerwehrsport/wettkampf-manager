@@ -19,13 +19,11 @@ class API::ExternalReader
 
   def perform
     loop do
-      begin
-        evaluate_output(serial_adapter.read(10))
-        sleep 0.3
-      rescue RubySerial::Error => e
-        return log_send_error("Schnittstelle: #{e.message}")
-      end
+      evaluate_output(serial_adapter.read(10))
+      sleep 0.3
     end
+  rescue RubySerial::Error => e
+    log_send_error("Schnittstelle: #{e.message}")
   end
 
   def check
@@ -82,7 +80,7 @@ class API::ExternalReader
 
   def evaluate_output(string)
     @current_line ||= ''
-    @current_line += string
+    @current_line += string.to_s
     while (result = @current_line.match(line_regexp))
       evaluate_with_log_line(result[1])
       @current_line = result[2]

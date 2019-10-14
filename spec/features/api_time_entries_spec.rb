@@ -3,6 +3,7 @@ RSpec.describe 'API Time entries', seed: :configured do
   before do
     Preset.find(4).save # D-Cup ohne 4x100
   end
+
   let(:assessment) { Assessment.discipline(Disciplines::ClimbingHookLadder.first).gender(:male).first }
   let!(:result) { create :score_result, assessment: assessment }
   let!(:person1) { create :person, :generated }
@@ -21,7 +22,7 @@ RSpec.describe 'API Time entries', seed: :configured do
       click_on 'Zuordnen'
     end
 
-    expect(page).to have_content('Zeit  11,22 s')
+    expect(page).to have_content("Zeit\t11,22 s")
     within('tr', text: person1.last_name) do
       click_on 'Zeit zuordnen'
     end
@@ -41,7 +42,7 @@ RSpec.describe 'API Time entries', seed: :configured do
       click_on 'Zuordnen'
     end
 
-    expect(page).to have_content('Zeit  12,22 s')
+    expect(page).to have_content("Zeit\t12,22 s")
     expect(page).not_to have_content(person1.last_name)
     within('tr', text: person2.last_name) do
       click_on 'Zeit zuordnen'
@@ -53,7 +54,7 @@ RSpec.describe 'API Time entries', seed: :configured do
     end
     click_on 'Speichern'
 
-    expect(page).to have_content('Zeit  13,22 s')
+    expect(page).to have_content("Zeit\t13,22 s")
     expect(page).not_to have_content(person1.last_name)
     expect(page).not_to have_content(person2.last_name)
     within('tr', text: person3.last_name) do

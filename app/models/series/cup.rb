@@ -1,4 +1,4 @@
-class Series::Cup < ActiveRecord::Base
+class Series::Cup < ApplicationRecord
   TODAY_ID = 99_999_000
   include Series::Participationable
 

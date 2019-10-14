@@ -10,6 +10,7 @@ RSpec.describe Certificates::Import, type: :model do
         expect(import.errors.messages).to eq(file: ['ist nicht gültig'])
       end
     end
+
     context 'when json data given' do
       let(:import) { described_class.new(file: fixture_file_upload('certificates_import.json')) }
 

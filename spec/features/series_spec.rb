@@ -17,6 +17,7 @@ RSpec.describe 'Series', seed: :configured do
            entity: create(:team, :female),
            time: 3344)
   end
+
   it 'is available after first start' do
     visit root_path
     click_on 'Cup-Wertung'

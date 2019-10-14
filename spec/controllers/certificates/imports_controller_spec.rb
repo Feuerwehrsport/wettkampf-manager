@@ -10,7 +10,7 @@ RSpec.describe Certificates::ImportsController, type: :controller, seed: :config
 
   describe 'POST create' do
     it 'creates template' do
-      post :create, certificates_import: { file: fixture_file_upload('certificates_import.json') }
+      post :create, params: { certificates_import: { file: fixture_file_upload('certificates_import.json') } }
       expect(response).to redirect_to certificates_template_path(Certificates::Template.last)
       expect(Certificates::Template.last.text_fields.count).to eq 15
       expect(Certificates::Template.last.image).to be_present

@@ -1,4 +1,4 @@
-class Series::Assessment < ActiveRecord::Base
+class Series::Assessment < ApplicationRecord
   include Genderable
   include Series::Importable
 
@@ -9,7 +9,7 @@ class Series::Assessment < ActiveRecord::Base
   has_many :score_results, through: :assessment_results
 
   scope :with_person, ->(person_id) do
-                        joins(:participations).where(series_participations: { person_id: person_id }).uniq
+                        joins(:participations).where(series_participations: { person_id: person_id }).distinct
                       end
   scope :round, ->(round_id) { where(round_id: round_id) }
   scope :year, ->(year) { joins(:round).where(series_rounds: { year: year }) }

@@ -12,13 +12,13 @@ Score::CompetitionResultRow = Struct.new(:result, :team) do
   end
 
   def assessment_result_from(assessment)
-    @assessment_results.select { |result| result.assessment == assessment }.first
+    @assessment_results.find { |result| result.assessment == assessment }
   end
 
   def fire_attack_result_entry
-    @assessment_results.select do |result|
+    @assessment_results.find do |result|
       result.discipline.is_a?(Disciplines::FireAttack)
-    end.first.try(:result_entry) || Score::ResultEntry.new(result_valid: false)
+    end.try(:result_entry) || Score::ResultEntry.new(result_valid: false)
   end
 
   def <=>(other)

@@ -35,6 +35,7 @@ RSpec.describe Score::Result, type: :model do
         expect(rows.last.result_entry_from(list2).time).to eq 2040
         expect(rows.last.best_result_entry.time).to eq 2040
       end
+
       describe 'supports Certificates::StorageSupport' do
         let(:time4) { nil }
 
@@ -133,6 +134,7 @@ RSpec.describe Score::Result, type: :model do
           end
         end
       end
+
       context 'when person tags present' do
         let(:tags) { [create(:person_tag)] }
 

@@ -9,7 +9,7 @@ RSpec.describe Score::ListFactory, type: :model do
 
   describe 'steps' do
     it 'goes through steps' do
-      instance = Score::ListFactory.create!(discipline: discipline, next_step: 'assessments')
+      instance = described_class.create!(discipline: discipline, next_step: 'assessments')
       expect(instance.current_step).to eq :assessments
       instance.update!(assessment_ids: [assessment.id], next_step: 'names')
 

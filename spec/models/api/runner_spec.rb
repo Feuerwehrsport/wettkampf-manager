@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe API::Runner, type: :model do
   let(:runner) { described_class.new }
-  let(:input) { StringIO.new }
-  let(:output) { StringIO.new }
+  let(:input) { IO.new(IO.sysopen(Tempfile.new.path, 'a+')) }
+  let(:output) { IO.new(IO.sysopen(Tempfile.new.path, 'a+')) }
   let(:terminal) { HighLine.new(input, output) }
 
   describe 'workflow' do
     before do
-      allow_any_instance_of(API::Runner).to receive(:cli).and_return(terminal)
-      allow_any_instance_of(API::Runner).to receive(:config).and_return({})
+      allow_any_instance_of(described_class).to receive(:cli).and_return(terminal)
+      allow_any_instance_of(described_class).to receive(:config).and_return({})
     end
 
     it 'asks questions' do

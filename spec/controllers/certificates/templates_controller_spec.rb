@@ -12,7 +12,7 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
 
   describe 'POST create' do
     it 'creates template' do
-      post :create, certificates_template: { name: 'Hindernisbahn' }
+      post :create, params: { certificates_template: { name: 'Hindernisbahn' } }
       expect(response).to redirect_to action: :show, id: Certificates::Template.last
     end
   end
@@ -20,7 +20,7 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
   describe 'POST duplicate' do
     it 'duplicate existing template' do
       expect do
-        post :duplicate, id: template
+        post :duplicate, params: { id: template }
         expect(response).to redirect_to action: :show, id: Certificates::Template.last
       end.to change(Certificates::Template, :count).by(2)
     end
@@ -28,13 +28,13 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
 
   describe 'GET show' do
     it 'renders show' do
-      get :show, id: template
+      get :show, params: { id: template }
       expect(response).to be_success
     end
 
     context 'when json export' do
       it 'renders show' do
-        get :show, id: template, format: :json
+        get :show, params: { id: template, format: :json }
         expect(response).to be_success
         expect(JSON.parse(response.body, symbolize_names: true).keys).to eq(
           %i[name image image_content_type image_name font font_content_type font_name
@@ -45,9 +45,9 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
 
     context 'when pdf requested' do
       it 'sends pdf' do
-        get :show, id: template, format: :pdf
+        get :show, params: { id: template, format: :pdf }
         expect(response).to be_success
-        expect(response.headers['Content-Type']).to eq Mime::PDF
+        expect(response.headers['Content-Type']).to eq Mime[:pdf]
         expect(response.headers['Content-Disposition']).to eq 'inline; filename="urkundenvorlage-hindernisbahn.pdf"'
       end
     end
@@ -64,14 +64,14 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
     render_views
 
     it 'renders form' do
-      get :edit, id: template
+      get :edit, params: { id: template }
       expect(response).to be_success
       expect(response).to render_template partial: '_form_edit'
     end
 
     context 'when form type is text_positions' do
       it 'renders text position form' do
-        get :edit, id: template, form_type: 'text_positions'
+        get :edit, params: { id: template, form_type: 'text_positions' }
         expect(response).to be_success
         expect(response).to render_template partial: '_form_text_fields'
       end
@@ -80,14 +80,14 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
 
   describe 'PATCH update' do
     it 'updates' do
-      patch :update, id: template, certificates_template: { name: 'neu' }
+      patch :update, params: { id: template, certificates_template: { name: 'neu' } }
       expect(response).to redirect_to template
     end
   end
 
   describe 'DELETE destroy' do
     it 'deletes' do
-      delete :destroy, id: template
+      delete :destroy, params: { id: template }
       expect(response).to redirect_to action: :index
     end
   end

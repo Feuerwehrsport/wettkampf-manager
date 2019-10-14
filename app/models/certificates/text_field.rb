@@ -1,4 +1,4 @@
-class Certificates::TextField < ActiveRecord::Base
+class Certificates::TextField < ApplicationRecord
   KEY_CONFIG = {
     team_name: {
       description: 'Name der Mannschaft',

@@ -42,6 +42,7 @@ RSpec.describe Exports::PDF::Score::List, type: :model do
         expect(show_pdf.filename).to eq 'hakenleitersteigen-manner.pdf'
       end
     end
+
     context 'when group discipline' do
       let(:team1) { create(:team, :generated) }
       let(:team2) { create(:team, :generated) }

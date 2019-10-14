@@ -1,6 +1,6 @@
 class Series::RoundsController < ApplicationController
   def index
-    @rounds = Series::Round.with_local_results.uniq
+    @rounds = Series::Round.with_local_results.distinct
     redirect_to @rounds.first if @rounds.count == 1
   end
 

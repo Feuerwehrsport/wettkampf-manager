@@ -45,11 +45,11 @@ class Score::Result < CacheDependendRecord
   end
 
   def person_tags
-    @person_tags ||= tags.where(type: PersonTag)
+    @person_tags ||= tags.where(type: 'PersonTag')
   end
 
   def team_tags
-    @team_tags ||= tags.where(type: TeamTag)
+    @team_tags ||= tags.where(type: 'TeamTag')
   end
 
   def generate_rows(group_result = false)

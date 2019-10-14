@@ -30,15 +30,15 @@ class Team < CacheDependendRecord
   def list_entries_group_competitor(assessment)
     @list_entries_group_competitor = {} if @list_entries_group_competitor.nil?
     @list_entries_group_competitor[assessment.id] ||= begin
-      people.includes(:list_entries).select do |person|
+      people.includes(:list_entries).count do |person|
         person.list_entries.select { |l| l.assessment_id == assessment.id }.find(&:group_competitor?).present?
-      end.count
+      end
     end
   end
 
   def people_assessments
     @people_assessments ||= begin
-      Assessment.where(id: Score::ListEntry.where(entity: people).pluck(:assessment_id).uniq)
+      Assessment.where(id: Score::ListEntry.where(entity: people).distinct.pluck(:assessment_id))
     end
   end
 

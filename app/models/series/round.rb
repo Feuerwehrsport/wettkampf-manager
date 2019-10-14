@@ -1,4 +1,4 @@
-class Series::Round < ActiveRecord::Base
+class Series::Round < ApplicationRecord
   include Series::Participationable
   include Series::Importable
 
@@ -16,7 +16,7 @@ class Series::Round < ActiveRecord::Base
   end
   scope :with_team, ->(team_id, gender) do
     joins(:participations).where(series_participations: { team_id: team_id })
-                          .merge(Series::TeamAssessment.gender(gender)).uniq
+                          .merge(Series::TeamAssessment.gender(gender)).distinct
   end
   scope :with_local_results, -> do
     assessment_ids = Series::AssessmentResult.select(:assessment_id)
@@ -73,7 +73,7 @@ class Series::Round < ActiveRecord::Base
 
   def teams(gender)
     teams = {}
-    assessments = self.assessments.where(type: Series::TeamAssessment)
+    assessments = self.assessments.where(type: 'Series::TeamAssessment')
     Series::TeamParticipation.where(assessment: assessments.gender(gender)).find_each do |participation|
       teams[participation.entity_id] ||= aggregate_class.new(self, participation.team, participation.team_number)
       teams[participation.entity_id].add_participation(participation)

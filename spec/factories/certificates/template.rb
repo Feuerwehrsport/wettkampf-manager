@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :certificates_template, class: Certificates::Template do
-    name  'Hindernisbahn'
+    name  { 'Hindernisbahn' }
     image do
       Rack::Test::UploadedFile.new(Rails.root.join('app', 'assets', 'images', 'disciplines',
                                                    'climbing_hook_ladder.png'))

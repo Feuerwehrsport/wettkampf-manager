@@ -13,7 +13,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
   describe 'POST create' do
     it 'creates competition_result' do
       expect do
-        post :create, score_competition_result: { name: 'foo', gender: :female, result_type: :dcup }
+        post :create, params: { score_competition_result: { name: 'foo', gender: :female, result_type: :dcup } }
         expect(response).to redirect_to action: :index
       end.to change(Score::CompetitionResult, :count).by(1)
     end
@@ -29,7 +29,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
       it 'sends pdf' do
         get :index, format: :pdf
         expect(response).to be_success
-        expect(response.headers['Content-Type']).to eq Mime::PDF
+        expect(response.headers['Content-Type']).to eq Mime[:pdf]
         expect(response.headers['Content-Disposition']).to eq 'inline; filename="gesamtwertungen.pdf"'
       end
     end
@@ -38,7 +38,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
       it 'sends xlsx' do
         get :index, format: :xlsx
         expect(response).to be_success
-        expect(response.headers['Content-Type']).to eq Mime::XLSX
+        expect(response.headers['Content-Type']).to eq Mime[:xlsx]
         expect(response.headers['Content-Disposition']).to eq 'attachment; filename="gesamtwertungen.xlsx"'
       end
     end
@@ -46,23 +46,24 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
 
   describe 'GET edit' do
     it 'renders form' do
-      get :edit, id: competition_result.id
+      get :edit, params: { id: competition_result.id }
       expect(response).to be_success
     end
   end
 
   describe 'PATCH update' do
     it 'updates competition_result' do
-      patch :update, id: competition_result.id, score_competition_result: { name: 'foo' }
+      patch :update, params: { id: competition_result.id, score_competition_result: { name: 'foo' } }
       expect(response).to redirect_to action: :index
     end
   end
 
   describe 'DELETE destroy' do
     before { competition_result }
+
     it 'destroys competition_result' do
       expect do
-        delete :destroy, id: competition_result.id
+        delete :destroy, params: { id: competition_result.id }
         expect(response).to redirect_to action: :index
       end.to change(Score::CompetitionResult, :count).by(-1)
     end

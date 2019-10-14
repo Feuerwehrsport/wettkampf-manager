@@ -1,4 +1,4 @@
-class CacheDependendRecord < ActiveRecord::Base
+class CacheDependendRecord < ApplicationRecord
   self.abstract_class = true
 
   after_save :clean_cache
