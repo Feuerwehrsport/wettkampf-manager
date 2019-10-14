@@ -43,7 +43,7 @@ elif [ -f /usr/share/rvm/scripts/rvm ] ; then
   source /usr/share/rvm/scripts/rvm
 fi
 
-rvm install ruby-2.4.4
+rvm install ruby-2.6.5
 git clone -b release --recursive https://github.com/Feuerwehrsport/wettkampf-manager.git "$INSTALL_PATH"
 
 cd "$INSTALL_PATH"

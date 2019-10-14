@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 5.0.0'
 
 # authentication
 gem 'cancancan'
@@ -31,10 +31,9 @@ gem 'coffee-script-source'
 gem 'jquery-rails'
 
 # exports
-gem 'axlsx', '~> 3.0.0.pre'
+gem 'caxlsx'
 gem 'prawn'
 gem 'prawn-table'
-gem 'rqrcode_png'
 gem 'prawn-qrcode'
 
 # for windows time zones
@@ -42,25 +41,26 @@ gem 'tzinfo-data'
 
 gem 'nokogiri'
 gem 'json'
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.0'
 
 # for rs232
 gem 'rubyserial'
 gem 'highline'
-gem 'ffi', '~> 1.9.0'
+gem 'ffi'
 
 gem 'firesport', path: 'firesport'
 gem 'firesport-series', path: 'firesport-series'
 
 group :development do
+  gem 'coffeelint'
+  gem 'faker'
   gem 'guard-rspec'
   gem 'guard-rubocop'
   gem 'rubocop', require: false
-  gem 'rubocop-rspec', require: false
   gem 'rubocop-daemon', require: false
   gem 'rubocop-performance', require: false
-  gem 'faker'
-  gem 'coffeelint'
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :development, :test do
@@ -70,13 +70,14 @@ end
 
 group :test do
   # Test with Rspec and Capybara
-  gem 'rspec-rails'
-  gem 'rspec-collection_matchers'
-  gem 'database_cleaner'
-  gem 'connection_pool'
   gem 'capybara'
-  gem 'poltergeist'
+  gem 'connection_pool'
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
+  gem 'poltergeist'
+  gem 'rails-controller-testing'
+  gem 'rspec-collection_matchers'
+  gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'vcr'
   gem 'webmock'
