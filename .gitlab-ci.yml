@@ -2,7 +2,7 @@ variables:
   GIT_SUBMODULE_STRATEGY: normal
 
 default:
-  image: ruby:2.6
+  image: lichtbit/ruby:2.6
 
 test:
   stage: test
