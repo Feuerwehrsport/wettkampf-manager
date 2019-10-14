@@ -13,7 +13,9 @@ RSpec.describe DisciplinesController, type: :controller, seed: :configured, user
   describe 'POST create' do
     it 'creates discipline' do
       expect do
-        post :create, params: { discipline: { name: 'foo', type: 'Disciplines::ObstacleCourse', like_fire_relay: true } }
+        post :create, params: { discipline: {
+          name: 'foo', type: 'Disciplines::ObstacleCourse', like_fire_relay: true
+        } }
         expect(response).to redirect_to action: :show, id: Discipline.last.id
       end.to change(Discipline, :count).by(1)
     end

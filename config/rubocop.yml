@@ -70,6 +70,8 @@ Rails:
   Enabled: true
 Rails/ApplicationRecord:
   Enabled: false
+Rails/HelperInstanceVariable:
+  Enabled: false
 Rails/LexicallyScopedActionFilter:
   Enabled: false
 Rails/Output:
@@ -90,6 +92,9 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Lambda:
   EnforcedStyle: literal
+Style/MixinUsage:
+  Exclude:
+  - bin/**/*
 Style/SafeNavigation:
   Enabled: false
 Style/TrailingCommaInArguments:

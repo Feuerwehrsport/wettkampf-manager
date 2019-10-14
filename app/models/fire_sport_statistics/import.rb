@@ -14,7 +14,7 @@ class FireSportStatistics::Import
   end
 
   def print_percent(key, count, index)
-    print "#{key}: #{(index.to_f / count.to_f * 100).round}%\r" # rubocop:disable Rails/Output
+    print "#{key}: #{(index.to_f / count * 100).round}%\r" # rubocop:disable Rails/Output
     STDOUT.flush
   end
 end

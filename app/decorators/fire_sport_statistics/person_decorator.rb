@@ -44,8 +44,6 @@ class FireSportStatistics::PersonDecorator < ApplicationDecorator
   def second_time(time)
     return '' if time.blank? || time.zero?
 
-    seconds = time.to_i / 100
-    millis = time.to_i % 100
-    "#{seconds},#{format('%02d', millis)} s"
+    Firesport::Time.second_time(time)
   end
 end

@@ -21,7 +21,8 @@ RSpec.describe Certificates::ListsController, type: :controller, seed: :configur
   describe 'POST export' do
     render_views
     it 'creates pdf' do
-      post :export, params: { certificates_list: { template_id: template.id, image: true, score_result_id: result.id }, format: :pdf }
+      post :export, params: { certificates_list:
+        { template_id: template.id, image: true, score_result_id: result.id }, format: :pdf }
       expect(response).to be_successful
       expect(response.headers['Content-Type']).to eq 'application/pdf'
       expect(response.headers['Content-Disposition']).to eq 'inline; filename="urkunden-hakenleitersteigen-manner.pdf"'
@@ -36,7 +37,8 @@ RSpec.describe Certificates::ListsController, type: :controller, seed: :configur
 
     context 'when format missing' do
       it 'redirects to new' do
-        post :export, params: { certificates_list: { template_id: template.id, image: true, score_result_id: result.id } }
+        post :export, params: { certificates_list:
+          { template_id: template.id, image: true, score_result_id: result.id } }
         expect(response).to redirect_to(action: :new)
       end
     end

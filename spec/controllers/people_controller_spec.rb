@@ -42,7 +42,8 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
   describe 'POST create' do
     it 'creates person' do
       expect do
-        post :create, params: { format: :js, person: { first_name: 'Alfred', last_name: 'Meier', gender: :male, team_id: team.id } }
+        post :create, params: { format: :js, person:
+          { first_name: 'Alfred', last_name: 'Meier', gender: :male, team_id: team.id } }
         expect(response).to be_successful
         expect(response.content_type).to eq 'text/javascript'
       end.to change(Person, :count).by(1)

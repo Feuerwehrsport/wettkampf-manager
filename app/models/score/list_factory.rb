@@ -68,7 +68,7 @@ class Score::ListFactory < CacheDependendRecord
   end
 
   def preview_run_count
-    (preview_entries_count.to_f / track_count.to_f).ceil
+    (preview_entries_count.to_f / track_count).ceil
   end
 
   def next_step

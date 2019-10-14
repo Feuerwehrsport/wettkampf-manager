@@ -21,7 +21,9 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
 
   describe 'POST create' do
     it 'creates configuration' do
-      post :create, params: { imports_configuration: { file: fixture_file_upload('import.wettkampf_manager_import') } }
+      post :create, params: { imports_configuration: {
+        file: fixture_file_upload('import.wettkampf_manager_import'),
+      } }
       expect(response).to redirect_to action: :edit, id: Imports::Configuration.last.id
     end
 
@@ -29,7 +31,9 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
       before { configuration }
 
       it 'redirects' do
-        post :create, params: { imports_configuration: { file: fixture_file_upload('import.wettkampf_manager_import') } }
+        post :create, params: { imports_configuration: {
+          file: fixture_file_upload('import.wettkampf_manager_import'),
+        } }
         expect(response).to redirect_to action: :show, id: configuration
       end
     end
