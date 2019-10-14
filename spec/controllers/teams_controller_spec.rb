@@ -6,14 +6,14 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET statistic_suggestions' do
     it 'renders form' do
       get :statistic_suggestions, xhr: true, params: { id: team.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.content_type).to eq 'text/javascript'
     end
   end
@@ -25,7 +25,7 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
 
     it 'renders form' do
       get :without_statistics_id
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:team_suggestions).map(&:team)).to eq [team]
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
   describe 'GET edit_assessment_requests' do
     it 'renders form' do
       get :edit_assessment_requests, xhr: true, params: { id: team.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.content_type).to eq 'text/javascript'
     end
   end
@@ -59,20 +59,20 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
   describe 'GET show' do
     it 'renders form' do
       get :show, params: { id: team.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET index' do
     it 'renders' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     context 'when pdf requested' do
       it 'sends pdf' do
         get :index, format: :pdf
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:pdf]
         expect(response.headers['Content-Disposition']).to eq 'inline; filename="mannschaften.pdf"'
       end
@@ -81,7 +81,7 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
     context 'when xlsx requested' do
       it 'sends xlsx' do
         get :index, format: :xlsx
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:xlsx]
         expect(response.headers['Content-Disposition']).to eq 'attachment; filename="mannschaften.xlsx"'
       end
@@ -91,7 +91,7 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
   describe 'GET edit' do
     it 'renders form' do
       get :edit, params: { id: team.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

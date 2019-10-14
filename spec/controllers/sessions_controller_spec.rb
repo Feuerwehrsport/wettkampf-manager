@@ -4,7 +4,7 @@ RSpec.describe SessionsController, type: :controller, seed: :configured do
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -18,7 +18,7 @@ RSpec.describe SessionsController, type: :controller, seed: :configured do
     context 'when password is wrong' do
       it 'failes' do
         post :create, params: { user: { name: 'admin', password: 'wrong' } }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(session[:user_id]).to eq nil
       end
     end

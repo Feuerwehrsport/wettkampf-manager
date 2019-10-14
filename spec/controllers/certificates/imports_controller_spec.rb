@@ -4,7 +4,7 @@ RSpec.describe Certificates::ImportsController, type: :controller, seed: :config
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

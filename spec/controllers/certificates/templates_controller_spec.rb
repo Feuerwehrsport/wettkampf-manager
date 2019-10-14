@@ -6,7 +6,7 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -29,13 +29,13 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
   describe 'GET show' do
     it 'renders show' do
       get :show, params: { id: template }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     context 'when json export' do
       it 'renders show' do
         get :show, params: { id: template, format: :json }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(JSON.parse(response.body, symbolize_names: true).keys).to eq(
           %i[name image image_content_type image_name font font_content_type font_name
              font2 font2_content_type font2_name text_fields],
@@ -46,7 +46,7 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
     context 'when pdf requested' do
       it 'sends pdf' do
         get :show, params: { id: template, format: :pdf }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:pdf]
         expect(response.headers['Content-Disposition']).to eq 'inline; filename="urkundenvorlage-hindernisbahn.pdf"'
       end
@@ -56,7 +56,7 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
   describe 'GET index' do
     it 'renders index' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -65,14 +65,14 @@ RSpec.describe Certificates::TemplatesController, type: :controller, seed: :conf
 
     it 'renders form' do
       get :edit, params: { id: template }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response).to render_template partial: '_form_edit'
     end
 
     context 'when form type is text_positions' do
       it 'renders text position form' do
         get :edit, params: { id: template, form_type: 'text_positions' }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response).to render_template partial: '_form_text_fields'
       end
     end

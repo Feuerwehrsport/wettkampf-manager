@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.2.0'
 
 # authentication
 gem 'cancancan'
@@ -41,7 +41,7 @@ gem 'tzinfo-data'
 
 gem 'nokogiri'
 gem 'json'
-gem 'sqlite3', '~> 1.3.0'
+gem 'sqlite3'
 
 # for rs232
 gem 'rubyserial'

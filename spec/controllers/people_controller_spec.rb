@@ -7,14 +7,14 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET statistic_suggestions' do
     it 'renders form' do
       get :statistic_suggestions, xhr: true, params: { id: person.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.content_type).to eq 'text/javascript'
     end
   end
@@ -26,7 +26,7 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
 
     it 'renders form' do
       get :without_statistics_id
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:person_suggestions).map(&:person)).to eq [person]
     end
   end
@@ -34,7 +34,7 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
   describe 'GET edit_assessment_requests' do
     it 'renders form' do
       get :edit_assessment_requests, xhr: true, params: { id: person.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.content_type).to eq 'text/javascript'
     end
   end
@@ -43,7 +43,7 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
     it 'creates person' do
       expect do
         post :create, params: { format: :js, person: { first_name: 'Alfred', last_name: 'Meier', gender: :male, team_id: team.id } }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.content_type).to eq 'text/javascript'
       end.to change(Person, :count).by(1)
     end
@@ -52,20 +52,20 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
   describe 'GET show' do
     it 'renders form' do
       get :show, params: { id: person }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET index' do
     it 'renders' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     context 'when pdf requested' do
       it 'sends pdf' do
         get :index, format: :pdf
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:pdf]
         expect(response.headers['Content-Disposition']).to eq 'inline; filename="wettkaempfer.pdf"'
       end
@@ -74,7 +74,7 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
     context 'when xlsx requested' do
       it 'sends xlsx' do
         get :index, format: :xlsx
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:xlsx]
         expect(response.headers['Content-Disposition']).to eq 'attachment; filename="wettkaempfer.xlsx"'
       end
@@ -84,7 +84,7 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
   describe 'GET edit' do
     it 'renders form' do
       get :edit, params: { id: person.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

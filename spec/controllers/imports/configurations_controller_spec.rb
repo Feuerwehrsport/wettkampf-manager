@@ -6,7 +6,7 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     context 'when configuration exists' do
@@ -38,7 +38,7 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
   describe 'GET show' do
     it 'renders show' do
       get :show, params: { id: configuration }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     context 'when configuration was imported' do
@@ -61,7 +61,7 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
   describe 'GET edit' do
     it 'renders form' do
       get :edit, params: { id: configuration }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     context 'when configuration was imported' do

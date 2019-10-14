@@ -6,14 +6,14 @@ RSpec.describe DashboardController, type: :controller, seed: :configured do
   describe 'GET show' do
     it 'renders' do
       get :show
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET flyer' do
     it 'renders' do
       get :flyer
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.headers['Content-Type']).to eq Mime[:pdf]
       expect(response.headers['Content-Disposition']).to eq 'inline; filename="flyer.pdf"'
     end
@@ -22,7 +22,7 @@ RSpec.describe DashboardController, type: :controller, seed: :configured do
   describe 'GET impressum' do
     it 'renders' do
       get :impressum
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

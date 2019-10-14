@@ -20,7 +20,7 @@ class FireSportStatistics::Person < ApplicationRecord
   scope :order_by_teams, ->(teams) do
     order_condition = teams.joins(:team_associations)
                            .where(arel_table[:id].eq(FireSportStatistics::TeamAssociation.arel_table[:person_id]))
-                           .exists
+                           .arel.exists
                            .desc
     order(order_condition)
   end

@@ -22,7 +22,7 @@ RSpec.describe Score::ListFactoriesController, type: :controller, seed: :configu
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe Score::ListFactoriesController, type: :controller, seed: :configu
     describe 'GET edit' do
       it 'renders form' do
         get :edit
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

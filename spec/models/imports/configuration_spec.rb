@@ -9,11 +9,11 @@ RSpec.describe Imports::Configuration, type: :model do
         Rails.application.load_seed
         configuration.update!(execute: '1')
         expect(configuration.executed_at).not_to be_nil
-        expect(Person.count).to be 4
-        expect(PersonTag.count).to be 2
-        expect(Team.count).to be 3
-        expect(TeamTag.count).to be 1
-        expect(Assessment.count).to be 0
+        expect(Person.count).to eq 4
+        expect(PersonTag.count).to eq 2
+        expect(Team.count).to eq 3
+        expect(TeamTag.count).to eq 1
+        expect(Assessment.count).to eq 0
         expect(Competition.first.attributes).to include(
           'name' => 'Deutschland-Cup',
           'date' => Date.parse('2016-03-09'),
@@ -29,17 +29,17 @@ RSpec.describe Imports::Configuration, type: :model do
         configuration.update!(execute: '1')
         expect(configuration.executed_at).not_to be_nil
 
-        expect(Person.count).to be 4
-        expect(PersonTag.count).to be 2
-        expect(PersonTag.first.tag_references.count).to be 7
-        expect(PersonTag.last.tag_references.count).to be 1
+        expect(Person.count).to eq 4
+        expect(PersonTag.count).to eq 2
+        expect(PersonTag.first.tag_references.count).to eq 7
+        expect(PersonTag.last.tag_references.count).to eq 1
 
-        expect(Team.count).to be 3
-        expect(TeamTag.count).to be 1
-        expect(TeamTag.last.tag_references.count).to be 1
+        expect(Team.count).to eq 3
+        expect(TeamTag.count).to eq 1
+        expect(TeamTag.last.tag_references.count).to eq 1
 
-        expect(Assessment.count).to be 11
-        expect(AssessmentRequest.count).to be 12
+        expect(Assessment.count).to eq 11
+        expect(AssessmentRequest.count).to eq 12
         expect(Competition.first.attributes).to include(
           'name' => 'Deutschland-Cup',
           'date' => Date.parse('2016-03-09'),

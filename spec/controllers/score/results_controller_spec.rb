@@ -7,7 +7,7 @@ RSpec.describe Score::ResultsController, type: :controller, seed: :configured, u
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:tags)).to eq []
     end
   end
@@ -25,7 +25,7 @@ RSpec.describe Score::ResultsController, type: :controller, seed: :configured, u
   describe 'GET index' do
     it 'renders' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:tags)).to eq []
     end
   end
@@ -33,14 +33,14 @@ RSpec.describe Score::ResultsController, type: :controller, seed: :configured, u
   describe 'GET show' do
     it 'renders' do
       get :show, params: { id: result.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:tags)).to eq []
     end
 
     context 'when pdf requested' do
       it 'sends pdf' do
         get :show, params: { id: result.id, format: :pdf }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:pdf]
         expect(response.headers['Content-Disposition']).to eq 'inline; filename="hakenleitersteigen-manner.pdf"'
       end
@@ -49,7 +49,7 @@ RSpec.describe Score::ResultsController, type: :controller, seed: :configured, u
     context 'when xlsx requested' do
       it 'sends xlsx' do
         get :show, params: { id: result.id, format: :xlsx }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:xlsx]
         expect(response.headers['Content-Disposition']).to eq 'attachment; filename="hakenleitersteigen-manner.xlsx"'
       end
@@ -59,7 +59,7 @@ RSpec.describe Score::ResultsController, type: :controller, seed: :configured, u
   describe 'GET edit' do
     it 'renders form' do
       get :edit, params: { id: result.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:tags)).to eq []
     end
   end

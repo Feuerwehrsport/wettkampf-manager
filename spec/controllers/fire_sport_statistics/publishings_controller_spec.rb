@@ -6,7 +6,7 @@ RSpec.describe FireSportStatistics::PublishingsController, type: :controller, se
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe FireSportStatistics::PublishingsController, type: :controller, se
         expect_any_instance_of(Exports::FullDump).to receive(:to_export_data).and_return('--')
 
         post :create
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

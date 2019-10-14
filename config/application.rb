@@ -20,5 +20,6 @@ module WettkampfManager
     config.i18n.default_locale = :de
     config.autoload_paths += %W[#{config.root}/lib #{config.root}/app/models/concerns]
     config.active_record.belongs_to_required_by_default = false
+    config.active_record.sqlite3.represent_boolean_as_integer = true
   end
 end

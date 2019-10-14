@@ -6,7 +6,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -22,13 +22,13 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
   describe 'GET index' do
     it 'renders' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
 
     context 'when pdf requested' do
       it 'sends pdf' do
         get :index, format: :pdf
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:pdf]
         expect(response.headers['Content-Disposition']).to eq 'inline; filename="gesamtwertungen.pdf"'
       end
@@ -37,7 +37,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
     context 'when xlsx requested' do
       it 'sends xlsx' do
         get :index, format: :xlsx
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:xlsx]
         expect(response.headers['Content-Disposition']).to eq 'attachment; filename="gesamtwertungen.xlsx"'
       end
@@ -47,7 +47,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
   describe 'GET edit' do
     it 'renders form' do
       get :edit, params: { id: competition_result.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

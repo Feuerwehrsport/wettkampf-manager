@@ -6,7 +6,7 @@ RSpec.describe Score::RunsController, type: :controller, seed: :configured, user
   describe 'GET edit' do
     it 'renders form' do
       get :edit, params: { list_id: list_entry.list_id, run: 1 }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

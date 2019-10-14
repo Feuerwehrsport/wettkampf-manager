@@ -6,7 +6,7 @@ RSpec.describe DisciplinesController, type: :controller, seed: :configured, user
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -22,21 +22,21 @@ RSpec.describe DisciplinesController, type: :controller, seed: :configured, user
   describe 'GET show' do
     it 'renders form' do
       get :show, params: { id: discipline }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET index' do
     it 'renders' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET edit' do
     it 'renders form' do
       get :edit, params: { id: discipline.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 

@@ -7,14 +7,14 @@ RSpec.describe Certificates::ListsController, type: :controller, seed: :configur
   describe 'GET new' do
     it 'renders form' do
       get :new
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'POST create' do
     it 'creates list' do
       post :create, params: { certificates_list: { template_id: template.id, image: true, score_result_id: result.id } }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -22,7 +22,7 @@ RSpec.describe Certificates::ListsController, type: :controller, seed: :configur
     render_views
     it 'creates pdf' do
       post :export, params: { certificates_list: { template_id: template.id, image: true, score_result_id: result.id }, format: :pdf }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response.headers['Content-Type']).to eq 'application/pdf'
       expect(response.headers['Content-Disposition']).to eq 'inline; filename="urkunden-hakenleitersteigen-manner.pdf"'
     end

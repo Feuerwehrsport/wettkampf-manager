@@ -12,7 +12,7 @@ RSpec.describe Score::ListsController, type: :controller, seed: :configured, use
   describe 'GET index' do
     it 'renders' do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:tags)).to eq []
     end
   end
@@ -20,35 +20,35 @@ RSpec.describe Score::ListsController, type: :controller, seed: :configured, use
   describe 'GET edit_times' do
     it 'renders' do
       get :edit_times, params: { id: list.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET select_entity' do
     it 'renders' do
       get :select_entity, xhr: true, params: { id: list.id }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET destroy_entity' do
     it 'renders' do
       get :destroy_entity, xhr: true, params: { id: list.id, entry_id: 1 }
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe 'GET show' do
     it 'renders' do
       get :show, params: { id: list.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:tags)).to eq []
     end
 
     context 'when pdf requested' do
       it 'sends pdf' do
         get :show, params: { id: list.id, format: :pdf }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:pdf]
         expect(response.headers['Content-Disposition']).to eq 'inline; filename="hakenleitersteigen-manner-lauf-1.pdf"'
       end
@@ -57,7 +57,7 @@ RSpec.describe Score::ListsController, type: :controller, seed: :configured, use
     context 'when xlsx requested' do
       it 'sends xlsx' do
         get :show, params: { id: list.id, format: :xlsx }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(response.headers['Content-Type']).to eq Mime[:xlsx]
         expect(response.headers['Content-Disposition']).to eq(
           'attachment; filename="hakenleitersteigen-manner-lauf-1.xlsx"',
@@ -69,7 +69,7 @@ RSpec.describe Score::ListsController, type: :controller, seed: :configured, use
   describe 'GET edit' do
     it 'renders form' do
       get :edit, params: { id: list.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:tags)).to eq []
     end
   end
