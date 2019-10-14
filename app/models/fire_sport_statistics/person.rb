@@ -36,8 +36,4 @@ class FireSportStatistics::Person < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-
-  def full_name_changed?
-    first_name_changed? || last_name_changed?
-  end
 end

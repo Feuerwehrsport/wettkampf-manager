@@ -45,7 +45,7 @@ class Score::ListFactory < CacheDependendRecord
                   end
   end
   after_save do
-    if status_changed? && status == :create
+    if saved_change_to_status? && status == :create
       list
       perform
     end
