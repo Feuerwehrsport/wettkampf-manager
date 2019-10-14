@@ -1,4 +1,4 @@
-class CreateUserAssessmentAbilities < ActiveRecord::Migration
+class CreateUserAssessmentAbilities < ActiveRecord::Migration[4.2]
   def change
     create_table :user_assessment_abilities do |t|
       t.references :user, null: false, index: true

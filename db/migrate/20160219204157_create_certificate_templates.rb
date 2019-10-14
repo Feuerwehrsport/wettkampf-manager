@@ -1,4 +1,4 @@
-class CreateCertificateTemplates < ActiveRecord::Migration
+class CreateCertificateTemplates < ActiveRecord::Migration[4.2]
   def change
     create_table :certificates_templates do |t|
       t.string :name, null: false

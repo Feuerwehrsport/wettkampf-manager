@@ -1,4 +1,4 @@
-class CreateFireSportStatisticsTeamAssociations < ActiveRecord::Migration
+class CreateFireSportStatisticsTeamAssociations < ActiveRecord::Migration[4.2]
   def change
     create_table :fire_sport_statistics_team_associations do |t|
       t.references :person, index: true, null: false

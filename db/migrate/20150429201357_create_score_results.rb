@@ -1,4 +1,4 @@
-class CreateScoreResults < ActiveRecord::Migration
+class CreateScoreResults < ActiveRecord::Migration[4.2]
   def change
     create_table :score_results do |t|
       t.string :name, null: false, default: ''

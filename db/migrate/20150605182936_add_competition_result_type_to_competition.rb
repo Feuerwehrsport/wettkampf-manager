@@ -1,4 +1,4 @@
-class AddCompetitionResultTypeToCompetition < ActiveRecord::Migration
+class AddCompetitionResultTypeToCompetition < ActiveRecord::Migration[4.2]
   def change
     add_column :competitions, :competition_result_type, :string
   end

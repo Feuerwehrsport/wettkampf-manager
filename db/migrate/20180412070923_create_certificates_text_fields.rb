@@ -1,4 +1,4 @@
-class CreateCertificatesTextFields < ActiveRecord::Migration
+class CreateCertificatesTextFields < ActiveRecord::Migration[4.2]
   def change
     create_table :certificates_text_fields do |t|
       t.integer  :template_id, null: false

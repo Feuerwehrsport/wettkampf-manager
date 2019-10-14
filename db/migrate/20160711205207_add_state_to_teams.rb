@@ -1,4 +1,4 @@
-class AddStateToTeams < ActiveRecord::Migration
+class AddStateToTeams < ActiveRecord::Migration[4.2]
   def change
     add_column :teams, :federal_state_id, :integer
     add_index :teams, :federal_state_id

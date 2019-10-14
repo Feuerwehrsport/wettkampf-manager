@@ -1,4 +1,4 @@
-class CreateSeriesParticipations < ActiveRecord::Migration
+class CreateSeriesParticipations < ActiveRecord::Migration[4.2]
   def change
     create_table :series_participations do |t|
       t.references :assessment, null: false

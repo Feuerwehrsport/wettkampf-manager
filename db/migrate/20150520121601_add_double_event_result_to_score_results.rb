@@ -1,4 +1,4 @@
-class AddDoubleEventResultToScoreResults < ActiveRecord::Migration
+class AddDoubleEventResultToScoreResults < ActiveRecord::Migration[4.2]
   def change
     add_column :score_results, :double_event_result_id, :integer
     add_column :score_results, :type, :string, default: 'Score::Result', null: false

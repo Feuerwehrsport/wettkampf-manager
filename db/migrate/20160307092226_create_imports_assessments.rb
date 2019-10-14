@@ -1,4 +1,4 @@
-class CreateImportsAssessments < ActiveRecord::Migration
+class CreateImportsAssessments < ActiveRecord::Migration[4.2]
   def change
     create_table :imports_assessments do |t|
       t.integer :foreign_key, null: false, index: true

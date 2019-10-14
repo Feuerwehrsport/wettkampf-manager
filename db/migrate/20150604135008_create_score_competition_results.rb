@@ -1,4 +1,4 @@
-class CreateScoreCompetitionResults < ActiveRecord::Migration
+class CreateScoreCompetitionResults < ActiveRecord::Migration[4.2]
   def change
     create_table :score_competition_results do |t|
       t.string :name

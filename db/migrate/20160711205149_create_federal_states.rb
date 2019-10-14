@@ -1,4 +1,4 @@
-class CreateFederalStates < ActiveRecord::Migration
+class CreateFederalStates < ActiveRecord::Migration[4.2]
   def change
     create_table :federal_states do |t|
       t.string :name, null: false

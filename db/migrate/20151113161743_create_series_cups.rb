@@ -1,4 +1,4 @@
-class CreateSeriesCups < ActiveRecord::Migration
+class CreateSeriesCups < ActiveRecord::Migration[4.2]
   def change
     create_table :series_cups do |t|
       t.references :round, null: false

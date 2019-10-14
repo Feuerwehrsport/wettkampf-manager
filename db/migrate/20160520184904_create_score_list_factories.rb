@@ -1,4 +1,4 @@
-class CreateScoreListFactories < ActiveRecord::Migration
+class CreateScoreListFactories < ActiveRecord::Migration[4.2]
   def change
     create_table :score_list_factories do |t|
       t.string :session_id

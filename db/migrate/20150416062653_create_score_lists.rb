@@ -1,4 +1,4 @@
-class CreateScoreLists < ActiveRecord::Migration
+class CreateScoreLists < ActiveRecord::Migration[4.2]
   def change
     create_table :score_lists do |t|
       t.string :name, null: false, default: ''

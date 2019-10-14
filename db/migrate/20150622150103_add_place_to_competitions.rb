@@ -1,4 +1,4 @@
-class AddPlaceToCompetitions < ActiveRecord::Migration
+class AddPlaceToCompetitions < ActiveRecord::Migration[4.2]
   def change
     add_column :competitions, :place, :string, null: false, default: ''
   end

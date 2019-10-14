@@ -1,4 +1,4 @@
-class CreateAPITimeEntries < ActiveRecord::Migration
+class CreateAPITimeEntries < ActiveRecord::Migration[4.2]
   def change
     create_table :api_time_entries do |t|
       t.integer :time, null: false

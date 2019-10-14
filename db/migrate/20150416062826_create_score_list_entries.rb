@@ -1,4 +1,4 @@
-class CreateScoreListEntries < ActiveRecord::Migration
+class CreateScoreListEntries < ActiveRecord::Migration[4.2]
   def change
     create_table :score_list_entries do |t|
       t.references :list, index: true, null: false

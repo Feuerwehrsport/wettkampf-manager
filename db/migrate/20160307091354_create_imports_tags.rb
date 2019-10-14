@@ -1,4 +1,4 @@
-class CreateImportsTags < ActiveRecord::Migration
+class CreateImportsTags < ActiveRecord::Migration[4.2]
   def change
     create_table :imports_tags do |t|
       t.references :configuration, null: false, index: true

@@ -1,4 +1,4 @@
-class AddBestScoresToFiresportPeople < ActiveRecord::Migration
+class AddBestScoresToFiresportPeople < ActiveRecord::Migration[4.2]
   def change
     add_column :fire_sport_statistics_people, :personal_best_hb, :integer
     add_column :fire_sport_statistics_people, :personal_best_hb_competition, :string

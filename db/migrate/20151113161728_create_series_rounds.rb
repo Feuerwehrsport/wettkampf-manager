@@ -1,4 +1,4 @@
-class CreateSeriesRounds < ActiveRecord::Migration
+class CreateSeriesRounds < ActiveRecord::Migration[4.2]
   def change
     create_table :series_rounds do |t|
       t.string :name, null: false

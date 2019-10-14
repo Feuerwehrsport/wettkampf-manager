@@ -1,4 +1,4 @@
-class CreateScoreListAssessments < ActiveRecord::Migration
+class CreateScoreListAssessments < ActiveRecord::Migration[4.2]
   def change
     create_table :score_list_assessments do |t|
       t.references :assessment, null: false

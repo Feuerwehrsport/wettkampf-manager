@@ -1,4 +1,4 @@
-class CreateTeamRelays < ActiveRecord::Migration
+class CreateTeamRelays < ActiveRecord::Migration[4.2]
   def change
     create_table :team_relays do |t|
       t.references :team, index: true, null: false
