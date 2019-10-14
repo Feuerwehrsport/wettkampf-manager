@@ -41,7 +41,7 @@ gem 'tzinfo-data'
 
 gem 'nokogiri'
 gem 'json'
-gem 'sqlite3'
+gem 'sqlite3', '1.3.13'
 
 # for rs232
 gem 'rubyserial'
@@ -78,6 +78,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rspec-collection_matchers'
   gem 'rspec-rails'
+  gem 'therubyracer' # for gitlab
   gem 'simplecov', require: false
   gem 'vcr'
   gem 'webmock'
