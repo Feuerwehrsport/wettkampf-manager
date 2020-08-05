@@ -9,12 +9,16 @@ AllCops:
   - firesport-series/**/*
   - spec/fixtures/**/*
   - tmp/**/*
-  TargetRailsVersion: 5.1
+  TargetRailsVersion: 5.2
   TargetRubyVersion: 2.6
 Bundler/OrderedGems:
   Enabled: false
-RSpec/MessageSpies:
-  Enabled: false
+Layout/LineLength:
+  Exclude:
+  - Gemfile
+  - db/migrate/*
+  - app/models/presets/*.rb
+  Max: 120
 Metrics/AbcSize:
   Enabled: false
 Metrics/BlockLength:
@@ -35,12 +39,6 @@ Metrics/ClassLength:
   Max: 200
 Metrics/CyclomaticComplexity:
   Max: 15
-Metrics/LineLength:
-  Exclude:
-  - Gemfile
-  - db/migrate/*
-  - app/models/presets/*.rb
-  Max: 120
 Metrics/MethodLength:
   Exclude:
   - db/migrate/*.rb
@@ -48,8 +46,6 @@ Metrics/MethodLength:
   Max: 30
 Metrics/PerceivedComplexity:
   Max: 15
-Rails/ReversibleMigration:
-  Enabled: false
 RSpec/AnyInstance:
   Enabled: false
 RSpec/DescribeClass:
@@ -61,6 +57,8 @@ RSpec/EmptyExampleGroup:
 RSpec/ExampleLength:
   Enabled: false
 RSpec/LetSetup:
+  Enabled: false
+RSpec/MessageSpies:
   Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false
@@ -77,6 +75,8 @@ Rails/LexicallyScopedActionFilter:
 Rails/Output:
   Exclude:
   - config/deploy/**/*
+Rails/ReversibleMigration:
+  Enabled: false
 Rails/SkipsModelValidations:
   Enabled: false
 Style/AsciiComments:

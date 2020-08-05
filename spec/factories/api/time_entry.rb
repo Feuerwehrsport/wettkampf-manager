@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :api_time_entry, class: API::TimeEntry do
+  factory :api_time_entry, class: 'API::TimeEntry' do
     time { 2233 }
     hint { 'Hinweis' }
     sender { 'Absender' }

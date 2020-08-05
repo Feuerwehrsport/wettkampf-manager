@@ -4,7 +4,7 @@ class Score::ListsController < ApplicationController
   before_action :assign_tags
 
   def index
-    @list_factory = Score::ListFactory.find_by(session_id: session.id)
+    @list_factory = Score::ListFactory.find_by(session_id: session.id.to_s)
   end
 
   def show

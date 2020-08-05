@@ -5,10 +5,10 @@ class Score::ListFactoriesController < ApplicationController
 
   def copy_list
     list = Score::List.find(params[:list_id])
-    base_collection.where(session_id: session.id).destroy_all
+    base_collection.where(session_id: session.id.to_s).destroy_all
 
     factory = Score::ListFactories::TrackChange.create!(
-      session_id: session.id,
+      session_id: session.id.to_s,
       discipline_id: list.assessments.first.discipline_id,
       next_step: :assessments,
     )
@@ -30,7 +30,7 @@ class Score::ListFactoriesController < ApplicationController
   end
 
   def redirect_to_edit
-    redirect_to action: :edit if base_collection.find_by(session_id: session.id).present?
+    redirect_to action: :edit if base_collection.find_by(session_id: session.id.to_s).present?
   end
 
   def after_save
@@ -43,11 +43,11 @@ class Score::ListFactoriesController < ApplicationController
   end
 
   def find_resource
-    base_collection.find_by!(session_id: session.id)
+    base_collection.find_by!(session_id: session.id.to_s)
   end
 
   def build_resource
-    resource_class.new(session_id: session.id)
+    resource_class.new(session_id: session.id.to_s)
   end
 
   def flash_notice_created; end

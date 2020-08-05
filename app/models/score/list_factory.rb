@@ -4,14 +4,14 @@ class Score::ListFactory < CacheDependendRecord
 
   STEPS = %i[discipline assessments names tracks results generator generator_params finish create].freeze
   GENERATORS = [
-    Score::ListFactories::GroupOrder,
-    Score::ListFactories::LotteryNumber,
-    Score::ListFactories::Simple,
-    Score::ListFactories::Best,
-    Score::ListFactories::FireRelay,
-    Score::ListFactories::TrackChange,
-    Score::ListFactories::TrackSame,
-    Score::ListFactories::TrackGenderable,
+    'Score::ListFactories::GroupOrder',
+    'Score::ListFactories::LotteryNumber',
+    'Score::ListFactories::Simple',
+    'Score::ListFactories::Best',
+    'Score::ListFactories::FireRelay',
+    'Score::ListFactories::TrackChange',
+    'Score::ListFactories::TrackSame',
+    'Score::ListFactories::TrackGenderable',
   ].freeze
 
   belongs_to :discipline
@@ -51,8 +51,12 @@ class Score::ListFactory < CacheDependendRecord
     end
   end
 
+  def self.generators
+    @generators ||= GENERATORS.map(&:constantize)
+  end
+
   def possible_types
-    GENERATORS.select { |g| g.generator_possible?(discipline) }
+    self.class.generators.select { |g| g.generator_possible?(discipline) }
   end
 
   def self.generator_params

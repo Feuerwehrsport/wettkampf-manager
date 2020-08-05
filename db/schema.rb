@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_14_090822) do
+ActiveRecord::Schema.define(version: 2020_08_05_064207) do
 
   create_table "api_time_entries", force: :cascade do |t|
     t.integer "time", null: false
@@ -398,6 +398,7 @@ ActiveRecord::Schema.define(version: 2019_10_14_090822) do
     t.integer "federal_state_id"
     t.index ["federal_state_id"], name: "index_teams_on_federal_state_id"
     t.index ["fire_sport_statistics_team_id"], name: "index_teams_on_fire_sport_statistics_team_id"
+    t.index ["name", "number", "gender"], name: "index_teams_on_name_and_number_and_gender", unique: true
   end
 
   create_table "user_assessment_abilities", force: :cascade do |t|

@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def icon_link_btn(icon_classes, path, options = {})
-    btn_link_to(content_tag(:i, '', class: icon_classes), path, options)
+    btn_link_to(tag.i('', class: icon_classes), path, options)
   end
 
   def discipline_image(discipline, options = {})
@@ -57,7 +57,7 @@ module ApplicationHelper
   def series_assessment_cup_participation(cup, row)
     result = row.participation_for_cup(cup)
     if result
-      content_tag(:div, result.result_entry_with_points, class: 'series-participation', data: { id: result.id })
+      tag.div(result.result_entry_with_points, class: 'series-participation', data: { id: result.id })
     else
       ''
     end

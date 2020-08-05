@@ -15,7 +15,7 @@ module Exports::PDF::Base
   end
 
   def unicode_perform
-    font_path = Rails.root.join('app', 'assets', 'fonts')
+    font_path = Rails.root.join('app/assets/fonts')
     pdf.font_families.update(
       'Arial' => {
         normal: "#{font_path}/Arial.ttf",

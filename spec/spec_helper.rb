@@ -30,7 +30,7 @@ RSpec.configure do |config|
       window_size: [1280, 1024],
       phantomjs_options: %w[--debug=no --load-images=yes --ignore-ssl-errors=yes --ssl-protocol=TLSv1'],
       debug: false,
-      extensions: [Rails.root.join('spec', 'support', 'phantomjs_disable_animations.js')],
+      extensions: [Rails.root.join('spec/support/phantomjs_disable_animations.js')],
     }
     Capybara::Poltergeist::Driver.new(app, options)
   end
@@ -112,7 +112,7 @@ RSpec.configure do |config|
     config.include FactoryBot::Syntax::Methods
 
     config.before(:suite) do
-      FileUtils.mkdir_p(Rails.root.join('tmp', 'cache'))
+      FileUtils.mkdir_p(Rails.root.join('tmp/cache'))
       # Do truncation once per suite to vacuum for Postgres
       DatabaseCleaner.clean_with :truncation
       # Normally do transactions-based cleanup

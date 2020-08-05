@@ -17,7 +17,7 @@ RSpec.describe 'Imports', seed: :configured do
     click_on 'Import von Feuerwehrsport-Statistik.de'
 
     expect(page).to have_content 'Importkonfiguration'
-    attach_file('Import-Datei', Rails.root.join('spec', 'fixtures', 'import.wettkampf_manager_import'))
+    attach_file('Import-Datei', Rails.root.join('spec/fixtures/import.wettkampf_manager_import'))
     click_on 'Speichern'
     expect(page).to have_content 'Importkonfiguration erfolgreich erstellt'
     click_on 'Weiter'

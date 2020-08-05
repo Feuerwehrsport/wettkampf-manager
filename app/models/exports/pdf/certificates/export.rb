@@ -36,11 +36,11 @@ Exports::PDF::Certificates::Export = Struct.new(:template, :title, :rows, :backg
   end
 
   def font_path
-    template.font.present? ? template.font.current_path : Rails.root.join('app', 'assets', 'fonts', 'Arial.ttf')
+    template.font.present? ? template.font.current_path : Rails.root.join('app/assets/fonts/Arial.ttf')
   end
 
   def font2_path
-    template.font2.present? ? template.font2.current_path : Rails.root.join('app', 'assets', 'fonts', 'Arial_Bold.ttf')
+    template.font2.present? ? template.font2.current_path : Rails.root.join('app/assets/fonts/Arial_Bold.ttf')
   end
 
   def render_position(position, row)

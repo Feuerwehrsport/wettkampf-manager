@@ -11,7 +11,7 @@ task :backup_data, %i[path verbose] => :environment do |_task, args|
 end
 
 desc 'backup data every 5 minutes'
-task :backup_data_recurring do
+task backup_data_recurring: :environment do
   loop do
     Rake::Task['backup_data'].reenable
     Rake::Task['backup_data'].invoke(nil, true)

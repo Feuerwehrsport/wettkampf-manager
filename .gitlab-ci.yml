@@ -2,11 +2,18 @@ variables:
   GIT_SUBMODULE_STRATEGY: normal
 
 default:
-  image: lichtbit/ruby:2.6
+  image: lichtbit/ruby:2.6.6
 
-test:
+before_script:
+  - bundle install --path /cache --without production development
+
+test:rubocop:
   stage: test
   script:
-  - bundle install --path /cache
+  - bundle exec rubocop --config config/rubocop.yml
+
+test:rspec:
+  stage: test
+  script:
   - bundle exec rake db:create RAILS_ENV=test
   - bundle exec rspec

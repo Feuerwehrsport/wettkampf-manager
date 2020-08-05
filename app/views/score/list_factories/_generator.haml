@@ -6,5 +6,5 @@
 
 .clearfix
 %table.table.table-condensed.small
-  - Score::ListFactory::GENERATORS.each do |generator_class|
+  - Score::ListFactory.generators.each do |generator_class|
     = render 'generator_description', generator_class: generator_class

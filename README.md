@@ -16,7 +16,7 @@ Weitere Informationen und Pakete zum Download:
 
 
 ### Über
-      
+
 Der Wettkampf-Manager wird seit Frühjahr 2015 von [Georg Limbach](https://georf.de) als quelloffene Software entwickelt. Ziel ist es, die Ergebnisberechnung von Feuerwehrsportwettkämpfen so einfach wie möglich zu gestalten.
 
 Als Basis wird das Framework Ruby on Rails 5.2 mit Ruby 2.6 benutzt. Weitere Informationen dazu finden sich auf [Feuerwehrsport-Statistik.de](https://feuerwehrsport-statistik.de/wettkampf_manager) oder auf [Github](https://github.com/Feuerwehrsport/wettkampf-manager).

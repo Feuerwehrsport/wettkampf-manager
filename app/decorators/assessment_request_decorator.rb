@@ -24,13 +24,13 @@ class AssessmentRequestDecorator < ApplicationDecorator
 
   def self.la_names_short
     [
-      ['1', h.content_tag(:span, '(Ma)', class: 'small')],
-      ['2', h.content_tag(:span, '(A)', class: 'small')],
-      ['3', h.content_tag(:span, '(SK)', class: 'small')],
-      ['4', h.content_tag(:span, '(B)', class: 'small')],
-      ['5', h.content_tag(:span, '(SL)', class: 'small')],
-      ['6', h.content_tag(:span, '(V)', class: 'small')],
-      ['7', h.content_tag(:span, '(SR)', class: 'small')],
+      ['1', h.tag.span('(Ma)', class: 'small')],
+      ['2', h.tag.span('(A)', class: 'small')],
+      ['3', h.tag.span('(SK)', class: 'small')],
+      ['4', h.tag.span('(B)', class: 'small')],
+      ['5', h.tag.span('(SL)', class: 'small')],
+      ['6', h.tag.span('(V)', class: 'small')],
+      ['7', h.tag.span('(SR)', class: 'small')],
     ]
   end
 
@@ -47,12 +47,12 @@ class AssessmentRequestDecorator < ApplicationDecorator
 
   def self.gs_names_short
     [
-      ['1', h.content_tag(:span, '(B)', class: 'small')],
-      ['2', h.content_tag(:span, '(V)', class: 'small')],
-      ['3', h.content_tag(:span, '(C)', class: 'small')],
-      ['4', h.content_tag(:span, '(Kn)', class: 'small')],
-      ['5', h.content_tag(:span, '(D)', class: 'small')],
-      ['6', h.content_tag(:span, '(Lä)', class: 'small')],
+      ['1', h.tag.span('(B)', class: 'small')],
+      ['2', h.tag.span('(V)', class: 'small')],
+      ['3', h.tag.span('(C)', class: 'small')],
+      ['4', h.tag.span('(Kn)', class: 'small')],
+      ['5', h.tag.span('(D)', class: 'small')],
+      ['6', h.tag.span('(Lä)', class: 'small')],
     ]
   end
 
