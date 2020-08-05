@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < CacheDependendRecord
   attr_accessor :password
   before_save :encrypt_password

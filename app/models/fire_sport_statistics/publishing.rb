@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FireSportStatistics::Publishing
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment

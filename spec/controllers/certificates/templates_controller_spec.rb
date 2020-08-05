@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Certificates::TemplatesController, type: :controller, seed: :configured, user: :logged_in do

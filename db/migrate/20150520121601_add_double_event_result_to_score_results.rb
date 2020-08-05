@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddDoubleEventResultToScoreResults < ActiveRecord::Migration[4.2]
   def change
     add_column :score_results, :double_event_result_id, :integer

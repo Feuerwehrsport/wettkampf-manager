@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ResourceAccess
   def resource_instance=(instance)
     instance_variable_set("@#{resource_name}", instance)

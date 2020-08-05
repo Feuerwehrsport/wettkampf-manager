@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Presets::SonnenwaldeKreisausscheid < Preset
   def name
     'Stadtmeisterschaften Sonnewalde / Kreismeisterschaft Elbe Elster 11.05.2019'

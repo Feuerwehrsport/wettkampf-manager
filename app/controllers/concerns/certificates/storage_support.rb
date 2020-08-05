@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Certificates::StorageSupport
   def get(position) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
     case position.key

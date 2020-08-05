@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Helpers::MenuHelper
   MenuItem = Struct.new(:label, :controller_path, :action) do
     def url

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 UI::CountTable = Struct.new(:view, :rows, :options, :columns, :data_fields) do
   def initialize(*args)
     super

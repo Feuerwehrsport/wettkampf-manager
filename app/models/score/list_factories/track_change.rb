@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListFactories::TrackChange < Score::ListFactory
   validates :before_list, presence: true, if: -> { step_reached?(:finish) }
   validate :before_list_assessment_match, if: -> { step_reached?(:finish) }

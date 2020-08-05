@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe 'Teams and People', seed: :configured do
   let!(:team) { create(:team, name: 'Mecklenburg') }

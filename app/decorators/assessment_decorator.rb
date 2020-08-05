@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AssessmentDecorator < ApplicationDecorator
   decorates_association :discipline
 

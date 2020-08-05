@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :import do
   desc 'Import fire sport statistics suggestions'
   task :suggestions, [:quiet] => :environment do |_task, args|

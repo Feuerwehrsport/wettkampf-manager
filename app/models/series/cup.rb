@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::Cup < ApplicationRecord
   TODAY_ID = 99_999_000
   include Series::Participationable

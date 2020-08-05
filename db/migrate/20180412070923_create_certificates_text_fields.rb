@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCertificatesTextFields < ActiveRecord::Migration[4.2]
   def change
     create_table :certificates_text_fields do |t|

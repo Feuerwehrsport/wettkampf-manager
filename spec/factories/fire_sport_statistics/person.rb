@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :fire_sport_statistics_person, class: 'FireSportStatistics::Person' do
     first_name { 'Alfred' }

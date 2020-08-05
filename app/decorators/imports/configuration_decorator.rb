@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Imports::ConfigurationDecorator < ApplicationDecorator
   decorates_association :tags
   decorates_association :assessments

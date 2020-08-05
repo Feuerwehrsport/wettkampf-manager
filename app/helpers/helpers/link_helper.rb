@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Helpers::LinkHelper
   def btn_link_to(label, url, options = {})
     options[:class] ||= ''

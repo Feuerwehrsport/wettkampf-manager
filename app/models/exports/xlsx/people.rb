@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::XLSX::People = Struct.new(:people) do
   include Exports::XLSX::Base
   include Exports::People

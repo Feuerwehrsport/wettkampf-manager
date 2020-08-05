@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::DoubleEventResult < Score::Result
   include Score::Resultable
   has_many :results, class_name: 'Score::Result', dependent: :nullify, inverse_of: :double_event_result

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AutoDecorate
   def render(*args)
     auto_decorate

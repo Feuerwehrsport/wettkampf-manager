@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DisciplinesController < ApplicationController
   implement_crud_actions
 

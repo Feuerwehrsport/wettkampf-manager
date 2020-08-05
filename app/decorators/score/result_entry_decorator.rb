@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ResultEntryDecorator < ApplicationDecorator
   def human_time
     if result_valid?

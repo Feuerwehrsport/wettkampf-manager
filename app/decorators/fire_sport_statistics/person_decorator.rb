@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FireSportStatistics::PersonDecorator < ApplicationDecorator
   def to_s
     full_name

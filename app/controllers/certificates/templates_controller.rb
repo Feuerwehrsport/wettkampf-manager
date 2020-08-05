@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Certificates::TemplatesController < ApplicationController
   implement_crud_actions
 

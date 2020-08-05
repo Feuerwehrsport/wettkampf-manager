@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::PDF::Score::Result = Struct.new(:result, :only) do
   include Exports::PDF::Base
   include Exports::ScoreResults

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::AssessmentsController < ApplicationController
   decorates_assigned :assessment, :person_assessments
 

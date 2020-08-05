@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Certificates::Example
   def get(position)
     if position.key == :text

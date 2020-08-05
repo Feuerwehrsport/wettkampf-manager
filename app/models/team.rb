@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Team < CacheDependendRecord
   include Genderable
   include Taggable

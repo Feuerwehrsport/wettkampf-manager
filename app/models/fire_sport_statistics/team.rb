@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FireSportStatistics::Team < ApplicationRecord
   include FireSportStatistics::TeamScopes
   has_many :team_associations, class_name: 'FireSportStatistics::TeamAssociation', dependent: :destroy,

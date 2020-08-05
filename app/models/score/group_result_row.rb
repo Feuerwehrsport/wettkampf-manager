@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Score::GroupResultRow = Struct.new(:team, :score_count, :run_count, :result) do
   include Draper::Decoratable
 

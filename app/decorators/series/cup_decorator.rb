@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::CupDecorator < ApplicationDecorator
   decorates_association :round
   decorates_association :competition

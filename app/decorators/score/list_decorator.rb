@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListDecorator < ApplicationDecorator
   def discipline
     object.assessments.first.discipline.decorate

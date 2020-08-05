@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Presets::HallCup < Preset
   def name
     'Hallenpokal HB + FS'

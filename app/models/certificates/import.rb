@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Certificates::Import
   extend ActiveModel::Naming
   extend ActiveModel::Translation

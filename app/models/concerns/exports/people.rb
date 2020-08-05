@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Exports::People
   def index_export_data(collection)
     return [] if collection.empty?

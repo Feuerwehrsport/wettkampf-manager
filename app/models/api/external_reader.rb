@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'uri'
 require 'net/http'
 
 class API::ExternalReader
-  DEFAULT_SENDER = ''.freeze
+  DEFAULT_SENDER = ''
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
   attr_accessor :url, :password, :sender, :cli, :serial_connection

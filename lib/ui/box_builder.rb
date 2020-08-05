@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 UI::BoxBuilder = Struct.new(:title, :options, :view, :block) do
   attr_reader :body
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::PDF::Score::List = Struct.new(:list, :more_columns, :double_run) do
   include Exports::PDF::Base
   include Exports::ScoreLists

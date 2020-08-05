@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::DoubleEventResultRowDecorator < ApplicationDecorator
   include Certificates::StorageSupport
   decorates_association :entity

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Certificates::Template < CacheDependendRecord
   mount_uploader :image, Certificates::ImageUploader
   mount_uploader :font, Certificates::FontUploader

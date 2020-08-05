@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'when configured seed loaded', seed: :configured do
   before do
     ENV['SET_USER_PASSWORD'] = 'password'

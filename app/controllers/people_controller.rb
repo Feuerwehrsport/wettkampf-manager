@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PeopleController < ApplicationController
   implement_crud_actions
   before_action :assign_person_tags

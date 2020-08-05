@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Certificates::ImportsController < ApplicationController
   implement_crud_actions only: %i[new create]
 

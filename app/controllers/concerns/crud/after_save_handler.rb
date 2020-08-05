@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CRUD::AfterSaveHandler
   extend ActiveSupport::Concern
 

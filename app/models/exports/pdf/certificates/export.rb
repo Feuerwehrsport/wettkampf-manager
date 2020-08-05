@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::PDF::Certificates::Export = Struct.new(:template, :title, :rows, :background_image) do
   include Exports::PDF::Base
 

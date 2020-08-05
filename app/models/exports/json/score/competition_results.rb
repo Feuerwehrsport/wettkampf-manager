@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::JSON::Score::CompetitionResults = Struct.new(:results) do
   include Exports::JSON::Base
   include Exports::CompetitionResults

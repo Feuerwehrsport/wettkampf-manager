@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def perform_login(password = 'admin')
   visit root_path
   click_on 'Anmelden'

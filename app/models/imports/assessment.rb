@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Imports::Assessment < CacheDependendRecord
   belongs_to :configuration, class_name: 'Imports::Configuration', inverse_of: :assessments
   belongs_to :assessment, class_name: '::Assessment', inverse_of: :imports_assessment

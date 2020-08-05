@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   sequence(:first_name) { |n| "Alfred#{n}" }
   sequence(:last_name) { |n| "Meier#{n}" }

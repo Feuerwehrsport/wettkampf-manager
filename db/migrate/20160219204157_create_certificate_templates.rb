@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateCertificateTemplates < ActiveRecord::Migration[4.2]
   def change
     create_table :certificates_templates do |t|

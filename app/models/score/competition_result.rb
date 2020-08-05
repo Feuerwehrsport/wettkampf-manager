@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::CompetitionResult < CacheDependendRecord
   include Genderable
   include Score::Resultable

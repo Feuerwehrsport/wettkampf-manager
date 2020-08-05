@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 RSpec.describe 'Start configuration', seed: :load do
   it 'is available after first start' do

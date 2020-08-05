@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Imports::AssessmentDecorator < ApplicationDecorator
   decorates_association :discipline_model
 

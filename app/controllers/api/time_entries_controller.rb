@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class API::TimeEntriesController < ApplicationController
   implement_crud_actions only: %i[create index show edit update]
   before_action :skip_closed_entries, only: %i[show edit update]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamRelay < CacheDependendRecord
   belongs_to :team
   has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy, inverse_of: :entity

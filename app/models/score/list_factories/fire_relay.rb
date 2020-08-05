@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListFactories::FireRelay < Score::ListFactory
   def self.generator_possible?(discipline)
     discipline.like_fire_relay?

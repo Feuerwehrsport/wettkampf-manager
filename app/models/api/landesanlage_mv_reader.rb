@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class API::LandesanlageMVReader < API::ExternalReader
-  DEFAULT_SENDER = 'Landesanlage MV'.freeze
+  DEFAULT_SENDER = 'Landesanlage MV'
 
   protected
 

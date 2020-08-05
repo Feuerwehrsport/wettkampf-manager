@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::Assessment < ApplicationRecord
   include Genderable
   include Series::Importable

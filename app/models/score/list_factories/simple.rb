@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListFactories::Simple < Score::ListFactory
   protected
 

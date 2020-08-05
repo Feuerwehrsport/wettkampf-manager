@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFireSportStatisticsTeamAssociations < ActiveRecord::Migration[4.2]
   def change
     create_table :fire_sport_statistics_team_associations do |t|

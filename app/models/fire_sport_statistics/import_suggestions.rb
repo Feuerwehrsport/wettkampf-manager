@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FireSportStatistics::ImportSuggestions < FireSportStatistics::Import
   def initialize(quiet = false)
     @quiet = quiet

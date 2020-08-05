@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Certificates::ListsController < ApplicationController
   implement_crud_actions
   before_action :assign_resource_for_export, only: :export

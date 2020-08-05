@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateScoreResultListFactories < ActiveRecord::Migration[4.2]
   def change
     create_table :score_result_list_factories do |t|

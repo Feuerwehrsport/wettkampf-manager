@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::CompetitionResultRowDecorator < ApplicationDecorator
   include Certificates::StorageSupport
   decorates_association :team

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CRUD::AuthorizeAction
   extend ActiveSupport::Concern
 

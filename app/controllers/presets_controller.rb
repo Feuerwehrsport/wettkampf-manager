@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PresetsController < ApplicationController
   implement_crud_actions only: %i[show index update]
   before_action do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Assessment < CacheDependendRecord
   include Genderable
   include Taggable

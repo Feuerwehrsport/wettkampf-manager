@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::PDF::People = Struct.new(:people) do
   include Exports::PDF::Base
   include Exports::People

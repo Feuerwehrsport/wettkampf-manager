@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAPITimeEntries < ActiveRecord::Migration[4.2]
   def change
     create_table :api_time_entries do |t|

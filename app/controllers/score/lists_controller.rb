@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListsController < ApplicationController
   implement_crud_actions
   before_action :assign_resource_for_action, only: %i[move select_entity destroy_entity edit_times]

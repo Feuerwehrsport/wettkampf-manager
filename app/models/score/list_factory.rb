@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListFactory < CacheDependendRecord
   include Score::ListFactoryDefaults
   include Genderable

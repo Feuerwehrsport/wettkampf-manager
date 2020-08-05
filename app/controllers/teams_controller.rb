@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamsController < ApplicationController
   implement_crud_actions
   before_action :assign_team_tags

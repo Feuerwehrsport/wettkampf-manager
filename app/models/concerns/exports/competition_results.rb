@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Exports::CompetitionResults
   def table_data(competition_result)
     header = %w[Platz Mannschaft]

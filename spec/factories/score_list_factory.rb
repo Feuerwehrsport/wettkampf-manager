@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :score_list_factory, class: 'Score::ListFactory' do
     assessments { [create(:assessment)] }

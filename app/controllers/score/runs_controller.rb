@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::RunsController < ApplicationController
   implement_crud_actions only: %i[edit update]
 

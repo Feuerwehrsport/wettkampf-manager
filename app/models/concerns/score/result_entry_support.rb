@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Score::ResultEntrySupport
   ENTRY_STATUS = %i[waiting valid invalid no_run].freeze
 

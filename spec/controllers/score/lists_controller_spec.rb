@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #  move_score_list GET    /score/lists/:id/move(.:format)                     score/lists#move
 #  select_entity_score_list GET    /score/lists/:id/select_entity(.:format)            score/lists#select_entity
 # destroy_entity_score_list GET    /score/lists/:id/destroy_entity/:entry_id(.:format) score/lists#destroy_entity

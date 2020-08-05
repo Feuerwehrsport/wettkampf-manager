@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FireSportStatistics::Person < ApplicationRecord
   include Genderable
 

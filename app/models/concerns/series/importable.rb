@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Series::Importable
   extend ActiveSupport::Concern
 

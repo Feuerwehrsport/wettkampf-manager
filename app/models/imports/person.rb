@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Imports::Person = Struct.new(:configuration, :data) do
   def import
     @person = ::Person.create!(

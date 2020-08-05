@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Score::ListFactoryDefaults
   def possible_assessments
     Assessment.where(discipline: discipline)

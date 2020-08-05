@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::JSON::People = Struct.new(:people) do
   include Exports::JSON::Base
   include Exports::People

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PersonDecorator < ApplicationDecorator
   decorates_association :team
   decorates_association :fire_sport_statistics_person

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::GroupResultDecorator < ApplicationDecorator
   decorates_association :assessment
 

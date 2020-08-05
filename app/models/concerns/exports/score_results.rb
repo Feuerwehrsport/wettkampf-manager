@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Exports::ScoreResults
   def build_data_rows(result, discipline, shortcut, export_headers: false)
     data = [build_data_headline(result, discipline, export_headers: export_headers)]

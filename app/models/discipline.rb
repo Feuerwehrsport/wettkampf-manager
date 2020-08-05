@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Discipline < CacheDependendRecord
   validates :type, presence: true
   has_many :assessments, dependent: :restrict_with_error

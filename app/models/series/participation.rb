@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::Participation < ApplicationRecord
   belongs_to :cup, class_name: 'Series::Cup', inverse_of: :participations
   belongs_to :assessment, class_name: 'Series::Assessment', inverse_of: :participations

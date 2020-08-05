@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::PersonParticipation < Series::Participation
   belongs_to :person, class_name: 'FireSportStatistics::Person', inverse_of: :series_participations
 

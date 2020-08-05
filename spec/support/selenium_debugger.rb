@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Capybara::Selenium::Driver.class_eval do
   def quit
     sleep 3

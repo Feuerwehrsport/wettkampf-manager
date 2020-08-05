@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Imports::Team = Struct.new(:configuration, :data) do
   def import
     number = [1, data[:team_number].to_i].max

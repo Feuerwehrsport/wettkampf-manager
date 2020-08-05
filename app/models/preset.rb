@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Preset
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment

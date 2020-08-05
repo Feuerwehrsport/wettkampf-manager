@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFontToCertificatesTemplates < ActiveRecord::Migration[4.2]
   def change
     add_column :certificates_templates, :font2, :string

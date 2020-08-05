@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::JSON::Teams = Struct.new(:teams) do
   include Exports::JSON::Base
   include Exports::Teams

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Exports::FullDump
   def initialize
     Score::List.all.find_each do |list|

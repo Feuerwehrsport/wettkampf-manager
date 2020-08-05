@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::Result < CacheDependendRecord
   include Taggable
   include Score::Resultable

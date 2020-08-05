@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Imports::ConfigurationsController < ApplicationController
   before_action :redirect_to_show, only: %i[new create]
   before_action :redirect_to_new, only: %i[show edit update destroy]

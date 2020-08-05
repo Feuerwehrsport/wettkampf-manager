@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AssessmentRequest < CacheDependendRecord
   belongs_to :assessment
   belongs_to :entity, polymorphic: true

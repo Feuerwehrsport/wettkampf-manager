@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Presets::DCupFull < Preset
   include Presets::DcupSupport
 

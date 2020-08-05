@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Exports::PDF::Base
   include Exports::Base
   extend ActiveSupport::Concern

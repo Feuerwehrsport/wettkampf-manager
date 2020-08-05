@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListFactoryDecorator < ApplicationDecorator
   def possible_type_with_names
     possible_types.map do |type|

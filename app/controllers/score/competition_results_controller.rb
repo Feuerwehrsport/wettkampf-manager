@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::CompetitionResultsController < ApplicationController
   implement_crud_actions only: %i[new create index edit update destroy]
 

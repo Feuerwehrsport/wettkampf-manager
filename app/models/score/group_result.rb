@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Score::GroupResult = Struct.new(:result) do
   include Draper::Decoratable
   include Score::Resultable

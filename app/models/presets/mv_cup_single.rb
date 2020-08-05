@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Presets::MvCupSingle < Preset
   def name
     'MV-Cup (HL, HB)'

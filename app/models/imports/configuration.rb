@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Imports::Configuration < CacheDependendRecord
   serialize :data, JSON
   mount_uploader :file, Imports::ConfigurationUploader

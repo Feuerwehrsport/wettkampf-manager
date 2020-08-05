@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::RoundsController < ApplicationController
   def index
     @rounds = Series::Round.with_local_results.distinct

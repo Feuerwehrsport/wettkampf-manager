@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddBestScoresToFiresportPeople < ActiveRecord::Migration[4.2]
   def change
     add_column :fire_sport_statistics_people, :personal_best_hb, :integer

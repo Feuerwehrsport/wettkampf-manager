@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FireSportStatistics::TeamScopes
   extend ActiveSupport::Concern
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Presets::Sonnenwalde < Preset
   def name
     'Stadtmeisterschaften Sonnewalde 07.07.2018'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def create_score_list(result, entities)
   list = create :score_list, results: [result], assessments: [result.assessment]
   index = 1

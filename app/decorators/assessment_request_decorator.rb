@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AssessmentRequestDecorator < ApplicationDecorator
   decorates_association :assessment
 

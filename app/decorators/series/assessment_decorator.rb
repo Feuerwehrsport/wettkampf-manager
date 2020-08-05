@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::AssessmentDecorator < ApplicationDecorator
   decorates_association :cups
   decorates_association :participations

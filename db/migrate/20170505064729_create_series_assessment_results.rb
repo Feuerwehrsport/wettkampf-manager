@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSeriesAssessmentResults < ActiveRecord::Migration[4.2]
   def change
     create_table :series_assessment_results do |t|

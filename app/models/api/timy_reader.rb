@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class API::TimyReader < API::ExternalReader
-  DEFAULT_SENDER = 'Timy'.freeze
+  DEFAULT_SENDER = 'Timy'
 
   protected
 

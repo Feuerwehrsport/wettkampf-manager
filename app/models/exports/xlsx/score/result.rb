@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::XLSX::Score::Result = Struct.new(:result) do
   include Exports::XLSX::Base
   include Exports::ScoreResults

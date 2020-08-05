@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Firesport::Series::Team::BaseDecorator < ApplicationDecorator
   decorates_association :team
 

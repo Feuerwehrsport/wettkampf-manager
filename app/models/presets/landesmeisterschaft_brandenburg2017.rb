@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Presets::LandesmeisterschaftBrandenburg2017 < Preset
   def name
     'Landesmeisterschaft Brandenburg 2017 (HL, HB, GS, LA, FS)'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListFactoriesController < ApplicationController
   implement_crud_actions
   before_action :redirect_to_edit, only: %i[new create]

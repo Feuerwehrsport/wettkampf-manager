@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Presets::EuregioCup < Preset
   def name
     'EuregioCup 2018 (HL, HB, LA, FS)'

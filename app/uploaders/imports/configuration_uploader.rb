@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Imports::ConfigurationUploader < BaseUploader
   def extension_white_list
     %w[wettkampf_manager_import]

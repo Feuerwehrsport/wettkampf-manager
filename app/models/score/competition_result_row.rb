@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Score::CompetitionResultRow = Struct.new(:result, :team) do
   include Draper::Decoratable
   attr_reader :assessment_results

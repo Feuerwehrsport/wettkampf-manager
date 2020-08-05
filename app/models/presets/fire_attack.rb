@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Presets::FireAttack < Preset
   def name
     'Löschangriff-Pokallauf (LA)'

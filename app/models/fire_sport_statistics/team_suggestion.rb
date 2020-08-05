@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FireSportStatistics::TeamSuggestion = Struct.new(:team) do
   include Draper::Decoratable
   delegate :first, :present?, to: :suggestions

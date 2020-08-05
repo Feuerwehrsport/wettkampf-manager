@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class API::TimeEntry < ApplicationRecord
   include Score::ResultEntrySupport
   belongs_to :score_list_entry, class_name: 'Score::ListEntry', inverse_of: :api_time_entries

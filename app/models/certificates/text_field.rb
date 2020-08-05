@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Certificates::TextField < ApplicationRecord
   KEY_CONFIG = {
     team_name: {

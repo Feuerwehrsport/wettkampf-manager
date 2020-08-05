@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFederalStates < ActiveRecord::Migration[4.2]
   def change
     create_table :federal_states do |t|

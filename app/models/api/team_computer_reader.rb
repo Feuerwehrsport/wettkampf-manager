@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class API::TeamComputerReader < API::ExternalReader
-  DEFAULT_SENDER = 'Team Computer'.freeze
+  DEFAULT_SENDER = 'Team Computer'
 
   protected
 

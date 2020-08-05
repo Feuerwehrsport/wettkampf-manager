@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Series::Round < ApplicationRecord
   include Series::Participationable
   include Series::Importable

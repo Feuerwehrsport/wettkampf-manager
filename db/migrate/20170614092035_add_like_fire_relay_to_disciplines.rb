@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddLikeFireRelayToDisciplines < ActiveRecord::Migration[4.2]
   def change
     add_column :disciplines, :like_fire_relay, :boolean, default: false, null: false

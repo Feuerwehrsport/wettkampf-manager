@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Exports::ScoreLists
   def show_export_data(list, more_columns: false, double_run: false)
     data = [show_export_header(list, more_columns: more_columns, double_run: double_run)]

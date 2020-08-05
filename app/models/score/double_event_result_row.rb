@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Score::DoubleEventResultRow = Struct.new(:entity, :result) do
   include Draper::Decoratable
   attr_reader :result_rows

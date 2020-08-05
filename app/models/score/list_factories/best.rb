@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ListFactories::Best < Score::ListFactory
   validates :best_count, numericality: { greater_than_or_equal_to: 0 }, if: -> { step_reached?(:finish) }
   validates :before_result, presence: true, if: -> { step_reached?(:finish) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FireSportStatistics::SuggestionsController < ApplicationController
   def people
     suggestions = FireSportStatistics::Person.limit(10)

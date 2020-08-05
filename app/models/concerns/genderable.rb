@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Genderable
   GENDERS = { female: 0, male: 1, youth: 2 }.freeze
   extend ActiveSupport::Concern

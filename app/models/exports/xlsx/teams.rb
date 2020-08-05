@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Exports::XLSX::Teams = Struct.new(:teams) do
   include Exports::XLSX::Base
   include Exports::Teams

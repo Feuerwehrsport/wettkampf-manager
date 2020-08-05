@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ModelCache
   def self.clean
     Competition.one.touch

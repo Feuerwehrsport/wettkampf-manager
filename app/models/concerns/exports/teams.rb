@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Exports::Teams
   def index_export_data(collection, full: false)
     headline = [

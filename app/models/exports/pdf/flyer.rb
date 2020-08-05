@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Exports::PDF::Flyer
   include Exports::PDF::Base
 

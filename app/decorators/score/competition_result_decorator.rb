@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::CompetitionResultDecorator < ApplicationDecorator
   decorates_association :rows
   decorates_association :results

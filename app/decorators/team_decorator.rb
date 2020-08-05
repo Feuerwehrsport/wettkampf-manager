@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TeamDecorator < ApplicationDecorator
   decorates_association :people
   decorates_association :team_relays

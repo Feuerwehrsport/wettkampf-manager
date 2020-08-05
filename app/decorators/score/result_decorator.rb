@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Score::ResultDecorator < ApplicationDecorator
   decorates_association :assessment
   decorates_association :lists
