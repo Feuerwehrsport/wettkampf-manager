@@ -53,21 +53,21 @@ gem 'ffi'
 gem 'firesport', path: 'firesport'
 gem 'firesport-series', path: 'firesport-series'
 
-group :development do
-  gem 'coffeelint'
-  gem 'faker'
+group :development, :test do
+  gem 'pry'
+  gem 'pry-byebug'
   gem 'guard-rspec'
   gem 'guard-rubocop'
+
+  gem 'coffeelint'
+  gem 'faker'
+
+  # Rubocop
   gem 'rubocop', require: false
   gem 'rubocop-daemon', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-end
-
-group :development, :test do
-  gem 'pry'
-  gem 'pry-byebug'
 end
 
 group :test do
