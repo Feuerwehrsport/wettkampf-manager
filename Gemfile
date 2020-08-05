@@ -43,7 +43,7 @@ gem 'tzinfo-data'
 
 gem 'nokogiri'
 gem 'json'
-gem 'sqlite3', '1.3.13'
+gem 'sqlite3'
 
 # for rs232
 gem 'rubyserial'
