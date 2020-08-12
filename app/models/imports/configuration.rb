@@ -2,10 +2,10 @@
 
 class Imports::Configuration < CacheDependendRecord
   serialize :data, JSON
-  mount_uploader :file, Imports::ConfigurationUploader
+  has_one_attached :file
 
   before_create do
-    self.data = JSON.parse(file.file.read)
+    self.data = JSON.parse(file.download)
     data[:person_tag_list].each { |tag| tags.build(name: tag, use: true, target: :person) }
     data[:team_tag_list].each { |tag| tags.build(name: tag, use: true, target: :team) }
     data[:assessments].each do |a|

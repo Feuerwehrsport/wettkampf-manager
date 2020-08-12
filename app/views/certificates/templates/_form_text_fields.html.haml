@@ -1,13 +1,13 @@
-- if @certificates_template.font.present?
+- if @certificates_template.font.attached?
   = render 'font_style', type: :regular, font: @certificates_template.font
-- if @certificates_template.font2.present?
+- if @certificates_template.font2.attached?
   = render 'font_style', type: :bold, font: @certificates_template.font2
 = simple_form_for @certificates_template do |f|
   = box @certificates_template.name do |box|
     = f.error_notification
     .row
       .col-md-10
-        #certificates-template-position{ data: { font_family_regular:  @certificates_template.font.present? ? "certificates_template_#{@certificates_template.id}_regular" : "", font_family_bold:  @certificates_template.font2.present? ? "certificates_template_#{@certificates_template.id}_bold" : "", background: @certificates_template.image, config: Certificates::TextField::KEY_CONFIG.to_json } }
+        #certificates-template-position{ data: { font_family_regular:  @certificates_template.font.attached? ? "certificates_template_#{@certificates_template.id}_regular" : "", font_family_bold:  @certificates_template.font2.attached? ? "certificates_template_#{@certificates_template.id}_bold" : "", background: @certificates_template.image, config: Certificates::TextField::KEY_CONFIG.to_json } }
       
       .col-md-2#position-buttons
         #add-new-field.btn.btn-default.btn-sm Feld hinzufügen

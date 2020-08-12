@@ -17,3 +17,5 @@
 /db/*.sqlite3
 /coverage/
 /api_runner.config
+/storage/*
+/.byebug_history

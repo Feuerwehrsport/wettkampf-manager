@@ -16,9 +16,6 @@ gem 'cocoon' # nested_form helper
 # Draper as model decorator
 gem 'draper'
 
-# Carrierwave for file uploads
-gem 'carrierwave'
-
 # Use SCSS for stylesheets
 gem 'sass-rails'
 gem 'bootstrap-sass'

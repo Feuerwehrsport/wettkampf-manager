@@ -8,8 +8,8 @@ Exports::PDF::Certificates::Export = Struct.new(:template, :title, :rows, :backg
     pdf.font_families.update('certificates_template_bold' => { normal: font2_path })
 
     rows.each_with_index do |row, i|
-      if template.image.present? && background_image
-        pdf.image(template.image.current_path, at: [0, height], width: width, height: height)
+      if template.image.attached? && background_image
+        pdf.image(template.image_path, at: [0, height], width: width, height: height)
       end
       template.text_fields.each { |position| render_position(position, row) }
 
@@ -38,11 +38,11 @@ Exports::PDF::Certificates::Export = Struct.new(:template, :title, :rows, :backg
   end
 
   def font_path
-    template.font.present? ? template.font.current_path : Rails.root.join('app/assets/fonts/Arial.ttf')
+    template.font_path || Rails.root.join('app/assets/fonts/Arial.ttf')
   end
 
   def font2_path
-    template.font2.present? ? template.font2.current_path : Rails.root.join('app/assets/fonts/Arial_Bold.ttf')
+    template.font2_path || Rails.root.join('app/assets/fonts/Arial_Bold.ttf')
   end
 
   def render_position(position, row)

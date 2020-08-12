@@ -60,7 +60,10 @@ Rails.application.routes.draw do
 
   namespace :certificates do
     resources :templates do
-      member { post :duplicate }
+      member do
+        post :duplicate
+        post :remove_file
+      end
     end
     resources :lists, only: %i[new create] do
       collection do

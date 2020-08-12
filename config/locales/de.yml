@@ -233,6 +233,7 @@ de:
       too_short: ist zu kurz (weniger als %{count} Zeichen)
       wrong_length: hat die falsche Länge (muss genau %{count} Zeichen haben)
       other_than: darf nicht gleich %{count} sein
+      content_type_invalid: 'Die hochgeladene Datei ist vom Typ %{content_type}. Erlaubt sind aber nur %{authorized_types}'
 
   time:
     am: vormittags

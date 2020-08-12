@@ -1,6 +1,6 @@
-- if @certificates_template.font.present?
+- if @certificates_template.font.attached?
   = render 'font_style', type: :regular, font: @certificates_template.font
-- if @certificates_template.font2.present?
+- if @certificates_template.font2.attached?
   = render 'font_style', type: :bold, font: @certificates_template.font2
 
 .row
@@ -11,24 +11,31 @@
           %tr
             %th= @certificates_template.class.human_attribute_name :name
             %td= @certificates_template.name
+            %td
         %tr
           %th= @certificates_template.class.human_attribute_name :image
-          - if @certificates_template.image.present?
+          - if @certificates_template.image.attached?
             %td= image_tag(@certificates_template.image, width: "100px")
+            %td= button_to 'Löschen', { action: :remove_file, type: :image }, class: 'btn-default btn-link btn btn-xs', form_class: 'button_to'
           - else
             %td Nicht angegeben
+            %td
         %tr
           %th= @certificates_template.class.human_attribute_name :font
-          - if @certificates_template.font.present?
-            %td{ style: "font-family: certificates_template_#{@certificates_template.id}_regular" } Beispieltext 
+          - if @certificates_template.font.attached?
+            %td{ style: "font-family: certificates_template_#{@certificates_template.id}_regular" } Beispieltext
+            %td= button_to 'Löschen', { action: :remove_file, type: :font }, class: 'btn-default btn-link btn btn-xs', form_class: 'button_to'
           - else
             %td Nicht angegeben
+            %td
         %tr
           %th= @certificates_template.class.human_attribute_name :font2
-          - if @certificates_template.font2.present?
-            %td{ style: "font-family: certificates_template_#{@certificates_template.id}_bold" } Beispieltext 
+          - if @certificates_template.font2.attached?
+            %td{ style: "font-family: certificates_template_#{@certificates_template.id}_bold" } Beispieltext
+            %td= button_to 'Löschen', { action: :remove_file, type: :font2 }, class: 'btn-default btn-link btn btn-xs', form_class: 'button_to'
           - else
             %td Nicht angegeben
+            %td
 
   .col-md-4
     = box("Aktionen") do

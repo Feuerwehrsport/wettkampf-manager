@@ -1,6 +1,6 @@
 <style>
   @font-face {
     font-family: "certificates_template_<%= @certificates_template.id %>_<%= type %>";
-    src: url('<%= font %>') format('truetype')
+    src: url('<%= rails_blob_path(font) %>') format('truetype')
   }
 </style>

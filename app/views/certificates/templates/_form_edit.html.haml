@@ -2,15 +2,9 @@
   = box @certificates_template.name do |box|
     = f.error_notification
     = f.input :name
-    = f.input :image
-    - if f.object.image.present?
-      = f.input :remove_image, as: :boolean, hint: "Zur Zeit: #{f.object.image.file.filename}"
-    = f.input :font
-    - if f.object.font.present?
-      = f.input :remove_font, as: :boolean, hint: "Zur Zeit: #{f.object.font.file.filename}"
-    = f.input :font2
-    - if f.object.font2.present?
-      = f.input :remove_font2, as: :boolean, hint: "Zur Zeit: #{f.object.font2.file.filename}"
+    = f.input :image, hint: f.object.image_hint
+    = f.input :font, hint: f.object.font_hint
+    = f.input :font2, hint: f.object.font2_hint
     - box.footer do
       = cancel_link
       = f.primary_button :submit, "Speichern"

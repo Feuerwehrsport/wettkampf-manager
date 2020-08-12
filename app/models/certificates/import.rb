@@ -25,15 +25,9 @@ class Certificates::Import
 
   def create_template
     self.template = Certificates::Template.new(name: json_data[:name])
-    if json_data[:image]
-      template.image = CarrierStringIO.new(json_data[:image], json_data[:image_name], json_data[:image_content_type])
-    end
-    if json_data[:font]
-      template.font = CarrierStringIO.new(json_data[:font], json_data[:font_name], json_data[:font_content_type])
-    end
-    if json_data[:font2]
-      template.font2 = CarrierStringIO.new(json_data[:font2], json_data[:font2_name], json_data[:font2_content_type])
-    end
+    template.image.attach(attachable(:image)) if json_data[:image]
+    template.font.attach(attachable(:font)) if json_data[:font]
+    template.font2.attach(attachable(:font2)) if json_data[:font2]
     json_data[:text_fields].each do |text_field|
       template.text_fields.build(
         left: text_field[:left],
@@ -50,12 +44,11 @@ class Certificates::Import
     template.save
   end
 
-  class CarrierStringIO < StringIO
-    attr_reader :original_filename, :content_type
-    def initialize(base64_data, filename, content_type)
-      super(Base64.decode64(base64_data))
-      @original_filename = filename
-      @content_type = content_type
-    end
+  def attachable(type)
+    {
+      io: StringIO.new(Base64.decode64(json_data[type])),
+      filename: json_data[:"#{type}_name"],
+      content_type: json_data[:"#{type}_content_type"],
+    }
   end
 end
