@@ -20,6 +20,7 @@ class Preset
       Presets::SonnenwaldeKreisausscheid,
       Presets::EuregioCup,
       Presets::LandesmeisterschaftBrandenburg2017,
+      Presets::Heedebockpokal,
     ]
   end
 
