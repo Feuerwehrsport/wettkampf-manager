@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_05_113631) do
+ActiveRecord::Schema.define(version: 2020_08_13_211155) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -295,6 +295,7 @@ ActiveRecord::Schema.define(version: 2020_08_05_113631) do
     t.datetime "updated_at", null: false
     t.string "shortcut", default: "", null: false
     t.date "date"
+    t.boolean "show_multiple_assessments", default: true
   end
 
   create_table "score_result_list_factories", force: :cascade do |t|

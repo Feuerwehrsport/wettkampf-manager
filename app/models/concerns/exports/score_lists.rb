@@ -16,20 +16,19 @@ module Exports::ScoreLists
         line.push(content: last_name, inline_format: true)
 
         line.push(entry.try(:entity).try(:short_first_name).to_s)
-        line.push(entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)))
+        team_name = entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type))
+        team_name = append_assessment(list, entry, team_name)
       else
         team_name = entry.try(:entity).to_s
-        if list.multiple_assessments? && entry.present?
-          team_name += "<font size='6'> (#{entry.try(:assessment).try(:decorate)})</font>"
-        end
+        team_name = append_assessment(list, entry, team_name)
 
         tags = (entry.try(:entity).try(:tag_names) || []) & list.tag_names
         team_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
 
         federal_state_shortcut = entry.try(:entity).try(:federal_state).try(:shortcut)
         team_name += "<font size='6'> <i>#{federal_state_shortcut}</i></font>" if federal_state_shortcut.present?
-        line.push(content: team_name, inline_format: true)
       end
+      line.push(content: team_name, inline_format: true)
       line.push(entry.try(:human_time))
       line.push('', '') if more_columns
       line.push('') if double_run
@@ -80,5 +79,12 @@ module Exports::ScoreLists
       invalid_count += 1
       return if invalid_count > 1000
     end
+  end
+
+  def append_assessment(list, entry, team_name)
+    if list.show_multiple_assessments? && list.multiple_assessments? && entry.present?
+      team_name += "<font size='6'> (#{entry&.assessment&.decorate})</font>"
+    end
+    team_name
   end
 end

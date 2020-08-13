@@ -118,6 +118,7 @@ de:
         results: Ergebnislisten
         shortcut: Abkürzung
         date: Datum
+        show_multiple_assessments: Zeige Wertungsgruppe unter Mannschaft an
       score/list_entry:
         assessment: Wertungsgruppe
         assessment_type: Wertung

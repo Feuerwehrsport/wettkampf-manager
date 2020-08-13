@@ -8,11 +8,15 @@
       %td= entry.try(:entity).try(:bib_number)
     %td= entry.try(:entity).try(:last_name).to_s.truncate(20)
     %td= entry.try(:entity).try(:first_name).to_s.truncate(20)
-    %td= entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)).to_s.truncate(20)
+    %td
+      = entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)).to_s.truncate(20)
+      - if @score_list.show_multiple_assessments? && @score_list.multiple_assessments?
+        %br
+        .tiny= entry.try(:assessment).try(:decorate)
   - else
     %td
       = entry.try(:entity).try(:to_s, @score_list.multiple_assessments?)
-      - if @score_list.multiple_assessments?
+      - if @score_list.show_multiple_assessments? && @score_list.multiple_assessments?
         %br
         .tiny= entry.try(:assessment).try(:decorate)
   = yield (track == 1)
