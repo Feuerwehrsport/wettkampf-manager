@@ -35,7 +35,6 @@ $ ->
           options.contents = element.data('balloon-content')
           options.html = true
 
-        console.log options
         element.showBalloon(options)
         shown = element
 

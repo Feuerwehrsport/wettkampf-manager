@@ -11,6 +11,6 @@
           - if first
             %td{rowspan: parts.count}= discipline_image(Discipline.for_key discipline)
             - first = false
-          %td= short
+          %td{title: short[1]}= short[0]
           %td= info[0]
           %td= info[1]

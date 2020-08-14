@@ -19,7 +19,8 @@ class FireSportStatistics::PersonDecorator < ApplicationDecorator
     @personal_best_table ||= begin
       table = {}
       %i[hb hl zk].each do |discipline|
-        { personal_best: 'PB', saison_best: 'SB' }.each do |method, short|
+        { personal_best: ['PB', 'Persönliche Bestleistung'], saison_best: %w[SB Saison-Bestleistung] }
+          .each do |method, short|
           next if public_send(:"#{method}_#{discipline}").blank?
 
           table[discipline] ||= {}
