@@ -43,7 +43,7 @@ module ApplicationHelper
 
   def discipline_image(discipline, options = {})
     options[:size] ||= '20x20'
-    image_tag "disciplines/#{discipline.image}.png", options
+    image_tag "disciplines/#{discipline.image}", options
   end
 
   def decorated_competition

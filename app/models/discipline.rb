@@ -45,7 +45,7 @@ class Discipline < CacheDependendRecord
   end
 
   def image
-    self.class.name.demodulize.underscore
+    "#{self.class.name.demodulize.underscore}.png"
   end
 
   def key
