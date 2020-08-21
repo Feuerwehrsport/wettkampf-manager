@@ -10,6 +10,8 @@ notifications:
   email:
     recipients:
       - georf@georf.de
+env:
+  HAML_LINT_RUBOCOP_CONF: config/rubocop.yml
 
 # Handle git submodules yourself
 git:
