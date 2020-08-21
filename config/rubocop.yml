@@ -95,6 +95,8 @@ Style/Lambda:
 Style/MixinUsage:
   Exclude:
   - bin/**/*
+Style/NumericPredicate:
+  Enabled: false
 Style/SafeNavigation:
   Enabled: false
 Style/TrailingCommaInArguments:

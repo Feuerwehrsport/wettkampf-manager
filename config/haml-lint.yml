@@ -1,0 +1,33 @@
+linters:
+  InlineStyles:
+    enabled: false
+  InstanceVariables:
+    enabled: false
+  LineLength:
+    enabled: false
+  RuboCop:
+    ignored_cops:
+    - Lint/BlockAlignment
+    - Lint/EndAlignment
+    - Lint/Void
+    - Layout/AlignHash
+    - Layout/AlignParameters
+    - Layout/CaseIndentation
+    - Layout/ElseAlignment
+    - Layout/EndOfLine
+    - Layout/HashAlignment
+    - Layout/IndentationWidth
+    - Layout/LineLength
+    - Layout/ParameterAlignment
+    - Layout/TrailingBlankLines
+    - Layout/TrailingEmptyLines
+    - Layout/TrailingWhitespace
+    - Metrics/BlockLength
+    - Metrics/BlockNesting
+    - Metrics/LineLength
+    - Naming/FileName
+    - Style/FrozenStringLiteralComment
+    - Style/IfUnlessModifier
+    - Style/Next
+    - Style/WhileUntilModifier
+    - Lint/AmbiguousBlockAssociation

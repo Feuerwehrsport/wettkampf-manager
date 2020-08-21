@@ -25,6 +25,8 @@
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
+ENV['HAML_LINT_RUBOCOP_CONF'] = 'config/rubocop.yml'
+
 # More info at https://github.com/guard/guard#readme
 group :red_green_refactor, halt_on_fail: true do
   guard 'rspec', cmd: 'bin/rspec', run_all: { cli: '--tag ~slow' }, failed_mode: :none do
@@ -41,6 +43,10 @@ group :red_green_refactor, halt_on_fail: true do
 
   guard :rubocop, all_on_start: false, keep_failed: false, cli: %w[-a --config config/rubocop.yml] do
     watch(/\.rb$/)
+  end
+
+  guard :haml_lint, all_on_start: false, cli: '--config config/haml-lint.yml' do
+    watch(/.+\.html.*\.haml$/)
   end
 end
 

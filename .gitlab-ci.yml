@@ -1,5 +1,6 @@
 variables:
   GIT_SUBMODULE_STRATEGY: normal
+  HAML_LINT_RUBOCOP_CONF: config/rubocop.yml
 
 default:
   image: lichtbit/ruby:2.6.6
@@ -17,3 +18,8 @@ test:rspec:
   script:
   - bundle exec rake db:create RAILS_ENV=test
   - bundle exec rspec
+
+test:haml_lint:
+  stage: test
+  script:
+  - bundle exec haml-lint --config config/haml-lint.yml

@@ -1,8 +1,11 @@
 language: ruby
 rvm:
   - 2.6.6
-bundler_args: --without production
-script: xvfb-run bundle exec rspec
+bundler_args: --without development production
+script:
+  - xvfb-run bundle exec rspec
+  - bundle exec rubocop --config config/rubocop.yml
+  - bundle exec haml-lint --config config/haml-lint.yml
 notifications:
   email:
     recipients:

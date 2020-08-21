@@ -55,6 +55,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'guard-rspec'
   gem 'guard-rubocop'
+  gem 'guard-haml_lint'
 
   gem 'coffeelint'
   gem 'faker'
@@ -65,6 +66,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  gem 'haml_lint', require: false
 end
 
 group :test do
