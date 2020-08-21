@@ -1,12 +1,10 @@
-.panel.panel-default{ box.options[:modal] ? { class: "modal fade" } : {} }
+.panel.panel-default{ box.options[:modal] ? { class: 'modal fade' } : {} }
   - if box.title.present? || box.header.present?
-    .panel-heading{ box.options[:modal] ? { class: "modal-body" } : {} }
-      - if box.title.present?
-        = box.title
-      - if box.header.present?
-        = box.header
+    .panel-heading{ box.options[:modal] ? { class: 'modal-body' } : {} }
+      = box.title.presence
+      = box.header.presence
       - if box.options[:modal]
-        %button.close{ type: :button, data: { dismiss: :modal }, "aria-hidden" => true } ×
+        %button.close{ type: :button, data: { dismiss: :modal }, 'aria-hidden' => true } ×
         .clearfix
   .panel-body
     = box.body.try(:html_safe)

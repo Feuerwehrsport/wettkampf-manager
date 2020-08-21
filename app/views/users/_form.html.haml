@@ -1,5 +1,5 @@
-= simple_form_for @user, url: { action: :update }do |f|
-  = box "Passwort für Systemanmeldung" do |box|
+= simple_form_for @user, url: { action: :update } do |f|
+  = box 'Passwort für Systemanmeldung' do |box|
     = f.error_notification
     - unless User.configured?
       .alert.alert-info Es wurde noch kein Passwort zur Anmeldung im System gesetzt.
@@ -9,4 +9,4 @@
     - if !@user.admin? && !@user.api?
       = f.association :assessments, as: :check_boxes
     - box.footer do
-      = f.primary_button :submit, "Passwort ändern"
+      = f.primary_button :submit, 'Passwort ändern'

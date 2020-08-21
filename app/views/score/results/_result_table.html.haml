@@ -16,11 +16,10 @@
       - @score_result.lists.each do |list|
         %td= list.object.shortcut
 
-
   - rows.each do |row|
     %tr
       - if places
-        %td= "#{@score_result.place_for_row(row)}."
+        %td #{@score_result.place_for_row(row)}.
       - if @discipline.single_discipline_or_double_event?
         - if Competition.one.show_bib_numbers?
           %td= row.entity.try(:bib_number)

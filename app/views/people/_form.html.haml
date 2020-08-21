@@ -1,7 +1,7 @@
 = simple_form_for @person do |f|
   = box Person.model_name.human do |box|
     = f.error_notification
-    = f.association :team, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
+    = f.association :team, label_method: ->(team) { team.decorate.numbered_name_with_gender }
     = f.input :first_name
     = f.input :last_name
     = f.input :gender, collection: Genderable::GENDERS.keys
@@ -11,4 +11,4 @@
     = render 'tag_form', f: f
     - box.footer do
       = cancel_link
-      = f.primary_button :submit, "Speichern"
+      = f.primary_button :submit, 'Speichern'

@@ -4,7 +4,7 @@
       - if admin_logged_in?
         - box.header do
           .pull-right
-            = btn_link_to "Hinzufügen", action: :new, controller: 'score/list_factories'
+            = btn_link_to 'Hinzufügen', action: :new, controller: 'score/list_factories'
           .clearfix
       %table.table
         - @score_lists.each do |list|
@@ -13,16 +13,16 @@
               = discipline_image(list.discipline)
               = list.name
             %td
-              = btn_link_to "Ansehen", list
+              = btn_link_to 'Ansehen', list
               - if logged_in? && !can?(:edit_times, list)
                 %span.glyphicon.glyphicon-ban-circle
 
       - if admin_logged_in?
         - box.footer do
-          = btn_link_to "Hinzufügen", action: :new, controller: 'score/list_factories'
+          = btn_link_to 'Hinzufügen', action: :new, controller: 'score/list_factories'
 
   - if admin_logged_in? && @list_factory.present?
     .col-md-4
-      = box 'Erstellungsvorgang' do |box|
+      = box 'Erstellungsvorgang' do
         = block_link_to "Weiter mit Schritt #{@list_factory.current_step_number + 1}", edit_score_list_factories_path
         = block_link_to 'Abbrechen', score_list_factories_path, method: :delete, data: { confirm: 'Listenerstellung abbrechen?' }, class: 'btn btn-default btn-sm'

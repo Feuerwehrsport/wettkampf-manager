@@ -25,8 +25,8 @@
 
       - if admin_logged_in?
         - box.footer do
-          = btn_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Person wirklich löschen?' }
-          = btn_link_to "Bearbeiten", action: :edit
+          = btn_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Person wirklich löschen?' }
+          = btn_link_to 'Bearbeiten', action: :edit
 
   .col-md-8
     = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
@@ -42,4 +42,4 @@
                 = t("assessment_types.#{@person.request_for(assessment).assessment_type}")
       - if admin_logged_in?
         - box.footer do
-          = btn_link_to "Wertungsgruppen bearbeiten", { action: :edit_assessment_requests }, remote: true
+          = btn_link_to 'Wertungsgruppen bearbeiten', { action: :edit_assessment_requests }, remote: true

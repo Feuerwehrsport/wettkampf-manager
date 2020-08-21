@@ -1,50 +1,48 @@
 .row
   .col-md-7
-    = box decorated_competition do |box|
-      %h4= "#{l decorated_competition.date} - #{decorated_competition.place}"
+    = box decorated_competition do
+      %h4 #{l decorated_competition.date} - #{decorated_competition.place}
       %table.table
         %tr
           %th
           %th Frauen
           %th Männer
-        - if Person.count > 0
+        - if Person.exists?
           %tr
             %th Angemeldete Wettkämpfer
             %th= Person.female.count
             %th= Person.male.count
-        - if Team.count > 0
+        - if Team.exists?
           %tr
             %th Angemeldete Mannschaften
             %th= Team.female.count
             %th= Team.male.count
   - if admin_logged_in?
     .col-md-5
-      = box "Konfigurieren" do |box|
-        = block_link_to "Wettkampf", edit_competitions_path
-        = block_link_to "Passwort", edit_user_path(User.first)
+      = box 'Konfigurieren' do
+        = block_link_to 'Wettkampf', edit_competitions_path
+        = block_link_to 'Passwort', edit_user_path(User.first)
         - if Imports::Configuration.possible?
-          = block_link_to "Import von Feuerwehrsport-Statistik.de", imports_configurations_path
-      = box "Aktionen" do |box|
-        = block_link_to "Mannschaft hinzufügen", new_team_path
-        = block_link_to "Startliste hinzufügen", new_score_list_factories_path
-        = block_link_to "Backup anlegen", create_backup_path
+          = block_link_to 'Import von Feuerwehrsport-Statistik.de', imports_configurations_path
+      = box 'Aktionen' do
+        = block_link_to 'Mannschaft hinzufügen', new_team_path
+        = block_link_to 'Startliste hinzufügen', new_score_list_factories_path
+        = block_link_to 'Backup anlegen', create_backup_path
   .col-md-5
     = box link_to(decorated_competition.hostname_url, decorated_competition.hostname_url) do
       = image_tag qrcode(decorated_competition.hostname_url)
       - if admin_logged_in?
-        = block_link_to("Flyer anzeigen", { format: :pdf, action: :flyer }, target: '_blank', rel: 'noopener')
+        = block_link_to('Flyer anzeigen', { format: :pdf, action: :flyer }, target: '_blank', rel: 'noopener')
       - elsif !logged_in?
-        = block_link_to("Anmelden", login_path)
+        = block_link_to('Anmelden', login_path)
 
   .col-md-6
-    = box "Wettkampf-Manager" do |box|
-      %p 
-        Dieses Programm ist eine 
+    = box 'Wettkampf-Manager' do |box|
+      %p
+        Dieses Programm ist eine
         %strong kostenlose und freie Software.
         Sie steht unter der Software-Lizenz
         %em AGPLv3
-        und kann 
-        = link_to("hier", "https://github.com/Feuerwehrsport/wettkampf-manager")
-        heruntergeladen werden.
+        und kann #{link_to('hier', 'https://github.com/Feuerwehrsport/wettkampf-manager')} heruntergeladen werden.
       - box.footer do
-        = btn_link_to("Weitere Informationen", action: :impressum)
+        = btn_link_to('Weitere Informationen', action: :impressum)

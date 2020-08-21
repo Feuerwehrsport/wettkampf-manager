@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    = box(@preset.name) do |box|
+    = box(@preset.name) do
       %ul
         - @preset.description_items.each do |hint|
           %li= hint

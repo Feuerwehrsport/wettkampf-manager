@@ -1,4 +1,4 @@
-#time-entries-refreshable.refreshable
+.refreshable#time-entries-refreshable
   .row
     .col-md-8
       = box 'Zeiteinträge' do |box|
@@ -27,8 +27,8 @@
         - box.footer do
           = btn_link_to 'Aktualisieren', url_for
     .col-md-4
-      = box 'Startlistenvorauswahl' do |box|
-        #preselect-list.list-group{data: { toogle: 'buttons' } }
+      = box 'Startlistenvorauswahl' do
+        .list-group#preselect-list{ data: { toogle: 'buttons' } }
           - @lists.each do |list|
             %label.btn.btn-default.btn-sm.list-group-item
               %input{ type: 'radio', name: 'preselect_list', value: "list-#{list.id}", autocomplete: 'off' }

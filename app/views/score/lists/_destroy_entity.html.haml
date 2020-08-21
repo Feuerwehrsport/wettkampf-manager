@@ -1,9 +1,9 @@
-= box "Teilnehmer aus Liste entfernen", modal: true do |box|
+= box 'Teilnehmer aus Liste entfernen', modal: true do
   = simple_form_for @score_list, remote: true do |f|
     = f.error_notification
     = f.simple_fields_for :entries, @score_list.entries.where(id: params[:entry_id]) do |g|
-      = g.input :_destroy, as: :hidden, input_html: { value: "1" }
-      = "Teilnehmer: #{g.object.entity.decorate}"
+      = g.input :_destroy, as: :hidden, input_html: { value: '1' }
+      Teilnehmer: #{g.object.entity.decorate}
     .modal-footer
-      = f.primary_button :submit, "Entfernen"
+      = f.primary_button :submit, 'Entfernen'
 

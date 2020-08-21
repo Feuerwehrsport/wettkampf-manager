@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    = box "Wertungsgruppen von #{@discipline}" do |box|
+    = box "Wertungsgruppen von #{@discipline}" do
       - if @discipline.assessments.count .zero?
         .alert.alert-info Keine Einträge gefunden
       - else
@@ -9,11 +9,11 @@
             %tr
               %td= assessment
               %td.text-right
-                = btn_link_to "Ansehen", assessment
+                = btn_link_to 'Ansehen', assessment
 
 
   .col-md-4
-    = box("Aktionen") do
+    = box('Aktionen') do
       %p= block_link_to 'Bearbeiten', { action: :edit }
       - if @discipline.destroy_possible?
         = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Disziplin wirklich löschen?' }

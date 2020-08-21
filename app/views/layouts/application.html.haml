@@ -1,8 +1,8 @@
 !!!
 %html
   %head
-    %meta{ charset: "UTF-8" }
-    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    %meta{ charset: 'UTF-8' }
+    %meta{ content: 'width=device-width, initial-scale=1', name: 'viewport' }/
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = javascript_include_tag "controllers/#{controller_path}" if asset_exists?("controllers/#{controller_path}.js")
@@ -20,20 +20,20 @@
     %nav.navbar.navbar-default.navbar-static-top
       .container
         .navbar-header
-          %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", type: "button"}
+          %button.navbar-toggle.collapsed{ 'aria-controls' => 'navbar', 'aria-expanded' => 'false', 'data-target' => '#navbar', 'data-toggle' => 'collapse', type: 'button' }
             %span.sr-only Toggle navigation
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand.hidden-lg.hidden-md.hidden-sm{ href: root_path } Wettkampf-Manager
-        #navbar.navbar-collapse.collapse
+        .navbar-collapse.collapse#navbar
           %ul.nav.navbar-nav
             - main_menu_items.each do |item|
               %li{ "/#{controller_path}" == item.controller_path ? { class: 'active' } : {} }= link_to(item.label, item.url)
           - if logged_in?
             %ul.nav.navbar-nav.navbar-right
               %li.dropdown
-                %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", href: "#", role: "button"}
+                %a.dropdown-toggle{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-toggle' => 'dropdown', href: '#', role: 'button' }
                   %span.glyphicon.glyphicon-wrench
                   %span.caret
                   %ul.dropdown-menu

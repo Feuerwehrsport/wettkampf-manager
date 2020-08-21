@@ -1,7 +1,7 @@
 - if admin_logged_in?
   .row
     .col-md-12.refreshable#without-statistics-id-index
-      = box Person.model_name.human count: 0 do |box|
+      = box Person.model_name.human count: 0 do
         %p Bei folgenden Einträgen konnten keine alten D-Cup-Ergebnisse zugeordnet werden. Dies kann zwei Ursachen haben:
         %ul
           %li Name wurde falsch geschrieben
@@ -26,7 +26,7 @@
                 %td
                   = simple_form_for suggestion.person, remote: true do |f|
                     = f.hidden_field :fire_sport_statistics_person_id
-                    = f.primary_button :submit, "Übernehmen", class: "btn-sm"
+                    = f.primary_button :submit, 'Übernehmen', class: 'btn-sm'
 
             - elsif suggestion.present?
               %tr.info
@@ -34,8 +34,8 @@
                   = suggestion.person
                   %br
                   .small= suggestion.person.team
-                %td= "#{suggestion.suggestions.count} Vorschläge"
-                %td= btn_link_to "Vorschlag auswählen", statistic_suggestions_person_path(suggestion.person), remote: true
+                %td #{suggestion.suggestions.count} Vorschläge
+                %td= btn_link_to 'Vorschlag auswählen', statistic_suggestions_person_path(suggestion.person), remote: true
             - else
               %tr.danger
                 %td
@@ -43,4 +43,4 @@
                   %br
                   .small= suggestion.person.team
                 %td Keine Vorschläge
-                %td= btn_link_to "Vorschlag suchen", statistic_suggestions_person_path(suggestion.person), remote: true
+                %td= btn_link_to 'Vorschlag suchen', statistic_suggestions_person_path(suggestion.person), remote: true

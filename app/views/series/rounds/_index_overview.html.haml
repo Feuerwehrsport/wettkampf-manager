@@ -9,6 +9,6 @@
     %tr
       %td= link_to(row.name, row)
       %td= link_to(row.year, row)
-      %td= row.disciplines.join(" ").html_safe
+      %td= safe_join(row.disciplines, ' ')
       %td= row.team_count
       %td= row.person_count

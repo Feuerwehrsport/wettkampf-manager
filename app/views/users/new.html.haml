@@ -1,5 +1,5 @@
-= simple_form_for @user, url: { action: :create }do |f|
-  = box "Passwort für Systemanmeldung" do |box|
+= simple_form_for @user, url: { action: :create } do |f|
+  = box 'Passwort für Systemanmeldung' do |box|
     = f.error_notification
     - unless User.configured?
       .alert.alert-info Es wurde noch kein Passwort zur Anmeldung im System gesetzt.

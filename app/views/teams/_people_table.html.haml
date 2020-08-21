@@ -6,7 +6,7 @@
       %tr
         %th Name
         - @person_tags.each do |tag|
-          %th{ style: "width: 5%" }= tag
+          %th{ style: 'width: 5%' }= tag
 
         - assessments = Assessment.requestable_for(collection.first).map(&:decorate)
         - assessments.each do |assessment|
@@ -27,11 +27,10 @@
               %td
           - if admin_logged_in?
             %td
-              = short_edit_link edit_assessment_requests_person_path(person), remote: true, class: "btn-xs", title: "Wertungsgruppen bearbeiten"
-              = simple_form_for person, html: { class: "hide registration-form" } do |f|
+              = short_edit_link edit_assessment_requests_person_path(person), remote: true, class: 'btn-xs', title: 'Wertungsgruppen bearbeiten'
+              = simple_form_for person, html: { class: 'hide registration-form' } do |f|
                 = f.input :registration_order, as: :hidden
 
       %tr.hide.placeholder
         %td
           %span
-          

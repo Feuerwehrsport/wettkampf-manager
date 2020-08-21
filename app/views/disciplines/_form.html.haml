@@ -1,11 +1,11 @@
 = simple_form_for @discipline do |f|
   = box Discipline.model_name.human do |box|
     = f.error_notification
-    - if action_name.in?(%w{new create})
+    - if action_name.in?(%w[new create])
       = f.input :type, collection: Discipline.types.map { |k| [k.model_name.human, k.name] }
     = f.input :name
     = f.input :short_name
     = f.input :like_fire_relay
     - box.footer do
       = cancel_link
-      = f.primary_button :submit, "Speichern"
+      = f.primary_button :submit, 'Speichern'

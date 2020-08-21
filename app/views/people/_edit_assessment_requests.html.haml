@@ -1,15 +1,15 @@
-= box @person, modal: true do |box|
+= box @person, modal: true do
   = simple_form_for @person, remote: true do |f|
     = f.error_notification
     - Assessment.requestable_for(@person).each do |assessment|
       .assessment-request
         = f.simple_fields_for :requests, @person.requests.find_or_initialize_by(assessment: assessment) do |g|
-          = g.input :_destroy, as: :boolean, label: 'Teilnahme', input_html: { checked: g.object.persisted? }, checked_value: "0", unchecked_value: "1"
+          = g.input :_destroy, as: :boolean, label: 'Teilnahme', input_html: { checked: g.object.persisted? }, checked_value: '0', unchecked_value: '1'
           = g.input :assessment_id, as: :hidden
 
           .row.edit-assesment-type
             .col-md-9
-              = g.input :assessment_type, as: :select, collection: AssessmentRequest.possible_assessment_types(assessment), label: assessment.decorate, label_method: lambda { |type| t("assessment_types.#{type}") }, include_blank: false, input_html: { class: 'assessment-types' }
+              = g.input :assessment_type, as: :select, collection: AssessmentRequest.possible_assessment_types(assessment), label: assessment.decorate, label_method: ->(type) { t("assessment_types.#{type}") }, include_blank: false, input_html: { class: 'assessment-types' }
             .col-md-3.group-competitor-order
               = g.input :group_competitor_order
             .col-md-3.single-competitor-order
@@ -24,5 +24,4 @@
               - else
                 = g.input :competitor_order
     .modal-footer
-      = f.primary_button :submit, "Speichern"
-
+      = f.primary_button :submit, 'Speichern'

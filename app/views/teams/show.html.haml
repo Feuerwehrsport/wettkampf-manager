@@ -1,6 +1,6 @@
 .row.refreshable#teams-index
   .col-md-8
-    = box(@team.numbered_name) do |box|
+    = box(@team.numbered_name) do
       %table.table.table-condensed
         %tr
           %th= @team.class.human_attribute_name :name
@@ -27,9 +27,9 @@
             %td= @team.tags.include?(tag) ? 'Ja' : 'Nein'
         - if admin_logged_in?
           - @team.people_assessments.each do |assessment|
-            %tr{ @team.list_entries_group_competitor(assessment) > Competition.one.group_run_count ? { class: "danger"} : {} }
+            %tr{ @team.list_entries_group_competitor(assessment) > Competition.one.group_run_count ? { class: 'danger' } : {} }
               %th= assessment.decorate
-              %td= "#{@team.list_entries_group_competitor(assessment)} von #{Competition.one.group_run_count}"
+              %td #{@team.list_entries_group_competitor(assessment)} von #{Competition.one.group_run_count}
 
 
     = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
@@ -43,31 +43,31 @@
             %td
               - if @team.request_for(assessment).present?
                 - if assessment.fire_relay?
-                  = "#{@team.request_for(assessment).relay_count} x"
+                  #{@team.request_for(assessment).relay_count} x
                 %span.glyphicon.glyphicon-ok
                 = t("assessment_types.#{@team.request_for(assessment).assessment_type}")
               - else
                 %span.glyphicon.glyphicon-remove
       - if admin_logged_in?
         - box.footer do
-          = btn_link_to "Wertungsgruppen bearbeiten", { action: :edit_assessment_requests }, remote: true
+          = btn_link_to 'Wertungsgruppen bearbeiten', { action: :edit_assessment_requests }, remote: true
 
   - if admin_logged_in?
     .col-md-4
-      = box("Aktionen") do
-        = block_link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), remote: true
-        = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Mannschaft wirklich löschen? Alle Zeiten usw. werden auch gelöscht!' }
-        = block_link_to "Name bearbeiten", { action: :edit }
-        = block_link_to "Wertungsgruppen bearbeiten", { action: :edit_assessment_requests }, remote: true
+      = box('Aktionen') do
+        = block_link_to 'Wettkämpfer hinzufügen', new_person_path(team: @team), remote: true
+        = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Mannschaft wirklich löschen? Alle Zeiten usw. werden auch gelöscht!' }
+        = block_link_to 'Name bearbeiten', { action: :edit }
+        = block_link_to 'Wertungsgruppen bearbeiten', { action: :edit_assessment_requests }, remote: true
 
   .col-md-12
-    = box(@team.class.human_attribute_name :people) do |box|
+    = box(@team.class.human_attribute_name(:people)) do |box|
       - if admin_logged_in?
         - box.header do
           .pull-right
-            = btn_link_to "Wettkämpfer hinzufügen", new_person_path(team: @team), remote: true
+            = btn_link_to 'Wettkämpfer hinzufügen', new_person_path(team: @team), remote: true
           .clearfix
-      = render "people_table", collection: @team.object.people.registration_order.map(&:decorate)
+      = render 'people_table', collection: @team.object.people.registration_order.map(&:decorate)
       - if admin_logged_in?
         - box.footer do
-          = "Die Reihenfolge der Personen kann einfach verschoben werden. Dadurch soll ein besseres Abgleichen mit der Eingabe möglich sein."
+          Die Reihenfolge der Personen kann einfach verschoben werden. Dadurch soll ein besseres Abgleichen mit der Eingabe möglich sein.

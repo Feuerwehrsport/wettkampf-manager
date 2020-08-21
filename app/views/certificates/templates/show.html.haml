@@ -15,7 +15,7 @@
         %tr
           %th= @certificates_template.class.human_attribute_name :image
           - if @certificates_template.image.attached?
-            %td= image_tag(@certificates_template.image, width: "100px")
+            %td= image_tag(@certificates_template.image, width: '100px')
             %td= button_to 'Löschen', { action: :remove_file, type: :image }, class: 'btn-default btn-link btn btn-xs', form_class: 'button_to'
           - else
             %td Nicht angegeben
@@ -38,15 +38,15 @@
             %td
 
   .col-md-4
-    = box("Aktionen") do
-      = block_link_to "Textpositionen", action: :edit, form_type: :text_positions
-      = block_link_to "Bearbeiten", action: :edit
-      = block_link_to "Vorschau als PDF", { format: :pdf }, target: '_blank', rel: 'noopener'
-      = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Vorlage wirklich löschen?' }
-      = block_link_to "Übersicht Urkundenvorlagen", action: :index
+    = box('Aktionen') do
+      = block_link_to 'Textpositionen', action: :edit, form_type: :text_positions
+      = block_link_to 'Bearbeiten', action: :edit
+      = block_link_to 'Vorschau als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
+      = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Vorlage wirklich löschen?' }
+      = block_link_to 'Übersicht Urkundenvorlagen', action: :index
       = button_to 'Vorlage duplizieren', { action: :duplicate }, class: 'btn-default btn-block btn btn-sm', form_class: 'button_to button_to_block'
       = block_link_to 'Vorlage exportieren', format: :json
 
   .col-md-6
-    = box("Vorschau") do
+    = box('Vorschau') do
       %iframe#certificates-template-preview{ src: url_for(format: :pdf) }

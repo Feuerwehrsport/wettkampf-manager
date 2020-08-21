@@ -1,6 +1,6 @@
 .row
   .col-md-8
-    = box("Wettkampf: #{@competition.name}") do |box|
+    = box("Wettkampf: #{@competition.name}") do
       %table.table
         - if @competition.name.present?
           %tr
@@ -11,5 +11,5 @@
           %td= l(@competition.date)
 
   .col-md-4
-    = box("Aktionen") do
-      = block_link_to "Bearbeiten", { action: :edit }
+    = box('Aktionen') do
+      = block_link_to 'Bearbeiten', { action: :edit }

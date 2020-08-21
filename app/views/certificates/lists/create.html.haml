@@ -1,7 +1,7 @@
 .row
   .col-md-8
     = simple_form_for @certificates_list, url: url_for(action: :export, format: :pdf) do |f|
-      = box 'Urkunden' do |box|
+      = box 'Urkunden' do
         = f.input :template_id, as: :hidden
         = f.input :background_image, as: :hidden
         = f.input :score_result_id, as: :hidden

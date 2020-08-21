@@ -1,9 +1,9 @@
-= box @person, modal: true do |box|
+= box @person, modal: true do
   = simple_form_for @person, remote: true do |f|
     = f.error_notification
     .form-group.string
-      %label.string.control-label{ for: "person_suggestion" } Name
-      %input.string.form-control{ name: "person_suggestion", id: "person_suggestion", value: @person.to_s, type: "text", data: { team_name: @person.try(:team).try(:name), gender: @person.gender } }
+      %label.string.control-label{ for: 'person_suggestion' } Name
+      %input.string.form-control{ name: 'person_suggestion', id: 'person_suggestion', value: @person.to_s, type: 'text', data: { team_name: @person.try(:team).try(:name), gender: @person.gender } }
     .suggestions-entries
       %table.table.table-hover.table-condensed
     .row.fire-sport-statistics-person
@@ -12,4 +12,4 @@
       .col-md-6.teams.small= @person.fire_sport_statistics_person.try(:team_list)
     = f.hidden_field :fire_sport_statistics_person_id
     .modal-footer
-      = f.primary_button :submit, "Speichern"
+      = f.primary_button :submit, 'Speichern'

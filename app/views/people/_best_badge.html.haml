@@ -9,8 +9,8 @@
       - parts.each do |short, info|
         %tr
           - if first
-            %td{rowspan: parts.count}= discipline_image(Discipline.for_key discipline)
+            %td{ rowspan: parts.count }= discipline_image(Discipline.for_key(discipline))
             - first = false
-          %td{title: short[1]}= short[0]
+          %td{ title: short[1] }= short[0]
           %td= info[0]
           %td= info[1]

@@ -1,7 +1,7 @@
 - if admin_logged_in?
   .row
     .col-md-12.refreshable#without-statistics-id-index
-      = box Team.model_name.human count: 0 do |box|
+      = box Team.model_name.human count: 0 do
         %p Bei folgenden Einträgen konnten keine Serien-Ergebnisse zugeordnet werden. Dies kann zwei Ursachen haben:
         %ul
           %li Name wurde falsch geschrieben
@@ -22,14 +22,14 @@
                 %td
                   = simple_form_for suggestion.team, remote: true do |f|
                     = f.hidden_field :fire_sport_statistics_team_id
-                    = f.primary_button :submit, "Übernehmen", class: "btn-sm"
+                    = f.primary_button :submit, 'Übernehmen', class: 'btn-sm'
 
             - elsif suggestion.present?
               %tr.info
                 %td
                   = suggestion.team
-                %td= "#{suggestion.suggestions.count} Vorschläge"
-                %td= btn_link_to "Vorschlag auswählen", statistic_suggestions_team_path(suggestion.team), remote: true
+                %td #{suggestion.suggestions.count} Vorschläge
+                %td= btn_link_to 'Vorschlag auswählen', statistic_suggestions_team_path(suggestion.team), remote: true
             - else
               %tr.danger
                 %td
@@ -37,4 +37,4 @@
                   %br
                   .small= suggestion.team.team
                 %td Keine Vorschläge
-                %td= btn_link_to "Vorschlag suchen", statistic_suggestions_team_path(suggestion.team), remote: true
+                %td= btn_link_to 'Vorschlag suchen', statistic_suggestions_team_path(suggestion.team), remote: true

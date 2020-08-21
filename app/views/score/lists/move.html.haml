@@ -10,15 +10,15 @@
             %td{ colspan: 5 }
               %span
       - box.footer do
-        = simple_form_for @score_list, html: { class: "hide score_list_form" } do |f|
+        = simple_form_for @score_list, html: { class: 'hide score_list_form' } do |f|
           = cancel_link
-          = f.primary_button :submit, "Liste speichern"
-        
+          = f.primary_button :submit, 'Liste speichern'
+
   .col-md-4
-    = box("Hinweise") do
+    = box('Hinweise') do
       %p Einfach die Zeilen in die neue Position ziehen. Danach unter der Tabelle auf Speichern klicken.
   .col-md-4
-    = box("Aktionen") do
-      = block_link_to "Ansehen", { action: :show }
-      = block_link_to "Bearbeiten", { action: :edit }
-      = block_link_to "Excel-Liste", { action: :show, format: :xlsx }
+    = box('Aktionen') do
+      = block_link_to 'Ansehen', { action: :show }
+      = block_link_to 'Bearbeiten', { action: :edit }
+      = block_link_to 'Excel-Liste', { action: :show, format: :xlsx }

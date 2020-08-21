@@ -1,6 +1,6 @@
 - if admin_logged_in?
   .pull-right
-    - if Certificates::Template.count > 0
+    - if Certificates::Template.exists?
       = btn_link_to 'Urkunden', new_certificates_list_path(competition_result_id: competition_result.id)
     = btn_link_to 'Bearbeiten', action: :edit, id: competition_result
     = btn_link_to 'Löschen', { action: :destroy, id: competition_result }, method: :delete, data: { confirm: 'Gesamtwertung wirklich löschen?' }
@@ -11,13 +11,13 @@
       %th.small.sum-points Platz
       %th Mannschaft
       - competition_result.results.each do |result|
-        %th.assessment{colspan: 2}
+        %th.assessment{ colspan: 2 }
           = discipline_image result.assessment.discipline
           = result.assessment.discipline.to_short
       %th.small.sum-points Punkte
     - competition_result.rows.each do |row|
       %tr
-        %td.sum-points= "#{competition_result.place_for_row(row)}."
+        %td.sum-points #{competition_result.place_for_row(row)}.
         %td= row.team.shortcut_name
         - competition_result.results.each do |result|
           - assessment_result = row.assessment_result_from(result.assessment)

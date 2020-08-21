@@ -10,7 +10,7 @@ RSpec.describe 'configure competition', seed: :configured do
     perform_login
     visit edit_competitions_path
 
-    within '#person_tags' do
+    within '#person-tags' do
       click_on 'Neue Markierung'
       expect(page).to have_content 'Name'
       fill_in 'Name', with: 'Ü80'
@@ -18,7 +18,7 @@ RSpec.describe 'configure competition', seed: :configured do
     click_on 'Speichern'
     click_on 'Bearbeiten'
 
-    within '#person_tags' do
+    within '#person-tags' do
       expect(page).to have_content 'Name'
       expect(find_field('Name').value).to eq 'Ü80'
       click_on 'Markierung entfernen'

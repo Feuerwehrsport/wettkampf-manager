@@ -1,0 +1,44 @@
+= box result.name do
+  %table.table
+    %tr
+      %th= result.class.human_attribute_name :name
+      %td= result
+    %tr
+      %th= result.class.human_attribute_name :assessment
+      %td= result.assessment
+    - result.tags.each do |tag|
+      %tr
+        %th #{tag.object.model_name.human} - #{tag.name}
+        %td Ja
+
+    - if result.is_a? Score::DoubleEventResult
+      %tr
+        %th= result.class.human_attribute_name :results
+        %td
+          %table.table.table-condensed
+            - result.results.each do |result|
+              %tr
+                %td= link_to result, score_result_path(result)
+    - else
+      %tr
+        %th= result.class.human_attribute_name :group_assessment
+        %td= result.translated_group_assessment
+    %tr
+      %th= result.class.human_attribute_name :lists
+      %td
+        %table.table.table-condensed
+          - result.lists.each do |list|
+            %tr
+              %td= link_to list.name, score_list_path(list)
+
+    - if result.series_assessments.exists?
+      %tr
+        %th Cup-Serie
+        %td
+          %ul
+            - result.series_assessments.each do |assessment|
+              %li
+                - if assessment.is_a?(Series::TeamAssessment)
+                  = link_to("Mannschaftswertung: #{assessment.to_label}", series_round_path(assessment.round))
+                - else
+                  = link_to(assessment.to_label, series_assessment_path(assessment))

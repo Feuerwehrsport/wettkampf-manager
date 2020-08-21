@@ -1,4 +1,4 @@
-= box @team, modal: true do |box|
+= box @team, modal: true do
   = simple_form_for @team, remote: true do |f|
     = f.error_notification
     .form-group.string
@@ -11,4 +11,4 @@
       .col-md-6.shortcut.small= @team.fire_sport_statistics_team.try(:shortcut)
     = f.hidden_field :fire_sport_statistics_team_id
     .modal-footer
-      = f.primary_button :submit, "Speichern"
+      = f.primary_button :submit, 'Speichern'

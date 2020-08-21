@@ -3,14 +3,14 @@
 - if @certificates_template.font2.attached?
   = render 'font_style', type: :bold, font: @certificates_template.font2
 = simple_form_for @certificates_template do |f|
-  = box @certificates_template.name do |box|
+  = box @certificates_template.name do |obox|
     = f.error_notification
     .row
       .col-md-10
-        #certificates-template-position{ data: { font_family_regular:  @certificates_template.font.attached? ? "certificates_template_#{@certificates_template.id}_regular" : "", font_family_bold:  @certificates_template.font2.attached? ? "certificates_template_#{@certificates_template.id}_bold" : "", background: @certificates_template.image, config: Certificates::TextField::KEY_CONFIG.to_json } }
-      
+        #certificates-template-position{ data: { font_family_regular: @certificates_template.font.attached? ? "certificates_template_#{@certificates_template.id}_regular" : '', font_family_bold: @certificates_template.font2.attached? ? "certificates_template_#{@certificates_template.id}_bold" : '', background: @certificates_template.image, config: Certificates::TextField::KEY_CONFIG.to_json } }
+
       .col-md-2#position-buttons
-        #add-new-field.btn.btn-default.btn-sm Feld hinzufügen
+        .btn.btn-default.btn-sm#add-new-field Feld hinzufügen
         #field-tables
 
     - @certificates_template.text_fields.each do |text_field|
@@ -30,16 +30,16 @@
     .new-position-form
       .modal.fade
         .modal-header
-          %button.close{ type: :button, data: { dismiss: :modal }, "aria-hidden" => true } ×
+          %button.close{ type: :button, data: { dismiss: :modal }, 'aria-hidden' => true } ×
         .modal-body
-          = simple_form_for Certificates::TextField.new, url: '' do |f|
+          = simple_form_for Certificates::TextField.new, url: '' do |tf|
             = box 'Textposition' do |box|
-              = f.input :key, as: :select, collection: Certificates::TextField::KEY_CONFIG.map { |k, v| ["#{v[:description]} (z.B.: #{v[:example]})", k] }
-              = f.input :text
+              = tf.input :key, as: :select, collection: Certificates::TextField::KEY_CONFIG.map { |k, v| ["#{v[:description]} (z.B.: #{v[:example]})", k] }
+              = tf.input :text
               - box.footer do
-                = f.primary_button :submit, "Speichern"
-    - box.footer do
+                = tf.primary_button :submit, 'Speichern'
+    - obox.footer do
       &nbsp;
       .actions
         = cancel_link
-        = f.primary_button :submit, "Speichern"
+        = f.primary_button :submit, 'Speichern'

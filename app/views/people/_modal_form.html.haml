@@ -1,9 +1,9 @@
-= box Person.model_name.human, modal: true do |box|
+= box Person.model_name.human, modal: true do
   = simple_form_for @person, remote: true do |f|
     = f.error_notification
     .form-group.string
-      %label.string.control-label{ for: "person_suggestion" } Schnelleingabe
-      %input.string.form-control{ name: "person_suggestion", id: "person_suggestion", type: "text", data: { team_name: @person.try(:team).try(:name) }, autocomplete: :off }
+      %label.string.control-label{ for: 'person_suggestion' } Schnelleingabe
+      %input.string.form-control{ name: 'person_suggestion', id: 'person_suggestion', type: 'text', data: { team_name: @person.try(:team).try(:name) }, autocomplete: :off }
     .suggestions-entries
       %table.table.table-hover.table-condensed
     .row
@@ -19,7 +19,7 @@
     .row
       - if @person.team.nil?
         .col-md-6
-          = f.association :team, label_method: lambda { |team| team.decorate.numbered_name_with_gender }
+          = f.association :team, label_method: ->(team) { team.decorate.numbered_name_with_gender }
       - else
         = f.hidden_field :team_id
       - if Competition.one.show_bib_numbers?
@@ -27,4 +27,4 @@
           = f.input :bib_number
     = f.hidden_field :fire_sport_statistics_person_id
     .modal-footer
-      = f.primary_button :submit, "Speichern"
+      = f.primary_button :submit, 'Speichern'

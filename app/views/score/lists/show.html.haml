@@ -5,7 +5,7 @@
         = render 'list_headline', times: true
         %tbody
           - score_list_entries(@score_list) do |entry, run, track|
-            = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do |first|
+            = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
               %td.time-col
                 = entry.try(:human_time)
                 - if logged_in? && can?(:edit_times, @score_list)

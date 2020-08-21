@@ -1,58 +1,18 @@
 .row
   .col-md-8
-    = box @score_result.name do |box|
-      %table.table
-        %tr
-          %th= @score_result.class.human_attribute_name :name
-          %td= @score_result
-        %tr
-          %th= @score_result.class.human_attribute_name :assessment
-          %td= @score_result.assessment
-        - @score_result.tags.each do |tag|
-          %tr
-            %th= "#{tag.object.model_name.human} - #{tag.name}"
-            %td Ja
+    = render 'overview_box', result: @score_result
 
-        - if @score_result.is_a? Score::DoubleEventResult
-          %tr
-            %th= @score_result.class.human_attribute_name :results
-            %td
-              %table.table.table-condensed
-                - @score_result.results.each do |result|
-                  %tr
-                    %td= link_to result, score_result_path(result)
-        - else
-          %tr
-            %th= @score_result.class.human_attribute_name :group_assessment
-            %td= @score_result.translated_group_assessment
-        %tr
-          %th= @score_result.class.human_attribute_name :lists
-          %td
-            %table.table.table-condensed
-              - @score_result.lists.each do |list|
-                %tr
-                  %td= link_to list.name, score_list_path(list)
-
-        - if false && @score_result.series_person_assessment.present?
-          %tr
-            %th Cup-Serie Einzelwertung
-            %td= link_to(@score_result.series_person_assessment.to_label, series_assessment_path(@score_result.series_person_assessment))
-
-        - if false && @score_result.series_team_assessment.present?
-          %tr
-            %th Cup-Serie Mannschaftswertung
-            %td= link_to(@score_result.series_team_assessment.to_label, series_round_path(@score_result.series_team_assessment.round))
   - if admin_logged_in?
     .col-md-4
-      = box("Aktionen") do
-        = block_link_to "Bearbeiten", action: :edit
-        = block_link_to "Cup-Serie-Zugehörigkeit", action: :edit, series: 1
-        = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Ergebnisliste wirklich löschen? Die zugehörigen Startlisten werden verändert!' }
+      = box('Aktionen') do
+        = block_link_to 'Bearbeiten', action: :edit
+        = block_link_to 'Cup-Serie-Zugehörigkeit', action: :edit, series: 1
+        = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Ergebnisliste wirklich löschen? Die zugehörigen Startlisten werden verändert!' }
       = box('Ausgabe') do
         = block_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
         = block_link_to 'als XLS', format: :xlsx
         - if admin_logged_in?
-          - if Certificates::Template.count > 0
+          - if Certificates::Template.exists?
             = block_link_to 'Urkunden', new_certificates_list_path(score_result_id: @score_result.id)
 
   - if @rows.count > 0
@@ -62,31 +22,31 @@
         - box.footer do
           - if admin_logged_in?
             - if Certificates::Template.count > 0
-              = btn_link_to "Urkunden", new_certificates_list_path(score_result_id: @score_result.id)
+              = btn_link_to 'Urkunden', new_certificates_list_path(score_result_id: @score_result.id)
           - if @score_result.group_assessment? && @discipline.single_discipline?
-            = btn_link_to "Mannschaftswertung als PDF", { format: :pdf, only: :group_assessment }, target: '_blank', rel: 'noopener'
-            = btn_link_to "Einzelwertung als PDF", { format: :pdf, only: :single_competitors }, target: '_blank', rel: 'noopener'
-          = btn_link_to "Komplett als PDF", { format: :pdf }, target: '_blank', rel: 'noopener'
-          = btn_link_to "als XLS", format: :xlsx
+            = btn_link_to 'Mannschaftswertung als PDF', { format: :pdf, only: :group_assessment }, target: '_blank', rel: 'noopener'
+            = btn_link_to 'Einzelwertung als PDF', { format: :pdf, only: :single_competitors }, target: '_blank', rel: 'noopener'
+          = btn_link_to 'Komplett als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
+          = btn_link_to 'als XLS', format: :xlsx
 
     - if @score_result.group_assessment? && @discipline.single_discipline?
       .col-md-12
-        = box "Mannschaftswertung" do |box|
+        = box 'Mannschaftswertung' do
           %table.table.table-bordered
             %tr
               %th
               %th Mannschaft
               %th Zeit
             - @group_result.rows.each do |row|
-              %tr{class: row_invalid_class(row)}
-                %td= "#{@group_result.place_for_row(row)}."
+              %tr{ class: row_invalid_class(row) }
+                %td #{@group_result.place_for_row(row)}.
                 %th= row.team
                 %th= row.result_entry
-              %tr{class: row_invalid_class(row)}
+              %tr{ class: row_invalid_class(row) }
                 %td
-                %td{colspan: 2}
-                  %em= row.rows_in.join(", ")
-                  %small= row.rows_out.join(", ")
+                %td{ colspan: 2 }
+                  %em= row.rows_in.join(', ')
+                  %small= row.rows_out.join(', ')
   - else
     .col-md-8
       .alert.alert-info Keine Einträge gefunden
@@ -94,5 +54,5 @@
 
   - if @out_of_competition_rows.count > 0
     .col-md-12
-      = box "Außer der Wertung" do |box|
+      = box 'Außer der Wertung' do
         = render 'result_table', rows: @out_of_competition_rows, places: false

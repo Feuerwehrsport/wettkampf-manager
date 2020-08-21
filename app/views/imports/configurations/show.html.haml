@@ -1,6 +1,6 @@
 .row
   .col-md-6
-    = box "Import von Feuerwehrsport-Statistik.de" do
+    = box 'Import von Feuerwehrsport-Statistik.de' do
       %table.table
         %tr
           %th Name
@@ -10,7 +10,7 @@
           %td= @imports_configuration.place
         %tr
           %th Datum
-          %td= @imports_configuration.date.present? ? l(@imports_configuration.date) : ""
+          %td= @imports_configuration.date.present? ? l(@imports_configuration.date) : ''
         %tr
           %th Wettkämpfer
           %td= @imports_configuration.data[:people].count
@@ -20,7 +20,7 @@
 
   - if @imports_configuration.tags.present?
     .col-md-6
-      = box "Kennzeichnungen" do
+      = box 'Kennzeichnungen' do
         - @imports_configuration.tags.each do |tag|
           %h4
             - if tag.use
@@ -30,13 +30,13 @@
             = tag.name
             %small= tag.target
 
-= box "Wertungen" do
+= box 'Wertungen' do
   .row
     - @imports_configuration.assessments.each do |assessment|
       .col-md-4
         = box do
           .text-center
-            Online: 
+            Online:
             = assessment
           .text-center
             %span.glyphicon.glyphicon-arrow-down
@@ -54,11 +54,11 @@
 
 .row
   .col-md-4
-    = box "Aktionen" do
+    = box 'Aktionen' do
       - if @imports_configuration.error_infos.blank?
         = simple_form_for(@imports_configuration) do |f|
           = f.input :execute, input_html: { value: '1' }, as: :hidden
-          = f.button :submit, "Importieren", class: "btn btn-info btn-block", data: { confirm: 'Import durchführen?' }
+          = f.button :submit, 'Importieren', class: 'btn btn-info btn-block', data: { confirm: 'Import durchführen?' }
         %hr
-      = block_link_to("Bearbeiten", action: :edit)
-      = block_link_to "Löschen", { action: :destroy }, method: :delete, data: { confirm: 'Importkonfiguration wirklich löschen?' }
+      = block_link_to('Bearbeiten', action: :edit)
+      = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Importkonfiguration wirklich löschen?' }

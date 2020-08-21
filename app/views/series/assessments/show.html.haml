@@ -6,6 +6,6 @@
         %br
         %small= assessment
       %ul
-        %li= link_to("Zurück zur Übersicht", assessment.round)
-    .col-md-4= render("series/cups_overview", cups: assessment.cups)
+        %li= link_to('Zurück zur Übersicht', assessment.round)
+    .col-md-4= render('series/cups_overview', cups: assessment.cups)
   = render('show_assessment_table', rows: assessment.rows, cups: assessment.cups)

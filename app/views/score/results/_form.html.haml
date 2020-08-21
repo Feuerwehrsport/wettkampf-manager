@@ -2,7 +2,7 @@
   = box Score::Result.model_name.human do |box|
     = f.error_notification
     - if @series_form
-      = f.association :series_assessments, as: :check_boxes, collection: @score_result.possible_series_assessments, label_method: -> (assessment) { assessment.decorate.score_result_label }
+      = f.association :series_assessments, as: :check_boxes, collection: @score_result.possible_series_assessments, label_method: ->(assessment) { assessment.decorate.score_result_label }
     - else
       = f.input :name
       = f.input :date, as: :string
@@ -11,4 +11,4 @@
       = render 'tag_form', f: f
     - box.footer do
       = cancel_link
-      = f.primary_button :submit, "Speichern"
+      = f.primary_button :submit, 'Speichern'

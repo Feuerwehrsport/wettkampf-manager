@@ -11,9 +11,9 @@
             %td
               = discipline_image(discipline)
               = discipline
-            %td= discipline.assessments.join(", ")
+            %td= discipline.assessments.join(', ')
             %td.text-right
-              = btn_link_to "Ansehen", discipline
-               
+              = btn_link_to 'Ansehen', discipline
+
       - box.footer do
-        = btn_link_to "Hinzufügen", { action: :new }
+        = btn_link_to 'Hinzufügen', { action: :new }

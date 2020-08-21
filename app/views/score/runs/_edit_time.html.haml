@@ -8,4 +8,4 @@
             = n.input :edit_second_time, as: :second_time
         .col-md-8
           .time-types
-            = n.collection_radio_buttons :result_type, Score::ResultEntrySupport::ENTRY_STATUS, :to_s, -> (t) { t("result_types.#{t}") }
+            = n.collection_radio_buttons :result_type, Score::ResultEntrySupport::ENTRY_STATUS, :to_s, ->(t) { t("result_types.#{t}") }
