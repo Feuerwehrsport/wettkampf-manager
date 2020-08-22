@@ -5,7 +5,7 @@ Exports::XLSX::Score::List = Struct.new(:list) do
   include Exports::ScoreLists
 
   def perform
-    workbook.add_worksheet(name: list.name.truncate(30)) do |sheet|
+    workbook.add_worksheet(name: list.name.truncate_bytes(30)) do |sheet|
       show_export_data(list).each { |row| sheet.add_row(content_row(row)) }
     end
   end

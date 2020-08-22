@@ -28,7 +28,7 @@ Exports::XLSX::Score::Result = Struct.new(:result) do
   end
 
   def single_table
-    workbook.add_worksheet(name: result.to_s.truncate(30)) do |sheet|
+    workbook.add_worksheet(name: result.to_s.truncate_bytes(30)) do |sheet|
       build_data_rows(result, discipline, false).each { |row| sheet.add_row(row) }
     end
   end

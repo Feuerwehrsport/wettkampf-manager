@@ -17,7 +17,7 @@ Exports::XLSX::People = Struct.new(:people) do
   protected
 
   def people_table(title, rows)
-    workbook.add_worksheet(name: title) do |sheet|
+    workbook.add_worksheet(name: title.truncate_bytes(30)) do |sheet|
       index_export_data(rows).each { |row| sheet.add_row(row) }
     end
   end
