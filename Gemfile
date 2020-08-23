@@ -81,6 +81,7 @@ group :test do
   gem 'rspec-rails'
   gem 'therubyracer' # for gitlab
   gem 'simplecov', require: false
+  gem 'codecov', require: false
   gem 'vcr'
   gem 'webmock'
 end
