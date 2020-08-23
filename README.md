@@ -5,6 +5,7 @@ Release-Branch: [![Build Status](https://travis-ci.org/Feuerwehrsport/wettkampf-
 
 Master-Branch: [![Build Status](https://travis-ci.org/Feuerwehrsport/wettkampf-manager.svg)](https://travis-ci.org/Feuerwehrsport/wettkampf-manager)
 [![Code Climate](https://codeclimate.com/github/Feuerwehrsport/wettkampf-manager/badges/gpa.svg)](https://codeclimate.com/github/Feuerwehrsport/wettkampf-manager)
+[![codecov](https://codecov.io/gh/Feuerwehrsport/wettkampf-manager/branch/master/graph/badge.svg)](https://codecov.io/gh/Feuerwehrsport/wettkampf-manager)
 
 Die Software steht unter der GNU Affero General Public License version 3. [![AGPL](https://www.gnu.org/graphics/agplv3-88x31.png)](https://www.gnu.org/licenses/agpl)
 
