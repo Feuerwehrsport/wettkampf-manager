@@ -121,6 +121,13 @@ RSpec.configure do |config|
       DatabaseCleaner.strategy = :transaction
     end
 
+    config.after(:suite) do
+      next if ENV['CI'] == 'true'
+
+      md5sum = `git ls-files -z --recurse-submodules | xargs -0 md5sum  | md5sum`
+      File.write(Rails.root.join('tmp/rspec_checksum'), md5sum)
+    end
+
     config.before do
       allow(Competition).to receive(:one).and_return(create(:competition))
     end

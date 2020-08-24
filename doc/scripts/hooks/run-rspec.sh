@@ -4,5 +4,12 @@ set -e
 
 cd "${0%/*}/../../.."
 
-echo "Running rspec"
-bundle exec rspec
+CHECKSUM=$(git ls-files -z --recurse-submodules | xargs -0 md5sum | md5sum)
+CACHESUM=$(cat tmp/rspec_checksum)
+
+if [ "$CHECKSUM" = "$CACHESUM" ]; then
+  echo "Skip rspec"
+else
+  echo "Running rspec"
+  bundle exec rspec
+fi
