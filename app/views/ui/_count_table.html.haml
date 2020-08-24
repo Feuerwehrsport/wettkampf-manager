@@ -2,9 +2,9 @@
   %thead
     %tr
       - ct.columns.each do |column|
-        %th{ column.th_options }= column.th_value
+        %th{ column.th_options }= column.name
   %tbody
     - ct.rows.each do |row|
-      %tr{ data: ct.row_data(row) }
+      %tr
         - ct.columns.each do |column|
           %td{ class: column.options[:class] }= column.content(row)
