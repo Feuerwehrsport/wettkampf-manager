@@ -48,10 +48,10 @@ class AssessmentRequest < CacheDependendRecord
       self.group_competitor_order = 0
       self.single_competitor_order = 0
     elsif group_competitor?
-      self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order .zero?
+      self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order&.zero?
       self.single_competitor_order = 0
     elsif single_competitor?
-      self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order .zero?
+      self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order&.zero?
       self.group_competitor_order = 0
     end
   end
@@ -59,7 +59,7 @@ class AssessmentRequest < CacheDependendRecord
   def assign_next_free_competitor_order
     return if persisted?
 
-    self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order .zero?
-    self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order .zero?
+    self.group_competitor_order = next_free_competitor_order(:group) if group_competitor_order&.zero?
+    self.single_competitor_order = next_free_competitor_order(:single) if single_competitor_order&.zero?
   end
 end
