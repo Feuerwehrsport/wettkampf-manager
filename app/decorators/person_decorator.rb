@@ -39,10 +39,6 @@ class PersonDecorator < ApplicationDecorator
     full_name
   end
 
-  def self.human_name_cols
-    %w[Vorname Nachname Mannschaft]
-  end
-
   def name_cols(assessment_type, shortcut)
     team = shortcut ? team_shortcut_name(assessment_type) : team_name(assessment_type)
     [first_name, last_name, team]

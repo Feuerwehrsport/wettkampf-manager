@@ -27,9 +27,9 @@ module Exports::ScoreResults
   def build_data_headline(result, discipline, export_headers: false)
     header = ['Platz']
     if discipline.single_discipline_or_double_event?
-      PersonDecorator.human_name_cols.each { |col| header.push col }
+      header.push 'Vorname', 'Nachname', 'Mannschaft'
     else
-      TeamDecorator.human_name_cols.each { |col| header.push col }
+      header.push 'Mannschaft'
     end
     if result.is_a? Score::DoubleEventResult
       result.results.each do |sub_result|

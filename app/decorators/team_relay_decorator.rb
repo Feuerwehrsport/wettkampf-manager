@@ -11,10 +11,6 @@ class TeamRelayDecorator < ApplicationDecorator
     "#{team.numbered_name_with_gender} #{name}"
   end
 
-  def self.human_name_cols
-    ['Mannschaft']
-  end
-
   def shortcut_name
     "#{team.shortcut_name} #{name}"
   end

@@ -30,10 +30,6 @@ class TeamDecorator < ApplicationDecorator
     full ? numbered_shortcut_name_with_gender : numbered_shortcut_name
   end
 
-  def self.human_name_cols
-    ['Mannschaft']
-  end
-
   def name_cols(_assessment_type, shortcut)
     [shortcut ? shortcut_name : to_s]
   end
