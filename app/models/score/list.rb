@@ -36,4 +36,14 @@ class Score::List < CacheDependendRecord
   def multiple_assessments?
     @multiple_assessments ||= assessments.count > 1
   end
+
+  def discipline_klass
+    if single_discipline?
+      Person
+    elsif assessments.first.fire_relay?
+      TeamRelay
+    else
+      Team
+    end
+  end
 end

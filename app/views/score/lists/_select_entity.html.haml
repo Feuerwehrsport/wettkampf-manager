@@ -5,7 +5,7 @@
     - else
       = f.error_notification
       - free_run, free_track = @score_list.next_free_track
-      = f.simple_fields_for :entries, @score_list.entries.build(run: free_run, track: free_track, entity_type: discipline_klass.name) do |g|
+      = f.simple_fields_for :entries, @score_list.entries.build(run: free_run, track: free_track, entity_type: @score_list.discipline_klass.name) do |g|
         = g.association :entity, collection: not_yet_present_entities, label_method: ->(entity) { label_method_for_select_entity(entity) }
         = g.input :run, as: :hidden
         = g.input :track, as: :hidden

@@ -10,22 +10,12 @@ module Score::ListsHelper
     options
   end
 
-  def discipline_klass
-    if @score_list.single_discipline?
-      Person
-    elsif @score_list.assessments.first.fire_relay?
-      TeamRelay
-    else
-      Team
-    end
-  end
-
   def not_yet_present_entities
     if @score_list.assessments.first.fire_relay?
       Team.all.map { |team| TeamRelay.create_next_free_for(team, @score_list.entries.pluck(:entity_id)) }
     else
-      discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id))
-                      .sort_by { |e| label_method_for_select_entity(e) }
+      @score_list.discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id))
+                 .sort_by { |e| label_method_for_select_entity(e) }
     end
   end
 
