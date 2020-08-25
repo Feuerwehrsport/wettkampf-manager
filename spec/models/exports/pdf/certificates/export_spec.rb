@@ -10,8 +10,8 @@ RSpec.describe Exports::PDF::Certificates::Export, type: :model do
 
   describe 'perform' do
     it 'creates pdf' do
-      expect(long_row).to receive(:get).and_return 'a' * 1000
-      expect(short_row).to receive(:get).and_return 'b' * 10
+      expect(long_row).to receive(:get).twice.and_return 'a' * 1000
+      expect(short_row).to receive(:get).twice.and_return 'b' * 10
 
       expect(export_pdf.bytestream).to start_with '%PDF-1.'
       expect(export_pdf.bytestream).to end_with "%%EOF\n"
