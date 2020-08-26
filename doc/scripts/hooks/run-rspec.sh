@@ -4,7 +4,7 @@ set -e
 
 cd "${0%/*}/../../.."
 
-CHECKSUM=$(git ls-files -z --recurse-submodules | xargs -0 md5sum | md5sum)
+CHECKSUM=$(git ls-files -z --recurse-submodules | xargs -0 md5sum | grep -F -v "doc/simplecov.json" | md5sum)
 CACHESUM=$(cat tmp/rspec_checksum)
 
 if [ "$CHECKSUM" = "$CACHESUM" ]; then
