@@ -18,16 +18,8 @@ class TeamDecorator < ApplicationDecorator
     full ? numbered_name_with_gender : numbered_name
   end
 
-  def numbered_shortcut_name
+  def shortcut_name
     multi_team? ? "#{shortcut} #{number}" : shortcut
-  end
-
-  def numbered_shortcut_name_with_gender
-    "#{numbered_shortcut_name} #{gender_symbol}"
-  end
-
-  def shortcut_name(full = false)
-    full ? numbered_shortcut_name_with_gender : numbered_shortcut_name
   end
 
   def name_cols(_assessment_type, shortcut)

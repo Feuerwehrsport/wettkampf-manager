@@ -15,7 +15,7 @@ module Exports::People
     collection.each do |person|
       line = []
       line.push(person.bib_number) if Competition.one.show_bib_numbers?
-      line.push(person.last_name, person.first_name, person.team&.numbered_shortcut_name)
+      line.push(person.last_name, person.first_name, person.team&.shortcut_name)
       tags.each { |tag| line.push(person.tags.include?(tag) ? 'X' : '') }
       assessments.each do |assessment|
         request = person.request_for(assessment.object)
