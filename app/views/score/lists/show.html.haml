@@ -29,12 +29,14 @@
           = block_link_to 'Zeiten im Block eintragen', { action: :edit_times }
         - if can?(:edit, @score_list)
           = block_link_to 'Teilnehmer hinzufügen', { action: :select_entity }, remote: true
-        = block_link_to 'Startliste klonen', copy_list_score_list_factories_path(@score_list)
+        - if can?(:copy, @score_list)
+          = block_link_to 'Startliste klonen', copy_list_score_list_factories_path(@score_list)
 
       - if can?(:edit, @score_list)
         = box('Allgemein') do
           = block_link_to 'Bearbeiten', { action: :edit }
-          = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }
+          - if can?(:destroy, @score_list)
+            = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Startliste wirklich löschen? Alle bisher eingetragenen Zeiten dieser Liste gehen verloren!' }
 
       = box('Ausgabe') do
         = block_link_to('PDF (Drucken)', { format: :pdf }, target: '_blank', rel: 'noopener')

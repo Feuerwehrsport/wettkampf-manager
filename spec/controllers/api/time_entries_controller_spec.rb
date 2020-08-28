@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured, user: :logged_in do
+RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured do
   let(:entry) { create(:api_time_entry) }
 
   describe 'POST create' do
@@ -23,7 +23,7 @@ RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured,
     end
   end
 
-  describe 'GET index' do
+  describe 'GET index', user: :logged_in do
     it 'renders index' do
       get :index
       expect(response).to be_successful
@@ -34,7 +34,7 @@ RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured,
     end
   end
 
-  describe 'GET show' do
+  describe 'GET show', user: :logged_in do
     it 'renders show' do
       get :show, params: { id: entry.id }
       expect(response).to be_successful
