@@ -125,9 +125,10 @@ RSpec.configure do |config|
       next if ENV['CI'] == 'true'
 
       md5sums = `git ls-files -z --recurse-submodules | xargs -0 md5sum | grep -F -v "doc/simplecov.json"`
-      File.write(Rails.root.join("tmp/rspec_checksum.#{DateTime.current}"), md5sums)
-      md5sum = `git ls-files -z --recurse-submodules | xargs -0 md5sum | grep -F -v "doc/simplecov.json" | md5sum`
-      File.write(Rails.root.join('tmp/rspec_checksum'), md5sum)
+      md5sums += `git ls-files --others --exclude-standard -z | xargs -0 md5sum`
+      sum_file = Rails.root.join("tmp/rspec_checksum.#{DateTime.current}")
+      File.write(sum_file, md5sums)
+      File.write(Rails.root.join('tmp/rspec_checksum'), `cat #{sum_file} | md5sum`)
     end
 
     config.before do
