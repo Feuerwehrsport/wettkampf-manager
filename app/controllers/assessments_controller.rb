@@ -2,21 +2,12 @@
 
 class AssessmentsController < ApplicationController
   implement_crud_actions
-  before_action :assign_resource_for_action, only: [:possible_associations]
-  before_action :assign_tags
-
-  def possible_associations
-    render json: { results: @assessment.results.pluck(:id), lists: @assessment.lists.pluck(:id) }
-  end
+  before_action :assign_tags, only: %i[new create edit update]
 
   protected
 
   def index_collection
     super.decorate.sort_by(&:to_s)
-  end
-
-  def assign_resource_for_action
-    assign_existing_resource
   end
 
   def assign_tags

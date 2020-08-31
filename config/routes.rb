@@ -14,9 +14,7 @@ Rails.application.routes.draw do
   resources :presets, only: %i[index show update]
   resource :competitions, only: %i[show edit update]
   resources :disciplines
-  resources :assessments do
-    member { get :possible_associations }
-  end
+  resources :assessments
   resources :people do
     member do
       get :edit_assessment_requests
