@@ -5,10 +5,17 @@ class Certificates::Template < CacheDependendRecord
     has_one_attached file
 
     define_method(:"#{file}_path") do
-      ActiveStorage::Blob.service.path_for(public_send(file).key) if public_send(file).attached?
+      temp_dir.join(public_send(file).filename.to_s) if public_send(file).attached?
     end
     define_method(:"#{file}_hint") do
       "Zur Zeit: #{public_send(file).filename}" if public_send(file).attached?
+    end
+
+    after_save do
+      if public_send(file).attached?
+        FileUtils.mkdir_p(temp_dir)
+        FileUtils.cp(ActiveStorage::Blob.service.path_for(public_send(file).key), public_send(:"#{file}_path"))
+      end
     end
   end
 
@@ -18,6 +25,10 @@ class Certificates::Template < CacheDependendRecord
 
   accepts_nested_attributes_for :text_fields, allow_destroy: true
   validates :name, presence: true
+
+  def temp_dir
+    Rails.root.join('tmp/certificates', id.to_s)
+  end
 
   def to_json(*_args)
     {
