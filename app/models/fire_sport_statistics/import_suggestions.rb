@@ -94,6 +94,7 @@ class FireSportStatistics::ImportSuggestions < FireSportStatistics::Import
           name: round.name,
           year: round.year,
           aggregate_type: round.aggregate_type,
+          full_cup_count: round.full_cup_count,
         )
       end
     end

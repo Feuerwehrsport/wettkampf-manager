@@ -11,15 +11,6 @@ class Series::Round < ApplicationRecord
   validates :name, :year, :aggregate_type, presence: true
 
   default_scope -> { order(year: :desc, name: :asc) }
-  scope :cup_count, -> do
-    select("#{table_name}.*, COUNT(#{Cup.table_name}.id) AS cup_count")
-      .joins(:cups)
-      .group("#{table_name}.id")
-  end
-  scope :with_team, ->(team_id, gender) do
-    joins(:participations).where(series_participations: { team_id: team_id })
-                          .merge(Series::TeamAssessment.gender(gender)).distinct
-  end
   scope :with_local_results, -> do
     assessment_ids = Series::AssessmentResult.select(:assessment_id)
     joins(:assessments).where(series_assessments: { id: assessment_ids })
@@ -36,25 +27,6 @@ class Series::Round < ApplicationRecord
 
   def aggregate_class
     @aggregate_class ||= Firesport::Series::Handler.team_class_for(aggregate_type)
-  end
-
-  def self.for_team(team_id, gender)
-    round_structs = {}
-    Series::Round.with_team(team_id, gender).decorate.each do |round|
-      round_structs[round.name] ||= []
-      round.team_assessment_rows(gender).select { |r| r.team.id == team_id }.each do |row|
-        next if row.rank.nil?
-
-        round_structs[round.name].push OpenStruct.new(
-          round: round,
-          cups: round.cups,
-          row: row.decorate,
-          team_number: row.team_number,
-        )
-      end
-      round_structs.delete(round.name) if round_structs[round.name].empty?
-    end
-    round_structs
   end
 
   def round

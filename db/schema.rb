@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_211155) do
+ActiveRecord::Schema.define(version: 2020_10_01_072444) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -378,6 +378,7 @@ ActiveRecord::Schema.define(version: 2020_08_13_211155) do
     t.string "aggregate_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "full_cup_count", default: 4, null: false
   end
 
   create_table "tag_references", force: :cascade do |t|
