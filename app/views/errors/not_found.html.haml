@@ -1,0 +1,19 @@
+.row
+  .col-md-8
+    %h1
+      %span.glyphicon.glyphicon-flash
+      Fehler 404 - Seite nicht gefunden
+      %span.glyphicon.glyphicon-flash
+.row
+  .col-md-6
+    = box 'Mögliche Ursachen' do
+      %ul
+        %li Programmfehler
+        %li Manuelle (falsche) Eingabe einer URL
+        %li URL ist nicht <em>mehr</em> vorhanden (z. B. Element wurde gelöscht)
+  .col-md-6
+    = box 'Mögliche Lösungen' do
+      %ul
+        %li Erneut probieren
+        %li <em>Aktualisieren</em> der Browser-Seite
+        %li #{link_to('Entwickler', impressum_path)} über Fehler benachrichtigen
