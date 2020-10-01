@@ -18,10 +18,6 @@ module ApplicationHelper
     end
   end
 
-  def page_title
-    controller_path.classify.constantize.model_name.human
-  end
-
   def short_edit_link(path, options = {})
     options[:title] ||= 'Bearbeiten'
     icon_link_btn('glyphicon glyphicon-edit', path, options)
@@ -30,11 +26,6 @@ module ApplicationHelper
   def short_destroy_link(path, options = {})
     options[:title] ||= 'Löschen'
     icon_link_btn('glyphicon glyphicon-remove', path, options)
-  end
-
-  def short_show_link(path, options = {})
-    options[:title] ||= 'Ansehen'
-    icon_link_btn('glyphicon glyphicon-eye', path, options)
   end
 
   def icon_link_btn(icon_classes, path, options = {})
@@ -58,11 +49,7 @@ module ApplicationHelper
 
   def series_assessment_cup_participation(cup, row)
     result = row.participation_for_cup(cup)
-    if result
-      tag.div(result.result_entry_with_points, class: 'series-participation', data: { id: result.id })
-    else
-      ''
-    end
+    result ? tag.div(result.result_entry_with_points, class: 'series-participation', data: { id: result.id }) : ''
   end
 
   def can?(verb, resource)

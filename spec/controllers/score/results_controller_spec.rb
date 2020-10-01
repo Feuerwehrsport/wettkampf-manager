@@ -63,6 +63,16 @@ RSpec.describe Score::ResultsController, type: :controller, seed: :configured, u
       get :edit, params: { id: result.id }
       expect(response).to be_successful
       expect(assigns(:tags)).to eq []
+      expect(assigns(:series_form)).to eq false
+    end
+
+    context 'when series form requested' do
+      it 'renders form' do
+        get :edit, params: { id: result.id, series: '1' }
+        expect(response).to be_successful
+        expect(assigns(:tags)).to eq []
+        expect(assigns(:series_form)).to eq true
+      end
     end
   end
 

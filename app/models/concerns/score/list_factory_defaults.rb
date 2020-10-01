@@ -17,16 +17,6 @@ module Score::ListFactoryDefaults
     Score::List.where(id: assessments.joins(:lists).pluck('score_lists.id'))
   end
 
-  def default_name
-    name.presence || begin
-      if !discipline.like_fire_relay?
-        "#{default_main_name} - Lauf #{default_run}"
-      else
-        default_main_name
-      end
-    end
-  end
-
   def default_shortcut
     shortcut.presence || begin
       if !discipline.like_fire_relay?
