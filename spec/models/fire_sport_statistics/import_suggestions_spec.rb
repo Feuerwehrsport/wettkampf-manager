@@ -12,7 +12,9 @@ RSpec.describe FireSportStatistics::ImportSuggestions, type: :model do
     let(:team_member) { { person_id: 1757, team_id: 1108 } }
     let(:team_spelling) { { team_id: 1108, name: 'FF Putpus', shortcut: 'Putpus' } }
     let(:person_spelling) { { person_id: 1757, first_name: 'Emely', last_name: 'Heyne', gender: 'female' } }
-    let(:series_round) { { id: 68, name: 'BB-Cup', year: 2019, aggregate_type: 'BrandenburgCup', full_cup_count: 4 } }
+    let(:series_round) do
+      { id: 68, name: 'BB-Cup', year: Date.current.year, aggregate_type: 'BrandenburgCup', full_cup_count: 4 }
+    end
     let(:series_cup) { { id: 531, round_id: 68, date: '2017-08-05', place: 'Tryppehna' } }
     let(:series_assessment) do
       { id: 812, gender: 'male', name: 'Löschangriff nass - männlich', discipline: 'la',
