@@ -35,10 +35,10 @@ Imports::Person = Struct.new(:configuration, :data) do
       if team.blank? && data[:team_name].present?
         team = ::Team.create_with(
           disable_autocreate_assessment_requests: true,
-          shortcut: data[:team_name].first(12),
+          shortcut: data[:team_name].strip.first(12),
           number: 1,
         ).find_or_create_by!(
-          name: data[:team_name],
+          name: data[:team_name].strip,
           gender: Genderable::GENDERS[data[:gender].to_sym],
         )
       end
