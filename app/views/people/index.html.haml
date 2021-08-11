@@ -9,7 +9,7 @@
 
         - if Series::Round.with_local_results.present? && @without_statistics_id.present?
           .alert.alert-danger
-            Es konnten zu #{@without_statistics_id.count} Wettkämpfern keine D-Cup-Ergebnisse gefunden wurden.
+            Es konnten zu #{@without_statistics_id.count} Wettkämpfern keine Serien-Ergebnisse gefunden wurden.
             = btn_link_to 'Probleme ansehen', without_statistics_id_people_path
 
 
