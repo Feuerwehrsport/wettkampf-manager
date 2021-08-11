@@ -7,7 +7,7 @@
     = f.error_notification
     .row
       .col-md-10
-        #certificates-template-position{ data: { font_family_regular: @certificates_template.font.attached? ? "certificates_template_#{@certificates_template.id}_regular" : '', font_family_bold: @certificates_template.font2.attached? ? "certificates_template_#{@certificates_template.id}_bold" : '', background: rails_blob_path(@certificates_template.image), config: Certificates::TextField::KEY_CONFIG.to_json } }
+        #certificates-template-position{ data: { font_family_regular: @certificates_template.font.attached? ? "certificates_template_#{@certificates_template.id}_regular" : '', font_family_bold: @certificates_template.font2.attached? ? "certificates_template_#{@certificates_template.id}_bold" : '', background: @certificates_template.image.attached? ? rails_blob_path(@certificates_template.image) : '', config: Certificates::TextField::KEY_CONFIG.to_json } }
 
       .col-md-2#position-buttons
         .btn.btn-default.btn-sm#add-new-field Feld hinzufügen
