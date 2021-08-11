@@ -13,8 +13,9 @@
             = btn_link_to 'Probleme ansehen', without_statistics_id_teams_path
 
       - Genderable::GENDERS.keys.each do |gender|
-        %h4= t("gender.#{gender}")
-        = render 'index_table', collection: @teams.select { |t| t.gender == gender.to_s }, assessments: Assessment.requestable_for(Team.new(gender: gender))
+        - if admin_logged_in? || @teams.select { |t| t.gender == gender.to_s }.present?
+          %h4= t("gender.#{gender}")
+          = render 'index_table', collection: @teams.select { |t| t.gender == gender.to_s }, assessments: Assessment.requestable_for(Team.new(gender: gender))
 
       - box.footer do
         = btn_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'

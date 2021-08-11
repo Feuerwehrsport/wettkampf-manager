@@ -14,8 +14,9 @@
 
 
       - Genderable::GENDERS.keys.each do |gender|
-        %h4= t("gender.#{gender}")
-        = render 'index_table', collection: @people.object.gender(gender).decorate
+        - if admin_logged_in? || @people.object.gender(gender).exists?
+          %h4= t("gender.#{gender}")
+          = render 'index_table', collection: @people.object.gender(gender).decorate
 
       - box.footer do
         = btn_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
