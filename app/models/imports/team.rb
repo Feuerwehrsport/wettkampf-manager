@@ -8,7 +8,7 @@ Imports::Team = Struct.new(:configuration, :data) do
       name: data[:name],
       gender: data[:gender],
       number: number,
-      shortcut: data[:shortcut].first(12),
+      shortcut: clean_and_cut_shortcut(data[:shortcut]),
       disable_autocreate_assessment_requests: true,
       fire_sport_statistics_team: fsst,
       federal_state: FederalState.find_by(shortcut: data[:federal_state]),
@@ -32,5 +32,29 @@ Imports::Team = Struct.new(:configuration, :data) do
 
   def competition_team
     @team
+  end
+
+  protected
+
+  def clean_and_cut_shortcut(long)
+    loop do
+      before = long
+      long = long.gsub(/\AFF\s/, '')
+      long = long.gsub(/\ABF\s/, '')
+      long = long.gsub(/\AOB\s/, '')
+      long = long.gsub(/\ATeam\s/, '')
+      long = long.gsub(/\AWettkampfteam\s/i, '')
+      long = long.gsub(/\AWettkampfgruppe\s/i, '')
+      long = long.gsub(/Berufsfeuerwehr/i, '')
+      long = long.gsub(/Gruppe/i, '')
+      long = long.gsub(/Wettkampf/i, '')
+      long = long.gsub(/Freiwillige/i, '')
+      long = long.gsub(/Feuerwehr/i, '')
+      long = long.gsub(/Ostseebad/i, '')
+      long = long.gsub(/\s-\s/, '-')
+      long = long.strip
+      break if before == long
+    end
+    long.first(12)
   end
 end
