@@ -62,6 +62,10 @@ class API::Runner
         config[:klass_select] = a
         self.klass = API::LandesanlageMVReader
       end
+      menu.choice('Anlage von Platz-Gamstädt') do |a|
+        config[:klass_select] = a
+        self.klass = API::PlatzGamstaedtReader
+      end
       menu.default = config[:klass_select]
     end
     cli.say("\n")

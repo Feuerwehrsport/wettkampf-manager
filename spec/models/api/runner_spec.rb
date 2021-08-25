@@ -39,6 +39,7 @@ RSpec.describe API::Runner, type: :model do
         1. Timy von Alge-Timing
         2. Computer vom Team-MV
         3. Landesanlage MV
+        4. Anlage von Platz-Gamstädt
         Bitte das angeschlossene Gerät angeben:
         Angeschlossene Schnittstelle? |/dev/ttyUSB0|
         1. Hakenleitersteigen
