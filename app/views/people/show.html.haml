@@ -29,17 +29,4 @@
           = btn_link_to 'Bearbeiten', action: :edit
 
   .col-md-8
-    = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
-      %table.table
-        - Assessment.requestable_for(@person).each do |assessment|
-          - decorated_assessment = assessment.decorate
-          %tr
-            %th
-              = discipline_image decorated_assessment.discipline
-              = decorated_assessment
-            %td
-              - if @person.request_for(assessment).present?
-                = t("assessment_types.#{@person.request_for(assessment).assessment_type}")
-      - if admin_logged_in?
-        - box.footer do
-          = btn_link_to 'Wertungsgruppen bearbeiten', { action: :edit_assessment_requests }, remote: true
+    = render('assessment_request_box', editable: true)

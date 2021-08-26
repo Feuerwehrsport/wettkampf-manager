@@ -10,6 +10,7 @@ class Person < CacheDependendRecord
   has_many :list_entries, class_name: 'Score::ListEntry', as: :entity, dependent: :destroy, inverse_of: :entity
   has_many :requested_assessments, through: :requests, source: :assessment
   before_save :assign_registration_order
+  after_save :remove_outdated_requests, on: :update
 
   validates :last_name, :first_name, :gender, presence: true
   validate :validate_team_gender
@@ -29,6 +30,12 @@ class Person < CacheDependendRecord
   end
 
   private
+
+  def remove_outdated_requests
+    return unless gender_previously_changed?
+
+    requests.reject { |request| request.assessment.gender == gender }.each(&:destroy)
+  end
 
   def strip_names
     self.last_name = last_name.try(:strip)

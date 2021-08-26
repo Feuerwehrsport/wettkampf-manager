@@ -24,4 +24,16 @@ RSpec.describe Person, type: :model do
       end
     end
   end
+
+  describe 'outdates requests after gender change' do
+    let(:assessment) { create(:assessment) }
+    let(:person) { create(:person, requests: [build(:assessment_request, assessment: assessment)]) }
+
+    it 'removes requests' do
+      expect(person.gender).to eq 'male'
+      expect(person.requests.count).to eq 1
+      person.update!(gender: :female)
+      expect(person.requests.count).to eq 0
+    end
+  end
 end
