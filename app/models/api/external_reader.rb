@@ -7,7 +7,7 @@ class API::ExternalReader
   DEFAULT_SENDER = ''
   include ActiveModel::Model
   include ActiveRecord::AttributeAssignment
-  attr_accessor :url, :password, :sender, :cli, :serial_connection
+  attr_accessor :url, :password, :sender, :cli, :serial_connection, :serial_connection_output
 
   def self.start_with_check(options)
     instance = new(options)
@@ -21,11 +21,23 @@ class API::ExternalReader
 
   def perform
     loop do
-      evaluate_output(serial_adapter.read(10))
-      sleep 0.3
+      line = serial_adapter.read(10)
+      if line.present?
+        evaluate_output(line)
+        send_to_output(line)
+
+      else
+        sleep 0.3
+      end
     end
   rescue RubySerial::Error => e
     log_send_error("Schnittstelle: #{e.message}")
+  end
+
+  def send_to_output(bytes)
+    serial_adapter_output.write(bytes) if serial_connection_output.present?
+  rescue RubySerial::Error => e
+    log_send_error("Output-Schnittstelle: #{e.message}")
   end
 
   def check
@@ -78,6 +90,10 @@ class API::ExternalReader
 
   def serial_adapter
     @serial_adapter ||= Serial.new(serial_connection)
+  end
+
+  def serial_adapter_output
+    @serial_adapter_output ||= Serial.new(serial_connection_output)
   end
 
   def evaluate_output(string)

@@ -17,6 +17,7 @@ RSpec.describe API::ExternalReader, type: :model do
     it 'loops' do
       expect(reader).to receive(:sleep).with(0.3).and_raise(RubySerial::Error.new(:blub))
       expect(reader).to receive(:serial_adapter).and_return(serial)
+      expect(reader).to receive(:serial_adapter).and_return(StringIO.new(''))
       expect(reader).to receive(:log_send_error).with('Schnittstelle: blub')
       reader.perform
     end

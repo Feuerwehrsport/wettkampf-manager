@@ -18,6 +18,7 @@ class API::PlatzGamstaedtReader < API::ExternalReader
         sleep 0.1
       else
         evaluate_byte(byte)
+        send_to_output([byte].pack('c*'))
       end
     end
   rescue RubySerial::Error => e

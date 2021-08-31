@@ -4,20 +4,21 @@ require 'highline'
 require 'rbconfig'
 
 class API::Runner
-  attr_accessor :klass, :serial_connection, :sender, :url, :password
+  attr_accessor :klass, :serial_connection, :serial_connection_output, :sender, :url, :password
 
   def initialize
     cli.say("\n\n")
-
     ask_klass
     ask_serial_connection
+    ask_serial_connection_output
     ask_sender
     ask_url
     ask_password
 
     write_config(config)
 
-    klass.start_with_check(url: url, password: password, serial_connection: serial_connection, cli: cli, sender: sender)
+    klass.start_with_check(url: url, password: password, serial_connection: serial_connection,
+                           serial_connection_output: serial_connection_output, cli: cli, sender: sender)
   end
 
   def cli
@@ -75,6 +76,24 @@ class API::Runner
     default = config[:serial_connection] || (os == :posix ? '/dev/ttyUSB0' : 'COM0')
     self.serial_connection = cli.ask('Angeschlossene Schnittstelle? ') { |q| q.default = default }
     config[:serial_connection] = serial_connection
+    cli.say("\n")
+  end
+
+  def ask_serial_connection_output
+    answer = cli.ask('Schnittstellen-Eingabe an andere Schnittstelle weitergeben? Z.B. für Anzeigetafeln?') do |q|
+      q.character = true
+      q.default = config[:serial_connection_output] == 'N' ? 'N' : 'J'
+      q.validate = /\A[JN]\Z/i
+    end
+
+    if answer.casecmp('N').zero?
+      config[:serial_connection_output] = 'N'
+      self.serial_connection_output = nil
+    else
+      default = config[:serial_connection_output] || (os == :posix ? '/dev/ttyUSB1' : 'COM1')
+      self.serial_connection_output = cli.ask('Angeschlossene Schnittstelle? ') { |q| q.default = default }
+      config[:serial_connection_output] = serial_connection_output
+    end
     cli.say("\n")
   end
 
