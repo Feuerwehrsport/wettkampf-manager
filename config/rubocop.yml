@@ -75,6 +75,10 @@ Rails/LexicallyScopedActionFilter:
 Rails/Output:
   Exclude:
   - config/deploy/**/*
+Rails/RakeEnvironment:
+  AutoCorrect: false
+  Exclude:
+  - lib/tasks/fake_stopwatch.rake
 Rails/ReversibleMigration:
   Enabled: false
 Rails/SkipsModelValidations:
