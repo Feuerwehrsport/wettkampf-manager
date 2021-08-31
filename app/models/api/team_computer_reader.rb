@@ -6,7 +6,7 @@ class API::TeamComputerReader < API::ExternalReader
   protected
 
   def line_regexp
-    /\A([^\r\n]*\r\n)(.*)\z/
+    /\A([^\r\n]*[\r\n])(.*)\z/m
   end
 
   def evaluate_line(line)
