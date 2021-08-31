@@ -30,7 +30,7 @@ class Certificates::Template < CacheDependendRecord
     Rails.root.join('tmp/certificates', id.to_s)
   end
 
-  def to_json(*_args)
+  def as_json(*_args)
     {
       name: name,
       image: image.attached? ? Base64.encode64(image.download) : nil,
@@ -43,6 +43,6 @@ class Certificates::Template < CacheDependendRecord
       font2_content_type: font2.attached? ? font2.blob.content_type : nil,
       font2_name: font2.attached? ? font2.filename : nil,
       text_fields: text_fields.map(&:to_export_hash),
-    }.to_json
+    }
   end
 end

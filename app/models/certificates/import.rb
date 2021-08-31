@@ -9,6 +9,7 @@ class Certificates::Import
   include ActiveRecord::Callbacks
   include Draper::Decoratable
   attr_accessor :file, :template
+  attr_writer :json_data
 
   validates :file, presence: true
 

@@ -23,16 +23,10 @@ class Certificates::TemplatesController < ApplicationController
 
   def duplicate
     assign_existing_resource
-    new_instance = resource_instance.dup
-    resource_instance.text_fields.each do |field|
-      new_instance.text_fields << field.dup
-    end
-    new_instance.font = resource_instance.font.dup if resource_instance.font.attached?
-    new_instance.font2 = resource_instance.font2.dup if resource_instance.font2.attached?
-    new_instance.image = resource_instance.image.dup if resource_instance.image.attached?
-    new_instance.name += ' (Duplikat)'
-    new_instance.save!
-    redirect_to action: :show, id: new_instance
+    resource_instance.name = "#{resource_instance.name} (Duplikat)"
+    import = Certificates::Import.new(json_data: resource_instance.as_json)
+    import.create_template
+    redirect_to certificates_template_path(import.template)
   end
 
   def remove_file
