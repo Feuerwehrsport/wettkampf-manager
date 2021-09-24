@@ -73,26 +73,41 @@ class API::Runner
   end
 
   def ask_serial_connection
-    default = config[:serial_connection] || (os == :posix ? '/dev/ttyUSB0' : 'COM0')
-    self.serial_connection = cli.ask('Angeschlossene Schnittstelle? ') { |q| q.default = default }
-    config[:serial_connection] = serial_connection
+    if os == :posix
+      cli.choose do |menu|
+        default = config[:serial_connection] || Dir['/dev/ttyUSB*'].first
+        menu.prompt = "Angeschlossene Schnittstelle? #{default}: "
+        Dir['/dev/ttyUSB*'].each do |file|
+          menu.choice(file) do |a|
+            config[:serial_connection] = a
+            self.serial_connection = a
+          end
+        end
+        menu.default = default
+      end
+    else
+      default = config[:serial_connection] || 'COM0'
+      self.serial_connection = cli.ask('Angeschlossene Schnittstelle? ') { |q| q.default = default }
+      config[:serial_connection] = serial_connection
+    end
     cli.say("\n")
   end
 
   def ask_serial_connection_output
-    answer = cli.ask('Schnittstellen-Eingabe an andere Schnittstelle weitergeben? Z.B. für Anzeigetafeln?') do |q|
-      q.character = true
-      q.default = config[:serial_connection_output] == 'N' ? 'N' : 'J'
-      q.validate = /\A[JN]\Z/i
-    end
-
-    if answer.casecmp('N').zero?
-      config[:serial_connection_output] = 'N'
-      self.serial_connection_output = nil
-    else
-      default = config[:serial_connection_output] || (os == :posix ? '/dev/ttyUSB1' : 'COM1')
-      self.serial_connection_output = cli.ask('Angeschlossene Schnittstelle? ') { |q| q.default = default }
-      config[:serial_connection_output] = serial_connection_output
+    cli.choose do |menu|
+      default = config[:serial_connection_output] || 'Nein'
+      menu.prompt = "Schnittstellen-Eingabe an andere Schnittstelle weitergeben? Z.B. für Anzeigetafeln? #{default}: "
+      menu.choice('Nein') do |a|
+        config[:serial_connection_output] = a
+        self.serial_connection_output = nil
+      end
+      Dir['/dev/ttyUSB*'].each do |file|
+        menu.choice(file) do |a|
+          config[:serial_connection] = a
+          self.serial_connection = a
+        end
+      end
+      menu.default = default
     end
     cli.say("\n")
   end
