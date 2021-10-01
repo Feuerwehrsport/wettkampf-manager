@@ -177,6 +177,8 @@ de:
     male_symbol: ♂
     youth: Jugend
     youth_symbol: ⚤
+    children: Kinder
+    children_symbol: 🧒
 
   assessment_types:
     competitor: Teilnahme

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Genderable
-  GENDERS = { female: 0, male: 1, youth: 2 }.freeze
+  GENDERS = { female: 0, male: 1, youth: 2, children: 3 }.freeze
   extend ActiveSupport::Concern
   included do
     enum gender: GENDERS

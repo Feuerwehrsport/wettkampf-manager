@@ -9,6 +9,7 @@ Exports::JSON::People = Struct.new(:people) do
       female: index_export_data(people.gender(:female).decorate),
       male: index_export_data(people.gender(:male).decorate),
       youth: index_export_data(people.gender(:youth).decorate),
+      children: index_export_data(people.gender(:children).decorate),
     }
   end
 
