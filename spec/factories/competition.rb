@@ -6,5 +6,6 @@ FactoryBot.define do
     date  { Date.current }
     flyer_text { 'Beispiel' }
     create_possible { true }
+    federal_states { true }
   end
 end

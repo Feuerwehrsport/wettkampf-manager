@@ -2,12 +2,9 @@
 
 module Exports::Teams
   def index_export_data(collection, full: false)
-    headline = [
-      Team.human_attribute_name(:name),
-      'BL',
-      Team.human_attribute_name(:gender),
-      'Wettkä.',
-    ]
+    headline = [Team.human_attribute_name(:name)]
+    headline.push('BL') if Competition.one.federal_states?
+    headline.push(Team.human_attribute_name(:gender), 'Wettkä.')
     headline.push('Los') if Competition.one.lottery_numbers?
     headline.push(Team.human_attribute_name(:shortcut)) if full
     tags.each { |tag| headline.push(tag.to_s) }
@@ -15,12 +12,9 @@ module Exports::Teams
 
     collection.each do |team|
       pc = team.people.count
-      line = [
-        team.numbered_name,
-        team.federal_state.try(:shortcut),
-        team.translated_gender,
-        pc.zero? ? '-' : pc,
-      ]
+      line = [team.numbered_name]
+      line.push(team.federal_state.try(:shortcut)) if Competition.one.federal_states?
+      line.push(team.translated_gender, pc.zero? ? '-' : pc)
       line.push(team.lottery_number) if Competition.one.lottery_numbers?
       line.push(team.shortcut) if full
       tags.each { |tag| line.push(team.tags.include?(tag) ? 'X' : '') }

@@ -11,7 +11,8 @@
     %tr{ team.list_entries_group_competitor_valid? ? {} : { class: 'danger' } }
       %td
         = team.numbered_name
-        %em.small= team.federal_state.try(:shortcut)
+        - if Competition.one.federal_states?
+          %em.small= team.federal_state.try(:shortcut)
       %td
         = team.people.count.positive? ? team.people.count : ''
         - if admin_logged_in?

@@ -8,7 +8,7 @@
         %tr
           %th= @team.class.human_attribute_name :shortcut
           %td= @team.shortcut
-        - if @team.federal_state.present?
+        - if @team.federal_state.present? && Competition.one.federal_states?
           %tr
             %th= @team.class.human_attribute_name :federal_state
             %td= @team.federal_state

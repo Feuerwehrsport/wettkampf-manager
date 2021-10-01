@@ -7,7 +7,8 @@
     = f.input :shortcut, input_html: { maxlength: 12 }, hint: 'Keine Nummern im Namen angeben!'
     = f.input :number
     = f.input :gender, collection: Genderable::GENDERS.keys
-    = f.association :federal_state
+    - if Competition.one.federal_states?
+      = f.association :federal_state
     - if Competition.one.lottery_numbers?
       = f.input :lottery_number
     = render 'tag_form', f: f

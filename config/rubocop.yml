@@ -35,6 +35,7 @@ Metrics/BlockLength:
   - class_methods
   - included
   - new
+  Max: 30
 Metrics/ClassLength:
   Max: 200
 Metrics/CyclomaticComplexity:

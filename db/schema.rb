@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_01_072444) do
+ActiveRecord::Schema.define(version: 2021_10_01_222340) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_072444) do
     t.boolean "lottery_numbers", default: false, null: false
     t.string "flyer_headline"
     t.boolean "hide_competition_results", default: false, null: false
+    t.boolean "federal_states", default: false, null: false
   end
 
   create_table "disciplines", force: :cascade do |t|

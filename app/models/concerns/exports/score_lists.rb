@@ -25,8 +25,10 @@ module Exports::ScoreLists
         tags = (entry.try(:entity).try(:tag_names) || []) & list.tag_names
         team_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
 
-        federal_state_shortcut = entry.try(:entity).try(:federal_state).try(:shortcut)
-        team_name += "<font size='6'> <i>#{federal_state_shortcut}</i></font>" if federal_state_shortcut.present?
+        if Competition.one.federal_states?
+          federal_state_shortcut = entry.try(:entity).try(:federal_state).try(:shortcut)
+          team_name += "<font size='6'> <i>#{federal_state_shortcut}</i></font>" if federal_state_shortcut.present?
+        end
       end
       line.push(content: team_name, inline_format: true)
       line.push(entry.try(:human_time))
