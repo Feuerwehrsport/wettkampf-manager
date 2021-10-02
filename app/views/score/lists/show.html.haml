@@ -1,27 +1,34 @@
 .row.refreshable#score-list-show
   .col-md-9
-    = box @score_list.name do |box|
-      %table.table
-        = render 'list_headline', times: true
-        %tbody
-          - score_list_entries(@score_list) do |entry, run, track|
-            = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
-              %td.time-col
-                = entry.try(:human_time)
-                - if logged_in? && can?(:edit_times, @score_list)
-                  .pull-right
-                    - if track == 1
-                      = short_edit_link edit_score_list_run_path(@score_list, run: run), title: 'Zeiten bearbeiten', class: 'btn-xs'
-                    - if entry.present?
-                      = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: 'Aus Liste entfernen', class: 'btn-xs', remote: true
-      - box.footer do
-        = btn_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
-        = btn_link_to 'als PDF mit vorgetäuschtem zweiten Lauf', { format: :pdf, double_run: true }, target: '_blank', rel: 'noopener'
-        = btn_link_to 'als PDF für Kampfrichter', { format: :pdf, more_columns: true }, target: '_blank', rel: 'noopener'
-        = btn_link_to 'als XLS', format: :xlsx
-
+    = box @score_list.name, warning: @score_list.hidden? do |box|
+      - if logged_in? || !@score_list.hidden?
+        %table.table
+          = render 'list_headline', times: true
+          %tbody
+            - score_list_entries(@score_list) do |entry, run, track|
+              = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
+                %td.time-col
+                  = entry.try(:human_time)
+                  - if logged_in? && can?(:edit_times, @score_list)
+                    .pull-right
+                      - if track == 1
+                        = short_edit_link edit_score_list_run_path(@score_list, run: run), title: 'Zeiten bearbeiten', class: 'btn-xs'
+                      - if entry.present?
+                        = short_destroy_link destroy_entity_score_list_path(@score_list, entry_id: entry.id), title: 'Aus Liste entfernen', class: 'btn-xs', remote: true
+        - box.footer do
+          = btn_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
+          = btn_link_to 'als PDF mit vorgetäuschtem zweiten Lauf', { format: :pdf, double_run: true }, target: '_blank', rel: 'noopener'
+          = btn_link_to 'als PDF für Kampfrichter', { format: :pdf, more_columns: true }, target: '_blank', rel: 'noopener'
+          = btn_link_to 'als XLS', format: :xlsx
+      - else
+        %p Diese Startliste ist derzeit nicht öffentlich einsehbar.
   .col-md-3
     - if logged_in?
+      - if @score_list.hidden?
+        = box('Versteckt', danger: true) do
+          %p Die Startliste ist derzeit noch versteckt. Bitte geben Sie diese nach der Kontrolle frei.
+          - if can?(:edit, @score_list)
+            = block_link_to 'Bearbeiten', { action: :edit }
       = box('Aktionen') do
         - if can?(:edit, @score_list)
           = block_link_to 'Reihenfolge bearbeiten', { action: :move }

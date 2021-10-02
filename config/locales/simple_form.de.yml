@@ -36,6 +36,7 @@ de:
         shortcut: Zum Beispiel <em>Lauf 1</em>, <em>Vorlauf</em> oder <em>Finale</em>, (maximal 8 Zeichen)
         date: Überschreibt bei Angabe das Datum des Wettkampfes YYYY-MM-DD
         show_multiple_assessments: Bei Aktivierung wird bei einer Startliste mit verschiedenen Wertungen immer die Wertung in kleinerer Schrift unter dem Mannschaftsnamen geschrieben
+        hidden: Manchmal ist es besser, die Startliste zuerst zu verstecken, um weitere Änderungen vornehmen zu können.
       score_result:
         date: Überschreibt bei Angabe das Datum des Wettkampfes YYYY-MM-DD
       team:

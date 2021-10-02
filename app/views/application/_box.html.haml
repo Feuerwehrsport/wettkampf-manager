@@ -1,4 +1,9 @@
-.panel.panel-default{ box.options[:modal] ? { class: 'modal fade' } : {} }
+:ruby
+  classes = []
+  classes.push('modal', 'fade') if box.options[:modal]
+  classes.push('panel-danger') if box.options[:danger]
+  classes.push('panel-warning') if box.options[:warning]
+.panel.panel-default{ class: classes }
   - if box.title.present? || box.header.present?
     .panel-heading{ box.options[:modal] ? { class: 'modal-body' } : {} }
       = box.title.presence

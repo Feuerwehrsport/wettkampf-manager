@@ -9,6 +9,7 @@
     %th Anzahl der Läufe
     %td= @score_list_factory.preview_run_count
 
+= f.input :hidden, hint: 'Manchmal ist es besser, die Startliste zuerst zu verstecken. Es kann dann zum Beispiel kontrolliert werden, ob die Reihenfolge stimmt.'
 
 .pull-right
   = f.primary_button :submit, 'Startliste erstellen'

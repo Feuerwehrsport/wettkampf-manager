@@ -123,7 +123,7 @@ class Score::ListFactory < CacheDependendRecord
 
   def list
     @list ||= Score::List.create!(name: name, shortcut: shortcut, assessments: assessments, results: results,
-                                  track_count: track_count)
+                                  track_count: track_count, hidden: hidden)
   end
 
   protected

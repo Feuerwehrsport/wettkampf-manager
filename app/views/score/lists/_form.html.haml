@@ -5,6 +5,7 @@
     = f.input :shortcut, input_html: { maxlength: 8 }
     = f.input :date, as: :string
     = f.input :show_multiple_assessments
+    = f.input :hidden
     = f.association :results, collection: Score::Result.all, as: :check_boxes
     = render 'tag_form', f: f
     - box.footer do

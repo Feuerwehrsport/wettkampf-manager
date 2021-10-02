@@ -88,6 +88,7 @@ de:
       score/list_factory:
         assessments: Wertungsgruppen
         name: Name
+        hidden: Startliste verstecken
         shortcut: Abkürzung
         track_count: Wettkampfbahnen
         track: Wettkampfbahn
@@ -120,6 +121,7 @@ de:
         shortcut: Abkürzung
         date: Datum
         show_multiple_assessments: Zeige Wertungsgruppe unter Mannschaft an
+        hidden: Verstecken
       score/list_entry:
         assessment: Wertungsgruppe
         assessment_type: Wertung
