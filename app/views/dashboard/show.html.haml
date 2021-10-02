@@ -3,19 +3,20 @@
     = box decorated_competition do
       %h4 #{l decorated_competition.date} - #{decorated_competition.place}
       %table.table
+        - used_genders = Genderable.used_genders
         %tr
           %th
-          - Genderable::GENDERS.keys.each do |gender|
+          - used_genders.each do |gender|
             %th= t("gender.#{gender}")
         - if Person.exists?
           %tr
             %th Angemeldete Wettkämpfer
-            - Genderable::GENDERS.keys.each do |gender|
+            - used_genders.each do |gender|
               %th= Person.gender(gender).count
         - if Team.exists?
           %tr
             %th Angemeldete Mannschaften
-            - Genderable::GENDERS.keys.each do |gender|
+            - used_genders.each do |gender|
               %th= Team.gender(gender).count
   - if admin_logged_in?
     .col-md-5

@@ -8,4 +8,8 @@ module Genderable
     scope :gender, ->(gender) { where(gender: GENDERS[gender.to_sym]) }
     scope :order_by_gender, ->(gender) { order(gender: gender.to_s == 'female' ? :asc : :desc) }
   end
+
+  def self.used_genders
+    GENDERS.keys.select { |gender| Person.gender(gender).exists? || Team.gender(gender).exists? }
+  end
 end
