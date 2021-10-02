@@ -5,18 +5,18 @@
       %table.table
         %tr
           %th
-          %th Frauen
-          %th Männer
+          - Genderable::GENDERS.keys.each do |gender|
+            %th= t("gender.#{gender}")
         - if Person.exists?
           %tr
             %th Angemeldete Wettkämpfer
-            %th= Person.female.count
-            %th= Person.male.count
+            - Genderable::GENDERS.keys.each do |gender|
+              %th= Person.gender(gender).count
         - if Team.exists?
           %tr
             %th Angemeldete Mannschaften
-            %th= Team.female.count
-            %th= Team.male.count
+            - Genderable::GENDERS.keys.each do |gender|
+              %th= Team.gender(gender).count
   - if admin_logged_in?
     .col-md-5
       = box 'Konfigurieren' do
