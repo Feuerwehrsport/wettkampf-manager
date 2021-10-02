@@ -103,8 +103,8 @@ class API::Runner
       end
       Dir['/dev/ttyUSB*'].each do |file|
         menu.choice(file) do |a|
-          config[:serial_connection] = a
-          self.serial_connection = a
+          config[:serial_connection_output] = a
+          self.serial_connection_output = a
         end
       end
       menu.default = default
