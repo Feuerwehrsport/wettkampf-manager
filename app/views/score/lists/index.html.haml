@@ -13,7 +13,7 @@
               = discipline_image(list.discipline)
               = list.name
             %td
-              - if !logged_in? && !list.hidden?
+              - if !logged_in? && !list.hidden? || logged_in?
                 = btn_link_to 'Ansehen', list
               - else
                 Noch nicht öffentlich
