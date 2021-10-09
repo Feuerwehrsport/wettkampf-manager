@@ -4,13 +4,15 @@ require 'highline'
 require 'rbconfig'
 
 class API::Runner
-  attr_accessor :klass, :serial_connection, :serial_connection_output, :sender, :url, :password
+  attr_accessor :klass, :serial_connection, :serial_connection_output, :serial_connection_output2,
+                :sender, :url, :password
 
   def initialize
     cli.say("\n\n")
     ask_klass
     ask_serial_connection
     ask_serial_connection_output
+    ask_serial_connection_output2
     ask_sender
     ask_url
     ask_password
@@ -18,7 +20,8 @@ class API::Runner
     write_config(config)
 
     klass.start_with_check(url: url, password: password, serial_connection: serial_connection,
-                           serial_connection_output: serial_connection_output, cli: cli, sender: sender)
+                           serial_connection_output: serial_connection_output,
+                           serial_connection_output2: serial_connection_output2, cli: cli, sender: sender)
   end
 
   def cli
@@ -105,6 +108,25 @@ class API::Runner
         menu.choice(file) do |a|
           config[:serial_connection_output] = a
           self.serial_connection_output = a
+        end
+      end
+      menu.default = default
+    end
+    cli.say("\n")
+  end
+
+  def ask_serial_connection_output2
+    cli.choose do |menu|
+      default = config[:serial_connection_output2] || 'Nein'
+      menu.prompt = "Schnittstellen-Eingabe an dritte Schnittstelle weitergeben? Z.B. für Anzeigetafeln? #{default}: "
+      menu.choice('Nein') do |a|
+        config[:serial_connection_output2] = a
+        self.serial_connection_output2 = nil
+      end
+      Dir['/dev/ttyUSB*'].each do |file|
+        menu.choice(file) do |a|
+          config[:serial_connection_output2] = a
+          self.serial_connection_output2 = a
         end
       end
       menu.default = default
