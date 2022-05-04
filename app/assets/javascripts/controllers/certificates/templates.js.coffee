@@ -172,7 +172,7 @@ class TextElement
         @regenerateTable()
       ).appendTo(alignLine)
       btn.addClass('btn-primary') if @formElement.get('align') is elem
-      
+
     $('<tr/>').appendTo(@table).append('<td/>').append('<th>Text</th>').append(alignLine)
 
     fontLine = $('<td colspan=2 class="text-center"/>')
@@ -185,7 +185,7 @@ class TextElement
         @regenerateTable()
       ).appendTo(fontLine)
       btn.addClass('btn-primary') if @formElement.get('font') is elem
-      
+
     $('<tr/>').appendTo(@table).append('<td/>').append('<th>Schrift</th>').append(fontLine)
 
     colorLine = $('<td colspan=2 class="text-center"/>')
@@ -201,7 +201,6 @@ class TextElement
       @adjustCenter()
     )
     $('<tr/>').appendTo(@table).append($('<td colspan="4" class="text-center"/>').append(btn))
-    
 
   blur: =>
     @element.removeClass('is-focused')
@@ -212,8 +211,8 @@ class TextElement
     @formElement.set('destroy', 'true')
 
   movedTo: (left, top) =>
-    @realLeft = left - @parentOffset.left
-    @realTop = top - @parentOffset.top
+    @realLeft = Math.round((left - @parentOffset.left) * 2)/2
+    @realTop = Math.round((top - @parentOffset.top) * 2)/2
     @savePosition()
     @regenerateTable()
 
@@ -224,6 +223,8 @@ class TextElement
     @movedTo(@element.offset().left, @element.offset().top)
 
   resizeTo: (@width, @height) =>
+    @width = Math.round(@width * 2) / 2
+    @height = Math.round(@height * 2) / 2
     @formElement.set('width', @width)
     @formElement.set('height', @height)
     @regenerateTable()
@@ -259,7 +260,7 @@ class TextElement
 
   setAlign: =>
     @textLine.css('textAlign', @formElement.get('align'))
-    
+
   setPosition: =>
     if @formElement.get('left') isnt ''
       left = parseInt(@formElement.get('left'), 10)

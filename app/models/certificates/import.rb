@@ -29,7 +29,7 @@ class Certificates::Import
     template.image.attach(attachable(:image)) if json_data[:image]
     template.font.attach(attachable(:font)) if json_data[:font]
     template.font2.attach(attachable(:font2)) if json_data[:font2]
-    json_data[:text_fields].each do |text_field|
+    text_fields.each do |text_field|
       template.text_fields.build(
         left: text_field[:left],
         top: text_field[:top],
@@ -51,5 +51,9 @@ class Certificates::Import
       filename: json_data[:"#{type}_name"],
       content_type: json_data[:"#{type}_content_type"],
     }
+  end
+
+  def text_fields
+    json_data[:text_fields] || []
   end
 end
