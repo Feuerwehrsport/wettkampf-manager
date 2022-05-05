@@ -30,7 +30,8 @@ class Score::ListFactories::GroupOrder < Score::ListFactory
 
   def sort_or_shuffle(hash)
     if team_shuffle?
-      hash.values.shuffle
+      # team with most requests first
+      hash.values.shuffle.sort_by(&:count).reverse
     else
       Team.where(id: hash.keys).reorder(:lottery_number).pluck(:id).map { |id| hash[id] }
     end
