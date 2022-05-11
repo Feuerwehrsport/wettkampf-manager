@@ -25,6 +25,8 @@
           .alert.alert-info
             Derzeit keine Einträge vorhanden
         - box.footer do
+          - if @waiting_time_entries.present?
+            = link_to 'Alle ignorieren', ignore_all_api_time_entries_path, method: :patch, class: 'btn btn-warning btn-sm', data: { confirm: 'Alle ungenutzten Einträge wirklich ignorieren?' }
           = btn_link_to 'Aktualisieren', url_for
     .col-md-4
       = box 'Startlistenvorauswahl' do

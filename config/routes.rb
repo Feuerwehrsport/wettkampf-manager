@@ -85,6 +85,9 @@ Rails.application.routes.draw do
       member do
         patch :ignore
       end
+      collection do
+        patch :ignore_all
+      end
     end
   end
 

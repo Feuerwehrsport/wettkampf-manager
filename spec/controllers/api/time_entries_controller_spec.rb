@@ -34,6 +34,16 @@ RSpec.describe API::TimeEntriesController, type: :controller, seed: :configured 
     end
   end
 
+  describe 'PATCH ignore_all', user: :logged_in do
+    it 'sets used_at for all waiting entries' do
+      entry
+      patch :ignore_all
+      expect(response).to redirect_to(action: :index)
+
+      expect(API::TimeEntry.waiting).to eq []
+    end
+  end
+
   describe 'GET show', user: :logged_in do
     it 'renders show' do
       get :show, params: { id: entry.id }

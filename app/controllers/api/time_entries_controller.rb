@@ -26,6 +26,11 @@ class API::TimeEntriesController < ApplicationController
     redirect_to action: :index
   end
 
+  def ignore_all
+    API::TimeEntry.waiting.update_all(used_at: Time.current)
+    redirect_to action: :index
+  end
+
   protected
 
   def open_lists
