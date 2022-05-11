@@ -13,7 +13,7 @@ end
 task :fake_stopwatch do
   last_start = Time.current
   cli = HighLine.new
-  adapter = Dir['/dev/ttyUSB*'].first
+  adapter = Dir['/dev/ttyUSB*'].min
   sa = Serial.new(adapter)
 
   def write(serial_adapter, string)
