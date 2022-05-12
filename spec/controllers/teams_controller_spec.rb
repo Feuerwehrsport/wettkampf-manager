@@ -65,6 +65,25 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
     end
   end
 
+  describe 'PATCH enrolled' do
+    it 'updates team' do
+      expect(team).not_to be_enrolled
+      patch :enrolled, params: { id: team.id }
+      expect(response).to redirect_to action: :index
+      expect(team.reload).to be_enrolled
+    end
+
+    context 'when reverse is given' do
+      it 'updates team' do
+        team.update!(enrolled: true)
+        expect(team).to be_enrolled
+        patch :enrolled, params: { id: team.id, reverse: 1 }
+        expect(response).to redirect_to action: :index
+        expect(team.reload).not_to be_enrolled
+      end
+    end
+  end
+
   describe 'GET index' do
     it 'renders' do
       get :index

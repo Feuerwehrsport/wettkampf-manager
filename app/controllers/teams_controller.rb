@@ -3,7 +3,8 @@
 class TeamsController < ApplicationController
   implement_crud_actions
   before_action :assign_team_tags
-  before_action :assign_resource_for_edit_assessment_requests, only: %i[edit_assessment_requests statistic_suggestions]
+  before_action :assign_resource_for_edit_assessment_requests, only: %i[edit_assessment_requests statistic_suggestions
+                                                                        enrolled]
 
   def show
     super
@@ -28,6 +29,11 @@ class TeamsController < ApplicationController
   end
 
   def statistic_suggestions; end
+
+  def enrolled
+    @team.update!(enrolled: params[:reverse].blank?)
+    redirect_to action: :index
+  end
 
   protected
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_083354) do
+ActiveRecord::Schema.define(version: 2022_05_11_212628) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -418,6 +418,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_083354) do
     t.integer "fire_sport_statistics_team_id"
     t.integer "lottery_number"
     t.integer "federal_state_id"
+    t.boolean "enrolled", default: false, null: false
     t.index ["federal_state_id"], name: "index_teams_on_federal_state_id"
     t.index ["fire_sport_statistics_team_id"], name: "index_teams_on_fire_sport_statistics_team_id"
     t.index ["name", "number", "gender"], name: "index_teams_on_name_and_number_and_gender", unique: true

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     member do
       get :edit_assessment_requests
       get :statistic_suggestions
+      patch :enrolled
     end
     collection { get :without_statistics_id }
   end

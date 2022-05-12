@@ -1,5 +1,7 @@
 %table.table.table-bordered.table-hover.table-condensed.people-index-table
   %tr
+    - if admin_logged_in?
+      %th
     %th= Team.human_attribute_name(:name)
     %th= Team.human_attribute_name(:people)
     - @tags.each do |tag|
@@ -9,6 +11,15 @@
     %th
   - collection.each do |team|
     %tr{ team.list_entries_group_competitor_valid? ? {} : { class: 'danger' } }
+      - if admin_logged_in?
+        - if team.enrolled?
+          %td{ title: 'Mannschaft korrekt angemeldet' }
+            = link_to(enrolled_team_path(id: team.id, reverse: 1), method: :patch, class: 'btn btn-default btn-xs') do
+              %span.glyphicon.glyphicon-ok
+        - else
+          %td{ title: 'Mannschaft nicht angemeldet' }
+            = link_to(enrolled_team_path(id: team.id), method: :patch, class: 'btn btn-default btn-xs') do
+              %span.glyphicon.glyphicon-remove
       %td
         = team.numbered_name
         - if Competition.one.federal_states?
