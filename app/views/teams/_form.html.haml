@@ -6,7 +6,8 @@
       %table.table.table-hover.table-condensed
     = f.input :shortcut, input_html: { maxlength: 12 }, hint: 'Keine Nummern im Namen angeben!'
     = f.input :number
-    = f.input :gender, collection: Genderable::GENDERS.keys
+    - unless @team.persisted?
+      = f.input :gender, collection: Genderable::GENDERS.keys
     - if Competition.one.federal_states?
       = f.association :federal_state
     - if Competition.one.lottery_numbers?
