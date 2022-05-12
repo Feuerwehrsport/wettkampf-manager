@@ -18,7 +18,7 @@
         %tr
           %th= @team.class.human_attribute_name :gender
           %td= @team.translated_gender
-        %tr
+        %tr{ admin_logged_in? && @team.assessment_request_group_competitor_valid? ? {} : { class: 'danger' } }
           %th= @team.class.human_attribute_name :people
           %td= @team.people.count
         - @tags.each do |tag|

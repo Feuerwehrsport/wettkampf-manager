@@ -10,7 +10,7 @@
       %th= discipline_image assessment.decorate.discipline, title: assessment.decorate
     %th
   - collection.each do |team|
-    %tr{ team.list_entries_group_competitor_valid? ? {} : { class: 'danger' } }
+    %tr{ admin_logged_in? && team.assessment_request_group_competitor_valid? ? {} : { class: 'danger' } }
       - if admin_logged_in?
         - if team.enrolled?
           %td{ title: 'Mannschaft korrekt angemeldet' }
@@ -26,9 +26,8 @@
           %em.small= team.federal_state.try(:shortcut)
       %td
         = team.people.count.positive? ? team.people.count : ''
-        - if admin_logged_in?
-          - unless team.list_entries_group_competitor_valid?
-            %span.glyphicon.glyphicon-remove{ title: 'Mannschaftswertung nicht korrekt' }
+        - if admin_logged_in? && !team.assessment_request_group_competitor_valid?
+          %span.glyphicon.glyphicon-remove{ title: 'Mannschaftswertung nicht korrekt' }
       - @tags.each do |tag|
         %td= team.tags.include?(tag) ? 'X' : ''
       - assessments.each do |assessment|

@@ -48,11 +48,13 @@ class Team < CacheDependendRecord
     fire_sport_statistics_team.presence || FireSportStatistics::Team.dummy(self)
   end
 
-  def list_entries_group_competitor_valid?
-    @list_entries_group_competitor_valid ||= begin
-      people_assessments.map do |assessment|
-        list_entries_group_competitor(assessment) <= Competition.one.group_run_count
-      end.all?
+  def assessment_request_group_competitor_valid?
+    @assessment_request_group_competitor_valid ||= begin
+      Assessment.no_double_event.all.all? do |assessment|
+        people.count do |person|
+          person.requests.assessment_type(:group_competitor).where(assessment: assessment).exists?
+        end <= Competition.one.group_run_count
+      end
     end
   end
 
