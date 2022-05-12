@@ -2,6 +2,8 @@
   %tr
     - if admin_logged_in?
       %th
+    - if Competition.one.lottery_numbers?
+      %th Los
     %th= Team.human_attribute_name(:name)
     %th= Team.human_attribute_name(:people)
     - @tags.each do |tag|
@@ -20,6 +22,8 @@
           %td{ title: 'Mannschaft nicht angemeldet' }
             = link_to(enrolled_team_path(id: team.id), method: :patch, class: 'btn btn-default btn-xs') do
               %span.glyphicon.glyphicon-remove
+      - if Competition.one.lottery_numbers?
+        %td= team.lottery_number
       %td
         = team.numbered_name
         - if Competition.one.federal_states?
