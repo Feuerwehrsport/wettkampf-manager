@@ -21,6 +21,7 @@ class Preset
       Presets::EuregioCup,
       Presets::LandesmeisterschaftBrandenburg2017,
       Presets::Heedebockpokal,
+      Presets::Dm2022,
     ]
   end
 

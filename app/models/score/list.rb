@@ -20,7 +20,7 @@ class Score::List < CacheDependendRecord
   def next_free_track
     last_entry = entries.last
     run = last_entry.try(:run) || 1
-    track = last_entry.try(:track) || 1
+    track = last_entry.try(:track) || 0
     track += 1
     if track > track_count
       track = 1

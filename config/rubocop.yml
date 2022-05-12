@@ -45,6 +45,9 @@ Metrics/MethodLength:
   - db/migrate/*.rb
   - app/models/presets/*.rb
   Max: 30
+Metrics/ParameterLists:
+  Exclude:
+  - app/models/presets/dm2022.rb
 Metrics/PerceivedComplexity:
   Max: 15
 RSpec/AnyInstance:
