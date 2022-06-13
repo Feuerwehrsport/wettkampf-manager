@@ -1,32 +1,42 @@
 # frozen_string_literal: true
 
 module Score::ResultEntrySupport
+  extend ActiveSupport::Concern
   ENTRY_STATUS = %i[waiting valid invalid no_run].freeze
 
-  def second_time
-    return '' if time.blank? || time.zero?
+  class_methods do
+    def edit_time(method_name)
+      define_method(:"second_#{method_name}") do
+        loaded_time = send(method_name)
+        return '' if loaded_time.blank? || loaded_time.zero?
 
-    Firesport::Time.second_time(time)
+        Firesport::Time.second_time(loaded_time)
+      end
+
+      define_method(:"edit_second_#{method_name}") do
+        send(:"second_#{method_name}").tr(',', '.')
+      end
+
+      define_method(:"edit_second_#{method_name}=") do |new_second_time|
+        send(:"second_#{method_name}=", new_second_time)
+      end
+
+      define_method(:"second_#{method_name}=") do |new_second_time|
+        send(:"#{method_name}=", if (result = new_second_time.match(/^(\d+):(\d{1,2})[,.](\d{1,2})$/))
+                                   result[1].to_i * 6000 + result[2].to_i * 100 + result[3].to_i
+                                 elsif (result = new_second_time.match(/^(\d{1,4})[,.](\d)$/))
+                                   result[1].to_i * 100 + (result[2].to_i * 10)
+                                 elsif (result = new_second_time.match(/^(\d{1,3})[,.](\d\d)$/))
+                                   result[1].to_i * 100 + result[2].to_i
+                                 else
+                                   new_second_time.to_i * 100
+                                 end)
+      end
+    end
   end
 
-  def edit_second_time
-    second_time.tr(',', '.')
-  end
-
-  def edit_second_time=(new_second_time)
-    self.second_time = new_second_time
-  end
-
-  def second_time=(new_second_time)
-    self.time = if (result = new_second_time.match(/^(\d+):(\d{1,2})[,.](\d{1,2})$/))
-                  result[1].to_i * 6000 + result[2].to_i * 100 + result[3].to_i
-                elsif (result = new_second_time.match(/^(\d{1,4})[,.](\d)$/))
-                  result[1].to_i * 100 + (result[2].to_i * 10)
-                elsif (result = new_second_time.match(/^(\d{1,3})[,.](\d\d)$/))
-                  result[1].to_i * 100 + result[2].to_i
-                else
-                  new_second_time.to_i * 100
-                end
+  included do
+    edit_time(:time)
   end
 
   def time_with_valid_calculation=(time)

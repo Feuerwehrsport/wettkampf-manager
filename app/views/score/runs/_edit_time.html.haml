@@ -5,7 +5,11 @@
       .row
         .col-md-4
           .time-entries
-            = n.input :edit_second_time, as: :second_time
+            - if entry.list.separate_target_times?
+              = n.input :edit_second_time_left_target, as: :second_time
+              = n.input :edit_second_time_right_target, as: :second_time
+            - else
+              = n.input :edit_second_time, as: :second_time
         .col-md-8
           .time-types
             = n.collection_radio_buttons :result_type, Score::ResultEntrySupport::ENTRY_STATUS, :to_s, ->(t) { t("result_types.#{t}") }

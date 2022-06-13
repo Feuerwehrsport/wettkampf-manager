@@ -35,7 +35,7 @@ Metrics/BlockLength:
   - class_methods
   - included
   - new
-  Max: 30
+  Max: 50
 Metrics/ClassLength:
   Max: 200
 Metrics/CyclomaticComplexity:
@@ -44,7 +44,7 @@ Metrics/MethodLength:
   Exclude:
   - db/migrate/*.rb
   - app/models/presets/*.rb
-  Max: 30
+  Max: 50
 Metrics/ParameterLists:
   Exclude:
   - app/models/presets/dm2022.rb

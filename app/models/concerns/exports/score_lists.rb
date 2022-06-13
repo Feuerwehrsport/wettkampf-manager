@@ -31,12 +31,20 @@ module Exports::ScoreLists
         end
       end
       line.push(content: team_name, inline_format: true)
+
+      if list.separate_target_times?
+        line.push(size7(entry.try(:human_time_left_target), size7(entry.try(:human_time_right_target))))
+      end
       line.push(entry.try(:human_time))
       line.push('', '') if more_columns
       line.push('') if double_run
       data.push(line)
     end
     data
+  end
+
+  def size7(content)
+    { content: "<font size='7'>#{content}</font>", inline_format: true }
   end
 
   def show_export_header(list, more_columns:, double_run:)
@@ -51,6 +59,10 @@ module Exports::ScoreLists
     elsif double_run
       header.push('Lauf 1', 'Lauf 2')
     else
+      if list.separate_target_times?
+        header.push({ content: "<font size='7'>Links</font>", inline_format: true })
+        header.push({ content: "<font size='7'>Rechts</font>", inline_format: true })
+      end
       header.push('Zeit')
     end
     header

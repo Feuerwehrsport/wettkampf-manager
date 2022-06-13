@@ -2,6 +2,8 @@
 
 class Score::ListEntry < CacheDependendRecord
   include Score::ResultEntrySupport
+  edit_time(:time_left_target)
+  edit_time(:time_right_target)
 
   belongs_to :list, class_name: 'Score::List', inverse_of: :entries
   belongs_to :entity, polymorphic: true
@@ -14,6 +16,12 @@ class Score::ListEntry < CacheDependendRecord
   validates :list, :entity, :track, :run, :assessment_type, :assessment, presence: true
   validates :track, :run, numericality: { greater_than: 0 }
   validates :track, numericality: { less_than_or_equal_to: :track_count }
+
+  before_validation do
+    if list.separate_target_times?
+      self.time = ([time_left_target, time_right_target].max if time_left_target.present? && time_right_target.present?)
+    end
+  end
 
   delegate :track_count, to: :list
 

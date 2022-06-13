@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_11_212628) do
+ActiveRecord::Schema.define(version: 2022_06_11_192258) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -260,6 +260,8 @@ ActiveRecord::Schema.define(version: 2022_05_11_212628) do
     t.datetime "updated_at", null: false
     t.integer "assessment_id", null: false
     t.integer "time"
+    t.integer "time_left_target"
+    t.integer "time_right_target"
     t.index ["list_id"], name: "index_score_list_entries_on_list_id"
   end
 
@@ -279,6 +281,7 @@ ActiveRecord::Schema.define(version: 2022_05_11_212628) do
     t.integer "track"
     t.integer "gender"
     t.boolean "hidden", default: false, null: false
+    t.boolean "separate_target_times"
   end
 
   create_table "score_list_factory_assessments", force: :cascade do |t|
@@ -299,6 +302,7 @@ ActiveRecord::Schema.define(version: 2022_05_11_212628) do
     t.date "date"
     t.boolean "show_multiple_assessments", default: true
     t.boolean "hidden", default: false, null: false
+    t.boolean "separate_target_times", default: false, null: false
   end
 
   create_table "score_result_list_factories", force: :cascade do |t|

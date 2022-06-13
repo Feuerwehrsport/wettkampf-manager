@@ -14,7 +14,10 @@
     - else
       %th Bestzeit
       - @score_result.lists.each do |list|
-        %td= list.object.shortcut
+        - if list.separate_target_times?
+          %td{ colspan: 2 }= list.object.shortcut
+        - else
+          %td= list.object.shortcut
 
   - rows.each do |row|
     %tr
@@ -39,4 +42,12 @@
       - else
         %th= row.best_result_entry
         - @score_result.lists.each do |list|
-          %td= row.result_entry_from(list)
+          - if list.separate_target_times?
+            %td.separate-times
+              = row.result_entry_from(list).try(:human_time_left_target)
+              %br
+              = row.result_entry_from(list).try(:human_time_right_target)
+            %td
+              = row.result_entry_from(list)
+          - else
+            %td= row.result_entry_from(list)

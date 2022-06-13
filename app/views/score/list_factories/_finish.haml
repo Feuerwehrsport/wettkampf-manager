@@ -11,5 +11,8 @@
 
 = f.input :hidden, hint: 'Manchmal ist es besser, die Startliste zuerst zu verstecken. Es kann dann zum Beispiel kontrolliert werden, ob die Reihenfolge stimmt.'
 
+- if @score_list_factory.discipline.key == :la
+  = f.input :separate_target_times, hint: 'Die Zeiten für das linke und rechte Ziel werden einzelnd erfasst. Die langsamere Zeit wird zur Wertungszeit.'
+
 .pull-right
   = f.primary_button :submit, 'Startliste erstellen'

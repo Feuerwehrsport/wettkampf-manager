@@ -89,6 +89,7 @@ de:
         assessments: Wertungsgruppen
         name: Name
         hidden: Startliste verstecken
+        separate_target_times: Zeiten für jedes Ziel separat aufnehmen
         shortcut: Abkürzung
         track_count: Wettkampfbahnen
         track: Wettkampfbahn
@@ -129,7 +130,11 @@ de:
         track: Bahn
         run: Lauf
         second_time: Zeit in Sekunden
+        second_time_left_target: Zeit in Sekunden
+        second_time_right_target: Rechte Zeit in Sekunden
         edit_second_time: Zeit in Sekunden
+        edit_second_time_left_target: Linke Zeit in Sekunden
+        edit_second_time_right_target: Rechte Zeit in Sekunden
       score/result:
         assessment: Wertungsgruppe
         group_assessment: Mannschaftswertung

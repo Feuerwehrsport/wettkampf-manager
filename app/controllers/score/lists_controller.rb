@@ -42,6 +42,7 @@ class Score::ListsController < ApplicationController
                                        entries_attributes: %i[
                                          id run track entity_id entity_type _destroy assessment_type
                                          result_type assessment_id edit_second_time
+                                         edit_second_time_left_target edit_second_time_right_target
                                        ],
                                        tag_references_attributes: %i[id tag_id _destroy])
   end

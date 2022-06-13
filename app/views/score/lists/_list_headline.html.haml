@@ -9,4 +9,7 @@
       %th Vorname
     %th Mannschaft
     - if times
+      - if @score_list.separate_target_times?
+        %th Ziele
       %th Zeit
+

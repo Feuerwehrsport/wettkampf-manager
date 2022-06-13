@@ -13,6 +13,14 @@ class Score::ResultEntryDecorator < ApplicationDecorator
     end
   end
 
+  def human_time_left_target
+    second_time_left_target.to_s if result_valid?
+  end
+
+  def human_time_right_target
+    second_time_right_target.to_s if result_valid?
+  end
+
   def long_human_time(seconds: 's', invalid: 'Ungültig')
     if result_valid?
       "#{second_time} #{seconds}"

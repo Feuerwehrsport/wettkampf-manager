@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Certificates::StorageSupport
-  def get(position) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
+  def get(position) # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     case position.key
     when :team_name
       entity.is_a?(TeamRelayDecorator) ? entity : entity.try(:team).try(:numbered_name)

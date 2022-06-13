@@ -58,6 +58,11 @@ Exports::PDF::Score::List = Struct.new(:list, :more_columns, :double_run) do
         widths[-2] = 40
       end
       widths[-3] = 40 if more_columns
+      if list.separate_target_times?
+        widths[-1] = 40
+        widths[-2] = 40
+        widths[-3] = 40
+      end
       widths
     end
   end
