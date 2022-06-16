@@ -14,11 +14,25 @@ class Score::ResultEntryDecorator < ApplicationDecorator
   end
 
   def human_time_left_target
-    second_time_left_target.to_s if result_valid?
+    value = second_time_left_target.to_s
+    value.presence ? "L: #{value}" : ''
+  end
+
+  def target_times_as_data(pdf: false)
+    target_times = [human_time_left_target, human_time_right_target].reject(&:blank?)
+    if pdf
+      {
+        content: "<font size='6'>#{target_times.join('<br/>')}</font>",
+        inline_format: true, padding: [0, 0, 3, 0], valign: :center
+      }
+    else
+      target_times.join(', ')
+    end
   end
 
   def human_time_right_target
-    second_time_right_target.to_s if result_valid?
+    value = second_time_right_target.to_s
+    value.presence ? "R: #{value}" : ''
   end
 
   def long_human_time(seconds: 's', invalid: 'Ungültig')

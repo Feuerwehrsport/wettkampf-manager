@@ -23,7 +23,7 @@ Exports::PDF::Score::Result = Struct.new(:result, :only) do
   def single_table
     pdf_header(result.to_s, discipline: discipline, date: result.date)
 
-    pdf.table(build_data_rows(result, discipline, true),
+    pdf.table(build_data_rows(result, discipline, true, pdf: true),
               header: true,
               row_colors: pdf_default_row_colors,
               width: pdf.bounds.width,

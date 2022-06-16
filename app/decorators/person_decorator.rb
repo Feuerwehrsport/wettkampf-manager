@@ -43,4 +43,17 @@ class PersonDecorator < ApplicationDecorator
     team = shortcut ? team_shortcut_name(assessment_type) : team_name(assessment_type)
     [first_name, last_name, team]
   end
+
+  def export_last_name(list, pdf: false)
+    last_name = short_last_name.to_s
+    tags = tag_names & list.tag_names
+
+    if pdf
+      last_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
+      { content: last_name, inline_format: true }
+    else
+      last_name += " (#{tags.join(', ')})" if tags.present?
+      last_name
+    end
+  end
 end

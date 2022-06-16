@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Exports::ScoreLists
-  def show_export_data(list, more_columns: false, double_run: false)
+  def show_export_data(list, more_columns: false, double_run: false, pdf: false)
     data = [show_export_header(list, more_columns: more_columns, double_run: double_run)]
 
     score_list_entries(list) do |entry, run, track|
@@ -10,17 +10,13 @@ module Exports::ScoreLists
       if list.single_discipline?
         line.push(entry.try(:entity).try(:bib_number).to_s) if Competition.one.show_bib_numbers?
 
-        last_name = entry.try(:entity).try(:short_last_name).to_s
-        tags = (entry.try(:entity).try(:tag_names) || []) & list.tag_names
-        last_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
-        line.push(content: last_name, inline_format: true)
-
+        line.push(entry.try(:entity).try(:export_last_name, list, pdf: pdf) || '')
         line.push(entry.try(:entity).try(:short_first_name).to_s)
         team_name = entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type))
-        team_name = append_assessment(list, entry, team_name)
+        team_name = append_assessment(list, entry, team_name, pdf: pdf)
       else
         team_name = entry.try(:entity).to_s
-        team_name = append_assessment(list, entry, team_name)
+        team_name = append_assessment(list, entry, team_name, pdf: pdf)
 
         tags = (entry.try(:entity).try(:tag_names) || []) & list.tag_names
         team_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
@@ -30,21 +26,19 @@ module Exports::ScoreLists
           team_name += "<font size='6'> <i>#{federal_state_shortcut}</i></font>" if federal_state_shortcut.present?
         end
       end
-      line.push(content: team_name, inline_format: true)
-
-      if list.separate_target_times?
-        line.push(size7(entry.try(:human_time_left_target), size7(entry.try(:human_time_right_target))))
+      if pdf
+        line.push(content: team_name, inline_format: true)
+      else
+        line.push(team_name)
       end
+
+      line.push(entry&.target_times_as_data(pdf: pdf)) if list.separate_target_times?
       line.push(entry.try(:human_time))
       line.push('', '') if more_columns
       line.push('') if double_run
       data.push(line)
     end
     data
-  end
-
-  def size7(content)
-    { content: "<font size='7'>#{content}</font>", inline_format: true }
   end
 
   def show_export_header(list, more_columns:, double_run:)
@@ -59,10 +53,7 @@ module Exports::ScoreLists
     elsif double_run
       header.push('Lauf 1', 'Lauf 2')
     else
-      if list.separate_target_times?
-        header.push({ content: "<font size='7'>Links</font>", inline_format: true })
-        header.push({ content: "<font size='7'>Rechts</font>", inline_format: true })
-      end
+      header.push('Ziele') if list.separate_target_times?
       header.push('Zeit')
     end
     header
@@ -95,10 +86,22 @@ module Exports::ScoreLists
     end
   end
 
-  def append_assessment(list, entry, team_name)
+  def append_assessment(list, entry, team_name, pdf:)
     if list.show_multiple_assessments? && list.multiple_assessments? && entry.present?
-      team_name += "<font size='6'> (#{entry&.assessment&.decorate})</font>"
+      team_name += if pdf
+                     "<font size='6'> (#{entry&.assessment&.decorate})</font>"
+                   else
+                     " (#{entry&.assessment&.decorate})"
+                   end
     end
     team_name
+  end
+
+  def size7(content, inline_format)
+    if inline_format
+      { content: "<font size='7'>#{content}</font>", inline_format: true }
+    else
+      content
+    end
   end
 end

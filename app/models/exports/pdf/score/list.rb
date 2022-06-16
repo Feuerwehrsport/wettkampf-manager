@@ -7,7 +7,7 @@ Exports::PDF::Score::List = Struct.new(:list, :more_columns, :double_run) do
   def perform
     pdf_header(title, discipline: list.discipline, date: list.date)
 
-    lines = show_export_data(list, more_columns: more_columns, double_run: double_run)
+    lines = show_export_data(list, more_columns: more_columns, double_run: double_run, pdf: true)
     list_track_count = list.track_count
 
     lines_per_page = (32 / list_track_count) * list_track_count
@@ -61,7 +61,6 @@ Exports::PDF::Score::List = Struct.new(:list, :more_columns, :double_run) do
       if list.separate_target_times?
         widths[-1] = 40
         widths[-2] = 40
-        widths[-3] = 40
       end
       widths
     end

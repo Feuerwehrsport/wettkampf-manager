@@ -1,30 +1,33 @@
 # frozen_string_literal: true
 
 module Exports::ScoreResults
-  def build_data_rows(result, discipline, shortcut, export_headers: false)
-    data = [build_data_headline(result, discipline, export_headers: export_headers)]
+  def build_data_rows(result, discipline, shortcut, export_headers: false, pdf: false)
+    data = [build_data_headline(result, discipline, export_headers: export_headers, pdf: pdf)]
     result.rows.each do |row|
       line = []
       line.push "#{result.place_for_row(row)}."
       if discipline.single_discipline_or_double_event?
-        row.entity.name_cols(row.try(:assessment_type), shortcut).each { |col| line.push col }
+        row.entity.name_cols(row.try(:assessment_type), shortcut).each { |col| line.push(col.to_s) }
       else
-        row.entity.name_cols(row.try(:assessment_type), false).each { |col| line.push col }
+        row.entity.name_cols(row.try(:assessment_type), false).each { |col| line.push(col.to_s) }
       end
       if row.is_a? Score::DoubleEventResultRow
-        result.results.each { |inner_result| line.push(row.result_entry_from(inner_result)) }
-        line.push row.sum_result_entry
+        result.results.each { |inner_result| line.push(row.result_entry_from(inner_result).to_s) }
+        line.push(row.sum_result_entry.to_s)
       else
-        result.lists.each { |list| line.push(row.result_entry_from(list)) }
-        line.push row.best_result_entry unless result.lists.count == 1
+        result.lists.each do |list|
+          entry = row.result_entry_from(list)
+          line.push(entry&.target_times_as_data(pdf: pdf)) if pdf && list.separate_target_times?
+          line.push(entry.to_s)
+        end
+        line.push(row.best_result_entry.to_s) unless result.lists.count == 1
       end
       data.push(line)
     end
-
-    data.map! { |row| row.map!(&:to_s) }
+    data
   end
 
-  def build_data_headline(result, discipline, export_headers: false)
+  def build_data_headline(result, discipline, export_headers: false, pdf: false)
     header = ['Platz']
     if discipline.single_discipline_or_double_event?
       header.push 'Vorname', 'Nachname', 'Mannschaft'
@@ -38,7 +41,11 @@ module Exports::ScoreResults
       header.push('Summe')
     else
       result.lists.each do |list|
-        header.push(export_headers ? 'time' : list.object.shortcut)
+        if pdf && list.separate_target_times?
+          header.push(content: list.object.shortcut, colspan: 2)
+        else
+          header.push(export_headers ? 'time' : list.object.shortcut)
+        end
       end
       header.push('Bestzeit') unless result.lists.count == 1
     end
