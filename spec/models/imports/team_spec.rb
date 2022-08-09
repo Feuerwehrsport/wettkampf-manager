@@ -4,8 +4,6 @@ require 'rails_helper'
 
 RSpec.describe Imports::Team, type: :model do
   describe '#clean_and_cut_shortcut' do
-    let(:team) { described_class.new }
-
     it 'truncates team names' do
       {
         'FF Warin' => 'Warin',
@@ -22,7 +20,7 @@ RSpec.describe Imports::Team, type: :model do
         'Freiwillige Feuerwehr Ostseebad Nienhagen' => 'Nienhagen',
         'Freiwillige Feuerwehr OB Nienhagen' => 'Nienhagen',
       }.each do |long, short|
-        expect(team.send(:clean_and_cut_shortcut, long)).to eq short
+        expect(described_class.clean_and_cut_shortcut(long)).to eq short
       end
     end
   end

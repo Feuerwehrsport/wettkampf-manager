@@ -5,6 +5,7 @@
         - box.header do
           .pull-right
             = link_to 'Hinzufügen', { action: :new }, class: 'btn btn-sm btn-info'
+            = link_to 'Importieren', new_teams_import_path, class: 'btn btn-sm btn-default'
           .clearfix
 
         - if Series::Round.with_local_results.present? && @without_statistics_id.present?

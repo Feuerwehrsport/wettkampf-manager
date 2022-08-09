@@ -8,7 +8,7 @@ Imports::Team = Struct.new(:configuration, :data) do
       name: data[:name],
       gender: data[:gender],
       number: number,
-      shortcut: clean_and_cut_shortcut(data[:shortcut]),
+      shortcut: self.class.clean_and_cut_shortcut(data[:shortcut]),
       disable_autocreate_assessment_requests: true,
       fire_sport_statistics_team: fsst,
       federal_state: FederalState.find_by(shortcut: data[:federal_state]),
@@ -34,9 +34,7 @@ Imports::Team = Struct.new(:configuration, :data) do
     @team
   end
 
-  protected
-
-  def clean_and_cut_shortcut(long)
+  def self.clean_and_cut_shortcut(long)
     loop do
       before = long
       long = long.gsub(/\AFF\s/, '')

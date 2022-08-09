@@ -1,0 +1,18 @@
+# Schritt 1 - VM vorbereiten
+
+* https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/
+* VM importieren
+* Sicherungspunkt setzen
+
+# Schritt 2 - Rubyinstaller
+
+* https://medium.com/ruby-on-rails-web-application-development/how-to-install-rubyonrails-on-windows-7-8-10-complete-tutorial-2017-fc95720ee059
+
+# Schritt 3 - Bundle
+
+* wettkampf-manger Verzeichnis auf VM kopieren
+* PATH festlegen
+* `bundle install --without development test`
+
+# Schritt 4 - Fehlende Libs kopieren
+* sqlite-lib

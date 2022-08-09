@@ -22,6 +22,9 @@ Rails.application.routes.draw do
     end
     collection { get :without_statistics_id }
   end
+  namespace :teams do
+    resource :import, only: %i[new create]
+  end
   resources :teams do
     member do
       get :edit_assessment_requests

@@ -14,7 +14,7 @@ class Team < CacheDependendRecord
 
   validates :name, :gender, :number, :shortcut, presence: true
   validates :number, numericality: { greater_than: 0 }
-  validates :name, uniqueness: { scope: %i[number gender] }
+  validates :name, uniqueness: { scope: %i[number gender], case_sensitive: false }
   validates :shortcut, length: { maximum: 12 }
   before_validation :strip_names
 

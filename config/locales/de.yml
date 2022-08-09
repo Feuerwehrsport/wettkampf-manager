@@ -46,6 +46,7 @@ de:
       team:
         one: Mannschaft
         other: Mannschaften
+      teams/import: Mannschafts-Import
       team_tag: Mannschaftkennzeichnung
       user: Benutzer
     attributes:
@@ -151,6 +152,9 @@ de:
         shortcut: Abkürzung
         lottery_number: Losnummer
         federal_state: Bundesland
+      teams/import:
+        gender: Geschlecht
+        import_rows: Namen
       user:
         name: Benutzername
         assessments: Wertungsgruppen
