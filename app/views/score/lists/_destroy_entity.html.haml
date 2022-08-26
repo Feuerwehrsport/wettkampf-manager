@@ -3,7 +3,9 @@
     = f.error_notification
     = f.simple_fields_for :entries, @score_list.entries.where(id: params[:entry_id]) do |g|
       = g.input :_destroy, as: :hidden, input_html: { value: '1' }
-      Teilnehmer: #{g.object.entity.decorate}
+      %p Teilnehmer: #{g.object.entity.decorate}
+      - unless g.object.result_waiting?
+        .alert.alert-danger Achtung: Die eingetragene Zeit wird unwiderruflich gelöscht!
     .modal-footer
       = f.primary_button :submit, 'Entfernen'
 

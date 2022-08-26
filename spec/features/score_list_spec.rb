@@ -86,6 +86,7 @@ RSpec.describe 'score lists', seed: :configured do
       expect(list.reload.entries.decorate.map(&:human_time)).to eq ['33,33', 'D', '32,34', '']
       expect(page).not_to have_content('Einfach die Zeilen in die neue Position ziehen')
 
+      click_on('Teilnehmer entfernen')
       within('tr', text: person4.last_name) do
         expect(page).to have_content(person4.first_name)
         expect(list.reload.entries.count).to eq 4
@@ -191,6 +192,7 @@ RSpec.describe 'score lists', seed: :configured do
       expect(list.reload.entries.decorate.map(&:human_time)).to eq ['33,33', 'D', '32,34', '']
       expect(page).not_to have_content('Einfach die Zeilen in die neue Position ziehen')
 
+      click_on('Teilnehmer entfernen')
       within('tr', text: team4.name) do
         expect(list.reload.entries.count).to eq 4
         expect(list.reload.entries.last.track).to eq 2
@@ -297,6 +299,7 @@ RSpec.describe 'score lists', seed: :configured do
       expect(list.reload.entries.decorate.map(&:human_time)).to eq ['33,33', 'D', '32,34', '']
       expect(page).not_to have_content('Einfach die Zeilen in die neue Position ziehen')
 
+      click_on('Teilnehmer entfernen')
       within('tr', text: team_relay4.decorate.to_s) do
         expect(list.reload.entries.count).to eq 4
         expect(list.reload.entries.last.track).to eq 2
