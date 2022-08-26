@@ -30,6 +30,13 @@ class Score::ListEntry < CacheDependendRecord
   scope :waiting, -> { where(result_type: :waiting) }
 
   def self.insert_random_values
-    where(result_type: :waiting).find_each { |l| l.update!(time_with_valid_calculation: rand(1900..2300)) }
+    where(result_type: :waiting).find_each do |l|
+      if l.list.separate_target_times?
+        l.update!(time_with_valid_calculation: rand(1900..2300),
+                  time_left_target: rand(1900..2300), time_right_target: rand(1900..2300))
+      else
+        l.update!(time_with_valid_calculation: rand(1900..2300))
+      end
+    end
   end
 end
