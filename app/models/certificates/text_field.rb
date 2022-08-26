@@ -18,6 +18,10 @@ class Certificates::TextField < ApplicationRecord
       description: 'Zeit (Sekunden)',
       example: '23,39 Sekunden',
     },
+    time_very_long: {
+      description: '»mit einer Zeit von« (Sekunden)',
+      example: 'mit einer Zeit von 23,39 Sekunden',
+    },
     time_short: {
       description: 'Zeit (s)',
       example: '23,39 s',
@@ -41,6 +45,10 @@ class Certificates::TextField < ApplicationRecord
     rank_with_rank: {
       description: 'Platz mit Platz',
       example: '42. Platz',
+    },
+    rank_with_rank_2: {
+      description: 'Platz mit Platz',
+      example: 'den 42. Platz',
     },
     rank_without_dot: {
       description: 'Platz ohne Punkt',

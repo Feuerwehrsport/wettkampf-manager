@@ -11,6 +11,10 @@ module Certificates::StorageSupport
       entity.try(:bib_number)
     when :time_long
       result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig') if respond_to?(:result_entry)
+    when :time_very_long
+      if respond_to?(:result_entry)
+        "mit einer Zeit von #{result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig')}"
+      end
     when :time_short
       result_entry.long_human_time(seconds: 's', invalid: 'D') if respond_to?(:result_entry)
     when :time_without_seconds
@@ -19,6 +23,8 @@ module Certificates::StorageSupport
       "#{result.place_for_row(self)}."
     when :rank_with_rank
       "#{result.place_for_row(self)}. Platz"
+    when :rank_with_rank_2
+      "den #{result.place_for_row(self)}. Platz"
     when :rank_without_dot
       result.place_for_row(self)
     when :assessment
