@@ -11,7 +11,7 @@ class Score::RunsController < ApplicationController
   end
 
   def after_save
-    redirect_to score_list_path(params[:list_id])
+    redirect_to score_list_path(params[:list_id], anchor: "jump-run-#{params[:run]}")
   end
 
   def score_run_params

@@ -26,7 +26,7 @@ RSpec.describe Score::RunsController, type: :controller, seed: :configured do
             list_entries_attributes: { '1' => { track: list_entry.track, edit_second_time: '33.33' } },
           } }
 
-          expect(response).to redirect_to score_list_path(list_entry.list)
+          expect(response).to redirect_to score_list_path(list_entry.list, anchor: 'jump-run-1')
           expect(list_entry.reload.second_time).to eq '33,33'
         end
       end

@@ -1,6 +1,7 @@
 %tr{ list_entry_options(track, entry) }
   %td.run
     - if track == 1
+      %a{ name: "jump-run-#{run + 1}" }
       = run
   %th.track= track
   - if @score_list.single_discipline?
