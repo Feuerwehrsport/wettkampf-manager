@@ -1,7 +1,9 @@
 %thead
   %tr.small
-    %th Lauf
-    %th Bahn
+    %th
+      %span.thead-run Lauf
+    %th
+      %span.thead-track Bahn
     - if @score_list.single_discipline?
       - if Competition.one.show_bib_numbers?
         %th Nr.

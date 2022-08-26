@@ -1,5 +1,5 @@
 .row
-  .col-md-12.refreshable#people-index
+  .col-md-12.much-data.refreshable#people-index
     = box Person.model_name.human count: 0 do |box|
       - if admin_logged_in?
         - box.header do

@@ -91,6 +91,22 @@ table.competition-results
   table
     display: none
 
+@media (max-width: $screen-xs-max)
+  .much-data span.thead-run, .much-data span.thead-track
+    display: none
+  .much-data th
+    font-size: 12px
+  .table.much-data > tbody > tr > td.run, .table.much-data > tbody > tr > th.track
+    padding-left: 1px
+    padding-right: 1px
+  .table.much-data > tbody > tr > td, .table.much-data > tbody > tr > th
+    padding-left: 2px
+    padding-right: 2px
+  .much-data.col-md-9, .much-data.col-md-12, .much-data .panel-body
+    padding-left: 3px
+    padding-right: 3px
+  .less-important
+    font-size: 12px
 .btn-block + .button_to_block, .button_to_block + .btn-block
   margin-top: 5px
 

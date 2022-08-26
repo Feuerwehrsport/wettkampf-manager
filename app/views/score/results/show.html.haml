@@ -16,7 +16,7 @@
             = block_link_to 'Urkunden', new_certificates_list_path(score_result_id: @score_result.id)
 
   - if @rows.count > 0
-    .col-md-12
+    .col-md-12.much-data
       = box @score_result do |box|
         = render 'result_table', rows: @rows, places: true
         - box.footer do
@@ -53,6 +53,6 @@
 
 
   - if @out_of_competition_rows.count > 0
-    .col-md-12
+    .col-md-12.much-data
       = box 'Außer der Wertung' do
         = render 'result_table', rows: @out_of_competition_rows, places: false

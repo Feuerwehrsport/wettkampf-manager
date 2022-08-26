@@ -1,10 +1,11 @@
 .row
-  .col-md-12
+  .col-md-12.much-data
     = simple_form_for @score_run, url: score_list_run_path do |f|
       = box @score_run.to_s do |box|
-        %table.table
+        %table.table.much-data
           %tr
-            %th= 'Bahn'
+            %th
+              %span.thead-track Bahn
             - if @score_run.list.single_discipline?
               %th= 'Vorname'
               %th= 'Nachname'

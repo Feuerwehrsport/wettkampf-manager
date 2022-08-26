@@ -4,7 +4,7 @@
       %th
     - if @discipline.single_discipline_or_double_event?
       - if Competition.one.show_bib_numbers?
-        %th Nr.
+        %th.hidden-xs Nr.
       %th Name
     %th Mannschaft
     - if @score_result.is_a? Score::DoubleEventResult
@@ -15,32 +15,34 @@
       %th Bestzeit
       - @score_result.lists.each do |list|
         - if list.separate_target_times?
-          %td{ colspan: 2 }= list.object.shortcut
+          %th{ colspan: 2 }= list.object.shortcut
         - else
-          %td= list.object.shortcut
+          %th= list.object.shortcut
 
   - rows.each do |row|
     %tr
       - if places
-        %td #{@score_result.place_for_row(row)}.
+        %td.less-important #{@score_result.place_for_row(row)}.
       - if @discipline.single_discipline_or_double_event?
         - if Competition.one.show_bib_numbers?
-          %td= row.entity.try(:bib_number)
+          %td.hidden-xs= row.entity.try(:bib_number)
         %td
           = row.entity.try(:to_s)
           = row.entity&.fire_sport_statistics_person&.personal_best_badge(row.best_result_entry)
-        %td= row.entity&.team&.shortcut_name
+        %td.less-important= row.entity&.team&.shortcut_name
       - else
         %td
           = row.entity
           - if row.entity.fire_sport_statistics_team.present?
             = link_to image_tag('statistiken-logo.png'), "https://feuerwehrsport-statistik.de/teams/#{row.entity.fire_sport_statistics_team_id}", target: '_blank', rel: 'noopener', title: 'Informationen über diese Mannschaft auf Feuerwehrsport-Statistik.de aufrufen', class: 'firesport-statistic-link'
       - if row.is_a?(Score::DoubleEventResultRow)
-        %th= row.sum_result_entry
+        %td
+          %strong= row.sum_result_entry
         - @score_result.results.each do |result|
           %td= row.result_entry_from(result)
       - else
-        %th= row.best_result_entry
+        %td
+          %strong= row.best_result_entry
         - @score_result.lists.each do |list|
           - if list.separate_target_times?
             %td.separate-times
@@ -50,4 +52,4 @@
             %td
               = row.result_entry_from(list)
           - else
-            %td= row.result_entry_from(list)
+            %td.less-important= row.result_entry_from(list)

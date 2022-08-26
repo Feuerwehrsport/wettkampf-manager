@@ -1,8 +1,8 @@
 .row.refreshable#score-list-show
-  .col-md-9
+  .col-md-9.much-data
     = box @score_list.name, warning: @score_list.hidden? do |box|
       - if logged_in? || !@score_list.hidden?
-        %table.table
+        %table.table.much-data
           = render 'list_headline', times: true
           %tbody
             - score_list_entries(@score_list) do |entry, run, track|
