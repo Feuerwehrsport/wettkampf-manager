@@ -16,20 +16,21 @@ RSpec.describe Score::ListEntry, type: :model do
       end
     end
 
-    context 'when last_update_timestamp given' do
-      let(:score_list_entry) { build_stubbed :score_list_entry, list: score_list }
+    context 'when edit_second_time_before given' do
+      let(:score_list_entry) { create :score_list_entry, list: score_list, edit_second_time: '22.88' }
 
       it 'checks it is the same' do
-        expect(score_list_entry.last_update_timestamp).to be_instance_of(Integer)
+        expect(score_list_entry.edit_second_time_before).to eq '22.88'
+        score_list_entry.edit_second_time = '22.89'
 
-        score_list_entry.last_update_timestamp = 123
+        score_list_entry.edit_second_time_before = '11.33'
         expect(score_list_entry).not_to be_valid
-        expect(score_list_entry.errors).to include :last_update_timestamp
+        expect(score_list_entry.errors).to include :changed_while_editing
 
-        score_list_entry.last_update_timestamp = score_list_entry.updated_at.to_i
+        score_list_entry.edit_second_time_before = '22.88'
         expect(score_list_entry).to be_valid
 
-        score_list_entry.last_update_timestamp = nil
+        score_list_entry.edit_second_time_before = nil
         expect(score_list_entry).to be_valid
       end
     end

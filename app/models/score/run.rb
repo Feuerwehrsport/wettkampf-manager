@@ -30,7 +30,7 @@ class Score::Run
   def update(attributes)
     self.list_entries_attributes = attributes[:list_entries_attributes]
     Score::ListEntry.transaction do
-      return false unless list_entries.all?(&:valid?)
+      return false unless list_entries.map(&:valid?).all?
 
       list_entries.all?(&:save!)
     rescue ActiveRecord::Rollback

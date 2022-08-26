@@ -17,6 +17,15 @@ class Ability
         can?(:edit_times, list)
       end
       can(%i[edit_times update], Score::List) { |r| (r.assessment_ids - user.assessment_ids).empty? }
+
+      case user.edit_type
+      when 'both'
+        can(%i[edit_times edit_result_types], Score::ListEntry)
+      when 'only_times'
+        can(:edit_times, Score::ListEntry)
+      when 'only_result_types'
+        can(:edit_result_types, Score::ListEntry)
+      end
     end
   end
 end

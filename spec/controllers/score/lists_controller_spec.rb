@@ -97,12 +97,12 @@ RSpec.describe Score::ListsController, type: :controller, seed: :configured do
         context 'when edit_times edited' do
           let(:entry) { create(:score_list_entry, list: list) }
 
-          context 'when last_update_timestamp is wrong' do
+          context 'when edit_second_time_before is wrong' do
             it 'renders again' do
               patch :update, params: { id: list.id, edit_times: 1, score_list: { entries_attributes: {
                 '0' => {
                   track: '1',
-                  last_update_timestamp: '1661506594',
+                  edit_second_time_before: 'wrong',
                   edit_second_time: '19.86',
                   result_type: 'valid',
                   id: entry.id,
@@ -113,12 +113,12 @@ RSpec.describe Score::ListsController, type: :controller, seed: :configured do
             end
           end
 
-          context 'when last_update_timestamp is correct' do
+          context 'when edit_second_time_before is correct' do
             it 'redirects' do
               patch :update, params: { id: list.id, edit_times: 1, score_list: { entries_attributes: {
                 '0' => {
                   track: '1',
-                  last_update_timestamp: entry.updated_at.to_i.to_s,
+                  edit_second_time_before: entry.edit_second_time.to_s,
                   edit_second_time: '19.86',
                   result_type: 'valid',
                   id: entry.id,

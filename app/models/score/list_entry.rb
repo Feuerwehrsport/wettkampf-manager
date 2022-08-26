@@ -4,6 +4,8 @@ class Score::ListEntry < CacheDependendRecord
   include Score::ResultEntrySupport
   edit_time(:time_left_target)
   edit_time(:time_right_target)
+  BEFORE_CHECK_METHODS =
+    %i[result_type edit_second_time edit_second_time_left_target edit_second_time_right_target].freeze
 
   belongs_to :list, class_name: 'Score::List', inverse_of: :entries
   belongs_to :entity, polymorphic: true
@@ -16,7 +18,7 @@ class Score::ListEntry < CacheDependendRecord
   validates :list, :entity, :track, :run, :assessment_type, :assessment, presence: true
   validates :track, :run, numericality: { greater_than: 0 }
   validates :track, numericality: { less_than_or_equal_to: :track_count }
-  validate :check_update_timestamp_not_changed
+  validate :check_changed_while_editing, on: :update
 
   before_validation do
     if list.separate_target_times?
@@ -30,13 +32,13 @@ class Score::ListEntry < CacheDependendRecord
   scope :not_waiting, -> { where.not(result_type: :waiting) }
   scope :waiting, -> { where(result_type: :waiting) }
 
-  def last_update_timestamp
-    updated_at.to_i
+  BEFORE_CHECK_METHODS.each do |method_name|
+    define_method(:"#{method_name}_before") do
+      send(method_name)
+    end
+    attr_writer :"#{method_name}_before"
   end
-
-  def last_update_timestamp=(check_timestamp)
-    @check_timestamp = check_timestamp
-  end
+  attr_accessor :changed_while_editing
 
   def self.insert_random_values
     where(result_type: :waiting).find_each do |l|
@@ -51,9 +53,13 @@ class Score::ListEntry < CacheDependendRecord
 
   private
 
-  def check_update_timestamp_not_changed
-    return if @check_timestamp.blank?
+  def check_changed_while_editing
+    datebase_entry = self.class.find(id)
+    changed_while_editing = BEFORE_CHECK_METHODS.any? do |method_name|
+      value_before = instance_variable_get(:"@#{method_name}_before")
+      value_before.present? && value_before.to_s != datebase_entry.send(method_name).to_s
+    end
 
-    errors.add(:last_update_timestamp) if @check_timestamp.to_i != last_update_timestamp
+    errors.add(:changed_while_editing) if changed_while_editing
   end
 end

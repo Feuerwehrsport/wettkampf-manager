@@ -15,8 +15,15 @@ class Score::RunsController < ApplicationController
   end
 
   def score_run_params
-    params.require(:score_run).permit(list_entries_attributes:
-      %i[id track last_update_timestamp result_type edit_second_time
-         edit_second_time_left_target edit_second_time_right_target])
+    editable_attributes = %i[id track]
+
+    editable_attributes.push(:result_type, :result_type_before) if can?(:edit_result_types, Score::ListEntry)
+    if can?(:edit_times, Score::ListEntry)
+      editable_attributes.push(:edit_second_time, :edit_second_time_before,
+                               :edit_second_time_left_target, :edit_second_time_left_target_before,
+                               :edit_second_time_right_target, :edit_second_time_right_target_before)
+    end
+
+    params.require(:score_run).permit(list_entries_attributes: editable_attributes)
   end
 end

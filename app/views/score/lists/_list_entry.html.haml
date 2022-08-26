@@ -22,7 +22,7 @@
         .tiny= entry.try(:assessment).try(:decorate)
   = yield (track == 1)
 
-- if entry&.errors&.include?(:last_update_timestamp)
+- if entry&.errors&.include?(:changed_while_editing)
   %tr.danger
     %td{ colspan: list.column_count }
       %p

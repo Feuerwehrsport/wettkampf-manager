@@ -41,13 +41,20 @@ class Score::ListsController < ApplicationController
   end
 
   def score_list_params
+    editable_attributes = %i[
+      id run track entity_id entity_type _destroy assessment_type assessment_id
+    ]
+
+    editable_attributes.push(:result_type, :result_type_before) if can?(:edit_result_types, Score::ListEntry)
+    if can?(:edit_times, Score::ListEntry)
+      editable_attributes.push(:edit_second_time, :edit_second_time_before,
+                               :edit_second_time_left_target, :edit_second_time_left_target_before,
+                               :edit_second_time_right_target, :edit_second_time_right_target_before)
+    end
+
     params.require(:score_list).permit(:name, :shortcut, :date, :show_multiple_assessments, :hidden,
                                        result_ids: [],
-                                       entries_attributes: %i[
-                                         id run track entity_id entity_type _destroy assessment_type
-                                         result_type assessment_id edit_second_time last_update_timestamp
-                                         edit_second_time_left_target edit_second_time_right_target
-                                       ],
+                                       entries_attributes: editable_attributes,
                                        tag_references_attributes: %i[id tag_id _destroy])
   end
 end

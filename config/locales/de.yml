@@ -158,6 +158,7 @@ de:
       user:
         name: Benutzername
         assessments: Wertungsgruppen
+        edit_type: Bearbeitsmöglichkeiten
         password: Passwort
         password_confirmation: Passwort wiederholen
 
@@ -180,6 +181,11 @@ de:
     valid: Gültig
     invalid: Ungültig
     no_run: Nicht angetreten
+
+  edit_types:
+    both: Komplett
+    only_times: Nur Zeiteingabe
+    only_result_types: Nur Gültigkeitsprüfung
 
   gender:
     female: Frauen

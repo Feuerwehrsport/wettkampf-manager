@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < CacheDependendRecord
+  EDIT_TYPES = { both: 0, only_times: 1, only_result_types: 2 }.freeze
+  enum edit_type: EDIT_TYPES
   attr_accessor :password
   before_save :encrypt_password
 
