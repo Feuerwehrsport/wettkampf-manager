@@ -32,9 +32,9 @@ RSpec.describe 'list factory', seed: :configured do
     assessment_request2
 
     perform_login
-    visit root_path
+    visit score_lists_path
 
-    click_on 'Startliste hinzufügen'
+    click_on 'Hinzufügen', match: :first
     click_on '100m Hindernisbahn'
     check '100m Hindernisbahn - Männer (2 Starter)'
     click_on 'Weiter'

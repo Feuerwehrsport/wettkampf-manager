@@ -7,6 +7,10 @@ class DashboardController < ApplicationController
 
   def show
     default_meta_description title: "#{Competition.one.name} - #{l Competition.one.date} - Wettkampf-Manager"
+    @current_score_lists = Score::List.where(hidden: false).joins(:entries).group(:id)
+                                      .select('score_lists.*, max(score_list_entries.updated_at) as last_update')
+                                      .reorder(last_update: :desc)
+                                      .limit(5)
   end
 
   def impressum

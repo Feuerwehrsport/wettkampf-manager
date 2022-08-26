@@ -25,17 +25,17 @@
         = block_link_to 'Passwort', edit_user_path(User.first)
         - if Imports::Configuration.possible?
           = block_link_to 'Import von Feuerwehrsport-Statistik.de', imports_configurations_path
-      = box 'Aktionen' do
-        = block_link_to 'Mannschaft hinzufügen', new_team_path
-        = block_link_to 'Startliste hinzufügen', new_score_list_factories_path
-        = block_link_to 'Backup anlegen', create_backup_path
-  .col-md-5
+  .col-md-6
     = box link_to(decorated_competition.hostname_url, decorated_competition.hostname_url) do
       = image_tag qrcode(decorated_competition.hostname_url)
       - if admin_logged_in?
         = block_link_to('Flyer anzeigen', { format: :pdf, action: :flyer }, target: '_blank', rel: 'noopener')
       - elsif !logged_in?
         = block_link_to('Anmelden', login_path)
+  .col-md-6
+    = box 'Aktuelle Startlisten' do
+      - @current_score_lists.each do |list|
+        = block_link_to(list.decorate, score_list_path(list))
 
   .col-md-6
     = box 'Wettkampf-Manager' do |box|
