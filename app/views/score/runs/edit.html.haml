@@ -3,28 +3,10 @@
     = simple_form_for @score_run, url: score_list_run_path do |f|
       = box @score_run.to_s do |box|
         %table.table.much-data
-          %tr
-            %th
-              %span.thead-track Bahn
-            - if @score_run.list.single_discipline?
-              %th= 'Vorname'
-              %th= 'Nachname'
-            %th= 'Mannschaft'
-            %th= 'Zeit'
+          = render 'score/lists/list_headline', times: true
           - @score_run.list_entries.each do |entry|
-            %tr
-              %td= entry.track
-              - if @score_run.list.single_discipline?
-                %td= entry.entity.first_name.truncate(20)
-                %td= entry.entity.last_name.truncate(20)
-                %td= entry.entity.team.try :shortcut_name
-              - else
-                %td
-                  = entry.try(:entity).try(:decorate)
-                  - if @score_run.list.multiple_assessments?
-                    %br
-                    .tiny= entry.try(:assessment).try(:decorate)
-              = render 'edit_time', entry: entry, f: f, fields_for: :list_entries
+            = render layout: 'score/lists/list_entry', locals: { entry: entry, run: @score_run.run_number.to_i, track: entry.track, list: @score_run.list } do
+              = render 'score/runs/edit_time', entry: entry, f: f, fields_for: :list_entries
         - box.footer do
           = cancel_link(@score_run.list)
           = f.primary_button :submit, 'Speichern'

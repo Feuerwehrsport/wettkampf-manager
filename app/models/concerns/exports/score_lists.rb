@@ -60,7 +60,11 @@ module Exports::ScoreLists
   end
 
   def score_list_entries(list, move_modus = false)
-    entries = list.entries.includes(:entity).to_a
+    entries = if list.errors.present?
+                list.entries.to_a
+              else
+                list.entries.includes(:entity).to_a
+              end
     track = 0
     run = 1
     entry = entries.shift

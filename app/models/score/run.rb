@@ -23,11 +23,18 @@ class Score::Run
   def list_entries_attributes=(attributes)
     attributes.each do |_key, entry_attributes|
       entry = list_entries.find { |e| e.track == entry_attributes[:track].to_i }
-      entry.update(entry_attributes)
+      entry.assign_attributes(entry_attributes)
     end
   end
 
   def update(attributes)
     self.list_entries_attributes = attributes[:list_entries_attributes]
+    Score::ListEntry.transaction do
+      return false unless list_entries.all?(&:valid?)
+
+      list_entries.all?(&:save!)
+    rescue ActiveRecord::Rollback
+      false
+    end
   end
 end

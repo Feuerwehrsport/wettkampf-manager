@@ -2,6 +2,7 @@
   - if entry.present?
     = f.simple_fields_for fields_for, entry do |n|
       = n.input :track, as: :hidden
+      = n.input :last_update_timestamp, as: :hidden
       .row
         .col-md-4
           .time-entries

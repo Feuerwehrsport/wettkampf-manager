@@ -24,6 +24,10 @@ class Score::ListsController < ApplicationController
 
   protected
 
+  def after_update_failed
+    render(action: params[:edit_times].present? ? :edit_times : :edit)
+  end
+
   def index_collection
     super.decorate.sort_by(&:to_s)
   end
@@ -41,7 +45,7 @@ class Score::ListsController < ApplicationController
                                        result_ids: [],
                                        entries_attributes: %i[
                                          id run track entity_id entity_type _destroy assessment_type
-                                         result_type assessment_id edit_second_time
+                                         result_type assessment_id edit_second_time last_update_timestamp
                                          edit_second_time_left_target edit_second_time_right_target
                                        ],
                                        tag_references_attributes: %i[id tag_id _destroy])

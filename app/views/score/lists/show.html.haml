@@ -6,7 +6,7 @@
           = render 'list_headline', times: true
           %tbody
             - score_list_entries(@score_list) do |entry, run, track|
-              = render layout: 'list_entry', locals: { entry: entry, run: run, track: track } do
+              = render layout: 'list_entry', locals: { entry: entry, run: run, track: track, list: @score_list } do
                 - if @score_list.separate_target_times?
                   %td.separate-times
                     = entry.try(:human_time_left_target)

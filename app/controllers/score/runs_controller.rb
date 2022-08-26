@@ -16,6 +16,7 @@ class Score::RunsController < ApplicationController
 
   def score_run_params
     params.require(:score_run).permit(list_entries_attributes:
-      %i[id track result_type edit_second_time edit_second_time_left_target edit_second_time_right_target])
+      %i[id track last_update_timestamp result_type edit_second_time
+         edit_second_time_left_target edit_second_time_right_target])
   end
 end

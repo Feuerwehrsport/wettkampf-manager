@@ -16,6 +16,7 @@ class Score::ListEntry < CacheDependendRecord
   validates :list, :entity, :track, :run, :assessment_type, :assessment, presence: true
   validates :track, :run, numericality: { greater_than: 0 }
   validates :track, numericality: { less_than_or_equal_to: :track_count }
+  validate :check_update_timestamp_not_changed
 
   before_validation do
     if list.separate_target_times?
@@ -29,6 +30,14 @@ class Score::ListEntry < CacheDependendRecord
   scope :not_waiting, -> { where.not(result_type: :waiting) }
   scope :waiting, -> { where(result_type: :waiting) }
 
+  def last_update_timestamp
+    updated_at.to_i
+  end
+
+  def last_update_timestamp=(check_timestamp)
+    @check_timestamp = check_timestamp
+  end
+
   def self.insert_random_values
     where(result_type: :waiting).find_each do |l|
       if l.list.separate_target_times?
@@ -38,5 +47,13 @@ class Score::ListEntry < CacheDependendRecord
         l.update!(time_with_valid_calculation: rand(1900..2300))
       end
     end
+  end
+
+  private
+
+  def check_update_timestamp_not_changed
+    return if @check_timestamp.blank?
+
+    errors.add(:last_update_timestamp) if @check_timestamp.to_i != last_update_timestamp
   end
 end

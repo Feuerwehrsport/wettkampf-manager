@@ -4,20 +4,29 @@
       %a{ name: "jump-run-#{run + 1}" }
       = run
   %th.track= track
-  - if @score_list.single_discipline?
+  - if list.single_discipline?
     - if Competition.one.show_bib_numbers?
       %td= entry.try(:entity).try(:bib_number)
     %td= entry.try(:entity).try(:last_name).to_s.truncate(20)
     %td= entry.try(:entity).try(:first_name).to_s.truncate(20)
     %td
       = entry.try(:entity).try(:team_shortcut_name, entry.try(:assessment_type)).to_s.truncate(20)
-      - if @score_list.show_multiple_assessments? && @score_list.multiple_assessments?
+      - if list.show_multiple_assessments? && list.multiple_assessments?
         %br
         .tiny= entry.try(:assessment).try(:decorate)
   - else
     %td
-      = entry.try(:entity).try(:to_s, @score_list.multiple_assessments?)
-      - if @score_list.show_multiple_assessments? && @score_list.multiple_assessments?
+      = entry.try(:entity).try(:to_s, list.multiple_assessments?)
+      - if list.show_multiple_assessments? && list.multiple_assessments?
         %br
         .tiny= entry.try(:assessment).try(:decorate)
   = yield (track == 1)
+
+- if entry&.errors&.include?(:last_update_timestamp)
+  %tr.danger
+    %td{ colspan: list.column_count }
+      %p
+        %strong Der Eintrag wurde in der Zwischenzeit von einem anderen Benutzer geändert. Durch ein erneutes Drücken auf »Speichern« überschreiben Sie den geänderten Eintrag.
+      %p
+        In der Datenbank steht zur Zeit folgender Wert:
+        %strong= Score::ListEntry.find(entry.id).decorate.overview
