@@ -4,8 +4,10 @@ require 'rails_helper'
 
 RSpec.describe Score::ListFactories::GroupOrder, type: :model do
   let(:factory) do
-    create(:score_list_factory_group_order, assessments: [assessment], discipline: assessment.discipline)
+    create(:score_list_factory_group_order, assessments: [assessment], discipline: assessment.discipline,
+                                            single_competitors_first: single_competitor_first)
   end
+  let(:single_competitor_first) { true }
 
   describe '#perform_rows' do
     let(:list) { build_stubbed :score_list, assessments: [assessment] }
@@ -76,6 +78,40 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
         person2_team3,
         person3_team3,
       ]
+    end
+
+    context 'when single competitors last' do
+      let(:single_competitor_first) { false }
+
+      it 'returns requests seperated by team and group competitor order and single competitors last' do
+        requests = factory.send(:perform_rows)
+        expect(requests).to have(13).items
+
+        requests_team1 = requests.select { |r| r.entity.team == team1 }
+        expect(requests_team1.map(&:entity)).to eq [
+          person1_team1,
+          person2_team1,
+          person3_team1,
+          person4_team1,
+          person5_team1,
+          person6_team1,
+        ]
+
+        requests_team2 = requests.select { |r| r.entity.team == team2 }
+        expect(requests_team2.map(&:entity)).to eq [
+          person1_team2,
+          person2_team2,
+          person3_team2,
+          person4_team2,
+        ]
+
+        requests_team3 = requests.select { |r| r.entity.team == team3 }
+        expect(requests_team3.map(&:entity)).to eq [
+          person1_team3,
+          person2_team3,
+          person3_team3,
+        ]
+      end
     end
   end
 end

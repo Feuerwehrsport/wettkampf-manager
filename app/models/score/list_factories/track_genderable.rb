@@ -6,7 +6,7 @@ class Score::ListFactories::TrackGenderable < Score::ListFactories::GroupOrder
                     if: -> { step_reached?(:finish) }
 
   def self.generator_params
-    %i[track gender]
+    %i[track gender single_competitors_first]
   end
 
   def perform

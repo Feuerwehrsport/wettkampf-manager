@@ -48,6 +48,8 @@ RSpec.describe 'list factory', seed: :configured do
     click_on 'Weiter'
     expect(find_field('Mannschaftsreihenfolge beachten')).to be_checked
     click_on 'Weiter'
+    choose 'Einzelstarter vor Mannschaftsstarter'
+    click_on 'Weiter'
     expect(page).to have_content('Voraussichtliche Liste')
     click_on 'Startliste erstellen'
 

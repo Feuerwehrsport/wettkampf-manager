@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
 class Score::ListFactories::GroupOrder < Score::ListFactory
+  validates :single_competitors_first, inclusion: { in: [true, false] }, if: -> { step_reached?(:finish) }
+
   def self.generator_possible?(discipline)
     discipline.single_discipline?
+  end
+
+  def self.generator_params
+    %i[single_competitors_first]
   end
 
   protected
@@ -11,7 +17,11 @@ class Score::ListFactories::GroupOrder < Score::ListFactory
     teams = {}
     requests = []
     sorted_assessment_requests = assessment_requests.sort_by do |request|
-      request.single_competitor_order + ((request.group_competitor_order + 1) * 100)
+      if single_competitors_first?
+        request.single_competitor_order + ((request.group_competitor_order + 1) * 100)
+      else
+        ((request.single_competitor_order + 1) * 100) + request.group_competitor_order
+      end
     end
     sorted_assessment_requests.each do |request|
       teams[request.entity.team_id] ||= []

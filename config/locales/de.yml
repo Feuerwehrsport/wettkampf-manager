@@ -96,6 +96,7 @@ de:
         track: Wettkampfbahn
         gender: Geschlecht
         results: Ergebnislisten
+        single_competitors_first: Reihenfolge der Einzelstarter
         type: Listenerstellung
         before_list: Vorherige Liste
         best_count: Anzahl der Finalisten auf der neuen Liste (X)

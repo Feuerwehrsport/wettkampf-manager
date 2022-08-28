@@ -9,6 +9,8 @@
   = f.input :track, collection: (1..@score_list_factory.object.track_count)
 - if :gender.in? @score_list_factory.object.class.generator_params
   = f.input :gender, collection: Genderable::GENDERS.keys
+- if :single_competitors_first.in? @score_list_factory.object.class.generator_params
+  = f.input :single_competitors_first, as: :radio_buttons, collection: [['Einzelstarter vor Mannschaftsstarter', true], ['Mannschaftsstarter vor Einzelstarter', false]]
 
 
 %table.table.table-condensed

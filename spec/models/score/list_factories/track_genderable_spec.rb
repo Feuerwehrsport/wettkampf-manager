@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Score::ListFactories::TrackGenderable, type: :model do
   let(:factory) do
-    build(:score_list_factory_track_genderable, track: track, gender: gender,
+    build(:score_list_factory_track_genderable, track: track, gender: gender, single_competitors_first: true,
                                                 assessments: [assessment_male, assessment_female])
   end
   let(:assessment_male) { create(:assessment, gender: :male) }

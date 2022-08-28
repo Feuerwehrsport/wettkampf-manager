@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_26_181718) do
+ActiveRecord::Schema.define(version: 2022_08_27_211144) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -282,6 +282,7 @@ ActiveRecord::Schema.define(version: 2022_08_26_181718) do
     t.integer "gender"
     t.boolean "hidden", default: false, null: false
     t.boolean "separate_target_times"
+    t.boolean "single_competitors_first"
   end
 
   create_table "score_list_factory_assessments", force: :cascade do |t|
