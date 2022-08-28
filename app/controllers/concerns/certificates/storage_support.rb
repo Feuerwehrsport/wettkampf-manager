@@ -12,9 +12,7 @@ module Certificates::StorageSupport
     when :time_long
       result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig') if respond_to?(:result_entry)
     when :time_very_long
-      if respond_to?(:result_entry)
-        "mit einer Zeit von #{result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig')}"
-      end
+      storage_support_time_very_long
     when :time_short
       result_entry.long_human_time(seconds: 's', invalid: 'D') if respond_to?(:result_entry)
     when :time_without_seconds
@@ -34,11 +32,7 @@ module Certificates::StorageSupport
     when :assessment_with_gender
       result.assessment if result.respond_to?(:assessment)
     when :gender
-      if result.respond_to?(:assessment)
-        result.assessment.try(:translated_gender)
-      else
-        result.try(:translated_gender)
-      end
+      storage_support_gender
     when :date
       h.l(result.try(:date).presence || Competition.one.date)
     when :place
@@ -51,6 +45,26 @@ module Certificates::StorageSupport
       t('certificates.lists.export.points', count: points) if respond_to?(:points)
     when :text
       position.text
+    end
+  end
+
+  private
+
+  def storage_support_time_very_long
+    return unless respond_to?(:result_entry)
+
+    if result_entry.result_valid?
+      "mit einer Zeit von #{result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig')}"
+    else
+      'mit einer ungültigen Zeit'
+    end
+  end
+
+  def storage_support_gender
+    if result.respond_to?(:assessment)
+      result.assessment.try(:translated_gender)
+    else
+      result.try(:translated_gender)
     end
   end
 end
