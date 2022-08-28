@@ -9,6 +9,8 @@
       = f.association :assessment
       = f.input :group_assessment, as: :boolean
       = render 'tag_form', f: f
+      %h3 Berechnung der Ergebnisse
+      = f.input :calculation_method, as: :radio_buttons, collection: Score::Result::CALCULATION_METHODS.map { |k, _v| [t("calculation_methods.#{k}"), k] }
     - box.footer do
       = cancel_link
       = f.primary_button :submit, 'Speichern'

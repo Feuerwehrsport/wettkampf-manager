@@ -139,6 +139,7 @@ de:
         edit_second_time_right_target: Rechte Zeit in Sekunden
       score/result:
         assessment: Wertungsgruppe
+        calculation_method: Berechnungsmethode
         group_assessment: Mannschaftswertung
         lists: Startlisten
         name: Name
@@ -187,6 +188,10 @@ de:
     both: Komplett
     only_times: Nur Zeiteingabe
     only_result_types: Nur Gültigkeitsprüfung
+
+  calculation_methods:
+    default: Standard (Bester Lauf in der Wertung)
+    sum_of_two: Summe der besten zwei Läufe
 
   gender:
     female: Frauen

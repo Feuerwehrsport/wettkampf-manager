@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_27_211144) do
+ActiveRecord::Schema.define(version: 2022_08_28_184511) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -335,6 +335,7 @@ ActiveRecord::Schema.define(version: 2022_08_27_211144) do
     t.integer "group_score_count"
     t.integer "group_run_count"
     t.date "date"
+    t.integer "calculation_method", default: 0, null: false
     t.index ["assessment_id"], name: "index_score_results_on_assessment_id"
     t.index ["double_event_result_id"], name: "index_score_results_on_double_event_result_id"
   end

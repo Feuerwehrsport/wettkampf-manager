@@ -3,6 +3,8 @@
 class Score::Result < CacheDependendRecord
   include Taggable
   include Score::Resultable
+  CALCULATION_METHODS = { default: 0, sum_of_two: 1 }.freeze
+  enum calculation_method: CALCULATION_METHODS
 
   belongs_to :assessment, inverse_of: :results
   has_many :series_assessment_results, class_name: 'Series::AssessmentResult', dependent: :destroy,

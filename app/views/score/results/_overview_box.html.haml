@@ -31,6 +31,11 @@
             %tr
               %td= link_to list.name, score_list_path(list)
 
+    - unless result.calculation_method == 'default'
+      %tr
+        %th= result.class.human_attribute_name :calculation_method
+        %td= t("calculation_methods.#{result.calculation_method}")
+
     - if result.series_assessments.exists?
       %tr
         %th Cup-Serie
