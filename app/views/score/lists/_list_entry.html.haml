@@ -16,7 +16,7 @@
         .tiny= entry.try(:assessment).try(:decorate)
   - else
     %td
-      = entry.try(:entity).try(:to_s, list.multiple_assessments?)
+      = entry.try(:entity).try(:to_s, !list.show_multiple_assessments? && list.multiple_assessments?)
       - if list.show_multiple_assessments? && list.multiple_assessments?
         %br
         .tiny= entry.try(:assessment).try(:decorate)
