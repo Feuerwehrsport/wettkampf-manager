@@ -74,3 +74,16 @@
           - box.footer do
             Die Reihenfolge der Personen kann einfach verschoben werden. Dadurch soll ein besseres Abgleichen mit der Eingabe möglich sein.
 
+  - if @team.list_entries.exists?
+    .col-md-12
+      = box('Startlisten') do
+        %table.table.table-bordered
+          %tr
+            %th Startliste
+            %th Lauf
+            %th Bahn
+          - @team.list_entries.sort_by { |entry| entry.list.decorate.to_s }.each do |entry|
+            %tr
+              %td= link_to(entry.list.decorate, score_list_path(entry.list, anchor: "jump-run-#{entry.run}"))
+              %td= entry.run
+              %td= entry.track
