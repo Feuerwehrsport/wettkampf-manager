@@ -5,6 +5,7 @@
     @modals.push(modal)
     $(document).trigger('modal.ready', [modal])
   pop: ->
+    return if Modals.modals.length == 0
     modal = @modals.pop()
     modal.modal('hide')
     modal.on 'hidden.bs.modal', ->

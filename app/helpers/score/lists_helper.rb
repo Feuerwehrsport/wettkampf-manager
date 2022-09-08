@@ -13,9 +13,11 @@ module Score::ListsHelper
   def not_yet_present_entities
     if @score_list.assessments.first.fire_relay?
       Team.all.map { |team| TeamRelay.create_next_free_for(team, @score_list.entries.pluck(:entity_id)) }
-    else
+    elsif params[:all_entities].blank?
       @score_list.discipline_klass.where.not(id: @score_list.entries.pluck(:entity_id))
                  .sort_by { |e| label_method_for_select_entity(e) }
+    else
+      @score_list.discipline_klass.all.sort_by { |e| label_method_for_select_entity(e) }
     end
   end
 

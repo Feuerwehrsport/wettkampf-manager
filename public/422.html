@@ -11096,6 +11096,9 @@ return jQuery;
     },
     pop: function() {
       var modal;
+      if (Modals.modals.length === 0) {
+        return;
+      }
       modal = this.modals.pop();
       modal.modal('hide');
       return modal.on('hidden.bs.modal', function() {

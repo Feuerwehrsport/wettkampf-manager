@@ -7,6 +7,8 @@
       - free_run, free_track = @score_list.next_free_track
       = f.simple_fields_for :entries, @score_list.entries.build(run: free_run, track: free_track, entity_type: @score_list.discipline_klass.name) do |g|
         = g.association :entity, collection: not_yet_present_entities, label_method: ->(entity) { label_method_for_select_entity(entity) }
+        - if params[:all_entities].blank?
+          .pull-right= link_to 'Alle anzeigen (für doppelte Einträge)', { action: :select_entity, all_entities: true }, remote: true
         = g.input :run, as: :hidden
         = g.input :track, as: :hidden
         = g.input :entity_type, as: :hidden
