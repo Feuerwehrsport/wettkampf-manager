@@ -31,8 +31,6 @@ module Exports::PDF::Base
     perform
   end
 
-  protected
-
   def pdf
     @pdf ||= Prawn::Document.new(default_prawn_options)
   end
@@ -44,6 +42,13 @@ module Exports::PDF::Base
     }
   end
 
+  def pdf_discipline_image(discipline, width:, at:)
+    pdf.image(Rails.root.join('app', 'assets', 'images', 'disciplines', discipline.decorate.image),
+              width: width, at: at)
+  end
+
+  protected
+
   def pdf_header(name, discipline: nil, date: nil)
     date ||= competition.date
     headline_y = pdf.cursor
@@ -51,8 +56,7 @@ module Exports::PDF::Base
     pdf.text([competition.name, l(date)].join(' - '), align: :center, size: 15)
     return if discipline.blank?
 
-    pdf.image(Rails.root.join('app', 'assets', 'images', 'disciplines', discipline.decorate.image),
-              width: 30, at: [10, headline_y])
+    pdf_discipline_image(discipline, width: 30, at: [10, headline_y])
   end
 
   def pdf_footer(name: nil, no_page_count: nil, date: nil)

@@ -32,7 +32,7 @@ Score::ResultRow = Struct.new(:entity, :result) do
   end
 
   def result_entry_from(list)
-    @list_entries.select { |entry| entry.list == list }.sort.first
+    @list_entries.select { |entry| entry.list == list }.min
   end
 
   def result_entries

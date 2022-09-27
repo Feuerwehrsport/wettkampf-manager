@@ -221,6 +221,13 @@ de:
     out_of_competition_short: A
     out_of_competition_short_order: A
 
+  score:
+    list_print_generators:
+      form:
+        entries:
+          one: 1 Eintrag
+          other: '%{count} Einträge'
+
   date:
     formats:
       default: ! '%d.%m.%Y'

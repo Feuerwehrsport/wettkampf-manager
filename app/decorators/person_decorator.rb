@@ -44,12 +44,12 @@ class PersonDecorator < ApplicationDecorator
     [first_name, last_name, team]
   end
 
-  def export_last_name(list, pdf: false)
+  def export_last_name(list, pdf: false, hint_size: 6)
     last_name = short_last_name.to_s
     tags = tag_names & list.tag_names
 
     if pdf
-      last_name += "<font size='6'> #{tags.join(',')}</font>" if tags.present?
+      last_name += "<font size='#{hint_size}'> #{tags.join(',')}</font>" if tags.present?
       { content: last_name, inline_format: true }
     else
       last_name += " (#{tags.join(', ')})" if tags.present?

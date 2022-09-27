@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       end
       resources :runs, only: %i[edit update], param: :run
     end
+    resource :list_print_generator, only: %i[new create]
     resources :results
     resources :competition_results, only: %i[new create index edit update destroy]
   end

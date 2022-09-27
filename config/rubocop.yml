@@ -36,20 +36,21 @@ Metrics/BlockLength:
   - included
   - new
   Max: 50
+Naming/MethodParameterName:
+  Enabled: false
 Metrics/ClassLength:
   Max: 200
 Metrics/CyclomaticComplexity:
-  Max: 15
+  Enabled: false
 Metrics/MethodLength:
   Exclude:
   - db/migrate/*.rb
   - app/models/presets/*.rb
   Max: 50
 Metrics/ParameterLists:
-  Exclude:
-  - app/models/presets/dm2022.rb
+  Enabled: false
 Metrics/PerceivedComplexity:
-  Max: 15
+  Enabled: false
 RSpec/AnyInstance:
   Enabled: false
 RSpec/DescribeClass:
@@ -87,6 +88,8 @@ Rails/ReversibleMigration:
   Enabled: false
 Rails/SkipsModelValidations:
   Enabled: false
+Metrics/ModuleLength:
+  Max: 200
 Style/AsciiComments:
   Enabled: false
 Style/ClassAndModuleChildren:

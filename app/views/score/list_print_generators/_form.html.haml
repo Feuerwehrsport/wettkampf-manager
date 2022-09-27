@@ -1,0 +1,27 @@
+= simple_form_for @list_print_generator, url: score_list_print_generator_path do |f|
+  = box 'Mehrere Startlisten zusammen drucken' do |box|
+    %ul.list-group#sortable-list-elements
+      - @lists.each do |list|
+        %li.list-group-item{ data: { print_id: list.id } }
+          %span.badge= t('.entries', count: list.entries.count)
+          = list.name
+      %li.list-group-item.disabled{ data: { print_id: 'finish' } }
+        %span.glyphicon.glyphicon-eject
+        &nbsp;
+        Ab hier wird ignoriert
+        &nbsp;
+        %span.glyphicon.glyphicon-eject
+      - (@lists.count - 1).times do
+        %li.list-group-item.list-group-item-info{ data: { print_id: 'column' } }
+          %span.glyphicon.glyphicon-share-alt
+          Spaltenumbruch
+      - (@lists.count - 1).times do
+        %li.list-group-item.list-group-item-warning{ data: { print_id: 'page' } }
+          %span.glyphicon.glyphicon-arrow-down
+          Seitenumbruch
+
+
+    = f.input :print_list, as: :hidden
+    - box.footer do
+      = cancel_link(score_lists_path)
+      = f.primary_button :submit, 'Generieren'

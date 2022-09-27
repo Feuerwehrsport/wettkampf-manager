@@ -29,5 +29,6 @@ linters:
     - Style/FrozenStringLiteralComment
     - Style/IfUnlessModifier
     - Style/Next
+    - Style/NumericPredicate
     - Style/WhileUntilModifier
     - Lint/AmbiguousBlockAssociation

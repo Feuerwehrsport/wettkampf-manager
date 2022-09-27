@@ -4,6 +4,7 @@
       - if admin_logged_in?
         - box.header do
           .pull-right
+            = btn_link_to 'Mehrere zusammen drucken', action: :new, controller: 'score/list_print_generators'
             = btn_link_to 'Hinzufügen', action: :new, controller: 'score/list_factories'
           .clearfix
       %table.table
@@ -22,6 +23,7 @@
 
       - if admin_logged_in?
         - box.footer do
+          = btn_link_to 'Mehrere zusammen drucken', action: :new, controller: 'score/list_print_generators'
           = btn_link_to 'Hinzufügen', action: :new, controller: 'score/list_factories'
 
   - if admin_logged_in? && @list_factory.present?

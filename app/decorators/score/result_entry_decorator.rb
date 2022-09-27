@@ -18,11 +18,11 @@ class Score::ResultEntryDecorator < ApplicationDecorator
     value.presence ? "L: #{value}" : ''
   end
 
-  def target_times_as_data(pdf: false)
+  def target_times_as_data(pdf: false, hint_size: 6)
     target_times = [human_time_left_target, human_time_right_target].reject(&:blank?)
     if pdf
       {
-        content: "<font size='6'>#{target_times.join('<br/>')}</font>",
+        content: "<font size='#{hint_size}'>#{target_times.join('<br/>')}</font>",
         inline_format: true, padding: [0, 0, 3, 0], valign: :center
       }
     else
