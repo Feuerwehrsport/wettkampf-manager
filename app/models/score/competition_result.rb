@@ -79,10 +79,10 @@ class Score::CompetitionResult < CacheDependendRecord
         teams[row.entity.id].add_assessment_result(assessment_result)
       end
     end
-    for_results do |result, result_rows, ranks|
+    for_results do |result, result_rows, _ranks|
       next if result_rows.empty?
 
-      points = ranks.values.max + 1
+      points = teams.count
       teams.keys.each do |team_id|
         next if teams[team_id].assessment_result_from(result.assessment).present?
 
