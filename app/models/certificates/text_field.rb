@@ -114,6 +114,7 @@ class Certificates::TextField < ApplicationRecord
       align: align,
       text: text,
       color: color,
+      font: font,
     }
   end
 end

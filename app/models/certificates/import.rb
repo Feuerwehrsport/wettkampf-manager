@@ -39,6 +39,7 @@ class Certificates::Import
         key: text_field[:key],
         align: text_field[:align],
         text: text_field[:text],
+        font: text_field[:font].presence || 'regular',
         color: text_field[:color].presence || '000000',
       )
     end
