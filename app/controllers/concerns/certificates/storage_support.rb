@@ -32,7 +32,7 @@ module Certificates::StorageSupport
     when :assessment_with_gender
       result.assessment if result.respond_to?(:assessment)
     when :gender
-      storage_support_gender
+      storage_support_band
     when :date
       h.l(result.try(:date).presence || Competition.one.date)
     when :place
@@ -60,11 +60,11 @@ module Certificates::StorageSupport
     end
   end
 
-  def storage_support_gender
-    if result.respond_to?(:assessment)
-      result.assessment.try(:translated_gender)
-    else
-      result.try(:translated_gender)
+  def storage_support_band
+    if result.respond_to?(:band)
+      result&.band&.name
+    elsif result.respond_to?(:assessment)
+      result.assessment&.band&.name
     end
   end
 end
