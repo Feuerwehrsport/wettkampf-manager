@@ -28,3 +28,7 @@ else
   user = User.new(name: 'API')
   user.save!(validate: false)
 end
+
+unless Rails.env.test?
+  Certificates::Import.new(file: Rails.root.join('doc/urkundenvorlage-beispiel-urkunde-vorlage.json')).save
+end
