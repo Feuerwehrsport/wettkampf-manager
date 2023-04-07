@@ -35,10 +35,6 @@ class Assessment < CacheDependendRecord
     @team_tags ||= tags.where(type: 'TeamTag')
   end
 
-  def self.single_discipline(gender)
-    gender(gender).select { |assessment| assessment.discipline.single_discipline? }
-  end
-
   def self.requestable_for_person(band)
     where(band: band).select do |a|
       a.discipline.group_discipline? ||

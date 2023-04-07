@@ -185,12 +185,6 @@ class Score::ListFactory < CacheDependendRecord
     end
   end
 
-  def results_possible
-    results.each do |result|
-      errors.add(:results, :invalid) unless result.in?(possible_results)
-    end
-  end
-
   def type_valid
     errors.add(:type, :invalid) unless type.in?(possible_types.map(&:to_s))
   end

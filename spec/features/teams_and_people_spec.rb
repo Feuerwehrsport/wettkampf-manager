@@ -14,7 +14,10 @@ RSpec.describe 'Teams and People', seed: :configured do
 
     click_on 'Mannschaften'
     within(:css, '.panel-heading') { expect(page).to have_content 'Mannschaften' }
-    click_on 'Mannschaft hinzufügen', match: :first
+
+    within(:css, '.row .row', text: 'Frauen') do
+      click_on 'Mannschaft hinzufügen'
+    end
 
     within(:css, '.panel-heading') { expect(page).to have_content 'Mannschaft' }
     fill_in 'Name', with: 'FF Warin'
@@ -24,6 +27,14 @@ RSpec.describe 'Teams and People', seed: :configured do
     expect(page).to have_content 'Mannschaft erfolgreich erstellt'
     expect(page).to have_content 'Keine Einträge gefunden'
     expect(page).to have_content 'Mecklenburg-Vorpommern'
+
+    click_on 'Wertungen bearbeiten', match: :first
+
+    within(:css, '.modal') do
+      expect(page).to have_content 'Löschangriff Nass - Frauen'
+      click_on 'Speichern'
+    end
+
     click_on 'Wettkämpfer hinzufügen', match: :first
 
     within(:css, '.modal') do
@@ -37,11 +48,11 @@ RSpec.describe 'Teams and People', seed: :configured do
 
     within(:css, '.modal') do
       within(:css, '.assessment-request:nth-of-type(1)') do
-        expect(page).to have_content '100m Hindernisbahn - AK 1'
+        expect(page).to have_content '100m Hindernisbahn - Frauen'
         check 'Teilnahme'
       end
       within(:css, '.assessment-request:nth-of-type(2)') do
-        expect(page).to have_content 'Hakenleitersteigen - AK 1'
+        expect(page).to have_content 'Hakenleitersteigen - Frauen'
         check 'Teilnahme'
       end
       click_on 'Speichern'
@@ -68,14 +79,14 @@ RSpec.describe 'Teams and People', seed: :configured do
 
     within(:css, '.modal') do
       within(:css, '.assessment-request:nth-of-type(1)') do
-        expect(page).to have_content '100m Hindernisbahn - AK 1'
+        expect(page).to have_content '100m Hindernisbahn - Frauen'
         check 'Teilnahme'
-        select 'Einzelstarter', from: '100m Hindernisbahn - AK 1'
+        select 'Einzelstarter', from: '100m Hindernisbahn - Frauen'
       end
       within(:css, '.assessment-request:nth-of-type(2)') do
-        expect(page).to have_content 'Hakenleitersteigen - AK 1'
+        expect(page).to have_content 'Hakenleitersteigen - Frauen'
         check 'Teilnahme'
-        select 'Einzelstarter', from: 'Hakenleitersteigen - AK 1'
+        select 'Einzelstarter', from: 'Hakenleitersteigen - Frauen'
       end
       click_on 'Speichern'
     end
@@ -92,7 +103,9 @@ RSpec.describe 'Teams and People', seed: :configured do
     expect(assessment_requests.assessment_type(:single_competitor)).to have(2).items
 
     visit people_path
-    click_on 'Wettkämpfer hinzufügen', match: :first
+    within(:css, '.row .row', text: 'Frauen') do
+      click_on 'Wettkämpfer hinzufügen'
+    end
 
     within(:css, '.modal') do
       expect(page).to have_content 'Wettkämpfer'
@@ -105,11 +118,11 @@ RSpec.describe 'Teams and People', seed: :configured do
 
     within(:css, '.modal') do
       within(:css, '.assessment-request:nth-of-type(1)') do
-        expect(page).to have_content '100m Hindernisbahn - AK 1'
+        expect(page).to have_content '100m Hindernisbahn - Frauen'
         check 'Teilnahme'
       end
       within(:css, '.assessment-request:nth-of-type(2)') do
-        expect(page).to have_content 'Hakenleitersteigen - AK 1'
+        expect(page).to have_content 'Hakenleitersteigen - Frauen'
         check 'Teilnahme'
         fill_in 'Reihenfolge', with: '6'
       end

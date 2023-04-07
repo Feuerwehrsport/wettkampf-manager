@@ -15,5 +15,13 @@ RSpec.describe Score::ListFactories::Simple, type: :model do
       factory.list
       expect { factory.perform }.to change(Score::ListEntry, :count).by(5)
     end
+
+    context 'when lottery_numbers given' do
+      it 'create list entries' do
+        Competition.one.update!(lottery_numbers: true)
+        factory.list
+        expect { factory.perform }.to change(Score::ListEntry, :count).by(5)
+      end
+    end
   end
 end

@@ -13,7 +13,7 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
     let(:list) { build_stubbed :score_list, assessments: [assessment] }
     let(:assessment) { create :assessment }
 
-    let(:team1) { create(:team, :generated) }
+    let(:team1) { create(:team, :generated, lottery_number: 3) }
     let(:person1_team1) { create(:person, :generated, team: team1) }
     let(:person2_team1) { create(:person, :generated, team: team1) }
     let(:person3_team1) { create(:person, :generated, team: team1) }
@@ -21,13 +21,13 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
     let(:person5_team1) { create(:person, :generated, team: team1) }
     let(:person6_team1) { create(:person, :generated, team: team1) }
 
-    let(:team2) { create(:team, :generated) }
+    let(:team2) { create(:team, :generated, lottery_number: 2) }
     let(:person1_team2) { create(:person, :generated, team: team2) }
     let(:person2_team2) { create(:person, :generated, team: team2) }
     let(:person3_team2) { create(:person, :generated, team: team2) }
     let(:person4_team2) { create(:person, :generated, team: team2) }
 
-    let(:team3) { create(:team, :generated) }
+    let(:team3) { create(:team, :generated, lottery_number: 1) }
     let(:person1_team3) { create(:person, :generated, team: team3) }
     let(:person2_team3) { create(:person, :generated, team: team3) }
     let(:person3_team3) { create(:person, :generated, team: team3) }
@@ -53,6 +53,11 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
     it 'returns requests seperated by team and group competitor order' do
       requests = factory.send(:perform_rows)
       expect(requests).to have(13).items
+
+      expect(requests[0].entity.team).to eq team1
+      expect(requests[1].entity.team).to eq team2
+      expect(requests[2].entity.team).to eq team3
+      expect(requests[3].entity.team).to eq team1
 
       requests_team1 = requests.select { |r| r.entity.team == team1 }
       expect(requests_team1.map(&:entity)).to eq [
@@ -111,6 +116,19 @@ RSpec.describe Score::ListFactories::GroupOrder, type: :model do
           person2_team3,
           person3_team3,
         ]
+      end
+    end
+
+    context 'when lottery_number given' do
+      it 'sorts teams' do
+        Competition.one.update!(lottery_numbers: true)
+
+        requests = factory.send(:perform_rows)
+        expect(requests).to have(13).items
+        expect(requests[0].entity.team).to eq team3
+        expect(requests[1].entity.team).to eq team2
+        expect(requests[2].entity.team).to eq team1
+        expect(requests[3].entity.team).to eq team3
       end
     end
   end
