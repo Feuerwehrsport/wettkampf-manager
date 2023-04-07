@@ -1,4 +1,4 @@
 = f.input :next_step, as: :hidden, input_html: { value: :names }
-= f.association :assessments, as: :check_boxes, collection: @score_list_factory.possible_assessments.decorate, label_method: :name_with_request_count, hint: 'Bitte alle Wertungsgruppen auswählen, die auf der Startliste erscheinen sollen'
+= f.association :assessments, as: :check_boxes, collection: @score_list_factory.possible_assessments.decorate, label_method: :name_with_request_count, hint: 'Bitte alle Wertungen auswählen, die auf der Startliste erscheinen sollen'
 .pull-right
   = f.primary_button :submit, 'Weiter'

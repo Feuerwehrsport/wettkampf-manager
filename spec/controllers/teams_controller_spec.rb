@@ -4,10 +4,11 @@ require 'rails_helper'
 
 RSpec.describe TeamsController, type: :controller, seed: :configured, user: :logged_in do
   let(:team) { create(:team) }
+  let(:male_band) { create(:band) }
 
   describe 'GET new' do
     it 'renders form' do
-      get :new
+      get :new, params: { band_id: male_band.id }
       expect(response).to be_successful
     end
   end
@@ -43,7 +44,7 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
   describe 'POST create' do
     it 'creates team' do
       expect do
-        post :create, params: { team: { name: 'FF Warin', shortcut: 'Warin', gender: :male, number: 1 } }
+        post :create, params: { band_id: male_band.id, team: { name: 'FF Warin', shortcut: 'Warin', number: 1 } }
         expect(response).to redirect_to teams_path
       end.to change(Team, :count).by(1)
     end
@@ -52,7 +53,7 @@ RSpec.describe TeamsController, type: :controller, seed: :configured, user: :log
       before { allow(controller).to receive(:single_discipline_exists?).and_return(true) }
 
       it 'creates team' do
-        post :create, params: { team: { name: 'FF Warin', shortcut: 'Warin', gender: :male, number: 1 } }
+        post :create, params: { band_id: male_band.id, team: { name: 'FF Warin', shortcut: 'Warin', number: 1 } }
         expect(response).to redirect_to team_path(Team.last.id)
       end
     end

@@ -6,17 +6,7 @@ class Imports::Configuration < CacheDependendRecord
 
   before_create do
     self.data = JSON.parse(file.download)
-    data[:person_tag_list].each { |tag| tags.build(name: tag, use: true, target: :person) }
-    data[:team_tag_list].each { |tag| tags.build(name: tag, use: true, target: :team) }
-    data[:assessments].each do |a|
-      assessments.build(name: a[:name], gender: a[:gender], discipline: a[:discipline], foreign_key: a[:id])
-    end
   end
-
-  has_many :tags, class_name: 'Imports::Tag', inverse_of: :configuration, dependent: :destroy
-  has_many :assessments, class_name: 'Imports::Assessment', inverse_of: :configuration, dependent: :destroy
-  accepts_nested_attributes_for :tags
-  accepts_nested_attributes_for :assessments
 
   validates :file, presence: true
 
@@ -36,6 +26,24 @@ class Imports::Configuration < CacheDependendRecord
     data[:place]
   end
 
+  def bands
+    @bands ||= data[:bands].each_with_index.map { |b, position| Imports::Band.new(self, b, position + 1) }
+  end
+
+  def tags
+    @tags ||= begin
+      pts = []
+      tts = []
+      data[:bands].each do |b|
+        pts += b[:person_tag_list]
+        tts += b[:team_tag_list]
+      end
+      ts = pts.uniq.map { |t| Imports::Tag.new(self, t, 'person') }
+      ts += tts.uniq.map { |t| Imports::Tag.new(self, t, 'team') }
+      ts
+    end
+  end
+
   def error_infos
     @error_infos ||= begin
       import(true)
@@ -51,14 +59,6 @@ class Imports::Configuration < CacheDependendRecord
     nil
   end
 
-  def teams
-    @teams ||= data[:teams].map { |t| Imports::Team.new(self, t) }
-  end
-
-  def people
-    @people ||= data[:people].map { |t| Imports::Person.new(self, t) }
-  end
-
   def execute=(_value)
     self.executed_at = Time.current
     import
@@ -68,8 +68,7 @@ class Imports::Configuration < CacheDependendRecord
     Competition.transaction do
       Competition.first.update!(name: name, place: place, date: date)
       tags.each(&:import)
-      teams.each(&:import)
-      people.each(&:import)
+      bands.each(&:import)
       raise ActiveRecord::Rollback if rollback
     end
   end

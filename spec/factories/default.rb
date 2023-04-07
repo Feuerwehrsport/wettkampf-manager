@@ -5,13 +5,25 @@ FactoryBot.define do
   sequence(:last_name) { |n| "Meier#{n}" }
   sequence(:name) { |n| "Team#{n}" }
 
+  factory :band do
+    gender { :male }
+    name { 'Männer' }
+
+    trait(:female) do
+      gender { :female }
+      name { 'Frauen' }
+    end
+  end
+
   factory :team do
     name { 'Mecklenburg-Vorpommern' }
     shortcut { 'Team MV' }
-    gender { :male }
+    band { Band.find_by(gender: :male) || build(:band, :male) }
 
-    trait(:male) { gender { :male } }
-    trait(:female) { gender { :female } }
+    trait(:male) {}
+    trait(:female) do
+      band { Band.find_by(gender: :female) || build(:band, :female) }
+    end
     trait(:generated) do
       name { generate(:name) }
     end
@@ -20,17 +32,19 @@ FactoryBot.define do
   factory :person do
     first_name { 'Alfred' }
     last_name { 'Meier' }
-    gender { :male }
+    band { Band.find_by(gender: :male) || build(:band, :male) }
 
     trait(:generated) do
       first_name { generate(:first_name) }
       last_name { generate(:last_name) }
     end
 
-    trait(:male) { gender { :male } }
-    trait(:female) { gender { :female } }
+    trait(:male) {}
+    trait(:female) do
+      band { Band.find_by(gender: :female) || build(:band, :female) }
+    end
     trait(:with_team) do
-      team { Team.first || build(:team) }
+      team { |person| Team.first || build(:team, band: person.band) }
     end
   end
 
@@ -51,7 +65,7 @@ FactoryBot.define do
   factory :assessment do
     discipline { Disciplines::ClimbingHookLadder.first || create(:climbing_hook_ladder) }
     name { '' }
-    gender { :male }
+    band { Band.find_by(gender: :male) || build(:band, :male) }
     trait :obstacle_course do
       discipline { create :obstacle_course }
     end

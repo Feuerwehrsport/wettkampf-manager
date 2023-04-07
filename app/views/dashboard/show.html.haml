@@ -2,22 +2,22 @@
   .col-md-7
     = box decorated_competition do
       %h4 #{l decorated_competition.date} - #{decorated_competition.place}
-      %table.table
-        - used_genders = Genderable.used_genders
+      %table.table.table-bordered
+        - bands = Band.all.decorate
         %tr
           %th
-          - used_genders.each do |gender|
-            %th= t("gender.#{gender}")
+          - bands.each do |band|
+            %th= band
         - if Person.exists?
           %tr
             %th Angemeldete Wettkämpfer
-            - used_genders.each do |gender|
-              %th= Person.gender(gender).count
+            - bands.each do |band|
+              %td.text-center= band.people.count
         - if Team.exists?
           %tr
             %th Angemeldete Mannschaften
-            - used_genders.each do |gender|
-              %th= Team.gender(gender).count
+            - bands.each do |band|
+              %td.text-center= band.teams.count
   - if admin_logged_in?
     .col-md-5
       = box 'Konfigurieren' do

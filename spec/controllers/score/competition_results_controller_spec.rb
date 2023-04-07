@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :configured, user: :logged_in do
   let(:competition_result) { create(:score_competition_result) }
+  let(:band) { create(:band) }
 
   describe 'GET new' do
     it 'renders form' do
@@ -15,7 +16,7 @@ RSpec.describe Score::CompetitionResultsController, type: :controller, seed: :co
   describe 'POST create' do
     it 'creates competition_result' do
       expect do
-        post :create, params: { score_competition_result: { name: 'foo', gender: :female, result_type: :dcup } }
+        post :create, params: { score_competition_result: { name: 'foo', band_id: band.id, result_type: :dcup } }
         expect(response).to redirect_to action: :index
       end.to change(Score::CompetitionResult, :count).by(1)
     end

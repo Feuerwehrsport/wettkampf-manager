@@ -8,6 +8,14 @@ module Taggable
     accepts_nested_attributes_for :tag_references, reject_if: :all_blank, allow_destroy: true
   end
 
+  def person_tags
+    @person_tags ||= tags.where(type: 'PersonTag')
+  end
+
+  def team_tags
+    @team_tags ||= tags.where(type: 'TeamTag')
+  end
+
   def tag_names
     tags.map(&:name)
   end

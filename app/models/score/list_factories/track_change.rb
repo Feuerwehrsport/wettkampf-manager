@@ -22,6 +22,6 @@ class Score::ListFactories::TrackChange < Score::ListFactory
   def before_list_assessment_match
     return unless before_list.blank? || before_list.assessment_ids.sort != assessment_ids.sort
 
-    errors.add(:before_list, 'muss mit jetziger Wertungsgruppe übereinstimmen')
+    errors.add(:before_list, 'muss mit jetziger Wertung übereinstimmen')
   end
 end

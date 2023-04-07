@@ -1,0 +1,32 @@
+.row
+  .col-md-8
+    = box @band do
+      %table.table
+        %tr
+          %th= @band.class.human_attribute_name :gender
+          %td= t("gender.#{@band.gender}")
+        %tr
+          %th= @band.class.human_attribute_name :name
+          %td= @band.name
+
+    = box Assessment.model_name.human(count: :many) do
+      - if @band.assessments.count.zero?
+        .alert.alert-info Keine Einträge gefunden
+      - else
+        %table.table
+          %tr
+            %th= Assessment.human_attribute_name(:name)
+            %th= Assessment.human_attribute_name(:discipline)
+          - @band.assessments.each do |assessment|
+            %tr
+              %td= link_to assessment, assessment
+              %td
+                = discipline_image assessment.discipline
+                = assessment.discipline
+
+  - if admin_logged_in?
+    .col-md-4
+      = box('Aktionen') do
+        = block_link_to 'Bearbeiten', { action: :edit }
+        = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Wertungsgruppe wirklich löschen? Dies ist nur möglich, wenn keine Wertungen verknüpft sind.' }
+        = block_link_to 'Übersicht Wertungsgruppen', { action: :index }

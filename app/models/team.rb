@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Team < CacheDependendRecord
-  include Genderable
   include Taggable
 
   has_many :people, dependent: :nullify
+  belongs_to :band, class_name: 'Band'
   belongs_to :fire_sport_statistics_team, class_name: 'FireSportStatistics::Team'
   belongs_to :federal_state
   has_many :requests, class_name: 'AssessmentRequest', as: :entity, dependent: :destroy, inverse_of: :entity
@@ -12,15 +12,15 @@ class Team < CacheDependendRecord
   has_many :requested_assessments, through: :requests, source: :assessment
   has_many :team_relays, dependent: :destroy
 
-  validates :name, :gender, :number, :shortcut, presence: true
+  validates :name, :band, :number, :shortcut, presence: true
   validates :number, numericality: { greater_than: 0 }
-  validates :name, uniqueness: { scope: %i[number gender], case_sensitive: false }
+  validates :name, uniqueness: { scope: %i[number band], case_sensitive: false }
   validates :shortcut, length: { maximum: 12 }
   before_validation :strip_names
 
   accepts_nested_attributes_for :requests, allow_destroy: true
 
-  default_scope { order(:gender, :name, :number) }
+  default_scope { order(:name, :number) }
 
   after_create :create_assessment_requests
   attr_accessor :disable_autocreate_assessment_requests
@@ -68,7 +68,7 @@ class Team < CacheDependendRecord
   def create_assessment_requests
     return if disable_autocreate_assessment_requests.present?
 
-    Assessment.requestable_for(self).each do |assessment|
+    Assessment.requestable_for_team(band).each do |assessment|
       count = assessment.fire_relay? ? 2 : 1
       requests.create(assessment: assessment, relay_count: count)
     end

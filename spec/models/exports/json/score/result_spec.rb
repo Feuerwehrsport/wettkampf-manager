@@ -20,6 +20,7 @@ RSpec.describe Exports::JSON::Score::Result, type: :model do
         ],
         name: 'Hakenleitersteigen - Männer',
         gender: 'male',
+        band: 'Männer',
         discipline: 'hl',
         group_rows: [
           %w[Platz Name Summe],

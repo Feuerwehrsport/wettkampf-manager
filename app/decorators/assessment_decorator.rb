@@ -2,9 +2,10 @@
 
 class AssessmentDecorator < ApplicationDecorator
   decorates_association :discipline
+  decorates_association :band
 
   def to_s
-    name.presence || ([discipline, translated_gender] + tag_names).reject(&:blank?).join(' - ')
+    name.presence || ([discipline, band] + tag_names).reject(&:blank?).join(' - ')
   end
 
   def name_with_request_count
@@ -18,10 +19,6 @@ class AssessmentDecorator < ApplicationDecorator
     else
       "#{self} (#{related_requests.count} Starter)"
     end
-  end
-
-  def translated_gender
-    gender.present? ? t("gender.#{gender}") : ''
   end
 
   def related_requests

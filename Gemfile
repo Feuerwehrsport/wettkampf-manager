@@ -29,6 +29,9 @@ gem 'coffee-script-source'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+# position in lists
+gem 'acts_as_list'
+
 # exports
 gem 'caxlsx'
 gem 'prawn'

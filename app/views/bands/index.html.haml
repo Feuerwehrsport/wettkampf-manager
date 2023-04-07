@@ -1,0 +1,7 @@
+.row
+  .col-md-12
+    = box Band.model_name.human count: 0 do |box|
+      = render 'index_table', bands: @bands
+
+      - box.footer do
+        = btn_link_to 'Hinzufügen', { action: :new }

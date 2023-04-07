@@ -16,8 +16,8 @@
           %th= @team.class.human_attribute_name :number
           %td= @team.number
         %tr
-          %th= @team.class.human_attribute_name :gender
-          %td= @team.translated_gender
+          %th= @team.class.human_attribute_name :band
+          %td= @team.band
         - if admin_logged_in? || @team.object.people.exists?
           %tr{ admin_logged_in? && !@team.assessment_request_group_competitor_valid? ? { class: 'danger' } : {} }
             %th= @team.class.human_attribute_name :people
@@ -35,7 +35,7 @@
 
     = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
       %table.table.table-condensed
-        - Assessment.requestable_for(@team).each do |assessment|
+        - Assessment.requestable_for_team(@team.band).each do |assessment|
           - decorated_assessment = assessment.decorate
           %tr
             %th
@@ -51,7 +51,7 @@
                 %span.glyphicon.glyphicon-remove
       - if admin_logged_in?
         - box.footer do
-          = btn_link_to 'Wertungsgruppen bearbeiten', { action: :edit_assessment_requests }, remote: true
+          = btn_link_to 'Wertungen bearbeiten', { action: :edit_assessment_requests }, remote: true
 
   - if admin_logged_in?
     .col-md-4
@@ -59,7 +59,7 @@
         = block_link_to 'Wettkämpfer hinzufügen', new_person_path(team: @team), remote: true
         = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Mannschaft wirklich löschen? Alle Zeiten usw. werden auch gelöscht!' }
         = block_link_to 'Name bearbeiten', { action: :edit }
-        = block_link_to 'Wertungsgruppen bearbeiten', { action: :edit_assessment_requests }, remote: true
+        = block_link_to 'Wertungen bearbeiten', { action: :edit_assessment_requests }, remote: true
 
   - if admin_logged_in? || @team.object.people.exists?
     .col-md-12

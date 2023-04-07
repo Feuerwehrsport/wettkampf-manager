@@ -86,7 +86,7 @@ Exports::PDF::Score::MultiList = Struct.new(:print_elements) do
                                           separate_target_times_as_columns: true)
         headline = lines.shift
         next_run = 0
-        max_run = element.entries.maximum(:run)
+        max_run = element.entries.maximum(:run) || 0
         while next_run < max_run
           next_column unless @column.fit?(element)
 

@@ -3,7 +3,7 @@ class Teams::Import
   include ActiveRecord::AttributeAssignment
   include Draper::Decoratable
 
-  attr_accessor :import_rows, :gender
+  attr_accessor :import_rows, :band_id
 
   def save
     teams.all?(&:save!)
@@ -20,7 +20,7 @@ class Teams::Import
 
   def build_teams
     import_rows.to_s.lines.map(&:strip).reject(&:blank?).map do |team_name|
-      Team.new(name: team_name, shortcut: Imports::Team.clean_and_cut_shortcut(team_name), gender: gender)
+      Team.new(name: team_name, shortcut: Imports::Team.clean_and_cut_shortcut(team_name), band_id: band_id)
     end.select(&:valid?)
   end
 end

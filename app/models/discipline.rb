@@ -40,6 +40,10 @@ class Discipline < CacheDependendRecord
     types_with_key[key.to_sym].new
   end
 
+  def self.instance_for_key(key)
+    types_with_key[key.to_sym].find_or_create_by({})
+  end
+
   def destroy_possible?
     assessments.empty?
   end

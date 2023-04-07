@@ -11,9 +11,10 @@ RSpec.describe 'Deletion of things', seed: :configured do
     list_entry.update(result_type: :valid, time: 2222)
   end
 
-  let(:team) { create(:team) }
-  let(:person) { create(:person, team: team) }
-  let(:assessment) { Assessment.requestable_for(person).first }
+  let(:male) { Band.find_by(gender: :male, name: 'Männer') }
+  let(:assessment) { Assessment.discipline(Disciplines::ObstacleCourse.first).find_by(band: male) }
+  let(:team) { create(:team, band: male) }
+  let(:person) { create(:person, team: team, band: male) }
   let(:assessment_request) { create(:assessment_request, entity: person, assessment: assessment) }
   let(:result) { Score::Result.where(assessment: assessment).first }
   let(:score_list) do
@@ -52,7 +53,7 @@ RSpec.describe 'Deletion of things', seed: :configured do
     visit assessment_path(assessment)
     click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content 'Wertungsgruppe konnte nicht entfernt werden'
+    expect(page).to have_content 'Wertung konnte nicht entfernt werden'
 
     visit discipline_path(assessment.discipline)
     expect(page).to have_content 'Diese Disziplin kann nicht gelöscht werden'
@@ -62,13 +63,21 @@ RSpec.describe 'Deletion of things', seed: :configured do
     visit assessment_path(assessment)
     click_on 'Löschen'
     page.driver.browser.accept_confirm
-    expect(page).to have_content 'Wertungsgruppe erfolgreich entfernt'
+    expect(page).to have_content 'Wertung erfolgreich entfernt'
 
-    visit discipline_path(assessment.discipline)
-    click_on 'Ansehen'
+    visit band_path(male)
+    click_on 'Löschen'
+    page.driver.browser.accept_confirm
+    expect(page).to have_content 'Wertungsgruppe konnte nicht entfernt werden'
+
+    male.assessments.destroy_all
+
+    visit band_path(male)
     click_on 'Löschen'
     page.driver.browser.accept_confirm
     expect(page).to have_content 'Wertungsgruppe erfolgreich entfernt'
+
+    assessment.discipline.assessments.destroy_all
 
     visit discipline_path(assessment.discipline)
     click_on 'Löschen'

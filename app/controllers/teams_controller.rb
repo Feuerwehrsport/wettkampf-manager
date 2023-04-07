@@ -37,6 +37,12 @@ class TeamsController < ApplicationController
 
   protected
 
+  def build_resource
+    super.tap do |team|
+      team.band = Band.find(params[:band_id])
+    end
+  end
+
   def assign_team_tags
     @tags = TeamTag.all.decorate
   end
@@ -47,7 +53,7 @@ class TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(
-      :name, :gender, :number, :shortcut, :fire_sport_statistics_team_id, :lottery_number, :federal_state_id,
+      :name, :band_id, :number, :shortcut, :fire_sport_statistics_team_id, :lottery_number, :federal_state_id,
       requests_attributes: %i[assessment_type relay_count _destroy assessment_id id],
       tag_references_attributes: %i[id tag_id _destroy]
     )

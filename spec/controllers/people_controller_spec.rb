@@ -3,12 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe PeopleController, type: :controller, seed: :configured, user: :logged_in do
-  let(:team) { create(:team) }
-  let(:person) { create(:person) }
+  let(:team) { create(:team, band: male_band) }
+  let(:person) { create(:person, band: male_band) }
+  let(:male_band) { create(:band) }
 
   describe 'GET new' do
     it 'renders form' do
-      get :new
+      get :new, params: { band_id: male_band.id }
       expect(response).to be_successful
     end
   end
@@ -44,8 +45,8 @@ RSpec.describe PeopleController, type: :controller, seed: :configured, user: :lo
   describe 'POST create' do
     it 'creates person' do
       expect do
-        post :create, params: { format: :js, person:
-          { first_name: 'Alfred', last_name: 'Meier', gender: :male, team_id: team.id } }
+        post :create, params: { format: :js, band_id: male_band.id, person:
+          { first_name: 'Alfred', last_name: 'Meier', team_id: team.id } }
         expect(response).to be_successful
         expect(response.content_type).to eq 'text/javascript'
       end.to change(Person, :count).by(1)

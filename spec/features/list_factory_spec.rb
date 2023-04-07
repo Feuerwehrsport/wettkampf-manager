@@ -6,11 +6,12 @@ RSpec.describe 'list factory', seed: :configured do
     Preset.find(3).save # D-Cup mit 4x100
   end
 
-  let(:team1) { create(:team, :generated) }
-  let(:team2) { create(:team, :generated) }
-  let(:person1) { create(:person, team: team1) }
-  let(:person2) { create(:person, team: team1) }
-  let(:assessment) { Assessment.requestable_for(person1).first }
+  let(:band) { Band.find_by(gender: :male, name: 'Männer') }
+  let(:team1) { create(:team, :generated, band: band) }
+  let(:team2) { create(:team, :generated, band: band) }
+  let(:person1) { create(:person, team: team1, band: band) }
+  let(:person2) { create(:person, team: team1, band: band) }
+  let(:assessment) { Assessment.discipline(Disciplines::ObstacleCourse.first).find_by(band: band) }
   let(:assessment_request1) do
     create(:assessment_request, entity: person1, assessment: assessment, group_competitor_order: 1)
   end

@@ -25,7 +25,7 @@ RSpec.describe Teams::ImportsController, type: :controller, seed: :configured, u
         ' ',
       ]
       expect do
-        post :create, params: { teams_import: { gender: team.gender, import_rows: lines.join("\n") } }
+        post :create, params: { teams_import: { band_id: team.band_id, import_rows: lines.join("\n") } }
         expect(response).to redirect_to teams_path
       end.to change(Team, :count).by(2)
     end

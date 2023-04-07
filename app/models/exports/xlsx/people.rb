@@ -5,8 +5,8 @@ Exports::XLSX::People = Struct.new(:people) do
   include Exports::People
 
   def perform
-    Genderable::GENDERS.keys.each do |gender|
-      people_table(I18n.t("gender.#{gender}"), people.gender(gender).decorate) if people.gender(gender).exists?
+    Band.all.find_each do |band|
+      people_table(band, people.where(band: band).decorate)
     end
   end
 
@@ -16,9 +16,11 @@ Exports::XLSX::People = Struct.new(:people) do
 
   protected
 
-  def people_table(title, rows)
-    workbook.add_worksheet(name: title.truncate_bytes(30)) do |sheet|
-      index_export_data(rows).each { |row| sheet.add_row(row) }
+  def people_table(band, rows)
+    return if rows.blank?
+
+    workbook.add_worksheet(name: band.name.truncate_bytes(30)) do |sheet|
+      index_export_data(band, rows).each { |row| sheet.add_row(row) }
     end
   end
 end

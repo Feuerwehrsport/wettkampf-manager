@@ -28,6 +28,7 @@ module Helpers::MenuHelper
     if admin_logged_in?
       [
         MenuItem.new('Disziplinen', '/disciplines'),
+        MenuItem.new('Wertungsgruppen', '/bands'),
         MenuItem.new('Wertungen', '/assessments'),
         MenuItem.new('Urkunden', '/certificates/templates'),
         MenuItem.new('Wettkampf', '/competitions', :edit),

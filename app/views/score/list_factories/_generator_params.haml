@@ -7,8 +7,8 @@
   = f.input :best_count, input_html: { value: @score_list_factory.default_best_count }
 - if :track.in? @score_list_factory.object.class.generator_params
   = f.input :track, collection: (1..@score_list_factory.object.track_count)
-- if :gender.in? @score_list_factory.object.class.generator_params
-  = f.input :gender, collection: Genderable::GENDERS.keys
+- if :bands.in? @score_list_factory.object.class.generator_params
+  = f.association :bands, collection: Band.all, as: :check_boxes
 - if :single_competitors_first.in? @score_list_factory.object.class.generator_params
   = f.input :single_competitors_first, as: :radio_buttons, collection: [['Einzelstarter vor Mannschaftsstarter', true], ['Mannschaftsstarter vor Einzelstarter', false]]
 

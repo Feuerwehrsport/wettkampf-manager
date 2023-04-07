@@ -1,0 +1,9 @@
+= simple_form_for @band do |f|
+  = box Band.model_name.human do |box|
+    = f.error_notification
+    = f.input :gender, collection: Band::GENDER_KEYS, as: :radio_buttons
+    = f.input :name
+    = render 'tag_form', f: f
+    - box.footer do
+      = cancel_link
+      = f.primary_button :submit, 'Speichern'

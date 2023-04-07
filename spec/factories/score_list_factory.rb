@@ -29,7 +29,7 @@ FactoryBot.define do
     factory :score_list_factory_track_same, class: 'Score::ListFactories::TrackSame' do
     end
 
-    factory :score_list_factory_track_genderable, class: 'Score::ListFactories::TrackGenderable' do
+    factory :score_list_factory_track_bandable, class: 'Score::ListFactories::TrackBandable' do
     end
   end
 end

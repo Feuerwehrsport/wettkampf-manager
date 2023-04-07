@@ -5,7 +5,7 @@
     %tr
       %th= Assessment.human_attribute_name(:name)
       %th= Assessment.human_attribute_name(:discipline)
-      %th= Assessment.human_attribute_name(:gender)
+      %th= Assessment.human_attribute_name(:band)
       %th
     - assessments.each do |assessment|
       %tr
@@ -13,7 +13,7 @@
         %td
           = discipline_image assessment.discipline
           = assessment.discipline
-        %td= assessment.translated_gender
+        %td= assessment.band
         %td.text-right
           = btn_link_to 'Ansehen', assessment
           = btn_link_to 'Bearbeiten', { action: :edit, id: assessment }

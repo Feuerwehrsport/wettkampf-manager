@@ -28,7 +28,7 @@ class Score::Result < CacheDependendRecord
   end
 
   def possible_series_assessments
-    Series::Assessment.gender(assessment.gender).where(discipline: assessment.discipline.key)
+    Series::Assessment.gender(assessment.band.gender).where(discipline: assessment.discipline.key)
   end
 
   def single_group_result?

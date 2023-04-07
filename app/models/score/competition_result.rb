@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class Score::CompetitionResult < CacheDependendRecord
-  include Genderable
   include Score::Resultable
 
+  belongs_to :band, class_name: 'Band'
   has_many :assessments, foreign_key: :score_competition_result_id, dependent: :nullify,
                          inverse_of: :score_competition_result
   has_many :results, -> { where(score_results: { group_assessment: true }) },
            through: :assessments, class_name: 'Score::Result'
 
-  validates :result_type, :gender, presence: true
+  validates :result_type, :band, presence: true
 
   def rows
     @rows ||= result_type.present? ? send(result_type) : []

@@ -1,1 +1,223 @@
-{"name":"Deutschland-Cup","place":"Rostock","date":"2016-03-09","description":"\u003cp\u003eBeschreibung\u003c/p\u003e\r\n\r\n\u003cp\u003e\u003cstrong\u003emit\u003c/strong\u003e\u003c/p\u003e\r\n\r\n\u003cp\u003eZeilenumbr\u0026uuml;chen\u003c/p\u003e\r\n","teams":[{"id":386,"name":"FF Ostseebad Nienhagen","shortcut":"Nienhagen","team_number":1,"statitics_team_id":36,"gender":"male","assessments":[295],"tag_names":["Kreisausscheid"],"federal_state":null},{"id":385,"name":"Team Mecklenburg-Vorpommern","shortcut":"Team MV","team_number":1,"statitics_team_id":2,"gender":"male","assessments":[297,295],"tag_names":[],"federal_state":"MV"}],"assessments":[{"discipline":"fs","gender":"female","name":"","id":298},{"discipline":"fs","gender":"male","name":"","id":297},{"discipline":"gs","gender":"female","name":"","id":303},{"discipline":"hb","gender":"female","name":"","id":300},{"discipline":"hb","gender":"male","name":"","id":299},{"discipline":"hl","gender":"female","name":"","id":302},{"discipline":"hl","gender":"male","name":"","id":301},{"discipline":"la","gender":"female","name":"","id":296},{"discipline":"la","gender":"male","name":"","id":295}],"people":[{"id":1249,"team_id":385,"team_name":null,"first_name":"Klaus","last_name":"Köster","statitics_person_id":227,"gender":"male","assessment_participations":[{"assessment_id":297,"single_competitor_order":0,"group_competitor_order":0,"competitor_order":4,"assessment_type":"competitor"},{"assessment_id":295,"single_competitor_order":0,"group_competitor_order":0,"competitor_order":5,"assessment_type":"competitor"},{"assessment_id":299,"single_competitor_order":0,"group_competitor_order":1,"competitor_order":0,"assessment_type":"group_competitor"},{"assessment_id":301,"single_competitor_order":0,"group_competitor_order":1,"competitor_order":0,"assessment_type":"group_competitor"}],"tag_names":[]},{"id":1250,"team_id":385,"team_name":null,"first_name":"Manfred","last_name":"Kremp","statitics_person_id":179,"gender":"male","assessment_participations":[{"assessment_id":299,"single_competitor_order":0,"group_competitor_order":0,"competitor_order":0,"assessment_type":"single_competitor"},{"assessment_id":295,"single_competitor_order":0,"group_competitor_order":0,"competitor_order":0,"assessment_type":"competitor"}],"tag_names":["Ü30"]},{"id":1251,"team_id":385,"team_name":null,"first_name":"Dennis","last_name":"Möller","statitics_person_id":2652,"gender":"male","assessment_participations":[{"assessment_id":299,"single_competitor_order":0,"group_competitor_order":0,"competitor_order":0,"assessment_type":"out_of_competition"}],"tag_names":["U20"]},{"id":1252,"team_id":null,"team_name":"Charlottenthal","first_name":"Anne","last_name":"Limbach","statitics_person_id":283,"gender":"female","assessment_participations":[{"assessment_id":300,"single_competitor_order":0,"group_competitor_order":1,"competitor_order":0,"assessment_type":"single_competitor"},{"assessment_id":302,"single_competitor_order":0,"group_competitor_order":0,"competitor_order":0,"assessment_type":"out_of_competition"}],"tag_names":[]}],"person_tag_list":["U20","Ü30"],"team_tag_list":["Kreisausscheid"]}
+{
+    "bands": [
+        {
+            "assessments": [
+                {
+                    "discipline": "fs",
+                    "gender": "female",
+                    "id": 298,
+                    "name": ""
+                },
+                {
+                    "discipline": "fs",
+                    "gender": "male",
+                    "id": 297,
+                    "name": ""
+                },
+                {
+                    "discipline": "gs",
+                    "gender": "female",
+                    "id": 303,
+                    "name": ""
+                },
+                {
+                    "discipline": "hb",
+                    "gender": "female",
+                    "id": 300,
+                    "name": ""
+                },
+                {
+                    "discipline": "hb",
+                    "gender": "male",
+                    "id": 299,
+                    "name": ""
+                },
+                {
+                    "discipline": "hl",
+                    "gender": "female",
+                    "id": 302,
+                    "name": ""
+                },
+                {
+                    "discipline": "hl",
+                    "gender": "male",
+                    "id": 301,
+                    "name": ""
+                },
+                {
+                    "discipline": "la",
+                    "gender": "female",
+                    "id": 296,
+                    "name": ""
+                },
+                {
+                    "discipline": "la",
+                    "gender": "male",
+                    "id": 295,
+                    "name": ""
+                }
+            ],
+            "gender": "male",
+            "name": "Männer",
+            "people": [
+                {
+                    "assessment_participations": [
+                        {
+                            "assessment_id": 297,
+                            "assessment_type": "competitor",
+                            "competitor_order": 4,
+                            "group_competitor_order": 0,
+                            "single_competitor_order": 0
+                        },
+                        {
+                            "assessment_id": 295,
+                            "assessment_type": "competitor",
+                            "competitor_order": 5,
+                            "group_competitor_order": 0,
+                            "single_competitor_order": 0
+                        },
+                        {
+                            "assessment_id": 299,
+                            "assessment_type": "group_competitor",
+                            "competitor_order": 0,
+                            "group_competitor_order": 1,
+                            "single_competitor_order": 0
+                        },
+                        {
+                            "assessment_id": 301,
+                            "assessment_type": "group_competitor",
+                            "competitor_order": 0,
+                            "group_competitor_order": 1,
+                            "single_competitor_order": 0
+                        }
+                    ],
+                    "first_name": "Klaus",
+                    "gender": "male",
+                    "id": 1249,
+                    "last_name": "Köster",
+                    "statitics_person_id": 227,
+                    "tag_names": [],
+                    "team_id": 385,
+                    "team_name": null
+                },
+                {
+                    "assessment_participations": [
+                        {
+                            "assessment_id": 299,
+                            "assessment_type": "single_competitor",
+                            "competitor_order": 0,
+                            "group_competitor_order": 0,
+                            "single_competitor_order": 0
+                        },
+                        {
+                            "assessment_id": 295,
+                            "assessment_type": "competitor",
+                            "competitor_order": 0,
+                            "group_competitor_order": 0,
+                            "single_competitor_order": 0
+                        }
+                    ],
+                    "first_name": "Manfred",
+                    "gender": "male",
+                    "id": 1250,
+                    "last_name": "Kremp",
+                    "statitics_person_id": 179,
+                    "tag_names": [
+                        "Ü30"
+                    ],
+                    "team_id": 385,
+                    "team_name": null
+                },
+                {
+                    "assessment_participations": [
+                        {
+                            "assessment_id": 299,
+                            "assessment_type": "out_of_competition",
+                            "competitor_order": 0,
+                            "group_competitor_order": 0,
+                            "single_competitor_order": 0
+                        }
+                    ],
+                    "first_name": "Dennis",
+                    "gender": "male",
+                    "id": 1251,
+                    "last_name": "Möller",
+                    "statitics_person_id": 2652,
+                    "tag_names": [
+                        "U20"
+                    ],
+                    "team_id": 385,
+                    "team_name": null
+                },
+                {
+                    "assessment_participations": [
+                        {
+                            "assessment_id": 300,
+                            "assessment_type": "single_competitor",
+                            "competitor_order": 0,
+                            "group_competitor_order": 1,
+                            "single_competitor_order": 0
+                        },
+                        {
+                            "assessment_id": 302,
+                            "assessment_type": "out_of_competition",
+                            "competitor_order": 0,
+                            "group_competitor_order": 0,
+                            "single_competitor_order": 0
+                        }
+                    ],
+                    "first_name": "Anne",
+                    "gender": "female",
+                    "id": 1252,
+                    "last_name": "Limbach",
+                    "statitics_person_id": 283,
+                    "tag_names": [],
+                    "team_id": null,
+                    "team_name": "Charlottenthal"
+                }
+            ],
+            "person_tag_list": [
+                "U20",
+                "Ü30"
+            ],
+            "team_tag_list": [
+                "Kreisausscheid"
+            ],
+            "teams": [
+                {
+                    "assessments": [
+                        295
+                    ],
+                    "federal_state": null,
+                    "gender": "male",
+                    "id": 386,
+                    "name": "FF Ostseebad Nienhagen",
+                    "shortcut": "Nienhagen",
+                    "statitics_team_id": 36,
+                    "tag_names": [
+                        "Kreisausscheid"
+                    ],
+                    "team_number": 1
+                },
+                {
+                    "assessments": [
+                        297,
+                        295
+                    ],
+                    "federal_state": "MV",
+                    "gender": "male",
+                    "id": 385,
+                    "name": "Team Mecklenburg-Vorpommern",
+                    "shortcut": "Team MV",
+                    "statitics_team_id": 2,
+                    "tag_names": [],
+                    "team_number": 1
+                }
+            ]
+        }
+    ],
+    "date": "2016-03-09",
+    "description": "<p>Beschreibung</p>\r\n\r\n<p><strong>mit</strong></p>\r\n\r\n<p>Zeilenumbr&uuml;chen</p>\r\n",
+    "name": "Deutschland-Cup",
+    "place": "Rostock"
+}

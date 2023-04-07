@@ -13,7 +13,7 @@ class Competition < ApplicationRecord
 
   attr_accessor :create_possible
 
-  validates :name, :date, presence: true
+  validates :name, :date, :place, presence: true
   validates :group_people_count, :group_run_count, :group_score_count, numericality: { greater_than: 0 }
   validates :competition_result_type, inclusion: { in: Score::CompetitionResult.result_types.keys.map(&:to_s) },
                                       allow_blank: true

@@ -2,24 +2,21 @@
   .col-md-12.much-data.refreshable#people-index
     = box Person.model_name.human count: 0 do |box|
       - if admin_logged_in?
-        - box.header do
-          .pull-right
-            = link_to 'Hinzufügen', new_person_path, class: 'btn btn-sm btn-info', remote: true
-          .clearfix
-
         - if Series::Round.with_local_results.present? && @without_statistics_id.present?
           .alert.alert-danger
             Es konnten zu #{@without_statistics_id.count} Wettkämpfern keine Serien-Ergebnisse gefunden wurden.
             = btn_link_to 'Probleme ansehen', without_statistics_id_people_path
 
 
-      - Genderable::GENDERS.keys.each do |gender|
-        - if admin_logged_in? || @people.object.gender(gender).exists?
-          %h4= t("gender.#{gender}")
-          = render 'index_table', collection: @people.object.gender(gender).decorate
+      - Band.all.decorate.each do |band|
+        - if admin_logged_in? || @people.object.where(band: band).exists?
+          .row
+            .col-md-3
+              %h4= band
+            - if admin_logged_in?
+              .col-md-3= link_to 'Wettkämpfer hinzufügen', { action: :new, band_id: band.id }, class: 'btn btn-xs btn-default', remote: true
+          = render 'index_table', band: band, collection: @people.object.where(band: band).decorate
 
       - box.footer do
         = btn_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
         = btn_link_to 'als XLS', format: :xlsx
-        - if admin_logged_in?
-          = link_to 'Hinzufügen', { action: :new }, class: 'btn btn-sm btn-info', remote: true

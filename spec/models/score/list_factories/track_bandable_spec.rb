@@ -2,13 +2,15 @@
 
 require 'rails_helper'
 
-RSpec.describe Score::ListFactories::TrackGenderable, type: :model do
+RSpec.describe Score::ListFactories::TrackBandable, type: :model do
   let(:factory) do
-    build(:score_list_factory_track_genderable, track: track, gender: gender, single_competitors_first: true,
-                                                assessments: [assessment_male, assessment_female])
+    build(:score_list_factory_track_bandable, track: track, bands: [gender].compact, single_competitors_first: true,
+                                              assessments: [assessment_male, assessment_female])
   end
-  let(:assessment_male) { create(:assessment, gender: :male) }
-  let(:assessment_female) { create(:assessment, gender: :female) }
+  let(:male) { create(:band, :male) }
+  let(:female) { create(:band, :female) }
+  let(:assessment_male) { create(:assessment, band: male) }
+  let(:assessment_female) { create(:assessment, band: female) }
   let(:track) { 3 }
   let(:gender) { nil }
 
@@ -16,12 +18,12 @@ RSpec.describe Score::ListFactories::TrackGenderable, type: :model do
     it 'validates track and gender' do
       expect(factory).not_to be_valid
       expect(factory).to have(1).error_on(:track)
-      expect(factory).to have(1).error_on(:gender)
+      expect(factory).to have(1).error_on(:bands)
     end
 
     context 'with correct values' do
       let(:track) { 1 }
-      let(:gender) { :female }
+      let(:gender) { female }
 
       it 'is valid' do
         expect(factory).to be_valid
@@ -31,19 +33,19 @@ RSpec.describe Score::ListFactories::TrackGenderable, type: :model do
 
   context 'when assessment requests present' do
     let(:track) { 1 }
-    let(:gender) { :female }
+    let(:gender) { female }
 
-    let(:team1) { create(:team, :generated, gender: :male) }
-    let(:person1_team1) { create(:person, :generated, team: team1, gender: :male, last_name: 'Male1') }
-    let(:person2_team1) { create(:person, :generated, team: team1, gender: :male, last_name: 'Male1') }
-    let(:person3_team1) { create(:person, :generated, team: team1, gender: :male, last_name: 'Male1-Single') }
+    let(:team1) { create(:team, :generated, band: male) }
+    let(:person1_team1) { create(:person, :generated, team: team1, band: male, last_name: 'Male1') }
+    let(:person2_team1) { create(:person, :generated, team: team1, band: male, last_name: 'Male1') }
+    let(:person3_team1) { create(:person, :generated, team: team1, band: male, last_name: 'Male1-Single') }
 
-    let(:team2) { create(:team, :generated, gender: :male) }
-    let(:person1_team2) { create(:person, :generated, team: team2, gender: :male, last_name: 'Male2') }
+    let(:team2) { create(:team, :generated, band: male) }
+    let(:person1_team2) { create(:person, :generated, team: team2, band: male, last_name: 'Male2') }
 
-    let(:team3) { create(:team, :generated, gender: :female) }
-    let(:person1_team3) { create(:person, :generated, team: team3, gender: :female) }
-    let(:person2_team3) { create(:person, :generated, team: team3, gender: :female) }
+    let(:team3) { create(:team, :generated, band: female) }
+    let(:person1_team3) { create(:person, :generated, team: team3, band: female) }
+    let(:person2_team3) { create(:person, :generated, team: team3, band: female) }
 
     before do
       create_assessment_request(person1_team1, assessment_male, 1)

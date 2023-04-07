@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :presets, only: %i[index show update]
   resource :competitions, only: %i[show edit update]
   resources :disciplines
+  resources :bands
   resources :assessments
   resources :people do
     member do

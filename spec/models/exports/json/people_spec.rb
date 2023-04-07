@@ -10,10 +10,18 @@ RSpec.describe Exports::JSON::People, type: :model do
   describe 'perform' do
     it 'creates export' do
       expect(export.bytestream).to eq({
-        female: [%w[Nachname Vorname Mannschaft], ['Meier', 'Alfred', nil]],
-        male: [%w[Nachname Vorname Mannschaft], ['Meier', 'Alfred', 'Team MV']],
-        youth: [],
-        children: [],
+        bands: [
+          {
+            name: 'Frauen',
+            gender: 'female',
+            people: [%w[Nachname Vorname Mannschaft], ['Meier', 'Alfred', nil]],
+          },
+          {
+            name: 'Männer',
+            gender: 'male',
+            people: [%w[Nachname Vorname Mannschaft], ['Meier', 'Alfred', 'Team MV']],
+          },
+        ],
       }.to_json)
 
       expect(export.filename).to eq 'wettkaempfer.json'

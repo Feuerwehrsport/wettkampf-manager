@@ -2,7 +2,7 @@
   = box Assessment.model_name.human do |box|
     = f.error_notification
     = f.association :discipline
-    = f.input :gender, collection: Genderable::GENDERS.keys
+    = f.association :band
     = f.input :name
     = render 'tag_form', f: f
     - box.footer do

@@ -1,15 +1,23 @@
 = simple_form_for @person do |f|
   = box Person.model_name.human do |box|
     = f.error_notification
-    = f.association :team, label_method: ->(team) { team.decorate.numbered_name_with_gender }
+    - unless @person.persisted?
+      = hidden_field_tag :band_id, @person.band_id
+    = f.input :band, disabled: true
+    .row
+      .col-md-6
+        = f.association :team, label_method: ->(team) { team.decorate.numbered_name_with_band }, label: 'Vorhandene Mannschaft', collection: @person.band.teams
+      .col-md-6
+        %datalist#team-names
+          - Team.all.distinct.pluck(:name).each do |team_name|
+            %option{ value: team_name }
+        = f.input :create_team_name, input_html: { list: 'team-names' }
     = f.input :first_name
     = f.input :last_name
-    - unless @person.persisted?
-      = f.input :gender, collection: Genderable::GENDERS.keys
     - if Competition.one.show_bib_numbers?
       = f.input :bib_number
 
-    = render 'tag_form', f: f
+    = render 'tag_form', f: f, object: @person, tags: @person.band.person_tags
     - box.footer do
       = cancel_link
       = f.primary_button :submit, 'Speichern'

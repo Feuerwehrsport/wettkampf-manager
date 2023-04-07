@@ -1,5 +1,6 @@
 = box Person.model_name.human, modal: true do
   = simple_form_for @person, remote: true do |f|
+    = hidden_field_tag :band_id, @person.band_id
     = f.error_notification
     .form-group.string
       %label.string.control-label{ for: 'person_suggestion' } Schnelleingabe
@@ -7,20 +8,28 @@
     .suggestions-entries
       %table.table.table-hover.table-condensed
     .row
-      - if PersonTag.all.present?
-        .col-md-3
-          = render 'tag_form', f: f
+      .col-md-3
+        - if @person.band.person_tags.present?
+          = render 'tag_form', f: f, object: @person, tags: @person.band.person_tags
       .col-md-3
         = f.input :first_name
       .col-md-3
         = f.input :last_name
       .col-md-3
-        = f.input :gender, collection: Genderable::GENDERS.keys
+        = f.input :band, disabled: true
     .row
-      - if @person.team.nil?
+      - if @person.team.nil? || !@person.team.persisted?
         .col-md-6
-          = f.association :team, label_method: ->(team) { team.decorate.numbered_name_with_gender }
+          = f.association :team, label_method: ->(team) { team.decorate.numbered_name_with_band }, label: 'Vorhandene Mannschaft', collection: @person.band.teams
+        .col-md-6
+          %datalist#team-names
+            - Team.all.distinct.pluck(:name).each do |team_name|
+              %option{ value: team_name }
+          = f.input :create_team_name, input_html: { list: 'team-names' }
       - else
+        .col-md-6
+          %strong Mannschaft:
+          = @person.team
         = f.hidden_field :team_id
       - if Competition.one.show_bib_numbers?
         .col-md-6

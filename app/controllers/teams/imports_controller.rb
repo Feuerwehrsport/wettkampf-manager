@@ -13,7 +13,7 @@ class Teams::ImportsController < ApplicationController
 
   def teams_import_params
     params.require(:teams_import).permit(
-      :import_rows, :gender
+      :import_rows, :band_id
     )
   end
 end

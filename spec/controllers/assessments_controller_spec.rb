@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe AssessmentsController, type: :controller, seed: :configured do
   let(:assessment) { create(:assessment) }
   let(:discipline) { create(:fire_relay) }
+  let(:band) { create(:band) }
 
   describe 'GET new', user: :logged_in do
     it 'renders form' do
@@ -18,6 +19,7 @@ RSpec.describe AssessmentsController, type: :controller, seed: :configured do
       expect do
         post :create, params: { assessment: {
           discipline_id: discipline.id,
+          band_id: band.id,
         } }
         expect(response).to redirect_to action: :show, id: Assessment.last.id
       end.to change(Assessment, :count).by(1)

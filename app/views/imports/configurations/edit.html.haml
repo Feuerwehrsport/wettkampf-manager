@@ -1,48 +1,59 @@
-= simple_form_for @imports_configuration do |f|
-  .row
-    .col-md-6
-      = box 'Import von Feuerwehrsport-Statistik.de' do
+.row
+  .col-md-8
+    = box 'Import von Feuerwehrsport-Statistik.de' do
+      %table.table
+        %tr
+          %th Name
+          %td= @imports_configuration.name
+        %tr
+          %th Ort
+          %td= @imports_configuration.place
+        %tr
+          %th Datum
+          %td= @imports_configuration.date.present? ? l(@imports_configuration.date) : ''
+    - @imports_configuration.bands.each do |band|
+      = box band.name do
         %table.table
           %tr
-            %th Name
-            %td= @imports_configuration.name
-          %tr
-            %th Ort
-            %td= @imports_configuration.place
-          %tr
-            %th Datum
-            %td= @imports_configuration.date.present? ? l(@imports_configuration.date) : ''
-          %tr
             %th Wettkämpfer
-            %td= @imports_configuration.data[:people].count
+            %td= band.people.count
           %tr
             %th Mannschaften
-            %td= @imports_configuration.data[:teams].count
+            %td= band.teams.count
+          %tr
+            %th Wertungsgruppe
+            %td
+              - if band.band.persisted?
+                = link_to(band.band.name, band.band)
+                (existiert bereits)
+              - else
+                (wird angelegt)
+          %tr
+            %th Wertungen
+            %td
+              %ul
+                - band.assessments.each do |assessment|
+                  %li
+                    = assessment.assessment.decorate
+                    - if assessment.assessment.persisted?
+                      (existiert bereits)
+                    - else
+                      (wird angelegt)
+          - if band.person_tag_list.present?
+            %tr
+              %th Markierungen - Personen
+              %td= band.person_tag_list.join(', ')
+          - if band.team_tag_list.present?
+            %tr
+              %th Markierungen - Mannschaften
+              %td= band.team_tag_list.join(', ')
 
-    - if @imports_configuration.tags.present?
-      .col-md-6
-        = box 'Kennzeichnungen' do |box|
-          = f.simple_fields_for :tags do |t|
-            %h4
-              = t.object.name
-              %small= t.object.target
 
-            = t.input :use, as: :boolean
-          - box.footer do
-            .text-center Wählen Sie die zu importierenden Kennzeichnungen aus.
-  = box 'Wertungen' do |box|
-    .row
-      = f.simple_fields_for :assessments do |t|
-        .col-md-4
-          = box do
-            = t.input :assessment_id, collection: t.object.possible_assessments, label: t.object
-    - box.footer do
-      .text-center Ordnen Sie die lokalen Wertungsgruppen zu. Angabe leer lassen, um die Wertung beim Import zu ignorieren.
-  .row
-    .col-md-6
-      = box 'Aktionen' do |box|
-        .text-center
-          = cancel_link
-          = f.primary_button :submit, 'Weiter'
-        - box.footer do
-          .text-center Sie können die Eingabe vor dem Import nochein überprüfen.
+  .col-md-4
+    = box 'Aktionen' do
+      - if @imports_configuration.error_infos.blank?
+        = simple_form_for(@imports_configuration) do |f|
+          = f.input :execute, input_html: { value: '1' }, as: :hidden
+          = f.button :submit, 'Importieren', class: 'btn btn-info btn-block', data: { confirm: 'Import durchführen?' }
+        %hr
+      = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Importkonfiguration wirklich löschen?' }

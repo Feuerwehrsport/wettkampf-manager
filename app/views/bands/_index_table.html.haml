@@ -1,0 +1,19 @@
+- if bands.count.zero?
+  .alert.alert-info Keine Einträge gefunden
+- else
+  %table.table
+    %tr
+      %th= Band.human_attribute_name(:name)
+      %th= Band.human_attribute_name(:gender)
+      %th= Band.human_attribute_name(:assessments)
+      %th
+    - bands.each do |band|
+      %tr
+        %td= band
+        %td= band.translated_gender
+        %td= band.assessments.count
+        %td.text-right
+          = btn_link_to '↥', { action: :edit, id: band, move: :up }, disabled: band.first?
+          = btn_link_to '↧', { action: :edit, id: band, move: :down }, disabled: band.last?
+          = btn_link_to 'Ansehen', band
+          = btn_link_to 'Bearbeiten', { action: :edit, id: band }

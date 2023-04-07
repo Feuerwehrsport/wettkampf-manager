@@ -13,10 +13,9 @@ de:
     options:
       defaults:
         gender:
-          male: Männer
-          female: Frauen
-          youth: Jugend
-          children: Kinder
+          male: Männlich
+          female: Weiblich
+          indifferent: Ungeschlechtlich
     hints:
       assessment:
         name: Wird ein Name angegeben, ersetzt dieser den generierten Namen

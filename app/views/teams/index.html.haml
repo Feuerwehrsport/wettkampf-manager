@@ -4,7 +4,6 @@
       - if admin_logged_in?
         - box.header do
           .pull-right
-            = link_to 'Hinzufügen', { action: :new }, class: 'btn btn-sm btn-info'
             = link_to 'Importieren', new_teams_import_path, class: 'btn btn-sm btn-default'
           .clearfix
 
@@ -13,13 +12,14 @@
             Es konnten zu #{@without_statistics_id.count} Mannschaften keine Serien-Ergebnisse gefunden wurden.
             = btn_link_to 'Probleme ansehen', without_statistics_id_teams_path
 
-      - Genderable::GENDERS.keys.each do |gender|
-        - if admin_logged_in? || @teams.select { |t| t.gender == gender.to_s }.present?
-          %h4= t("gender.#{gender}")
-          = render 'index_table', collection: @teams.select { |t| t.gender == gender.to_s }, assessments: Assessment.requestable_for(Team.new(gender: gender))
+      - Band.all.decorate.each do |band|
+        .row
+          .col-md-3
+            %h4= band
+          - if admin_logged_in?
+            .col-md-3= link_to 'Mannschaft hinzufügen', { action: :new, band_id: band.id }, class: 'btn btn-xs btn-default'
+        = render 'index_table', collection: @teams.select { |t| t.band == band }, assessments: Assessment.requestable_for_team(band), band: band
 
       - box.footer do
         = btn_link_to 'als PDF', { format: :pdf }, target: '_blank', rel: 'noopener'
         = btn_link_to 'als XLS', format: :xlsx
-        - if admin_logged_in?
-          = link_to 'Hinzufügen', { action: :new }, class: 'btn btn-sm btn-info'

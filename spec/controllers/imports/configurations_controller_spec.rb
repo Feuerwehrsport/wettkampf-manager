@@ -16,7 +16,7 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
 
       it 'redirects' do
         get :new
-        expect(response).to redirect_to action: :show, id: configuration
+        expect(response).to redirect_to action: :edit, id: configuration
       end
     end
   end
@@ -36,15 +36,15 @@ RSpec.describe Imports::ConfigurationsController, type: :controller, seed: :conf
         post :create, params: { imports_configuration: {
           file: fixture_file_upload('import.wettkampf_manager_import'),
         } }
-        expect(response).to redirect_to action: :show, id: configuration
+        expect(response).to redirect_to action: :edit, id: configuration
       end
     end
   end
 
   describe 'GET show' do
-    it 'renders show' do
+    it 'redirects' do
       get :show, params: { id: configuration }
-      expect(response).to be_successful
+      expect(response).to redirect_to action: :edit, id: configuration
     end
 
     context 'when configuration was imported' do

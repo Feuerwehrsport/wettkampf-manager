@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_28_184511) do
+ActiveRecord::Schema.define(version: 2023_04_06_113330) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -61,12 +61,27 @@ ActiveRecord::Schema.define(version: 2022_08_28_184511) do
   create_table "assessments", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.integer "discipline_id", null: false
-    t.integer "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "score_competition_result_id"
+    t.integer "band_id", null: false
     t.index ["discipline_id"], name: "index_assessments_on_discipline_id"
     t.index ["score_competition_result_id"], name: "index_assessments_on_score_competition_result_id"
+  end
+
+  create_table "bands", force: :cascade do |t|
+    t.integer "gender", null: false
+    t.string "name", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bands_score_list_factories", id: false, force: :cascade do |t|
+    t.integer "band_id"
+    t.integer "list_factory_id"
+    t.index ["band_id"], name: "index_bands_score_list_factories_on_band_id"
+    t.index ["list_factory_id"], name: "index_bands_score_list_factories_on_list_factory_id"
   end
 
   create_table "certificates_templates", force: :cascade do |t|
@@ -189,20 +204,6 @@ ActiveRecord::Schema.define(version: 2022_08_28_184511) do
     t.index ["federal_state_id"], name: "index_fire_sport_statistics_teams_on_federal_state_id"
   end
 
-  create_table "imports_assessments", force: :cascade do |t|
-    t.integer "foreign_key", null: false
-    t.integer "configuration_id"
-    t.string "name"
-    t.string "gender"
-    t.string "discipline"
-    t.integer "assessment_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["assessment_id"], name: "index_imports_assessments_on_assessment_id"
-    t.index ["configuration_id"], name: "index_imports_assessments_on_configuration_id"
-    t.index ["foreign_key"], name: "index_imports_assessments_on_foreign_key"
-  end
-
   create_table "imports_configurations", force: :cascade do |t|
     t.datetime "executed_at"
     t.text "data", default: "{}", null: false
@@ -210,35 +211,25 @@ ActiveRecord::Schema.define(version: 2022_08_28_184511) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "imports_tags", force: :cascade do |t|
-    t.integer "configuration_id", null: false
-    t.string "name", null: false
-    t.string "target", null: false
-    t.boolean "use", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["configuration_id"], name: "index_imports_tags_on_configuration_id"
-  end
-
   create_table "people", force: :cascade do |t|
     t.string "last_name", null: false
     t.string "first_name", null: false
-    t.integer "gender", null: false
     t.integer "team_id"
     t.string "bib_number", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "fire_sport_statistics_person_id"
     t.integer "registration_order", default: 0, null: false
+    t.integer "band_id", null: false
     t.index ["team_id"], name: "index_people_on_team_id"
   end
 
   create_table "score_competition_results", force: :cascade do |t|
     t.string "name"
-    t.integer "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "result_type"
+    t.integer "band_id", null: false
   end
 
   create_table "score_list_assessments", force: :cascade do |t|
@@ -279,10 +270,9 @@ ActiveRecord::Schema.define(version: 2022_08_28_184511) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "track"
-    t.integer "gender"
     t.boolean "hidden", default: false, null: false
     t.boolean "separate_target_times"
-    t.boolean "single_competitors_first"
+    t.boolean "single_competitors_first", default: true
   end
 
   create_table "score_list_factory_assessments", force: :cascade do |t|
@@ -416,7 +406,6 @@ ActiveRecord::Schema.define(version: 2022_08_28_184511) do
 
   create_table "teams", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "gender", null: false
     t.integer "number", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -425,9 +414,10 @@ ActiveRecord::Schema.define(version: 2022_08_28_184511) do
     t.integer "lottery_number"
     t.integer "federal_state_id"
     t.boolean "enrolled", default: false, null: false
+    t.integer "band_id", null: false
     t.index ["federal_state_id"], name: "index_teams_on_federal_state_id"
     t.index ["fire_sport_statistics_team_id"], name: "index_teams_on_fire_sport_statistics_team_id"
-    t.index ["name", "number", "gender"], name: "index_teams_on_name_and_number_and_gender", unique: true
+    t.index ["name", "number", "band_id"], name: "index_teams_on_name_and_number_and_band_id"
   end
 
   create_table "user_assessment_abilities", force: :cascade do |t|

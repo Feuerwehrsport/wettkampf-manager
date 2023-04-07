@@ -15,7 +15,7 @@ class AssessmentsController < ApplicationController
   end
 
   def assessment_params
-    params.require(:assessment).permit(:name, :discipline_id, :gender,
+    params.require(:assessment).permit(:name, :discipline_id, :band_id,
                                        tag_references_attributes: %i[id tag_id _destroy])
   end
 end

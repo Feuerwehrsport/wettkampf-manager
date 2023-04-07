@@ -1,0 +1,11 @@
+- if @tags.present?
+  %h4 Mögliche Markierungen für Mannschaften und Wettkämpfer
+  - @tags.each do |tag|
+    - if @band.tag_references.find { |tag_ref| tag_ref.tag_id == tag.id }.present?
+      = f.simple_fields_for :tag_references, @band.tag_references.find { |tag_ref| tag_ref.tag_id == tag.id } do |g|
+        = g.input :_destroy, as: :boolean, label: tag.name, input_html: { checked: true }, checked_value: '0', unchecked_value: '1'
+        = g.input :tag_id, as: :hidden
+    - else
+      = f.simple_fields_for :tag_references, @band.tag_references.find_or_initialize_by(tag: tag) do |g|
+        = g.input :_destroy, as: :boolean, label: tag.name, input_html: { checked: false }, checked_value: '0', unchecked_value: '1'
+        = g.input :tag_id, as: :hidden

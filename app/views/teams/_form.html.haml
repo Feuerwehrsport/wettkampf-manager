@@ -1,18 +1,19 @@
 = simple_form_for @team do |f|
   = box Team.model_name.human do |box|
     = f.error_notification
+    - unless @team.persisted?
+      = hidden_field_tag :band_id, @team.band_id
+    = f.input :band, disabled: true
     = f.input :name, input_html: { autocomplete: :off }, hint: 'Keine Nummern im Namen angeben!'
     .suggestions-entries
       %table.table.table-hover.table-condensed
     = f.input :shortcut, input_html: { maxlength: 12 }, hint: 'Keine Nummern im Namen angeben!'
     = f.input :number
-    - unless @team.persisted?
-      = f.input :gender, collection: Genderable::GENDERS.keys
     - if Competition.one.federal_states?
       = f.association :federal_state
     - if Competition.one.lottery_numbers?
       = f.input :lottery_number
-    = render 'tag_form', f: f
+    = render 'tag_form', f: f, object: @team, tags: @team.band.team_tags
     = f.hidden_field :fire_sport_statistics_team_id
     - box.footer do
       = cancel_link

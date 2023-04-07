@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Exports::People
-  def index_export_data(collection)
+  def index_export_data(band, collection)
     return [] if collection.empty?
 
-    assessments = Assessment.requestable_for(collection.first).map(&:decorate)
+    assessments = Assessment.requestable_for_person(band).map(&:decorate)
     headline = []
     headline.push('Nr.') if Competition.one.show_bib_numbers?
     headline.push('Nachname', 'Vorname', 'Mannschaft')

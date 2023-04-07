@@ -5,17 +5,19 @@ require 'rails_helper'
 RSpec.describe Score::DoubleEventResult, type: :model do
   let(:double_event_result) { described_class.create!(assessment: zk_assessment) }
 
-  let(:hl_assessment) { create(:assessment, discipline: create(:climbing_hook_ladder), gender: gender) }
+  let(:band) { create(:band, gender) }
+
+  let(:hl_assessment) { create(:assessment, discipline: create(:climbing_hook_ladder), band: band) }
   let(:hl_result) { create :score_result, assessment: hl_assessment, double_event_result: double_event_result }
-  let(:hb_assessment) { create(:assessment, discipline: create(:obstacle_course), gender: gender) }
+  let(:hb_assessment) { create(:assessment, discipline: create(:obstacle_course), band: band) }
   let(:hb_result) { create :score_result, assessment: hb_assessment, double_event_result: double_event_result }
-  let(:zk_assessment) { create(:assessment, discipline: create(:double_event), gender: gender) }
+  let(:zk_assessment) { create(:assessment, discipline: create(:double_event), band: band) }
 
   describe '.rows' do
-    let(:person1) { create :person, :generated, gender: gender }
-    let(:person2) { create :person, :generated, gender: gender }
-    let(:person3) { create :person, :generated, gender: gender }
-    let(:person4) { create :person, :generated, gender: gender }
+    let(:person1) { create :person, :generated, band: band }
+    let(:person2) { create :person, :generated, band: band }
+    let(:person3) { create :person, :generated, band: band }
+    let(:person4) { create :person, :generated, band: band }
 
     context 'when entries given' do
       let!(:list1) { create_score_list(hb_result, person1 => 1912, person2 => 2020, person3 => 2040, person4 => nil) }
@@ -74,9 +76,8 @@ RSpec.describe Score::DoubleEventResult, type: :model do
                 assessment: 'Zweikampf',
                 assessment_with_gender: 'Zweikampf - Frauen',
                 result_name: 'Zweikampf - Frauen',
-                gender: 'Frauen',
                 date: I18n.l(Date.current),
-                place: '',
+                place: 'Bargeshagen',
                 competition_name: 'Wettkampf',
                 points: '',
                 points_with_points: '',
@@ -95,9 +96,8 @@ RSpec.describe Score::DoubleEventResult, type: :model do
                 assessment: 'Zweikampf',
                 assessment_with_gender: 'Zweikampf - Frauen',
                 result_name: 'Zweikampf - Frauen',
-                gender: 'Frauen',
                 date: I18n.l(Date.current),
-                place: '',
+                place: 'Bargeshagen',
                 competition_name: 'Wettkampf',
                 points: '',
                 points_with_points: '',
@@ -116,9 +116,8 @@ RSpec.describe Score::DoubleEventResult, type: :model do
                 assessment: 'Zweikampf',
                 assessment_with_gender: 'Zweikampf - Frauen',
                 result_name: 'Zweikampf - Frauen',
-                gender: 'Frauen',
                 date: I18n.l(Date.current),
-                place: '',
+                place: 'Bargeshagen',
                 competition_name: 'Wettkampf',
                 points: '',
                 points_with_points: '',

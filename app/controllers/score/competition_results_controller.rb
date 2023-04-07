@@ -14,7 +14,7 @@ class Score::CompetitionResultsController < ApplicationController
   protected
 
   def score_competition_result_params
-    params.require(:score_competition_result).permit(:name, :gender, :result_type, assessment_ids: [])
+    params.require(:score_competition_result).permit(:name, :band_id, :result_type, assessment_ids: [])
   end
 
   def after_save

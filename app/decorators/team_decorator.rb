@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class TeamDecorator < ApplicationDecorator
+  decorates_association :band
   decorates_association :people
   decorates_association :team_relays
   decorates_association :tags
@@ -10,12 +11,12 @@ class TeamDecorator < ApplicationDecorator
     multi_team? ? "#{name} #{number}" : name
   end
 
-  def numbered_name_with_gender
-    "#{numbered_name} #{translated_gender}"
+  def numbered_name_with_band
+    "#{numbered_name} #{band}"
   end
 
   def to_s(full = false)
-    full ? numbered_name_with_gender : numbered_name
+    full ? numbered_name_with_band : numbered_name
   end
 
   def shortcut_name
@@ -33,6 +34,8 @@ class TeamDecorator < ApplicationDecorator
   private
 
   def multi_team?
-    Team.gender(gender).where(name: name).where.not(id: id).count.positive?
+    cache [Competition.one.updated_at, id] do
+      Team.where(band: band).where(name: name).where.not(id: id).count.positive?
+    end
   end
 end

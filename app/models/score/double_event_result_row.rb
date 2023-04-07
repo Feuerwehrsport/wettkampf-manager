@@ -26,7 +26,7 @@ Score::DoubleEventResultRow = Struct.new(:entity, :result) do
     compare = sum_result_entry <=> other.sum_result_entry
     return compare if compare != 0
 
-    if entity.gender.to_s == 'female'
+    if entity.band.gender.to_s == 'female'
       compare = obstacle_course_time <=> other.obstacle_course_time
       return compare if compare != 0
 

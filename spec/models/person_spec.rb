@@ -3,12 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe Person, type: :model do
-  describe 'validation' do
-    let(:team_male) { build_stubbed(:team, :male) }
-    let(:team_female) { build_stubbed(:team, :female) }
+  let(:band_male) { build_stubbed(:band) }
+  let(:band_female) { build_stubbed(:band, :female) }
 
-    context 'when team gender is not person gender' do
-      let(:person) { build(:person, :male, team: team_female) }
+  describe 'validation' do
+    let(:team_male) { build_stubbed(:team, :male, band: band_male) }
+    let(:team_female) { build_stubbed(:team, :female, band: band_female) }
+
+    context 'when team band is not person band' do
+      let(:person) { build(:person, :male, team: team_female, band: band_male) }
 
       it 'fails on validation' do
         expect(person).not_to be_valid
@@ -16,24 +19,12 @@ RSpec.describe Person, type: :model do
       end
     end
 
-    context 'when team gender is person gender' do
-      let(:person) { build(:person, :male, team: team_male) }
+    context 'when team band is person band' do
+      let(:person) { build(:person, :male, team: team_male, band: band_male) }
 
       it 'fails on validation' do
         expect(person).to be_valid
       end
-    end
-  end
-
-  describe 'outdates requests after gender change' do
-    let(:assessment) { create(:assessment) }
-    let(:person) { create(:person, requests: [build(:assessment_request, assessment: assessment)]) }
-
-    it 'removes requests' do
-      expect(person.gender).to eq 'male'
-      expect(person.requests.count).to eq 1
-      person.update!(gender: :female)
-      expect(person.requests.count).to eq 0
     end
   end
 end

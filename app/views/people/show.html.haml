@@ -9,10 +9,10 @@
           %th= @person.class.human_attribute_name :last_name
           %td= @person.last_name
         %tr
-          %th= @person.class.human_attribute_name :gender
-          %td= @person.translated_gender
+          %th= @person.class.human_attribute_name :band
+          %td= @person.band
 
-        - @tags.each do |tag|
+        - @person.band.person_tags.each do |tag|
           %tr
             %th= tag
             %td= @person.tags.include?(tag) ? 'Ja' : 'Nein'

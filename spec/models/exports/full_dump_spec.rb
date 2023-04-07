@@ -43,7 +43,7 @@ RSpec.describe Exports::FullDump, type: :model do
       dump.to_path('/path')
 
       hash = dump.to_export_hash
-      expect(hash.except(:files)).to eq(name: 'Wettkampf', date: Date.current.to_s, place: '')
+      expect(hash.except(:files)).to eq(name: 'Wettkampf', date: Date.current.to_s, place: 'Bargeshagen')
       expect(hash[:files].count).to eq(created_files.count)
       expect(hash[:files].first.except(:base64_data)).to eq(
         name: created_files.first, mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

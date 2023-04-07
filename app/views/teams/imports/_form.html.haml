@@ -1,7 +1,7 @@
 = simple_form_for @teams_import, url: teams_import_path do |f|
   = box 'Mannschaften importieren' do |box|
     = f.error_notification
-    = f.input :gender, collection: Genderable::GENDERS.keys, required: true
+    = f.input :band_id, as: :radio_buttons, collection: Band.all, required: true
     = f.input :import_rows, as: :text, hint: 'Bitte die Namen Zeilenweise angeben', required: true
     = f.hint 'Mannschaften, die schon vorhanden sind, werden übersprungen und nicht erneut angelegt.'
 

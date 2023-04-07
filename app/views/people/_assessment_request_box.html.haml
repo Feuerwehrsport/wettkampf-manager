@@ -1,6 +1,6 @@
 = box("Gewünschte #{Assessment.model_name.human count: 0}") do |box|
   %table.table
-    - Assessment.requestable_for(@person).each do |assessment|
+    - Assessment.requestable_for_person(@person.band).each do |assessment|
       - decorated_assessment = assessment.decorate
       %tr
         %th
@@ -11,4 +11,4 @@
             = t("assessment_types.#{@person.request_for(assessment).assessment_type}")
   - if editable && admin_logged_in?
     - box.footer do
-      = btn_link_to 'Wertungsgruppen bearbeiten', { action: :edit_assessment_requests }, remote: true
+      = btn_link_to 'Wertungen bearbeiten', { action: :edit_assessment_requests }, remote: true

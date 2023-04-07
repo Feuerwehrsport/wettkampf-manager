@@ -1,0 +1,91 @@
+%h3 Aus Vorlage
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading Erwachsene
+      .panel-body
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'Frauen' }, as: :hidden
+            = f.input :gender, input_html: { value: 'female' }, as: :hidden
+            = f.submit 'Frauen', class: 'btn btn-default btn-block'
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'Männer' }, as: :hidden
+            = f.input :gender, input_html: { value: 'male' }, as: :hidden
+            = f.submit 'Männer', class: 'btn btn-default btn-block'
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'Erwachsene' }, as: :hidden
+            = f.input :gender, input_html: { value: 'indifferent' }, as: :hidden
+            = f.submit 'Erwachsene', class: 'btn btn-default btn-block'
+          %em.small Geschlechtsunabhängig
+  .col-md-6
+    .panel.panel-default
+      .panel-heading Jugend
+      .panel-body
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'Mädchen' }, as: :hidden
+            = f.input :gender, input_html: { value: 'female' }, as: :hidden
+            = f.submit 'Mädchen', class: 'btn btn-default btn-block'
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'Jungen' }, as: :hidden
+            = f.input :gender, input_html: { value: 'male' }, as: :hidden
+            = f.submit 'Jungen', class: 'btn btn-default btn-block'
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'Jugend' }, as: :hidden
+            = f.input :gender, input_html: { value: 'indifferent' }, as: :hidden
+            = f.submit 'Jugend', class: 'btn btn-default btn-block'
+          %em.small Geschlechtsunabhängig
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-heading AK 1
+      .panel-body
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'AK 1 - Mädchen' }, as: :hidden
+            = f.input :gender, input_html: { value: 'female' }, as: :hidden
+            = f.submit 'AK 1 - Mädchen', class: 'btn btn-default btn-block'
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'AK 1 - Jungen' }, as: :hidden
+            = f.input :gender, input_html: { value: 'male' }, as: :hidden
+            = f.submit 'AK 1 - Jungen', class: 'btn btn-default btn-block'
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'AK 1' }, as: :hidden
+            = f.input :gender, input_html: { value: 'indifferent' }, as: :hidden
+            = f.submit 'AK 1', class: 'btn btn-default btn-block'
+          %em.small Geschlechtsunabhängig
+  .col-md-6
+    .panel.panel-default
+      .panel-heading AK 2
+      .panel-body
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'AK 2 - Mädchen' }, as: :hidden
+            = f.input :gender, input_html: { value: 'female' }, as: :hidden
+            = f.submit 'AK 2 - Mädchen', class: 'btn btn-default btn-block'
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'AK 2 - Jungen' }, as: :hidden
+            = f.input :gender, input_html: { value: 'male' }, as: :hidden
+            = f.submit 'AK 2 - Jungen', class: 'btn btn-default btn-block'
+        .col-md-4.text-center
+          = simple_form_for @band do |f|
+            = f.input :name, input_html: { value: 'AK 2' }, as: :hidden
+            = f.input :gender, input_html: { value: 'indifferent' }, as: :hidden
+            = f.submit 'AK 2', class: 'btn btn-default btn-block'
+          %em.small Geschlechtsunabhängig
+
+%h3 Eigene Eingabe
+.row
+  .col-md-8
+    = render 'form'
+  - if partial_exists? 'form_description'
+    .col-md-4
+      = render 'form_description'

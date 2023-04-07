@@ -73,6 +73,12 @@ Rails:
   Enabled: true
 Rails/ApplicationRecord:
   Enabled: false
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+Rails/CreateTableWithTimestamps:
+  Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false
 Rails/HelperInstanceVariable:
   Enabled: false
 Rails/LexicallyScopedActionFilter:

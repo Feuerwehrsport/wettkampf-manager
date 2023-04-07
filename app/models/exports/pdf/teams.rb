@@ -6,7 +6,6 @@ Exports::PDF::Teams = Struct.new(:teams) do
 
   def perform
     pdf_header(Team.model_name.human(count: 0))
-
     pdf.table(index_export_data(teams),
               header: true,
               row_colors: pdf_default_row_colors,

@@ -2,7 +2,6 @@
 
 class PeopleController < ApplicationController
   implement_crud_actions
-  before_action :assign_person_tags
   before_action :assign_resource_for_action, only: %i[edit_assessment_requests statistic_suggestions]
 
   def edit_assessment_requests; end
@@ -26,10 +25,6 @@ class PeopleController < ApplicationController
 
   protected
 
-  def assign_person_tags
-    @tags = PersonTag.all.decorate
-  end
-
   def assign_resource_for_action
     assign_existing_resource
   end
@@ -40,7 +35,8 @@ class PeopleController < ApplicationController
 
   def build_resource
     instance = super
-    instance.assign_attributes(team: team_from_param, gender: team_from_param.gender) if team_from_param.present?
+    instance.assign_attributes(team: team_from_param, band: team_from_param.band) if team_from_param.present?
+    instance.band ||= Band.find(params[:band_id])
     instance
   end
 
@@ -49,8 +45,8 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:first_name, :last_name, :team_id, :gender, :fire_sport_statistics_person_id,
-                                   :registration_order, :bib_number,
+    params.require(:person).permit(:first_name, :last_name, :team_id, :band_id, :fire_sport_statistics_person_id,
+                                   :registration_order, :bib_number, :create_team_name,
                                    requests_attributes: %i[assessment_type _destroy assessment_id id
                                                            group_competitor_order single_competitor_order
                                                            competitor_order],

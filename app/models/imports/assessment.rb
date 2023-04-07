@@ -1,19 +1,27 @@
 # frozen_string_literal: true
 
-class Imports::Assessment < CacheDependendRecord
-  belongs_to :configuration, class_name: 'Imports::Configuration', inverse_of: :assessments
-  belongs_to :assessment, class_name: '::Assessment', inverse_of: :imports_assessment
-  validates :gender, :discipline, :configuration, :foreign_key, presence: true
-
-  before_create do
-    self.assessment = possible_assessments.find { |pa| pa.decorate.to_s == decorate.to_s } || possible_assessments.first
+Imports::Assessment = Struct.new(:configuration, :import_band, :data) do
+  def foreign_key
+    data[:id]
   end
 
-  def discipline_model
-    ::Discipline.for_key(discipline)
+  def name
+    data[:name]
   end
 
-  def possible_assessments
-    ::Assessment.discipline(discipline_model).gender(gender)
+  def discipline_key
+    data[:discipline]
+  end
+
+  def discipline
+    @discipline ||= Discipline.instance_for_key(discipline_key)
+  end
+
+  def assessment
+    @assessment || import_band.band.assessments.find_or_initialize_by(discipline: discipline, name: name)
+  end
+
+  def import
+    assessment.save!
   end
 end

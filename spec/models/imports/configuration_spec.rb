@@ -15,7 +15,7 @@ RSpec.describe Imports::Configuration, type: :model do
         expect(PersonTag.count).to eq 2
         expect(Team.count).to eq 3
         expect(TeamTag.count).to eq 1
-        expect(Assessment.count).to eq 0
+        expect(Assessment.count).to eq 5
         expect(Competition.first.attributes).to include(
           'name' => 'Deutschland-Cup',
           'date' => Date.parse('2016-03-09'),
@@ -33,14 +33,14 @@ RSpec.describe Imports::Configuration, type: :model do
 
         expect(Person.count).to eq 4
         expect(PersonTag.count).to eq 2
-        expect(PersonTag.first.tag_references.count).to eq 7
-        expect(PersonTag.last.tag_references.count).to eq 1
+        expect(PersonTag.first.tag_references.count).to eq 8
+        expect(PersonTag.last.tag_references.count).to eq 2
 
         expect(Team.count).to eq 3
         expect(TeamTag.count).to eq 1
-        expect(TeamTag.last.tag_references.count).to eq 1
+        expect(TeamTag.last.tag_references.count).to eq 2
 
-        expect(Assessment.count).to eq 11
+        expect(Assessment.count).to eq 18
         expect(AssessmentRequest.count).to eq 12
         expect(Competition.first.attributes).to include(
           'name' => 'Deutschland-Cup',

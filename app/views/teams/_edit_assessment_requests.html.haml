@@ -1,7 +1,7 @@
 = box Team.model_name.human, modal: true do
   = simple_form_for @team, remote: true do |f|
     = f.error_notification
-    - Assessment.requestable_for(@team).each do |assessment|
+    - Assessment.requestable_for_team(@team.band).each do |assessment|
       .assessment-request
         = f.simple_fields_for :requests, @team.requests.find_or_initialize_by(assessment: assessment) do |g|
           = g.input :_destroy, as: :boolean, label: 'Teilnahme', input_html: { checked: g.object.persisted? }, checked_value: '0', unchecked_value: '1'

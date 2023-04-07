@@ -13,15 +13,7 @@ class Preset
       Presets::FireAttack,
       Presets::DCupFull,
       Presets::DCupSmall,
-      Presets::HallCup,
       Presets::MvCupSingle,
-      Presets::BrandenburgJugend,
-      Presets::Sonnenwalde,
-      Presets::SonnenwaldeKreisausscheid,
-      Presets::EuregioCup,
-      Presets::LandesmeisterschaftBrandenburg2017,
-      Presets::Heedebockpokal,
-      Presets::Dm2022,
     ]
   end
 

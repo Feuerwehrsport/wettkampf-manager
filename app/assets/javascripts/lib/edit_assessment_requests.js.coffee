@@ -31,3 +31,4 @@ resetHandler = ->
 $ ->
   $(document).on 'modal.ready hidden.bs.modal', ->
     resetHandler()
+  resetHandler()

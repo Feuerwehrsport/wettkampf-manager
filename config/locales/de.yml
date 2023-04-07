@@ -2,6 +2,9 @@ de:
   activerecord: &activerecord
     models:
       assessment: 
+        one: Wertung
+        other: Wertungen
+      band:
         one: Wertungsgruppe
         other: Wertungsgruppen
       competition: Wettkampf
@@ -38,7 +41,7 @@ de:
       score/list_factories/lottery_number: Losnummernreihenfolge beachten
       score/list_factories/track_change: Bahnwechsel
       score/list_factories/track_same: Bahn behalten
-      score/list_factories/track_genderable: Bahn geschlechtsabhängig
+      score/list_factories/track_bandable: Bahn abhängig von Wertungsgruppen
       score/result: Ergebnisse
       score/run: Lauf
       series/team_assessment: Mannschaftswertung
@@ -52,13 +55,17 @@ de:
     attributes:
       assessment:
         discipline: Disziplin
-        gender: Geschlecht
+        band: Wertungsgruppe
         name: Name
       assessment_request:
         competitor_order: Nummer
         group_competitor_order: Reihenfolge
         relay_count: Staffelanzahl
         single_competitor_order: Reihenfolge
+      band:
+        gender: Geschlecht
+        name: Name
+        assessments: Wertungen
       competition:
         competition_result_type: Gesamtwertungsberechnung
         date: Datum
@@ -81,20 +88,21 @@ de:
         type: Disziplin
         like_fire_relay: Wie Feuerwehrstafette (pro Mannschaft 2 Staffeln A/B)
       person:
+        create_team_name: Neue Mannschaft
         first_name: Vorname
-        gender: Geschlecht
+        band: Wertungsgruppe
         last_name: Nachname
         team: Mannschaft
         bib_number: Startnummer
       score/list_factory:
-        assessments: Wertungsgruppen
+        assessments: Wertungen
         name: Name
         hidden: Startliste verstecken
         separate_target_times: Zeiten für jedes Ziel separat aufnehmen
         shortcut: Abkürzung
         track_count: Wettkampfbahnen
         track: Wettkampfbahn
-        gender: Geschlecht
+        bands: Wertungsgruppen
         results: Ergebnislisten
         single_competitors_first: Reihenfolge der Einzelstarter
         type: Listenerstellung
@@ -115,18 +123,18 @@ de:
         description: Die Bahn wird gegenüber einer vorherigen Liste getauscht.
       score/list_factories/track_same:
         description: Die Bahn wird gegenüber einer vorherigen Liste behalten.
-      score/list_factories/track_genderable:
-        description: Eine Bahn kann geschlechtsabhängig definiert werden.
+      score/list_factories/track_bandable:
+        description: Eine Bahn kann abhängig von Wertungsgruppen definiert werden.
       score/list:
-        assessments: Wertungsgruppen
+        assessments: Wertungen
         name: Name
         results: Ergebnislisten
         shortcut: Abkürzung
         date: Datum
-        show_multiple_assessments: Zeige Wertungsgruppe unter Mannschaft an
+        show_multiple_assessments: Zeige Wertungen unter Mannschaft an
         hidden: Verstecken
       score/list_entry:
-        assessment: Wertungsgruppe
+        assessment: Wertung
         assessment_type: Wertung
         entity: Teilnehmer
         track: Bahn
@@ -138,7 +146,7 @@ de:
         edit_second_time_left_target: Linke Zeit in Sekunden
         edit_second_time_right_target: Rechte Zeit in Sekunden
       score/result:
-        assessment: Wertungsgruppe
+        assessment: Wertung
         calculation_method: Berechnungsmethode
         group_assessment: Mannschaftswertung
         lists: Startlisten
@@ -147,7 +155,7 @@ de:
         date: Datum
         series_assessments: Wertungen
       team:
-        gender: Geschlecht
+        band: Wertungsgruppe
         name: Name
         number: Nummer
         people: Wettkämpfer
@@ -155,11 +163,11 @@ de:
         lottery_number: Losnummer
         federal_state: Bundesland
       teams/import:
-        gender: Geschlecht
+        band_id: Wertungsgruppe
         import_rows: Namen
       user:
         name: Benutzername
-        assessments: Wertungsgruppen
+        assessments: Wertung
         edit_type: Bearbeitsmöglichkeiten
         password: Passwort
         password_confirmation: Passwort wiederholen
@@ -194,14 +202,12 @@ de:
     sum_of_two: Summe der besten zwei Läufe
 
   gender:
-    female: Frauen
+    female: weiblich
     female_symbol: ♀
-    male: Männer
+    male: männlich
     male_symbol: ♂
-    youth: Jugend
-    youth_symbol: ⚤
-    children: Kinder
-    children_symbol: 🧒
+    indifferent: ungeschlechtlich
+    indifferent_symbol: ⚤
 
   assessment_types:
     competitor: Teilnahme
@@ -257,7 +263,7 @@ de:
       not_a_number: ist keine Zahl
       not_an_integer: muss ganzzahlig sein
       odd: muss ungerade sein
-      has_other_gender: hat ein anderes Geschlecht
+      has_other_band: hat eine andere Wertungsgruppe
       record_invalid: ! 'Gültigkeitsprüfung ist fehlgeschlagen: %{errors}'
       restrict_dependent_destroy:
         one: ! 'Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz existiert.'

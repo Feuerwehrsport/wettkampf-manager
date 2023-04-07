@@ -1,32 +1,31 @@
 %table.table.table-bordered.table-hover.table-condensed.people-index-table
   %tr
     - if admin_logged_in?
-      %th
+      %th.small{ style: 'width: 40px' } Anm.
     - if Competition.one.lottery_numbers?
-      %th Los
+      %th{ style: 'width: 40px' } Los
     %th= Team.human_attribute_name(:name)
     - if Person.exists?
-      %th= Team.human_attribute_name(:people)
-    - @tags.each do |tag|
-      %th= tag
+      %th.small{ style: 'width: 120px' }= Team.human_attribute_name(:people)
+    - band.team_tags.each do |tag|
+      %th.small{ style: 'width: 60px' }= tag
     - assessments.each do |assessment|
-      %th= discipline_image assessment.decorate.discipline, title: assessment.decorate
-    %th
+      %th.small{ style: 'width: 60px' }= discipline_image assessment.decorate.discipline, title: assessment.decorate
   - collection.each do |team|
     %tr{ admin_logged_in? && !team.assessment_request_group_competitor_valid? ? { class: 'danger' } : {} }
       - if admin_logged_in?
         - if team.enrolled?
           %td{ title: 'Mannschaft korrekt angemeldet' }
-            = link_to(enrolled_team_path(id: team.id, reverse: 1), method: :patch, class: 'btn btn-default btn-xs') do
-              %span.glyphicon.glyphicon-ok
+            = link_to(enrolled_team_path(id: team.id, reverse: 1), method: :patch, class: 'btn btn-link btn-xs') do
+              %span.glyphicon.glyphicon-ok-circle
         - else
           %td{ title: 'Mannschaft nicht angemeldet' }
-            = link_to(enrolled_team_path(id: team.id), method: :patch, class: 'btn btn-default btn-xs') do
-              %span.glyphicon.glyphicon-remove
+            = link_to(enrolled_team_path(id: team.id), method: :patch, class: 'btn btn-link btn-xs') do
+              %span.glyphicon.glyphicon-ban-circle
       - if Competition.one.lottery_numbers?
         %td= team.lottery_number
       %td
-        = team.numbered_name
+        = link_to(team.numbered_name, team)
         - if Competition.one.federal_states?
           %em.small= team.federal_state.try(:shortcut)
       - if Person.exists?
@@ -34,7 +33,7 @@
           = team.people.count.positive? ? team.people.count : ''
           - if admin_logged_in? && !team.assessment_request_group_competitor_valid?
             %span.glyphicon.glyphicon-remove{ title: 'Mannschaftswertung nicht korrekt' }
-      - @tags.each do |tag|
+      - band.team_tags.each do |tag|
         %td= team.tags.include?(tag) ? 'X' : ''
       - assessments.each do |assessment|
         %td
@@ -42,6 +41,3 @@
             - if assessment.fire_relay?
               #{team.request_for(assessment).relay_count} x
             = t("assessment_types.#{team.request_for(assessment).assessment_type}_short")
-
-      %td.text-right
-        = btn_link_to 'Ansehen', team

@@ -1,20 +1,20 @@
-- if collection.count .zero?
+- if collection.blank?
   .alert.alert-info Keine Einträge gefunden
 - else
   %table.table.table-bordered.table-hover.table-condensed.people-index-table
     %tr
       - if Competition.one.show_bib_numbers?
-        %th Nr.
-      %th Name
+        %th{ style: 'width: 40px' } Nr.
+      %th{ style: 'width: 300px' } Name
       %th Mannschaft
-      - @tags.each do |tag|
-        %th= tag
+      - band.person_tags.each do |tag|
+        %th.small{ style: 'width: 60px' }= tag
 
-      - assessments = Assessment.no_double_event.gender(collection.first.gender).map(&:decorate)
+      - assessments = Assessment.no_double_event.where(band: collection.first.band).map(&:decorate)
       - assessments.each do |assessment|
-        %th{ title: assessment }= discipline_image assessment.discipline
+        %th.small{ style: 'width: 60px', title: assessment }= discipline_image assessment.discipline
       - if admin_logged_in?
-        %th
+        %th{ style: 'width: 60px' }
     - collection.each do |person|
       %tr
         - if Competition.one.show_bib_numbers?
@@ -22,8 +22,10 @@
         %td
           = link_to person, person_path(person)
           = person.fire_sport_statistics_person&.personal_best_badge
-        %td= person.team
-        - @tags.each do |tag|
+        %td
+          - if person.team.present?
+            = link_to(person.team, person.team)
+        - band.person_tags.each do |tag|
           %td= person.tags.include?(tag) ? 'X' : ''
         - assessments.each do |assessment|
           - request = person.request_for(assessment.object).try(:decorate)
@@ -32,4 +34,4 @@
           - else
             %td
         - if admin_logged_in?
-          %td= short_edit_link edit_assessment_requests_person_path(person), remote: true, class: 'btn-xs', title: 'Wertungsgruppen bearbeiten'
+          %td= short_edit_link edit_assessment_requests_person_path(person), remote: true, class: 'btn-xs', title: 'Wertungen bearbeiten'

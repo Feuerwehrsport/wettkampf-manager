@@ -4,6 +4,7 @@ class PersonDecorator < ApplicationDecorator
   decorates_association :team
   decorates_association :fire_sport_statistics_person
   decorates_association :tags
+  decorates_association :band
 
   def short_first_name
     first_name.truncate(15)
@@ -29,10 +30,6 @@ class PersonDecorator < ApplicationDecorator
 
   def team_shortcut_name(assessment_type = nil)
     team_assessment_type_name [team.try(:shortcut_name)], assessment_type
-  end
-
-  def translated_gender
-    t("gender.#{gender}")
   end
 
   def to_s

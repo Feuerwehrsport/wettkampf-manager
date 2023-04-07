@@ -9,12 +9,12 @@
           %th= @assessment.class.human_attribute_name :discipline
           %td= @assessment.discipline
         %tr
-          %th= @assessment.class.human_attribute_name :gender
-          %td= t("gender.#{@assessment.gender}")
+          %th= @assessment.class.human_attribute_name :band
+          %td= link_to @assessment.band, @assessment.band
 
   - if admin_logged_in?
     .col-md-4
       = box('Aktionen') do
         = block_link_to 'Bearbeiten', { action: :edit }
-        = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Wertungsgruppe wirklich löschen? Dies ist nur möglich, wenn keine Ergebnisse verknüpft sind.' }
-        = block_link_to 'Übersicht Wertungsgruppen', { action: :index }
+        = block_link_to 'Löschen', { action: :destroy }, method: :delete, data: { confirm: 'Wertung wirklich löschen? Dies ist nur möglich, wenn keine Ergebnisse verknüpft sind.' }
+        = block_link_to 'Übersicht Wertungen', { action: :index }

@@ -22,7 +22,6 @@ RSpec.describe 'Imports', seed: :configured do
     attach_file('Import-Datei', Rails.root.join('spec/fixtures/import.wettkampf_manager_import'))
     click_on 'Speichern'
     expect(page).to have_content 'Importkonfiguration erfolgreich erstellt'
-    click_on 'Weiter'
     accept_confirm do
       click_on 'Importieren'
     end
@@ -30,7 +29,7 @@ RSpec.describe 'Imports', seed: :configured do
 
     expect(Tag.count).to eq 3
     expect(Team.count).to eq 3
-    expect(TagReference.count).to eq 9
+    expect(TagReference.count).to eq 12
     expect(AssessmentRequest.count).to eq 12
     expect(Person.count).to eq 4
   end

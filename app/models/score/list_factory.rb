@@ -2,7 +2,6 @@
 
 class Score::ListFactory < CacheDependendRecord
   include Score::ListFactoryDefaults
-  include Genderable
 
   STEPS = %i[discipline assessments names tracks results generator generator_params finish create].freeze
   GENERATORS = [
@@ -13,7 +12,7 @@ class Score::ListFactory < CacheDependendRecord
     'Score::ListFactories::FireRelay',
     'Score::ListFactories::TrackChange',
     'Score::ListFactories::TrackSame',
-    'Score::ListFactories::TrackGenderable',
+    'Score::ListFactories::TrackBandable',
   ].freeze
 
   belongs_to :discipline
@@ -23,6 +22,7 @@ class Score::ListFactory < CacheDependendRecord
   has_many :assessments, through: :list_factory_assessments
   has_many :result_list_factories, dependent: :destroy
   has_many :results, through: :result_list_factories
+  has_and_belongs_to_many :bands
 
   default_scope { where.not(status: :create) }
 

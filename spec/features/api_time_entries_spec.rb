@@ -6,7 +6,8 @@ RSpec.describe 'API Time entries', seed: :configured do
     Preset.find(4).save # D-Cup ohne 4x100
   end
 
-  let(:assessment) { Assessment.discipline(Disciplines::ClimbingHookLadder.first).gender(:male).first }
+  let(:band) { Band.find_by(gender: :male, name: 'Männer') }
+  let(:assessment) { Assessment.discipline(Disciplines::ClimbingHookLadder.first).find_by(band: band) }
   let!(:result) { create :score_result, assessment: assessment }
   let!(:person1) { create :person, :generated }
   let!(:person2) { create :person, :generated }

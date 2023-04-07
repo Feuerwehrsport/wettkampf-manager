@@ -41,9 +41,9 @@ class Score::ListFactories::Best < Score::ListFactory
 
   def result_assessments_match
     if assessments.length != 1
-      errors.add(:before_result, 'Es darf nur eine Wertungsgruppe ausgewählt werden')
+      errors.add(:before_result, 'Es darf nur eine Wertung ausgewählt werden')
     elsif before_result.present? && before_result.assessment != assessments.first
-      errors.add(:before_result, 'muss mit jetziger Wertungsgruppe übereinstimmen')
+      errors.add(:before_result, 'muss mit jetziger Wertung übereinstimmen')
     end
   end
 end

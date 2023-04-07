@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-Imports::Person = Struct.new(:configuration, :data) do
+Imports::Person = Struct.new(:configuration, :import_band, :data) do
   def import
     @person = ::Person.create!(
       last_name: data[:last_name],
       first_name: data[:first_name],
-      gender: data[:gender],
+      band: import_band.band,
       team: team,
       fire_sport_statistics_person: fssp,
     )
     data[:tag_names].each do |tag_name|
-      tag = configuration.tags.find_by(target: :person, name: tag_name, use: true).try(:competition_tag)
+      tag = configuration.tags.find { |t| t.target == 'person' && t.name == tag_name }&.competition_tag
       @person.tag_references.create!(tag: tag) if tag.present?
     end
     data[:assessment_participations].each do |participation|
-      assessment = configuration.assessments.find_by(foreign_key: participation[:assessment_id]).try(:assessment)
+      assessment = import_band.assessments.find { |a| a.foreign_key == participation[:assessment_id] }&.assessment
       next if assessment.blank?
 
       AssessmentRequest.create!(
@@ -30,7 +30,7 @@ Imports::Person = Struct.new(:configuration, :data) do
 
   def team
     @team ||= begin
-      team = configuration.teams.find { |t| t.foreign_key == data[:team_id] }.try(:competition_team)
+      team = import_band.teams.find { |t| t.foreign_key == data[:team_id] }&.competition_team
 
       if team.blank? && data[:team_name].present?
         team = ::Team.create_with(
@@ -39,7 +39,7 @@ Imports::Person = Struct.new(:configuration, :data) do
           number: 1,
         ).find_or_create_by!(
           name: data[:team_name].strip,
-          gender: Genderable::GENDERS[data[:gender].to_sym],
+          band: import_band.band,
         )
       end
       team

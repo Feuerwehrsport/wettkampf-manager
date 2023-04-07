@@ -9,8 +9,8 @@ RSpec.describe 'Series', seed: :configured do
     Preset.find(4).save # D-Cup ohne 4x100
 
     list = create(:score_list,
-                  assessments: Assessment.gender(:female).discipline(Disciplines::FireAttack.new),
-                  results: Score::Result.gender(:female).discipline(Disciplines::FireAttack.new),
+                  assessments: Assessment.discipline(Disciplines::FireAttack.new),
+                  results: Score::Result.discipline(Disciplines::FireAttack.new),
                   name: 'Löschangriff Lauf 1')
 
     create(:score_list_entry, :result_valid,
@@ -24,7 +24,7 @@ RSpec.describe 'Series', seed: :configured do
     visit root_path
     click_on 'Cup-Wertung'
 
-    expect(page).to have_content 'Mannschaftswertung Frauen'
+    expect(page).to have_content 'Mannschaftswertung weiblich'
     click_on 'Hakenleitersteigen - Männlich'
     expect(page).to have_content 'Alfred'
     expect(page).to have_content 'Meier'

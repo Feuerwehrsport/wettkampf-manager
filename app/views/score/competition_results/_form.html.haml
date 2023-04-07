@@ -2,11 +2,11 @@
   = box 'Gesamtwertung' do |box|
     = f.error_notification
     = f.input :name
-    = f.input :gender, collection: Genderable::GENDERS.keys
+    = f.association :band
     = f.input :result_type, collection: Score::CompetitionResult.result_types.invert
     = f.association :assessments, as: :check_boxes
     .alert.alert-info
-      %p Es werden alle Ergebnislisten der ausgewählten Wertungsgruppe beachtet, die <i>Mannschaftswertung</i> ausgewählt haben.
+      %p Es werden alle Ergebnislisten der ausgewählten Wertung beachtet, die <i>Mannschaftswertung</i> ausgewählt haben.
 
     - box.footer do
       = cancel_link(action: :index)
