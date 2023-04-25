@@ -34,8 +34,8 @@ class TeamDecorator < ApplicationDecorator
   private
 
   def multi_team?
-    h.cache [Competition.one.updated_at, id] do
-      Team.where(band: band).where(name: name).where.not(id: id).count.positive?
+    Rails.cache.fetch([Competition.one.updated_at, id, 'multi_team']) do
+      Team.where(band: band).where(name: name).where.not(id: id).exists?
     end
   end
 end
