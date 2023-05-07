@@ -36,7 +36,7 @@ class Exports::FullDump
   end
 
   def to_export_data
-    Zlib::Deflate.deflate(to_export_hash.to_json)
+    Base64.encode64(Zlib::Deflate.deflate(to_export_hash.to_json))
   end
 
   protected

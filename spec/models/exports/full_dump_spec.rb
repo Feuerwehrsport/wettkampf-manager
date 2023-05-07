@@ -49,7 +49,7 @@ RSpec.describe Exports::FullDump, type: :model do
         name: created_files.first, mimetype: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       )
 
-      expect(JSON.parse(Zlib::Inflate.inflate(dump.to_export_data), symbolize_names: true)).to eq(hash)
+      expect(JSON.parse(Zlib::Inflate.inflate(Base64.decode64(dump.to_export_data)), symbolize_names: true)).to eq(hash)
     end
   end
 end
