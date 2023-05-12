@@ -95,8 +95,11 @@ class Score::Result < CacheDependendRecord
     when Team
       !entity.include_tags?(team_tags)
     when Person
-      !entity.include_tags?(person_tags) && (team_tags.blank? || (entity.team.present? &&
-        entity.team.include_tags?(team_tags)))
+      return true unless entity.include_tags?(person_tags)
+      return false if team_tags.blank?
+      return false if entity.team.blank?
+
+      !entity.team.include_tags?(team_tags)
     else
       true
     end
