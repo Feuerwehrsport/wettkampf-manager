@@ -32,7 +32,8 @@ class FireSportStatistics::Person < ApplicationRecord
   scope :dummies, -> { where(dummy: true) }
 
   def self.dummy(person)
-    find_or_create_by(last_name: person.last_name, first_name: person.first_name, gender: person.gender, dummy: true)
+    find_or_create_by(last_name: person.last_name, first_name: person.first_name, gender: person.band.gender,
+                      dummy: true)
   end
 
   def full_name
