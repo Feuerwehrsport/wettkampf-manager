@@ -99,6 +99,7 @@ de:
         name: Name
         hidden: Startliste verstecken
         separate_target_times: Zeiten für jedes Ziel separat aufnehmen
+        show_best_of_run: Beste des Laufs anzeigen
         shortcut: Abkürzung
         track_count: Wettkampfbahnen
         track: Wettkampfbahn
@@ -132,6 +133,7 @@ de:
         shortcut: Abkürzung
         date: Datum
         show_multiple_assessments: Zeige Wertungen unter Mannschaft an
+        show_best_of_run: Beste des Laufs anzeigen
         hidden: Verstecken
       score/list_entry:
         assessment: Wertung

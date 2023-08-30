@@ -6,6 +6,7 @@
     = f.input :date, as: :string
     = f.input :show_multiple_assessments
     = f.input :hidden
+    = f.input :show_best_of_run
     = f.association :results, collection: Score::Result.all, as: :check_boxes
     = render 'tag_form', f: f
     - box.footer do

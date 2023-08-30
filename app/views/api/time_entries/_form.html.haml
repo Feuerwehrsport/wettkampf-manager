@@ -6,7 +6,7 @@
     %table.table
       = render 'score/lists/list_headline', times: true
       %tbody
-        = render layout: 'score/lists/list_entry', locals: { entry: @list_entry.decorate, run: @list_entry.run, track: @list_entry.track, list: @list_entry.list } do
+        = render layout: 'score/lists/list_entry', locals: { entry: @list_entry.decorate, run: @list_entry.run, track: @list_entry.track, list: @list_entry.list, best_of_run: false } do
           = render 'score/runs/edit_time', entry: @list_entry, f: f, fields_for: :score_list_entry
     - box.footer do
       = cancel_link

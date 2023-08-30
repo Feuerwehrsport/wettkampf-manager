@@ -125,7 +125,8 @@ class Score::ListFactory < CacheDependendRecord
   def list
     @list ||= Score::List.create!(name: name, shortcut: shortcut, assessments: assessments, results: results,
                                   track_count: track_count, hidden: hidden,
-                                  separate_target_times: separate_target_times.nil? ? false : separate_target_times)
+                                  separate_target_times: separate_target_times.nil? ? false : separate_target_times,
+                                  show_best_of_run: show_best_of_run.nil? ? false : show_best_of_run)
   end
 
   protected

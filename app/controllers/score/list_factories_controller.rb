@@ -13,6 +13,7 @@ class Score::ListFactoriesController < ApplicationController
       session_id: session.id.to_s,
       discipline_id: list.assessments.first.discipline_id,
       next_step: :assessments,
+      show_best_of_run: list.show_best_of_run,
     )
     factory.update!(assessments: list.assessments, next_step: :names)
     factory.update!(next_step: :tracks, name: factory.default_name, shortcut: factory.default_shortcut)
@@ -65,7 +66,7 @@ class Score::ListFactoriesController < ApplicationController
   def score_list_factory_params
     params.require(:score_list_factory).permit(:discipline_id, :next_step, :name, :shortcut, :track_count, :hidden,
                                                :type, :before_result_id, :before_list_id, :best_count, :track,
-                                               :separate_target_times, :single_competitors_first,
+                                               :separate_target_times, :single_competitors_first, :show_best_of_run,
                                                result_ids: [], assessment_ids: [], band_ids: [])
   end
 end

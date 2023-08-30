@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_06_113330) do
+ActiveRecord::Schema.define(version: 2023_08_30_091911) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -273,6 +273,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_113330) do
     t.boolean "hidden", default: false, null: false
     t.boolean "separate_target_times"
     t.boolean "single_competitors_first", default: true
+    t.boolean "show_best_of_run", default: false, null: false
   end
 
   create_table "score_list_factory_assessments", force: :cascade do |t|
@@ -294,6 +295,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_113330) do
     t.boolean "show_multiple_assessments", default: true
     t.boolean "hidden", default: false, null: false
     t.boolean "separate_target_times", default: false, null: false
+    t.boolean "show_best_of_run", default: false, null: false
   end
 
   create_table "score_result_list_factories", force: :cascade do |t|

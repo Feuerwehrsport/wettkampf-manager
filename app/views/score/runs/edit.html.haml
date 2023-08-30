@@ -5,7 +5,7 @@
         %table.table.much-data
           = render 'score/lists/list_headline', times: true
           - @score_run.list_entries.each do |entry|
-            = render layout: 'score/lists/list_entry', locals: { entry: entry, run: @score_run.run_number.to_i, track: entry.track, list: @score_run.list } do
+            = render layout: 'score/lists/list_entry', locals: { entry: entry, run: @score_run.run_number.to_i, track: entry.track, list: @score_run.list, best_of_run: false } do
               = render 'score/runs/edit_time', entry: entry, f: f, fields_for: :list_entries
         - box.footer do
           = cancel_link(@score_run.list)

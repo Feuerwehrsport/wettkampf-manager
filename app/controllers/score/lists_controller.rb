@@ -53,6 +53,7 @@ class Score::ListsController < ApplicationController
     end
 
     params.require(:score_list).permit(:name, :shortcut, :date, :show_multiple_assessments, :hidden,
+                                       :show_best_of_run,
                                        result_ids: [],
                                        entries_attributes: editable_attributes,
                                        tag_references_attributes: %i[id tag_id _destroy])

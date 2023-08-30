@@ -13,6 +13,7 @@
 
 - if @score_list_factory.discipline.key == :la
   = f.input :separate_target_times, hint: 'Die Zeiten für das linke und rechte Ziel werden einzelnd erfasst. Die langsamere Zeit wird zur Wertungszeit.'
+= f.input :show_best_of_run, hint: 'Zeige den Laufbesten hervorgehoben an, um z.B. schneller über das Schläuchemessen zu entscheiden.'
 
 .pull-right
   = f.primary_button :submit, 'Startliste erstellen'

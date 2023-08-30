@@ -7,7 +7,7 @@ module Exports::ScoreLists
                                      show_bib_numbers: show_bib_numbers,
                                      separate_target_times_as_columns: separate_target_times_as_columns)]
 
-    score_list_entries(list) do |entry, run, track|
+    score_list_entries(list) do |entry, run, track, _best_of_run|
       line = []
       line.push((track == 1 ? run : ''), track)
       if list.single_discipline?
@@ -82,6 +82,7 @@ module Exports::ScoreLists
               else
                 list.entries.includes(:entity).to_a
               end
+    best_of_runs = list.show_best_of_run? ? calculate_best_of_runs(entries) : {}
     track = 0
     run = 1
     entry = entries.shift
@@ -91,10 +92,10 @@ module Exports::ScoreLists
       extra_run = false if entry.blank? && track.zero? && extra_run
       track += 1
       if entry && entry.track == track && entry.run == run
-        yield entry.decorate, run, track
+        yield entry.decorate, run, track, entry.in?(best_of_runs[run] || [])
         entry = entries.shift
       else
-        yield nil, run, track
+        yield nil, run, track, false
       end
 
       if track == list.track_count
@@ -105,6 +106,12 @@ module Exports::ScoreLists
       invalid_count += 1
       return if invalid_count > 1000
     end
+  end
+
+  def calculate_best_of_runs(entries)
+    entries.reject { |e| e.time.nil? }.group_by(&:run).map do |run, runners|
+      [run, runners.group_by(&:time).min.second]
+    end.to_h
   end
 
   def append_assessment(list, entry, team_name, pdf:, hint_size: 6)
