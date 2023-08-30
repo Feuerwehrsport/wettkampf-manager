@@ -109,7 +109,7 @@ module Exports::ScoreLists
   end
 
   def calculate_best_of_runs(entries)
-    entries.reject { |e| e.time.nil? }.group_by(&:run).map do |run, runners|
+    entries.select(&:result_valid?).group_by(&:run).map do |run, runners|
       [run, runners.group_by(&:time).min.second]
     end.to_h
   end
