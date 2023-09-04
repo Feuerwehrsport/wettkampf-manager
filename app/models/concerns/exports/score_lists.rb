@@ -110,7 +110,10 @@ module Exports::ScoreLists
 
   def calculate_best_of_runs(entries)
     entries.select(&:result_valid?).group_by(&:run).map do |run, runners|
-      [run, runners.group_by(&:time).min.second]
+      best_per_assessments = runners.group_by(&:assessment_id).map do |_, ass_runners|
+        ass_runners.group_by(&:time).min.second
+      end
+      [run, best_per_assessments.inject(:+)]
     end.to_h
   end
 
