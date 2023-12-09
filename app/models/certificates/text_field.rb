@@ -22,6 +22,10 @@ class Certificates::TextField < ApplicationRecord
       description: '»mit einer Zeit von« (Sekunden)',
       example: 'mit einer Zeit von 23,39 Sekunden',
     },
+    time_other_long: {
+      description: '»belegte mit einer Zeit von« (Sekunden)',
+      example: 'belegte mit einer Zeit von 23,39 Sekunden',
+    },
     time_short: {
       description: 'Zeit (s)',
       example: '23,39 s',

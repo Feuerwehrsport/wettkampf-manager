@@ -13,6 +13,8 @@ module Certificates::StorageSupport
       result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig') if respond_to?(:result_entry)
     when :time_very_long
       storage_support_time_very_long
+    when :time_other_long
+      storage_support_time_very_long('belegte ')
     when :time_short
       result_entry.long_human_time(seconds: 's', invalid: 'D') if respond_to?(:result_entry)
     when :time_without_seconds
@@ -50,13 +52,13 @@ module Certificates::StorageSupport
 
   private
 
-  def storage_support_time_very_long
+  def storage_support_time_very_long(prefix = '')
     return unless respond_to?(:result_entry)
 
     if result_entry.result_valid?
-      "mit einer Zeit von #{result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig')}"
+      "#{prefix}mit einer Zeit von #{result_entry.long_human_time(seconds: 'Sekunden', invalid: 'Ungültig')}"
     else
-      'mit einer ungültigen Zeit'
+      "#{prefix}mit einer ungültigen Zeit"
     end
   end
 
