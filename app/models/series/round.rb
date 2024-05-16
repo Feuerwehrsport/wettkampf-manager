@@ -59,7 +59,7 @@ class Series::Round < ApplicationRecord
       cup  = Series::Cup.today_cup_for_round(self)
       rows = result.discipline.single_discipline? ? Score::GroupResult.new(result).rows : result.group_result_rows
 
-      convert_result_rows(rows) do |row, time, points, rank|
+      convert_result_rows(rows, gender) do |row, time, points, rank|
         participation = Series::TeamParticipation.new(
           cup: cup,
           team: row.entity.fire_sport_statistics_team_with_dummy,
