@@ -38,13 +38,13 @@ class Assessment < CacheDependendRecord
   def self.requestable_for_person(band)
     where(band: band).select do |a|
       a.discipline.group_discipline? ||
-        (a.discipline.single_discipline? && (a.person_tags.blank? || entity.include_tags?(a.person_tags)))
+        (a.discipline.single_discipline? && (a.person_tags.blank? || band.include_tags?(a.person_tags)))
     end
   end
 
   def self.requestable_for_team(band)
     where(band: band).select do |a|
-      a.discipline.group_discipline? && (a.team_tags.blank? || entity.include_tags?(a.team_tags))
+      a.discipline.group_discipline? && (a.team_tags.blank? || band.include_tags?(a.team_tags))
     end
   end
 end
